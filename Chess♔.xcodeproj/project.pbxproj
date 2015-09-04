@@ -23,6 +23,23 @@
 		8F4A02851B9A3F240084024A /* chessIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02821B9A3F240084024A /* chessIcon.png */; settings = {ASSET_TAGS = (); }; };
 		8F4A02861B9A3F240084024A /* chessIcon1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02831B9A3F240084024A /* chessIcon1024.png */; settings = {ASSET_TAGS = (); }; };
 		8F4A02871B9A3F240084024A /* chessIcon180.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02841B9A3F240084024A /* chessIcon180.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A028A1B9A40FF0084024A /* GameInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4A02891B9A40FF0084024A /* GameInterface.swift */; settings = {ASSET_TAGS = (); }; };
+		8F4A028C1B9A414D0084024A /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4A028B1B9A414D0084024A /* GameMenu.swift */; settings = {ASSET_TAGS = (); }; };
+		8F4A028F1B9A42180084024A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A028D1B9A42180084024A /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
+		8F4A02901B9A42180084024A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A028E1B9A42180084024A /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
+		8F4A02931B9A424F0084024A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02921B9A424F0084024A /* AudioToolbox.framework */; };
+		8F4A02951B9A42610084024A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02941B9A42610084024A /* CFNetwork.framework */; };
+		8F4A02971B9A42690084024A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02961B9A42690084024A /* CoreGraphics.framework */; };
+		8F4A02991B9A42720084024A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02981B9A42720084024A /* CoreLocation.framework */; };
+		8F4A029B1B9A427B0084024A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A029A1B9A427B0084024A /* MobileCoreServices.framework */; };
+		8F4A029D1B9A42820084024A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A029C1B9A42820084024A /* QuartzCore.framework */; };
+		8F4A029F1B9A42890084024A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A029E1B9A42890084024A /* Security.framework */; };
+		8F4A02A11B9A428E0084024A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A01B9A428E0084024A /* StoreKit.framework */; };
+		8F4A02A31B9A429B0084024A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A21B9A429B0084024A /* SystemConfiguration.framework */; };
+		8F4A02A51B9A42D40084024A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A41B9A42D40084024A /* Accounts.framework */; };
+		8F4A02A71B9A42DC0084024A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A61B9A42DC0084024A /* Social.framework */; };
+		8F4A02A91B9A43510084024A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A81B9A43510084024A /* libz.tbd */; };
+		8F4A02AB1B9A435C0084024A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02AA1B9A435C0084024A /* libsqlite3.tbd */; };
 		8FA5C8911B9A264F0097637E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8901B9A264F0097637E /* AppDelegate.swift */; };
 		8FA5C8931B9A264F0097637E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8921B9A264F0097637E /* ViewController.swift */; };
 		8FA5C8961B9A264F0097637E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8941B9A264F0097637E /* Main.storyboard */; };
@@ -66,6 +83,23 @@
 		8F4A02821B9A3F240084024A /* chessIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessIcon.png; sourceTree = "<group>"; };
 		8F4A02831B9A3F240084024A /* chessIcon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessIcon1024.png; sourceTree = "<group>"; };
 		8F4A02841B9A3F240084024A /* chessIcon180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessIcon180.png; sourceTree = "<group>"; };
+		8F4A02891B9A40FF0084024A /* GameInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInterface.swift; sourceTree = "<group>"; };
+		8F4A028B1B9A414D0084024A /* GameMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
+		8F4A028D1B9A42180084024A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		8F4A028E1B9A42180084024A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		8F4A02921B9A424F0084024A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		8F4A02941B9A42610084024A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		8F4A02961B9A42690084024A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8F4A02981B9A42720084024A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8F4A029A1B9A427B0084024A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		8F4A029C1B9A42820084024A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8F4A029E1B9A42890084024A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		8F4A02A01B9A428E0084024A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		8F4A02A21B9A429B0084024A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8F4A02A41B9A42D40084024A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		8F4A02A61B9A42DC0084024A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		8F4A02A81B9A43510084024A /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		8F4A02AA1B9A435C0084024A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		8FA5C88D1B9A264F0097637E /* Chess♔.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chess♔.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8901B9A264F0097637E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FA5C8921B9A264F0097637E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +120,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F4A02AB1B9A435C0084024A /* libsqlite3.tbd in Frameworks */,
+				8F4A02A91B9A43510084024A /* libz.tbd in Frameworks */,
+				8F4A02A71B9A42DC0084024A /* Social.framework in Frameworks */,
+				8F4A02A51B9A42D40084024A /* Accounts.framework in Frameworks */,
+				8F4A02A31B9A429B0084024A /* SystemConfiguration.framework in Frameworks */,
+				8F4A02A11B9A428E0084024A /* StoreKit.framework in Frameworks */,
+				8F4A029F1B9A42890084024A /* Security.framework in Frameworks */,
+				8F4A029D1B9A42820084024A /* QuartzCore.framework in Frameworks */,
+				8F4A029B1B9A427B0084024A /* MobileCoreServices.framework in Frameworks */,
+				8F4A02991B9A42720084024A /* CoreLocation.framework in Frameworks */,
+				8F4A02971B9A42690084024A /* CoreGraphics.framework in Frameworks */,
+				8F4A02951B9A42610084024A /* CFNetwork.framework in Frameworks */,
+				8F4A02931B9A424F0084024A /* AudioToolbox.framework in Frameworks */,
+				8F4A02901B9A42180084024A /* Parse.framework in Frameworks */,
+				8F4A028F1B9A42180084024A /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +194,39 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		8F4A02881B9A3F730084024A /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				8FA5C8901B9A264F0097637E /* AppDelegate.swift */,
+				8FA5C8921B9A264F0097637E /* ViewController.swift */,
+				8F4A02891B9A40FF0084024A /* GameInterface.swift */,
+				8F4A028B1B9A414D0084024A /* GameMenu.swift */,
+			);
+			name = Swift;
+			sourceTree = "<group>";
+		};
+		8F4A02911B9A421D0084024A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8F4A02AA1B9A435C0084024A /* libsqlite3.tbd */,
+				8F4A02A81B9A43510084024A /* libz.tbd */,
+				8F4A02A61B9A42DC0084024A /* Social.framework */,
+				8F4A02A41B9A42D40084024A /* Accounts.framework */,
+				8F4A02A21B9A429B0084024A /* SystemConfiguration.framework */,
+				8F4A02A01B9A428E0084024A /* StoreKit.framework */,
+				8F4A029E1B9A42890084024A /* Security.framework */,
+				8F4A029C1B9A42820084024A /* QuartzCore.framework */,
+				8F4A029A1B9A427B0084024A /* MobileCoreServices.framework */,
+				8F4A02981B9A42720084024A /* CoreLocation.framework */,
+				8F4A02961B9A42690084024A /* CoreGraphics.framework */,
+				8F4A02941B9A42610084024A /* CFNetwork.framework */,
+				8F4A02921B9A424F0084024A /* AudioToolbox.framework */,
+				8F4A028D1B9A42180084024A /* Bolts.framework */,
+				8F4A028E1B9A42180084024A /* Parse.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8FA5C8841B9A264F0097637E = {
 			isa = PBXGroup;
 			children = (
@@ -168,9 +250,9 @@
 		8FA5C88F1B9A264F0097637E /* Chess♔ */ = {
 			isa = PBXGroup;
 			children = (
+				8F4A02911B9A421D0084024A /* Frameworks */,
 				8F4A02651B9A3E590084024A /* Assets */,
-				8FA5C8901B9A264F0097637E /* AppDelegate.swift */,
-				8FA5C8921B9A264F0097637E /* ViewController.swift */,
+				8F4A02881B9A3F730084024A /* Swift */,
 				8FA5C8941B9A264F0097637E /* Main.storyboard */,
 				8FA5C8971B9A264F0097637E /* Assets.xcassets */,
 				8FA5C8991B9A264F0097637E /* LaunchScreen.storyboard */,
@@ -344,6 +426,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F4A028C1B9A414D0084024A /* GameMenu.swift in Sources */,
+				8F4A028A1B9A40FF0084024A /* GameInterface.swift in Sources */,
 				8FA5C8931B9A264F0097637E /* ViewController.swift in Sources */,
 				8FA5C8911B9A264F0097637E /* AppDelegate.swift in Sources */,
 			);
@@ -489,6 +573,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Chess♔",
+				);
 				INFOPLIST_FILE = "Chess♔/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Panber.Chess-";
@@ -503,6 +591,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Chess♔",
+				);
 				INFOPLIST_FILE = "Chess♔/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Panber.Chess-";
