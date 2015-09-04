@@ -578,8 +578,9 @@
 					"$(PROJECT_DIR)/Chess♔",
 				);
 				INFOPLIST_FILE = "Chess♔/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Panber.Chess-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Panber.Chess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -596,8 +597,9 @@
 					"$(PROJECT_DIR)/Chess♔",
 				);
 				INFOPLIST_FILE = "Chess♔/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Panber.Chess-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Panber.Chess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
