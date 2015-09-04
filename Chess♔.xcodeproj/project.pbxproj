@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F4A02691B9A3E890084024A /* PANBERlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02681B9A3E890084024A /* PANBERlogo.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A02751B9A3EE80084024A /* whiteBishop.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A026A1B9A3EE70084024A /* whiteBishop.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A02761B9A3EE80084024A /* whiteKing.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A026B1B9A3EE70084024A /* whiteKing.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A02771B9A3EE80084024A /* whiteKnight.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A026C1B9A3EE70084024A /* whiteKnight.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A02781B9A3EE80084024A /* whitePawn.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A026D1B9A3EE70084024A /* whitePawn.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A02791B9A3EE80084024A /* whiteQueen.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A026E1B9A3EE80084024A /* whiteQueen.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A027A1B9A3EE80084024A /* whiteRook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A026F1B9A3EE80084024A /* whiteRook.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A027B1B9A3EE80084024A /* blackKing.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02701B9A3EE80084024A /* blackKing.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A027C1B9A3EE80084024A /* blackKnight.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02711B9A3EE80084024A /* blackKnight.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A027D1B9A3EE80084024A /* blackPawn.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02721B9A3EE80084024A /* blackPawn.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A027E1B9A3EE80084024A /* blackQueen.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02731B9A3EE80084024A /* blackQueen.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A027F1B9A3EE80084024A /* blackBishop.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02741B9A3EE80084024A /* blackBishop.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A02811B9A3F0B0084024A /* blackRook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02801B9A3F0B0084024A /* blackRook.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A02851B9A3F240084024A /* chessIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02821B9A3F240084024A /* chessIcon.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A02861B9A3F240084024A /* chessIcon1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02831B9A3F240084024A /* chessIcon1024.png */; settings = {ASSET_TAGS = (); }; };
+		8F4A02871B9A3F240084024A /* chessIcon180.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02841B9A3F240084024A /* chessIcon180.png */; settings = {ASSET_TAGS = (); }; };
 		8FA5C8911B9A264F0097637E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8901B9A264F0097637E /* AppDelegate.swift */; };
 		8FA5C8931B9A264F0097637E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8921B9A264F0097637E /* ViewController.swift */; };
 		8FA5C8961B9A264F0097637E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8941B9A264F0097637E /* Main.storyboard */; };
@@ -34,6 +50,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8F4A02681B9A3E890084024A /* PANBERlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PANBERlogo.png; sourceTree = "<group>"; };
+		8F4A026A1B9A3EE70084024A /* whiteBishop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteBishop.png; sourceTree = "<group>"; };
+		8F4A026B1B9A3EE70084024A /* whiteKing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteKing.png; sourceTree = "<group>"; };
+		8F4A026C1B9A3EE70084024A /* whiteKnight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteKnight.png; sourceTree = "<group>"; };
+		8F4A026D1B9A3EE70084024A /* whitePawn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitePawn.png; sourceTree = "<group>"; };
+		8F4A026E1B9A3EE80084024A /* whiteQueen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteQueen.png; sourceTree = "<group>"; };
+		8F4A026F1B9A3EE80084024A /* whiteRook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteRook.png; sourceTree = "<group>"; };
+		8F4A02701B9A3EE80084024A /* blackKing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackKing.png; sourceTree = "<group>"; };
+		8F4A02711B9A3EE80084024A /* blackKnight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackKnight.png; sourceTree = "<group>"; };
+		8F4A02721B9A3EE80084024A /* blackPawn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackPawn.png; sourceTree = "<group>"; };
+		8F4A02731B9A3EE80084024A /* blackQueen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackQueen.png; sourceTree = "<group>"; };
+		8F4A02741B9A3EE80084024A /* blackBishop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackBishop.png; sourceTree = "<group>"; };
+		8F4A02801B9A3F0B0084024A /* blackRook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackRook.png; sourceTree = "<group>"; };
+		8F4A02821B9A3F240084024A /* chessIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessIcon.png; sourceTree = "<group>"; };
+		8F4A02831B9A3F240084024A /* chessIcon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessIcon1024.png; sourceTree = "<group>"; };
+		8F4A02841B9A3F240084024A /* chessIcon180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessIcon180.png; sourceTree = "<group>"; };
 		8FA5C88D1B9A264F0097637E /* Chess♔.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chess♔.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8901B9A264F0097637E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FA5C8921B9A264F0097637E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +106,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F4A02651B9A3E590084024A /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				8F4A02671B9A3E6E0084024A /* Images */,
+				8F4A02661B9A3E650084024A /* Logos */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		8F4A02661B9A3E650084024A /* Logos */ = {
+			isa = PBXGroup;
+			children = (
+				8F4A02821B9A3F240084024A /* chessIcon.png */,
+				8F4A02831B9A3F240084024A /* chessIcon1024.png */,
+				8F4A02841B9A3F240084024A /* chessIcon180.png */,
+				8F4A02681B9A3E890084024A /* PANBERlogo.png */,
+			);
+			name = Logos;
+			sourceTree = "<group>";
+		};
+		8F4A02671B9A3E6E0084024A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8F4A026A1B9A3EE70084024A /* whiteBishop.png */,
+				8F4A026B1B9A3EE70084024A /* whiteKing.png */,
+				8F4A026C1B9A3EE70084024A /* whiteKnight.png */,
+				8F4A026D1B9A3EE70084024A /* whitePawn.png */,
+				8F4A026E1B9A3EE80084024A /* whiteQueen.png */,
+				8F4A026F1B9A3EE80084024A /* whiteRook.png */,
+				8F4A02701B9A3EE80084024A /* blackKing.png */,
+				8F4A02711B9A3EE80084024A /* blackKnight.png */,
+				8F4A02721B9A3EE80084024A /* blackPawn.png */,
+				8F4A02801B9A3F0B0084024A /* blackRook.png */,
+				8F4A02731B9A3EE80084024A /* blackQueen.png */,
+				8F4A02741B9A3EE80084024A /* blackBishop.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		8FA5C8841B9A264F0097637E = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +168,7 @@
 		8FA5C88F1B9A264F0097637E /* Chess♔ */ = {
 			isa = PBXGroup;
 			children = (
+				8F4A02651B9A3E590084024A /* Assets */,
 				8FA5C8901B9A264F0097637E /* AppDelegate.swift */,
 				8FA5C8921B9A264F0097637E /* ViewController.swift */,
 				8FA5C8941B9A264F0097637E /* Main.storyboard */,
@@ -229,9 +301,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F4A02771B9A3EE80084024A /* whiteKnight.png in Resources */,
 				8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */,
+				8F4A027B1B9A3EE80084024A /* blackKing.png in Resources */,
 				8FA5C8981B9A264F0097637E /* Assets.xcassets in Resources */,
+				8F4A02861B9A3F240084024A /* chessIcon1024.png in Resources */,
+				8F4A027E1B9A3EE80084024A /* blackQueen.png in Resources */,
+				8F4A027F1B9A3EE80084024A /* blackBishop.png in Resources */,
+				8F4A02791B9A3EE80084024A /* whiteQueen.png in Resources */,
+				8F4A02691B9A3E890084024A /* PANBERlogo.png in Resources */,
+				8F4A02811B9A3F0B0084024A /* blackRook.png in Resources */,
+				8F4A02851B9A3F240084024A /* chessIcon.png in Resources */,
+				8F4A02751B9A3EE80084024A /* whiteBishop.png in Resources */,
+				8F4A02761B9A3EE80084024A /* whiteKing.png in Resources */,
+				8F4A027C1B9A3EE80084024A /* blackKnight.png in Resources */,
+				8F4A02871B9A3F240084024A /* chessIcon180.png in Resources */,
+				8F4A027D1B9A3EE80084024A /* blackPawn.png in Resources */,
 				8FA5C8961B9A264F0097637E /* Main.storyboard in Resources */,
+				8F4A027A1B9A3EE80084024A /* whiteRook.png in Resources */,
+				8F4A02781B9A3EE80084024A /* whitePawn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +578,7 @@
 				8FA5C8B71B9A264F0097637E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8FA5C8B81B9A264F0097637E /* Build configuration list for PBXNativeTarget "Chess♔Tests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +587,7 @@
 				8FA5C8BA1B9A264F0097637E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8FA5C8BB1B9A264F0097637E /* Build configuration list for PBXNativeTarget "Chess♔UITests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +596,7 @@
 				8FA5C8BD1B9A264F0097637E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
