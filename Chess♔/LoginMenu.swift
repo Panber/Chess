@@ -82,10 +82,13 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     }
     //setting the profile photo
     @IBAction func selectProfilePhoto(sender: AnyObject) {
+        
+        
         let myPickerController = UIImagePickerController()
         myPickerController.delegate = self
         myPickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.presentViewController(myPickerController, animated: true, completion: nil)
+        self.presentViewController(myPickerController, animated: false, completion: nil)
+        BlackBC.alpha -= 0.5
     
         
     }
@@ -101,7 +104,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         }
 
             profilePhotoImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-            self.dismissViewControllerAnimated(true, completion: animateOut)
+            self.dismissViewControllerAnimated(false, completion: animateOut)
         
 
     }
