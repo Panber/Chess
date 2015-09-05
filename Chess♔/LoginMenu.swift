@@ -19,7 +19,11 @@ class LoginMenu: UIViewController {
     @IBOutlet weak var signUpEmailOutlet: UIButton!
     @IBOutlet weak var imageBC: UIImageView!
     
+    @IBOutlet weak var chessIconHeader: UIImageView!
     
+    @IBOutlet weak var lineOutlet: UILabel!
+    @IBOutlet weak var emailInput: UITextField!
+    @IBOutlet weak var passwordInput: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +40,10 @@ class LoginMenu: UIViewController {
         //Editing look at startup
         SignUpFacebookOutlet.layer.cornerRadius = cornerRadius
         signUpEmailOutlet.layer.cornerRadius = cornerRadius
+        emailInput.layer.cornerRadius = cornerRadius
+        passwordInput.layer.cornerRadius = cornerRadius
+
+
         
     }
     
@@ -47,6 +55,19 @@ class LoginMenu: UIViewController {
 
     @IBAction func signUpFacebook(sender: AnyObject) {
         
+        
+    }
+    @IBAction func signUpEmail(sender: AnyObject) {
+        
+        UIView.animateWithDuration(1.0, animations: {
+            self.chessIconHeader.frame.origin.y -= 1000
+            self.emailInput.frame.origin.y -= 800
+            self.passwordInput.frame.origin.y -= 800
+            self.SignUpFacebookOutlet.frame.origin.y -= 1000
+            self.signUpEmailOutlet.frame.origin.y -= 1000
+            self.lineOutlet.frame.origin.y -= 1000
+        
+        })
         
     }
 
