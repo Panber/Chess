@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8FA5C88C1B9A264F0097637E"
-               BuildableName = "Chess.app"
+               BuildableName = "Chess&#x2654;.app"
                BlueprintName = "Chess&#x2654;"
                ReferencedContainer = "container:Chess&#x2654;.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8FA5C88C1B9A264F0097637E"
-            BuildableName = "Chess.app"
+            BuildableName = "Chess&#x2654;.app"
             BlueprintName = "Chess&#x2654;"
             ReferencedContainer = "container:Chess&#x2654;.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8FA5C88C1B9A264F0097637E"
-            BuildableName = "Chess.app"
+            BuildableName = "Chess&#x2654;.app"
             BlueprintName = "Chess&#x2654;"
             ReferencedContainer = "container:Chess&#x2654;.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8FA5C88C1B9A264F0097637E"
-            BuildableName = "Chess.app"
+            BuildableName = "Chess&#x2654;.app"
             BlueprintName = "Chess&#x2654;"
             ReferencedContainer = "container:Chess&#x2654;.xcodeproj">
          </BuildableReference>
