@@ -40,16 +40,6 @@
 		8F4A02A31B9A429B0084024A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A21B9A429B0084024A /* SystemConfiguration.framework */; };
 		8F4A02A51B9A42D40084024A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A41B9A42D40084024A /* Accounts.framework */; };
 		8F4A02A71B9A42DC0084024A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A61B9A42DC0084024A /* Social.framework */; };
-		8FA1F7CA1B9AFC9C00A0C548 /* Data@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA1F7C71B9AFC9C00A0C548 /* Data@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8FA1F7CB1B9AFC9C00A0C548 /* Friends@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA1F7C81B9AFC9C00A0C548 /* Friends@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8FA1F7CC1B9AFC9C00A0C548 /* settingsTabBarIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA1F7C91B9AFC9C00A0C548 /* settingsTabBarIcon@3x.png */; settings = {ASSET_TAGS = (); }; };
-		8FA1F7D51B9AFCE500A0C548 /* board black and white no border.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA1F7CE1B9AFCE500A0C548 /* board black and white no border.png */; settings = {ASSET_TAGS = (); }; };
-		8FA1F7D61B9AFCE500A0C548 /* clack and white board with half boarder copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA1F7CF1B9AFCE500A0C548 /* clack and white board with half boarder copy.png */; settings = {ASSET_TAGS = (); }; };
-		8FA1F7D71B9AFCE500A0C548 /* graySquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA1F7D01B9AFCE500A0C548 /* graySquare.png */; settings = {ASSET_TAGS = (); }; };
-		8FA1F7D81B9AFCE500A0C548 /* moveOption.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA1F7D11B9AFCE500A0C548 /* moveOption.png */; settings = {ASSET_TAGS = (); }; };
-		8FA1F7D91B9AFCE500A0C548 /* pieceMarked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA1F7D21B9AFCE500A0C548 /* pieceMarked.png */; settings = {ASSET_TAGS = (); }; };
-		8FA1F7DA1B9AFCE500A0C548 /* piecePossibilities.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA1F7D31B9AFCE500A0C548 /* piecePossibilities.png */; settings = {ASSET_TAGS = (); }; };
-		8FA1F7DB1B9AFCE500A0C548 /* whiteSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA1F7D41B9AFCE500A0C548 /* whiteSquare.png */; settings = {ASSET_TAGS = (); }; };
 		8FA5C8911B9A264F0097637E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8901B9A264F0097637E /* AppDelegate.swift */; };
 		8FA5C8931B9A264F0097637E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8921B9A264F0097637E /* ViewController.swift */; };
 		8FA5C8961B9A264F0097637E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8941B9A264F0097637E /* Main.storyboard */; };
@@ -110,16 +100,6 @@
 		8F4A02A21B9A429B0084024A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8F4A02A41B9A42D40084024A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8F4A02A61B9A42DC0084024A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		8FA1F7C71B9AFC9C00A0C548 /* Data@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Data@3x.png"; path = "../../Chess/Data@3x.png"; sourceTree = "<group>"; };
-		8FA1F7C81B9AFC9C00A0C548 /* Friends@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Friends@3x.png"; path = "../../Chess/Friends@3x.png"; sourceTree = "<group>"; };
-		8FA1F7C91B9AFC9C00A0C548 /* settingsTabBarIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settingsTabBarIcon@3x.png"; path = "../../Chess/settingsTabBarIcon@3x.png"; sourceTree = "<group>"; };
-		8FA1F7CE1B9AFCE500A0C548 /* board black and white no border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "board black and white no border.png"; sourceTree = "<group>"; };
-		8FA1F7CF1B9AFCE500A0C548 /* clack and white board with half boarder copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clack and white board with half boarder copy.png"; sourceTree = "<group>"; };
-		8FA1F7D01B9AFCE500A0C548 /* graySquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graySquare.png; sourceTree = "<group>"; };
-		8FA1F7D11B9AFCE500A0C548 /* moveOption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moveOption.png; sourceTree = "<group>"; };
-		8FA1F7D21B9AFCE500A0C548 /* pieceMarked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pieceMarked.png; sourceTree = "<group>"; };
-		8FA1F7D31B9AFCE500A0C548 /* piecePossibilities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piecePossibilities.png; sourceTree = "<group>"; };
-		8FA1F7D41B9AFCE500A0C548 /* whiteSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteSquare.png; sourceTree = "<group>"; };
 		8FA5C88D1B9A264F0097637E /* Chess♔.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chess♔.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8901B9A264F0097637E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FA5C8921B9A264F0097637E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -198,16 +178,6 @@
 		8F4A02671B9A3E6E0084024A /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				8FA1F7C71B9AFC9C00A0C548 /* Data@3x.png */,
-				8FA1F7C81B9AFC9C00A0C548 /* Friends@3x.png */,
-				8FA1F7C91B9AFC9C00A0C548 /* settingsTabBarIcon@3x.png */,
-				8FA1F7CE1B9AFCE500A0C548 /* board black and white no border.png */,
-				8FA1F7CF1B9AFCE500A0C548 /* clack and white board with half boarder copy.png */,
-				8FA1F7D01B9AFCE500A0C548 /* graySquare.png */,
-				8FA1F7D11B9AFCE500A0C548 /* moveOption.png */,
-				8FA1F7D21B9AFCE500A0C548 /* pieceMarked.png */,
-				8FA1F7D31B9AFCE500A0C548 /* piecePossibilities.png */,
-				8FA1F7D41B9AFCE500A0C548 /* whiteSquare.png */,
 				8FA1F7CD1B9AFCA800A0C548 /* Pieces */,
 			);
 			name = Images;
@@ -430,26 +400,16 @@
 				8F4A027F1B9A3EE80084024A /* blackBishop.png in Resources */,
 				8F4A02791B9A3EE80084024A /* whiteQueen.png in Resources */,
 				8F4A02691B9A3E890084024A /* PANBERlogo.png in Resources */,
-				8FA1F7CB1B9AFC9C00A0C548 /* Friends@3x.png in Resources */,
-				8FA1F7D91B9AFCE500A0C548 /* pieceMarked.png in Resources */,
 				8F4A02811B9A3F0B0084024A /* blackRook.png in Resources */,
 				8F4A02851B9A3F240084024A /* chessIcon.png in Resources */,
-				8FA1F7CA1B9AFC9C00A0C548 /* Data@3x.png in Resources */,
 				8F4A02751B9A3EE80084024A /* whiteBishop.png in Resources */,
 				8F4A02761B9A3EE80084024A /* whiteKing.png in Resources */,
 				8F4A027C1B9A3EE80084024A /* blackKnight.png in Resources */,
 				8F4A02871B9A3F240084024A /* chessIcon180.png in Resources */,
-				8FA1F7DA1B9AFCE500A0C548 /* piecePossibilities.png in Resources */,
-				8FA1F7D81B9AFCE500A0C548 /* moveOption.png in Resources */,
-				8FA1F7D51B9AFCE500A0C548 /* board black and white no border.png in Resources */,
-				8FA1F7D71B9AFCE500A0C548 /* graySquare.png in Resources */,
-				8FA1F7DB1B9AFCE500A0C548 /* whiteSquare.png in Resources */,
 				8F4A027D1B9A3EE80084024A /* blackPawn.png in Resources */,
 				8FA5C8961B9A264F0097637E /* Main.storyboard in Resources */,
 				8F4A027A1B9A3EE80084024A /* whiteRook.png in Resources */,
 				8F4A02781B9A3EE80084024A /* whitePawn.png in Resources */,
-				8FA1F7D61B9AFCE500A0C548 /* clack and white board with half boarder copy.png in Resources */,
-				8FA1F7CC1B9AFC9C00A0C548 /* settingsTabBarIcon@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
