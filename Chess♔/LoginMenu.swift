@@ -19,7 +19,9 @@ class LoginMenu: UIViewController {
     @IBOutlet weak var signUpEmailOutlet: UIButton!
     @IBOutlet weak var imageBC: UIImageView!
     
+    @IBOutlet weak var chessIconHeader: UIImageView!
     
+    @IBOutlet weak var emailInput: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +49,14 @@ class LoginMenu: UIViewController {
 
     @IBAction func signUpFacebook(sender: AnyObject) {
         
+        
+    }
+    @IBAction func signUpEmail(sender: AnyObject) {
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.chessIconHeader.frame.origin.y -= 100
+        
+        })
         
     }
 

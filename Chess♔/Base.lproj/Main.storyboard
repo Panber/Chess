@@ -60,6 +60,9 @@
                                 <state key="normal" title="Sign up with Email">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="signUpEmail:" destination="o7c-Vd-f6m" eventType="touchUpInside" id="huI-eh-c4g"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mcs-aI-ilU">
                                 <rect key="frame" x="50" y="459" width="500" height="65"/>
@@ -136,6 +139,8 @@
                     <connections>
                         <outlet property="BlackBC" destination="WJa-kr-zsc" id="suz-ZX-tMe"/>
                         <outlet property="SignUpFacebookOutlet" destination="Mcs-aI-ilU" id="OAm-tA-GTL"/>
+                        <outlet property="chessIconHeader" destination="0ga-NC-mGk" id="o1H-uV-IkB"/>
+                        <outlet property="emailInput" destination="eGc-b9-Wbm" id="2nb-OS-JUO"/>
                         <outlet property="imageBC" destination="7gN-ib-qSd" id="Q7C-9J-HC4"/>
                         <outlet property="signUpEmailOutlet" destination="2IT-p6-TyC" id="2WI-XV-szz"/>
                     </connections>
