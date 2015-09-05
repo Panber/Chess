@@ -11,6 +11,11 @@ import Parse
 
 class LoginMenu: UIViewController {
 
+    //Black Background Image Overlay for nice effect
+    @IBOutlet weak var BlackBC: UIImageView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -23,8 +28,17 @@ class LoginMenu: UIViewController {
 //            print("Object has been saved.")
 //        }
         
+        
+        
     }
 
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

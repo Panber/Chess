@@ -3,6 +3,11 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Bauru.ttf">
+            <string>BauruTypeface</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Play-->
         <scene sceneID="tne-QT-ifu">
@@ -24,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="1909" y="420"/>
         </scene>
-        <!--View Controller-->
+        <!--Login Menu-->
         <scene sceneID="Ycv-dp-2az">
             <objects>
-                <viewController id="o7c-Vd-f6m" sceneMemberID="viewController">
+                <viewController id="o7c-Vd-f6m" customClass="LoginMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u9W-Ow-hDl"/>
                         <viewControllerLayoutGuide type="bottom" id="Ust-Ci-HXm"/>
@@ -36,21 +41,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Cr-1Q-zqW">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DSCF0388.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9Cr-1Q-zqW">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackBC.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Q0C-Ki-dUv">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQu-Om-yFj">
+                                <rect key="frame" x="180" y="405" width="240" height="47"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.34895604962366794" green="0.46528816630663422" blue="0.95127051767676774" alpha="0.64812077702702697" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="19"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Sign up with Facebook"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chess" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQi-fl-m3i">
+                                <rect key="frame" x="0.0" y="251" width="600" height="98"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="BauruTypeface" family="Bauru" pointSize="87"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chessIconRounded.png" translatesAutoresizingMaskIntoConstraints="NO" id="M17-QV-aVV">
+                                <rect key="frame" x="200" y="43" width="200" height="200"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="CWl-Dt-Mak"/>
+                                    <constraint firstAttribute="width" constant="200" id="sOK-mp-teV"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="KQi-fl-m3i" firstAttribute="trailing" secondItem="9Cr-1Q-zqW" secondAttribute="trailing" id="5se-Go-3PL"/>
+                            <constraint firstItem="Q0C-Ki-dUv" firstAttribute="leading" secondItem="9Cr-1Q-zqW" secondAttribute="leading" id="7Y3-u9-Zp8"/>
                             <constraint firstItem="9Cr-1Q-zqW" firstAttribute="top" secondItem="iS6-Su-1RO" secondAttribute="top" id="8fe-bJ-nrd"/>
+                            <constraint firstItem="KQi-fl-m3i" firstAttribute="leading" secondItem="9Cr-1Q-zqW" secondAttribute="leading" id="HoW-7G-KEa"/>
+                            <constraint firstItem="Q0C-Ki-dUv" firstAttribute="top" secondItem="9Cr-1Q-zqW" secondAttribute="top" id="Io2-yz-BUw"/>
+                            <constraint firstItem="KQi-fl-m3i" firstAttribute="centerY" secondItem="9Cr-1Q-zqW" secondAttribute="centerY" id="JNN-my-6iH"/>
+                            <constraint firstItem="M17-QV-aVV" firstAttribute="centerX" secondItem="KQi-fl-m3i" secondAttribute="centerX" id="Z3m-NJ-waU"/>
+                            <constraint firstItem="GQu-Om-yFj" firstAttribute="top" secondItem="KQi-fl-m3i" secondAttribute="bottom" constant="56" id="b8n-mP-ckf"/>
+                            <constraint firstItem="Q0C-Ki-dUv" firstAttribute="bottom" secondItem="Ust-Ci-HXm" secondAttribute="top" id="cmf-oM-XRg"/>
                             <constraint firstItem="9Cr-1Q-zqW" firstAttribute="bottom" secondItem="Ust-Ci-HXm" secondAttribute="top" id="eVD-if-FhP"/>
                             <constraint firstItem="9Cr-1Q-zqW" firstAttribute="leading" secondItem="iS6-Su-1RO" secondAttribute="leading" id="fKa-nT-PXd"/>
                             <constraint firstAttribute="trailing" secondItem="9Cr-1Q-zqW" secondAttribute="trailing" id="ks3-aL-Dpa"/>
+                            <constraint firstItem="Q0C-Ki-dUv" firstAttribute="trailing" secondItem="9Cr-1Q-zqW" secondAttribute="trailing" id="nhi-Bb-iZ1"/>
+                            <constraint firstItem="KQi-fl-m3i" firstAttribute="top" secondItem="M17-QV-aVV" secondAttribute="bottom" constant="8" symbolic="YES" id="pNS-cr-HfZ"/>
+                            <constraint firstItem="M17-QV-aVV" firstAttribute="top" secondItem="u9W-Ow-hDl" secondAttribute="bottom" constant="43" id="sm4-zl-6LU"/>
+                            <constraint firstItem="KQi-fl-m3i" firstAttribute="centerX" secondItem="GQu-Om-yFj" secondAttribute="centerX" id="tji-01-ZRA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oWy-ez-KX1"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="BlackBC" destination="Q0C-Ki-dUv" id="rJB-at-qAE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DX6-Pr-DHe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -238,9 +287,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BlackBC.jpg" width="3000" height="3000"/>
         <image name="ChessIconTab.png" width="30" height="30"/>
+        <image name="DSCF0388.jpg" width="1659" height="2651"/>
         <image name="Data.png" width="30" height="30"/>
         <image name="Friends.png" width="30" height="30"/>
+        <image name="chessIconRounded.png" width="700" height="700"/>
         <image name="settingsTabBarIcon.png" width="32" height="32"/>
     </resources>
 </document>
