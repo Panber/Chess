@@ -9,10 +9,14 @@
 import UIKit
 import Parse
 
+let cornerRadius:CGFloat = 25
+
 class LoginMenu: UIViewController {
 
     //Black Background Image Overlay for nice effect
     @IBOutlet weak var BlackBC: UIImageView!
+    @IBOutlet weak var SignUpFacebookOutlet: UIButton!
+    @IBOutlet weak var signUpEmailOutlet: UIButton!
     
     
     
@@ -27,7 +31,8 @@ class LoginMenu: UIViewController {
 //        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
 //            print("Object has been saved.")
 //        }
-        
+        SignUpFacebookOutlet.layer.cornerRadius = cornerRadius
+        signUpEmailOutlet.layer.cornerRadius = cornerRadius
         
         
     }
@@ -38,6 +43,7 @@ class LoginMenu: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -2,12 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="Bauru.ttf">
-            <string>BauruTypeface</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--Play-->
         <scene sceneID="tne-QT-ifu">
@@ -41,69 +37,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DSCF0388.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9Cr-1Q-zqW">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DSCF0388.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7gN-ib-qSd">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackBC.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Q0C-Ki-dUv">
+                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackBC.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="WJa-kr-zsc">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQu-Om-yFj">
-                                <rect key="frame" x="180" y="405" width="240" height="47"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ChessIconAndTExt.png" translatesAutoresizingMaskIntoConstraints="NO" id="0ga-NC-mGk">
+                                <rect key="frame" x="67" y="8" width="466" height="284"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.34895604962366794" green="0.46528816630663422" blue="0.95127051767676774" alpha="0.64812077702702697" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="19"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Sign up with Facebook"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chess" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQi-fl-m3i">
-                                <rect key="frame" x="0.0" y="251" width="600" height="98"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2IT-p6-TyC">
+                                <rect key="frame" x="50" y="300" width="500" height="60"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" name="BauruTypeface" family="Bauru" pointSize="87"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chessIconRounded.png" translatesAutoresizingMaskIntoConstraints="NO" id="M17-QV-aVV">
-                                <rect key="frame" x="200" y="43" width="200" height="200"/>
-                                <animations/>
+                                <color key="backgroundColor" red="0.78518334594793537" green="0.80516098484848486" blue="0.78974472515362726" alpha="0.75659839527027029" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="CWl-Dt-Mak"/>
-                                    <constraint firstAttribute="width" constant="200" id="sOK-mp-teV"/>
+                                    <constraint firstAttribute="height" constant="60" id="vNu-h4-Jan"/>
                                 </constraints>
-                            </imageView>
+                                <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="25"/>
+                                <state key="normal" title="Sign up with Email">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mcs-aI-ilU">
+                                <rect key="frame" x="50" y="381" width="500" height="60"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.34895604959999998" green="0.46528816629999997" blue="0.95127051770000004" alpha="0.80041173990000003" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="cU9-Iu-z23"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="25"/>
+                                <state key="normal" title="Sign up with Facebook">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KQi-fl-m3i" firstAttribute="trailing" secondItem="9Cr-1Q-zqW" secondAttribute="trailing" id="5se-Go-3PL"/>
-                            <constraint firstItem="Q0C-Ki-dUv" firstAttribute="leading" secondItem="9Cr-1Q-zqW" secondAttribute="leading" id="7Y3-u9-Zp8"/>
-                            <constraint firstItem="9Cr-1Q-zqW" firstAttribute="top" secondItem="iS6-Su-1RO" secondAttribute="top" id="8fe-bJ-nrd"/>
-                            <constraint firstItem="KQi-fl-m3i" firstAttribute="leading" secondItem="9Cr-1Q-zqW" secondAttribute="leading" id="HoW-7G-KEa"/>
-                            <constraint firstItem="Q0C-Ki-dUv" firstAttribute="top" secondItem="9Cr-1Q-zqW" secondAttribute="top" id="Io2-yz-BUw"/>
-                            <constraint firstItem="KQi-fl-m3i" firstAttribute="centerY" secondItem="9Cr-1Q-zqW" secondAttribute="centerY" id="JNN-my-6iH"/>
-                            <constraint firstItem="M17-QV-aVV" firstAttribute="centerX" secondItem="KQi-fl-m3i" secondAttribute="centerX" id="Z3m-NJ-waU"/>
-                            <constraint firstItem="GQu-Om-yFj" firstAttribute="top" secondItem="KQi-fl-m3i" secondAttribute="bottom" constant="56" id="b8n-mP-ckf"/>
-                            <constraint firstItem="Q0C-Ki-dUv" firstAttribute="bottom" secondItem="Ust-Ci-HXm" secondAttribute="top" id="cmf-oM-XRg"/>
-                            <constraint firstItem="9Cr-1Q-zqW" firstAttribute="bottom" secondItem="Ust-Ci-HXm" secondAttribute="top" id="eVD-if-FhP"/>
-                            <constraint firstItem="9Cr-1Q-zqW" firstAttribute="leading" secondItem="iS6-Su-1RO" secondAttribute="leading" id="fKa-nT-PXd"/>
-                            <constraint firstAttribute="trailing" secondItem="9Cr-1Q-zqW" secondAttribute="trailing" id="ks3-aL-Dpa"/>
-                            <constraint firstItem="Q0C-Ki-dUv" firstAttribute="trailing" secondItem="9Cr-1Q-zqW" secondAttribute="trailing" id="nhi-Bb-iZ1"/>
-                            <constraint firstItem="KQi-fl-m3i" firstAttribute="top" secondItem="M17-QV-aVV" secondAttribute="bottom" constant="8" symbolic="YES" id="pNS-cr-HfZ"/>
-                            <constraint firstItem="M17-QV-aVV" firstAttribute="top" secondItem="u9W-Ow-hDl" secondAttribute="bottom" constant="43" id="sm4-zl-6LU"/>
-                            <constraint firstItem="KQi-fl-m3i" firstAttribute="centerX" secondItem="GQu-Om-yFj" secondAttribute="centerX" id="tji-01-ZRA"/>
+                            <constraint firstItem="7gN-ib-qSd" firstAttribute="leading" secondItem="WJa-kr-zsc" secondAttribute="leading" id="0sA-9d-wcm"/>
+                            <constraint firstItem="WJa-kr-zsc" firstAttribute="bottom" secondItem="Ust-Ci-HXm" secondAttribute="top" id="3aJ-S2-bf6"/>
+                            <constraint firstItem="2IT-p6-TyC" firstAttribute="leading" secondItem="iS6-Su-1RO" secondAttribute="leadingMargin" constant="30" id="4f6-vO-4ja"/>
+                            <constraint firstItem="7gN-ib-qSd" firstAttribute="bottom" secondItem="Ust-Ci-HXm" secondAttribute="top" id="4r2-cy-E94"/>
+                            <constraint firstItem="7gN-ib-qSd" firstAttribute="leading" secondItem="iS6-Su-1RO" secondAttribute="leading" id="5xJ-mO-TfW"/>
+                            <constraint firstItem="0ga-NC-mGk" firstAttribute="leading" secondItem="iS6-Su-1RO" secondAttribute="leadingMargin" constant="47" id="B2f-Cq-8me"/>
+                            <constraint firstItem="0ga-NC-mGk" firstAttribute="top" secondItem="u9W-Ow-hDl" secondAttribute="bottom" constant="8" symbolic="YES" id="TVh-OP-kcE"/>
+                            <constraint firstAttribute="trailing" secondItem="7gN-ib-qSd" secondAttribute="trailing" id="WEd-M0-rAL"/>
+                            <constraint firstItem="0ga-NC-mGk" firstAttribute="centerX" secondItem="2IT-p6-TyC" secondAttribute="centerX" id="YIl-zV-wlP"/>
+                            <constraint firstItem="Mcs-aI-ilU" firstAttribute="leading" secondItem="2IT-p6-TyC" secondAttribute="leading" id="eOw-7m-oDl"/>
+                            <constraint firstItem="7gN-ib-qSd" firstAttribute="top" secondItem="u9W-Ow-hDl" secondAttribute="bottom" id="fiU-pW-j19"/>
+                            <constraint firstItem="Mcs-aI-ilU" firstAttribute="trailing" secondItem="2IT-p6-TyC" secondAttribute="trailing" id="g1E-9N-Vqs"/>
+                            <constraint firstItem="WJa-kr-zsc" firstAttribute="top" secondItem="7gN-ib-qSd" secondAttribute="top" id="hSr-6n-Jr0"/>
+                            <constraint firstItem="0ga-NC-mGk" firstAttribute="centerX" secondItem="WJa-kr-zsc" secondAttribute="centerX" id="ngE-Mz-kSA"/>
+                            <constraint firstItem="Mcs-aI-ilU" firstAttribute="top" secondItem="2IT-p6-TyC" secondAttribute="bottom" constant="21" id="oUE-T7-Ac7"/>
+                            <constraint firstItem="7gN-ib-qSd" firstAttribute="trailing" secondItem="WJa-kr-zsc" secondAttribute="trailing" id="pyE-x7-mCd"/>
+                            <constraint firstItem="2IT-p6-TyC" firstAttribute="top" secondItem="0ga-NC-mGk" secondAttribute="bottom" constant="8" symbolic="YES" id="q43-re-FhW"/>
+                            <constraint firstItem="Ust-Ci-HXm" firstAttribute="top" secondItem="Mcs-aI-ilU" secondAttribute="bottom" constant="159" id="vgo-nf-hdE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oWy-ez-KX1"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="BlackBC" destination="Q0C-Ki-dUv" id="rJB-at-qAE"/>
+                        <outlet property="BlackBC" destination="WJa-kr-zsc" id="suz-ZX-tMe"/>
+                        <outlet property="SignUpFacebookOutlet" destination="Mcs-aI-ilU" id="OAm-tA-GTL"/>
+                        <outlet property="signUpEmailOutlet" destination="2IT-p6-TyC" id="2WI-XV-szz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DX6-Pr-DHe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1911" y="-361"/>
+            <point key="canvasLocation" x="1911" y="-363"/>
         </scene>
         <!--Play-->
         <scene sceneID="ICd-Pm-2GB">
@@ -288,11 +293,11 @@
     </scenes>
     <resources>
         <image name="BlackBC.jpg" width="3000" height="3000"/>
+        <image name="ChessIconAndTExt.png" width="1048" height="1237"/>
         <image name="ChessIconTab.png" width="30" height="30"/>
         <image name="DSCF0388.jpg" width="1659" height="2651"/>
         <image name="Data.png" width="30" height="30"/>
         <image name="Friends.png" width="30" height="30"/>
-        <image name="chessIconRounded.png" width="700" height="700"/>
         <image name="settingsTabBarIcon.png" width="32" height="32"/>
     </resources>
 </document>
