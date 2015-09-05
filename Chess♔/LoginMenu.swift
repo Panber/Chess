@@ -59,14 +59,18 @@ class LoginMenu: UIViewController {
     }
     @IBAction func signUpEmail(sender: AnyObject) {
         
-        UIView.animateWithDuration(1.0, animations: {
-            self.chessIconHeader.frame.origin.y -= 1000
-            self.emailInput.frame.origin.y -= 800
-            self.passwordInput.frame.origin.y -= 800
+        emailInput.adjustsFontSizeToFitWidth = true
+//        emailInput.minimumScaleFactor = 0.2
+        
+        UIView.animateWithDuration(0.8, animations: {
+            self.chessIconHeader.frame.origin.y -= 220
+            self.emailInput.frame.origin.y -= 750
+            self.passwordInput.frame.origin.y -= 750
             self.SignUpFacebookOutlet.frame.origin.y -= 1000
             self.signUpEmailOutlet.frame.origin.y -= 1000
             self.lineOutlet.frame.origin.y -= 1000
-        
+            self.lineOutlet.alpha = 0
+            
         })
         
     }
