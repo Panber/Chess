@@ -52,7 +52,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
         passwordInput.layer.cornerRadius = cornerRadius
         
         passwordInput.delegate = self
-        emailInput.delegate= self
+        emailInput.delegate = self
         
     }
     
