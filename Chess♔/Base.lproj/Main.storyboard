@@ -92,7 +92,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eGc-b9-Wbm">
-                                <rect key="frame" x="50" y="918" width="500" height="65"/>
+                                <rect key="frame" x="50" y="824" width="500" height="65"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -103,7 +103,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3me-cE-fqC">
-                                <rect key="frame" x="50" y="991" width="500" height="65"/>
+                                <rect key="frame" x="50" y="897" width="500" height="65"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -118,6 +118,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="eGc-b9-Wbm" firstAttribute="top" secondItem="Mcs-aI-ilU" secondAttribute="bottom" constant="300" id="2hX-XF-no1"/>
                             <constraint firstItem="6xU-5s-jdP" firstAttribute="centerX" secondItem="0ga-NC-mGk" secondAttribute="centerX" id="2tL-BC-FIa"/>
                             <constraint firstItem="eGc-b9-Wbm" firstAttribute="top" secondItem="Mcs-aI-ilU" secondAttribute="bottom" constant="350" id="3xC-fd-qqc"/>
                             <constraint firstItem="3me-cE-fqC" firstAttribute="top" secondItem="eGc-b9-Wbm" secondAttribute="bottom" constant="8" id="6Yf-WG-sZb"/>
@@ -149,6 +150,7 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="mLr-EJ-Jnz"/>
+                                <exclude reference="3xC-fd-qqc"/>
                             </mask>
                         </variation>
                     </view>
