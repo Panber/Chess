@@ -86,9 +86,11 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         let userPassword = passwordInput.text
         let userName = usernameInput.text
         
+        //checking if forms are typed in
+            //remember to add photo to this list
         if (userName == "" || userPassword == "" || userEmail == "") {
             
-            var myAlert = UIAlertController(title: "Alert", message: "You have to submit all forms", preferredStyle: UIAlertControllerStyle.Alert)
+            let myAlert = UIAlertController(title: "Alert", message: "You have to submit all forms", preferredStyle: UIAlertControllerStyle.Alert)
             
             let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
             myAlert.addAction(okAction)
@@ -99,11 +101,44 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         
         }
         
+        let myUser:PFUser = PFUser()
+        myUser.username = userName
+        myUser.email = userEmail
+        myUser.password = userPassword
+        
         let profileImageData = UIImageJPEGRepresentation(profilePhotoImageView.image!, 1)
         
         if profileImageData != nil {
-            //create the PFFile object to be sen to parse cloud service
+                let profileImageFile = PFFile(data: profileImageData!)
+                myUser.setObject(profileImageFile, forKey: "profile_picture")
         }
+        
+        
+        myUser.signUpInBackgroundWithBlock { (success:Bool, error: NSError?) -> Void in
+            
+            var userMessage = "Welcome! Your registration was successfull"
+            
+            if !success {
+//                userMessage = "The registration was not completed."
+                userMessage = error!.localizedDescription
+            }
+            
+
+            
+            let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) { action in
+                if success {
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
+                    self.showViewController(vc as! UIViewController, sender: vc)
+                }
+            }
+            myAlert.addAction(okAction)
+            
+            self.presentViewController(myAlert, animated: true, completion: nil)
+            
+        }
+
         
     }
     //setting the profile photo

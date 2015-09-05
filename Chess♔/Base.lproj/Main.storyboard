@@ -8,7 +8,7 @@
         <!--Play-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="GameMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Play" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="GameMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CTA-QS-dyF"/>
                         <viewControllerLayoutGuide type="bottom" id="m6A-2R-EOC"/>
@@ -273,7 +273,7 @@
         <!--Play-->
         <scene sceneID="ICd-Pm-2GB">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZtP-fs-Dvj" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Tab" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZtP-fs-Dvj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Play" image="ChessIconTab.png" id="dHm-k1-ffu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dlM-n8-8sJ">
@@ -293,7 +293,7 @@
         <!--Sett-->
         <scene sceneID="suy-iP-UXV">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="bY1-z2-YMg" customClass="sett" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="Sett" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bY1-z2-YMg" customClass="sett" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="FFH-hZ-yxt">
                         <autoresizingMask key="autoresizingMask"/>
