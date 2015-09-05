@@ -49,7 +49,10 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
         signUpEmailOutlet.layer.cornerRadius = cornerRadius
         emailInput.layer.cornerRadius = cornerRadius
         passwordInput.layer.cornerRadius = cornerRadius
+        passwordInput.layer.cornerRadius = cornerRadius
+        
         passwordInput.delegate = self
+        emailInput.description = self
         
     }
     
@@ -86,6 +89,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 //            self.signUpOutlet.frame.origin.y -= 750
             self.view.frame.origin.y -= 750
             self.view.frame.size.height += 750
+            self.imageBC.frame.size.height += 750
             
         })
         
