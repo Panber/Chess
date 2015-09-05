@@ -87,7 +87,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         let myPickerController = UIImagePickerController()
         myPickerController.delegate = self
         myPickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.presentViewController(myPickerController, animated: false, completion: nil)
+        self.presentViewController(myPickerController, animated: true, completion: nil)
         BlackBC.alpha -= 0.5
     
         
@@ -97,9 +97,10 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         func animateOut() {
             UIView.animateWithDuration(0.8, animations: {
                 //animating the view
-                self.view.frame.origin.y -= 750
-                self.view.frame.size.height += 750
-                self.imageBC.frame.size.height += 750
+                self.view.frame.origin.y -= 800
+                self.view.frame.size.height += 800
+                self.imageBC.frame.size.height += 800
+                self.BlackBC.alpha += 0.5
             })
         }
 
@@ -108,6 +109,21 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         
 
     }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    
+        func animateOut() {
+            UIView.animateWithDuration(0.8, animations: {
+                //animating the view
+                self.view.frame.origin.y -= 800
+                self.view.frame.size.height += 800
+                self.imageBC.frame.size.height += 800
+                self.BlackBC.alpha += 0.5
+            })
+        }
+        self.dismissViewControllerAnimated(false, completion: animateOut)
+    }
+
 
     
     @IBAction func signUpFacebook(sender: AnyObject) {
@@ -122,9 +138,9 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         UIView.animateWithDuration(0.8, animations: {
             
             //animating the view
-            self.view.frame.origin.y -= 750
-            self.view.frame.size.height += 750
-            self.imageBC.frame.size.height += 750
+            self.view.frame.origin.y -= 800
+            self.view.frame.size.height += 800
+            self.imageBC.frame.size.height += 800
             
             //changing alpha of elements
             self.emailInput.alpha = 1
@@ -136,9 +152,9 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             self.lineOutlet.alpha = 0
             self.BlackBC.alpha += 0.5
             
-                //previous elements
-                self.signUpEmailOutlet.alpha = 0
-                self.SignUpFacebookOutlet.alpha = 0
+//                //previous elements
+//                self.signUpEmailOutlet.alpha = 0
+//                self.SignUpFacebookOutlet.alpha = 0
 
         })
         
