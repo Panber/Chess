@@ -28,8 +28,11 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
     @IBOutlet weak var lineOutlet: UILabel!
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
+    @IBOutlet weak var usernameInput: UITextField!
     @IBOutlet weak var signUpOutlet: UIButton!
+    @IBOutlet weak var selectProfilePhotoOutlet: UIButton!
     
+    @IBOutlet weak var profilePhotoImageView: UIImageView!
     
     
     override func viewDidLoad() {
@@ -49,10 +52,27 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
         signUpEmailOutlet.layer.cornerRadius = cornerRadius
         emailInput.layer.cornerRadius = cornerRadius
         passwordInput.layer.cornerRadius = cornerRadius
-        passwordInput.layer.cornerRadius = cornerRadius
+        signUpOutlet.layer.cornerRadius = cornerRadius
+        usernameInput.layer.cornerRadius = cornerRadius
+        selectProfilePhotoOutlet.layer.cornerRadius = cornerRadius
+
+        //changing profileImage
+        self.profilePhotoImageView.layer.cornerRadius = (self.profilePhotoImageView.frame.size.width / 2)
+        self.profilePhotoImageView.clipsToBounds = true
+        self.profilePhotoImageView.layer.borderWidth = 3
+        self.profilePhotoImageView.layer.borderColor = UIColor.whiteColor().CGColor
+
+        
+        
+        emailInput.alpha = 0
+        passwordInput.alpha = 0
+        signUpOutlet.alpha = 0
+        usernameInput.alpha = 0
+        selectProfilePhotoOutlet.alpha = 0
+        profilePhotoImageView.alpha = 0
         
         passwordInput.delegate = self
-        emailInput.delegate= self
+        emailInput.delegate = self
         
     }
     
@@ -66,6 +86,8 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
     @IBAction func signUp(sender: AnyObject) {
         print("signing up")
         
+    }
+    @IBAction func selectProfilePhoto(sender: AnyObject) {
     }
     @IBAction func signUpFacebook(sender: AnyObject) {
         
@@ -84,13 +106,21 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 //            self.SignUpFacebookOutlet.frame.origin.y -= 1000
 //            self.signUpEmailOutlet.frame.origin.y -= 1000
 //            self.lineOutlet.frame.origin.y -= 1000
-            self.lineOutlet.alpha = 0
-            self.BlackBC.alpha += 0.5
 //            self.signUpOutlet.frame.origin.y -= 750
             self.view.frame.origin.y -= 750
             self.view.frame.size.height += 750
             self.imageBC.frame.size.height += 750
             
+            //changing alpha of elements
+            self.emailInput.alpha = 1
+            self.passwordInput.alpha = 1
+            self.signUpOutlet.alpha = 1
+            self.usernameInput.alpha = 1
+            self.selectProfilePhotoOutlet.alpha = 1
+            self.profilePhotoImageView.alpha = 1
+            self.lineOutlet.alpha = 0
+            self.BlackBC.alpha += 0.5
+
         })
         
         
