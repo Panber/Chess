@@ -27,8 +27,7 @@ class LoginMenu: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-      
+            print("viewDidLoad")
         
         // A Parse test, uncomment to test Parse
 //        let testObject = PFObject(className: "TestObject")
@@ -71,9 +70,10 @@ class LoginMenu: UIViewController {
             self.signUpEmailOutlet.frame.origin.y -= 1000
             self.lineOutlet.frame.origin.y -= 1000
             self.lineOutlet.alpha = 0
-            self.BlackBC.alpha += 0.3
+            self.BlackBC.alpha += 0.5
             
         })
+        
         
     }
 
@@ -83,6 +83,7 @@ class LoginMenu: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
+        print("viewWillAppear")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

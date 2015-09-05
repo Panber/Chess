@@ -151,10 +151,10 @@
 		8FA5C8971B9A264F0097637E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FA5C89A1B9A264F0097637E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8FA5C89C1B9A264F0097637E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8FA5C8A11B9A264F0097637E /* Chess♔Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chess♔Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FA5C8A11B9A264F0097637E /* Chess♔.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chess♔.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8A51B9A264F0097637E /* Chess_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chess_Tests.swift; sourceTree = "<group>"; };
 		8FA5C8A71B9A264F0097637E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8FA5C8AC1B9A264F0097637E /* Chess♔UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chess♔UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FA5C8AC1B9A264F0097637E /* Chess♔.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chess♔.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8B01B9A264F0097637E /* Chess_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chess_UITests.swift; sourceTree = "<group>"; };
 		8FA5C8B21B9A264F0097637E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -315,8 +315,8 @@
 			isa = PBXGroup;
 			children = (
 				8FA5C88D1B9A264F0097637E /* Chess♔.app */,
-				8FA5C8A11B9A264F0097637E /* Chess♔Tests.xctest */,
-				8FA5C8AC1B9A264F0097637E /* Chess♔UITests.xctest */,
+				8FA5C8A11B9A264F0097637E /* Chess♔.xctest */,
+				8FA5C8AC1B9A264F0097637E /* Chess♔.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -388,7 +388,7 @@
 			);
 			name = "Chess♔Tests";
 			productName = "Chess♔Tests";
-			productReference = 8FA5C8A11B9A264F0097637E /* Chess♔Tests.xctest */;
+			productReference = 8FA5C8A11B9A264F0097637E /* Chess♔.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		8FA5C8AB1B9A264F0097637E /* Chess♔UITests */ = {
@@ -406,7 +406,7 @@
 			);
 			name = "Chess♔UITests";
 			productName = "Chess♔UITests";
-			productReference = 8FA5C8AC1B9A264F0097637E /* Chess♔UITests.xctest */;
+			productReference = 8FA5C8AC1B9A264F0097637E /* Chess♔.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -677,7 +677,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Panber.Chess;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Chess♔";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -696,7 +696,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Panber.Chess;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Chess♔";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -708,7 +708,7 @@
 				INFOPLIST_FILE = "Chess♔Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Panber.Chess-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Chess♔";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chess♔.app/Chess♔";
 			};
 			name = Debug;
@@ -720,7 +720,7 @@
 				INFOPLIST_FILE = "Chess♔Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Panber.Chess-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Chess♔";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chess♔.app/Chess♔";
 			};
 			name = Release;
@@ -731,7 +731,7 @@
 				INFOPLIST_FILE = "Chess♔UITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Panber.Chess-UITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Chess♔";
 				TEST_TARGET_NAME = "Chess♔";
 				USES_XCTRUNNER = YES;
 			};
@@ -743,7 +743,7 @@
 				INFOPLIST_FILE = "Chess♔UITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Panber.Chess-UITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Chess♔";
 				TEST_TARGET_NAME = "Chess♔";
 				USES_XCTRUNNER = YES;
 			};
