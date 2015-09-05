@@ -67,6 +67,9 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         passwordInput.delegate = self
         emailInput.delegate = self
         
+        
+    
+        
     }
     
     //Function to blur images
@@ -78,6 +81,29 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
 
     @IBAction func signUp(sender: AnyObject) {
         print("signing up")
+        
+        let userEmail = emailInput.text
+        let userPassword = passwordInput.text
+        let userName = usernameInput.text
+        
+        if (userName == "" || userPassword == "" || userEmail == "") {
+            
+            var myAlert = UIAlertController(title: "Alert", message: "You have to submit all forms", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            myAlert.addAction(okAction)
+            
+            self.presentViewController(myAlert, animated: true, completion: nil)
+            
+            return
+        
+        }
+        
+        let profileImageData = UIImageJPEGRepresentation(profilePhotoImageView.image!, 1)
+        
+        if profileImageData != nil {
+            //create the PFFile object to be sen to parse cloud service
+        }
         
     }
     //setting the profile photo

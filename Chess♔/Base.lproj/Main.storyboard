@@ -104,7 +104,7 @@
                                     <constraint firstAttribute="width" constant="500" id="lUT-0Y-gyO"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="25"/>
+                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -124,7 +124,7 @@
                                     <constraint firstAttribute="height" constant="50" id="xiT-rI-idA"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="25"/>
+                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -194,7 +194,7 @@
                                     <constraint firstAttribute="width" constant="500" id="eAI-no-bSQ"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="25"/>
+                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <variation key="default">
                                     <mask key="constraints">
