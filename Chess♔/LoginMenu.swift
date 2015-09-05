@@ -61,6 +61,7 @@ class LoginMenu: UIViewController {
         
         emailInput.adjustsFontSizeToFitWidth = true
 //        emailInput.minimumScaleFactor = 0.2
+
         
         UIView.animateWithDuration(0.8, animations: {
             self.chessIconHeader.frame.origin.y -= 220
@@ -70,6 +71,7 @@ class LoginMenu: UIViewController {
             self.signUpEmailOutlet.frame.origin.y -= 1000
             self.lineOutlet.frame.origin.y -= 1000
             self.lineOutlet.alpha = 0
+            self.BlackBC.alpha += 0.3
             
         })
         
