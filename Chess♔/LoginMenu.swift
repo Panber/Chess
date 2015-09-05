@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-let cornerRadius:CGFloat = 25
+let cornerRadius:CGFloat = 13
 
 class LoginMenu: UIViewController {
 
@@ -17,6 +17,7 @@ class LoginMenu: UIViewController {
     @IBOutlet weak var BlackBC: UIImageView!
     @IBOutlet weak var SignUpFacebookOutlet: UIButton!
     @IBOutlet weak var signUpEmailOutlet: UIButton!
+    @IBOutlet weak var imageBC: UIImageView!
     
     
     
@@ -31,8 +32,20 @@ class LoginMenu: UIViewController {
 //        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
 //            print("Object has been saved.")
 //        }
+        
+        //Editing look at startup
         SignUpFacebookOutlet.layer.cornerRadius = cornerRadius
         signUpEmailOutlet.layer.cornerRadius = cornerRadius
+        
+    }
+    
+    func blur(let imageView: UIImageView) {
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+        visualEffectView.frame = imageView.bounds
+        imageView.addSubview(visualEffectView)
+    }
+
+    @IBAction func signUpFacebook(sender: AnyObject) {
         
         
     }
@@ -43,7 +56,6 @@ class LoginMenu: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
-        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
