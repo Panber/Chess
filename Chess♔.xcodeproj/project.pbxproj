@@ -52,8 +52,11 @@
 		8F4A02A31B9A429B0084024A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A21B9A429B0084024A /* SystemConfiguration.framework */; };
 		8F4A02A51B9A42D40084024A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A41B9A42D40084024A /* Accounts.framework */; };
 		8F4A02A71B9A42DC0084024A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A61B9A42DC0084024A /* Social.framework */; };
+		8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */; settings = {ASSET_TAGS = (); }; };
+		8F86392B1B9B01D00055608B /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86392A1B9B01D00055608B /* SettingsMenu.swift */; settings = {ASSET_TAGS = (); }; };
+		8F86392D1B9B02780055608B /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86392C1B9B02780055608B /* ChatView.swift */; settings = {ASSET_TAGS = (); }; };
 		8FA5C8911B9A264F0097637E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8901B9A264F0097637E /* AppDelegate.swift */; };
-		8FA5C8931B9A264F0097637E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8921B9A264F0097637E /* ViewController.swift */; };
+		8FA5C8931B9A264F0097637E /* LoginMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8921B9A264F0097637E /* LoginMenu.swift */; };
 		8FA5C8961B9A264F0097637E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8941B9A264F0097637E /* Main.storyboard */; };
 		8FA5C8981B9A264F0097637E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8971B9A264F0097637E /* Assets.xcassets */; };
 		8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8991B9A264F0097637E /* LaunchScreen.storyboard */; };
@@ -124,9 +127,12 @@
 		8F4A02A21B9A429B0084024A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8F4A02A41B9A42D40084024A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8F4A02A61B9A42DC0084024A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeMenu.swift; sourceTree = "<group>"; };
+		8F86392A1B9B01D00055608B /* SettingsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
+		8F86392C1B9B02780055608B /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		8FA5C88D1B9A264F0097637E /* Chess♔.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chess♔.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8901B9A264F0097637E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8FA5C8921B9A264F0097637E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8FA5C8921B9A264F0097637E /* LoginMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenu.swift; sourceTree = "<group>"; };
 		8FA5C8951B9A264F0097637E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8FA5C8971B9A264F0097637E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FA5C89A1B9A264F0097637E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -223,9 +229,12 @@
 			isa = PBXGroup;
 			children = (
 				8FA5C8901B9A264F0097637E /* AppDelegate.swift */,
-				8FA5C8921B9A264F0097637E /* ViewController.swift */,
+				8FA5C8921B9A264F0097637E /* LoginMenu.swift */,
 				8F4A02891B9A40FF0084024A /* GameInterface.swift */,
 				8F4A028B1B9A414D0084024A /* GameMenu.swift */,
+				8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */,
+				8F86392A1B9B01D00055608B /* SettingsMenu.swift */,
+				8F86392C1B9B02780055608B /* ChatView.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -484,7 +493,10 @@
 			files = (
 				8F4A028C1B9A414D0084024A /* GameMenu.swift in Sources */,
 				8F4A028A1B9A40FF0084024A /* GameInterface.swift in Sources */,
-				8FA5C8931B9A264F0097637E /* ViewController.swift in Sources */,
+				8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */,
+				8F86392B1B9B01D00055608B /* SettingsMenu.swift in Sources */,
+				8F86392D1B9B02780055608B /* ChatView.swift in Sources */,
+				8FA5C8931B9A264F0097637E /* LoginMenu.swift in Sources */,
 				8FA5C8911B9A264F0097637E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
