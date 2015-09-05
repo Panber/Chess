@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8FA5C8A01B9A264F0097637E"
-               BuildableName = "Chess&#x2654;Tests.xctest"
+               BuildableName = "Chess&#x2654;.xctest"
                BlueprintName = "Chess&#x2654;Tests"
                ReferencedContainer = "container:Chess&#x2654;.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8FA5C8AB1B9A264F0097637E"
-               BuildableName = "Chess&#x2654;UITests.xctest"
+               BuildableName = "Chess&#x2654;.xctest"
                BlueprintName = "Chess&#x2654;UITests"
                ReferencedContainer = "container:Chess&#x2654;.xcodeproj">
             </BuildableReference>

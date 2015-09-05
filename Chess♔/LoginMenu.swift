@@ -10,8 +10,12 @@ import UIKit
 import Parse
 
 let cornerRadius:CGFloat = 13
+let screenSize: CGRect = UIScreen.mainScreen().bounds
+let screenWidth = screenSize.width
+let screenHeight = screenSize.height
 
-class LoginMenu: UIViewController {
+
+class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
     //Black Background Image Overlay for nice effect
     @IBOutlet weak var BlackBC: UIImageView!
@@ -24,11 +28,13 @@ class LoginMenu: UIViewController {
     @IBOutlet weak var lineOutlet: UILabel!
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
+    @IBOutlet weak var signUpOutlet: UIButton!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-      
+            print("viewDidLoad")
         
         // A Parse test, uncomment to test Parse
 //        let testObject = PFObject(className: "TestObject")
@@ -37,22 +43,30 @@ class LoginMenu: UIViewController {
 //            print("Object has been saved.")
 //        }
         
+        
         //Editing look at startup
         SignUpFacebookOutlet.layer.cornerRadius = cornerRadius
         signUpEmailOutlet.layer.cornerRadius = cornerRadius
         emailInput.layer.cornerRadius = cornerRadius
         passwordInput.layer.cornerRadius = cornerRadius
-
-
+        passwordInput.layer.cornerRadius = cornerRadius
+        
+        passwordInput.delegate = self
+        emailInput.delegate= self
         
     }
     
+    //Function to blur images
     func blur(let imageView: UIImageView) {
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
         visualEffectView.frame = imageView.bounds
         imageView.addSubview(visualEffectView)
     }
 
+    @IBAction func signUp(sender: AnyObject) {
+        print("signing up")
+        
+    }
     @IBAction func signUpFacebook(sender: AnyObject) {
         
         
@@ -62,18 +76,23 @@ class LoginMenu: UIViewController {
         emailInput.adjustsFontSizeToFitWidth = true
 //        emailInput.minimumScaleFactor = 0.2
 
-        
+        //animate in
         UIView.animateWithDuration(0.8, animations: {
-            self.chessIconHeader.frame.origin.y -= 220
-            self.emailInput.frame.origin.y -= 750
-            self.passwordInput.frame.origin.y -= 750
-            self.SignUpFacebookOutlet.frame.origin.y -= 1000
-            self.signUpEmailOutlet.frame.origin.y -= 1000
-            self.lineOutlet.frame.origin.y -= 1000
+//            self.chessIconHeader.frame.origin.y -= 220
+//            self.emailInput.frame.origin.y -= 750
+//            self.passwordInput.frame.origin.y -= 750
+//            self.SignUpFacebookOutlet.frame.origin.y -= 1000
+//            self.signUpEmailOutlet.frame.origin.y -= 1000
+//            self.lineOutlet.frame.origin.y -= 1000
             self.lineOutlet.alpha = 0
-            self.BlackBC.alpha += 0.3
+            self.BlackBC.alpha += 0.5
+//            self.signUpOutlet.frame.origin.y -= 750
+            self.view.frame.origin.y -= 750
+            self.view.frame.size.height += 750
+            self.imageBC.frame.size.height += 750
             
         })
+        
         
     }
 
@@ -83,6 +102,7 @@ class LoginMenu: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
+        print("viewWillAppear")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
