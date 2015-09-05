@@ -37,6 +37,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14K-CM-lPC">
+                                <rect key="frame" x="180" y="686" width="240" height="128"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DSCF0388.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7gN-ib-qSd">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
                                 <animations/>

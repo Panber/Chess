@@ -15,7 +15,7 @@ let screenWidth = screenSize.width
 let screenHeight = screenSize.height
 
 
-class LoginMenu: UIViewController, UITextFieldDelegate {
+class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
     //Black Background Image Overlay for nice effect
     @IBOutlet weak var BlackBC: UIImageView!
@@ -50,7 +50,6 @@ class LoginMenu: UIViewController, UITextFieldDelegate {
         emailInput.layer.cornerRadius = cornerRadius
         passwordInput.layer.cornerRadius = cornerRadius
         passwordInput.delegate = self
-
         
     }
     
@@ -76,15 +75,17 @@ class LoginMenu: UIViewController, UITextFieldDelegate {
 
         //animate in
         UIView.animateWithDuration(0.8, animations: {
-            self.chessIconHeader.frame.origin.y -= 220
-            self.emailInput.frame.origin.y -= 750
-            self.passwordInput.frame.origin.y -= 750
-            self.SignUpFacebookOutlet.frame.origin.y -= 1000
-            self.signUpEmailOutlet.frame.origin.y -= 1000
-            self.lineOutlet.frame.origin.y -= 1000
+//            self.chessIconHeader.frame.origin.y -= 220
+//            self.emailInput.frame.origin.y -= 750
+//            self.passwordInput.frame.origin.y -= 750
+//            self.SignUpFacebookOutlet.frame.origin.y -= 1000
+//            self.signUpEmailOutlet.frame.origin.y -= 1000
+//            self.lineOutlet.frame.origin.y -= 1000
             self.lineOutlet.alpha = 0
             self.BlackBC.alpha += 0.5
-            self.signUpOutlet.frame.origin.y -= 750
+//            self.signUpOutlet.frame.origin.y -= 750
+            self.view.frame.origin.y -= 750
+            self.view.frame.size.height += 750
             
         })
         
