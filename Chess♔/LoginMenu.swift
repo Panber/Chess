@@ -22,6 +22,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     @IBOutlet weak var signUpEmailOutlet: UIButton!
     @IBOutlet weak var imageBC: UIImageView!
     
+    @IBOutlet weak var imageBC2: UIImageView!
     @IBOutlet weak var chessIconHeader: UIImageView!
     
     @IBOutlet weak var lineOutlet: UILabel!
@@ -68,8 +69,35 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         emailInput.delegate = self
         
 
+
         
     }
+    
+//    //fadeing bc func
+//    func bcFade() {
+//        
+//        //bc fade
+//        var nameOfimages = ["DSCF0388","DSCF0378"]
+//        
+//        func animateInBCImage() {
+//            var ranNum = Int(arc4random()%2)
+//        UIView.animateWithDuration(1, animations: {
+//            self.imageBC2.image = UIImage(named: nameOfimages[ranNum + 1])
+//            self.imageBC.alpha = 1
+//            self.imageBC2.alpha = 0
+//            }, completion: animateInBCImage2)
+//        }
+//        
+//        func animateInBCImage2() {
+//            var ranNum = Int(arc4random()%2)
+//            UIView.animateWithDuration(1, animations: {
+//                self.imageBC.image = UIImage(named: nameOfimages[ranNum])
+//                self.imageBC.alpha = 0
+//                self.imageBC2.alpha = 1
+//                }, completion: animateInBCImage)
+//        }
+//    
+//    }
     
     
     //Function to blur images
@@ -161,6 +189,8 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
                 self.view.frame.origin.y -= 800
                 self.view.frame.size.height += 800
                 self.imageBC.frame.size.height += 800
+                self.imageBC2.frame.size.height += 800
+
                 self.BlackBC.alpha += 0.5
             })
         }
@@ -179,6 +209,8 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
                 self.view.frame.origin.y -= 800
                 self.view.frame.size.height += 800
                 self.imageBC.frame.size.height += 800
+                self.imageBC2.frame.size.height += 800
+
                 self.BlackBC.alpha += 0.5
             })
         }
@@ -202,6 +234,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             self.view.frame.origin.y -= 800
             self.view.frame.size.height += 800
             self.imageBC.frame.size.height += 800
+            self.imageBC2.frame.size.height += 800
             
             //changing alpha of elements
             self.emailInput.alpha = 1
