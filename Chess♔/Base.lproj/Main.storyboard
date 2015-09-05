@@ -41,7 +41,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
                                 <animations/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackBC.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="WJa-kr-zsc">
+                            <imageView alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackBC.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="WJa-kr-zsc">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
                                 <animations/>
                             </imageView>
@@ -105,7 +105,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="22"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="lUT-0Y-gyO"/>
@@ -174,7 +174,7 @@
                                     <action selector="selectProfilePhoto:" destination="o7c-Vd-f6m" eventType="touchUpInside" id="bva-cc-paP"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PANBERlogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="nRn-gP-RiE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nRn-gP-RiE">
                                 <rect key="frame" x="50" y="998" width="87" height="87"/>
                                 <animations/>
                                 <constraints>
@@ -195,7 +195,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="22"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="eAI-no-bSQ"/>
@@ -458,7 +458,6 @@
         <image name="DSCF0388.jpg" width="1659" height="2651"/>
         <image name="Data.png" width="30" height="30"/>
         <image name="Friends.png" width="30" height="30"/>
-        <image name="PANBERlogo.png" width="1920" height="1920"/>
         <image name="settingsTabBarIcon.png" width="32" height="32"/>
     </resources>
 </document>

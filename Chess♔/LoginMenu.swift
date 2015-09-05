@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-let cornerRadius:CGFloat = 13
+let cornerRadius:CGFloat = 8
 let screenSize: CGRect = UIScreen.mainScreen().bounds
 let screenWidth = screenSize.width
 let screenHeight = screenSize.height
@@ -67,10 +67,10 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         passwordInput.delegate = self
         emailInput.delegate = self
         
-        
-    
+
         
     }
+    
     
     //Function to blur images
     func blur(let imageView: UIImageView) {
@@ -88,7 +88,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         
         //checking if forms are typed in
             //remember to add photo to this list
-        if (userName == "" || userPassword == "" || userEmail == "") {
+        if (userName == "" || userPassword == "" || userEmail == "" || profilePhotoImageView.image == UIImage(named: "")) {
             
             let myAlert = UIAlertController(title: "Alert", message: "You have to submit all forms", preferredStyle: UIAlertControllerStyle.Alert)
             
