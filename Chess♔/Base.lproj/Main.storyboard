@@ -37,7 +37,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0lU-SP-kXh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="4.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0lU-SP-kXh">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
                                 <animations/>
                             </imageView>
@@ -461,7 +461,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1.jpg" width="3000" height="2150"/>
+        <image name="4.jpg" width="3500" height="2334"/>
         <image name="BlackBC.jpg" width="3000" height="3000"/>
         <image name="ChessIconAndTExt.png" width="1048" height="1237"/>
         <image name="ChessIconTab.png" width="30" height="30"/>
