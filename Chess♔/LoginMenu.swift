@@ -39,6 +39,9 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         super.viewDidLoad()
             print("viewDidLoad")
         
+        BlackBC.alpha = 1
+        
+        UIView.animateWithDuration(1, animations: {self.BlackBC.alpha = 0.4})
         
         
         //Editing look at startup
@@ -68,36 +71,51 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         passwordInput.delegate = self
         emailInput.delegate = self
         
+        bcFade()
 
 
         
     }
     
-//    //fadeing bc func
-//    func bcFade() {
-//        
-//        //bc fade
-//        var nameOfimages = ["DSCF0388","DSCF0378"]
-//        
-//        func animateInBCImage() {
-//            var ranNum = Int(arc4random()%2)
-//        UIView.animateWithDuration(1, animations: {
-//            self.imageBC2.image = UIImage(named: nameOfimages[ranNum + 1])
-//            self.imageBC.alpha = 1
-//            self.imageBC2.alpha = 0
-//            }, completion: animateInBCImage2)
-//        }
-//        
-//        func animateInBCImage2() {
-//            var ranNum = Int(arc4random()%2)
-//            UIView.animateWithDuration(1, animations: {
-//                self.imageBC.image = UIImage(named: nameOfimages[ranNum])
-//                self.imageBC.alpha = 0
-//                self.imageBC2.alpha = 1
-//                }, completion: animateInBCImage)
-//        }
-//    
-//    }
+    //fadeing bc func
+    func bcFade() {
+        
+        //bc fade
+        var nameOfimages = ["1.jpg","2.JPG","3.jpg","4.jpg"]
+        
+        
+        func animateInBCImage() {
+            let ranNum = Int(arc4random()%2)
+            print("animateInBC gets called")
+            UIView.animateWithDuration(3, delay: 5, options: UIViewAnimationOptions.CurveLinear, animations: {
+            self.imageBC2.image = UIImage(named: nameOfimages[Int(arc4random_uniform(4))])
+            self.imageBC.alpha = 1
+            self.imageBC2.alpha = 0
+            }, completion: { finished in animateInBCImage2()})
+        }
+        
+        func animateInBCImage2() {
+            let ranNum = Int(arc4random()%2)
+            UIView.animateWithDuration(3, delay: 5, options: UIViewAnimationOptions.CurveLinear, animations: {
+                self.imageBC.image = UIImage(named: nameOfimages[Int(arc4random_uniform(4))])
+                self.imageBC.alpha = 0
+                self.imageBC2.alpha = 1
+                
+                }, completion: { finished in animateInBCImage()})
+            
+//            UIView.animateWithDuration(10, animations: {
+//                self.imageBC.frame.size.width += 100
+//                self.imageBC.frame.size.height += 100
+//                }, completion: { finished in
+//                    self.imageBC.frame.size.width -= 50
+//                    self.imageBC.frame.size.height -= 50})
+//            
+        }
+        
+        
+        animateInBCImage2()
+    
+    }
     
     
     //Function to blur images
