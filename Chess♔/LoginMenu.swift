@@ -87,21 +87,26 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         func animateInBCImage() {
             let ranNum = Int(arc4random()%2)
             print("animateInBC gets called")
-            UIView.animateWithDuration(3, delay: 5, options: UIViewAnimationOptions.CurveLinear, animations: {
-            self.imageBC2.image = UIImage(named: nameOfimages[Int(arc4random_uniform(4))])
+            UIView.animateWithDuration(5, delay: 3, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             self.imageBC.alpha = 1
             self.imageBC2.alpha = 0
-            }, completion: { finished in animateInBCImage2()})
+            }, completion: { starting in
+                self.imageBC2.image = UIImage(named: nameOfimages[Int(arc4random_uniform(4))])
+                animateInBCImage2()
+            })
         }
         
         func animateInBCImage2() {
             let ranNum = Int(arc4random()%2)
-            UIView.animateWithDuration(3, delay: 5, options: UIViewAnimationOptions.CurveLinear, animations: {
-                self.imageBC.image = UIImage(named: nameOfimages[Int(arc4random_uniform(4))])
+            print("animateInBC2 gets called")
+            UIView.animateWithDuration(5, delay: 3, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                 self.imageBC.alpha = 0
                 self.imageBC2.alpha = 1
                 
-                }, completion: { finished in animateInBCImage()})
+                }, completion: { starting in
+                    self.imageBC.image = UIImage(named: nameOfimages[Int(arc4random_uniform(4))])
+                    animateInBCImage()
+            })
             
 //            UIView.animateWithDuration(10, animations: {
 //                self.imageBC.frame.size.width += 100

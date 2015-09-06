@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8F14D17E1B9C39EA00A58CCF /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F14D17A1B9C39EA00A58CCF /* 1.jpg */; settings = {ASSET_TAGS = (); }; };
-		8F14D17F1B9C39EA00A58CCF /* 2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 8F14D17B1B9C39EA00A58CCF /* 2.JPG */; settings = {ASSET_TAGS = (); }; };
-		8F14D1801B9C39EA00A58CCF /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F14D17C1B9C39EA00A58CCF /* 3.jpg */; settings = {ASSET_TAGS = (); }; };
-		8F14D1811B9C39EA00A58CCF /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F14D17D1B9C39EA00A58CCF /* 4.jpg */; settings = {ASSET_TAGS = (); }; };
+		8F14D1861B9C823500A58CCF /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F14D1821B9C823500A58CCF /* 3.jpg */; settings = {ASSET_TAGS = (); }; };
+		8F14D1871B9C823500A58CCF /* 2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 8F14D1831B9C823500A58CCF /* 2.JPG */; settings = {ASSET_TAGS = (); }; };
+		8F14D1881B9C823500A58CCF /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F14D1841B9C823500A58CCF /* 1.jpg */; settings = {ASSET_TAGS = (); }; };
+		8F14D1891B9C823500A58CCF /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F14D1851B9C823500A58CCF /* 4.jpg */; settings = {ASSET_TAGS = (); }; };
 		8F2DD6DE1B9AFFF80059CEFA /* board black and white no border.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D21B9AFFF80059CEFA /* board black and white no border.png */; settings = {ASSET_TAGS = (); }; };
 		8F2DD6DF1B9AFFF80059CEFA /* ChessIconTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D31B9AFFF80059CEFA /* ChessIconTab@3x.png */; settings = {ASSET_TAGS = (); }; };
 		8F2DD6E01B9AFFF80059CEFA /* clack and white board with half boarder copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D41B9AFFF80059CEFA /* clack and white board with half boarder copy.png */; settings = {ASSET_TAGS = (); }; };
@@ -94,10 +94,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8F14D17A1B9C39EA00A58CCF /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
-		8F14D17B1B9C39EA00A58CCF /* 2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.JPG; sourceTree = "<group>"; };
-		8F14D17C1B9C39EA00A58CCF /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
-		8F14D17D1B9C39EA00A58CCF /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
+		8F14D1821B9C823500A58CCF /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
+		8F14D1831B9C823500A58CCF /* 2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.JPG; sourceTree = "<group>"; };
+		8F14D1841B9C823500A58CCF /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		8F14D1851B9C823500A58CCF /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
 		8F2DD6D21B9AFFF80059CEFA /* board black and white no border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "board black and white no border.png"; sourceTree = "<group>"; };
 		8F2DD6D31B9AFFF80059CEFA /* ChessIconTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChessIconTab@3x.png"; sourceTree = "<group>"; };
 		8F2DD6D41B9AFFF80059CEFA /* clack and white board with half boarder copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clack and white board with half boarder copy.png"; sourceTree = "<group>"; };
@@ -233,10 +233,10 @@
 		8F4A02671B9A3E6E0084024A /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				8F14D17A1B9C39EA00A58CCF /* 1.jpg */,
-				8F14D17B1B9C39EA00A58CCF /* 2.JPG */,
-				8F14D17C1B9C39EA00A58CCF /* 3.jpg */,
-				8F14D17D1B9C39EA00A58CCF /* 4.jpg */,
+				8F14D1821B9C823500A58CCF /* 3.jpg */,
+				8F14D1831B9C823500A58CCF /* 2.JPG */,
+				8F14D1841B9C823500A58CCF /* 1.jpg */,
+				8F14D1851B9C823500A58CCF /* 4.jpg */,
 				8FA018D61B9B1BDE002B410E /* blubutton.png */,
 				8FA018D21B9B0D76002B410E /* chessIconRounded.png */,
 				8F2DD6D21B9AFFF80059CEFA /* board black and white no border.png */,
@@ -482,6 +482,7 @@
 				8F2DD6E81B9AFFF80059CEFA /* settingsTabBarIcon@3x.png in Resources */,
 				8F4A02861B9A3F240084024A /* chessIcon1024.png in Resources */,
 				8F4A027E1B9A3EE80084024A /* blackQueen.png in Resources */,
+				8F14D1881B9C823500A58CCF /* 1.jpg in Resources */,
 				8F4A027F1B9A3EE80084024A /* blackBishop.png in Resources */,
 				8FA018D91B9B1FAE002B410E /* ChessIconAndTExt.png in Resources */,
 				8F4A02791B9A3EE80084024A /* whiteQueen.png in Resources */,
@@ -499,16 +500,15 @@
 				8F2DD6E01B9AFFF80059CEFA /* clack and white board with half boarder copy.png in Resources */,
 				8F2DD6E21B9AFFF80059CEFA /* Friends@3x.png in Resources */,
 				8F2DD6E11B9AFFF80059CEFA /* Data@3x.png in Resources */,
-				8F14D17E1B9C39EA00A58CCF /* 1.jpg in Resources */,
-				8F14D1801B9C39EA00A58CCF /* 3.jpg in Resources */,
 				8F2DD6E61B9AFFF80059CEFA /* piecePossibilities.png in Resources */,
 				8F2DD6E41B9AFFF80059CEFA /* moveOption.png in Resources */,
-				8F14D17F1B9C39EA00A58CCF /* 2.JPG in Resources */,
 				8F4A027C1B9A3EE80084024A /* blackKnight.png in Resources */,
+				8F14D1871B9C823500A58CCF /* 2.JPG in Resources */,
+				8F14D1861B9C823500A58CCF /* 3.jpg in Resources */,
 				8F2DD6E31B9AFFF80059CEFA /* graySquare.png in Resources */,
 				8F4A02871B9A3F240084024A /* chessIcon180.png in Resources */,
 				8F4A027D1B9A3EE80084024A /* blackPawn.png in Resources */,
-				8F14D1811B9C39EA00A58CCF /* 4.jpg in Resources */,
+				8F14D1891B9C823500A58CCF /* 4.jpg in Resources */,
 				8FA5C8961B9A264F0097637E /* Main.storyboard in Resources */,
 				8F4A027A1B9A3EE80084024A /* whiteRook.png in Resources */,
 				8F2DD6E71B9AFFF80059CEFA /* pieces vlack and white board blurred.png in Resources */,
