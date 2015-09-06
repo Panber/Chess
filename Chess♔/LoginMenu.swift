@@ -39,6 +39,9 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         super.viewDidLoad()
             print("viewDidLoad")
         
+        BlackBC.alpha = 1
+        
+        UIView.animateWithDuration(1, animations: {self.BlackBC.alpha = 0.4})
         
         
         //Editing look at startup
@@ -68,36 +71,60 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         passwordInput.delegate = self
         emailInput.delegate = self
         
+        bcFade()
 
 
         
     }
     
-//    //fadeing bc func
-//    func bcFade() {
-//        
-//        //bc fade
-//        var nameOfimages = ["DSCF0388","DSCF0378"]
-//        
-//        func animateInBCImage() {
-//            var ranNum = Int(arc4random()%2)
-//        UIView.animateWithDuration(1, animations: {
-//            self.imageBC2.image = UIImage(named: nameOfimages[ranNum + 1])
-//            self.imageBC.alpha = 1
-//            self.imageBC2.alpha = 0
-//            }, completion: animateInBCImage2)
-//        }
-//        
-//        func animateInBCImage2() {
-//            var ranNum = Int(arc4random()%2)
-//            UIView.animateWithDuration(1, animations: {
-//                self.imageBC.image = UIImage(named: nameOfimages[ranNum])
-//                self.imageBC.alpha = 0
-//                self.imageBC2.alpha = 1
-//                }, completion: animateInBCImage)
-//        }
-//    
-//    }
+    //fadeing bc func
+    func bcFade() {
+        
+        //bc fade
+        var nameOfimages = ["1.jpg","2.JPG","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.png","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg"]
+        
+        //animating side to side
+        func animateSideToSide() {
+        UIView.animateWithDuration(80, delay:0 , options: UIViewAnimationOptions.CurveEaseInOut,animations: {
+            self.imageBC.frame.size.width += 100
+            self.imageBC2.frame.size.width -= 100
+            },  completion: { starting in
+                UIView.animateWithDuration(80, animations: {
+                    self.imageBC.frame.size.width -= 100
+                    self.imageBC2.frame.size.width += 100
+                })
+        })
+        }
+        animateSideToSide()
+        
+        //animate in bcimage
+        func animateInBCImage() {
+            print("animateInBC gets called")
+            UIView.animateWithDuration(5, delay: 3, options: UIViewAnimationOptions.TransitionCurlUp, animations: {
+            self.imageBC.alpha = 1
+            self.imageBC2.alpha = 0
+            
+            }, completion: { starting in
+                self.imageBC2.image = UIImage(named: nameOfimages[Int(arc4random_uniform(15))])
+                animateInBCImage2()
+            })
+        }
+        
+        //animate in bcimage2
+        func animateInBCImage2() {
+            print("animateInBC2 gets called")
+            UIView.animateWithDuration(5, delay: 3, options: UIViewAnimationOptions.CurveLinear, animations: {
+                self.imageBC.alpha = 0
+                self.imageBC2.alpha = 1
+                }, completion: { starting in
+                    self.imageBC.image = UIImage(named: nameOfimages[Int(arc4random_uniform(15))])
+                    animateInBCImage()
+            })
+            
+        }
+        
+        animateInBCImage2()
+    }
     
     
     //Function to blur images
