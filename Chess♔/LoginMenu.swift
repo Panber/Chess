@@ -83,43 +83,47 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         //bc fade
         var nameOfimages = ["1.jpg","2.JPG","3.jpg","4.jpg"]
         
+        //animating side to side
+        func animateSideToSide() {
+        UIView.animateWithDuration(80, delay:0 , options: UIViewAnimationOptions.CurveEaseInOut,animations: {
+            self.imageBC.frame.size.width += 100
+            self.imageBC2.frame.size.width -= 100
+            },  completion: { starting in
+                UIView.animateWithDuration(80, animations: {
+                    self.imageBC.frame.size.width -= 100
+                    self.imageBC2.frame.size.width += 100
+                })
+        })
+        }
+        animateSideToSide()
         
+        //animate in bcimage
         func animateInBCImage() {
-            let ranNum = Int(arc4random()%2)
             print("animateInBC gets called")
-            UIView.animateWithDuration(5, delay: 3, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+            UIView.animateWithDuration(5, delay: 3, options: UIViewAnimationOptions.TransitionCurlUp, animations: {
             self.imageBC.alpha = 1
             self.imageBC2.alpha = 0
+            
             }, completion: { starting in
                 self.imageBC2.image = UIImage(named: nameOfimages[Int(arc4random_uniform(4))])
                 animateInBCImage2()
             })
         }
         
+        //animate in bcimage2
         func animateInBCImage2() {
-            let ranNum = Int(arc4random()%2)
             print("animateInBC2 gets called")
-            UIView.animateWithDuration(5, delay: 3, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+            UIView.animateWithDuration(5, delay: 3, options: UIViewAnimationOptions.CurveLinear, animations: {
                 self.imageBC.alpha = 0
                 self.imageBC2.alpha = 1
-                
                 }, completion: { starting in
                     self.imageBC.image = UIImage(named: nameOfimages[Int(arc4random_uniform(4))])
                     animateInBCImage()
             })
             
-//            UIView.animateWithDuration(10, animations: {
-//                self.imageBC.frame.size.width += 100
-//                self.imageBC.frame.size.height += 100
-//                }, completion: { finished in
-//                    self.imageBC.frame.size.width -= 50
-//                    self.imageBC.frame.size.height -= 50})
-//            
         }
         
-        
         animateInBCImage2()
-    
     }
     
     
