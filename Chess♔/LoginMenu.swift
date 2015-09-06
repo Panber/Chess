@@ -34,6 +34,8 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     
     @IBOutlet weak var profilePhotoImageView: UIImageView!
     
+    @IBOutlet weak var newUserButtonOutlet: UIButton!
+    @IBOutlet weak var orLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +54,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         signUpOutlet.layer.cornerRadius = cornerRadius
         usernameInput.layer.cornerRadius = cornerRadius
         selectProfilePhotoOutlet.layer.cornerRadius = cornerRadius
+        
 
         //changing profileImage
         self.profilePhotoImageView.layer.cornerRadius = (self.profilePhotoImageView.frame.size.width / 2)
@@ -67,6 +70,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         usernameInput.alpha = 0
         selectProfilePhotoOutlet.alpha = 0
         profilePhotoImageView.alpha = 0
+
         
         passwordInput.delegate = self
         emailInput.delegate = self
@@ -282,6 +286,23 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         
     }
 
+    @IBAction func newUser(sender: AnyObject) {
+        
+        
+        UIView.animateWithDuration(0.8, animations: {
+            self.orLabel.alpha = 0
+            self.signUpOutlet.frame.origin.y += 161
+            self.newUserButtonOutlet.alpha = 0
+            self.usernameInput.frame.origin.y = self.passwordInput.frame.origin.y + 58
+            self.profilePhotoImageView.frame.origin.y = self.usernameInput.frame.origin.y + 58
+            self.selectProfilePhotoOutlet.frame.origin.y = self.usernameInput.frame.origin.y + 69
+            self.usernameInput.alpha = 1
+            self.profilePhotoImageView.alpha = 1
+            self.selectProfilePhotoOutlet.alpha = 1
+            self.view.layoutIfNeeded()
+        })
+        
+    }
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
@@ -289,6 +310,8 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
         print("viewWillAppear")
+        
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
