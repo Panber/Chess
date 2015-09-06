@@ -8,7 +8,7 @@
         <!--Play-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="GameMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Play" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="GameMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CTA-QS-dyF"/>
                         <viewControllerLayoutGuide type="bottom" id="m6A-2R-EOC"/>
@@ -37,11 +37,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DSCF0388.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7gN-ib-qSd">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ChessIconAndTExt.png" translatesAutoresizingMaskIntoConstraints="NO" id="0lU-SP-kXh">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
                                 <animations/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackBC.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="WJa-kr-zsc">
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DSCF0388.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7gN-ib-qSd">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
+                                <animations/>
+                            </imageView>
+                            <imageView alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackBC.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="WJa-kr-zsc">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
                                 <animations/>
                             </imageView>
@@ -104,8 +108,8 @@
                                     <constraint firstAttribute="width" constant="500" id="lUT-0Y-gyO"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="25"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="22"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="lUT-0Y-gyO"/>
@@ -124,7 +128,7 @@
                                     <constraint firstAttribute="height" constant="50" id="xiT-rI-idA"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="25"/>
+                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -174,7 +178,7 @@
                                     <action selector="selectProfilePhoto:" destination="o7c-Vd-f6m" eventType="touchUpInside" id="bva-cc-paP"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PANBERlogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="nRn-gP-RiE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nRn-gP-RiE">
                                 <rect key="frame" x="50" y="998" width="87" height="87"/>
                                 <animations/>
                                 <constraints>
@@ -194,8 +198,8 @@
                                     <constraint firstAttribute="width" constant="500" id="eAI-no-bSQ"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="25"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="22"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="eAI-no-bSQ"/>
@@ -214,12 +218,15 @@
                             <constraint firstItem="nRn-gP-RiE" firstAttribute="leading" secondItem="iS6-Su-1RO" secondAttribute="leadingMargin" constant="30" id="EQa-oc-UGy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CFh-ug-4Kl" secondAttribute="trailing" constant="30" id="Fwq-ts-RZ3"/>
                             <constraint firstItem="0ga-NC-mGk" firstAttribute="centerX" secondItem="6xU-5s-jdP" secondAttribute="centerX" id="GKl-DW-Cbl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0lU-SP-kXh" secondAttribute="trailing" id="GPt-Cc-gNf"/>
                             <constraint firstItem="WJa-kr-zsc" firstAttribute="leading" secondItem="iS6-Su-1RO" secondAttribute="leading" id="H28-qY-f6A"/>
                             <constraint firstItem="2IT-p6-TyC" firstAttribute="top" secondItem="6xU-5s-jdP" secondAttribute="bottom" constant="80" id="Hmz-Nt-3vR"/>
                             <constraint firstItem="Mcs-aI-ilU" firstAttribute="trailing" secondItem="eGc-b9-Wbm" secondAttribute="trailing" id="JA7-2B-EDL"/>
+                            <constraint firstItem="0lU-SP-kXh" firstAttribute="leading" secondItem="iS6-Su-1RO" secondAttribute="leadingMargin" id="MxG-ld-QKp"/>
                             <constraint firstItem="Mcs-aI-ilU" firstAttribute="leading" secondItem="2IT-p6-TyC" secondAttribute="leading" id="QFn-jX-6Wk"/>
                             <constraint firstItem="6xU-5s-jdP" firstAttribute="top" secondItem="0ga-NC-mGk" secondAttribute="bottom" constant="8" symbolic="YES" id="Rpc-NV-uol"/>
                             <constraint firstItem="CFh-ug-4Kl" firstAttribute="top" secondItem="fyb-77-vHO" secondAttribute="bottom" constant="19" id="VJc-ls-r04"/>
+                            <constraint firstItem="0lU-SP-kXh" firstAttribute="top" secondItem="adz-3w-0xp" secondAttribute="bottom" id="W6I-Dg-PKb"/>
                             <constraint firstItem="0ga-NC-mGk" firstAttribute="leading" secondItem="iS6-Su-1RO" secondAttribute="leadingMargin" constant="47" id="XMn-yf-e2j"/>
                             <constraint firstItem="fyb-77-vHO" firstAttribute="top" secondItem="3me-cE-fqC" secondAttribute="bottom" constant="8" id="a6t-Vf-F4J"/>
                             <constraint firstItem="WJa-kr-zsc" firstAttribute="bottom" secondItem="S1l-m8-RAX" secondAttribute="top" id="c3Y-aW-ZJJ"/>
@@ -243,6 +250,7 @@
                             <constraint firstItem="7gN-ib-qSd" firstAttribute="top" secondItem="WJa-kr-zsc" secondAttribute="top" id="wHv-wp-KKZ"/>
                             <constraint firstItem="0iH-HM-vnM" firstAttribute="leading" secondItem="iS6-Su-1RO" secondAttribute="leadingMargin" constant="30" id="x03-gs-6oN"/>
                             <constraint firstItem="WJa-kr-zsc" firstAttribute="top" secondItem="adz-3w-0xp" secondAttribute="bottom" id="x7g-zB-Jcr"/>
+                            <constraint firstItem="S1l-m8-RAX" firstAttribute="top" secondItem="0lU-SP-kXh" secondAttribute="bottom" id="xtR-ht-KqK"/>
                             <constraint firstItem="nRn-gP-RiE" firstAttribute="top" secondItem="fyb-77-vHO" secondAttribute="bottom" constant="8" id="zAn-b4-DEE"/>
                         </constraints>
                     </view>
@@ -257,6 +265,7 @@
                         <outlet property="chessIconHeader" destination="0ga-NC-mGk" id="o1H-uV-IkB"/>
                         <outlet property="emailInput" destination="eGc-b9-Wbm" id="2nb-OS-JUO"/>
                         <outlet property="imageBC" destination="7gN-ib-qSd" id="Q7C-9J-HC4"/>
+                        <outlet property="imageBC2" destination="0lU-SP-kXh" id="iSe-Yv-fW9"/>
                         <outlet property="lineOutlet" destination="6xU-5s-jdP" id="w3q-N0-nOx"/>
                         <outlet property="passwordInput" destination="3me-cE-fqC" id="rMP-fn-t9S"/>
                         <outlet property="profilePhotoImageView" destination="nRn-gP-RiE" id="Yif-gV-aE1"/>
@@ -273,7 +282,7 @@
         <!--Play-->
         <scene sceneID="ICd-Pm-2GB">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZtP-fs-Dvj" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Tab" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZtP-fs-Dvj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Play" image="ChessIconTab.png" id="dHm-k1-ffu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dlM-n8-8sJ">
@@ -293,7 +302,7 @@
         <!--Sett-->
         <scene sceneID="suy-iP-UXV">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="bY1-z2-YMg" customClass="sett" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="Sett" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bY1-z2-YMg" customClass="sett" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="FFH-hZ-yxt">
@@ -459,7 +468,6 @@
         <image name="DSCF0388.jpg" width="1659" height="2651"/>
         <image name="Data.png" width="30" height="30"/>
         <image name="Friends.png" width="30" height="30"/>
-        <image name="PANBERlogo.png" width="1920" height="1920"/>
         <image name="settingsTabBarIcon.png" width="32" height="32"/>
     </resources>
 </document>
