@@ -308,7 +308,8 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         let bottomConstraint = NSLayoutConstraint(item: signUpOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
         let bottomConstraint2 = NSLayoutConstraint(item: profilePhotoImageView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
         let bottomConstraint3 = NSLayoutConstraint(item: selectProfilePhotoOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
-        let bottomConstraint4 = NSLayoutConstraint(item: usernameInput, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+        let bottomConstraint4 = NSLayoutConstraint(item: usernameInput, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: passwordInput, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 20)
+        let bottomConstraint5 = NSLayoutConstraint(item: emailInput, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
         
         
         
@@ -328,13 +329,15 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             
             //constraint stuff
             self.view.addConstraint(bottomConstraint)
-            bottomConstraint.constant = -304
+            bottomConstraint.constant = -304 - 45
             self.view.addConstraint(bottomConstraint2)
-            bottomConstraint2.constant = -380
+            bottomConstraint2.constant = -380 - 45
             self.view.addConstraint(bottomConstraint3)
-            bottomConstraint3.constant = -390
+            bottomConstraint3.constant = -390 - 45
             self.view.addConstraint(bottomConstraint4)
-            bottomConstraint4.constant = -477
+            bottomConstraint4.constant = 50
+//            self.view.addConstraint(bottomConstraint5)
+//            bottomConstraint5.constant = -500
             self.selectProfilePhotoHeigthConstraint.constant = 65
             self.view.addConstraint(self.selectProfilePhotoHeigthConstraint)
             self.profilePhotoImageViewHeightConstraint.constant = 87
