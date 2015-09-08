@@ -59,6 +59,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         signUpOutlet.layer.cornerRadius = cornerRadius
         usernameInput.layer.cornerRadius = cornerRadius
         selectProfilePhotoOutlet.layer.cornerRadius = cornerRadius
+        newUserButtonOutlet.layer.cornerRadius = cornerRadius
         
 
         //changing profileImage
@@ -317,10 +318,8 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         UIView.animateWithDuration(0.8, animations: { () -> Void in
             self.orLabel.alpha = 0
           //  self.signUpOutlet.frame.origin.y += 161
-            self.newUserButtonOutlet.alpha = 0.3
-//            self.usernameInput.frame.origin.y = self.passwordInput.frame.origin.y + 58
-//            self.profilePhotoImageView.frame.origin.y = self.usernameInput.frame.origin.y + 58
-//            self.selectProfilePhotoOutlet.frame.origin.y = self.usernameInput.frame.origin.y + 69
+            self.newUserButtonOutlet.alpha = 0.0
+            self.newUserButtonOutlet.userInteractionEnabled = false
             self.usernameInput.alpha = 1
             self.profilePhotoImageView.alpha = 1
             self.selectProfilePhotoOutlet.alpha = 1
