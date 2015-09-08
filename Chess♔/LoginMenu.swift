@@ -76,6 +76,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         usernameInput.alpha = 0
         selectProfilePhotoOutlet.alpha = 0
         profilePhotoImageView.alpha = 0
+        
 
         
         passwordInput.delegate = self
@@ -277,9 +278,6 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             self.emailInput.alpha = 1
             self.passwordInput.alpha = 1
             self.signUpOutlet.alpha = 1
-            self.usernameInput.alpha = 1
-            self.selectProfilePhotoOutlet.alpha = 1
-            self.profilePhotoImageView.alpha = 1
             self.lineOutlet.alpha = 0
             self.BlackBC.alpha += 0.5
             
@@ -324,6 +322,9 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             self.usernameInput.alpha = 1
             self.profilePhotoImageView.alpha = 1
             self.selectProfilePhotoOutlet.alpha = 1
+            self.usernameInput.alpha = 1
+            self.selectProfilePhotoOutlet.alpha = 1
+            self.profilePhotoImageView.alpha = 1
             
             self.signUpOutlet.setTitle("Sign up", forState: .Normal)
             
