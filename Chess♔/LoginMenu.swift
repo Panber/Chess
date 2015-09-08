@@ -37,6 +37,9 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     @IBOutlet weak var newUserButtonOutlet: UIButton!
     @IBOutlet weak var orLabel: UILabel!
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
             print("viewDidLoad")
@@ -286,21 +289,41 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         
     }
 
+    
+    
     @IBAction func newUser(sender: AnyObject) {
         
+//        self.signUpOutlet.translatesAutoresizingMaskIntoConstraints = false
+//        
+//
+//        
+//        let bottomConstraint = NSLayoutConstraint(item: signUpOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+//        view.layoutIfNeeded()
+//
+//        UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 15, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+//            
+//            
+//            
+//            }, completion: nil)
         
-        UIView.animateWithDuration(0.8, animations: {
+        UIView.animateWithDuration(0.8, animations: { () -> Void in
             self.orLabel.alpha = 0
             self.signUpOutlet.frame.origin.y += 161
-            self.newUserButtonOutlet.alpha = 0
+            self.newUserButtonOutlet.alpha = 0.3
             self.usernameInput.frame.origin.y = self.passwordInput.frame.origin.y + 58
             self.profilePhotoImageView.frame.origin.y = self.usernameInput.frame.origin.y + 58
             self.selectProfilePhotoOutlet.frame.origin.y = self.usernameInput.frame.origin.y + 69
             self.usernameInput.alpha = 1
             self.profilePhotoImageView.alpha = 1
             self.selectProfilePhotoOutlet.alpha = 1
-            self.view.layoutIfNeeded()
+        //    self.signUpOutlet.setTitle("Sign up", forState: .Normal)
+//            self.view.addConstraint(bottomConstraint)
+//            bottomConstraint.constant = -300
+//            
+//            self.view.layoutIfNeeded()
         })
+      //  self.signUpOutlet.setTitle("Sign up", forState: .Normal)
+
         
     }
     override func prefersStatusBarHidden() -> Bool {
