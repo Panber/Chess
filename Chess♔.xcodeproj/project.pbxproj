@@ -751,6 +751,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Panber.Chess;
 				PRODUCT_NAME = "Chess♔";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -770,6 +771,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Panber.Chess;
 				PRODUCT_NAME = "Chess♔";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
