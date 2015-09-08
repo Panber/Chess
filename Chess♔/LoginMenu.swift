@@ -38,7 +38,9 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     @IBOutlet weak var orLabel: UILabel!
     
     
+    @IBOutlet weak var selectProfilePhotoHeigthConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var profilePhotoImageViewHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -293,36 +295,55 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     
     @IBAction func newUser(sender: AnyObject) {
         
-//        self.signUpOutlet.translatesAutoresizingMaskIntoConstraints = false
-//        
-//
-//        
-//        let bottomConstraint = NSLayoutConstraint(item: signUpOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
-//        view.layoutIfNeeded()
-//
-//        UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 15, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-//            
-//            
-//            
-//            }, completion: nil)
+        self.signUpOutlet.translatesAutoresizingMaskIntoConstraints = false
+        self.emailInput.translatesAutoresizingMaskIntoConstraints = false
+        self.passwordInput.translatesAutoresizingMaskIntoConstraints = false
+        self.usernameInput.translatesAutoresizingMaskIntoConstraints = false
+        self.selectProfilePhotoOutlet.translatesAutoresizingMaskIntoConstraints = false
+        self.profilePhotoImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+
+        
+        let bottomConstraint = NSLayoutConstraint(item: signUpOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+        let bottomConstraint2 = NSLayoutConstraint(item: profilePhotoImageView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+        let bottomConstraint3 = NSLayoutConstraint(item: selectProfilePhotoOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+        let bottomConstraint4 = NSLayoutConstraint(item: usernameInput, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+        
+        
+        
+        view.layoutIfNeeded()
+
         
         UIView.animateWithDuration(0.8, animations: { () -> Void in
             self.orLabel.alpha = 0
-            self.signUpOutlet.frame.origin.y += 161
+          //  self.signUpOutlet.frame.origin.y += 161
             self.newUserButtonOutlet.alpha = 0.3
-            self.usernameInput.frame.origin.y = self.passwordInput.frame.origin.y + 58
-            self.profilePhotoImageView.frame.origin.y = self.usernameInput.frame.origin.y + 58
-            self.selectProfilePhotoOutlet.frame.origin.y = self.usernameInput.frame.origin.y + 69
+//            self.usernameInput.frame.origin.y = self.passwordInput.frame.origin.y + 58
+//            self.profilePhotoImageView.frame.origin.y = self.usernameInput.frame.origin.y + 58
+//            self.selectProfilePhotoOutlet.frame.origin.y = self.usernameInput.frame.origin.y + 69
             self.usernameInput.alpha = 1
             self.profilePhotoImageView.alpha = 1
             self.selectProfilePhotoOutlet.alpha = 1
-        //    self.signUpOutlet.setTitle("Sign up", forState: .Normal)
-//            self.view.addConstraint(bottomConstraint)
-//            bottomConstraint.constant = -300
-//            
-//            self.view.layoutIfNeeded()
+            
+            self.signUpOutlet.setTitle("Sign up", forState: .Normal)
+            
+            //constraint stuff
+            self.view.addConstraint(bottomConstraint)
+            bottomConstraint.constant = -304
+            self.view.addConstraint(bottomConstraint2)
+            bottomConstraint2.constant = -380
+            self.view.addConstraint(bottomConstraint3)
+            bottomConstraint3.constant = -390
+            self.view.addConstraint(bottomConstraint4)
+            bottomConstraint4.constant = -477
+            self.selectProfilePhotoHeigthConstraint.constant = 65
+            self.view.addConstraint(self.selectProfilePhotoHeigthConstraint)
+            self.profilePhotoImageViewHeightConstraint.constant = 87
+            self.view.addConstraint(self.profilePhotoImageViewHeightConstraint)
+
+            
+            self.view.layoutIfNeeded()
         })
-      //  self.signUpOutlet.setTitle("Sign up", forState: .Normal)
 
         
     }
