@@ -98,7 +98,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="10" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="eGc-b9-Wbm">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Username" textAlignment="center" minimumFontSize="10" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="eGc-b9-Wbm">
                                 <rect key="frame" x="50" y="824" width="500" height="50"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -186,7 +186,7 @@
                                     <constraint firstAttribute="height" constant="87" id="uPG-t8-y42"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Username" textAlignment="center" minimumFontSize="10" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="fyb-77-vHO">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="10" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="fyb-77-vHO">
                                 <rect key="frame" x="50" y="1355" width="500" height="50"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -310,7 +310,7 @@
                         <outlet property="BlackBC" destination="WJa-kr-zsc" id="suz-ZX-tMe"/>
                         <outlet property="SignUpFacebookOutlet" destination="Mcs-aI-ilU" id="OAm-tA-GTL"/>
                         <outlet property="chessIconHeader" destination="0ga-NC-mGk" id="o1H-uV-IkB"/>
-                        <outlet property="emailInput" destination="eGc-b9-Wbm" id="2nb-OS-JUO"/>
+                        <outlet property="emailInput" destination="fyb-77-vHO" id="TRy-qT-fPR"/>
                         <outlet property="imageBC" destination="7gN-ib-qSd" id="Q7C-9J-HC4"/>
                         <outlet property="imageBC2" destination="0lU-SP-kXh" id="iSe-Yv-fW9"/>
                         <outlet property="lineOutlet" destination="6xU-5s-jdP" id="w3q-N0-nOx"/>
@@ -323,7 +323,7 @@
                         <outlet property="selectProfilePhotoOutlet" destination="CFh-ug-4Kl" id="7vR-6U-dVR"/>
                         <outlet property="signUpEmailOutlet" destination="2IT-p6-TyC" id="2WI-XV-szz"/>
                         <outlet property="signUpOutlet" destination="0iH-HM-vnM" id="hzE-9z-Rhk"/>
-                        <outlet property="usernameInput" destination="fyb-77-vHO" id="dNP-Jh-FFr"/>
+                        <outlet property="usernameInput" destination="eGc-b9-Wbm" id="DGE-YR-hRg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DX6-Pr-DHe" userLabel="First Responder" sceneMemberID="firstResponder"/>

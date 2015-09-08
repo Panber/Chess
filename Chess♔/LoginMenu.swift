@@ -14,6 +14,8 @@ let screenSize: CGRect = UIScreen.mainScreen().bounds
 let screenWidth = screenSize.width
 let screenHeight = screenSize.height
 
+var login = true
+
 
 class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
@@ -145,7 +147,39 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         imageView.addSubview(visualEffectView)
     }
 
+    //Signup or sgin in
     @IBAction func signUp(sender: AnyObject) {
+        
+        //login!!
+        if (login) {
+            let userName = usernameInput.text
+            let userPassword = passwordInput.text
+            
+            if (userName == "" || userPassword == "") {
+            
+                return
+            }
+            
+            
+            PFUser.logInWithUsernameInBackground(userName!, password: userPassword!) { (user:PFUser?, error:NSError?) -> Void in
+                
+                var userMessage = "Welcome!"
+                
+                if user != nil {
+                    
+                }
+                else {
+                    userMessage = error!.localizedDescription
+                }
+                let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                myAlert.addAction(okAction)
+                self.presentViewController(myAlert, animated: true, completion: nil)
+                }
+            }
+        
+            //if signup
+        else if (!login) {
         print("signing up")
         
         let userEmail = emailInput.text
@@ -188,9 +222,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
 //                userMessage = "The registration was not completed."
                 userMessage = error!.localizedDescription
             }
-            
-
-            
+  
             let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
             
             let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) { action in
@@ -203,6 +235,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             
             self.presentViewController(myAlert, animated: true, completion: nil)
             
+        }
         }
 
         
@@ -275,7 +308,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             self.imageBC2.frame.size.height += 800
             
             //changing alpha of elements
-            self.emailInput.alpha = 1
+            self.usernameInput.alpha = 1
             self.passwordInput.alpha = 1
             self.signUpOutlet.alpha = 1
             self.lineOutlet.alpha = 0
@@ -294,6 +327,8 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     
     @IBAction func newUser(sender: AnyObject) {
         
+        login = false
+        
         self.signUpOutlet.translatesAutoresizingMaskIntoConstraints = false
         self.emailInput.translatesAutoresizingMaskIntoConstraints = false
         self.passwordInput.translatesAutoresizingMaskIntoConstraints = false
@@ -306,8 +341,8 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         let bottomConstraint = NSLayoutConstraint(item: signUpOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
         let bottomConstraint2 = NSLayoutConstraint(item: profilePhotoImageView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
         let bottomConstraint3 = NSLayoutConstraint(item: selectProfilePhotoOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
-        let bottomConstraint4 = NSLayoutConstraint(item: usernameInput, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: passwordInput, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 20)
-        let bottomConstraint5 = NSLayoutConstraint(item: emailInput, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+        let bottomConstraint4 = NSLayoutConstraint(item: emailInput, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: passwordInput, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 20)
+        let bottomConstraint5 = NSLayoutConstraint(item: usernameInput, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
         
         
         
@@ -319,7 +354,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
           //  self.signUpOutlet.frame.origin.y += 161
             self.newUserButtonOutlet.alpha = 0.0
             self.newUserButtonOutlet.userInteractionEnabled = false
-            self.usernameInput.alpha = 1
+            self.emailInput.alpha = 1
             self.profilePhotoImageView.alpha = 1
             self.selectProfilePhotoOutlet.alpha = 1
             self.usernameInput.alpha = 1
