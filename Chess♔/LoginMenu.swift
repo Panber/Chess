@@ -167,14 +167,26 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
                 
                 if user != nil {
                     
+                    //remember sign in stage
+                    let userName: String? = user?.username
+                    NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "user_name")
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    
+//                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Sett", bundle: nil)
+//                    var mainPage:MainPageViewcontroller = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
+                    
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
+                    self.showViewController(vc as! UIViewController, sender: vc)
+                    
                 }
                 else {
                     userMessage = error!.localizedDescription
+                    
+                    let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                    let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                    myAlert.addAction(okAction)
+                    self.presentViewController(myAlert, animated: true, completion: nil)
                 }
-                let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
-                myAlert.addAction(okAction)
-                self.presentViewController(myAlert, animated: true, completion: nil)
                 }
             }
         
@@ -225,6 +237,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
   
             let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
             
+            // if success sign up
             let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) { action in
                 if success {
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
