@@ -405,7 +405,6 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
         print("viewWillAppear")
-        
 
     }
     override func didReceiveMemoryWarning() {
