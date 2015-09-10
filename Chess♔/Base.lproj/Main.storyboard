@@ -451,10 +451,10 @@
             </objects>
             <point key="canvasLocation" x="1097" y="1891"/>
         </scene>
-        <!--Settings-->
+        <!--Profile-->
         <scene sceneID="atO-UA-MW5">
             <objects>
-                <viewController id="7gJ-Tu-NM0" customClass="SettingsMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7gJ-Tu-NM0" customClass="ProfileMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="R9L-5m-OBw"/>
                         <viewControllerLayoutGuide type="bottom" id="zPr-qb-QWA"/>
@@ -465,17 +465,17 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Settings" id="zLj-l5-sgy"/>
+                    <navigationItem key="navigationItem" title="Profile" id="zLj-l5-sgy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F8q-Dm-ZaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1910.9999999999998" y="2601"/>
         </scene>
-        <!--Settings-->
+        <!--Profile-->
         <scene sceneID="XVM-Bc-UrF">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="62Z-TF-teT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="settingsTabBarIcon.png" id="RYY-Qg-oRu"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profileTabBarIcon.png" id="RYY-Qg-oRu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WDr-hF-O0D">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -519,6 +519,6 @@
         <image name="DSCF0388.jpg" width="1659" height="2651"/>
         <image name="Data.png" width="30" height="30"/>
         <image name="Friends.png" width="30" height="30"/>
-        <image name="settingsTabBarIcon.png" width="32" height="32"/>
+        <image name="profileTabBarIcon.png" width="30" height="30"/>
     </resources>
 </document>
