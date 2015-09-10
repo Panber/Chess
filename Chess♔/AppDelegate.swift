@@ -11,7 +11,7 @@ import Parse
 import Bolts
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDelegate{
 
     var window: UIWindow?
 
@@ -29,6 +29,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+        
+        let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
+        
+        if userName != nil {
+        
+      
+        
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainPage = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
+            var mainPageNav = UINavigationController(rootViewController: mainPage)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window?.rootViewController = mainPageNav
+        
+//            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
+//            self.showViewController(vc as! UIViewController, sender: vc)
+            
+            
+        }
+        
         
         return true
     }

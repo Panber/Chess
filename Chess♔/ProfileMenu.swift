@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class SettingsMenu: UIViewController {
+class ProfileMenu: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
