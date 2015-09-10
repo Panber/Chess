@@ -99,12 +99,12 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         //animating side to side
         func animateSideToSide() {
         UIView.animateWithDuration(80, delay:0 , options: UIViewAnimationOptions.CurveEaseInOut,animations: {
-            self.imageBC.frame.size.width += 100
-            self.imageBC2.frame.size.width -= 100
+            self.imageBC.frame.size.width += 200
+            self.imageBC2.frame.size.width -= 200
             },  completion: { starting in
                 UIView.animateWithDuration(80, animations: {
-                    self.imageBC.frame.size.width -= 100
-                    self.imageBC2.frame.size.width += 100
+                    self.imageBC.frame.size.width -= 200
+                    self.imageBC2.frame.size.width += 200
                 })
         })
         }
