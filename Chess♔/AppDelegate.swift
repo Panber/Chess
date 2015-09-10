@@ -34,14 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
         let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
         
         if userName != nil {
-        
-      
-        
             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let mainPage = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
-            var mainPageNav = UINavigationController(rootViewController: mainPage)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.window?.rootViewController = mainPageNav
+            appDelegate.window?.rootViewController = mainPage
         
 //            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
 //            self.showViewController(vc as! UIViewController, sender: vc)
