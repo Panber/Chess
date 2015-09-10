@@ -36,7 +36,11 @@ class FriendsMenu: UIViewController {
    
     // When button tapped seachbar appears
     @IBAction func startSearch(sender: AnyObject) {
-        searchBar.hidden = false
+//        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+//            self.searchBar.frame = CGRectMake(0.0, 64, 600, 44)
+//            
+//        }, completion: nil)
     }
+    
 
 }
