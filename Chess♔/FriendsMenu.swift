@@ -10,6 +10,8 @@ import UIKit
 
 class FriendsMenu: UIViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,5 +33,10 @@ class FriendsMenu: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+   
+    // When button tapped seachbar appears
+    @IBAction func startSearch(sender: AnyObject) {
+        searchBar.hidden = false
+    }
 
 }
