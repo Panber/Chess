@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A204h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -392,59 +392,6 @@
             </objects>
             <point key="canvasLocation" x="1899" y="1169"/>
         </scene>
-        <!--Friends-->
-        <scene sceneID="fzr-15-ghF">
-            <objects>
-                <viewController id="7Y0-28-DgG" customClass="FriendsMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Nx1-Is-eRZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="Fm6-Zq-aup"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7Az-YD-gcz">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="SQz-QK-uu6">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <animations/>
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CeK-4h-2Ew">
-                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="SQz-QK-uu6" firstAttribute="bottom" secondItem="CeK-4h-2Ew" secondAttribute="top" id="EtT-K8-cav"/>
-                            <constraint firstItem="SQz-QK-uu6" firstAttribute="trailing" secondItem="CeK-4h-2Ew" secondAttribute="trailing" id="Kf7-gw-uTb"/>
-                            <constraint firstItem="SQz-QK-uu6" firstAttribute="leading" secondItem="CeK-4h-2Ew" secondAttribute="leading" id="RHo-k9-QIx"/>
-                            <constraint firstItem="SQz-QK-uu6" firstAttribute="top" secondItem="Nx1-Is-eRZ" secondAttribute="bottom" id="Y0M-YE-lo3"/>
-                            <constraint firstAttribute="trailing" secondItem="SQz-QK-uu6" secondAttribute="trailing" id="h1T-6c-RH9"/>
-                            <constraint firstItem="SQz-QK-uu6" firstAttribute="leading" secondItem="7Az-YD-gcz" secondAttribute="leading" id="tAV-Zj-W7l"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Friends" id="9GQ-kX-MtO">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="7uz-8n-zqU">
-                            <connections>
-                                <action selector="startSearch:" destination="7Y0-28-DgG" id="Nu7-S6-9u2"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="searchBar" destination="SQz-QK-uu6" id="oNA-HZ-btG"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KTg-fO-e03" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1899" y="1891"/>
-        </scene>
         <!--Analyze-->
         <scene sceneID="XDQ-dG-Skb">
             <objects>
@@ -471,6 +418,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ObW-z1-ppP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="Friends.png" id="xGr-9G-XJJ"/>
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HCp-6N-Ldx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -478,12 +426,72 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="7Y0-28-DgG" kind="relationship" relationship="rootViewController" id="lz6-JO-n3w"/>
+                        <segue destination="2eL-m4-pjy" kind="relationship" relationship="rootViewController" id="6ih-DZ-sU5"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dst-gf-bUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1097" y="1891"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="Y8B-NZ-V1C">
+            <objects>
+                <viewController storyboardIdentifier="FriendsMenu" id="2eL-m4-pjy" customClass="FriendsMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W5b-5G-n27"/>
+                        <viewControllerLayoutGuide type="bottom" id="B8j-5t-Kad"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V9h-oz-p71">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oDH-fa-IEB">
+                                <rect key="frame" x="0.0" y="64" width="414" height="44"/>
+                                <animations/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2eL-m4-pjy" id="8DV-c3-6Qs"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="a42-g2-zHe">
+                                <rect key="frame" x="0.0" y="108" width="414" height="579"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="IaG-1Z-KOD">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IaG-1Z-KOD" id="97J-wb-7z9">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="2eL-m4-pjy" id="xFc-C1-dGQ"/>
+                                    <outlet property="delegate" destination="2eL-m4-pjy" id="iWt-sm-wS6"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="oDH-fa-IEB" secondAttribute="trailing" constant="-20" id="2AY-xG-S50"/>
+                            <constraint firstItem="oDH-fa-IEB" firstAttribute="leading" secondItem="V9h-oz-p71" secondAttribute="leadingMargin" constant="-20" id="HSm-pf-bum"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Friends" id="H6V-J1-cnI">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="mZB-ME-KB3"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="a42-g2-zHe" id="0he-Rj-VlM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oZk-3Z-hw8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1904" y="1891"/>
         </scene>
         <!--Profile-->
         <scene sceneID="atO-UA-MW5">
