@@ -18,6 +18,7 @@ class ProfileMenu: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    
         // Enable user to scroll up and down
         scrollView.scrollEnabled = true
         scrollView.contentSize = CGSizeMake(screenSize.width, 565)
@@ -38,7 +39,7 @@ class ProfileMenu: UIViewController {
         profilePictureObject.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
             
             if (imageData != nil) {
-                
+                print("no pforilepic was found")
                 self.userProfileImage.image = UIImage(data: imageData!)
             }
             

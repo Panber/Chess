@@ -15,7 +15,16 @@ let screenWidth = screenSize.width
 let screenHeight = screenSize.height
 
 var login = true
+var emailUEnabled = false
+var newUserTappedOnce = false
 
+var bottomConstraint: NSLayoutConstraint = NSLayoutConstraint()
+var bottomConstraint0: NSLayoutConstraint = NSLayoutConstraint()
+var bottomConstraint2 : NSLayoutConstraint = NSLayoutConstraint()
+var bottomConstraint3 : NSLayoutConstraint = NSLayoutConstraint()
+var bottomConstraint4 : NSLayoutConstraint = NSLayoutConstraint()
+var bottomConstraint5: NSLayoutConstraint = NSLayoutConstraint()
+var bottomConstraint6: NSLayoutConstraint = NSLayoutConstraint()
 
 class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
@@ -43,6 +52,9 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     @IBOutlet weak var selectProfilePhotoHeigthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var profilePhotoImageViewHeightConstraint: NSLayoutConstraint!
+    
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,8 +98,98 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         
         bcFade()
 
+        //assigning guesture to background
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
+        BlackBC.addGestureRecognizer(tapGestureRecognizer)
 
         
+    }
+    
+    //func to detect if BCImage was tapped
+    func imageTapped(img: AnyObject) {
+        if emailUEnabled == false {
+            }
+        else {
+            //dismisses keyboard
+            view.endEditing(true)
+        
+            
+            self.signUpOutlet.translatesAutoresizingMaskIntoConstraints = true
+            self.emailInput.translatesAutoresizingMaskIntoConstraints = true
+            self.passwordInput.translatesAutoresizingMaskIntoConstraints = true
+            self.usernameInput.translatesAutoresizingMaskIntoConstraints = true
+            self.selectProfilePhotoOutlet.translatesAutoresizingMaskIntoConstraints = true
+            self.profilePhotoImageView.translatesAutoresizingMaskIntoConstraints = true
+            self.orLabel.translatesAutoresizingMaskIntoConstraints = true
+            self.newUserButtonOutlet.translatesAutoresizingMaskIntoConstraints = true
+            
+            self.signUpOutlet.updateConstraints()
+            
+            
+//          let bottomConstraint = NSLayoutConstraint(item: signUpOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+//            let bottomConstraint2 = NSLayoutConstraint(item: profilePhotoImageView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+//            let bottomConstraint3 = NSLayoutConstraint(item: selectProfilePhotoOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+//            let bottomConstraint4 = NSLayoutConstraint(item: emailInput, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: passwordInput, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 20)
+//            let bottomConstraint5 = NSLayoutConstraint(item: usernameInput, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+            
+            login = true
+            view.layoutIfNeeded()
+            
+            
+            UIView.animateWithDuration(0.8, animations: { () -> Void in
+                self.orLabel.alpha = 1
+                //  self.signUpOutlet.frame.origin.y += 161
+                self.newUserButtonOutlet.alpha = 1
+                self.newUserButtonOutlet.userInteractionEnabled = true
+                self.emailInput.alpha = 0
+                self.profilePhotoImageView.alpha = 0
+                self.selectProfilePhotoOutlet.alpha = 0
+                self.usernameInput.alpha = 0
+                self.selectProfilePhotoOutlet.alpha = 0
+                self.profilePhotoImageView.alpha = 0
+                
+                self.signUpOutlet.setTitle("Log in", forState: .Normal)
+                
+//                //constraint stuff
+//                self.view.addConstraint(bottomConstraint)
+//                bottomConstraint.constant = 304 + 45
+//                self.view.addConstraint(bottomConstraint2)
+//                bottomConstraint2.constant = 380 + 45
+//                self.view.addConstraint(bottomConstraint3)
+//                bottomConstraint3.constant = 390 + 45
+//                self.view.addConstraint(bottomConstraint4)
+//                bottomConstraint4.constant = -50
+
+                
+                self.view.layoutIfNeeded()
+            })
+            
+            //animate out
+            UIView.animateWithDuration(0.8, animations: {
+                
+                //animating the view
+                self.view.frame.origin.y += 800
+                self.view.frame.size.height -= 800
+                self.imageBC.frame.size.height -= 800
+                self.imageBC2.frame.size.height -= 800
+                
+                //changing alpha of elements
+                self.usernameInput.alpha = 0
+                self.passwordInput.alpha = 0
+                self.signUpOutlet.alpha = 0
+                self.lineOutlet.alpha = 1
+                self.BlackBC.alpha -= 0.5
+                
+                //                //previous elements
+                //                self.signUpEmailOutlet.alpha = 0
+                //                self.SignUpFacebookOutlet.alpha = 0
+                
+            })
+            
+            emailUEnabled = false
+        }
+        print("BCImage tapped!!")
+    
     }
     
     //fadeing bc func
@@ -308,9 +410,20 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     }
     @IBAction func signUpEmail(sender: AnyObject) {
         
+        emailUEnabled = true
         emailInput.adjustsFontSizeToFitWidth = true
 //        emailInput.minimumScaleFactor = 0.2
-
+        
+        bottomConstraint = NSLayoutConstraint(item: signUpOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+        bottomConstraint5 = NSLayoutConstraint(item: orLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: signUpOutlet, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 20)
+        bottomConstraint6 = NSLayoutConstraint(item: newUserButtonOutlet, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: orLabel, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 20)
+        
+        if newUserTappedOnce == true {
+            self.signUpOutlet.translatesAutoresizingMaskIntoConstraints = false
+            self.orLabel.translatesAutoresizingMaskIntoConstraints = false
+            self.newUserButtonOutlet.translatesAutoresizingMaskIntoConstraints = false
+ 
+        }
         //animate in
         UIView.animateWithDuration(0.8, animations: {
             
@@ -326,11 +439,22 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             self.signUpOutlet.alpha = 1
             self.lineOutlet.alpha = 0
             self.BlackBC.alpha += 0.5
+            self.newUserButtonOutlet.alpha = 1
+            self.orLabel.alpha = 1
+            self.newUserButtonOutlet.userInteractionEnabled = true
             
-//                //previous elements
-//                self.signUpEmailOutlet.alpha = 0
-//                self.SignUpFacebookOutlet.alpha = 0
+            
+            if newUserTappedOnce == true {
+                            bottomConstraint.constant = -304 - 45 - 100 - 65
+                            self.view.addConstraint(bottomConstraint)
+                            bottomConstraint5.constant = 30
+                            self.view.addConstraint(bottomConstraint5)
+                            bottomConstraint6.constant = 30
+                            self.view.addConstraint(bottomConstraint6)
+                
+                self.view.layoutIfNeeded()
 
+            }
         })
         
         
@@ -348,25 +472,27 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         self.usernameInput.translatesAutoresizingMaskIntoConstraints = false
         self.selectProfilePhotoOutlet.translatesAutoresizingMaskIntoConstraints = false
         self.profilePhotoImageView.translatesAutoresizingMaskIntoConstraints = false
-        
+        self.orLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.newUserButtonOutlet.translatesAutoresizingMaskIntoConstraints = false
 
         
-        let bottomConstraint = NSLayoutConstraint(item: signUpOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
-        let bottomConstraint2 = NSLayoutConstraint(item: profilePhotoImageView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
-        let bottomConstraint3 = NSLayoutConstraint(item: selectProfilePhotoOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
-        let bottomConstraint4 = NSLayoutConstraint(item: emailInput, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: passwordInput, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 20)
-        let bottomConstraint5 = NSLayoutConstraint(item: usernameInput, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
-        
+        bottomConstraint = NSLayoutConstraint(item: signUpOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+        bottomConstraint0 = NSLayoutConstraint(item: signUpOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+        bottomConstraint2 = NSLayoutConstraint(item: profilePhotoImageView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+        bottomConstraint3 = NSLayoutConstraint(item: selectProfilePhotoOutlet, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 20)
+        bottomConstraint4 = NSLayoutConstraint(item: emailInput, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: passwordInput, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 20)
+        bottomConstraint5 = NSLayoutConstraint(item: orLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: signUpOutlet, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 20)
+        bottomConstraint6 = NSLayoutConstraint(item: newUserButtonOutlet, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: orLabel, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 20)
         
         
         view.layoutIfNeeded()
 
         
         UIView.animateWithDuration(0.8, animations: { () -> Void in
-            self.orLabel.alpha = 0
+         //   self.orLabel.alpha = 0
           //  self.signUpOutlet.frame.origin.y += 161
-            self.newUserButtonOutlet.alpha = 0.0
-            self.newUserButtonOutlet.userInteractionEnabled = false
+        //    self.newUserButtonOutlet.alpha = 0.0
+           // self.newUserButtonOutlet.userInteractionEnabled = false
             self.emailInput.alpha = 1
             self.profilePhotoImageView.alpha = 1
             self.selectProfilePhotoOutlet.alpha = 1
@@ -377,16 +503,45 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             self.signUpOutlet.setTitle("Sign up", forState: .Normal)
             
             //constraint stuff
-            self.view.addConstraint(bottomConstraint)
-            bottomConstraint.constant = -304 - 45
+            if newUserTappedOnce == false {
+                self.view.addConstraint(bottomConstraint)
+                bottomConstraint.constant = -304 - 45
+                
+//                self.view.addConstraint(bottomConstraint5)
+//                bottomConstraint5.constant = -304 - 45
+//                self.view.addConstraint(bottomConstraint6)
+//                bottomConstraint6.constant = -304 - 45
+            }
+            else  if newUserTappedOnce == true{
+
+            bottomConstraint = NSLayoutConstraint(item: self.signUpOutlet, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.profilePhotoImageView, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 20)
+                
+                self.view.addConstraint(bottomConstraint0)
+                bottomConstraint0.constant = -304 - 45
+                
+                self.view.addConstraint(bottomConstraint)
+                bottomConstraint.constant = 60
+                
+                self.view.addConstraint(bottomConstraint5)
+                bottomConstraint5.constant = 30
+
+                
+                self.view.addConstraint(bottomConstraint6)
+                bottomConstraint6.constant = 30
+                
+                self.view.layoutIfNeeded()
+
+                print("second time yo!")
+            }
+            
+
+            
             self.view.addConstraint(bottomConstraint2)
             bottomConstraint2.constant = -380 - 45
             self.view.addConstraint(bottomConstraint3)
             bottomConstraint3.constant = -390 - 45
             self.view.addConstraint(bottomConstraint4)
             bottomConstraint4.constant = 50
-//            self.view.addConstraint(bottomConstraint5)
-//            bottomConstraint5.constant = -500
             self.selectProfilePhotoHeigthConstraint.constant = 65
             self.view.addConstraint(self.selectProfilePhotoHeigthConstraint)
             self.profilePhotoImageViewHeightConstraint.constant = 87
@@ -395,7 +550,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             
             self.view.layoutIfNeeded()
         })
-
+        newUserTappedOnce = true
         
     }
     override func prefersStatusBarHidden() -> Bool {
