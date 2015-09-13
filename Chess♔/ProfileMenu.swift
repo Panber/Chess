@@ -20,7 +20,7 @@ class ProfileMenu: UIViewController {
 
         // Enable user to scroll up and down
         scrollView.scrollEnabled = true
-        scrollView.contentSize = CGSizeMake(screenSize.width, screenSize.height)
+        scrollView.contentSize = CGSizeMake(screenSize.width, 565)
         scrollView.showsVerticalScrollIndicator = false
         
         let usernameObject = PFUser.currentUser()?.objectForKey("username") as! String

@@ -504,16 +504,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L2O-Bk-c0b">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ub-G6-HTY">
                                 <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="11.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6zc-3X-vKf">
-                                        <rect key="frame" x="167" y="37" width="80" height="80"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="11.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6zc-3X-vKf">
+                                        <rect key="frame" x="167" y="33" width="80" height="80"/>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="ANs-QR-0L7"/>
+                                            <constraint firstAttribute="width" constant="80" id="MS3-O6-lVZ"/>
+                                        </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sf-rm-Rds">
-                                        <rect key="frame" x="124" y="130" width="166" height="23"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sf-rm-Rds">
+                                        <rect key="frame" x="124" y="121" width="166" height="23"/>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="166" id="TKs-9Q-UsB"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -524,11 +531,17 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8Ub-G6-HTY" firstAttribute="leading" secondItem="MvB-s8-PVF" secondAttribute="leadingMargin" constant="-20" id="E8w-Is-9rf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8Ub-G6-HTY" secondAttribute="trailing" constant="-20" id="iq4-Hq-RDD"/>
+                            <constraint firstItem="zPr-qb-QWA" firstAttribute="top" secondItem="8Ub-G6-HTY" secondAttribute="bottom" id="jJb-2l-D2k"/>
+                            <constraint firstItem="8Ub-G6-HTY" firstAttribute="top" secondItem="R9L-5m-OBw" secondAttribute="bottom" constant="-50" id="xNQ-bq-jda"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="zLj-l5-sgy"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <outlet property="scrollView" destination="L2O-Bk-c0b" id="fp4-kU-px6"/>
+                        <outlet property="scrollView" destination="8Ub-G6-HTY" id="pVK-cg-tnA"/>
                         <outlet property="userProfileImage" destination="6zc-3X-vKf" id="tiP-Ug-Phw"/>
                         <outlet property="username" destination="7sf-rm-Rds" id="D35-1l-uat"/>
                     </connections>
