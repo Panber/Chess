@@ -16,10 +16,12 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
     }
 
     // Func that searches for user with key and stores it in an array
@@ -59,6 +61,7 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
         // Declare user object and set cell text to username
         var user: PFUser = users[indexPath.row] as! PFUser
         cell.textLabel?.text = user["username"] as! String
+        
         
         return cell
     }
