@@ -103,7 +103,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         passwordInput.delegate = self
         emailInput.delegate = self
         
-      //  bcFade()
+        bcFade()
 
         //assigning guesture to background
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
