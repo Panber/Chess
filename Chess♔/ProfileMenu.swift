@@ -17,13 +17,13 @@ class ProfileMenu: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    
+        
         // Enable user to scroll up and down
         scrollView.scrollEnabled = true
         scrollView.contentSize = CGSizeMake(screenSize.width, 565)
         scrollView.showsVerticalScrollIndicator = false
         
+        // Get username from parse
         let usernameObject = PFUser.currentUser()?.objectForKey("username") as! String
         username.text = usernameObject
         
