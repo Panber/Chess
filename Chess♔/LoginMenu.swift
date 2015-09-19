@@ -63,6 +63,9 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         super.viewDidLoad()
             print("viewDidLoad")
         
+        let nav = self.navigationController?.navigationBar
+        nav?.barStyle = UIBarStyle.BlackTranslucent
+        
         BlackBC.alpha = 1
         
         UIView.animateWithDuration(1, animations: {self.BlackBC.alpha = 0.4})
