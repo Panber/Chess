@@ -11,16 +11,33 @@ import Parse
 
 class GameMenu: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // make tab-bar and navigation bar black
         let nav = self.navigationController?.navigationBar
-        nav?.barStyle = UIBarStyle.BlackTranslucent
+        nav?.barStyle = UIBarStyle.Default
+        
+//        //Checking if first launch
+//        let firstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
+//        if firstLaunch  {
+//            print("Not first launch.")
+//        }
+//        else {
+//            print("First launch, setting NSUserDefault.")
+//            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
+//            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
+//            self.showViewController(vc as! UIViewController, sender: vc)
+//        }
+        
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
+                    self.showViewController(vc as! UIViewController, sender: vc)
         
         // Do any additional setup after loading the view.
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

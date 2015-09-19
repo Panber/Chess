@@ -86,7 +86,6 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         self.profilePhotoImageView.clipsToBounds = true
         self.profilePhotoImageView.layer.borderWidth = 2
         self.profilePhotoImageView.layer.borderColor = UIColor.whiteColor().CGColor
-
         
         //changing alpha of things
         emailInput.alpha = 0

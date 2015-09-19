@@ -20,10 +20,60 @@
                         <color key="backgroundColor" red="0.14509803921568629" green="0.14509803921568629" blue="0.14509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Play" id="bfc-qg-EO6"/>
+                    <connections>
+                        <segue destination="Z2e-Fv-mEq" kind="presentation" id="aXo-hn-lFb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1909" y="420"/>
+            <point key="canvasLocation" x="1910" y="420"/>
+        </scene>
+        <!--firstLaunchVC-->
+        <scene sceneID="Jma-vQ-5Il">
+            <objects>
+                <viewController storyboardIdentifier="firstLaunchVC" title="firstLaunchVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z2e-Fv-mEq" customClass="FirstLaunchScreen" customModule="Chess_" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lqX-nJ-PDo"/>
+                        <viewControllerLayoutGuide type="bottom" id="xAF-iI-keJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UD2-Cv-AyD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dark mode or light mode?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cu9-YA-BAt">
+                                <rect key="frame" x="170" y="97" width="260" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="260" id="jS5-lx-yti"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="seT-G1-p8z">
+                                <rect key="frame" x="276" y="284" width="51" height="31"/>
+                                <animations/>
+                                <connections>
+                                    <action selector="switchPressed:" destination="Z2e-Fv-mEq" eventType="valueChanged" id="qKg-Gi-NAJ"/>
+                                </connections>
+                            </switch>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cu9-YA-BAt" firstAttribute="centerX" secondItem="UD2-Cv-AyD" secondAttribute="centerX" id="JA7-0b-uTK"/>
+                            <constraint firstItem="seT-G1-p8z" firstAttribute="centerX" secondItem="cu9-YA-BAt" secondAttribute="centerX" id="Ogm-J4-gUs"/>
+                            <constraint firstItem="cu9-YA-BAt" firstAttribute="top" secondItem="lqX-nJ-PDo" secondAttribute="bottom" constant="77" id="Tam-vH-TFn"/>
+                            <constraint firstItem="seT-G1-p8z" firstAttribute="centerY" secondItem="UD2-Cv-AyD" secondAttribute="centerY" id="WMK-wm-dDX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="switchOutlet" destination="seT-G1-p8z" id="H4Q-t0-VAh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UFl-en-0nA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2553" y="420"/>
         </scene>
         <!--Login Menu-->
         <scene sceneID="Ycv-dp-2az">

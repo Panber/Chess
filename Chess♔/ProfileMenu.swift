@@ -18,12 +18,7 @@ class ProfileMenu: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // make tab-bar and navigation bar black
-        let nav = self.navigationController?.navigationBar
-        nav?.barStyle = UIBarStyle.BlackTranslucent
-        
-        self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-        self.tabBarController?.tabBar.barTintColor = UIColor.blackColor()
+    
         
         //self.tableView.contentInset = UIEdgeInsetsMake(130, 0, 0, 0);
         

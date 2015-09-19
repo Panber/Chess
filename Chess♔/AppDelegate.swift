@@ -30,17 +30,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
-        //check if user has logged in before
-//        let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
-//        
-//        if userName != nil {
-//            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//            let mainPage = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
-//            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//            appDelegate.window?.rootViewController = mainPage
-//
-//            
-//        }
+//        check if user has logged in before
+        let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
+        
+        if userName != nil {
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainPage = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window?.rootViewController = mainPage
+
+            
+        }
+        
         
         
         return true
