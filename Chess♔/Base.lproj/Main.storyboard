@@ -68,6 +68,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="darkOrLightLabel" destination="cu9-YA-BAt" id="hhv-MF-JBs"/>
                         <outlet property="switchOutlet" destination="seT-G1-p8z" id="H4Q-t0-VAh"/>
                     </connections>
                 </viewController>
