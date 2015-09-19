@@ -11,10 +11,12 @@ import Parse
 
 var darkMode = Bool()
 
+//var uiElements = Array()
 
 class FirstLaunchScreen: UIViewController {
 
     @IBOutlet weak var switchOutlet: UISwitch!
+    @IBOutlet weak var darkOrLightLabel: UILabel!
 
     
     override func viewDidLoad() {
@@ -69,6 +71,7 @@ class FirstLaunchScreen: UIViewController {
             self.view.backgroundColor = UIColor.whiteColor()
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
+//self.view. = UIColor.whiteColor()
 
             
         }
