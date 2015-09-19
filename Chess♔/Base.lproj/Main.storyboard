@@ -515,7 +515,7 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HHy-rM-WED">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HHy-rM-WED">
                                                     <rect key="frame" x="167" y="8" width="80" height="80"/>
                                                     <animations/>
                                                 </imageView>
@@ -603,7 +603,7 @@
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <color key="backgroundColor" red="0.225779646" green="0.225779646" blue="0.225779646" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.69748263889999995" green="0.0" blue="0.083622007949999994" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
