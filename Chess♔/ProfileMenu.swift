@@ -18,6 +18,7 @@ class ProfileMenu: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    
         // Enable user to scroll up and down
         scrollView.scrollEnabled = true
         scrollView.contentSize = CGSizeMake(screenSize.width, 565)

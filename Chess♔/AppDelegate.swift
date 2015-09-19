@@ -39,8 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.window?.rootViewController = mainPage
         
-//            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
-//            self.showViewController(vc as! UIViewController, sender: vc)
             
             
         }
