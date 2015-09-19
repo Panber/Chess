@@ -27,22 +27,12 @@ class ProfileMenu: UIViewController {
         username.text = usernameObject
         
         //changing profileImage
-        self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
-        self.userProfileImage.clipsToBounds = true
-        self.userProfileImage.layer.borderWidth = 3
-        self.userProfileImage.layer.borderColor = UIColor.whiteColor().CGColor
+//        self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
+//        self.userProfileImage.clipsToBounds = true
+//        //self.userProfileImage.layer.borderWidth = 3
+//        self.userProfileImage.layer.borderColor = UIColor.whiteColor().CGColor
         
-        
-        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
-        
-        profilePictureObject.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
-            
-            if (imageData != nil) {
-                
-                self.userProfileImage.image = UIImage(data: imageData!)
-            }
-            
-        })
+        loadUserDetails()
         
         // Do any additional setup after loading the view.
     }
@@ -61,5 +51,39 @@ class ProfileMenu: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    @IBAction func logOut(sender: AnyObject) {
+        
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("user_name")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+        PFUser.logOutInBackgroundWithBlock { (error:NSError?) -> Void in
+        
+            let mainStoryBoard:UIStoryboard = UIStoryboard(name:"Main", bundle:nil)
+            
+            let signInPage:LoginMenu = mainStoryBoard.instantiateViewControllerWithIdentifier("LoginMenu") as! LoginMenu
+            
+            let signInPageNav = UINavigationController(rootViewController: signInPage)
+            
+            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window?.rootViewController = signInPageNav
+        }
+    }
+    
+    func loadUserDetails() {
+        
+        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as? PFFile
+        
+        if(profilePictureObject != nil)
+        {
+            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                
+                if(imageData != nil)
+                {
+                    self.userProfileImage.image = UIImage(data: imageData!)
+                }
+                
+            }
+        }
+    }
 }
