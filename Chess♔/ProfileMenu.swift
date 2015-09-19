@@ -28,10 +28,10 @@ class ProfileMenu: UIViewController {
         username.text = usernameObject
         
         //changing profileImage
-//        self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
-//        self.userProfileImage.clipsToBounds = true
-//        //self.userProfileImage.layer.borderWidth = 3
-//        self.userProfileImage.layer.borderColor = UIColor.whiteColor().CGColor
+        self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
+        self.userProfileImage.clipsToBounds = true
+        self.userProfileImage.layer.borderWidth = 3
+        self.userProfileImage.layer.borderColor = UIColor.whiteColor().CGColor
         
         loadUserDetails()
         
