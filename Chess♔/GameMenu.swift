@@ -18,6 +18,10 @@ class GameMenu: UIViewController {
         // make tab-bar and navigation bar black
         let nav = self.navigationController?.navigationBar
         nav?.barStyle = UIBarStyle.Default
+        self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
+        self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
+
+
         
 //        //Checking if first launch
 //        let firstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
