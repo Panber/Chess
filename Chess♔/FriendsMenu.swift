@@ -22,6 +22,10 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
+        // make tab-bar and navigation bar black
+        let nav = self.navigationController?.navigationBar
+        nav?.barStyle = UIBarStyle.BlackTranslucent
+        
     }
 
     // Func that searches for user with key and stores it in an array

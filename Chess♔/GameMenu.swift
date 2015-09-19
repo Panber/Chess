@@ -13,7 +13,11 @@ class GameMenu: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // make tab-bar and navigation bar black
+        let nav = self.navigationController?.navigationBar
+        nav?.barStyle = UIBarStyle.BlackTranslucent
+        
         // Do any additional setup after loading the view.
     }
 
