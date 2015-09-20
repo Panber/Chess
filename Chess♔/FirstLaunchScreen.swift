@@ -19,17 +19,32 @@ class FirstLaunchScreen: UIViewController {
 
     @IBOutlet weak var switchOutlet: UISwitch!
     @IBOutlet weak var darkOrLightLabel: UILabel!
+    @IBOutlet weak var darkModeLabel: UILabel!
     
+    @IBOutlet weak var darkModeCellLabel: UILabel!
     
+    @IBOutlet weak var darkPreviewWindow: UIImageView!
+    
+    @IBOutlet weak var lightPreviewWindow: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tabBarController?.tabBar.hidden = true
 
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "dark_mode")
         darkMode = NSUserDefaults.standardUserDefaults().boolForKey("dark_mode")
         
-        uiLabels += [darkOrLightLabel]
+        uiLabels += [darkOrLightLabel,darkModeLabel]
         
+        setLightMode()
+        darkPreviewWindow.alpha = 0
+        lightPreviewWindow.alpha = 0
+        
+        UIView.animateWithDuration(0.8, animations: {
+            
+            self.lightPreviewWindow.alpha = 1
+
+        })
         // Do any additional setup after loading the view.
     }
 
@@ -61,49 +76,79 @@ class FirstLaunchScreen: UIViewController {
     }
 
        func setDarkMode() {
-            self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-            self.view.backgroundColor = UIColor.darkGrayColor()
-            self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
 
-            
-            var i = 0
-            for i; i < uiLabels.count; i++ {
-                uiLabels[i].tintColor = UIColor.whiteColor()
-            }
-            var o = 0
-            for o; i < uiButtons.count; o++ {
-                uiButtons[o].tintColor = UIColor.whiteColor()
-            }
-            var p = 0
-            for p; i < uiTableViews.count; p++ {
-                uiTableViews[i].backgroundColor = UIColor.blackColor()
-            }
-    
+        
+            UIView.animateWithDuration(0.8, animations: {
+                self.darkPreviewWindow.alpha = 1
+                self.lightPreviewWindow.alpha = 0
+                
+                self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+                self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
+                self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+
+                self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+                self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
+                self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
+                self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+                self.darkModeCellLabel.backgroundColor = UIColor.darkGrayColor()
+                
+                var i = 0
+                for i; i < uiLabels.count; i++ {
+                    uiLabels[i].textColor = UIColor.whiteColor()
+                }
+                var o = 0
+                for o; i < uiButtons.count; o++ {
+                    uiButtons[o].tintColor = UIColor.whiteColor()
+                }
+                var p = 0
+                for p; i < uiTableViews.count; p++ {
+                    uiTableViews[i].backgroundColor = UIColor.blackColor()
+                }
+                
+                
+            })
+
+        
+
         }
     
         func setLightMode() {
             
-            self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
-            self.view.backgroundColor = UIColor.whiteColor()
-            self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
-            self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
+
+            
+            UIView.animateWithDuration(0.8, animations: {
+                self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
+                self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+                self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+                self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
+                self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
+                self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
+                self.darkModeCellLabel.backgroundColor = UIColor.whiteColor()
+                
+                self.lightPreviewWindow.alpha = 1
+                self.darkPreviewWindow.alpha = 0
+                
+                var i = 0
+                for i; i < uiLabels.count; i++ {
+                    uiLabels[i].textColor = UIColor.blackColor()
+                }
+                var o = 0
+                for o; i < uiButtons.count; o++ {
+                    uiButtons[o].tintColor = UIColor.blueColor()
+                }
+                var p = 0
+                for p; i < uiTableViews.count; p++ {
+                    uiTableViews[i].backgroundColor = UIColor.whiteColor()
+                }
+
+            })
+            
+            
 
 
-            var i = 0
-            for i; i < uiLabels.count; i++ {
-                uiLabels[i].tintColor = UIColor.blackColor()
-            }
-            var o = 0
-            for o; i < uiButtons.count; o++ {
-                uiButtons[o].tintColor = UIColor.blueColor()
-            }
-            var p = 0
-            for p; i < uiTableViews.count; p++ {
-                uiTableViews[i].backgroundColor = UIColor.whiteColor()
-            }
+
+
+
             
         }
     

@@ -20,6 +20,9 @@ class GameMenu: UIViewController {
         nav?.barStyle = UIBarStyle.Default
         self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
         self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
+        self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+
+        
 
 
         
@@ -48,14 +51,9 @@ class GameMenu: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
+    override func viewWillAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = false
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
 
 }
