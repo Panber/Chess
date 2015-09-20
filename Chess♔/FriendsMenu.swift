@@ -16,20 +16,10 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
-        // Don't show search bar until editing begins
-        searchBar.setShowsCancelButton(false, animated: true)
-        searchBar.sizeToFit()
-        
-        
-        var newBounds: CGRect = self.tableView.bounds
-        newBounds.origin.y = newBounds.origin.y + searchBar.bounds.size.height
-        self.tableView.bounds = newBounds
         
     }
 
@@ -58,31 +48,6 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
-    }
-    
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")!
-        
-        // Declare user object and set cell text to username
-        var user: PFUser = users[indexPath.row] as! PFUser
-        cell.textLabel?.text = user["username"] as! String
-        
-        
-        return cell
-    }
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.characters.count > 0 {
-            self.searchUsers(searchText)
-        }
-    }
-
-    
-    
     /*
     // MARK: - Navigation
 
@@ -93,12 +58,56 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
     }
     */
 
+    // MARK: - Table View
     
-    // When button tapped seachbar appears
-    @IBAction func startSearch(sender: AnyObject) {
-       
-     searchBar.becomeFirstResponder()
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return users.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell")!
+        
+        // Declare user object and set cell text to username
+        var user:PFUser = users[indexPath.row] as! PFUser
+        cell.textLabel?.text = user["username"] as! String
+        
+        return cell
+    }
+    
+    
+    // MARK - Search
 
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
+        
+        var query: PFQuery = PFQuery(className:"_User")
+        
+        query.whereKey("username", containsString: searchString)
+        query.orderByAscending("username")
+        query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                self.users.removeAllObjects()
+                self.users.addObjectsFromArray(objects!)
+                self.tableView.reloadData()
+            }
+            else {
+                print("error")
+            }
+            
+        }
+        
+        return true
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        
+        
+        return true
+    }
+    
+    
+    
 }
