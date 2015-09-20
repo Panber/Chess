@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
     
     // Array for users that are being searched for
     var users = NSMutableArray()
@@ -22,6 +22,14 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
+        // Don't show search bar until editing begins
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.sizeToFit()
+        
+        
+        var newBounds: CGRect = self.tableView.bounds
+        newBounds.origin.y = newBounds.origin.y + searchBar.bounds.size.height
+        self.tableView.bounds = newBounds
         
     }
 
@@ -72,6 +80,7 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
             self.searchUsers(searchText)
         }
     }
+
     
     
     /*
@@ -87,10 +96,8 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
     
     // When button tapped seachbar appears
     @IBAction func startSearch(sender: AnyObject) {
-//        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
-//            self.searchBar.frame = CGRectMake(0.0, 64, self.searchBar.frame.width, self.searchBar.frame.height)
-//        }, completion: nil)
-        
+       
+     searchBar.becomeFirstResponder()
     }
     
 

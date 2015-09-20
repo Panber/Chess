@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A216g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A216g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bY1-z2-YMg">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -460,11 +460,11 @@
             </objects>
             <point key="canvasLocation" x="1097" y="1169"/>
         </scene>
-        <!--Friends-->
+        <!--Explore-->
         <scene sceneID="SeI-Wo-YbG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ObW-z1-ppP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Friends" image="Friends.png" id="xGr-9G-XJJ"/>
+                    <tabBarItem key="tabBarItem" title="Explore" image="Friends.png" id="xGr-9G-XJJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HCp-6N-Ldx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -480,7 +480,7 @@
             </objects>
             <point key="canvasLocation" x="1097" y="1891"/>
         </scene>
-        <!--Friends-->
+        <!--Explore-->
         <scene sceneID="Y8B-NZ-V1C">
             <objects>
                 <viewController storyboardIdentifier="FriendsMenu" id="2eL-m4-pjy" customClass="FriendsMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
@@ -492,21 +492,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oDH-fa-IEB">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <animations/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="2eL-m4-pjy" id="8DV-c3-6Qs"/>
-                                </connections>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="59" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="a42-g2-zHe">
                                 <rect key="frame" x="0.0" y="108" width="600" height="579"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="60" id="IaG-1Z-KOD">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="60"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IaG-1Z-KOD" id="97J-wb-7z9">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
@@ -521,22 +513,43 @@
                                     <outlet property="delegate" destination="2eL-m4-pjy" id="iWt-sm-wS6"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" ambiguous="YES" misplaced="YES" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="ZiJ-I8-RqN">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="Geu-yq-Z3U"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.89201570680628273" green="0.89201570680628273" blue="0.89201570680628273" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2eL-m4-pjy" id="Jf1-Ln-XhK"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="oDH-fa-IEB" secondAttribute="trailing" constant="-20" id="2AY-xG-S50"/>
-                            <constraint firstItem="oDH-fa-IEB" firstAttribute="leading" secondItem="V9h-oz-p71" secondAttribute="leadingMargin" constant="-20" id="HSm-pf-bum"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZiJ-I8-RqN" secondAttribute="trailing" constant="-20" id="Hwx-lD-FVQ"/>
+                            <constraint firstItem="ZiJ-I8-RqN" firstAttribute="leading" secondItem="V9h-oz-p71" secondAttribute="leadingMargin" constant="-20" id="sOb-Uc-YH8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Friends" id="H6V-J1-cnI">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="mZB-ME-KB3"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Explore" id="H6V-J1-cnI"/>
                     <connections>
+                        <outlet property="searchBar" destination="ZiJ-I8-RqN" id="sXh-cJ-l1e"/>
+                        <outlet property="searchDisplayController" destination="t6L-QR-rUF" id="KkJ-0P-y8w"/>
                         <outlet property="tableView" destination="a42-g2-zHe" id="0he-Rj-VlM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oZk-3Z-hw8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="t6L-QR-rUF">
+                    <connections>
+                        <outlet property="delegate" destination="2eL-m4-pjy" id="8Kt-R7-Wje"/>
+                        <outlet property="searchBar" destination="ZiJ-I8-RqN" id="xQn-kg-deb"/>
+                        <outlet property="searchContentsController" destination="2eL-m4-pjy" id="Er9-hG-sj5"/>
+                        <outlet property="searchResultsDataSource" destination="2eL-m4-pjy" id="qTC-Ql-MI7"/>
+                        <outlet property="searchResultsDelegate" destination="2eL-m4-pjy" id="Juf-hD-TEe"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1899" y="1885"/>
         </scene>
