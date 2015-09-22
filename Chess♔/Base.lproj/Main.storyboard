@@ -611,6 +611,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Explore" id="H6V-J1-cnI"/>
                     <connections>
+                        <outlet property="searchBar" destination="bh1-fF-lrI" id="Bnp-qf-anF"/>
                         <outlet property="searchDisplayController" destination="DkX-tg-AZ0" id="thh-Ct-NEl"/>
                         <outlet property="tableView" destination="a42-g2-zHe" id="0he-Rj-VlM"/>
                     </connections>
