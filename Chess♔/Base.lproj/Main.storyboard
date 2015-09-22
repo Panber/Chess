@@ -622,7 +622,7 @@
         <!--Profile-->
         <scene sceneID="SPW-79-m2Z">
             <objects>
-                <tableViewController id="7ia-wo-Pp7" customClass="ProfileMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7ia-wo-Pp7" customClass="ProfileMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="1JD-eR-hD6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

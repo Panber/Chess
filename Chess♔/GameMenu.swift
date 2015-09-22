@@ -31,11 +31,11 @@ class GameMenu: UIViewController {
 //            
 //        }
         
-        
         //remove this after a while
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
                     self.showViewController(vc as! UIViewController, sender: vc)
-        
+
+    
         // Do any additional setup after loading the view.
     }
 
