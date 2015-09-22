@@ -78,35 +78,26 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
         return cell
     }
     
-    
     // MARK - Search
 
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
         
-        var query: PFQuery = PFQuery(className:"_User")
         
-        query.whereKey("username", containsString: searchString)
-        query.orderByAscending("username")
-        query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-            if error == nil {
-                self.users.removeAllObjects()
-                self.users.addObjectsFromArray(objects!)
-                self.tableView.reloadData()
-            }
-            else {
-                print("error")
-            }
-            
+        if searchString!.characters.count > 0 {
+            self.searchUsers(searchString!)
         }
+        
         
         return true
     }
     
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
         
+        self.searchUsers((self.searchDisplayController?.searchBar.text)!)
         
         return true
     }
+    
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
