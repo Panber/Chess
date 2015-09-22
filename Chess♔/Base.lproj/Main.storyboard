@@ -551,7 +551,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Explore" id="bh1-fF-lrI">
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search" id="bh1-fF-lrI">
                                     <rect key="frame" x="0.0" y="64" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <animations/>
