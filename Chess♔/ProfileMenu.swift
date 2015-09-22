@@ -29,6 +29,11 @@ class ProfileMenu: UITableViewController {
         self.userProfileImage.layer.borderColor = UIColor.blackColor().CGColor
         
         loadUserDetails()
+
+        //setting nav bar heading to username
+        if usernameObject.characters.count <= 10 {
+            self.title = usernameObject
+        }
         
         // Do any additional setup after loading the view.
     }

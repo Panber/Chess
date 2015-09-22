@@ -15,15 +15,6 @@ class GameMenu: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // make tab-bar and navigation bar black
-        let nav = self.navigationController?.navigationBar
-        nav?.barStyle = UIBarStyle.Default
-        self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
-        self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
-        self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
-
-        
-
 
         
 //        //Checking if first launch
@@ -37,7 +28,9 @@ class GameMenu: UIViewController {
 //            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
 //            self.showViewController(vc as! UIViewController, sender: vc)
 //            
+//            
 //        }
+        
         
         //remove this after a while
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
