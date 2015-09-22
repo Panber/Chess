@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A216g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A263e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -89,13 +89,22 @@
                                     <action selector="switchPressed:" destination="Z2e-Fv-mEq" eventType="valueChanged" id="qKg-Gi-NAJ"/>
                                 </connections>
                             </switch>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cOt-3w-PoH">
+                                <rect key="frame" x="0.0" y="224" width="600" height="376"/>
+                                <animations/>
+                                <connections>
+                                    <action selector="shakeButton:" destination="Z2e-Fv-mEq" eventType="touchUpInside" id="SiU-57-0Jf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cu9-YA-BAt" firstAttribute="leading" secondItem="UD2-Cv-AyD" secondAttribute="leadingMargin" id="06J-ev-CBu"/>
                             <constraint firstItem="iDT-Mk-jlJ" firstAttribute="leading" secondItem="scS-Em-HAD" secondAttribute="leading" id="0ci-vr-Klh"/>
+                            <constraint firstItem="cOt-3w-PoH" firstAttribute="leading" secondItem="4k9-Uc-5t6" secondAttribute="leading" id="7TA-6q-ic5"/>
                             <constraint firstItem="iDT-Mk-jlJ" firstAttribute="trailing" secondItem="4k9-Uc-5t6" secondAttribute="trailing" id="9D3-EP-8l7"/>
+                            <constraint firstItem="cOt-3w-PoH" firstAttribute="trailing" secondItem="iDT-Mk-jlJ" secondAttribute="trailing" id="B4b-zq-4k0"/>
                             <constraint firstItem="scS-Em-HAD" firstAttribute="leading" secondItem="UD2-Cv-AyD" secondAttribute="leading" id="B6h-7i-00D"/>
                             <constraint firstItem="iDT-Mk-jlJ" firstAttribute="top" secondItem="BDv-YY-Otn" secondAttribute="bottom" constant="8" symbolic="YES" id="Bpg-K6-kQv"/>
                             <constraint firstAttribute="trailing" secondItem="iDT-Mk-jlJ" secondAttribute="trailing" id="DGB-Ri-ecH"/>
@@ -110,9 +119,11 @@
                             <constraint firstItem="iDT-Mk-jlJ" firstAttribute="top" secondItem="4k9-Uc-5t6" secondAttribute="top" id="eTs-om-q78"/>
                             <constraint firstItem="xAF-iI-keJ" firstAttribute="top" secondItem="4k9-Uc-5t6" secondAttribute="bottom" constant="8" symbolic="YES" id="gEI-7E-re9"/>
                             <constraint firstItem="BDv-YY-Otn" firstAttribute="top" secondItem="cu9-YA-BAt" secondAttribute="bottom" constant="1" id="iRN-dP-7NX"/>
+                            <constraint firstItem="cOt-3w-PoH" firstAttribute="top" secondItem="iDT-Mk-jlJ" secondAttribute="top" id="lec-rq-6dK"/>
                             <constraint firstItem="4k9-Uc-5t6" firstAttribute="top" secondItem="scS-Em-HAD" secondAttribute="bottom" constant="8" symbolic="YES" id="oDr-MK-fkb"/>
                             <constraint firstItem="cu9-YA-BAt" firstAttribute="centerX" secondItem="scS-Em-HAD" secondAttribute="centerX" id="s6F-Gt-2lt"/>
                             <constraint firstItem="seT-G1-p8z" firstAttribute="top" secondItem="cu9-YA-BAt" secondAttribute="bottom" constant="8" symbolic="YES" id="sNW-PT-fac"/>
+                            <constraint firstItem="cOt-3w-PoH" firstAttribute="bottom" secondItem="xAF-iI-keJ" secondAttribute="top" id="wu9-2p-Mrp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="seT-G1-p8z" secondAttribute="trailing" constant="-7" id="xQQ-oM-yaY"/>
                         </constraints>
                     </view>
@@ -649,17 +660,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DdN-8y-jw8">
-                                                    <rect key="frame" x="64" y="14" width="158" height="21"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" name="Baskerville-SemiBold" family="Baskerville" pointSize="19"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z5g-hl-r3n">
                                                     <rect key="frame" x="357" y="6" width="51" height="31"/>
                                                     <animations/>
                                                 </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DdN-8y-jw8">
+                                                    <rect key="frame" x="28" y="11" width="158" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="15"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <animations/>
                                         </tableViewCellContentView>

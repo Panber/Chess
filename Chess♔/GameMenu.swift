@@ -64,7 +64,6 @@ class GameMenu: UIViewController {
     func lightOrDarkMode() {
         if darkMode == true {
         
-            UIView.animateWithDuration(0.8, animations: {
 
                 self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
                 self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
@@ -75,25 +74,10 @@ class GameMenu: UIViewController {
                 self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
                 self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
                 
-//                var i = 0
-//                for i; i < uiLabels.count; i++ {
-//                    uiLabels[i].textColor = UIColor.whiteColor()
-//                }
-//                var o = 0
-//                for o; i < uiButtons.count; o++ {
-//                    uiButtons[o].tintColor = UIColor.whiteColor()
-//                }
-//                var p = 0
-//                for p; i < uiTableViews.count; p++ {
-//                    uiTableViews[i].backgroundColor = UIColor.blackColor()
-//                }
-                
-                
-            })
-        
+            
         }
         else if darkMode == false {
-            UIView.animateWithDuration(0.8, animations: {
+            
                 self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
                 self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
                 self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
@@ -101,20 +85,8 @@ class GameMenu: UIViewController {
                 self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
                 self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
 
-//                var i = 0
-//                for i; i < uiLabels.count; i++ {
-//                    uiLabels[i].textColor = UIColor.blackColor()
-//                }
-//                var o = 0
-//                for o; i < uiButtons.count; o++ {
-//                    uiButtons[o].tintColor = UIColor.blueColor()
-//                }
-//                var p = 0
-//                for p; i < uiTableViews.count; p++ {
-//                    uiTableViews[i].backgroundColor = UIColor.whiteColor()
-//                }
+
                 
-            })
         
         }
     

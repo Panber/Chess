@@ -26,6 +26,9 @@ class FirstLaunchScreen: UIViewController {
     @IBOutlet weak var darkPreviewWindow: UIImageView!
     
     @IBOutlet weak var lightPreviewWindow: UIImageView!
+    
+    
+    // MARK: -functions!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,23 +56,51 @@ class FirstLaunchScreen: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //checking if switch was pressed
     @IBAction func switchPressed(sender: AnyObject) {
+        
         if switchOutlet.on {
+            
             print("switch is on")
-        
-            
             setDarkMode()
-            
         }
+            
         else {
-            print("switch is off")
-
-            setLightMode()
             
+            print("switch is off")
+            setLightMode()
         }
-        
     }
 
+    //func to shake preview windows to indicate that it is not pressable
+    @IBAction func shakeButton(sender: AnyObject) {
+
+        //rememeber to add easter egg with darkside
+        
+        UIView.animateWithDuration(0.1, animations: {
+            
+            self.lightPreviewWindow.frame.origin.x -= 10
+            self.darkPreviewWindow.frame.origin.x -= 10
+
+            }, completion: { Void in
+        
+                UIView.animateWithDuration(0.1, animations: {
+                    
+                    self.lightPreviewWindow.frame.origin.x += 20
+                    self.darkPreviewWindow.frame.origin.x += 20
+                    
+                    }, completion: { Void in
+                        
+                        UIView.animateWithDuration(0.1, animations: {
+                        
+                            self.lightPreviewWindow.frame.origin.x -= 10
+                            self.darkPreviewWindow.frame.origin.x -= 10
+                        
+                        })
+                })
+        })
+    }
+    
        func setDarkMode() {
 
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "dark_mode")
@@ -141,12 +172,6 @@ class FirstLaunchScreen: UIViewController {
                 }
 
             })
-            
-            
-
-
-
-
 
             
         }
