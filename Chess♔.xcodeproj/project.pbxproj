@@ -89,6 +89,7 @@
 		8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8991B9A264F0097637E /* LaunchScreen.storyboard */; };
 		8FA5C8A61B9A264F0097637E /* Chess_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8A51B9A264F0097637E /* Chess_Tests.swift */; };
 		8FA5C8B11B9A264F0097637E /* Chess_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8B01B9A264F0097637E /* Chess_UITests.swift */; };
+		8FBED2FC1BB1F35700CDAACC /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +198,7 @@
 		8FA5C8AC1B9A264F0097637E /* Chess♔.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chess♔.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8B01B9A264F0097637E /* Chess_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chess_UITests.swift; sourceTree = "<group>"; };
 		8FA5C8B21B9A264F0097637E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,7 +317,6 @@
 		8F4A02881B9A3F730084024A /* Swift */ = {
 			isa = PBXGroup;
 			children = (
-				8FA5C8901B9A264F0097637E /* AppDelegate.swift */,
 				8FA5C8921B9A264F0097637E /* LoginMenu.swift */,
 				8F4A02891B9A40FF0084024A /* GameInterface.swift */,
 				8F4A028B1B9A414D0084024A /* GameMenu.swift */,
@@ -324,6 +325,8 @@
 				8F86392C1B9B02780055608B /* ChatView.swift */,
 				8F86392E1B9B044F0055608B /* FriendsMenu.swift */,
 				8F1AFCF81BAE05A7009D7299 /* FirstLaunchScreen.swift */,
+				8FA5C8901B9A264F0097637E /* AppDelegate.swift */,
+				8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				8F4A028A1B9A40FF0084024A /* GameInterface.swift in Sources */,
 				8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */,
 				8F86392B1B9B01D00055608B /* ProfileMenu.swift in Sources */,
+				8FBED2FC1BB1F35700CDAACC /* UserTableViewCell.swift in Sources */,
 				8F1AFCF91BAE05A7009D7299 /* FirstLaunchScreen.swift in Sources */,
 				8F86392F1B9B044F0055608B /* FriendsMenu.swift in Sources */,
 				8F86392D1B9B02780055608B /* ChatView.swift in Sources */,
