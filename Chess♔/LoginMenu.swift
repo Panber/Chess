@@ -173,7 +173,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
                             login = false
                             
                             self.signUpOutlet.setTitle("Sign Up", forState: .Normal)
-                            self.alreadyAUserButtonOutlet.setTitle("...or are you already an user?", forState: .Normal)
+                            self.alreadyAUserButtonOutlet.setTitle("Already an user?", forState: .Normal)
                             
                             self.profilePhotoImageView.alpha = 0
                             self.selectProfilePhotoOutlet.alpha = 0
@@ -505,7 +505,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             login = true
             
             self.signUpOutlet.setTitle("Log in", forState: .Normal)
-            self.alreadyAUserButtonOutlet.setTitle("...or are you a new user?", forState: .Normal)
+            self.alreadyAUserButtonOutlet.setTitle("New user?", forState: .Normal)
             
             self.profilePhotoImageView.alpha = 0
             self.selectProfilePhotoOutlet.alpha = 0
@@ -539,7 +539,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
                     login = false
                     
                     self.signUpOutlet.setTitle("Sign Up", forState: .Normal)
-                    self.alreadyAUserButtonOutlet.setTitle("...or are you already an user?", forState: .Normal)
+                    self.alreadyAUserButtonOutlet.setTitle("Already an user?", forState: .Normal)
                     
                     self.profilePhotoImageView.alpha = 1
                     self.selectProfilePhotoOutlet.alpha = 1

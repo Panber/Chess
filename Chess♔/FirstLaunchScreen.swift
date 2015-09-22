@@ -56,19 +56,14 @@ class FirstLaunchScreen: UIViewController {
     @IBAction func switchPressed(sender: AnyObject) {
         if switchOutlet.on {
             print("switch is on")
-            
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "dark_mode")
-            darkMode = NSUserDefaults.standardUserDefaults().boolForKey("dark_mode")
+        
             
             setDarkMode()
             
         }
         else {
             print("switch is off")
-            
-            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "dark_mode")
-            darkMode = NSUserDefaults.standardUserDefaults().boolForKey("dark_mode")
-            
+
             setLightMode()
             
         }
@@ -77,6 +72,8 @@ class FirstLaunchScreen: UIViewController {
 
        func setDarkMode() {
 
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "dark_mode")
+        darkMode = NSUserDefaults.standardUserDefaults().boolForKey("dark_mode")
         
             UIView.animateWithDuration(0.8, animations: {
                 self.darkPreviewWindow.alpha = 1
@@ -114,7 +111,9 @@ class FirstLaunchScreen: UIViewController {
     
         func setLightMode() {
             
-
+            
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "dark_mode")
+            darkMode = NSUserDefaults.standardUserDefaults().boolForKey("dark_mode")
             
             UIView.animateWithDuration(0.8, animations: {
                 self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
