@@ -19,7 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                     </view>
-                    <navigationItem key="navigationItem" title="Play" id="bfc-qg-EO6"/>
+                    <navigationItem key="navigationItem" title="Play" id="bfc-qg-EO6">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="vKz-xP-h12"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="TEw-RB-qu2"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="Z2e-Fv-mEq" kind="presentation" id="aXo-hn-lFb"/>
                     </connections>
@@ -752,11 +755,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPl-nK-S7Z">
-                                                    <rect key="frame" x="266" y="7" width="69" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                                     <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="69" id="oeY-x6-i7X"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="20"/>
                                                     <state key="normal" title="Logout">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -768,9 +768,10 @@
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstItem="zPl-nK-S7Z" firstAttribute="top" secondItem="6t3-aG-tMI" secondAttribute="topMargin" constant="-1" id="Qvj-qT-rqk"/>
-                                                <constraint firstItem="zPl-nK-S7Z" firstAttribute="centerY" secondItem="6t3-aG-tMI" secondAttribute="centerY" id="cRU-Xj-ESO"/>
-                                                <constraint firstItem="zPl-nK-S7Z" firstAttribute="centerX" secondItem="6t3-aG-tMI" secondAttribute="centerX" id="q6c-L7-ILN"/>
+                                                <constraint firstItem="zPl-nK-S7Z" firstAttribute="top" secondItem="6t3-aG-tMI" secondAttribute="top" id="Avr-2f-zvY"/>
+                                                <constraint firstItem="zPl-nK-S7Z" firstAttribute="leading" secondItem="6t3-aG-tMI" secondAttribute="leading" id="IZ6-ub-9Dk"/>
+                                                <constraint firstAttribute="trailing" secondItem="zPl-nK-S7Z" secondAttribute="trailing" id="gHf-kO-Wiq"/>
+                                                <constraint firstAttribute="bottom" secondItem="zPl-nK-S7Z" secondAttribute="bottom" id="ocO-nz-vn2"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
