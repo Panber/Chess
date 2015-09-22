@@ -14,17 +14,44 @@ class GameInterface: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // make tab-bar and navigation bar black
-        let nav = self.navigationController?.navigationBar
-        nav?.barStyle = UIBarStyle.BlackTranslucent
         
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+// MARK: -Some Functions that could be used
+    
+    //func to moev piece
+    func movePiece( piece:String, x:Int, y:Int) {
+    
+        UIView.animateWithDuration(1.0, animations: {
+            //move piece
+        })
+        
     }
+    
+    //func to load previous positions adn information
+    func updateBoardWithPositionsAndInformation() {
+    
+    }
+    
+    //func to remove piece after capture
+    func removePieceAfterCapture() {
+    
+    }
+    
+    //func to update the score
+    func updateScore() {
+    
+    }
+    
+    //func to load new game
+    func loadNewGame() {
+    
+    }
+    
+    
+    
+// MARK: -light or dark
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
