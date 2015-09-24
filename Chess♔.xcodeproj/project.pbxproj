@@ -199,6 +199,7 @@
 		8FA5C8B01B9A264F0097637E /* Chess_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chess_UITests.swift; sourceTree = "<group>"; };
 		8FA5C8B21B9A264F0097637E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,8 +319,8 @@
 			isa = PBXGroup;
 			children = (
 				8FA5C8921B9A264F0097637E /* LoginMenu.swift */,
-				8F4A02891B9A40FF0084024A /* GameInterface.swift */,
 				8F4A028B1B9A414D0084024A /* GameMenu.swift */,
+				8F4A02891B9A40FF0084024A /* GameInterface.swift */,
 				8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */,
 				8F86392A1B9B01D00055608B /* ProfileMenu.swift */,
 				8F86392C1B9B02780055608B /* ChatView.swift */,
@@ -327,6 +328,7 @@
 				8F1AFCF81BAE05A7009D7299 /* FirstLaunchScreen.swift */,
 				8FA5C8901B9A264F0097637E /* AppDelegate.swift */,
 				8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */,
+				8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
