@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A216g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -623,21 +623,40 @@
                                     </connections>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="70" id="1Vn-yT-H3u">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="70" id="1Vn-yT-H3u" customClass="UserTableViewCell" customModule="Chess_" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="136" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Vn-yT-H3u" id="9Q7-mO-icB">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhd-6J-fDz">
+                                                    <rect key="frame" x="87" y="8" width="191" height="24"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="191" id="Goh-PC-jpT"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rwp-LA-btJ">
-                                                    <rect key="frame" x="23" y="6" width="55" height="55"/>
+                                                    <rect key="frame" x="25" y="2" width="54" height="54"/>
                                                     <animations/>
                                                 </imageView>
                                             </subviews>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="lhd-6J-fDz" secondAttribute="bottom" constant="29" id="KLS-mD-xRs"/>
+                                                <constraint firstItem="lhd-6J-fDz" firstAttribute="leading" secondItem="9Q7-mO-icB" secondAttribute="leading" constant="87" id="Npl-36-cik"/>
+                                                <constraint firstItem="lhd-6J-fDz" firstAttribute="top" secondItem="9Q7-mO-icB" secondAttribute="topMargin" id="cf1-cf-0T9"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
+                                        <connections>
+                                            <outlet property="userProfileImage" destination="rwp-LA-btJ" id="Twa-FE-P3n"/>
+                                            <outlet property="username" destination="lhd-6J-fDz" id="z1n-Kt-EsN"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -658,6 +677,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Explore" id="H6V-J1-cnI"/>
                     <connections>
+                        <outlet property="searchBar" destination="bh1-fF-lrI" id="Bnp-qf-anF"/>
                         <outlet property="searchDisplayController" destination="DkX-tg-AZ0" id="thh-Ct-NEl"/>
                         <outlet property="tableView" destination="a42-g2-zHe" id="0he-Rj-VlM"/>
                     </connections>

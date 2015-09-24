@@ -20,6 +20,11 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+     
+        
+        // Register costum cell
+//        let nib = UINib(nibName: "Main", bundle: nil)
+//        tableView.registerNib(nib, forCellReuseIdentifier: "cell")
         
     }
 
@@ -69,11 +74,26 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell")!
+        
+        var cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
         // Declare user object and set cell text to username
         var user:PFUser = users[indexPath.row] as! PFUser
-        cell.textLabel?.text = user["username"] as! String
+        cell.username.text = user["username"] as! String
+        
+        let profilePictureObject = user["profile_picture"] as? PFFile
+        
+        if(profilePictureObject != nil)
+        {
+            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                
+                if(imageData != nil)
+                {
+                    cell.userProfileImage.image = UIImage(data: imageData!)
+                }
+                
+            }
+        }
         
         return cell
     }
