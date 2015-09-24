@@ -9,6 +9,9 @@
 import UIKit
 import Parse
 
+//imageviews for whitepieces
+var whitePiecesImageView: Array<UIImageView> = []
+
 //coulors
 let white = "white"; let black = "black"
 
@@ -45,6 +48,7 @@ class GameInterface: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         loadNewGame()
         movePiece(white, piece: pawn, id: 1, toX: 100, toY: 0)
@@ -75,6 +79,7 @@ class GameInterface: UIViewController {
         UIView.animateWithDuration(5.0, animations: {
             //move piece
             self.pawnTest.frame.origin.x += CGFloat(toX)
+            whitePiecesImageView[0].frame.origin.y += CGFloat(100)
             
             
         })
@@ -111,11 +116,15 @@ class GameInterface: UIViewController {
     //func to load new game
     func loadNewGame() {
         
-        let image = UIImage(named: "whitePawn.png")
-        let imageView = UIImageView(image: image!)
         
-        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
+        let image = UIImage(named: "whitePawn.png")
+        let imageView = UIImageView(frame:CGRectMake(0, 0, 100, 100))
+        
+        imageView.image = image
+        imageView.userInteractionEnabled = true
         view.addSubview(imageView)
+        
+        whitePiecesImageView += [imageView]
     
     }
     
@@ -123,17 +132,19 @@ class GameInterface: UIViewController {
     
     // MARK: - Touches began! 👆
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
-        
         let touch = touches.first as UITouch!
         
-        if touch.view == pawnTest {
+        for var i = 0; i < whitePiecesImageView.count; i++ {
             
-            print("touches began!!")
+            if touch.view == whitePiecesImageView[i] {
+            
+                print("touches began!!")
 
                 movePiece(white, piece: pawn, id: 1, toX: 500, toY: 0)
         
             }
+            
+        }
         
         }
     
