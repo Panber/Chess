@@ -9,6 +9,18 @@
 import UIKit
 import Parse
 
+extension Int {
+//    var km: Double { return self * 1_000.0 }
+//    var m: Double { return self }
+//    var cm: Double { return self / 100.0 }
+//    var mm: Double { return self / 1_000.0 }
+//    var ft: Double { return self / 3.28084 }
+    var id: Int {
+        
+        return self}
+    
+}
+
 //imageviews for whitepieces
 var whitePiecesImageView: Array<UIImageView> = []
 
@@ -49,7 +61,6 @@ class GameInterface: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         loadNewGame()
         movePiece(white, piece: pawn, id: 1, toX: 100, toY: 0)
         // Do any additional setup after loading the view.
@@ -62,6 +73,18 @@ class GameInterface: UIViewController {
     //func to moev piece
     func movePiece(colour: String, piece:String,id: Int, toX:Int, toY:Int) {
         
+        func move (piece: UIImageView){
+            
+            UIView.animateWithDuration(5.0, animations: {
+                //move piece
+                piece.frame.origin.x = CGFloat(toX)
+                piece.frame.origin.y = CGFloat(toY)
+                
+                
+            })
+        
+        }
+        
         if colour == white {
             
             if piece == pawn {
@@ -72,17 +95,13 @@ class GameInterface: UIViewController {
                 pieceToMove = wPawn[id]
                 
                 print(wPawn[id])
+                
+    
             }
             
         }
         
-        UIView.animateWithDuration(5.0, animations: {
-            //move piece
-            self.pawnTest.frame.origin.x += CGFloat(toX)
-            whitePiecesImageView[0].frame.origin.y += CGFloat(100)
-            
-            
-        })
+
         
     }
   
@@ -128,6 +147,7 @@ class GameInterface: UIViewController {
     
     }
     
+
     
     
     // MARK: - Touches began! 👆
@@ -140,7 +160,7 @@ class GameInterface: UIViewController {
             
                 print("touches began!!")
 
-                movePiece(white, piece: pawn, id: 1, toX: 500, toY: 0)
+                movePiece(white, piece: pawn, id: 1, toX: Int(screenWidth/2) , toY: Int(screenHeight/2))
         
             }
             
