@@ -4,63 +4,63 @@
 
 import UIKit
 
+//coulors
+let white = "white"; let black = "black"
 
-var wPawn1 = ["pawn","1","white","1","2"]
-let rook = "rook"
-let knight = "knight"
-let bishop = "bishop"
-let queen = "queen"
-let king = "king"
+//pieces
+let pawn = "pawn"; let rook = "rook"; let knight = "knight";
+let bishop = "bishop"; let queen = "queen"; let king = "king"
 
-var wPawn = [wPawn1]
+//positions
+var positionX = 0; var positionY = 0
 
-var positionX = 0
-var positionY = 0
+//variable to find piecetomove
+var pieceToMove = [""]
+
+
+//remember that wpawn1 will not be changed if you change wPawn
+//piece-Ids for white pawns
+var wPawn1 = [white,pawn,"1","1","2"]
+var wPawn2 = [white,pawn,"2","2","2"]
+var wPawn3 = [white,pawn,"3","3","2"]
+var wPawn4 = [white,pawn,"4","4","2"]
+var wPawn5 = [white,pawn,"5","5","2"]
+var wPawn6 = [white,pawn,"6","6","2"]
+var wPawn7 = [white,pawn,"7","7","2"]
+var wPawn8 = [white,pawn,"8","8","2"]
+
+var wPawn = [wPawn1,wPawn2,wPawn3,wPawn4,wPawn5,wPawn6,wPawn7,wPawn8]
 
 
 //chek if move is possible
 func isMoveLegal() {
 
-
 }
 
-var id = "1"
-var toX = 9
-var toY = 8
 
-        
-        wPawn[0][3] = String(toX)
-        wPawn[0][4] = String(toY)
-        
-        wpawn1 
-        
-        wPawn
 
-wPawn1
+//remember that wpawn1 will not be changed if you change wPawn
 //func to moev piece
-func movePiece( piece:String,id: String, colour: String,toX:Int, toY:Int) {
+func movePiece(colour: String, piece:String,id: Int, toX:Int, toY:Int) {
     
     if colour == "white" {
         
         if piece == "pawn" {
             
-            for var i = -1; i <= wPawn.count; i++ {
-                if id == "\(i)" {
-                    
-                    wPawn[i][3] = String(toX)
-                    wPawn[i][4] = String(toY)
-                    
-                    wPawn1
-                    
-                }
+                    wPawn[id][3] = String(toX)
+                    wPawn[id][4] = String(toY)
             
+                    pieceToMove = wPawn[id]
+            
+                    print(wPawn[id])
             }
-        }
         
     }
 
     UIView.animateWithDuration(1.0, animations: {
         //move piece
+        
+        
         
     })
     
@@ -68,7 +68,6 @@ func movePiece( piece:String,id: String, colour: String,toX:Int, toY:Int) {
 
 wPawn
 
-movePiece("pawn", id: "1", colour: "white", toX: 6, toY: 0)
 //func to load previous positions adn information
 func updateBoardWithPositionsAndInformation() {
     
