@@ -89,6 +89,7 @@
 		8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8991B9A264F0097637E /* LaunchScreen.storyboard */; };
 		8FA5C8A61B9A264F0097637E /* Chess_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8A51B9A264F0097637E /* Chess_Tests.swift */; };
 		8FA5C8B11B9A264F0097637E /* Chess_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8B01B9A264F0097637E /* Chess_UITests.swift */; };
+		8FBD3A371BB498A200212314 /* GameInterFace2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD3A361BB498A200212314 /* GameInterFace2.swift */; settings = {ASSET_TAGS = (); }; };
 		8FBED2FC1BB1F35700CDAACC /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -198,6 +199,7 @@
 		8FA5C8AC1B9A264F0097637E /* Chess♔.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chess♔.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8B01B9A264F0097637E /* Chess_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chess_UITests.swift; sourceTree = "<group>"; };
 		8FA5C8B21B9A264F0097637E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8FBD3A361BB498A200212314 /* GameInterFace2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInterFace2.swift; sourceTree = "<group>"; };
 		8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -329,6 +331,7 @@
 				8FA5C8901B9A264F0097637E /* AppDelegate.swift */,
 				8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */,
 				8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */,
+				8FBD3A361BB498A200212314 /* GameInterFace2.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -494,7 +497,7 @@
 				TargetAttributes = {
 					8FA5C88C1B9A264F0097637E = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = G542NRN7XT;
+						DevelopmentTeam = V47FUAKS5S;
 					};
 					8FA5C8A01B9A264F0097637E = {
 						CreatedOnToolsVersion = 7.0;
@@ -612,6 +615,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F4A028C1B9A414D0084024A /* GameMenu.swift in Sources */,
+				8FBD3A371BB498A200212314 /* GameInterFace2.swift in Sources */,
 				8F4A028A1B9A40FF0084024A /* GameInterface.swift in Sources */,
 				8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */,
 				8F86392B1B9B01D00055608B /* ProfileMenu.swift in Sources */,
