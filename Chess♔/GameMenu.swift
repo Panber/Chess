@@ -9,6 +9,9 @@
 import UIKit
 import Parse
 
+var gameIDS = []
+var pressedCreateNewGame = NSUserDefaults()
+
 class GameMenu: UIViewController {
 
     
@@ -16,7 +19,7 @@ class GameMenu: UIViewController {
         super.viewDidLoad()
         
 
-        
+        //check this before launching!!!!!!
 //        //Checking if first launch
 //        let notFirstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
 //        if notFirstLaunch  {
@@ -31,26 +34,25 @@ class GameMenu: UIViewController {
 //            
 //        }
         
-        //remove this after a while
+        //...and remove this after a while
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
                     self.showViewController(vc as! UIViewController, sender: vc)
 
     
         // Do any additional setup after loading the view.
+      
+
     }
 
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func newGame(sender: AnyObject) {
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "created_New_Game")
     }
-    
+
 
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
         lightOrDarkMode()
-
-
     }
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
@@ -78,8 +80,7 @@ class GameMenu: UIViewController {
                 self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
                 self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
 
-
-                
+  
         
         }
     

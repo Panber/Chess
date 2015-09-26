@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A216g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -17,25 +17,26 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIz-z8-djf">
-                                <rect key="frame" x="0.0" y="285" width="46" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="2sG-Vo-YGM" kind="show" id="fQr-ej-kGh"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <animations/>
-                        <constraints>
-                            <constraint firstItem="KIz-z8-djf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VXi-CC-8sK"/>
-                            <constraint firstItem="KIz-z8-djf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="gjJ-ug-Mal"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Play" id="bfc-qg-EO6">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="vKz-xP-h12"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="TEw-RB-qu2"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="ysv-p2-HdS">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aKg-7t-OJF">
+                                <rect key="frame" x="447" y="7" width="133" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="19"/>
+                                <inset key="contentEdgeInsets" minX="50" minY="0.0" maxX="-50" maxY="0.0"/>
+                                <state key="normal" title="New">
+                                    <color key="titleColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="newGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ikF-Kq-AbN"/>
+                                    <segue destination="2sG-Vo-YGM" kind="show" id="X9F-2B-LMQ"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="Z2e-Fv-mEq" kind="presentation" id="aXo-hn-lFb"/>
@@ -171,6 +172,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clack and white board with half boarder copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="9fb-On-dtq">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7t-ac-5Wg">
                                 <rect key="frame" x="277" y="513" width="46" height="30"/>
                                 <animations/>
@@ -183,7 +188,7 @@
                                 <rect key="frame" x="277" y="72" width="46" height="30"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="2mS-Z5-o9p"/>
+                                    <constraint firstAttribute="width" constant="46" id="rmt-Bu-LTc"/>
                                 </constraints>
                                 <state key="normal" title="Load"/>
                                 <connections>
@@ -195,11 +200,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="iyC-cT-A3R" firstAttribute="top" secondItem="h7t-ac-5Wg" secondAttribute="bottom" constant="8" symbolic="YES" id="7wx-dy-gdp"/>
-                            <constraint firstItem="ftm-aB-KqO" firstAttribute="trailing" secondItem="h7t-ac-5Wg" secondAttribute="trailing" id="GEr-mI-AK0"/>
-                            <constraint firstItem="ftm-aB-KqO" firstAttribute="leading" secondItem="h7t-ac-5Wg" secondAttribute="leading" id="GxJ-W2-MdB"/>
-                            <constraint firstItem="h7t-ac-5Wg" firstAttribute="centerX" secondItem="LlF-cf-qyW" secondAttribute="centerX" id="kaO-Ue-5hc"/>
-                            <constraint firstItem="ftm-aB-KqO" firstAttribute="top" secondItem="5T0-o3-6bD" secondAttribute="bottom" constant="8" symbolic="YES" id="mwS-2f-UMU"/>
+                            <constraint firstAttribute="trailing" secondItem="9fb-On-dtq" secondAttribute="trailing" id="1uB-Th-neL"/>
+                            <constraint firstItem="ftm-aB-KqO" firstAttribute="top" secondItem="5T0-o3-6bD" secondAttribute="bottom" constant="8" symbolic="YES" id="5N0-lg-xGI"/>
+                            <constraint firstItem="h7t-ac-5Wg" firstAttribute="trailing" secondItem="ftm-aB-KqO" secondAttribute="trailing" id="C49-bg-keN"/>
+                            <constraint firstItem="9fb-On-dtq" firstAttribute="top" secondItem="LlF-cf-qyW" secondAttribute="top" id="KJW-Ed-GhA"/>
+                            <constraint firstItem="iyC-cT-A3R" firstAttribute="top" secondItem="h7t-ac-5Wg" secondAttribute="bottom" constant="8" symbolic="YES" id="TNz-c8-dxw"/>
+                            <constraint firstItem="h7t-ac-5Wg" firstAttribute="leading" secondItem="ftm-aB-KqO" secondAttribute="leading" id="VIi-kv-ECa"/>
+                            <constraint firstItem="h7t-ac-5Wg" firstAttribute="centerX" secondItem="9fb-On-dtq" secondAttribute="centerX" id="WvK-fM-NnA"/>
+                            <constraint firstItem="9fb-On-dtq" firstAttribute="leading" secondItem="LlF-cf-qyW" secondAttribute="leading" id="ZM8-sk-i7r"/>
+                            <constraint firstAttribute="bottom" secondItem="9fb-On-dtq" secondAttribute="bottom" id="m6G-C8-Bho"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="bfG-SZ-G87" appends="YES" id="We8-wf-ka8"/>
@@ -1044,6 +1053,7 @@
         <image name="Data.png" width="30" height="30"/>
         <image name="Friends.png" width="30" height="30"/>
         <image name="LightModePreview.png" width="1472" height="1490"/>
+        <image name="clack and white board with half boarder copy.png" width="2000" height="2096"/>
         <image name="profileTabBarIcon.png" width="30" height="30"/>
     </resources>
 </document>
