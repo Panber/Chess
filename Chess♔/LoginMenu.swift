@@ -343,7 +343,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             
             if profileImageData != nil {
                 let profileImageFile = PFFile(data: profileImageData!)
-                myUser.setObject(profileImageFile, forKey: "profile_picture")
+                myUser.setObject(profileImageFile, forKey: "profile picture")
                 myUser.saveInBackground()
                 print("setting profile pic was successfull")
             }

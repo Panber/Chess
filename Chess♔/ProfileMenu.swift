@@ -58,8 +58,10 @@ class ProfileMenu: UITableViewController {
         NSUserDefaults.standardUserDefaults().removeObjectForKey("user_name")
         NSUserDefaults.standardUserDefaults().synchronize()
         
+        
         PFUser.logOutInBackgroundWithBlock { (error:NSError?) -> Void in
         
+            PFUser.logOut()
             let mainStoryBoard:UIStoryboard = UIStoryboard(name:"Main", bundle:nil)
             
             let signInPage:LoginMenu = mainStoryBoard.instantiateViewControllerWithIdentifier("LoginMenu") as! LoginMenu
@@ -79,9 +81,9 @@ class ProfileMenu: UITableViewController {
         if(profilePictureObject != nil)
         {
             profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                
-                if(imageData != nil)
-                {
+
+                    dispatch_async(dispatch_get_main_queue()) {
+                    
                     self.userProfileImage.image = UIImage(data: imageData!)
                 }
                 
