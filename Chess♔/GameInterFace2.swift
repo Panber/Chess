@@ -85,6 +85,9 @@ var wPieces_ids = [wPawn1_id,wPawn2_id,wPawn3_id,wPawn4_id,wPawn5_id,wPawn6_id,w
 
 var ojId = ""
 
+let gameID = NSUserDefaults.standardUserDefaults().stringArrayForKey("game_with")
+
+
 import UIKit
 import Parse
 
@@ -102,7 +105,7 @@ class GameInterFace2: UIViewController {
         else if NSUserDefaults.standardUserDefaults().boolForKey("created_New_Game") == false {
             retrieveBoardFromCloud()
             print("creted new game = false")
-
+            
         }
         
     }
@@ -110,21 +113,12 @@ class GameInterFace2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        //If EXISTING GAME, then load all positions of pieces from the cloud
-        //retrieveBoardFromCloud()
-
-        
-        print("the oj is\(boardState.objectId)")
-        print(boardState.objectId)
-        print(boardState.objectForKey("wPawn1Y"))
-        
     }
     
     //func to load new game
     func loadNewGame() {
         
-        //setting boatd state
+        //setting board state
         for var i = 0; i < wPiecesX.count; i++ {
             boardState[wPiecesX[i]] = wPiecesXint[i]
             boardState[wPiecesY[i]] = wPiecesYint[i]
@@ -140,10 +134,12 @@ class GameInterFace2: UIViewController {
                         }
                     )}
              self.saveBoardToCloud()
+                
+                NSUserDefaults.standardUserDefaults().setObject(ojId, forKey: "game_with_")
             }
         }
         
-        
+        //Add pieces to view
         for var i = 0; i < wPieces.count; i++ {
             
             wPieces[i].userInteractionEnabled = true
@@ -186,13 +182,14 @@ class GameInterFace2: UIViewController {
                 view.addSubview(_view)
             }
         }
-    
     }
 
 
     //retrieve board from cloud
     func retrieveBoardFromCloud() {
-        var query = PFQuery(className:"BoardState")
+        
+        let query = PFQuery(className:"BoardState")
+        
         query.getObjectInBackgroundWithId("aqmUTFRLSL") {
             (boardState: PFObject?, error: NSError?) -> Void in
             if error == nil && boardState != nil {
@@ -200,8 +197,8 @@ class GameInterFace2: UIViewController {
                 
                 for var i = 0; i < wPieces.count; i++ {
                     UIView.animateWithDuration(1, animations: {
-                wPieces[i].frame.origin.x = CGFloat((boardState?.objectForKey(wPiecesX[i]))! as! NSNumber) * square
-                wPieces[i].frame.origin.y = CGFloat((boardState?.objectForKey(wPiecesY[i]))! as! NSNumber) * square + (screenHeight/2)
+                        wPieces[i].frame.origin.x = CGFloat((boardState?.objectForKey(wPiecesX[i]))! as! NSNumber) * square
+                        wPieces[i].frame.origin.y = CGFloat((boardState?.objectForKey(wPiecesY[i]))! as! NSNumber) * square + (screenHeight/2)
                 }
                 )}
                 
@@ -209,13 +206,13 @@ class GameInterFace2: UIViewController {
                 print(error)
             }
         }
-        
-    
     }
     
     //save existing board to cloud
     func saveBoardToCloud() {
-        var query = PFQuery(className:"BoardState")
+        
+        let query = PFQuery(className:"BoardState")
+        
         query.getObjectInBackgroundWithId("aqmUTFRLSL") {
             (boardState: PFObject?, error: NSError?) -> Void in
             
@@ -252,8 +249,6 @@ class GameInterFace2: UIViewController {
                         boardState[wPiecesX[i]] = 7
                     }
 
-                    var p = 0
-                    for var o = 3; o > -4; o--, p++ {}
                     if wPieces[i].frame.origin.y == _1 {
                         boardState[wPiecesY[i]] = 3
                     }
@@ -279,14 +274,11 @@ class GameInterFace2: UIViewController {
                         boardState[wPiecesY[i]] = -4
                     }
                     
-                    
                 }
                 
                 boardState.saveInBackground()
-                
             }
         }
-    
     }
     
     //move piece
@@ -299,7 +291,6 @@ class GameInterFace2: UIViewController {
             }, completion: {Void in
         
         })
-    
     }
     
     // MARK: - Touches began! 👆
@@ -325,13 +316,10 @@ class GameInterFace2: UIViewController {
         saveBoardToCloud()
     }
     
-    
-    
     // MARK: - BLACK OR WHITE
     //func to check if dark or light mode should be enabled, keep this at the bottom
     func lightOrDarkMode() {
         if darkMode == true {
-            
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
             self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
@@ -341,7 +329,6 @@ class GameInterFace2: UIViewController {
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
             self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
             self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-            
             
         }
         else if darkMode == false {
@@ -353,10 +340,7 @@ class GameInterFace2: UIViewController {
             self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
             self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
 
-            
         }
-        
-        
     }
 
 }
