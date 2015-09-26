@@ -9,14 +9,10 @@
 import UIKit
 import Parse
 
-class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
+class FriendsMenu: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
     
     // Array for users that are being searched for
     var users = NSMutableArray()
-    var filteredUsers = NSMutableArray()
-    
-    
-    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,41 +57,28 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
     
     // MARK - Table View
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tableView == self.searchDisplayController?.searchResultsTableView {
-            
-            return self.filteredUsers.count
-        }
-        else {
-            return users.count
-        }
+        return users.count
+
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
         var user:PFUser = users[indexPath.row] as! PFUser
         
-        if (tableView == self.searchDisplayController?.searchResultsTableView) {
-            user = self.filteredUsers[indexPath.row] as! PFUser
-        }
-        else {
-            user = self.users[indexPath.row] as! PFUser
-        }
-        
         cell.username.text = user["username"] as! String
         
-        let profilePictureObject = user["profile_picture"] as? PFFile
+        let profilePictureObject = user.objectForKey("profile_picture") as! PFFile
         
-        if(profilePictureObject != nil)
-        {
-            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+       
+            profilePictureObject.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
                 
                 if(imageData != nil)
                 {
@@ -103,43 +86,42 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
                 }
                 
             }
-        }
+
         
         return cell
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.characters.count > 0 {
+            searchUsers(searchText)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        var user:PFUser = users[indexPath.row] as! PFUser
-        
-        if tableView == self.searchDisplayController?.searchResultsTableView {
-            user = self.filteredUsers[indexPath.row] as! PFUser
-        }
-        else {
-            user = self.users[indexPath.row] as! PFUser
-        }
-        
-        
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60
     }
     
     // MARK: - Search
     
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
-        
-        self.searchUsers(searchString!)
-        
-        return true
-    }
+//    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
+//        
+//        
+//        return true
+//    }
     
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-        
-        self.searchUsers((self.searchDisplayController?.searchBar.text)!)
-        
-        return true
-    }
+//    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+//        
+//        self.searchUsers((self.searchDisplayController?.searchBar.text)!)
+//        
+//        return true
+//    }
     
     
     override func viewWillAppear(animated: Bool) {
@@ -171,13 +153,10 @@ class FriendsMenu: UIViewController, UITableViewDataSource, UITableViewDelegate,
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
             self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
-            
-            
-            
+
             
         }
-        
-        
+
     }
     
 }
