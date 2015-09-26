@@ -56,12 +56,12 @@ class ProfileMenu: UITableViewController {
     @IBAction func logOut(sender: AnyObject) {
         
         NSUserDefaults.standardUserDefaults().removeObjectForKey("user_name")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("profile_picture")
         NSUserDefaults.standardUserDefaults().synchronize()
         
         
         PFUser.logOutInBackgroundWithBlock { (error:NSError?) -> Void in
         
-            PFUser.logOut()
             let mainStoryBoard:UIStoryboard = UIStoryboard(name:"Main", bundle:nil)
             
             let signInPage:LoginMenu = mainStoryBoard.instantiateViewControllerWithIdentifier("LoginMenu") as! LoginMenu
