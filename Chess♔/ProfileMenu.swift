@@ -73,7 +73,8 @@ class ProfileMenu: UITableViewController {
     
     func loadUserDetails() {
         
-        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as? PFFile
+        let user = PFUser.currentUser()
+        let profilePictureObject = user?.objectForKey("profile picture")
         
         if(profilePictureObject != nil)
         {
