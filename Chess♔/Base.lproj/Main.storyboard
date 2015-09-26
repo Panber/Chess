@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A216g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -170,9 +170,37 @@
                     <view key="view" contentMode="scaleToFill" id="LlF-cf-qyW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7t-ac-5Wg">
+                                <rect key="frame" x="277" y="513" width="46" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="submitMove:" destination="2sG-Vo-YGM" eventType="touchUpInside" id="SYj-Js-m1P"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftm-aB-KqO">
+                                <rect key="frame" x="277" y="72" width="46" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="2mS-Z5-o9p"/>
+                                </constraints>
+                                <state key="normal" title="Load"/>
+                                <connections>
+                                    <action selector="loadBoard:" destination="2sG-Vo-YGM" eventType="touchUpInside" id="cfZ-T9-lry"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="iyC-cT-A3R" firstAttribute="top" secondItem="h7t-ac-5Wg" secondAttribute="bottom" constant="8" symbolic="YES" id="7wx-dy-gdp"/>
+                            <constraint firstItem="ftm-aB-KqO" firstAttribute="trailing" secondItem="h7t-ac-5Wg" secondAttribute="trailing" id="GEr-mI-AK0"/>
+                            <constraint firstItem="ftm-aB-KqO" firstAttribute="leading" secondItem="h7t-ac-5Wg" secondAttribute="leading" id="GxJ-W2-MdB"/>
+                            <constraint firstItem="h7t-ac-5Wg" firstAttribute="centerX" secondItem="LlF-cf-qyW" secondAttribute="centerX" id="kaO-Ue-5hc"/>
+                            <constraint firstItem="ftm-aB-KqO" firstAttribute="top" secondItem="5T0-o3-6bD" secondAttribute="bottom" constant="8" symbolic="YES" id="mwS-2f-UMU"/>
+                        </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="bfG-SZ-G87" appends="YES" id="We8-wf-ka8"/>
                         </connections>
