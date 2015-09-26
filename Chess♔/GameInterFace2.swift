@@ -6,6 +6,7 @@
 //  Copyright © 2015 Panber. All rights reserved.
 //
 
+var boardState = PFObject(className: "BoardState")
 
 
 var square = sqrt(screenWidth * screenWidth / 64)
@@ -20,6 +21,8 @@ var f = square * 5
 var g = square * 6
 var h = square * 7
 
+var xCoordinates = [a,b,c,d,e,f,g,h]
+
 //y-axis
 let _1 = screenHeight/2 + 3 * square
 let _2 = screenHeight/2 + 2 * square
@@ -30,6 +33,7 @@ let _6 = screenHeight/2 - 2 * square
 let _7 = screenHeight/2 - 3 * square
 let _8 = screenHeight/2 - 4 * square
 
+var yCoordinates = [_1,_2,_3,_4,_5,_6,_7,_8]
 
 //All pieces
 var wPawn1 = UIImageView(frame: CGRectMake(a, _2, square, square))
@@ -50,6 +54,13 @@ var wQueen1 = UIImageView(frame: CGRectMake(d, _1, square, square))
 var wKing1 = UIImageView(frame: CGRectMake(e, _1, square, square))
 
 var wPieces = [wPawn1,wPawn2,wPawn3,wPawn4,wPawn5,wPawn6,wPawn7,wPawn8,wRook1,wRook2,wKnight1,wKnight2,wBishop1,wBishop2,wQueen1,wKing1]
+
+var wPiecesX = ["wPawn1X","wPawn2X","wPawn3X","wPawn4X","wPawn5X","wPawn6X","wPawn7X","wPawn8X","wRook1X","wRook2X","wKnight1X","wKnight2X","wBishop1X","wBishop2X","wQueen1X","wKing1X"]
+var wPiecesY = ["wPawn1Y","wPawn2Y","wPawn3Y","wPawn4Y","wPawn5Y","wPawn6Y","wPawn7Y","wPawn8Y","wRook1Y","wRook2Y","wKnight1Y","wKnight2Y","wBishop1Y","wBishop2Y","wQueen1Y","wKing1Y"]
+
+//variables so set up positions from cloud. needed to times with variable
+var wPiecesXint = [0,1,2,3,4,5,6,7,0,7,1,6,2,5,3,4]
+var wPiecesYint = [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1]
 
 
 //all Pieces IDS
@@ -82,12 +93,29 @@ class GameInterFace2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
         
         //If EXISTING GAME, then load all positions of pieces from the cloud
-        var boardState = PFObject(className: "BoardState4")
-        boardState["wPawn1X"] = 1
-        boardState["wPawn1Y"] = screenHeight/2 + 2 * square
-        boardState["pieceID"] = wPawn1_id
+        //retrieveBoardFromCloud()
+
+        
+        print("the oj is\(boardState.objectId)")
+        print(boardState.objectId)
+        print(boardState.objectForKey("wPawn1Y"))
+        
+        //else is NEW GAME, then load all pieces to view and do additional setup
+        loadNewGame()
+
+    }
+    
+    //func to load new game
+    func loadNewGame() {
+        
+        for var i = 0; i < wPiecesX.count; i++ {
+            boardState[wPiecesX[i]] = wPiecesXint[i]
+            boardState[wPiecesY[i]] = wPiecesYint[i]
+            boardState["pieceID"] = wPieces_ids[i]
+        }
         boardState.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
                 ojId = String(boardState.objectId)
@@ -95,28 +123,7 @@ class GameInterFace2: UIViewController {
                 
             }
         }
-
         
-        var query = PFQuery(className:"BoardState4")
-        query.getObjectInBackgroundWithId("5IRfGX02gR") {
-            (boardState: PFObject?, error: NSError?) -> Void in
-            if error == nil && boardState != nil {
-                print("the boardstate is \(boardState)")
-                
-                wPawn1.frame.origin.x = CGFloat((boardState?.objectForKey("wPawn1X"))! as! NSNumber)
-                
-            } else {
-                print(error)
-            }
-        }
-            
-        
-    
-        print("the oj is\(boardState.objectId)")
-        print(boardState.objectId)
-        print(boardState.objectForKey("wPawn1Y"))
-        
-        //else is NEW GAME, then load all pieces to view and do additional setup
         for var i = 0; i < wPieces.count; i++ {
             
             wPieces[i].userInteractionEnabled = true
@@ -159,39 +166,135 @@ class GameInterFace2: UIViewController {
                 view.addSubview(_view)
             }
         }
-
+    
     }
 
-        // MARK: - Touches began! 👆
+
+    //retrieve board from cloud
+    func retrieveBoardFromCloud() {
+        var query = PFQuery(className:"BoardState")
+        query.getObjectInBackgroundWithId("aqmUTFRLSL") {
+            (boardState: PFObject?, error: NSError?) -> Void in
+            if error == nil && boardState != nil {
+                print("the boardstate is \(boardState)")
+                
+                for var i = 0; i < wPieces.count; i++ {
+                wPieces[i].frame.origin.x = CGFloat((boardState?.objectForKey(wPiecesX[i]))! as! NSNumber) * square
+                wPieces[i].frame.origin.y = CGFloat((boardState?.objectForKey(wPiecesY[i]))! as! NSNumber) * square + (screenHeight/2)
+                }
+                
+            } else {
+                print(error)
+            }
+        }
+        
+    
+    }
+    
+    //save existing board to cloud
+    func saveBoardToCloud() {
+        var query = PFQuery(className:"BoardState")
+        query.getObjectInBackgroundWithId("aqmUTFRLSL") {
+            (boardState: PFObject?, error: NSError?) -> Void in
+            if error != nil {
+                print(error)
+            } else if let boardState = boardState {
+                
+                for var i = 0; i < wPiecesX.count; i++ {
+                    
+                    if  wPieces[i].frame.origin.x == a  {
+                        boardState[wPiecesX[i]] = 0
+                    }
+                    else if  wPieces[i].frame.origin.x == b  {
+                        boardState[wPiecesX[i]] = 1
+                    }
+                    else if  wPieces[i].frame.origin.x == c  {
+                        boardState[wPiecesX[i]] = 2
+                    }
+                    else if  wPieces[i].frame.origin.x == d  {
+                        boardState[wPiecesX[i]] = 3
+                    }
+                    else if  wPieces[i].frame.origin.x == e  {
+                        boardState[wPiecesX[i]] = 4
+                    }
+                    else if  wPieces[i].frame.origin.x == f  {
+                        boardState[wPiecesX[i]] = 5
+                    }
+                    else if  wPieces[i].frame.origin.x == g  {
+                        boardState[wPiecesX[i]] = 6
+                    }
+                    else if  wPieces[i].frame.origin.x == h  {
+                        boardState[wPiecesX[i]] = 7
+                    }
+
+
+                    
+                    if wPieces[i].frame.origin.y == _1 {
+                        boardState[wPiecesY[i]] = 3
+                    }
+                    else if wPieces[i].frame.origin.y == _2 {
+                        boardState[wPiecesY[i]] = 2
+                    }
+                    else if wPieces[i].frame.origin.y == _3 {
+                        boardState[wPiecesY[i]] = 1
+                    }
+                    else if wPieces[i].frame.origin.y == _4 {
+                        boardState[wPiecesY[i]] = 0
+                    }
+                    else if wPieces[i].frame.origin.y == _5 {
+                        boardState[wPiecesY[i]] = -1
+                    }
+                    else if wPieces[i].frame.origin.y == _6 {
+                        boardState[wPiecesY[i]] = -2
+                    }
+                    else if wPieces[i].frame.origin.y == _7 {
+                        boardState[wPiecesY[i]] = -3
+                    }
+                    else if wPieces[i].frame.origin.y == _8 {
+                        boardState[wPiecesY[i]] = -4
+                    }
+                    
+                    
+                }
+                
+                boardState.saveInBackground()
+                
+            }
+        }
+    
+    }
+    
+    //move piece
+    func movePiece(piece: UIImageView) {
+        
+        UIView.animateWithDuration(1.0, animations: {
+                piece.frame.origin.x = h
+                piece.frame.origin.y = _8
+            
+            }, completion: {Void in
+        
+        })
+    
+    }
+    
+    // MARK: - Touches began! 👆
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first as UITouch!
-    
+        
         for var i = 0; i < wPieces.count; i++ {
-    
+            if touch.view == wPawn8 {
+            saveBoardToCloud()
+            }
+            if touch.view == wRook2 {
+            retrieveBoardFromCloud()
+            }
             if touch.view == wPieces[i] {
                 
                 print("touches began!!")
                 movePiece(wPieces[i])
                 return
             }
-            print("2")
-    
         }
-        print("3")
-
-        
-        }
-    
-    func movePiece(piece: UIImageView) {
-        
-        UIView.animateWithDuration(1.0, animations: {
-                piece.frame.origin.x = CGFloat(100)
-                piece.frame.origin.y =  CGFloat(200)
-            
-            }, completion: {Void in
-        
-        })
-    
     }
 
 }
