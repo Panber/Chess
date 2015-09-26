@@ -227,8 +227,8 @@ class GameInterFace2: UIViewController {
                         boardState[wPiecesX[i]] = 7
                     }
 
-
-                    
+                    var p = 0
+                    for var o = 3; o > -4; o--, p++ {}
                     if wPieces[i].frame.origin.y == _1 {
                         boardState[wPiecesY[i]] = 3
                     }
@@ -282,12 +282,7 @@ class GameInterFace2: UIViewController {
         let touch = touches.first as UITouch!
         
         for var i = 0; i < wPieces.count; i++ {
-            if touch.view == wPawn8 {
-            saveBoardToCloud()
-            }
-            if touch.view == wRook2 {
-            retrieveBoardFromCloud()
-            }
+          
             if touch.view == wPieces[i] {
                 
                 print("touches began!!")
@@ -295,6 +290,14 @@ class GameInterFace2: UIViewController {
                 return
             }
         }
+    }
+    
+    @IBAction func loadBoard(sender: AnyObject) {
+        retrieveBoardFromCloud()
+    }
+    
+    @IBAction func submitMove(sender: AnyObject) {
+        saveBoardToCloud()
     }
 
 }
