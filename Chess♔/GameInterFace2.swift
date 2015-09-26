@@ -114,7 +114,6 @@ class GameInterFace2: UIViewController {
         for var i = 0; i < wPiecesX.count; i++ {
             boardState[wPiecesX[i]] = wPiecesXint[i]
             boardState[wPiecesY[i]] = wPiecesYint[i]
-            boardState["pieceID"] = wPieces_ids[i]
         }
         boardState.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
@@ -196,9 +195,12 @@ class GameInterFace2: UIViewController {
         var query = PFQuery(className:"BoardState")
         query.getObjectInBackgroundWithId("aqmUTFRLSL") {
             (boardState: PFObject?, error: NSError?) -> Void in
+            
             if error != nil {
                 print(error)
-            } else if let boardState = boardState {
+            }
+            
+            else if let boardState = boardState {
                 
                 for var i = 0; i < wPiecesX.count; i++ {
                     
