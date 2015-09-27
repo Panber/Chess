@@ -12,7 +12,9 @@ import Parse
 var gameIDS = []
 var pressedCreateNewGame = NSUserDefaults()
 
-class GameMenu: UIViewController {
+var scrollView: UIScrollView!
+
+class GameMenu: UIViewController, UIScrollViewDelegate {
 
     
     override func viewDidLoad() {
@@ -42,6 +44,14 @@ class GameMenu: UIViewController {
         // Do any additional setup after loading the view.
       
 
+        scrollView = UIScrollView(frame: view.bounds)
+        scrollView.contentSize = view.bounds.size
+        scrollView.frame.size.height = 2000
+        scrollView.showsHorizontalScrollIndicator = true
+        scrollView.userInteractionEnabled = true
+        scrollView.delegate = self
+        scrollView.scrollEnabled = true
+        view.addSubview(scrollView)
     }
 
     
@@ -53,27 +63,88 @@ class GameMenu: UIViewController {
 
     func newGameSetup() {
         
-        var contentView: UIView = UIView(frame: CGRectMake(10, 100, screenWidth - 20 , screenHeight/7))
+        
+        //creating the view
+        var shadowView: UIView = UIView(frame: CGRectMake(10, 75, screenWidth - 20 , screenHeight/7))
+        shadowView.layer.cornerRadius = cornerRadius
+        shadowView.backgroundColor = UIColor.whiteColor()
+        shadowView.layer.shadowColor = UIColor.blackColor().CGColor
+        shadowView.layer.shadowOpacity = 0.1
+        shadowView.layer.shadowRadius = cornerRadius
+        shadowView.layer.shadowOffset = CGSizeZero
+        scrollView.addSubview(shadowView)
+        
+        //creating the view
+        var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
         contentView.layer.cornerRadius = cornerRadius
         contentView.backgroundColor = UIColor.whiteColor()
         contentView.layer.shadowColor = UIColor.blackColor().CGColor
         contentView.layer.shadowOpacity = 0.1
         contentView.layer.shadowRadius = cornerRadius
         contentView.layer.shadowOffset = CGSizeZero
-        view.addSubview(contentView)
+        contentView.clipsToBounds = true
+        shadowView.addSubview(contentView)
+
+        //setting up bc image of profile pic
+        let profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.height, contentView.frame.size.height))
+        profilePicBlur.image = UIImage(named:"JBpp.jpg")
+        profilePicBlur.clipsToBounds = true
+        contentView.addSubview(profilePicBlur)
         
+        //bluring bc of profile pic
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+        visualEffectView.frame = profilePicBlur.bounds
+        profilePicBlur.addSubview(visualEffectView)
+
+        //adding the profile pic
         let profilePic = UIImageView(frame: CGRectMake(7.5, 7.5, (contentView.frame.size.height) - 15, (contentView.frame.size.height) - 15))
-        profilePic.image = UIImage(named:"chessIconRounded.png")
         profilePic.layer.cornerRadius = profilePic.frame.size.height / 2
+        profilePic.clipsToBounds = true
         profilePic.layer.borderColor = UIColor.whiteColor().CGColor
         profilePic.layer.borderWidth = 3
+        profilePic.image = UIImage(named:"JBpp.jpg")
+        profilePic.contentMode = UIViewContentMode.ScaleAspectFill
         contentView.addSubview(profilePic)
         
+        //adding username to view
+        let label = UILabel(frame: CGRectMake(profilePicBlur.frame.size.width + 20, contentView.frame.size.height/8, 200, 40))
+        label.textAlignment = NSTextAlignment.Left
+        label.text = "johannesberge"
+        label.font = UIFont(name: "Didot-Bold", size: 30)
+        contentView.addSubview(label)
         
+        
+        //adding updated since label
+        let label2 = UILabel(frame: CGRectMake(profilePicBlur.frame.size.width + 20, contentView.frame.size.height - contentView.frame.size.height/2.4, 150, 20))
+        label2.textAlignment = NSTextAlignment.Left
+        label2.text = "Last move: 8 hours ago"
+        label2.font = UIFont(name: "Didot-Italic", size: 10)
+        contentView.addSubview(label2)
+        
+        //adding time left label
+        let label3 = UILabel(frame: CGRectMake(profilePicBlur.frame.size.width + 20, contentView.frame.size.height - contentView.frame.size.height/3.2, 150, 20))
+        label3.textAlignment = NSTextAlignment.Left
+        label3.text = "Time left: 2 hours"
+        label3.font = UIFont(name: "Didot-Italic", size: 10)
+        contentView.addSubview(label3)
     
+        //adding moveindicator
+        let moveindicator = UILabel(frame: CGRectMake(contentView.frame.size.width - 10, 0, 10, contentView.frame.size.height))
+        moveindicator.backgroundColor = UIColorFromRGB(0x02C223)
+        contentView.addSubview(moveindicator)
     
     }
-
+    
+    //func to find hexadecimal color value
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
         lightOrDarkMode()
