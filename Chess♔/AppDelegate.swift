@@ -42,8 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
             
         }
         
-        
-        
         return true
     }
 
