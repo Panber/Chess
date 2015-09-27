@@ -43,10 +43,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
     
         // Do any additional setup after loading the view.
       
-
+        view.frame.size.height = 2000
         scrollView = UIScrollView(frame: view.bounds)
         scrollView.contentSize = view.bounds.size
-        scrollView.frame.size.height = 2000
+        scrollView.frame.size.height = screenHeight
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.userInteractionEnabled = true
         scrollView.delegate = self
@@ -59,23 +59,26 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "created_New_Game")
         
         newGameSetup()
+     //   newGameSetup("", ProfilePic: UIImage(named: "")!, Rating: "", UpdatedAt: "", TimeLeft: "")
+
     }
 
     func newGameSetup() {
         
         
-        //creating the view
-        var shadowView: UIView = UIView(frame: CGRectMake(10, 75, screenWidth - 20 , screenHeight/7))
-        shadowView.layer.cornerRadius = cornerRadius
-        shadowView.backgroundColor = UIColor.whiteColor()
-        shadowView.layer.shadowColor = UIColor.blackColor().CGColor
-        shadowView.layer.shadowOpacity = 0.1
-        shadowView.layer.shadowRadius = cornerRadius
-        shadowView.layer.shadowOffset = CGSizeZero
-        scrollView.addSubview(shadowView)
+//        //creating the view
+//        var shadowView: UIView = UIView(frame: CGRectMake(10, 75, screenWidth - 20 , screenHeight/7))
+//        shadowView.layer.cornerRadius = cornerRadius
+//        shadowView.backgroundColor = UIColor.whiteColor()
+//        shadowView.layer.shadowColor = UIColor.blackColor().CGColor
+//        shadowView.layer.shadowOpacity = 0.1
+//        shadowView.layer.shadowRadius = cornerRadius
+//        shadowView.layer.shadowOffset = CGSizeZero
+//        scrollView.addSubview(shadowView)
         
         //creating the view
-        var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
+      //  var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
+        var contentView: UIView = UIView(frame: CGRectMake(10, 75, screenWidth - 20 , screenHeight/7))
         contentView.layer.cornerRadius = cornerRadius
         contentView.backgroundColor = UIColor.whiteColor()
         contentView.layer.shadowColor = UIColor.blackColor().CGColor
@@ -83,7 +86,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
         contentView.layer.shadowRadius = cornerRadius
         contentView.layer.shadowOffset = CGSizeZero
         contentView.clipsToBounds = true
-        shadowView.addSubview(contentView)
+        scrollView.addSubview(contentView)
 
         //setting up bc image of profile pic
         let profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.height, contentView.frame.size.height))
@@ -134,6 +137,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
         contentView.addSubview(moveindicator)
     
     }
+    
+    //function to update the ui of things like time left etc...
+    func updateGameSetup(User: String, ProfilePic: UIImage, Rating: String, UpdatedAt: String, TimeLeft: String) {
+    
+    }
+
+    
     
     //func to find hexadecimal color value
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {

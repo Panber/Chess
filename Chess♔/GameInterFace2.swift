@@ -123,6 +123,8 @@ class GameInterFace2: UIViewController {
             boardState[wPiecesX[i]] = wPiecesXint[i]
             boardState[wPiecesY[i]] = wPiecesYint[i]
         }
+        boardState["GameWith"] = (PFUser.currentUser()?.username)! + ""
+        
         boardState.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
                 ojId = String(boardState.objectId)
@@ -188,39 +190,72 @@ class GameInterFace2: UIViewController {
     //retrieve board from cloud
     func retrieveBoardFromCloud() {
         
-        let query = PFQuery(className:"BoardState")
         
-        query.getObjectInBackgroundWithId("aqmUTFRLSL") {
-            (boardState: PFObject?, error: NSError?) -> Void in
+        let query = PFQuery(className:"BoardState")
+        query.whereKey("GameWith", equalTo:"b3rge")
+
+        query.findObjectsInBackgroundWithBlock {
+            (boardState: [AnyObject]?, error: NSError?) -> Void in
+            
             if error == nil && boardState != nil {
                 print("the boardstate is \(boardState)")
                 
-                for var i = 0; i < wPieces.count; i++ {
-                    UIView.animateWithDuration(1, animations: {
-                        wPieces[i].frame.origin.x = CGFloat((boardState?.objectForKey(wPiecesX[i]))! as! NSNumber) * square
-                        wPieces[i].frame.origin.y = CGFloat((boardState?.objectForKey(wPiecesY[i]))! as! NSNumber) * square + (screenHeight/2)
+                if let boardState = boardState as? [PFObject] {
+                    for boardState in boardState {
+                        
+                        for var i = 0; i < wPieces.count; i++ {
+                            UIView.animateWithDuration(1, animations: {
+                                wPieces[i].frame.origin.x = CGFloat((boardState.objectForKey(wPiecesX[i]))! as! NSNumber) * square
+                                wPieces[i].frame.origin.y = CGFloat((boardState.objectForKey(wPiecesY[i]))! as! NSNumber) * square + (screenHeight/2)
+                                
+                                }
+                            )}
+                        
+                    }
                 }
-                )}
+                
+
                 
             } else {
                 print(error)
             }
         }
+        
+//        let query = PFQuery(className:"BoardState")
+//        
+//        query.getObjectInBackgroundWithId("aqmUTFRLSL") {
+//            (boardState: PFObject?, error: NSError?) -> Void in
+//            if error == nil && boardState != nil {
+//                print("the boardstate is \(boardState)")
+//                
+//                for var i = 0; i < wPieces.count; i++ {
+//                    UIView.animateWithDuration(1, animations: {
+//                        wPieces[i].frame.origin.x = CGFloat((boardState?.objectForKey(wPiecesX[i]))! as! NSNumber) * square
+//                        wPieces[i].frame.origin.y = CGFloat((boardState?.objectForKey(wPiecesY[i]))! as! NSNumber) * square + (screenHeight/2)
+//                }
+//                )}
+//                
+//            } else {
+//                print(error)
+//            }
+//        }
     }
     
     //save existing board to cloud
     func saveBoardToCloud() {
         
         let query = PFQuery(className:"BoardState")
+        query.whereKey("GameWith", equalTo:"b3rge")
         
-        query.getObjectInBackgroundWithId("aqmUTFRLSL") {
-            (boardState: PFObject?, error: NSError?) -> Void in
+        query.findObjectsInBackgroundWithBlock {
+            (boardState: [AnyObject]?, error: NSError?) -> Void in
             
             if error != nil {
                 print(error)
             }
             
-            else if let boardState = boardState {
+            if let boardState = boardState as? [PFObject] {
+                for boardState in boardState {
                 
                 for var i = 0; i < wPiecesX.count; i++ {
                     
@@ -278,7 +313,9 @@ class GameInterFace2: UIViewController {
                 
                 boardState.saveInBackground()
             }
+            
         }
+    }
     }
     
     //move piece
