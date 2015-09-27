@@ -47,8 +47,32 @@ class GameMenu: UIViewController {
     
     @IBAction func newGame(sender: AnyObject) {
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "created_New_Game")
+        
+        newGameSetup()
     }
 
+    func newGameSetup() {
+        
+        var contentView: UIView = UIView(frame: CGRectMake(10, 100, screenWidth - 20 , screenHeight/7))
+        contentView.layer.cornerRadius = cornerRadius
+        contentView.backgroundColor = UIColor.whiteColor()
+        contentView.layer.shadowColor = UIColor.blackColor().CGColor
+        contentView.layer.shadowOpacity = 0.1
+        contentView.layer.shadowRadius = cornerRadius
+        contentView.layer.shadowOffset = CGSizeZero
+        view.addSubview(contentView)
+        
+        let profilePic = UIImageView(frame: CGRectMake(7.5, 7.5, (contentView.frame.size.height) - 15, (contentView.frame.size.height) - 15))
+        profilePic.image = UIImage(named:"chessIconRounded.png")
+        profilePic.layer.cornerRadius = profilePic.frame.size.height / 2
+        profilePic.layer.borderColor = UIColor.whiteColor().CGColor
+        profilePic.layer.borderWidth = 3
+        contentView.addSubview(profilePic)
+        
+        
+    
+    
+    }
 
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
