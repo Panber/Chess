@@ -19,8 +19,6 @@ var login = false
 var emailUEnabled = false
 var alreadyUserTappedOnce = false
 
-let myUser:PFUser = PFUser()
-
 
 var bottomConstraint: NSLayoutConstraint = NSLayoutConstraint()
 var bottomConstraint0: NSLayoutConstraint = NSLayoutConstraint()
@@ -273,7 +271,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     @IBAction func signUp(sender: AnyObject) {
         
         //login!!
-        if (login) {
+//        if (login) {
             let userName = usernameInput.text
             let userPassword = passwordInput.text
             
@@ -281,8 +279,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             
                 return
             }
-            
-            
+
             PFUser.logInWithUsernameInBackground(userName!, password: userPassword!) { (user:PFUser?, error:NSError?) -> Void in
                 
                 var userMessage = "Welcome!"
@@ -309,76 +306,77 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
                     myAlert.addAction(okAction)
                     self.presentViewController(myAlert, animated: true, completion: nil)
                 }
-                }
-            }
+//                }
+           // }
         
-            //if signup
-        else if (!login) {
-        print("signing up")
-        
-        let userEmail = emailInput.text
-        let userPassword = passwordInput.text
-        let userName = usernameInput.text
-        
-        //checking if forms are typed in
-            if (userName == "" || userPassword == "" || userEmail == "" || profilePhotoImageView.image == UIImage(named:"") ){
-            
-            let myAlert = UIAlertController(title: "Alert", message: "You have to submit all forms", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-            myAlert.addAction(okAction)
-            
-            self.presentViewController(myAlert, animated: true, completion: nil)
-            
-            return
-        
-        }
-        
-        myUser.username = userName
-        myUser.email = userEmail
-        myUser.password = userPassword
-            
-            
-            let profileImageData = UIImageJPEGRepresentation(self.profilePhotoImageView.image!, 1)
-            
-            if profileImageData != nil {
-                let profileImageFile = PFFile(data: profileImageData!)
-                myUser.setObject(profileImageFile, forKey: "profile picture")
-                myUser.saveInBackground()
-                print("setting profile pic was successfull")
-            }
-            
-            if profileImageData == nil {
-                
-                print("profileImageDAte == nil")
-            }
-            
-        
-        
-        
-        myUser.signUpInBackgroundWithBlock { (success:Bool, error: NSError?) -> Void in
-            
-            var userMessage = "Welcome! Your registration was successfull"
-            
-            if !success {
-                //                userMessage = "The registration was not completed."
-                userMessage = error!.localizedDescription
-            }
-            
-            let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-            
-            // if success sign up
-            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) { action in
-                if success {
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
-                    self.showViewController(vc as! UIViewController, sender: vc)
-                }
-            }
-            myAlert.addAction(okAction)
-            
-            self.presentViewController(myAlert, animated: true, completion: nil)
-            
-        }
+//            //if signup
+//        else if (!login) {
+//        print("signing up")
+//        
+//        let myUser:PFUser = PFUser()
+//            
+//        let userEmail = emailInput.text
+//        let userPassword = passwordInput.text
+//        let userName = usernameInput.text
+//        
+//        //checking if forms are typed in
+//            if (userName == "" || userPassword == "" || userEmail == "" || profilePhotoImageView.image == UIImage(named:"") ){
+//            
+//            let myAlert = UIAlertController(title: "Alert", message: "You have to submit all forms", preferredStyle: UIAlertControllerStyle.Alert)
+//            
+//            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+//            myAlert.addAction(okAction)
+//            
+//            self.presentViewController(myAlert, animated: true, completion: nil)
+//            
+//            return
+//        
+//        }
+//        
+//        myUser.username = userName
+//        myUser.email = userEmail
+//        myUser.password = userPassword
+//            
+//            
+//            let profileImageData = UIImageJPEGRepresentation(self.profilePhotoImageView.image!, 1)
+//            
+//            if profileImageData != nil {
+//                let profileImageFile = PFFile(data: profileImageData!)
+//                myUser.setObject(profileImageFile, forKey: "profile_picture")
+//                print("setting profile pic was successfull")
+//            }
+//            
+//            if profileImageData == nil {
+//                
+//                print("profileImageDAte == nil")
+//            }
+//            
+//        
+//        
+//        
+//        myUser.signUpInBackgroundWithBlock { (success, error) -> Void in
+//            
+//            var userMessage = "Welcome! Your registration was successfull"
+//            
+//            if !success {
+//                //                userMessage = "The registration was not completed."
+//                userMessage = error!.localizedDescription
+//            }
+//            
+//            let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+//            
+//            // if success sign up
+//            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) { action in
+//                if success {
+//                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
+//                    self.showViewController(vc as! UIViewController, sender: vc)
+//                }
+//            }
+//            myAlert.addAction(okAction)
+//            
+//            self.presentViewController(myAlert, animated: true, completion: nil)
+//            
+//        }
         }
 
     }

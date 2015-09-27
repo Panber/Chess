@@ -18,10 +18,6 @@ class ProfileMenu: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Get username from parse
-        let usernameObject = PFUser.currentUser()?.objectForKey("username") as! String
-        username.text = usernameObject
-        
         //changing profileImage
         self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
         self.userProfileImage.clipsToBounds = true
@@ -29,11 +25,6 @@ class ProfileMenu: UITableViewController {
         self.userProfileImage.layer.borderColor = UIColor.blackColor().CGColor
         
         loadUserDetails()
-
-        //setting nav bar heading to username
-        if usernameObject.characters.count <= 10 {
-            self.title = usernameObject
-        }
         
         // Do any additional setup after loading the view.
     }
@@ -56,9 +47,7 @@ class ProfileMenu: UITableViewController {
     @IBAction func logOut(sender: AnyObject) {
         
         NSUserDefaults.standardUserDefaults().removeObjectForKey("user_name")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("profile_picture")
         NSUserDefaults.standardUserDefaults().synchronize()
-        
         
         PFUser.logOutInBackgroundWithBlock { (error:NSError?) -> Void in
         
@@ -75,17 +64,30 @@ class ProfileMenu: UITableViewController {
     
     func loadUserDetails() {
         
-        let user = PFUser.currentUser()
-        let profilePictureObject = user?.objectForKey("profile picture")
+        if(PFUser.currentUser() == nil)
+        {
+            return
+        }
+        
+        // Get username from parse
+        let usernameObject = PFUser.currentUser()?.objectForKey("username") as! String
+        username.text = usernameObject
+        
+        //setting nav bar heading to username
+        if usernameObject.characters.count <= 10 {
+            self.title = usernameObject
+        }
+        
+        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as? PFFile
         
         if(profilePictureObject != nil)
         {
             profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-
-                    dispatch_async(dispatch_get_main_queue()) {
-                    
-                    self.userProfileImage.image = UIImage(data: imageData!)
-                }
+                
+                //            if(imageData != nil)
+                //            {
+                self.userProfileImage.image = UIImage(data: imageData!)
+                //            }
                 
             }
         }
