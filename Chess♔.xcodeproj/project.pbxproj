@@ -79,6 +79,8 @@
 		8F86392D1B9B02780055608B /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86392C1B9B02780055608B /* ChatView.swift */; };
 		8F86392F1B9B044F0055608B /* FriendsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86392E1B9B044F0055608B /* FriendsMenu.swift */; };
 		8F8639331B9B09F90055608B /* BlackBC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F8639321B9B09F90055608B /* BlackBC.jpg */; };
+		8F970FBD1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F970FBC1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png */; settings = {ASSET_TAGS = (); }; };
+		8F970FBF1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F970FBE1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png */; settings = {ASSET_TAGS = (); }; };
 		8FA018D31B9B0D76002B410E /* chessIconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA018D21B9B0D76002B410E /* chessIconRounded.png */; };
 		8FA018D51B9B0E33002B410E /* Bauru.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FA018D41B9B0E33002B410E /* Bauru.ttf */; };
 		8FA018D71B9B1BDE002B410E /* blubutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA018D61B9B1BDE002B410E /* blubutton.png */; };
@@ -185,6 +187,8 @@
 		8F86392C1B9B02780055608B /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		8F86392E1B9B044F0055608B /* FriendsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsMenu.swift; sourceTree = "<group>"; };
 		8F8639321B9B09F90055608B /* BlackBC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BlackBC.jpg; sourceTree = "<group>"; };
+		8F970FBC1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessIconSmallTextAndLogo.png; sourceTree = "<group>"; };
+		8F970FBE1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessIconSmallTextAndLogoDarkMode.png; sourceTree = "<group>"; };
 		8FA018D21B9B0D76002B410E /* chessIconRounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessIconRounded.png; sourceTree = "<group>"; };
 		8FA018D41B9B0E33002B410E /* Bauru.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bauru.ttf; sourceTree = "<group>"; };
 		8FA018D61B9B1BDE002B410E /* blubutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blubutton.png; sourceTree = "<group>"; };
@@ -296,6 +300,8 @@
 			children = (
 				8F14D18A1B9C917800A58CCF /* LoginImages */,
 				8FA018D61B9B1BDE002B410E /* blubutton.png */,
+				8F970FBC1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png */,
+				8F970FBE1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png */,
 				8F38EF671BB8302300668B3B /* slogen.jpg */,
 				8F38EF691BB8399D00668B3B /* JBpp.jpg */,
 				8F056AF51BAF533C00CD617B /* LightModePreview.png */,
@@ -564,6 +570,7 @@
 				8F38EF6A1BB8399D00668B3B /* JBpp.jpg in Resources */,
 				8F4A02691B9A3E890084024A /* PANBERlogo.png in Resources */,
 				8F14D19D1B9C918700A58CCF /* 8.jpg in Resources */,
+				8F970FBF1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png in Resources */,
 				8F2DD6E51B9AFFF80059CEFA /* pieceMarked.png in Resources */,
 				8F4A02811B9A3F0B0084024A /* blackRook.png in Resources */,
 				8F4A02851B9A3F240084024A /* chessIcon.png in Resources */,
@@ -586,6 +593,7 @@
 				8F2DD6E61B9AFFF80059CEFA /* piecePossibilities.png in Resources */,
 				8F2DD6E41B9AFFF80059CEFA /* moveOption.png in Resources */,
 				8F4A027C1B9A3EE80084024A /* blackKnight.png in Resources */,
+				8F970FBD1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png in Resources */,
 				8F14D1871B9C823500A58CCF /* 2.JPG in Resources */,
 				8F14D1861B9C823500A58CCF /* 3.jpg in Resources */,
 				8F2DD6E31B9AFFF80059CEFA /* graySquare.png in Resources */,

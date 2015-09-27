@@ -17,52 +17,25 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bj6-lS-cdt">
-                                <rect key="frame" x="0.0" y="172" width="78" height="30"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="78" id="4eM-Lu-3lp"/>
-                                </constraints>
-                                <state key="normal" title="game 1"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rch-aS-kkH">
-                                <rect key="frame" x="0.0" y="222" width="70" height="30"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="Ih2-Z1-G0V"/>
-                                </constraints>
-                                <state key="normal" title="game2"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1c-Dl-9sF">
-                                <rect key="frame" x="0.0" y="270" width="78" height="30"/>
-                                <animations/>
-                                <state key="normal" title="game 3"/>
-                            </button>
-                        </subviews>
                         <animations/>
-                        <constraints>
-                            <constraint firstItem="bj6-lS-cdt" firstAttribute="leading" secondItem="rch-aS-kkH" secondAttribute="leading" id="Kxo-t4-dLr"/>
-                            <constraint firstItem="rch-aS-kkH" firstAttribute="top" secondItem="bj6-lS-cdt" secondAttribute="bottom" constant="20" id="Vno-cF-3vk"/>
-                            <constraint firstItem="c1c-Dl-9sF" firstAttribute="trailing" secondItem="bj6-lS-cdt" secondAttribute="trailing" id="XzT-yF-eKg"/>
-                            <constraint firstItem="c1c-Dl-9sF" firstAttribute="top" secondItem="rch-aS-kkH" secondAttribute="bottom" constant="18" id="acO-Fw-PQl"/>
-                            <constraint firstItem="bj6-lS-cdt" firstAttribute="top" secondItem="CTA-QS-dyF" secondAttribute="bottom" constant="108" id="cUP-Nb-1XZ"/>
-                            <constraint firstItem="bj6-lS-cdt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mBE-Wj-3NL"/>
-                            <constraint firstItem="rch-aS-kkH" firstAttribute="leading" secondItem="c1c-Dl-9sF" secondAttribute="leading" id="ncT-6e-wcR"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Play" id="bfc-qg-EO6">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="vKz-xP-h12"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="dwq-aW-MXQ">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="q8f-St-ouB">
+                                <rect key="frame" x="20" y="7" width="133" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="19"/>
+                                <state key="normal" title="Edit"/>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="ysv-p2-HdS">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aKg-7t-OJF">
                                 <rect key="frame" x="447" y="7" width="133" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="19"/>
-                                <inset key="contentEdgeInsets" minX="50" minY="0.0" maxX="-50" maxY="0.0"/>
-                                <state key="normal" title="New">
-                                    <color key="titleColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                                <state key="normal" title="New"/>
                                 <connections>
                                     <action selector="newGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ikF-Kq-AbN"/>
                                     <segue destination="2sG-Vo-YGM" kind="show" id="X9F-2B-LMQ"/>
@@ -71,6 +44,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButtonOutlet" destination="q8f-St-ouB" id="L6B-eE-eks"/>
+                        <outlet property="newButtonOutlet" destination="aKg-7t-OJF" id="4pG-iL-Tkd"/>
                         <segue destination="Z2e-Fv-mEq" kind="presentation" id="aXo-hn-lFb"/>
                     </connections>
                 </viewController>

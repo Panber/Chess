@@ -14,8 +14,14 @@ var pressedCreateNewGame = NSUserDefaults()
 
 var scrollView: UIScrollView!
 
+var logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
+var logoView = UIImageView(image:logo)
+
 class GameMenu: UIViewController, UIScrollViewDelegate {
 
+    @IBOutlet weak var newButtonOutlet: UIButton!
+    
+    @IBOutlet weak var editButtonOutlet: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +46,19 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
                     self.showViewController(vc as! UIViewController, sender: vc)
 
+        
+        //setting new-button and edit button
+        newButtonOutlet.frame.size.width = 50
+        editButtonOutlet.frame.size.width = 50
+
+        //logo things
+        logoView.contentMode = UIViewContentMode.ScaleAspectFit
+        logoView.frame.size.height = 50
+        self.navigationItem.titleView = logoView
+        
+        
     
-        // Do any additional setup after loading the view.
-      
+      //setting scrollview
         view.frame.size.height = 2000
         scrollView = UIScrollView(frame: view.bounds)
         scrollView.contentSize = view.bounds.size
@@ -50,6 +66,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.userInteractionEnabled = true
         scrollView.delegate = self
+        scrollView.bounces = false
         scrollView.scrollEnabled = true
         view.addSubview(scrollView)
     }
@@ -80,11 +97,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
       //  var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
         var contentView: UIView = UIView(frame: CGRectMake(10, 75, screenWidth - 20 , screenHeight/7))
         contentView.layer.cornerRadius = cornerRadius
-        contentView.backgroundColor = UIColor.whiteColor()
-        contentView.layer.shadowColor = UIColor.blackColor().CGColor
-        contentView.layer.shadowOpacity = 0.1
-        contentView.layer.shadowRadius = cornerRadius
-        contentView.layer.shadowOffset = CGSizeZero
+        
+        if darkMode { contentView.backgroundColor = UIColor(red: 0.12, green: 0.12 , blue: 0.12, alpha: 1) }
+        else { contentView.backgroundColor = UIColor.whiteColor() }
+      //  contentView.layer.shadowColor = UIColor.blackColor().CGColor
+     //   contentView.layer.shadowOpacity = 0.1
+     //   contentView.layer.shadowRadius = cornerRadius
+     //   contentView.layer.shadowOffset = CGSizeZero
         contentView.clipsToBounds = true
         scrollView.addSubview(contentView)
 
@@ -96,6 +115,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
         
         //bluring bc of profile pic
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+        if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+        else { visualEffectView.effect = UIBlurEffect(style: .Light) }
         visualEffectView.frame = profilePicBlur.bounds
         profilePicBlur.addSubview(visualEffectView)
 
@@ -110,18 +131,24 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
         contentView.addSubview(profilePic)
         
         //adding username to view
-        let label = UILabel(frame: CGRectMake(profilePicBlur.frame.size.width + 20, contentView.frame.size.height/8, 200, 40))
+        let label = UILabel(frame: CGRectMake(profilePicBlur.frame.size.width + 20, contentView.frame.size.height/8, 250, 40))
         label.textAlignment = NSTextAlignment.Left
-        label.text = "johannesberge"
+        label.text = (PFUser.currentUser()?.username)
         label.font = UIFont(name: "Didot-Bold", size: 30)
+        if darkMode { label.textColor = UIColor.whiteColor() }
+        else { label.textColor = UIColor.blackColor() }
         contentView.addSubview(label)
         
         
         //adding updated since label
-        let label2 = UILabel(frame: CGRectMake(profilePicBlur.frame.size.width + 20, contentView.frame.size.height - contentView.frame.size.height/2.4, 150, 20))
+        let label2 = UILabel(frame: CGRectMake(profilePicBlur.frame.size.width + 20, contentView.frame.size.height - contentView.frame.size.height/2.4, 100, 40))
         label2.textAlignment = NSTextAlignment.Left
-        label2.text = "Last move: 8 hours ago"
+        label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
+        label2.numberOfLines = 0
+        label2.text = "Last move: 8 hours ago" + " Time left: 2 hours"
         label2.font = UIFont(name: "Didot-Italic", size: 10)
+        if darkMode { label2.textColor = UIColor.whiteColor() }
+        else { label2.textColor = UIColor.blackColor() }
         contentView.addSubview(label2)
         
         //adding time left label
@@ -129,7 +156,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
         label3.textAlignment = NSTextAlignment.Left
         label3.text = "Time left: 2 hours"
         label3.font = UIFont(name: "Didot-Italic", size: 10)
-        contentView.addSubview(label3)
+       // contentView.addSubview(label3)
     
         //adding moveindicator
         let moveindicator = UILabel(frame: CGRectMake(contentView.frame.size.width - 10, 0, 10, contentView.frame.size.height))
@@ -173,7 +200,18 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
                 self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
                 self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
                 self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-                
+                self.newButtonOutlet.tintColor = UIColor.whiteColor()
+                self.editButtonOutlet.tintColor = UIColor.whiteColor()
+            
+            //setting top logo
+            logo = UIImage(named: "ChessIconSmallTextAndLogoDarkMode.png")
+            logoView = UIImageView(image:logo)
+            logoView.contentMode = UIViewContentMode.ScaleAspectFit
+            logoView.frame.size.height = 50
+            self.navigationItem.titleView = logoView
+            
+            
+            
             
         }
         else if darkMode == false {
@@ -184,6 +222,16 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
                 self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
                 self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
                 self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
+                self.newButtonOutlet.tintColor = UIColor.blueColor()
+                self.editButtonOutlet.tintColor = UIColor.blueColor()
+            
+            //setting top logo
+            logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
+            logoView = UIImageView(image:logo)
+            logoView.contentMode = UIViewContentMode.ScaleAspectFit
+            logoView.frame.size.height = 50
+            self.navigationItem.titleView = logoView
+            
 
   
         
