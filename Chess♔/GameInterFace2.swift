@@ -60,7 +60,7 @@ var wPiecesY = ["wPawn1Y","wPawn2Y","wPawn3Y","wPawn4Y","wPawn5Y","wPawn6Y","wPa
 
 //variables so set up positions from cloud. needed to times with variable
 var wPiecesXint = [0,1,2,3,4,5,6,7,0,7,1,6,2,5,3,4]
-var wPiecesYint = [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1]
+var wPiecesYint = [2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3]
 
 
 //all Pieces IDS
@@ -85,32 +85,40 @@ var wPieces_ids = [wPawn1_id,wPawn2_id,wPawn3_id,wPawn4_id,wPawn5_id,wPawn6_id,w
 
 var ojId = ""
 
+let gameID = NSUserDefaults.standardUserDefaults().stringArrayForKey("game_with")
+
+
 import UIKit
 import Parse
 
 class GameInterFace2: UIViewController {
 
+    override func viewWillAppear(animated: Bool) {
+        lightOrDarkMode()
+        
+        //check if new game or not
+        if NSUserDefaults.standardUserDefaults().boolForKey("created_New_Game") == true {
+            loadNewGame()
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "created_New_Game")
+            print("creted new game = true")
+        }
+        else if NSUserDefaults.standardUserDefaults().boolForKey("created_New_Game") == false {
+            retrieveBoardFromCloud()
+            print("creted new game = false")
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
-        //If EXISTING GAME, then load all positions of pieces from the cloud
-        //retrieveBoardFromCloud()
-
-        
-        print("the oj is\(boardState.objectId)")
-        print(boardState.objectId)
-        print(boardState.objectForKey("wPawn1Y"))
-        
-        //else is NEW GAME, then load all pieces to view and do additional setup
-        loadNewGame()
-
     }
     
     //func to load new game
     func loadNewGame() {
         
+        //setting board state
         for var i = 0; i < wPiecesX.count; i++ {
             boardState[wPiecesX[i]] = wPiecesXint[i]
             boardState[wPiecesY[i]] = wPiecesYint[i]
@@ -119,10 +127,19 @@ class GameInterFace2: UIViewController {
             if success {
                 ojId = String(boardState.objectId)
                 print("the oj in the load is \(ojId)")
+                for var i = 0; i < wPieces.count; i++ {
+                    UIView.animateWithDuration(1, animations: {
+                        wPieces[i].frame.origin.x = CGFloat((boardState.objectForKey(wPiecesX[i]))! as! NSNumber) * square
+                        wPieces[i].frame.origin.y = CGFloat((boardState.objectForKey(wPiecesY[i]))! as! NSNumber) * square + (screenHeight/2)
+                        }
+                    )}
+             self.saveBoardToCloud()
                 
+                NSUserDefaults.standardUserDefaults().setObject(ojId, forKey: "game_with_")
             }
         }
         
+        //Add pieces to view
         for var i = 0; i < wPieces.count; i++ {
             
             wPieces[i].userInteractionEnabled = true
@@ -165,34 +182,37 @@ class GameInterFace2: UIViewController {
                 view.addSubview(_view)
             }
         }
-    
     }
 
 
     //retrieve board from cloud
     func retrieveBoardFromCloud() {
-        var query = PFQuery(className:"BoardState")
+        
+        let query = PFQuery(className:"BoardState")
+        
         query.getObjectInBackgroundWithId("aqmUTFRLSL") {
             (boardState: PFObject?, error: NSError?) -> Void in
             if error == nil && boardState != nil {
                 print("the boardstate is \(boardState)")
                 
                 for var i = 0; i < wPieces.count; i++ {
-                wPieces[i].frame.origin.x = CGFloat((boardState?.objectForKey(wPiecesX[i]))! as! NSNumber) * square
-                wPieces[i].frame.origin.y = CGFloat((boardState?.objectForKey(wPiecesY[i]))! as! NSNumber) * square + (screenHeight/2)
+                    UIView.animateWithDuration(1, animations: {
+                        wPieces[i].frame.origin.x = CGFloat((boardState?.objectForKey(wPiecesX[i]))! as! NSNumber) * square
+                        wPieces[i].frame.origin.y = CGFloat((boardState?.objectForKey(wPiecesY[i]))! as! NSNumber) * square + (screenHeight/2)
                 }
+                )}
                 
             } else {
                 print(error)
             }
         }
-        
-    
     }
     
     //save existing board to cloud
     func saveBoardToCloud() {
-        var query = PFQuery(className:"BoardState")
+        
+        let query = PFQuery(className:"BoardState")
+        
         query.getObjectInBackgroundWithId("aqmUTFRLSL") {
             (boardState: PFObject?, error: NSError?) -> Void in
             
@@ -229,8 +249,6 @@ class GameInterFace2: UIViewController {
                         boardState[wPiecesX[i]] = 7
                     }
 
-                    var p = 0
-                    for var o = 3; o > -4; o--, p++ {}
                     if wPieces[i].frame.origin.y == _1 {
                         boardState[wPiecesY[i]] = 3
                     }
@@ -256,14 +274,11 @@ class GameInterFace2: UIViewController {
                         boardState[wPiecesY[i]] = -4
                     }
                     
-                    
                 }
                 
                 boardState.saveInBackground()
-                
             }
         }
-    
     }
     
     //move piece
@@ -276,7 +291,6 @@ class GameInterFace2: UIViewController {
             }, completion: {Void in
         
         })
-    
     }
     
     // MARK: - Touches began! 👆
@@ -300,6 +314,33 @@ class GameInterFace2: UIViewController {
     
     @IBAction func submitMove(sender: AnyObject) {
         saveBoardToCloud()
+    }
+    
+    // MARK: - BLACK OR WHITE
+    //func to check if dark or light mode should be enabled, keep this at the bottom
+    func lightOrDarkMode() {
+        if darkMode == true {
+            
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            
+            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
+            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            
+        }
+        else if darkMode == false {
+            
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
+            self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+            self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
+            self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
+            self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
+
+        }
     }
 
 }
