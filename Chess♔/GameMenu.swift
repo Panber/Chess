@@ -52,6 +52,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
         scrollView.scrollEnabled = true
         view.addSubview(scrollView)
+        scrollView.showsVerticalScrollIndicator = false
     }
 
     
