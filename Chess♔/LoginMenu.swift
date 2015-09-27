@@ -19,8 +19,6 @@ var login = false
 var emailUEnabled = false
 var alreadyUserTappedOnce = false
 
-let myUser:PFUser = PFUser()
-
 
 var bottomConstraint: NSLayoutConstraint = NSLayoutConstraint()
 var bottomConstraint0: NSLayoutConstraint = NSLayoutConstraint()
@@ -281,8 +279,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             
                 return
             }
-            
-            
+
             PFUser.logInWithUsernameInBackground(userName!, password: userPassword!) { (user:PFUser?, error:NSError?) -> Void in
                 
                 var userMessage = "Welcome!"
@@ -315,7 +312,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             //if signup
         else if (!login) {
         print("signing up")
-        
+            
         let userEmail = emailInput.text
         let userPassword = passwordInput.text
         let userName = usernameInput.text
@@ -334,17 +331,18 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         
         }
         
+        let myUser:PFUser = PFUser()
         myUser.username = userName
         myUser.email = userEmail
         myUser.password = userPassword
+        myUser.setObject(userName!, forKey: "username")
             
             
             let profileImageData = UIImageJPEGRepresentation(self.profilePhotoImageView.image!, 1)
             
             if profileImageData != nil {
                 let profileImageFile = PFFile(data: profileImageData!)
-                myUser.setObject(profileImageFile, forKey: "profile picture")
-                myUser.saveInBackground()
+                myUser.setObject(profileImageFile, forKey: "profile_picture")
                 print("setting profile pic was successfull")
             }
             
@@ -356,7 +354,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         
         
         
-        myUser.signUpInBackgroundWithBlock { (success:Bool, error: NSError?) -> Void in
+        myUser.signUpInBackgroundWithBlock { (success, error) -> Void in
             
             var userMessage = "Welcome! Your registration was successfull"
             
