@@ -24,26 +24,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
         Parse.enableLocalDatastore()
         
         // Initialize Parse.
-        Parse.setApplicationId("hadtED3WDzRnxyboadNlGaBCQQjx569EhHzLs5Fm",
-            clientKey: "iMCLxq9tBCaXHkCYBts5xn94qAgobzDY0Gk68iNr")
+        Parse.setApplicationId("2PsQGHMlwrvTSYb3rUS1kJGiISfjYAK0hzH9sDF8",
+            clientKey: "uDXStFAvReKWOdzhcy4taikalkY12OQOaAkS2414")
         
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
-//        check if user has logged in before
-        let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
-        
-        if userName != nil {
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let mainPage = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.window?.rootViewController = mainPage
-
-            //notifications
-            let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
-        }
+////        check if user has logged in before
+     //   rememrber to delete at logout
+//        let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
+//        
+//        if userName != nil {
+//            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let mainPage = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
+//            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//            appDelegate.window?.rootViewController = mainPage
+//
+//        }
+//        
+        //notifications
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
         
         return true
     }
