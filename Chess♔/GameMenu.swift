@@ -188,14 +188,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
         self.tabBarController?.tabBar.hidden = false
         lightOrDarkMode()
     }
-    //notifications
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        // Store the deviceToken in the current Installation and save it to Parse
-        print("saving device token")
-        let installation = PFInstallation.currentInstallation()
-        installation.setDeviceTokenFromData(deviceToken)
-        installation.saveInBackground()
-    }
+
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
     func lightOrDarkMode() {
