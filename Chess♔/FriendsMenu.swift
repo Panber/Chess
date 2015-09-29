@@ -67,6 +67,42 @@ class FriendsMenu: UITableViewController, UISearchBarDelegate, UISearchDisplayDe
         
         cell.username.text = user["username"] as? String
         
+        
+//        let query = PFQuery(className: "_User")
+//       // let user: PFUser = query[indexPath.row] as! PFUser
+//        
+//        query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
+//            if error == nil {
+//                let object = objects as! [PFObject]
+//                
+//                for object in objects! {
+//                    
+//                    let thumbNail = object["profile_picture"] as! PFFile
+//                    
+//                    
+//                    thumbNail.getDataInBackgroundWithBlock {
+//                        (imageData: NSData?, error: NSError?) -> Void in
+//                        if (error == nil) {
+//                            let image = UIImage(data:imageData!)
+//                            //image object implementation
+//                            //self.imageResources.append(image)
+//                            cell.userProfileImage.image = image
+//                            print(image)
+//                        }
+//                        
+//                    } //getDataInBackgroundWithBlock - end
+//                    
+//                }//for - end
+//                
+//            }
+//            else{
+//               print("Error in retrieving \(error)")
+//            }
+//            }
+        
+
+        
+        
         let profilePictureObject = user["profile_picture"] as? PFFile
         
         
