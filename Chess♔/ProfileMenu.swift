@@ -84,11 +84,11 @@ class ProfileMenu: UITableViewController {
         {
             profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
                 
-//            if(imageData != nil)
-//            {
+            if(error == nil)
+            {
             self.userProfileImage.image = UIImage(data: imageData!)
-//                }
-                
+                }
+            
             }
         }
     }
