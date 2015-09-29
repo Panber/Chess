@@ -61,20 +61,23 @@ class FriendsMenu: UITableViewController, UISearchBarDelegate, UISearchDisplayDe
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
+        let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
-        var user:PFUser = users[indexPath.row] as! PFUser
+        let user:PFUser = users[indexPath.row] as! PFUser
         
-        cell.username.text = user["username"] as! String
+        cell.username.text = user["username"] as? String
         
-        let profilePictureObject = user.objectForKey("profile_picture") as! PFFile
+        let profilePictureObject = user["profile_picture"] as? PFFile
         
-       
-            profilePictureObject.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+        
+            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
                 
-                if(imageData != nil)
+                if(error == nil)
                 {
                     cell.userProfileImage.image = UIImage(data: imageData!)
+                }
+                else {
+                    print("there was an error in the system regarding the load of profile pics in the table views")
                 }
                 
             }
