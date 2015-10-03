@@ -9,8 +9,6 @@
 import UIKit
 import Parse
 
-let picture = PFObject(className: "_User")
-
 class ProfileMenu: UITableViewController {
     
     @IBOutlet weak var userProfileImage: UIImageView!
@@ -30,19 +28,18 @@ class ProfileMenu: UITableViewController {
         
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     /*
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
     
@@ -52,7 +49,7 @@ class ProfileMenu: UITableViewController {
         NSUserDefaults.standardUserDefaults().synchronize()
         
         PFUser.logOutInBackgroundWithBlock { (error:NSError?) -> Void in
-        
+            
             let mainStoryBoard:UIStoryboard = UIStoryboard(name:"Main", bundle:nil)
             
             let signInPage:LoginMenu = mainStoryBoard.instantiateViewControllerWithIdentifier("LoginMenu") as! LoginMenu
@@ -80,57 +77,23 @@ class ProfileMenu: UITableViewController {
             self.title = usernameObject
         }
         
-        let pictureQuery = PFQuery(className: "_User")
-        if let user = PFUser.currentUser() {
-        pictureQuery.whereKey("username", equalTo: user.username!)
+        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as? PFFile
         
-            pictureQuery.findObjectsInBackgroundWithBlock({ (picture: [AnyObject]?, error:NSError?) -> Void in
+        //self.userProfileImage.image = UIImage(data: (profilePictureObject?.getData())!)
+        
+        if(profilePictureObject != nil)
+        {
+            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
                 
-                if let picture = picture as? [PFObject]{
-                    for picture in picture {
-                        
-//                       var pic = picture["profile_picture"] as? NSData
-//                        
-//                    self.userProfileImage.image = UIImage(data: pic!)
-//                        
-//                        print("his is where it ist")
-                                let profilePictureObject = picture["profile_picture"]
-                        
-                                if(profilePictureObject != nil)
-                                {
-                                    profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                        
-                        
-                          //            if(imageData != nil)
-                          //            {
-                                        self.userProfileImage.image = UIImage(data: imageData!)
-                                        
-                            //            }
-                                        
-                                    }
-                                }
-                        
-                    }
-                
+                if(error == nil)
+                {
+                    self.userProfileImage.image = UIImage(data: imageData!)
+                } else {
+                    print(error?.localizedDescription)
                 }
-            })
-            
-//        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as? PFFile
-//        
-//        if(profilePictureObject != nil)
-//        {
-//            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-//                
-//  //            if(imageData != nil)
-//  //            {
-//                dispatch_async(dispatch_get_main_queue()) {
-//                self.userProfileImage.image = UIImage(data: imageData!)
-//                }
-//    //            }
-//                
-//            }
-//        }
-    }
+                
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -142,33 +105,33 @@ class ProfileMenu: UITableViewController {
         if darkMode == true {
             
             
-                self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-                self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-                self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
-                
-                self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
-                self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-                self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-                self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-                
-                
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            
+            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
+            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            
+            
             
         }
         else if darkMode == false {
-
-                self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
-                self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-                self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
-                self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
-                self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
-                self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
-                
-                
-                
+            
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
+            self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+            self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
+            self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
+            self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
+            
+            
+            
             
         }
         
         
     }
-
+    
 }
