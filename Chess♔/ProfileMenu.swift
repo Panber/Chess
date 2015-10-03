@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+let picture = PFObject(className: "_User")
+
 class ProfileMenu: UITableViewController {
     
     @IBOutlet weak var userProfileImage: UIImageView!
@@ -78,19 +80,57 @@ class ProfileMenu: UITableViewController {
             self.title = usernameObject
         }
         
-        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as? PFFile
+        let pictureQuery = PFQuery(className: "_User")
+        if let user = PFUser.currentUser() {
+        pictureQuery.whereKey("username", equalTo: user.username!)
         
-        if(profilePictureObject != nil)
-        {
-            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+            pictureQuery.findObjectsInBackgroundWithBlock({ (picture: [AnyObject]?, error:NSError?) -> Void in
                 
-            if(error == nil)
-            {
-            self.userProfileImage.image = UIImage(data: imageData!)
+                if let picture = picture as? [PFObject]{
+                    for picture in picture {
+                        
+//                       var pic = picture["profile_picture"] as? NSData
+//                        
+//                    self.userProfileImage.image = UIImage(data: pic!)
+//                        
+//                        print("his is where it ist")
+                                let profilePictureObject = picture["profile_picture"]
+                        
+                                if(profilePictureObject != nil)
+                                {
+                                    profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                        
+                        
+                          //            if(imageData != nil)
+                          //            {
+                                        self.userProfileImage.image = UIImage(data: imageData!)
+                                        
+                            //            }
+                                        
+                                    }
+                                }
+                        
+                    }
+                
                 }
+            })
             
-            }
-        }
+//        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as? PFFile
+//        
+//        if(profilePictureObject != nil)
+//        {
+//            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+//                
+//  //            if(imageData != nil)
+//  //            {
+//                dispatch_async(dispatch_get_main_queue()) {
+//                self.userProfileImage.image = UIImage(data: imageData!)
+//                }
+//    //            }
+//                
+//            }
+//        }
+    }
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -293,10 +293,14 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
                     
 //                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Sett", bundle: nil)
 //                    var mainPage:MainPageViewcontroller = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
+                    let userN:String? =  NSUserDefaults.standardUserDefaults().stringForKey("user_name")
                     
+                    if(userN != nil)
+                    {
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
                     self.showViewController(vc as! UIViewController, sender: vc)
                     
+                }
                 }
                 else {
                     userMessage = error!.localizedDescription
@@ -338,17 +342,13 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         myUser.setObject(userName!, forKey: "username")
             
             
-            let profileImageData = UIImageJPEGRepresentation(self.profilePhotoImageView.image!, 1)
-            
-            if profileImageData != nil {
-                let profileImageFile = PFFile(data: profileImageData!)
-                myUser.setObject(profileImageFile, forKey: "profile_picture")
-                print("setting profile pic was successfull")
-            }
-            
-            if profileImageData == nil {
+            if let profileImageData = profilePhotoImageView.image
+            {
+                let profileImageDataJPEG = UIImageJPEGRepresentation(profileImageData, 1)
                 
-                print("profileImageDAte == nil")
+                let profileImageFile = PFFile(data: profileImageDataJPEG!)
+                myUser.setObject(profileImageFile, forKey: "profile_picture")
+                
             }
             
         
