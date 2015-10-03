@@ -68,7 +68,6 @@ class FriendRequests: UIViewController {
     }
 
     @IBAction func handleAcceptButtonPressed(sender: AnyObject) {
-        
         let requestQuery = PFQuery(className:"FriendRequest")
         if let user = PFUser.currentUser() {
             requestQuery.whereKey("fromUser", equalTo: userToAdd)

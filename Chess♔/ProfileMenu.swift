@@ -80,6 +80,8 @@ class ProfileMenu: UITableViewController {
         
         let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as? PFFile
         
+        //self.userProfileImage.image = UIImage(data: (profilePictureObject?.getData())!)
+        
         if(profilePictureObject != nil)
         {
             profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
@@ -87,6 +89,8 @@ class ProfileMenu: UITableViewController {
             if(error == nil)
             {
             self.userProfileImage.image = UIImage(data: imageData!)
+            } else {
+                print(error?.localizedDescription)
                 }
             
             }
