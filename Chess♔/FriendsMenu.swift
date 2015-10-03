@@ -9,15 +9,35 @@
 import UIKit
 import Parse
 
-class FriendsMenu: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
+class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate{
     
     // Array for users that are being searched for
     var users = NSMutableArray()
+    
+    @IBOutlet weak var top10World: UIScrollView!
+    @IBOutlet weak var top10Friends: UIScrollView!
+    @IBOutlet weak var grossing: UIScrollView!
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        top10World.scrollEnabled = true
+        top10World.contentSize = CGSizeMake(796, 105)
+        top10World.showsHorizontalScrollIndicator = false
+        top10World.bounces = false
+        
+        top10Friends.scrollEnabled = true
+        top10Friends.contentSize = CGSizeMake(796, 105)
+        top10Friends.showsHorizontalScrollIndicator = false
+        top10Friends.bounces = false
+        
+        grossing.scrollEnabled = true
+        grossing.contentSize = CGSizeMake(796, 105)
+        grossing.showsHorizontalScrollIndicator = false
+        grossing.bounces = false
         
     }
     
@@ -32,7 +52,7 @@ class FriendsMenu: UITableViewController, UISearchBarDelegate, UISearchDisplayDe
             if error == nil {
                 self.users.removeAllObjects()
                 self.users.addObjectsFromArray(objects!)
-                self.tableView.reloadData()
+                //self.tableView.reloadData()
             }
             else {
                 print("error")
@@ -49,103 +69,66 @@ class FriendsMenu: UITableViewController, UISearchBarDelegate, UISearchDisplayDe
     
     // MARK - Table View
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return users.count
 
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
+        var cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
-        let user:PFUser = users[indexPath.row] as! PFUser
-        
-        cell.username.text = user["username"] as? String
-        
-        
-//        let query = PFQuery(className: "_User")
-//       // let user: PFUser = query[indexPath.row] as! PFUser
-//        
-//        query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
-//            if error == nil {
-//                let object = objects as! [PFObject]
-//                
-//                for object in objects! {
-//                    
-//                    let thumbNail = object["profile_picture"] as! PFFile
-//                    
-//                    
-//                    thumbNail.getDataInBackgroundWithBlock {
-//                        (imageData: NSData?, error: NSError?) -> Void in
-//                        if (error == nil) {
-//                            let image = UIImage(data:imageData!)
-//                            //image object implementation
-//                            //self.imageResources.append(image)
-//                            cell.userProfileImage.image = image
-//                            print(image)
-//                        }
-//                        
-//                    } //getDataInBackgroundWithBlock - end
-//                    
-//                }//for - end
-//                
-//            }
-//            else{
-//               print("Error in retrieving \(error)")
-//            }
-//            }
-        
-
-        
+        // Declare user object and set cell text to username
+        var user:PFUser = users[indexPath.row] as! PFUser
+        cell.username.text = user["username"] as! String
         
         let profilePictureObject = user["profile_picture"] as? PFFile
         
-        
+        if(profilePictureObject != nil)
+        {
             profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
                 
-                if(error == nil)
+                if(imageData != nil)
                 {
                     cell.userProfileImage.image = UIImage(data: imageData!)
                 }
-                else {
-                    print("there was an error in the system regarding the load of profile pics in the table views")
-                }
                 
             }
-
+        }
         
         return cell
-        
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 0 {
             searchUsers(searchText)
         }
+        tableView.hidden = false
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 60
+     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
     }
     
     // MARK: - Search
     
-//    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
-//        
-//        
-//        return true
-//    }
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
+        
+         tableView.hidden = false
+        
+        return true
+    }
     
 //    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
 //        
@@ -153,6 +136,10 @@ class FriendsMenu: UITableViewController, UISearchBarDelegate, UISearchDisplayDe
 //        
 //        return true
 //    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        tableView.hidden = true
+    }
     
     
     override func viewWillAppear(animated: Bool) {
