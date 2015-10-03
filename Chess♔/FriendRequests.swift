@@ -1,3 +1,4 @@
+
 //
 //  FriendRequests.swift
 //  Chess♔
@@ -8,6 +9,12 @@
 
 import UIKit
 import Parse
+
+var userFriends = [""]
+var request = PFObject(className: "FriendRequest")
+var friends = PFObject(className: "Friends")
+
+
 
 class FriendRequests: UIViewController {
 
@@ -21,7 +28,13 @@ class FriendRequests: UIViewController {
             
             print("success!!")
         }
-        
+        let friendsQuery = PFQuery(className: "Friends")
+        if let user = PFUser.currentUser() {
+            friendsQuery.whereKey("user", equalTo: user)
+          //  userFriends = (friends["friends"] as? Array)!
+//            var r = friends["friends"]
+//            userFriends = Array(arrayLiteral: r)
+        }
     }
     
     override func viewDidLoad() {
@@ -38,7 +51,6 @@ class FriendRequests: UIViewController {
     
     @IBAction func sendButton(sender: AnyObject) {
         
-        let request = PFObject(className: "FriendRequest")
         request["fromUser"] = String(PFUser.currentUser())
         request["toUser"] = userInputTextField.text
         request["status"] = "pending"
@@ -56,9 +68,15 @@ class FriendRequests: UIViewController {
 
     @IBAction func handleAcceptButtonPressed(sender: AnyObject) {
         
+        friends["user"] = PFUser.currentUser()
+        userFriends.append(String(request["fromUser"]))
+        friends["friends"] = userFriends
         
+        friends.saveInBackground()
+        print("the usernam is")
+        print(userFriends[1])
         
-//
+        //
 //        //the buttons tag stores the indexPath.row of the array
 //        let friendRequest: PFObject = self.friendRequestsToCurrentUser[sender.tag] as PFObject
 //        
