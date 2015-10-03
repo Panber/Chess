@@ -716,11 +716,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" ambiguous="YES" misplaced="YES" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="mZt-ni-vmc">
-                                <rect key="frame" x="0.0" y="64" width="414" height="44"/>
+                            <searchBar contentMode="redraw" ambiguous="YES" misplaced="YES" placeholder="Search" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZt-ni-vmc">
+                                <rect key="frame" x="0.0" y="64" width="414" height="88"/>
                                 <animations/>
                                 <color key="barTintColor" red="0.93136452879999998" green="0.93136452879999998" blue="0.93136452879999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Friends</string>
+                                    <string>Users</string>
+                                </scopeButtonTitles>
                                 <connections>
                                     <outlet property="delegate" destination="NkV-B6-IDt" id="AvH-dw-Af1"/>
                                 </connections>
