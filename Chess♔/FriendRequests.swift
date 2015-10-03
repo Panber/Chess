@@ -10,31 +10,71 @@
 import UIKit
 import Parse
 
-var userFriends = [""]
 var request = PFObject(className: "FriendRequest")
 var friends = PFObject(className: "Friends")
 
 
 
 class FriendRequests: UIViewController {
+    
+    var userFriends = NSMutableArray()
 
     @IBOutlet weak var userInputTextField: UITextField!
     
     override func viewWillAppear(animated: Bool) {
         
+        
         let requestQuery = PFQuery(className:"FriendRequest")
         if let user = PFUser.currentUser() {
-            requestQuery.whereKey("toUser", equalTo: user)
+            requestQuery.whereKey("toUser", equalTo: "AlexPan")
+            
+            requestQuery.findObjectsInBackgroundWithBlock({ (toUser:[AnyObject]?, error:NSError?) -> Void in
+               
+                if error == nil {
+                    for request in toUser! {
+                        
+                        self.userFriends.addObject(request["toUser"] as! String)
+                        print(self.userFriends)
+                        
+//                let friendsQuery = PFQuery(className: "Friends")
+//                if let user = PFUser.currentUser() {
+//                    friendsQuery.whereKey("user", equalTo: user)
+//                    
+//                    friendsQuery.findObjectsInBackgroundWithBlock({ (Friends: [AnyObject]?, error: NSError?) -> Void in
+//                        if error == nil {
+//                            //do something with the object that has been found
+//
+//                            friends["friends"] = self.userFriends
+//                            friends.saveInBackground()
+//
+//
+//                            
+//                        }
+//                        else {
+//                            print("annerror accured")
+//                        }
+//                        
+//                    })
+//                    
+//                    //  userFriends = (friends["friends"] as? Array)!
+//                    //            var r = friends["friends"]
+//                    //            userFriends = Array(arrayLiteral: r)
+//                }
+                    }
+                }
+                
+                
+                
+            })
+            
+
             
             print("success!!")
         }
-        let friendsQuery = PFQuery(className: "Friends")
-        if let user = PFUser.currentUser() {
-            friendsQuery.whereKey("user", equalTo: user)
-          //  userFriends = (friends["friends"] as? Array)!
-//            var r = friends["friends"]
-//            userFriends = Array(arrayLiteral: r)
-        }
+        friends["friends"] = self.userFriends
+        friends.saveInBackground()
+
+        
     }
     
     override func viewDidLoad() {
@@ -68,15 +108,15 @@ class FriendRequests: UIViewController {
 
     @IBAction func handleAcceptButtonPressed(sender: AnyObject) {
         
-        friends["user"] = PFUser.currentUser()
-        userFriends.append(String(request["fromUser"]))
-        friends["friends"] = userFriends
+//        friends["user"] = PFUser.currentUser()
+//        userFriends.append(String(request["fromUser"]))
+//        friends["friends"] = userFriends
+//        
+//        friends.saveInBackground()
+//        print("the usernam is")
+//        print(userFriends[1])
         
-        friends.saveInBackground()
-        print("the usernam is")
-        print(userFriends[1])
-        
-        //
+//        
 //        //the buttons tag stores the indexPath.row of the array
 //        let friendRequest: PFObject = self.friendRequestsToCurrentUser[sender.tag] as PFObject
 //        
