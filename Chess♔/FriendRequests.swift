@@ -10,31 +10,32 @@
 import UIKit
 import Parse
 
-var userFriends = [""]
 var request = PFObject(className: "FriendRequest")
 var friends = PFObject(className: "Friends")
-
+var userToAdd = "1"
 
 
 class FriendRequests: UIViewController {
+    
+    var userFriends = NSMutableArray()
 
     @IBOutlet weak var userInputTextField: UITextField!
     
     override func viewWillAppear(animated: Bool) {
         
-        let requestQuery = PFQuery(className:"FriendRequest")
+        let loadFriendsQuery = PFQuery(className: "Friends")
         if let user = PFUser.currentUser() {
-            requestQuery.whereKey("toUser", equalTo: user)
-            
-            print("success!!")
+            loadFriendsQuery.whereKey("user", equalTo: user)
+            loadFriendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error:NSError?) -> Void in
+                if let friends = friends  as? [PFObject]{
+                    for friends in friends {
+                    self.userFriends = friends["friends"] as! NSMutableArray
+                        print("user friends is \(self.userFriends)")
+                    }
+                }
+            })
         }
-        let friendsQuery = PFQuery(className: "Friends")
-        if let user = PFUser.currentUser() {
-            friendsQuery.whereKey("user", equalTo: user)
-          //  userFriends = (friends["friends"] as? Array)!
-//            var r = friends["friends"]
-//            userFriends = Array(arrayLiteral: r)
-        }
+        
     }
     
     override func viewDidLoad() {
@@ -51,7 +52,7 @@ class FriendRequests: UIViewController {
     
     @IBAction func sendButton(sender: AnyObject) {
         
-        request["fromUser"] = String(PFUser.currentUser())
+        request["fromUser"] = PFUser.currentUser()
         request["toUser"] = userInputTextField.text
         request["status"] = "pending"
         
@@ -68,40 +69,39 @@ class FriendRequests: UIViewController {
 
     @IBAction func handleAcceptButtonPressed(sender: AnyObject) {
         
-        friends["user"] = PFUser.currentUser()
-        userFriends.append(String(request["fromUser"]))
-        friends["friends"] = userFriends
+        let requestQuery = PFQuery(className:"FriendRequest")
+        if let user = PFUser.currentUser() {
+            requestQuery.whereKey("fromUser", equalTo: userToAdd)
+            requestQuery.findObjectsInBackgroundWithBlock({ (toUser:[AnyObject]?, error:NSError?) -> Void in
+                
+                if error == nil {
+                    for request in toUser! {
+                        
+                        self.userFriends.addObject(request["fromUser"] as! String)
+                        print(self.userFriends)
+                    }
+                }
+            })
+        }
         
-        friends.saveInBackground()
-        print("the usernam is")
-        print(userFriends[1])
-        
-        //
-//        //the buttons tag stores the indexPath.row of the array
-//        let friendRequest: PFObject = self.friendRequestsToCurrentUser[sender.tag] as PFObject
-//        
-//        let fromUser: PFUser = friendRequest[FriendRequestKeyFrom] as PFUser
-//        
-//        //call the cloud code function that adds the current user to the user who sent the request and pass in the friendRequest id as a parameter
-//        PFCloud.callFunctionInBackground("addFriendToFriendsRelation", withParameters: ["friendRequest": friendRequest.objectId]) { (object:AnyObject!, error: NSError!) -> Void in
-//            
-//            //add the person who sent the request as a friend of the current user
-//            let friendsRelation: PFRelation = self.currentUser.relationForKey(UserKeyFriends)
-//            friendsRelation.addObject(fromUser)
-//            self.currentUser.saveInBackgroundWithBlock({ (succeeded: Bool, error: NSError!) -> Void in
-//                
-//                if succeeded {
-//                    
-//                    
-//                    
-//                } else {
-//                    
-//                    Utilities.handleError(error)
-//                }
-//            })
-//        }
-        
-    }
-    
+        let friendsQuery = PFQuery(className: "Friends")
+        if let user = PFUser.currentUser() {
+            friendsQuery.whereKey("user", equalTo: user)
+            friendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
 
+                if error == nil {
+                    if let friends = friends as? [PFObject]{
+                        for friends in friends {
+                            
+                            friends["friends"] = self.userFriends
+                            friends.saveInBackground()
+                        }
+                    }
+                }
+                else {
+                    print("annerror accured")
+                }
+            })
+        }
+    }
 }
