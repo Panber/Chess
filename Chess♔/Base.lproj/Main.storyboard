@@ -806,11 +806,11 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="70" id="AO9-08-HbD" customClass="UserTableViewCell" customModule="Chess_" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="70" id="AO9-08-HbD" customClass="UserTableViewCell" customModule="Chess_" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AO9-08-HbD" id="ZYG-4u-DdI">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="381" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9sN-ch-N56">
@@ -821,7 +821,7 @@
                                                     <rect key="frame" x="106" y="8" width="225" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="19"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2d-7F-zNR">
@@ -838,6 +838,7 @@
                                         <connections>
                                             <outlet property="userProfileImage" destination="9sN-ch-N56" id="nTg-7t-MzN"/>
                                             <outlet property="username" destination="hqL-nq-gch" id="qqQ-er-X2r"/>
+                                            <segue destination="om4-fo-GZo" kind="push" id="Xtj-59-2Ij"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -876,6 +877,51 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1899" y="1891"/>
+        </scene>
+        <!--Users Profile Page-->
+        <scene sceneID="nzh-R6-0a3">
+            <objects>
+                <tableViewController id="om4-fo-GZo" customClass="UsersProfilePage" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qER-d1-aS7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="KOt-AF-2Vi">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="238" id="MEt-wV-n2u">
+                                        <rect key="frame" x="0.0" y="64" width="414" height="238"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MEt-wV-n2u" id="bkZ-fg-CQf">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="237"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="slogen.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="8zf-Ww-0e3">
+                                                    <rect key="frame" x="167" y="31" width="80" height="80"/>
+                                                    <animations/>
+                                                </imageView>
+                                            </subviews>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="om4-fo-GZo" id="A3i-Je-I1g"/>
+                            <outlet property="delegate" destination="om4-fo-GZo" id="JoG-Xi-xUe"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="J0w-Op-SfS"/>
+                    <connections>
+                        <outlet property="profilePicture" destination="8zf-Ww-0e3" id="Gjy-XP-lRM"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o2K-dl-fOF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2494" y="1891"/>
         </scene>
         <!--Friend Requests-->
         <scene sceneID="g9f-Gt-Pwr">
@@ -1184,6 +1230,7 @@
         <image name="LightModePreview.png" width="1472" height="1490"/>
         <image name="clack and white board with half boarder copy.png" width="2000" height="2096"/>
         <image name="profileTabBarIcon.png" width="30" height="30"/>
+        <image name="slogen.jpg" width="344" height="338"/>
         <image name="testScrollVoew.png" width="381" height="200"/>
     </resources>
 </document>
