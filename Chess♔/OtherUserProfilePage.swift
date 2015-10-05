@@ -9,16 +9,12 @@
 import UIKit
 import Parse
 
-var contentView = UIView()
 
 class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView!
     
     override func viewWillAppear(animated: Bool) {
         setUpProfile()
-    }
-    override func viewWillDisappear(animated: Bool) {
-        //removeProfile()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +42,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         //creating the view
         //  var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
-        contentView = UIView(frame: CGRectMake(10, 75, screenWidth - 20 , screenHeight/7))
+        let contentView: UIView = UIView(frame: CGRectMake(10, 75, screenWidth - 20 , screenHeight/7))
         contentView.layer.cornerRadius = cornerRadius
         if darkMode { contentView.backgroundColor = UIColor(red: 0.12, green: 0.12 , blue: 0.12, alpha: 1) }
         else { contentView.backgroundColor = UIColor.whiteColor() }
@@ -103,12 +99,6 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         contentView.addSubview(label2)
     }
     
-    
-    func removeProfile() {
-        contentView.removeFromSuperview()
-        
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -117,6 +107,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     
     /*
     // MARK: - Navigation
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     // Get the new view controller using segue.destinationViewController.

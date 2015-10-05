@@ -18,19 +18,19 @@ var usersFrom = String()
 class FriendRequests: UIViewController {
     
     var userFriends = NSMutableArray()
-
+    
     @IBOutlet weak var userInputTextField: UITextField!
     
     override func viewWillAppear(animated: Bool) {
         
-
+        
         let loadFriendsQuery = PFQuery(className: "Friends")
         if let user = PFUser.currentUser() {
             loadFriendsQuery.whereKey("user", equalTo: user)
             loadFriendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error:NSError?) -> Void in
                 if let friends = friends  as? [PFObject]{
                     for friends in friends {
-                    self.userFriends = friends["friends"] as! NSMutableArray
+                        self.userFriends = friends["friends"] as! NSMutableArray
                         print("user friends is \(self.userFriends)")
                     }
                 }
@@ -41,11 +41,11 @@ class FriendRequests: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -71,7 +71,7 @@ class FriendRequests: UIViewController {
         }
         view.endEditing(true)
     }
-
+    
     
     //accept request given
     @IBAction func handleAcceptButtonPressed(sender: AnyObject) {
@@ -136,7 +136,7 @@ class FriendRequests: UIViewController {
         if let user = PFUser.currentUser() {
             friendsQuery.whereKey("user", equalTo: user)
             friendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
-
+                
                 if error == nil {
                     if let friends = friends as? [PFObject]{
                         for friends in friends {
@@ -151,6 +151,6 @@ class FriendRequests: UIViewController {
                 }
             })
         }
-
+        
     }
 }
