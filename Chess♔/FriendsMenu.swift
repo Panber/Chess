@@ -87,9 +87,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         // Declare user object and set cell text to username
         var user:PFUser = users[indexPath.row] as! PFUser
         
-        NSUserDefaults.standardUserDefaults().setObject(user, forKey: "user_pressed")
-        NSUserDefaults.standardUserDefaults().synchronize()
-        
         cell.username.text = user["username"] as! String
         
         let profilePictureObject = user["profile_picture"] as? PFFile
@@ -101,6 +98,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 if(imageData != nil)
                 {
                     cell.userProfileImage.image = UIImage(data: imageData!)
+                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "user_pressed")
+                    NSUserDefaults.standardUserDefaults().synchronize()
                     print(cell.userProfileImage.image)
                 }
                 

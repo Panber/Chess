@@ -897,7 +897,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="237"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="slogen.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="8zf-Ww-0e3">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8zf-Ww-0e3">
                                                     <rect key="frame" x="167" y="31" width="80" height="80"/>
                                                     <animations/>
                                                 </imageView>
@@ -1230,7 +1230,6 @@
         <image name="LightModePreview.png" width="1472" height="1490"/>
         <image name="clack and white board with half boarder copy.png" width="2000" height="2096"/>
         <image name="profileTabBarIcon.png" width="30" height="30"/>
-        <image name="slogen.jpg" width="344" height="338"/>
         <image name="testScrollVoew.png" width="381" height="200"/>
     </resources>
 </document>

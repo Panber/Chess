@@ -34,21 +34,9 @@ class UsersProfilePage: UITableViewController {
         self.profilePicture.layer.borderWidth = 2
         self.profilePicture.layer.borderColor = UIColor.whiteColor().CGColor
 
-        var usernameOutlet = NSUserDefaults.standardUserDefaults().objectForKey("user_pressed") as! PFUser
+        var usernameOutlet = NSUserDefaults.standardUserDefaults().objectForKey("user_pressed") as! NSData
         
-        let profilePictureObject = usernameOutlet["profile_picture"] as? PFFile
-        
-        if(profilePictureObject != nil)
-        {
-            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                
-                if(imageData != nil)
-                {
-                    self.profilePicture.image = UIImage(data:imageData!)
-                }
-                
-            }
-        }
+        self.profilePicture.image = UIImage(data: usernameOutlet)
         
     }
 
