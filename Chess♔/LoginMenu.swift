@@ -293,7 +293,6 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
                     
 //                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Sett", bundle: nil)
 //                    var mainPage:MainPageViewcontroller = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
-                    let userN:String? =  NSUserDefaults.standardUserDefaults().stringForKey("user_name")
                     
                     if(userN != nil)
                     {
