@@ -50,7 +50,11 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(contentView)
         
         //setting up bc image of profile pic
+        if NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") == nil {
+        sleep(5)
+        }
         let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") as! NSData
+        
         let profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.height, contentView.frame.size.height))
         profilePicBlur.image = UIImage(data: imageData)
         profilePicBlur.clipsToBounds = true

@@ -86,9 +86,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         // Declare user object and set cell text to username
         let user:PFUser = users[indexPath.row] as! PFUser
-        
         cell.username.text = user["username"] as? String
-        NSUserDefaults.standardUserDefaults().setObject(cell.username.text, forKey: "other_username")
+
         
 //        var userRating = user["ratingg"] as? String
 //        NSUserDefaults.standardUserDefaults().setObject(userRating, forKey: "other_userRating")
@@ -102,8 +101,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 if(imageData != nil)
                 {
                     cell.userProfileImage.image = UIImage(data: imageData!)
-                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
-                    NSUserDefaults.standardUserDefaults().synchronize()
+                   // NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
+                   // NSUserDefaults.standardUserDefaults().synchronize()
                     print(cell.userProfileImage.image)
                 }
                 
@@ -120,14 +119,43 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         tableView.hidden = false
     }
     
-     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        
+//        
+//        
+//        let currentCell = tableView.cellForRowAtIndexPath(indexPath)
+//        
+//       
+//        
+//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+//        
+//        
+//        
+//    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
+        
+        let user:PFUser = users[indexPath.row] as! PFUser
+        
+        cell.username.text = user["username"] as? String
+        NSUserDefaults.standardUserDefaults().setObject(cell.username.text, forKey: "other_username")
+        
+        let profilePictureObject = user["profile_picture"] as? PFFile
         
         
-        
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        
-        
+        if(profilePictureObject != nil)
+        {
+            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                
+                if(imageData != nil)
+                {
+                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
+                    self.showViewController(vc as! UIViewController, sender: vc)
+                }
+                
+            }
+        }
     }
     
      func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
