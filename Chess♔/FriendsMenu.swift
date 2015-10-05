@@ -122,7 +122,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let row = tableView.cellForRowAtIndexPath(indexPath)
         
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
