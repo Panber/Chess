@@ -294,7 +294,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
 //                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Sett", bundle: nil)
 //                    var mainPage:MainPageViewcontroller = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
                     
-                    if(userN != nil)
+                    if(userName != nil)
                     {
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
                     self.showViewController(vc as! UIViewController, sender: vc)
