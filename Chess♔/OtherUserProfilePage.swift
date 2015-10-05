@@ -47,6 +47,11 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
             profilePicBlur.frame.size.height = contentView.frame.size.height + yPos
             profilePicBlur.contentMode = .ScaleAspectFill
         
+        scrollView.contentOffset.y = 10
+
+        UIView.animateWithDuration(1.0) { () -> Void in
+            self.scrollView.contentOffset.y = 0
+        }
         
     }
 
