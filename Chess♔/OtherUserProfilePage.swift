@@ -55,20 +55,21 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         }
         let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") as! NSData
         
-        let profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.height, contentView.frame.size.height))
+        profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height))
         profilePicBlur.image = UIImage(data: imageData)
         profilePicBlur.clipsToBounds = true
+        profilePicBlur.contentMode = .ScaleAspectFill
         contentView.addSubview(profilePicBlur)
         
         //bluring bc of profile pic
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
         if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-        else { visualEffectView.effect = UIBlurEffect(style: .Light) }
+        else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
         visualEffectView.frame = profilePicBlur.bounds
         profilePicBlur.addSubview(visualEffectView)
         
         //adding the profile pic
-        let profilePic = UIImageView(frame: CGRectMake(7.5, 7.5, (contentView.frame.size.height) - 15, (contentView.frame.size.height) - 15))
+        let profilePic = UIImageView(frame: CGRectMake(20, 20, (contentView.frame.size.height) - 40, (contentView.frame.size.height) - 40))
         profilePic.layer.cornerRadius = profilePic.frame.size.height / 2
         profilePic.clipsToBounds = true
         profilePic.layer.borderColor = UIColor.whiteColor().CGColor
@@ -78,7 +79,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         contentView.addSubview(profilePic)
         
         //adding username to view
-        let label = UILabel(frame: CGRectMake(profilePicBlur.frame.size.width + 20, contentView.frame.size.height/8, 250, 40))
+        let label = UILabel(frame: CGRectMake(contentView.frame.size.height  + 15, contentView.frame.size.height/5, 250, 40))
         label.textAlignment = NSTextAlignment.Left
         label.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username")as? String
         label.font = UIFont(name: "Didot-Bold", size: 30)
@@ -97,6 +98,11 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         if darkMode { label2.textColor = UIColor.whiteColor() }
         else { label2.textColor = UIColor.blackColor() }
         contentView.addSubview(label2)
+        
+        
+        
+
+        
     }
     
     override func didReceiveMemoryWarning() {
