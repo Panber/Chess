@@ -291,7 +291,7 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
                     NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "user_name")
                     NSUserDefaults.standardUserDefaults().synchronize()
                     
-//                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Sett", bundle: nil)
+//                    let maxinStoryboard: UIStoryboard = UIStoryboard(name: "Sett", bundle: nil)
 //                    var mainPage:MainPageViewcontroller = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
                     
                     if(userName != nil)

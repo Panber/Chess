@@ -82,12 +82,16 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
+        let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
         // Declare user object and set cell text to username
-        var user:PFUser = users[indexPath.row] as! PFUser
+        let user:PFUser = users[indexPath.row] as! PFUser
         
-        cell.username.text = user["username"] as! String
+        cell.username.text = user["username"] as? String
+        NSUserDefaults.standardUserDefaults().setObject(cell.username.text, forKey: "other_username")
+        
+//        var userRating = user["ratingg"] as? String
+//        NSUserDefaults.standardUserDefaults().setObject(userRating, forKey: "other_userRating")
         
         let profilePictureObject = user["profile_picture"] as? PFFile
         
@@ -98,7 +102,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 if(imageData != nil)
                 {
                     cell.userProfileImage.image = UIImage(data: imageData!)
-                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "user_pressed")
+                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
                     NSUserDefaults.standardUserDefaults().synchronize()
                     print(cell.userProfileImage.image)
                 }
@@ -118,7 +122,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        let row = tableView.cellForRowAtIndexPath(indexPath)
+        
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        
         
     }
     
