@@ -28,6 +28,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
         
         print("the current installation is \(PFInstallation.currentInstallation())")
 
+        
+
         //check this before launching!!!!!!
 //        //Checking if first launch
 //        let notFirstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
@@ -40,7 +42,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
 //            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
 //            self.showViewController(vc as! UIViewController, sender: vc)
 //            
-//            
+//        let friends = PFObject(className: "Friends")
+//        friends["user"] = PFUser.currentUser()
+//        friends["username"] = PFUser.currentUser()?.username
+//        friends["friends"] = []
+//        friends.saveInBackground()
+
+//
 //        }
         
         //...and remove this after a while

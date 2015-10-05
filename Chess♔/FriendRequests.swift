@@ -12,7 +12,7 @@ import Parse
 
 var request = PFObject(className: "FriendRequest")
 var friends = PFObject(className: "Friends")
-var userToAdd = "1"
+var usersFrom = String()
 
 
 class FriendRequests: UIViewController {
@@ -23,6 +23,7 @@ class FriendRequests: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         
+
         let loadFriendsQuery = PFQuery(className: "Friends")
         if let user = PFUser.currentUser() {
             loadFriendsQuery.whereKey("user", equalTo: user)
@@ -50,11 +51,17 @@ class FriendRequests: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //send request to user
     @IBAction func sendButton(sender: AnyObject) {
         
-        request["fromUser"] = PFUser.currentUser()
-        request["toUser"] = userInputTextField.text
+        request["fromUser"] = PFUser.currentUser()?.username
+        request["toUserr"] = userInputTextField.text
         request["status"] = "pending"
+        
+        let toUserQuery = PFQuery(className: "FriendRequest")
+        toUserQuery.findObjectsInBackgroundWithBlock { (request:[AnyObject]?, error:NSError?) -> Void in
+            
+        }
         
         request.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
             if success {
@@ -62,23 +69,65 @@ class FriendRequests: UIViewController {
             }
             else {}
         }
-        
         view.endEditing(true)
-        
     }
 
+    
+    //accept request given
     @IBAction func handleAcceptButtonPressed(sender: AnyObject) {
+        
         let requestQuery = PFQuery(className:"FriendRequest")
         if let user = PFUser.currentUser() {
-            requestQuery.whereKey("fromUser", equalTo: userToAdd)
+            requestQuery.whereKey("toUserr", equalTo: user.username!)
             requestQuery.findObjectsInBackgroundWithBlock({ (toUser:[AnyObject]?, error:NSError?) -> Void in
                 
                 if error == nil {
+                    
+                    
                     for request in toUser! {
                         
                         self.userFriends.addObject(request["fromUser"] as! String)
                         print(self.userFriends)
+                        print("accepeted")
                     }
+                }
+            })
+        }
+        
+        let requestQuery2 = PFQuery(className: "FriendRequest")
+        if let user = PFUser.currentUser() {
+            requestQuery2.whereKey("toUserr", equalTo: user.username!)
+            requestQuery2.findObjectsInBackgroundWithBlock({ (request:[AnyObject]?, error:NSError?) -> Void in
+                
+                if error == nil {
+                    
+                    
+                    for request in request! {
+                        usersFrom = request["fromUser"] as! String
+                        
+                        request.deleteEventually()
+                    }
+                    
+                    let userFriendsQuery = PFQuery(className: "Friends")
+                    userFriendsQuery.whereKey("username", equalTo: usersFrom)
+                    userFriendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
+                        
+                        if error == nil {
+                            if let friends = friends as? [PFObject]{
+                                for friends in friends {
+                                    
+                                    friends["friends"]?.addObject((PFUser.currentUser()?.username)!)
+                                    let r = friends["friends"]
+                                    print("his friends are \(r)")
+                                    friends.saveInBackground()
+                                    usersFrom = ""
+                                }
+                            }
+                        }
+                        else {
+                            print("annerror accured")
+                        }
+                    })
                 }
             })
         }
@@ -102,5 +151,6 @@ class FriendRequests: UIViewController {
                 }
             })
         }
+
     }
 }
