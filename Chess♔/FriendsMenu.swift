@@ -70,14 +70,14 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     // MARK - Table View
     
-     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return users.count
-
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -87,10 +87,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         // Declare user object and set cell text to username
         let user:PFUser = users[indexPath.row] as! PFUser
         cell.username.text = user["username"] as? String
-
         
-//        var userRating = user["ratingg"] as? String
-//        NSUserDefaults.standardUserDefaults().setObject(userRating, forKey: "other_userRating")
+        
+        //        var userRating = user["ratingg"] as? String
+        //        NSUserDefaults.standardUserDefaults().setObject(userRating, forKey: "other_userRating")
         
         let profilePictureObject = user["profile_picture"] as? PFFile
         
@@ -101,8 +101,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 if(imageData != nil)
                 {
                     cell.userProfileImage.image = UIImage(data: imageData!)
-                   // NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
-                   // NSUserDefaults.standardUserDefaults().synchronize()
+                    // NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
+                    // NSUserDefaults.standardUserDefaults().synchronize()
                     print(cell.userProfileImage.image)
                 }
                 
@@ -119,19 +119,19 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         tableView.hidden = false
     }
     
-//     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        
-//        
-//        
-//        let currentCell = tableView.cellForRowAtIndexPath(indexPath)
-//        
-//       
-//        
-//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-//        
-//        
-//        
-//    }
+    //     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    //
+    //
+    //
+    //        let currentCell = tableView.cellForRowAtIndexPath(indexPath)
+    //
+    //
+    //
+    //        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    //
+    //
+    //
+    //    }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
@@ -158,7 +158,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         }
     }
     
-     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 70
     }
     
@@ -166,17 +166,17 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
         
-         tableView.hidden = false
+        tableView.hidden = false
         
         return true
     }
     
-//    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-//        
-//        self.searchUsers((self.searchDisplayController?.searchBar.text)!)
-//        
-//        return true
-//    }
+    //    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+    //
+    //        self.searchUsers((self.searchDisplayController?.searchBar.text)!)
+    //
+    //        return true
+    //    }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         tableView.hidden = true
@@ -212,10 +212,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
             self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
-
+            
             
         }
-
+        
     }
     
 }

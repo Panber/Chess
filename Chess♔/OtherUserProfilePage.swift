@@ -13,7 +13,7 @@ var contentView = UIView()
 
 class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView!
-
+    
     override func viewWillAppear(animated: Bool) {
         setUpProfile()
     }
@@ -22,7 +22,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         //setting scrollview
         view.frame.size.height = 1000
@@ -37,13 +37,13 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         view.addSubview(scrollView)
         scrollView.showsVerticalScrollIndicator = false
         
- 
+        
         
     }
-
+    
     func setUpProfile () {
-    
-    
+        
+        
         //creating the view
         //  var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
         contentView = UIView(frame: CGRectMake(10, 75, screenWidth - 20 , screenHeight/7))
@@ -55,7 +55,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         //setting up bc image of profile pic
         if NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") == nil {
-        sleep(5)
+            sleep(5)
         }
         let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") as! NSData
         
@@ -105,8 +105,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     
     
     func removeProfile() {
-    contentView.removeFromSuperview()
-    
+        contentView.removeFromSuperview()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -114,15 +114,14 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
