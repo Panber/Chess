@@ -22,7 +22,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var refreshControl:UIRefreshControl!
     
     override func viewWillDisappear(animated: Bool) {
         view.endEditing(true)
@@ -50,11 +49,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         addTop10World()
         
     }
-    
-//    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-//       
-//        return true
-//    }
+
     
     
     //func to set up people in top10WorldView
@@ -93,10 +88,13 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 for object in objects! {
                     if objects?.count != 0 {
                     self.users.addObject(object)
-                        self.tableView.reloadData()
+                        
                     }
                 }
-               // print(self.users.count)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+                    })
+                print(self.users.count)
             }
         }
         
@@ -150,6 +148,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 //       
 //    }
 //    
+    
+    
+    
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        return true
+    }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
