@@ -1,10 +1,14 @@
-
 //
-//  FriendRequests.swift
-//  Chess♔
+////
+////  FriendRequests.swift
+////  Chess♔
+////
+////  Created by Johannes Berge on 01/10/15.
+////  Copyright © 2015 Panber. All rights reserved.
+////
 //
-//  Created by Johannes Berge on 01/10/15.
-//  Copyright © 2015 Panber. All rights reserved.
+//import UIKit
+//import Parse
 //
 
 import UIKit

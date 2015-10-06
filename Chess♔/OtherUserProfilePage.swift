@@ -103,9 +103,54 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         else { label2.textColor = UIColor.blackColor() }
         contentView.addSubview(label2)
         
+        //adding freinds request button
+        let friends = PFQuery(className: "friends")
+        if let user = PFUser.currentUser() {
+        friends.whereKey("user", equalTo: user)
+        friends.whereKey("friends", containsString: NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String)
+            
+        }
         
         
+        
+        //if not friend:
+        friendRequestButton.setTitle("Add as friend", forState: .Normal)
+        friendRequestButton.titleLabel?.font = UIFont(name: "Didot-Bold", size: 18)
+        friendRequestButton.layer.borderWidth = 0
+        friendRequestButton.layer.cornerRadius = 0
+        friendRequestButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        friendRequestButton.layer.borderColor = UIColor.blueColor().CGColor
+        friendRequestButton.frame.origin.x = 0
+        friendRequestButton.frame.origin.y
+         = contentView.frame.height + 20 + contentView.frame.origin.y
+        friendRequestButton.frame.size.height = 44
+        friendRequestButton.frame.size.width = screenWidth
+        friendRequestButton.backgroundColor = UIColor.whiteColor()
+        friendRequestButton.userInteractionEnabled = true
+        friendRequestButton.addTarget(self, action: "friendRequestPressed:", forControlEvents: .TouchUpInside)
+        scrollView.addSubview(friendRequestButton)
 
+        //adding stats label
+        let label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + 20 + contentView.frame.origin.y + 65, 150, 25))
+        label3.textAlignment = NSTextAlignment.Left
+        label3.text = "Statisitics"
+        label3.font = UIFont(name: "Didot-Italic", size: 16)
+        if darkMode { label3.textColor = UIColor.lightTextColor() }
+        else { label3.textColor = UIColor.lightGrayColor() }
+        scrollView.addSubview(label3)
+        
+        //adding won: label
+        let label4 = UILabel(frame: CGRectMake(0, contentView.frame.height + 20 + contentView.frame.origin.y + 65 + 25, screenWidth, 45))
+        label4.textAlignment = NSTextAlignment.Left
+        label4.text = "Won"
+        label4.backgroundColor = UIColor.whiteColor()
+        label4.font = UIFont(name: "Didot-Italic", size: 16)
+        if darkMode { label4.textColor = UIColor.lightTextColor() }
+        else { label4.textColor = UIColor.lightGrayColor() }
+        scrollView.addSubview(label4)
+        
+        
+        
         
     }
     
