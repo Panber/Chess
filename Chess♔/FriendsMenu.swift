@@ -21,6 +21,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    var refreshControl:UIRefreshControl!
+    
     override func viewWillDisappear(animated: Bool) {
         view.endEditing(true)
     }
@@ -46,14 +48,14 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
     }
     
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-        return true
-    }
+//    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+//       
+//        return true
+//    }
     
     // Func that searches for user with key and stores it in an array
     func searchUsers() {
         
-        //self.tableView.reloadData()
         var query: PFQuery = PFQuery(className:"_User")
         query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
@@ -61,13 +63,15 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 if objects?.count != 0 {
                 self.users.removeAllObjects() // <- I'm not sure where to put this yet
                 }
-                self.tableView.reloadData()
+         //       self.tableView.reloadData()
+                print(objects?.count)
                 for object in objects! {
                     if objects?.count != 0 {
                     self.users.addObject(object)
+                        self.tableView.reloadData()
                     }
                 }
-                self.tableView.reloadData()
+               // print(self.users.count)
             }
         }
         
@@ -116,10 +120,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         tableView.hidden = false
     }
     
-    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
-    }
-    
+//    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+//       
+//    }
+//    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
@@ -141,6 +145,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                             if error == nil {
                                 let image:UIImage = UIImage(data: imageData!)!
                                 cell.userProfileImage.image = image as! UIImage
+                                
+                               // tableView.reloadInputViews()
                             }
                             
                         }
@@ -218,7 +224,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
-        //searchUsers()
     }
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
