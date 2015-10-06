@@ -15,6 +15,9 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     var profilePicBlur = UIImageView()
     
     override func viewWillAppear(animated: Bool) {
+//  setUpProfile()
+    }
+    override func viewDidAppear(animated: Bool) {
         setUpProfile()
     }
     override func viewDidLoad() {
@@ -56,12 +59,12 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         }
         let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") as! NSData
         
-        profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height))
+        profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height+1))
+        profilePicBlur.contentMode = .ScaleAspectFill
         profilePicBlur.image = UIImage(data: imageData)
         profilePicBlur.clipsToBounds = true
-        profilePicBlur.contentMode = .ScaleAspectFill
         contentView.addSubview(profilePicBlur)
-        
+
         //bluring bc of profile pic
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
         if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
@@ -90,7 +93,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         //adding updated since label
-        let label2 = UILabel(frame: CGRectMake(profilePicBlur.frame.size.width + 20, contentView.frame.size.height - contentView.frame.size.height/2.4, 100, 40))
+        let label2 = UILabel(frame: CGRectMake(contentView.frame.size.height  + 15, contentView.frame.size.height - contentView.frame.size.height/2.4, 100, 40))
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
