@@ -46,14 +46,15 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     // Func that searches for user with key and stores it in an array
     func searchUsers() {
         
-        
+        //self.tableView.reloadData()
         var query: PFQuery = PFQuery(className:"_User")
         query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
         
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
+                self.users.removeAllObjects() // <- I'm not sure where to put this yet
                 for object in objects! {
-                    self.users.removeAllObjects()
+                    
                     self.users.addObject(object)
                     
                 }
@@ -62,20 +63,20 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         }
         
         
-//        query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
-//        query.orderByAscending("username")
-//        query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-//            if error == nil {
-//                self.users.removeAllObjects()
-//                self.users.addObjectsFromArray(objects!)
-//                self.tableView.reloadData()
-//                //print(search_string)
-//            }
-//            else {
-//                print("error")
-//            }
-//            
-//        }
+        //        query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
+        //        query.orderByAscending("username")
+        //        query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
+        //            if error == nil {
+        //                self.users.removeAllObjects()
+        //                self.users.addObjectsFromArray(objects!)
+        //                self.tableView.reloadData()
+        //                //print(search_string)
+        //            }
+        //            else {
+        //                print("error")
+        //            }
+        //
+        //        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -101,6 +102,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         tableView.hidden = false
     }
     
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
@@ -118,12 +123,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     
                     if let profileImage:PFFile = user["profile_picture"] as? PFFile {
                         profileImage.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                        
+                            
                             if error == nil {
                                 let image:UIImage = UIImage(data: imageData!)!
                                 cell.userProfileImage.image = image as! UIImage
                             }
-                        
+                            
                         }
                     }
                     
