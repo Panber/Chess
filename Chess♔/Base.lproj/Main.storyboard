@@ -769,7 +769,7 @@
                                     <constraint firstAttribute="bottom" secondItem="eRa-wG-i4w" secondAttribute="bottom" id="YH5-kJ-XBT"/>
                                 </constraints>
                             </scrollView>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-dp-8si">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-dp-8si">
                                 <rect key="frame" x="0.0" y="108" width="600" height="579"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -791,13 +791,13 @@
                                                         <constraint firstAttribute="width" constant="60" id="noS-Hi-88W"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqL-nq-gch">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqL-nq-gch">
                                                     <rect key="frame" x="106" y="8" width="225" height="21"/>
                                                     <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="225" id="2ft-ay-jAq"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="19"/>
+                                                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="19"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -807,7 +807,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="165" id="KfN-qt-TDp"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="Didot-Italic" family="Didot" pointSize="14"/>
                                                     <color key="textColor" red="0.53280431939999995" green="0.53280431939999995" blue="0.53280431939999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
