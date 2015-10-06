@@ -46,20 +46,26 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
     }
     
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        return true
+    }
+    
     // Func that searches for user with key and stores it in an array
     func searchUsers() {
         
         //self.tableView.reloadData()
         var query: PFQuery = PFQuery(className:"_User")
         query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
-        
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
+                if objects?.count != 0 {
                 self.users.removeAllObjects() // <- I'm not sure where to put this yet
+                }
+                self.tableView.reloadData()
                 for object in objects! {
-                    
+                    if objects?.count != 0 {
                     self.users.addObject(object)
-                    
+                    }
                 }
                 self.tableView.reloadData()
             }
@@ -101,7 +107,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.characters.count > 0 {
         searchUsers()
+        }
+        if searchText.characters.count == 0 {
+            self.users.removeAllObjects()
+        }
         tableView.hidden = false
     }
     
@@ -138,7 +149,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 }
             }
         }
-        
         return cell
     }
     
@@ -208,7 +218,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
-        searchUsers()
+        //searchUsers()
     }
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
