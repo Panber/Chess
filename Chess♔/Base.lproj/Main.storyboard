@@ -886,6 +886,7 @@
                     <connections>
                         <outlet property="grossing" destination="9rG-85-TBI" id="E79-Ji-Iuh"/>
                         <outlet property="searchDisplayController" destination="xRN-YF-Kwd" id="aIg-u7-pXq"/>
+                        <outlet property="searchText" destination="mZt-ni-vmc" id="AKU-Ca-hrN"/>
                         <outlet property="tableView" destination="iVT-dp-8si" id="NxV-Lh-Wsp"/>
                         <outlet property="top10Friends" destination="RZi-u0-QVD" id="zkx-Hm-gBz"/>
                         <outlet property="top10World" destination="YOz-dR-tdf" id="7jx-vf-Ig7"/>

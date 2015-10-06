@@ -12,12 +12,13 @@ import Parse
 class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate{
     
     // Array for users that are being searched for
-    var users = NSMutableArray()
+    var users:NSMutableArray = NSMutableArray()
     
     @IBOutlet weak var top10World: UIScrollView!
     @IBOutlet weak var top10Friends: UIScrollView!
     @IBOutlet weak var grossing: UIScrollView!
     
+    @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -43,23 +44,38 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     }
     
     // Func that searches for user with key and stores it in an array
-    func searchUsers(search_string: String) {
+    func searchUsers() {
+        
         
         var query: PFQuery = PFQuery(className:"_User")
+        query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
         
-        query.whereKey("username", matchesRegex:search_string, modifiers:"i")
-        query.orderByAscending("username")
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
-                self.users.removeAllObjects()
-                self.users.addObjectsFromArray(objects!)
-                //self.tableView.reloadData()
+                for object in objects! {
+                    self.users.removeAllObjects()
+                    self.users.addObject(object)
+                    
+                }
+                self.tableView.reloadData()
             }
-            else {
-                print("error")
-            }
-            
         }
+        
+        
+//        query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
+//        query.orderByAscending("username")
+//        query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
+//            if error == nil {
+//                self.users.removeAllObjects()
+//                self.users.addObjectsFromArray(objects!)
+//                self.tableView.reloadData()
+//                //print(search_string)
+//            }
+//            else {
+//                print("error")
+//            }
+//            
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,43 +96,42 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
     }
     
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        searchUsers()
+        tableView.hidden = false
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
         // Declare user object and set cell text to username
-        let user:PFUser = users[indexPath.row] as! PFUser
-        cell.username.text = user["username"] as? String
+        let users:PFObject = self.users.objectAtIndex(indexPath.row) as! PFObject
         
+        var findUserName: PFQuery = PFQuery(className:"_User")
+        findUserName.whereKey("username", containsString: searchText.text)
         
-        //        var userRating = user["ratingg"] as? String
-        //        NSUserDefaults.standardUserDefaults().setObject(userRating, forKey: "other_userRating")
-        
-        let profilePictureObject = user["profile_picture"] as? PFFile
-        
-        if(profilePictureObject != nil)
-        {
-            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                
-                if(imageData != nil)
-                {
-                    cell.userProfileImage.image = UIImage(data: imageData!)
-                    // NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
-                    // NSUserDefaults.standardUserDefaults().synchronize()
-                    print(cell.userProfileImage.image)
+        findUserName.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
+            if (error == nil) {
+                if let user:PFUser = users as? PFUser {
+                    cell.username.text = user.username
+                    
+                    if let profileImage:PFFile = user["profile_picture"] as? PFFile {
+                        profileImage.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                        
+                            if error == nil {
+                                let image:UIImage = UIImage(data: imageData!)!
+                                cell.userProfileImage.image = image as! UIImage
+                            }
+                        
+                        }
+                    }
+                    
                 }
-                
             }
         }
         
         return cell
-    }
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.characters.count > 0 {
-            searchUsers(searchText)
-        }
-        tableView.hidden = false
     }
     
     //     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -185,6 +200,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
+        searchUsers()
     }
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
