@@ -51,6 +51,15 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
 //
 //        }
         
+        let user = PFObject(className: "User")
+        user["username"] = PFUser.currentUser()?.username
+        user["won"] = "0"
+        user["drawn"] = "0"
+        user["lost"] = "0"
+        user["rating"] = "100"
+        user.saveInBackground()
+        
+        
         //...and remove this after a while
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
                     self.showViewController(vc as! UIViewController, sender: vc)
