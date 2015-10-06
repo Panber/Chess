@@ -13,6 +13,7 @@ import Parse
 class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView!
     var profilePicBlur = UIImageView()
+    let friendRequestButton = UIButton()
     
     override func viewWillAppear(animated: Bool) {
 //  setUpProfile()
