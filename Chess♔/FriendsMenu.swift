@@ -47,11 +47,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         grossing.bounces = false
         
     }
-    
-//    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-//       
-//        return true
-//    }
+
     
     // Func that searches for user with key and stores it in an array
     func searchUsers() {
