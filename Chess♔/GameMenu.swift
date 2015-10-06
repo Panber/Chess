@@ -51,13 +51,28 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
 //
 //        }
         
-        let user = PFObject(className: "User")
-        user["username"] = PFUser.currentUser()?.username
-        user["won"] = "0"
-        user["drawn"] = "0"
-        user["lost"] = "0"
-        user["rating"] = "100"
-        user.saveInBackground()
+        //setting the different variables for the current user, remember to implement this in a firstload method
+            let users = PFQuery(className: "_User")
+            if let user = PFUser.currentUser() {
+                users.whereKey("username", equalTo: user.username!)
+                users.findObjectsInBackgroundWithBlock({ (users: [AnyObject]?, error: NSError?) -> Void in
+        
+                    if error == nil {
+                        if let users = users as? [PFObject]{
+                            for users in users {
+                                users["won"] = "0"
+                                users["drawn"] = "0"
+                                users["lost"] = "0"
+                                users["rating"] = "100"
+                                users.saveInBackground()
+                            }
+                        }
+                    }
+                    else {
+                        print("annerror accured")
+                    }
+                })
+            }
         
         
         //...and remove this after a while
