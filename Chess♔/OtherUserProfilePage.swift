@@ -72,7 +72,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         profilePicBlur.image = UIImage(data: imageData)
         profilePicBlur.clipsToBounds = true
         contentView.addSubview(profilePicBlur)
-
+        
         //bluring bc of profile pic
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
         if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
@@ -114,8 +114,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         //adding freinds request button
         let friends = PFQuery(className: "friends")
         if let user = PFUser.currentUser() {
-        friends.whereKey("user", equalTo: user)
-        friends.whereKey("friends", containsString: NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String)
+            friends.whereKey("user", equalTo: user)
+            friends.whereKey("friends", containsString: NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String)
             
         }
         
@@ -130,14 +130,14 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         friendRequestButton.layer.borderColor = UIColor.blueColor().CGColor
         friendRequestButton.frame.origin.x = 0
         friendRequestButton.frame.origin.y
-         = contentView.frame.height + 20 + contentView.frame.origin.y
+            = contentView.frame.height + 20 + contentView.frame.origin.y
         friendRequestButton.frame.size.height = 44
         friendRequestButton.frame.size.width = screenWidth
         friendRequestButton.backgroundColor = UIColor.whiteColor()
         friendRequestButton.userInteractionEnabled = true
         friendRequestButton.addTarget(self, action: "friendRequestPressed:", forControlEvents: .TouchUpInside)
         scrollView.addSubview(friendRequestButton)
-
+        
         //adding stats label
         let label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + 20 + contentView.frame.origin.y + 65, 150, 25))
         label3.textAlignment = NSTextAlignment.Left
