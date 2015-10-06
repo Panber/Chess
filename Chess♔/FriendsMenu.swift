@@ -46,14 +46,15 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     // Func that searches for user with key and stores it in an array
     func searchUsers() {
         
-        
+        //self.tableView.reloadData()
         var query: PFQuery = PFQuery(className:"_User")
         query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
         
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
+                self.users.removeAllObjects() // <- I'm not sure where to put this yet
                 for object in objects! {
-                    self.users.removeAllObjects()
+                    
                     self.users.addObject(object)
                     
                 }
@@ -99,6 +100,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         searchUsers()
         tableView.hidden = false
+    }
+    
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

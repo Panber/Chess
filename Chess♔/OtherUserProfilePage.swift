@@ -14,13 +14,20 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView!
     var profilePicBlur = UIImageView()
     let friendRequestButton = UIButton()
+    var contentView = UIView()
+    var request = PFObject(className: "FriendRequest")
+    
     
     override func viewWillAppear(animated: Bool) {
-//  setUpProfile()
+        //  setUpProfile()
     }
     override func viewDidAppear(animated: Bool) {
         setUpProfile()
     }
+    override func viewWillDisappear(animated: Bool) {
+        self.removeProfile()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,8 +54,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         //creating the view
         //  var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
-        let contentView: UIView = UIView(frame: CGRectMake(10, 75, screenWidth - 20 , screenHeight/7))
-        contentView.layer.cornerRadius = cornerRadius
+        contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
+        //contentView.layer.cornerRadius = cornerRadius
         if darkMode { contentView.backgroundColor = UIColor(red: 0.12, green: 0.12 , blue: 0.12, alpha: 1) }
         else { contentView.backgroundColor = UIColor.whiteColor() }
         contentView.clipsToBounds = true
@@ -65,7 +72,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         profilePicBlur.image = UIImage(data: imageData)
         profilePicBlur.clipsToBounds = true
         contentView.addSubview(profilePicBlur)
-
+        
         //bluring bc of profile pic
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
         if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
@@ -107,8 +114,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         //adding freinds request button
         let friends = PFQuery(className: "friends")
         if let user = PFUser.currentUser() {
-        friends.whereKey("user", equalTo: user)
-        friends.whereKey("friends", containsString: NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String)
+            friends.whereKey("user", equalTo: user)
+            friends.whereKey("friends", containsString: NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String)
             
         }
         
@@ -123,14 +130,14 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         friendRequestButton.layer.borderColor = UIColor.blueColor().CGColor
         friendRequestButton.frame.origin.x = 0
         friendRequestButton.frame.origin.y
-         = contentView.frame.height + 20 + contentView.frame.origin.y
+            = contentView.frame.height + 20 + contentView.frame.origin.y
         friendRequestButton.frame.size.height = 44
         friendRequestButton.frame.size.width = screenWidth
         friendRequestButton.backgroundColor = UIColor.whiteColor()
         friendRequestButton.userInteractionEnabled = true
         friendRequestButton.addTarget(self, action: "friendRequestPressed:", forControlEvents: .TouchUpInside)
         scrollView.addSubview(friendRequestButton)
-
+        
         //adding stats label
         let label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + 20 + contentView.frame.origin.y + 65, 150, 25))
         label3.textAlignment = NSTextAlignment.Left
@@ -152,6 +159,57 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         
+        
+    }
+    
+    func friendRequestPressed(sender: UIButton!) {
+        
+        
+        request["fromUser"] = PFUser.currentUser()?.username
+        request["toUserr"] = NSUserDefaults.standardUserDefaults().objectForKey("other_username")
+        request["status"] = "pending"
+        
+        let toUserQuery = PFQuery(className: "FriendRequest")
+        toUserQuery.findObjectsInBackgroundWithBlock { (request:[AnyObject]?, error:NSError?) -> Void in
+            
+        }
+        self.friendRequestButton.userInteractionEnabled = false
+        request.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+            if success {
+                self.friendRequestButton.userInteractionEnabled = false
+                self.friendRequestButton.setTitleColor(UIColor.grayColor(), forState: .Normal)
+                self.friendRequestButton.setTitle("Pending Friend Request", forState: UIControlState.Normal)
+                print("request was saved in background")
+            }
+            else {
+                self.friendRequestButton.userInteractionEnabled = true
+                self.friendRequestButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+            }
+        }
+        
+    }
+    
+    func removeProfile() {
+        contentView.removeFromSuperview()
+        
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let yPos = -scrollView.contentOffset.y
+        
+        if yPos >= 0 {
+            //            CGRect imgRect = self.imageView.frame;
+            //            imgRect.origin.y = scrollView.contentOffset.y;
+            //            imgRect.size.height = HeaderHeight+yPos;
+            //            self.imageView.frame = imgRect;
+            
+            contentView.frame.origin.y = scrollView.contentOffset.y + 64
+            // contentView.frame.size.height =  screenHeight/5 + yPos
+            
+            profilePicBlur.frame.size.height = contentView.frame.size.height + yPos
+            profilePicBlur.contentMode = .ScaleAspectFill
+            
+        }
         
     }
     
