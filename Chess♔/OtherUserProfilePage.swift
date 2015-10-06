@@ -16,14 +16,20 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView!
 
     override func viewWillAppear(animated: Bool) {
+//  setUpProfile()
+    }
+    override func viewDidAppear(animated: Bool) {
         setUpProfile()
     }
     override func viewWillDisappear(animated: Bool) {
-        UIView.animateWithDuration(0.8, animations: {self.removeProfile()})
+        self.removeProfile()
     }
+//    override func viewDidUnload() {
+//        removeProfile()
+//    }
     override func viewDidLoad() {
-        super.viewDidLoad()
 
+        super.viewDidLoad()
         // Do any additional setup after loading the view.
         //setting scrollview
         view.frame.size.height = 1000
@@ -47,11 +53,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
             profilePicBlur.frame.size.height = contentView.frame.size.height + yPos
             profilePicBlur.contentMode = .ScaleAspectFill
         
-        scrollView.contentOffset.y = 10
-
-        UIView.animateWithDuration(1.0) { () -> Void in
-            self.scrollView.contentOffset.y = 0
-        }
+       scrollView.contentOffset = CGPoint(x: 0, y: 0)
         
     }
 
@@ -73,7 +75,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         }
         let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") as! NSData
         
-        profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height))
+        profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height+1))
         profilePicBlur.image = UIImage(data: imageData)
         profilePicBlur.clipsToBounds = true
         profilePicBlur.contentMode = .ScaleAspectFill
