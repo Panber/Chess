@@ -18,6 +18,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     var request = PFObject(className: "FriendRequest")
 
     
+    
     override func viewWillAppear(animated: Bool) {
         //  setUpProfile()
     }
