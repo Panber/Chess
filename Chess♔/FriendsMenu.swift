@@ -17,6 +17,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     @IBOutlet weak var top10World: UIScrollView!
     @IBOutlet weak var top10Friends: UIScrollView!
     @IBOutlet weak var grossing: UIScrollView!
+    @IBOutlet weak var top10WorldView: UIView!
     
     @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -46,12 +47,36 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         grossing.showsHorizontalScrollIndicator = false
         grossing.bounces = false
         
+        addTop10World()
+        
     }
     
 //    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
 //       
 //        return true
 //    }
+    
+    
+    //func to set up people in top10WorldView
+    func addTop10World () {
+        
+        
+        
+        for var i:CGFloat = 0; i < 10; i++ {
+        let personView = UIView(frame: CGRectMake(5 + (top10WorldView.frame.size.height) * i, 5, top10WorldView.frame.size.height - 10, top10WorldView.frame.size.height - 10))
+        personView.layer.cornerRadius = cornerRadius
+        personView.backgroundColor = UIColor.whiteColor()
+        personView.layer.borderWidth = 0.5
+        personView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        top10World.addSubview(personView)
+            
+            
+            
+        let profilePicture = UIImageView(frame: CGRectMake(10, 5, personView.frame.size.width - 10, personView.frame.size.width - 10))
+        
+            
+        }
+    }
     
     // Func that searches for user with key and stores it in an array
     func searchUsers() {
@@ -74,6 +99,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                // print(self.users.count)
             }
         }
+        
         
         
         //        query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
