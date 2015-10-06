@@ -11,6 +11,9 @@ import Parse
 
 var contentView = UIView()
 var profilePicBlur = UIImageView()
+let friendRequestButton = UIButton()
+var request = PFObject(className: "FriendRequest")
+
 
 class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView!
@@ -59,7 +62,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
 
     func setUpProfile () {
     
-    
+    self.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username")as? String
+        
         //creating the view
         //  var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
         contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
@@ -119,12 +123,88 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         else { label2.textColor = UIColor.blackColor() }
         contentView.addSubview(label2)
         
+        //adding freinds request button
+        let friends = PFQuery(className: "friends")
+        if let user = PFUser.currentUser() {
+        friends.whereKey("user", equalTo: user)
+        friends.whereKey("friends", containsString: NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String)
+            
+        }
         
         
+        
+        //if not friend:
+        friendRequestButton.setTitle("Add as friend", forState: .Normal)
+        friendRequestButton.titleLabel?.font = UIFont(name: "Didot-Bold", size: 18)
+        friendRequestButton.layer.borderWidth = 0
+        friendRequestButton.layer.cornerRadius = 0
+        friendRequestButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        friendRequestButton.layer.borderColor = UIColor.blueColor().CGColor
+        friendRequestButton.frame.origin.x = 0
+        friendRequestButton.frame.origin.y
+         = contentView.frame.height + 20 + contentView.frame.origin.y
+        friendRequestButton.frame.size.height = 44
+        friendRequestButton.frame.size.width = screenWidth
+        friendRequestButton.backgroundColor = UIColor.whiteColor()
+        friendRequestButton.userInteractionEnabled = true
+        friendRequestButton.addTarget(self, action: "friendRequestPressed:", forControlEvents: .TouchUpInside)
+        scrollView.addSubview(friendRequestButton)
 
+        //adding stats label
+        let label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + 20 + contentView.frame.origin.y + 65, 150, 25))
+        label3.textAlignment = NSTextAlignment.Left
+        label3.text = "Statisitics"
+        label3.font = UIFont(name: "Didot-Italic", size: 16)
+        if darkMode { label3.textColor = UIColor.lightTextColor() }
+        else { label3.textColor = UIColor.lightGrayColor() }
+        scrollView.addSubview(label3)
+        
+        //adding won: label
+        let label4 = UILabel(frame: CGRectMake(0, contentView.frame.height + 20 + contentView.frame.origin.y + 65 + 25, screenWidth, 45))
+        label4.textAlignment = NSTextAlignment.Left
+        label4.text = "Won"
+        label4.backgroundColor = UIColor.whiteColor()
+        label4.font = UIFont(name: "Didot-Italic", size: 16)
+        if darkMode { label4.textColor = UIColor.lightTextColor() }
+        else { label4.textColor = UIColor.lightGrayColor() }
+        scrollView.addSubview(label4)
+        
+        
+        
         
     }
     
+    func friendRequestPressed(sender: UIButton!) {
+        
+        request["fromUser"] = PFUser.currentUser()?.username
+        request["toUserr"] = NSUserDefaults.standardUserDefaults().objectForKey("other_username") as! String
+        request["status"] = "pending"
+        
+        let toUserQuery = PFQuery(className: "FriendRequest")
+        toUserQuery.findObjectsInBackgroundWithBlock { (request:[AnyObject]?, error:NSError?) -> Void in
+            
+        }
+        
+        friendRequestButton.userInteractionEnabled = false
+        friendRequestButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        
+        request.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+            if success {
+                print("request was saved in sent")
+                friendRequestButton.userInteractionEnabled = false
+                friendRequestButton.setTitleColor(UIColor.lightGrayColor(), forState: UIControlState.Normal)
+                UIView.animateWithDuration(0.8, animations: { () -> Void in
+                    friendRequestButton.setTitle("Pending friend request", forState: UIControlState.Normal)
+                })
+                
+            }
+            else {
+                friendRequestButton.userInteractionEnabled = true
+                friendRequestButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+            }
+        }
+    
+    }
     
     func removeProfile() {
     contentView.removeFromSuperview()
