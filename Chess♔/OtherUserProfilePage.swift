@@ -62,7 +62,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     
         //creating the view
         //  var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
-        contentView = UIView(frame: CGRectMake(0, 65, screenWidth, screenHeight/5))
+        contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
         //contentView.layer.cornerRadius = cornerRadius
         if darkMode { contentView.backgroundColor = UIColor(red: 0.12, green: 0.12 , blue: 0.12, alpha: 1) }
         else { contentView.backgroundColor = UIColor.whiteColor() }
@@ -76,11 +76,11 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") as! NSData
         
         profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height+1))
+        profilePicBlur.contentMode = .ScaleAspectFill
         profilePicBlur.image = UIImage(data: imageData)
         profilePicBlur.clipsToBounds = true
-        profilePicBlur.contentMode = .ScaleAspectFill
         contentView.addSubview(profilePicBlur)
-        
+
         //bluring bc of profile pic
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
         if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
@@ -109,7 +109,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         //adding updated since label
-        let label2 = UILabel(frame: CGRectMake(profilePicBlur.frame.size.width + 20, contentView.frame.size.height - contentView.frame.size.height/2.4, 100, 40))
+        let label2 = UILabel(frame: CGRectMake(contentView.frame.size.height  + 15, contentView.frame.size.height - contentView.frame.size.height/2.4, 100, 40))
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
@@ -140,7 +140,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
 //            imgRect.size.height = HeaderHeight+yPos;
 //            self.imageView.frame = imgRect;
             
-            contentView.frame.origin.y = scrollView.contentOffset.y + 65
+            contentView.frame.origin.y = scrollView.contentOffset.y + 64
            // contentView.frame.size.height =  screenHeight/5 + yPos
             
             profilePicBlur.frame.size.height = contentView.frame.size.height + yPos
