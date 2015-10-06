@@ -12,6 +12,7 @@ import Parse
 
 class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView!
+    var profilePicBlur = UIImageView()
     
     override func viewWillAppear(animated: Bool) {
         setUpProfile()
