@@ -37,15 +37,45 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate {
     
     func loadRequestToView( t:CGFloat) {
         
+        //create bc
         let bcLabel = UILabel(frame: CGRectMake(0, 0 + (70 * t), screenWidth, 70))
         bcLabel.backgroundColor = UIColor.whiteColor()
         scrollViewView.addSubview(bcLabel)
         
+        //create seperator
         let seperator = UILabel(frame: CGRectMake(0, 0 + (70 * t), screenWidth, 0.5))
         seperator.backgroundColor = UIColor.lightGrayColor()
         scrollViewView.addSubview(seperator)
         
+        //create namelabel
+        let name = UILabel(frame: CGRectMake(30, bcLabel.frame.size.height / 2 + (t*70), 200, 40))
+        name.font = UIFont(name: "Didot", size: 20)
+        name.textAlignment = .Left
+        scrollViewView.addSubview(name)
+        
+        
+        let frequestsQuery = PFQuery(className: "FriendRequest")
+        
+        if let user = PFUser.currentUser()?.username {
+            frequestsQuery.whereKey("toUserr", equalTo: (user))
+            frequestsQuery.orderByDescending("updatedAt")
+            frequestsQuery.whereKey("status", equalTo: "pending")
+            
+            frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
+                
+                for frequests in frequests! {
+                
+                 name.text = frequests["fromUser"] as? String
+                }
+                
+            })
+            
+            
+        }
+        
         let profilePic = UIImageView(frame: CGRectMake(10, 10 + (70 * t), 50, 50))
+        
+        
     }
     
     // MARK - Table View
@@ -62,26 +92,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate {
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-
-        let frequestsQuery = PFQuery(className: "FriendRequest")
-        
-        if let user = PFUser.currentUser()?.username {
-        frequestsQuery.whereKey("toUserr", equalTo: (user))
-        frequestsQuery.orderByDescending("updatedAt")
-        frequestsQuery.whereKey("status", equalTo: "pending")
-        
-            frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
-                
-                for frequests in frequests! {
-                
     
-                }
-                
-        })
-            
-            
-        }
         
         
 //        let users:PFObject = self.users.objectAtIndex(indexPath.row) as! PFObject
@@ -109,7 +120,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate {
 //                }
 //            }
 //        }
-        return cell
+        //return cell
     }
     
 
