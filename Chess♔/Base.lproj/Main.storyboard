@@ -1269,10 +1269,60 @@
                     <view key="view" contentMode="scaleToFill" id="QLE-mk-qdn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cDT-RB-RPf">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="2cR-tM-4dY" customClass="UserTableViewCell" customModule="Chess_" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2cR-tM-4dY" id="Vkr-fr-q3i">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pp7-2R-KJF">
+                                                    <rect key="frame" x="21" y="4" width="50" height="50"/>
+                                                    <animations/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOn-fs-Ihd">
+                                                    <rect key="frame" x="110" y="8" width="215" height="27"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                        <connections>
+                                            <outlet property="userProfileImage" destination="Pp7-2R-KJF" id="xiE-Y9-OpC"/>
+                                            <outlet property="username" destination="uOn-fs-Ihd" id="0pp-om-b5h"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Hi9-mt-X2K" id="rnO-JN-Yvh"/>
+                                    <outlet property="delegate" destination="Hi9-mt-X2K" id="doQ-4Z-m7F"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cDT-RB-RPf" firstAttribute="bottom" secondItem="alW-AO-rFq" secondAttribute="top" id="DZW-ew-MkS"/>
+                            <constraint firstItem="cDT-RB-RPf" firstAttribute="top" secondItem="xns-YP-8IL" secondAttribute="bottom" id="Ex8-su-kuF"/>
+                            <constraint firstItem="cDT-RB-RPf" firstAttribute="leading" secondItem="QLE-mk-qdn" secondAttribute="leading" id="EzK-kD-6WA"/>
+                            <constraint firstAttribute="trailing" secondItem="cDT-RB-RPf" secondAttribute="trailing" id="zRJ-E0-BP3"/>
+                        </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="cDT-RB-RPf" id="f05-sZ-Hi4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Zf-Nu-aID" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
