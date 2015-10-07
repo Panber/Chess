@@ -65,6 +65,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         let ratingQuery = PFQuery(className: "_User")
         ratingQuery.orderByDescending("rating")
+        ratingQuery.limit = 10 
         ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
                 for usersObject in usersObject! {

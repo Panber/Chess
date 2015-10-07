@@ -459,12 +459,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
             self.navigationController?.navigationBar.tintColor = blue
             scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
     
-            
 
-            
-            
-            
-            
         }
         
         
