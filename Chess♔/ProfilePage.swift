@@ -41,9 +41,10 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         //loadUserInfoFromCloud()
     }
     override func viewDidDisappear(animated: Bool) {
-        removeProfile()
     }
     override func viewWillDisappear(animated: Bool) {
+        removeProfile()
+
     }
     
     override func viewDidLoad() {
@@ -61,7 +62,6 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
         scrollView.bounces = true
         scrollView.scrollEnabled = true
-        view.addSubview(scrollView)
         scrollView.showsVerticalScrollIndicator = false
         
         lightOrDarkMode()
@@ -104,9 +104,16 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         loadUserInfoFromCloud()
         
         
-        label0 = UILabel(frame: CGRectMake(0, 220, screenWidth, 10))
+        
+        
+        view.addSubview(scrollView)
+        //creating the view
+        contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
+        
+        label0 = UILabel(frame: CGRectMake(0, 63 + contentView.frame.size.height, screenWidth, 1))
         label0.layer.shadowColor = UIColor.blackColor().CGColor
         label0.layer.shadowOpacity = 0.1
+        label0.backgroundColor = UIColor.whiteColor()
         label0.layer.shadowOffset = CGSizeZero
         scrollView.addSubview(label0)
         
@@ -385,6 +392,11 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
     
     func removeProfile() {
         contentView.removeFromSuperview()
+        scrollView.removeFromSuperview()
+        
+        for view in self.scrollView.subviews {
+            view.removeFromSuperview()
+        }
         
     }
     
@@ -395,6 +407,8 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
             
             
             contentView.frame.origin.y = scrollView.contentOffset.y + 64
+            label0.frame.origin.y = scrollView.contentOffset.y + 63
+
             
             profilePicBlur.frame.size.height = contentView.frame.size.height + yPos
             profilePicBlur.contentMode = .ScaleAspectFill
