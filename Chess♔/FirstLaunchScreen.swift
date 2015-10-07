@@ -151,8 +151,8 @@ class FirstLaunchScreen: UIViewController {
                 self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
                 self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
                 self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
-                self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
-                self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
+                self.tabBarController?.tabBar.tintColor = blue
+                self.navigationController?.navigationBar.tintColor = blue
                 self.darkModeCellLabel.backgroundColor = UIColor.whiteColor()
                 
                 self.lightPreviewWindow.alpha = 1
@@ -164,7 +164,7 @@ class FirstLaunchScreen: UIViewController {
                 }
                 var o = 0
                 for o; i < uiButtons.count; o++ {
-                    uiButtons[o].tintColor = UIColor.blueColor()
+                    uiButtons[o].tintColor = blue
                 }
                 var p = 0
                 for p; i < uiTableViews.count; p++ {

@@ -41,15 +41,17 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         //loadUserInfoFromCloud()
     }
     override func viewDidDisappear(animated: Bool) {
+        removeProfile()
+
     }
     override func viewWillDisappear(animated: Bool) {
-        removeProfile()
 
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = PFUser.currentUser()?.username
+        navigationController?.navigationBar.topItem?.title = PFUser.currentUser()?.username
+        self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         
         // Do any additional setup after loading the view.
         //setting scrollview
@@ -303,7 +305,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         friendsButton.setTitle("Friends", forState: .Normal)
         friendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
         friendsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        friendsButton.layer.borderColor = UIColor.blueColor().CGColor
+        friendsButton.layer.borderColor = blue.CGColor
         friendsButton.frame.origin.x = 20
         friendsButton.frame.origin.y
             = contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 65
@@ -331,7 +333,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         friendRequestsButton.setTitle("Friend Requests", forState: .Normal)
         friendRequestsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
         friendRequestsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        friendRequestsButton.layer.borderColor = UIColor.blueColor().CGColor
+        friendRequestsButton.layer.borderColor = blue.CGColor
         friendRequestsButton.frame.origin.x = 20
         friendRequestsButton.frame.origin.y
             = contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 65 + 45
@@ -359,7 +361,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         settingsButton.setTitle("Settings", forState: .Normal)
         settingsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
         settingsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        settingsButton.layer.borderColor = UIColor.blueColor().CGColor
+        settingsButton.layer.borderColor = blue.CGColor
         settingsButton.frame.origin.x = 20
         settingsButton.frame.origin.y
             = contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 65 + 45 + 45
@@ -387,6 +389,12 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         
+    }
+    
+    func friendRequestsPressed(sender: UIButton!) {
+    
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("FriendRequests")
+        self.showViewController(vc as! UIViewController, sender: vc)
     }
     
     
@@ -447,8 +455,8 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
             self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
             self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
-            self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
+            self.tabBarController?.tabBar.tintColor = blue
+            self.navigationController?.navigationBar.tintColor = blue
             scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
     
             
