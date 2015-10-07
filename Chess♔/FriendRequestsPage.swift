@@ -20,6 +20,8 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     var scrollView = UIScrollView()
     var scrollViewView = UIView()
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,12 +29,49 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         scrollView.userInteractionEnabled = true
         scrollView.showsVerticalScrollIndicator = true
         scrollView.bounces = true
+        scrollView.scrollEnabled = true
         view.addSubview(scrollView)
         
-        scrollViewView = UIView(frame: CGRectMake(0, 0, screenWidth, screenHeight + 20))
-        scrollView.addSubview(scrollViewView)
+        scrollViewView = UIView(frame: CGRectMake(0, 0, screenWidth, screenHeight + 200))
+       // scrollView.addSubview(scrollViewView)
         
         
+        
+        
+    }
+    
+    
+    func loadRequestToView( t:CGFloat, _name:String) {
+        
+        //create bc
+        let bcLabel = UILabel(frame: CGRectMake(0, 0 + (70 * t), screenWidth, 70))
+        bcLabel.backgroundColor = UIColor.whiteColor()
+        scrollView.addSubview(bcLabel)
+        
+        //create seperator
+        let seperator = UILabel(frame: CGRectMake(0, 0 + (70 * t), screenWidth, 0.5))
+        seperator.backgroundColor = UIColor.lightGrayColor()
+        scrollView.addSubview(seperator)
+        
+        //create namelabel
+        let name = UILabel(frame: CGRectMake(30, bcLabel.frame.size.height / 2 + (t*70), 200, 40))
+        name.font = UIFont(name: "Didot", size: 20)
+        name.textAlignment = .Left
+        name.text = _name
+        scrollView.addSubview(name)
+    
+        
+        let profilePic = UIImageView(frame: CGRectMake(10, 10 + (70 * t), 50, 50))
+        
+        
+    }
+    
+
+    
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        lightOrDarkMode()
         
         let frequestsQuery = PFQuery(className: "FriendRequest")
         
@@ -51,41 +90,6 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
             })
         }
         
-        
-    }
-    
-    
-    func loadRequestToView( t:CGFloat, _name:String) {
-        
-        //create bc
-        let bcLabel = UILabel(frame: CGRectMake(0, 0 + (70 * t), screenWidth, 70))
-        bcLabel.backgroundColor = UIColor.whiteColor()
-        scrollViewView.addSubview(bcLabel)
-        
-        //create seperator
-        let seperator = UILabel(frame: CGRectMake(0, 0 + (70 * t), screenWidth, 0.5))
-        seperator.backgroundColor = UIColor.lightGrayColor()
-        scrollViewView.addSubview(seperator)
-        
-        //create namelabel
-        let name = UILabel(frame: CGRectMake(30, bcLabel.frame.size.height / 2 + (t*70), 200, 40))
-        name.font = UIFont(name: "Didot", size: 20)
-        name.textAlignment = .Left
-        name.text = _name
-        scrollViewView.addSubview(name)
-    
-        
-        let profilePic = UIImageView(frame: CGRectMake(10, 10 + (70 * t), 50, 50))
-        
-        
-    }
-    
-
-    
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        lightOrDarkMode()
     }
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
