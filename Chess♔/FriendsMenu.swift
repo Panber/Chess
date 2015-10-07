@@ -28,6 +28,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     var top10WorldArrayRating = [String]()
     var top10WorldArrayUsers:Array<String> = []
     
+    var usersScope:Bool = false
+    var friendsScope:Bool = true
+    
+    var string = 0;
+    
     override func viewWillDisappear(animated: Bool) {
         view.endEditing(true)
     }
@@ -221,7 +226,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.characters.count > 0 {
+        if searchText.characters.count > 0 && usersScope == true {
         searchUsers(searchText)
         }
         tableView.hidden = false
@@ -233,7 +238,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 //    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
         // Declare user object and set cell text to username
@@ -319,9 +324,17 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         switch selectedScope {
         case 0:
             print("Friends")
+            friendsScope = true
+            usersScope = false
+            users.removeAllObjects()
+            tableView.reloadData()
             break
         case 1:
             print("Users")
+            usersScope = true
+            friendsScope = false
+            users.removeAllObjects()
+            tableView.reloadData()
             break
         
         default:
