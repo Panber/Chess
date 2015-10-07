@@ -84,11 +84,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     personView.clipsToBounds = true
                     self.top10WorldView.addSubview(personView)
                     
-//                    //bluring bc
-//                    let profilePicBlur = UIImageView(frame: CGRectMake(0, 0, personView.frame.size.width, personView.frame.size.height))
-//                    profilePicBlur.contentMode = .ScaleAspectFill
-//                    profilePicBlur.clipsToBounds = true
-//                    personView.addSubview(profilePicBlur)
                     
                     
                     //making usernamelabel
