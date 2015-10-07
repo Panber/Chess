@@ -164,26 +164,24 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     // Func that searches for user with key and stores it in an array
     func searchUsers() {
         
+        
         var query: PFQuery = PFQuery(className:"_User")
         query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
+        query.orderByAscending("username")
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
-                if objects?.count != 0 {
-                self.users.removeAllObjects() // <- I'm not sure where to put this yet
-                }
+        //        if objects?.count != 0 {
+                 // <- I'm not sure where to put this yet
+       //         }
          //       self.tableView.reloadData()
                 print(objects?.count)
-                for object in objects! {
-                    if objects?.count != 0 {
-                    self.users.addObject(object)
-                        
-                    }
-                }
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.tableView.reloadData()
-                    })
+                self.users.removeAllObjects()
+                self.users.addObjectsFromArray(objects!)
                 print(self.users.count)
             }
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+            })
         }
         
         
@@ -223,7 +221,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.characters.count > 0 {
+        if searchText.characters.count >= 0 {
         searchUsers()
         }
         if searchText.characters.count == 0 {
