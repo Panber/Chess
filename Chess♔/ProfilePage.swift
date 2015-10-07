@@ -41,9 +41,10 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         //loadUserInfoFromCloud()
     }
     override func viewDidDisappear(animated: Bool) {
-        removeProfile()
     }
     override func viewWillDisappear(animated: Bool) {
+        removeProfile()
+
     }
     
     override func viewDidLoad() {
@@ -61,7 +62,6 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
         scrollView.bounces = true
         scrollView.scrollEnabled = true
-        view.addSubview(scrollView)
         scrollView.showsVerticalScrollIndicator = false
         
         lightOrDarkMode()
@@ -102,6 +102,11 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
     func setUpProfile () {
         
         loadUserInfoFromCloud()
+        
+        
+        
+        
+        view.addSubview(scrollView)
         //creating the view
         contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
         
@@ -387,6 +392,11 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
     
     func removeProfile() {
         contentView.removeFromSuperview()
+        scrollView.removeFromSuperview()
+        
+        for view in self.scrollView.subviews {
+            view.removeFromSuperview()
+        }
         
     }
     
