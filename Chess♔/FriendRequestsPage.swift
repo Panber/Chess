@@ -12,15 +12,14 @@ import Parse
 var frequests = PFObject(className: "FriendRequest")
 
 
-class FriendRequestsPage: UIViewController, UITableViewDelegate {
+class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
 
     var userss:NSMutableArray = NSMutableArray()
-    var t = 0
+    var i = 0
 
     var scrollView = UIScrollView()
     var scrollViewView = UIView()
     
-    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,12 +29,33 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate {
         scrollView.bounces = true
         view.addSubview(scrollView)
         
-        scrollViewView = UIView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
+        scrollViewView = UIView(frame: CGRectMake(0, 0, screenWidth, screenHeight + 20))
         scrollView.addSubview(scrollViewView)
+        
+        
+        
+        let frequestsQuery = PFQuery(className: "FriendRequest")
+        
+        if let user = PFUser.currentUser()?.username {
+            frequestsQuery.whereKey("toUserr", equalTo: (user))
+            frequestsQuery.orderByDescending("updatedAt")
+            frequestsQuery.whereKey("status", equalTo: "pending")
+            
+            frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
+                
+                for frequests in frequests! {
+                    self.i++
+                    self.loadRequestToView(CGFloat(self.i), _name: frequests["fromUser"] as! String)
+                }
+                
+            })
+        }
+        
+        
     }
     
     
-    func loadRequestToView( t:CGFloat) {
+    func loadRequestToView( t:CGFloat, _name:String) {
         
         //create bc
         let bcLabel = UILabel(frame: CGRectMake(0, 0 + (70 * t), screenWidth, 70))
@@ -51,107 +71,16 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate {
         let name = UILabel(frame: CGRectMake(30, bcLabel.frame.size.height / 2 + (t*70), 200, 40))
         name.font = UIFont(name: "Didot", size: 20)
         name.textAlignment = .Left
+        name.text = _name
         scrollViewView.addSubview(name)
-        
-        
-        let frequestsQuery = PFQuery(className: "FriendRequest")
-        
-        if let user = PFUser.currentUser()?.username {
-            frequestsQuery.whereKey("toUserr", equalTo: (user))
-            frequestsQuery.orderByDescending("updatedAt")
-            frequestsQuery.whereKey("status", equalTo: "pending")
-            
-            frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
-                
-                for frequests in frequests! {
-                
-                 name.text = frequests["fromUser"] as? String
-                }
-                
-            })
-            
-            
-        }
+    
         
         let profilePic = UIImageView(frame: CGRectMake(10, 10 + (70 * t), 50, 50))
         
         
     }
     
-    // MARK - Table View
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 5
-        
-    }
-    
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    
-        
-        
-//        let users:PFObject = self.users.objectAtIndex(indexPath.row) as! PFObject
-//        
-//        var findUserName: PFQuery = PFQuery(className:"_User")
-//        findUserName.whereKey("username", containsString: searchText.text)
-//        
-//        findUserName.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-//            if (error == nil) {
-//                if let user:PFUser = users as? PFUser {
-//                    cell.username.text = user.username
-//                    
-//                    if let profileImage:PFFile = user["profile_picture"] as? PFFile {
-//                        profileImage.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-//                            
-//                            if error == nil {
-//                                let image:UIImage = UIImage(data: imageData!)!
-//                                cell.userProfileImage.image = image as! UIImage
-//                                
-//                            }
-//                            
-//                        }
-//                    }
-//                    
-//                }
-//            }
-//        }
-        //return cell
-    }
-    
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
-        
-        let user:PFUser = userss[indexPath.row] as! PFUser
-        
-        NSUserDefaults.standardUserDefaults().setObject(cell.username.text, forKey: "other_username")
-        
-        let profilePictureObject = user["profile_picture"] as? PFFile
-        
-        
-        if(profilePictureObject != nil)
-        {
-            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                
-                if(imageData != nil)
-                {
-                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
-                    self.showViewController(vc as! UIViewController, sender: vc)
-                }
-                
-            }
-        }
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 70
-    }
     
     
     
