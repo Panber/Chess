@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+var blue = UIColor(red:0.17, green:0.33, blue:0.71, alpha:1.0)
+
 var gameIDS = []
 var pressedCreateNewGame = NSUserDefaults()
 
@@ -255,10 +257,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
                 self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
                 self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
                 self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
-                self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
-                self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
-                self.newButtonOutlet.tintColor = UIColor.blueColor()
-                self.editButtonOutlet.tintColor = UIColor.blueColor()
+                self.tabBarController?.tabBar.tintColor = blue
+                self.navigationController?.navigationBar.tintColor = blue
+                self.newButtonOutlet.tintColor = blue
+                self.editButtonOutlet.tintColor = blue
             
             //setting top logo
             logo = UIImage(named: "ChessIconSmallTextAndLogo.png")

@@ -47,7 +47,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String
-        
+        self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         // Do any additional setup after loading the view.
         //setting scrollview
         view.frame.size.height = 1000
@@ -99,6 +99,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     func setUpProfile () {
         
         loadUserInfoFromCloud()
+        navigationController?.navigationBar.topItem?.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String
+        self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         //creating the view
         //  var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
         contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
@@ -170,8 +172,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         //if not friend:
         friendRequestButton.setTitle("Add as Friend", forState: .Normal)
         friendRequestButton.titleLabel?.font = UIFont(name: "Didot-Bold", size: 18)
-        friendRequestButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        friendRequestButton.layer.borderColor = UIColor.blueColor().CGColor
+        friendRequestButton.setTitleColor(blue, forState: .Normal)
+        friendRequestButton.layer.borderColor = blue.CGColor
         friendRequestButton.frame.origin.x = 0
         friendRequestButton.frame.origin.y
             = contentView.frame.height + contentView.frame.origin.y
@@ -294,7 +296,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         friendsButton.setTitle("Friends", forState: .Normal)
         friendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
         friendsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        friendsButton.layer.borderColor = UIColor.blueColor().CGColor
+        friendsButton.layer.borderColor = blue.CGColor
         friendsButton.frame.origin.x = 20
         friendsButton.frame.origin.y
             = contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65
@@ -346,7 +348,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
             }
             else {
                 self.friendRequestButton.userInteractionEnabled = true
-                self.friendRequestButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+                self.friendRequestButton.setTitleColor(blue, forState: .Normal)
 }
         }
         

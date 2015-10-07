@@ -367,8 +367,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
             self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
-            self.tabBarController?.tabBar.tintColor = UIColor.blueColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
+            self.tabBarController?.tabBar.tintColor = blue
+            self.navigationController?.navigationBar.tintColor = blue
             
             
         }
