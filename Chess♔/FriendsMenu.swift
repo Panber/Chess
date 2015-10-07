@@ -22,8 +22,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     @IBOutlet weak var grossing: UIScrollView!
     @IBOutlet weak var top10WorldView: UIView!
     
-    @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var top10WorldArrayRating = [String]()
     var top10WorldArrayUsers:Array<String> = []
@@ -162,11 +162,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     }
     
     // Func that searches for user with key and stores it in an array
-    func searchUsers() {
-        
+    func searchUsers(searchString: String) {
         
         var query: PFQuery = PFQuery(className:"_User")
-        query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
+        query.whereKey("username", matchesRegex:searchString, modifiers:"i")
         query.orderByAscending("username")
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
@@ -177,11 +176,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 print(objects?.count)
                 self.users.removeAllObjects()
                 self.users.addObjectsFromArray(objects!)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.tableView.reloadData()
+                })
                 print(self.users.count)
             }
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.tableView.reloadData()
-            })
+            
         }
         
         
@@ -221,11 +221,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.characters.count >= 0 {
-        searchUsers()
-        }
-        if searchText.characters.count == 0 {
-            self.users.removeAllObjects()
+        if searchText.characters.count > 0 {
+        searchUsers(searchText)
         }
         tableView.hidden = false
     }
@@ -235,42 +232,29 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 //    }
 //    
     
-    
-    
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-        return true
-    }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
         // Declare user object and set cell text to username
-        let users:PFObject = self.users.objectAtIndex(indexPath.row) as! PFObject
+        let user:PFUser = users[indexPath.row] as! PFUser
         
-        var findUserName: PFQuery = PFQuery(className:"_User")
-        findUserName.whereKey("username", containsString: searchText.text)
+        cell.username.text = user["username"] as? String
         
-        findUserName.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-            if (error == nil) {
-                if let user:PFUser = users as? PFUser {
-                    cell.username.text = user.username
-                    
-                    if let profileImage:PFFile = user["profile_picture"] as? PFFile {
-                        profileImage.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                            
-                            if error == nil {
-                                let image:UIImage = UIImage(data: imageData!)!
-                                cell.userProfileImage.image = image as! UIImage
-                                
-                               // tableView.reloadInputViews()
-                            }
-                            
-                        }
-                    }
-                    
+        let profilePictureObject = user["profile_picture"] as? PFFile
+        
+        if(profilePictureObject != nil)
+        {
+            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                
+                if(imageData != nil)
+                {
+                    cell.userProfileImage.image = UIImage(data: imageData!)
                 }
+                
             }
         }
+        
         return cell
     }
     
@@ -321,17 +305,30 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
         
-        tableView.hidden = false
+       tableView.hidden = false
         
-        return true
+       return true
     }
     
-    //    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-    //
-    //        self.searchUsers((self.searchDisplayController?.searchBar.text)!)
-    //
-    //        return true
-    //    }
+        func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+    
+            return true
+        }
+    
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        switch selectedScope {
+        case 0:
+            print("Friends")
+            break
+        case 1:
+            print("Users")
+            break
+        
+        default:
+            break
+        
+        }
+    }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         tableView.hidden = true
