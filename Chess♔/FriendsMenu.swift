@@ -9,6 +9,9 @@
 import UIKit
 import Parse
 
+let usersObject = PFObject(className: "_User")
+
+
 class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate{
     
     // Array for users that are being searched for
@@ -22,6 +25,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    var top10WorldArrayRating = [String]()
+    var top10WorldArrayUsers:Array<String> = []
     
     override func viewWillDisappear(animated: Bool) {
         view.endEditing(true)
@@ -30,6 +35,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         
         top10World.scrollEnabled = true
         top10World.contentSize = CGSizeMake(796, 105)
@@ -55,22 +61,109 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     //func to set up people in top10WorldView
     func addTop10World () {
         
+        var image = UIImage()
         
+        let ratingQuery = PFQuery(className: "_User")
+        ratingQuery.orderByDescending("rating")
+        ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
+            if error == nil {
+                for usersObject in usersObject! {
+                    self.top10WorldArrayRating.append(usersObject["rating"] as! String)
+                    print(self.top10WorldArrayRating)
+                    self.top10WorldArrayUsers.append(usersObject["username"] as! String)
+                    print(self.top10WorldArrayUsers)
+                }
+                var t = 0
+                for var i:CGFloat = 0; i < 5; i++, t++ {
+                    
+                    let personView = UIView(frame: CGRectMake(5 + (self.top10WorldView.frame.size.height) * i, 5, self.top10WorldView.frame.size.height - 10, self.top10WorldView.frame.size.height - 10))
+                    personView.layer.cornerRadius = cornerRadius
+                    personView.backgroundColor = UIColor.whiteColor()
+                    personView.layer.borderWidth = 0.5
+                    personView.layer.borderColor = UIColor.lightGrayColor().CGColor
+                    personView.clipsToBounds = true
+                    self.top10WorldView.addSubview(personView)
+                    
+//                    //bluring bc
+//                    let profilePicBlur = UIImageView(frame: CGRectMake(0, 0, personView.frame.size.width, personView.frame.size.height))
+//                    profilePicBlur.contentMode = .ScaleAspectFill
+//                    profilePicBlur.clipsToBounds = true
+//                    personView.addSubview(profilePicBlur)
+                    
+                    
+                    //making usernamelabel
+                    let usernameLabel = UILabel(frame: CGRectMake(5, personView.frame.size.height / 1.6 , personView.frame.size.width - 10, 20))
+                    usernameLabel.text = self.top10WorldArrayUsers[t]
+                    usernameLabel.textAlignment = .Center
+                    usernameLabel.font = UIFont(name: "Didot", size: 14)
+                    personView.addSubview(usernameLabel)
+                    
+                    //ratinglabel
+                    let ratingLabel = UILabel(frame: CGRectMake(5, personView.frame.size.height / 1.3 , personView.frame.size.width - 10, 20))
+                    ratingLabel.text = self.top10WorldArrayRating[t]
+                    ratingLabel.textColor = UIColor.lightGrayColor()
+                    ratingLabel.textAlignment = .Center
+                    ratingLabel.font = UIFont(name: "Didot", size: 12)
+                    personView.addSubview(ratingLabel)
+                    
+                    //placement
+                    let placeLabel = UILabel(frame: CGRectMake(8, 8,11,11))
+                    placeLabel.text = "\(t+1)."
+                    placeLabel.textColor = UIColor.grayColor()
+                    placeLabel.textAlignment = .Center
+                    placeLabel.font = UIFont(name: "Didot-Italic", size: 11)
+                    personView.addSubview(placeLabel)
+                    
+                    //profilepic
+                    let profilePicture = UIImageView(frame: CGRectMake(personView.frame.size.width / 2 * 0.5, 10, personView.frame.size.width / 2 , personView.frame.size.width / 2 ))
+                    profilePicture.layer.cornerRadius = profilePicture.frame.size.height / 2
+                    profilePicture.layer.borderColor = UIColor.lightGrayColor().CGColor
+                    profilePicture.layer.borderWidth = 0.5
+                    profilePicture.clipsToBounds = true
+                    profilePicture.contentMode = UIViewContentMode.ScaleAspectFill
+                    personView.addSubview(profilePicture)
+                    
+                    
+                    let findUserName: PFQuery = PFQuery(className:"_User")
+                    findUserName.whereKey("username", containsString: self.top10WorldArrayUsers[t])
+                    
+                    findUserName.findObjectsInBackgroundWithBlock{(usersObject: [AnyObject]?, error: NSError?) -> Void in
+                        if (error == nil) {
+                            
+                            for usersObject in usersObject! {
+                                if let profileImage:PFFile = usersObject["profile_picture"] as? PFFile {
+                                    profileImage.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                                        
+                                        if error == nil {
+                                            image = UIImage(data: imageData!)!
+                                            profilePicture.image = image
+                                            // tableView.reloadInputViews()
+                                            //bluring bc
+//                                            profilePicBlur.image = image
+//                                            //bluring bc of profile pic
+//                                            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+//                                            if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+//                                            else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+//                                            visualEffectView.frame = profilePicBlur.bounds
+//                                            profilePicBlur.addSubview(visualEffectView)
+                                        }
+                                        
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                    
+                }
+                
+            }
+            else {
+                
+            }
+        })
         
-        for var i:CGFloat = 0; i < 10; i++ {
-        let personView = UIView(frame: CGRectMake(5 + (top10WorldView.frame.size.height) * i, 5, top10WorldView.frame.size.height - 10, top10WorldView.frame.size.height - 10))
-        personView.layer.cornerRadius = cornerRadius
-        personView.backgroundColor = UIColor.whiteColor()
-        personView.layer.borderWidth = 0.5
-        personView.layer.borderColor = UIColor.lightGrayColor().CGColor
-        top10World.addSubview(personView)
-            
-            
-            
-        let profilePicture = UIImageView(frame: CGRectMake(10, 5, personView.frame.size.width - 10, personView.frame.size.width - 10))
-        
-            
-        }
+    
     }
     
     // Func that searches for user with key and stores it in an array

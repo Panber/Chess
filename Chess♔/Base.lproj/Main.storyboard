@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -668,17 +668,17 @@
                                 <rect key="frame" x="0.0" y="234" width="600" height="121"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8E-0k-kSW">
-                                        <rect key="frame" x="0.0" y="0.0" width="796" height="121"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1210" height="121"/>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="796" id="9PW-82-imk"/>
+                                            <constraint firstAttribute="width" constant="1210" id="9PW-82-imk"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <animations/>
                                 <constraints>
                                     <constraint firstItem="r8E-0k-kSW" firstAttribute="centerY" secondItem="YOz-dR-tdf" secondAttribute="centerY" id="HZq-Of-Ons"/>
-                                    <constraint firstAttribute="trailing" secondItem="r8E-0k-kSW" secondAttribute="trailing" constant="-196" id="J7Y-WI-crS"/>
+                                    <constraint firstAttribute="trailing" secondItem="r8E-0k-kSW" secondAttribute="trailing" constant="-610" id="J7Y-WI-crS"/>
                                     <constraint firstAttribute="bottom" secondItem="r8E-0k-kSW" secondAttribute="bottom" id="d0o-zm-fnq"/>
                                     <constraint firstItem="r8E-0k-kSW" firstAttribute="leading" secondItem="YOz-dR-tdf" secondAttribute="leading" id="dtY-PD-O2m"/>
                                     <constraint firstItem="r8E-0k-kSW" firstAttribute="top" secondItem="YOz-dR-tdf" secondAttribute="top" id="g2Z-38-O4j"/>
@@ -758,7 +758,7 @@
                                 </constraints>
                             </scrollView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-dp-8si">
-                                <rect key="frame" x="0.0" y="108" width="600" height="66"/>
+                                <rect key="frame" x="0.0" y="108" width="600" height="58"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
