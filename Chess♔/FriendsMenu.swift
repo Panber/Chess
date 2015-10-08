@@ -15,7 +15,7 @@ let usersObject = PFObject(className: "_User")
 class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate{
     
     // Array for users that are being searched for
-    var users:NSMutableArray = NSMutableArray()
+    var users:NSMutableArray = []
     
     @IBOutlet weak var top10World: UIScrollView!
     @IBOutlet weak var top10Friends: UIScrollView!
@@ -170,42 +170,22 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     // Func that searches for user with key and stores it in an array
     func searchUsers(searchString: String) {
         
+        self.users.removeAllObjects()
         var query: PFQuery = PFQuery(className:"_User")
         query.whereKey("username", matchesRegex:searchString, modifiers:"i")
         query.orderByAscending("username")
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
-//                if objects?.count != 0 {
-//                  <- I'm not sure where to put this yet
-//                }
-//                self.tableView.reloadData()
-                print(objects?.count)
-                self.users.removeAllObjects()
-                self.users.addObjectsFromArray(objects!)
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.tableView.reloadData()
-                })
+                for object in objects! {
+                    self.users.addObject(object)
+                }
+                self.tableView.reloadData()
                 print(self.users.count)
             }
             
+            
         }
-        
-        
-        
-        //        query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
-        //        query.orderByAscending("username")
-        //        query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-        //            if error == nil {
-        //                self.users.removeAllObjects()
-        //                self.users.addObjectsFromArray(objects!)
-        //                self.tableView.reloadData()
-        //                //print(search_string)
-        //            }
-        //            else {
-        //                print("error")
-        //            }
-        //
-        //        }
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -222,11 +202,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
      
-        if tableView == self.searchDisplayController?.searchResultsTableView {
         return users.count
-        } else {
-            return 0
-        }
         
     }
     
@@ -236,11 +212,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         }
         tableView.hidden = false
     }
-    
-//    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-//       
-//    }
-//    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
@@ -264,7 +235,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 
             }
         }
-        
+         //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         return cell
     }
     
@@ -316,7 +287,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
         
        tableView.hidden = false
-        
        return true
     }
     
@@ -355,6 +325,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
+        //searchUsers(searchBar.text!)
     }
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
