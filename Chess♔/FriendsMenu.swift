@@ -28,8 +28,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     var top10WorldArrayRating = [String]()
     var top10WorldArrayUsers:Array<String> = []
     
-    var usersScope:Bool = false
-    var friendsScope:Bool = true
+    var usersScope:Bool = true
+    var friendsScope:Bool = false
 
     
     override func viewWillDisappear(animated: Bool) {
@@ -299,21 +299,19 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         switch selectedScope {
         case 0:
-            print("Friends")
-            friendsScope = true
-            usersScope = false
-            users.removeAllObjects()
-            tableView.reloadData()
-            break
-        case 1:
+            
             print("Users")
             usersScope = true
             friendsScope = false
             users.removeAllObjects()
             tableView.reloadData()
-            if searchBar.text?.characters.count > 0 {
-                searchUsers(searchBar.text!)
-            }
+            break
+        case 1:
+            print("Friends")
+            friendsScope = true
+            usersScope = false
+            users.removeAllObjects()
+            tableView.reloadData()
             break
             
         default:
