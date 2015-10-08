@@ -397,6 +397,12 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         self.showViewController(vc as! UIViewController, sender: vc)
     }
     
+    func settingsPressed(sender: UIButton!) {
+        
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Settings")
+        self.showViewController(vc as! UIViewController, sender: vc)
+    }
+    
     
     func removeProfile() {
         contentView.removeFromSuperview()
