@@ -11,6 +11,8 @@ import Parse
 
 var frequests = PFObject(className: "FriendRequest")
 
+var usersFrom = String()
+
 
 class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
 
@@ -28,7 +30,10 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     var crossButton = UIButton()
     var checkButtons:Array<UIButton> = []
     var crossButtons:Array<UIButton> = []
+    var userFriends = NSMutableArray()
 
+    var friendRequestUsers: Array<String> = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +69,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                     let username:String? = frequests["fromUser"] as? String
                     self.userArray.append(username!)
                     print(username)
+                    self.friendRequestUsers.append(username!)
                     dispatch_async(dispatch_get_main_queue()) {
                         self.tableView.reloadData()
                     }
@@ -87,26 +93,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         
         cell.crossButton.tag = indexPath.row + 100_000
         cell.crossButton.addTarget(self, action: "crossButtonPressed:", forControlEvents: .TouchUpInside)
-        
-//        checkmarkButton = UIButton(frame: CGRectMake(280, 15, 40, 40))
-//        checkmarkButton.tag = indexPath.row
-//        checkmarkButton.addTarget(self, action: "checkmarkButtonPressed:", forControlEvents: .TouchUpInside)
-//        checkmarkButton.contentMode = UIViewContentMode.ScaleAspectFill
-//        checkmarkButton.setBackgroundImage(UIImage(named: "checkmark11.png"), forState: .Normal)
-//        cell.addSubview(checkmarkButton)
-//        
-//        checkButtons.append(checkmarkButton)
-//        
-//        crossButton = UIButton(frame: CGRectMake(330, 15, 40, 40))
-//        crossButton.tag = indexPath.row
-//        crossButton.addTarget(self, action: "crossButtonPressed:", forControlEvents: .TouchUpInside)
-//        crossButton.contentMode = UIViewContentMode.ScaleAspectFill
-//        crossButton.setBackgroundImage(UIImage(named: "close38.png"), forState: .Normal)
-//        cell.addSubview(crossButton)
-//
-//        crossButtons.append(crossButton)
 
-        
         cell.username.text = userArray[indexPath.row]
         
         
@@ -183,15 +170,87 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     func checkmarkButtonPressed(sender:UIButton) {
 
         
+        
+        
         let buttonRow = sender.tag
         let tmpButton = self.view.viewWithTag(buttonRow) as? UIButton
         checkmarkButton = tmpButton!
         checkmarkButton.setBackgroundImage(UIImage(named: "checkmark12.png"), forState: .Normal)
         
         
+        
+        self.userFriends.addObject(friendRequestUsers[buttonRow-1])
+        
+        let requestQuery2 = PFQuery(className: "FriendRequest")
+        if let user = PFUser.currentUser() {
+            requestQuery2.whereKey("toUserr", equalTo: user.username!)
+            requestQuery2.findObjectsInBackgroundWithBlock({ (request:[AnyObject]?, error:NSError?) -> Void in
+                
+                if error == nil {
+                    
+                    
+                    for request in request! {
+                        usersFrom = request["fromUser"] as! String
+                        
+                        request.deleteEventually()
+                    }
+                    
+                    let userFriendsQuery = PFQuery(className: "Friends")
+                    userFriendsQuery.whereKey("username", equalTo: usersFrom)
+                    userFriendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
+                        
+                        if error == nil {
+                            if let friends = friends as? [PFObject]{
+                                for friends in friends {
+                                    
+                                    friends["friends"]?.addObject((PFUser.currentUser()?.username)!)
+                                    let r = friends["friends"]
+                                    print("his friends are \(r)")
+                                    friends.saveInBackground()
+                                    usersFrom = ""
+                                }
+                            }
+                        }
+                        else {
+                            print("annerror accured")
+                        }
+                    })
+                }
+            })
+        }
+        
+        //adding friends to self
+        let friendsQuery = PFQuery(className: "Friends")
+        if let user = PFUser.currentUser() {
+            friendsQuery.whereKey("user", equalTo: user)
+            friendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
+                
+                if error == nil {
+                    if let friends = friends as? [PFObject]{
+                        for friends in friends {
+                            
+                            friends["friends"]?.addObject(self.userFriends[self.userFriends.count - 1])
+                            friends.saveInBackground()
+                        }
+                    }
+                }
+                else {
+                    print("annerror accured")
+                }
+            })
+        }
+        
+
+        //end of accepting
+        
+        
+        //editing the view
         let buttonRow2 = sender.tag + 99_999
         let tmpButton2 = self.view.viewWithTag(buttonRow2) as? UIButton
         crossButton = tmpButton2!
+        
+        checkmarkButton.userInteractionEnabled = false
+        crossButton.userInteractionEnabled = false
         
         checkmarkButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -222,6 +281,10 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         let buttonRow2 = sender.tag - 99_999
         let tmpButton2 = self.view.viewWithTag(buttonRow2) as? UIButton
         checkmarkButton = tmpButton2!
+        
+        checkmarkButton.userInteractionEnabled = false
+        crossButton.userInteractionEnabled = false
+        
         
         checkmarkButton.translatesAutoresizingMaskIntoConstraints = false
 
