@@ -61,7 +61,6 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.scrollEnabled = true
         view.addSubview(scrollView)
         scrollView.showsVerticalScrollIndicator = false
-        
     }
     
     func loadUserInfoFromCloud () {

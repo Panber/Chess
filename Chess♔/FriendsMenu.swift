@@ -175,10 +175,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         query.orderByAscending("username")
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
-        //        if objects?.count != 0 {
-                 // <- I'm not sure where to put this yet
-       //         }
-         //       self.tableView.reloadData()
+//                if objects?.count != 0 {
+//                  <- I'm not sure where to put this yet
+//                }
+//                self.tableView.reloadData()
                 print(objects?.count)
                 self.users.removeAllObjects()
                 self.users.addObjectsFromArray(objects!)
@@ -221,8 +221,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+     
+        if tableView == self.searchDisplayController?.searchResultsTableView {
         return users.count
+        } else {
+            return 0
+        }
         
     }
     
