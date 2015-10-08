@@ -60,7 +60,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         addTop10World()
         
     }
-
+    
     
     
     //func to set up people in top10WorldView
@@ -70,7 +70,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         let ratingQuery = PFQuery(className: "_User")
         ratingQuery.orderByDescending("rating")
-        ratingQuery.limit = 10 
+        ratingQuery.limit = 10
         ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
                 for usersObject in usersObject! {
@@ -140,13 +140,13 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                             profilePicture.image = image
                                             // tableView.reloadInputViews()
                                             //bluring bc
-//                                            profilePicBlur.image = image
-//                                            //bluring bc of profile pic
-//                                            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
-//                                            if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-//                                            else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-//                                            visualEffectView.frame = profilePicBlur.bounds
-//                                            profilePicBlur.addSubview(visualEffectView)
+                                            //                                            profilePicBlur.image = image
+                                            //                                            //bluring bc of profile pic
+                                            //                                            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+                                            //                                            if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+                                            //                                            else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+                                            //                                            visualEffectView.frame = profilePicBlur.bounds
+                                            //                                            profilePicBlur.addSubview(visualEffectView)
                                         }
                                         
                                     }
@@ -164,7 +164,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             }
         })
         
-    
+        
     }
     
     // Func that searches for user with key and stores it in an array
@@ -180,12 +180,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     self.users.addObject(object)
                 }
                 print(self.users.count)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
             }
-            
-            
         }
-        self.tableView.reloadData()
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -200,24 +199,24 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         return 1
     }
     
-     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return users.count
         
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 0 && usersScope == true {
-        searchUsers(searchText)
+            searchUsers(searchText)
         }
         tableView.hidden = false
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
+        
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
-
+        
         
         
         // Declare user object and set cell text to username
@@ -238,7 +237,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 
             }
         }
-         //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         return cell
     }
     
@@ -289,14 +288,14 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
         
-       tableView.hidden = false
-       return true
+        tableView.hidden = false
+        return true
     }
     
-        func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-    
-            return true
-        }
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        
+        return true
+    }
     
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         switch selectedScope {
@@ -314,10 +313,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             users.removeAllObjects()
             tableView.reloadData()
             break
-        
+            
         default:
             break
-        
+            
         }
     }
     
