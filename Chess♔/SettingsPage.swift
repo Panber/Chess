@@ -75,7 +75,7 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
         //adding Receive notofocations: label
         let label1 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 25, screenWidth, 45))
         label1.textAlignment = NSTextAlignment.Left
-        label1.text = "Receive notofocations"
+        label1.text = "Receive notifications"
         label1.font = UIFont(name: "Didot", size: 16)
         if darkMode { label1.textColor = UIColor.lightTextColor() }
         else { label1.textColor = UIColor.grayColor() }
