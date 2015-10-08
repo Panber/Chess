@@ -19,12 +19,37 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     var request = PFObject(className: "FriendRequest")
     let friendsButton = UIButton()
     var label2 = UILabel()
+    var label3 = UILabel()
+    var label4 = UILabel()
+    var label5 = UILabel()
+
+    var label6 = UILabel()
+    var label7 = UILabel()
+    var label8 = UILabel()
+
+    var label9 = UILabel()
+
+    var label10 = UILabel()
+    var label11 = UILabel()
+
     var label12 = UILabel()
     var label13 = UILabel()
     var label14 = UILabel()
     var label15 = UILabel()
+    var label16 = UILabel()
+    var label17 = UILabel()
 
-    
+    var label18 = UILabel()
+
+    var label19 = UILabel()
+    var label20 = UILabel()
+
+    var friendsArrowImage = UIImageView()
+
+    var friendStatusLabel = UILabel()
+
+    var t:CGFloat = 0
+    var underElements:Array<UILabel> = []
 
 
     var userRating = String()
@@ -46,6 +71,10 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        underElements = [label3,label4,label5,label6,label7,label8,label9,label10,label11,label12,label13,label14,label15,label16,label17]
+        
+        
         self.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         // Do any additional setup after loading the view.
@@ -98,6 +127,14 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     func setUpProfile () {
         
         loadUserInfoFromCloud()
+        
+        
+        
+        
+        
+        
+        
+        
         navigationController?.navigationBar.topItem?.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         //creating the view
@@ -108,6 +145,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         else { contentView.backgroundColor = UIColor.whiteColor() }
         contentView.clipsToBounds = true
         scrollView.addSubview(contentView)
+        
+        
         
         //setting up bc image of profile pic
         if NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") == nil {
@@ -138,8 +177,9 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         profilePic.contentMode = UIViewContentMode.ScaleAspectFill
         contentView.addSubview(profilePic)
         
+        
         //adding username to view
-        let label = UILabel(frame: CGRectMake(contentView.frame.size.height - 20 , contentView.frame.size.height/5, 250, 40))
+        let label = UILabel(frame: CGRectMake(contentView.frame.size.height - 30 , contentView.frame.size.height/5, 250, 40))
         label.textAlignment = NSTextAlignment.Left
         label.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username")as? String
         label.font = UIFont(name: "Didot-Bold", size: 30)
@@ -149,7 +189,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         //adding rating label
-        label2 = UILabel(frame: CGRectMake(contentView.frame.size.height - 20 , label.frame.origin.y + 30, 100, 40))
+        label2 = UILabel(frame: CGRectMake(contentView.frame.size.height - 30 , label.frame.origin.y + 30, 100, 40))
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
@@ -157,6 +197,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         if darkMode { label2.textColor = UIColor.whiteColor() }
         else { label2.textColor = UIColor.blackColor() }
         contentView.addSubview(label2)
+        
+        
         
         //adding freinds request button
         let friends = PFQuery(className: "friends")
@@ -166,25 +208,90 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
             
         }
         
+        //adding white bc to fridnrequest
+        let label2o5 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y, screenWidth, 45))
+        label2o5.text = ""
+        label2o5.backgroundColor = UIColor.whiteColor()
+        scrollView.addSubview(label2o5)
+        
+        //adding the checmark or cross
+        let ifFriend = UIImageView(frame: CGRectMake(profilePic.frame.origin.x , contentView.frame.height + contentView.frame.origin.y + 7.5, profilePic.frame.size.width, 30))
+        ifFriend.layer.cornerRadius = ifFriend.frame.size.height / 2
+        ifFriend.clipsToBounds = true
+        ifFriend.contentMode = UIViewContentMode.ScaleAspectFit
+        scrollView.addSubview(ifFriend)
+        
+        //setting up frienStatusLabel
+        friendStatusLabel = UILabel(frame: CGRectMake(label.frame.origin.x, contentView.frame.height + contentView.frame.origin.y, screenWidth - label.frame.origin.x, 45))
+        friendStatusLabel.textAlignment = .Left
+        friendStatusLabel.font = UIFont(name: "Didot", size: 16)
+        friendStatusLabel.textColor = UIColor.lightGrayColor()
+        scrollView.addSubview(friendStatusLabel)
+        
+        let friendsQuery = PFQuery(className: "Friends")
+        friends.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
+        friendsQuery.whereKey("friends", equalTo: label.text!)
+        friendsQuery.findObjectsInBackgroundWithBlock({ (friendss:[AnyObject]?, error:NSError?) -> Void in
+            
+            
+            if "\(friendss)" == "Optional([])" {
+                self.t = 1
+                
+                ifFriend.image = UIImage(named: "close1.png")
+                self.friendStatusLabel.text = "You are not friends"
+                
+                //if not friend:
+                self.friendRequestButton.setTitle("Add as Friend", forState: .Normal)
+                self.friendRequestButton.titleLabel?.font = UIFont(name: "Didot-Bold", size: 18)
+                self.friendRequestButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
+                self.friendRequestButton.setTitleColor(blue, forState: .Normal)
+                self.friendRequestButton.layer.borderColor = blue.CGColor
+                self.friendRequestButton.frame.origin.x = 0
+                self.friendRequestButton.frame.origin.y
+                    = self.contentView.frame.height + self.contentView.frame.origin.y + 45
+                self.friendRequestButton.frame.size.height = 45
+                self.friendRequestButton.frame.size.width = screenWidth
+                self.friendRequestButton.backgroundColor = UIColor.whiteColor()
+                self.friendRequestButton.userInteractionEnabled = true
+                self.friendRequestButton.addTarget(self, action: "friendRequestPressed:", forControlEvents: .TouchUpInside)
+                self.friendRequestButton.alpha = 0
+                self.scrollView.addSubview(self.friendRequestButton)
+                
+                
+                let sep = UILabel(frame: CGRectMake(0, self.contentView.frame.height + self.contentView.frame.origin.y + 45 , screenWidth, 0.5))
+                if darkMode { sep.backgroundColor = UIColor.lightGrayColor() }
+                else { sep.backgroundColor = UIColor.lightGrayColor() }
+                self.scrollView.addSubview(sep)
+                
+                
+                UIView.animateWithDuration(0.5, animations: { () -> Void in
+                    self.friendRequestButton.alpha = 1
+                })
+                self.elementSetup()
+            }
+            else {
+                ifFriend.image = UIImage(named: "checkmark13.png")
+                self.friendStatusLabel.text = "You are friends"
+                
+                self.elementSetup()
+            }
+        })
+        //end of add friend
         
         
-        //if not friend:
-        friendRequestButton.setTitle("Add as Friend", forState: .Normal)
-        friendRequestButton.titleLabel?.font = UIFont(name: "Didot-Bold", size: 18)
-        friendRequestButton.setTitleColor(blue, forState: .Normal)
-        friendRequestButton.layer.borderColor = blue.CGColor
-        friendRequestButton.frame.origin.x = 0
-        friendRequestButton.frame.origin.y
-            = contentView.frame.height + contentView.frame.origin.y
-        friendRequestButton.frame.size.height = 44
-        friendRequestButton.frame.size.width = screenWidth
-        friendRequestButton.backgroundColor = UIColor.whiteColor()
-        friendRequestButton.userInteractionEnabled = true
-        friendRequestButton.addTarget(self, action: "friendRequestPressed:", forControlEvents: .TouchUpInside)
-        scrollView.addSubview(friendRequestButton)
+
+    }
+    
+    func elementSetup() {
+    
+
+    
+
+
+      
         
         //adding stats label
-        let label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + contentView.frame.origin.y + 65, 150, 25))
+        label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + contentView.frame.origin.y + 65 + (45*t), 150, 25))
         label3.textAlignment = NSTextAlignment.Left
         label3.text = "Statisitics"
         label3.font = UIFont(name: "Didot-Italic", size: 16)
@@ -193,13 +300,13 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label3)
         
         //adding white bc to stats
-        let label4 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25, screenWidth, 45*4))
+        label4 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + (45*t), screenWidth, 45*4))
         label4.text = ""
         label4.backgroundColor = UIColor.whiteColor()
             scrollView.addSubview(label4)
         
         //adding won: label
-        let label5 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25, screenWidth, 45))
+        label5 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + (45*t), screenWidth, 45))
         label5.textAlignment = NSTextAlignment.Left
         label5.text = "Won"
         label5.font = UIFont(name: "Didot", size: 16)
@@ -208,7 +315,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label5)
 
         //adding drawn: label
-        let label6 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45, screenWidth, 45))
+        label6 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + (45*t), screenWidth, 45))
         label6.textAlignment = NSTextAlignment.Left
         label6.text = "Drawn"
         label6.font = UIFont(name: "Didot", size: 16)
@@ -217,7 +324,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label6)
         
         //adding lost: label
-        let label7 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45, screenWidth, 45))
+        label7 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + (45*t), screenWidth, 45))
         label7.textAlignment = NSTextAlignment.Left
         label7.text = "Lost"
         label7.font = UIFont(name: "Didot", size: 16)
@@ -226,7 +333,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label7)
         
         //adding rating: label
-        let label8 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45, screenWidth, 45))
+        label8 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + (45*t), screenWidth, 45))
         label8.textAlignment = NSTextAlignment.Left
         label8.text = "Rating"
         label8.font = UIFont(name: "Didot", size: 16)
@@ -235,26 +342,26 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label8)
         
         //adding seperator: label
-        let label9 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45, screenWidth, 0.5))
+        label9 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + (45*t), screenWidth, 0.5))
         if darkMode { label9.backgroundColor = UIColor.lightGrayColor() }
         else { label9.backgroundColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label9)
         
         //adding seperator2: label
-        let label10 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45, screenWidth, 0.5))
+        label10 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + (45*t), screenWidth, 0.5))
         if darkMode { label10.backgroundColor = UIColor.lightGrayColor() }
         else { label10.backgroundColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label10)
         
         //adding seperator3: label
-        let label11 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45, screenWidth, 0.5))
+        label11 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + (45*t), screenWidth, 0.5))
         if darkMode { label11.backgroundColor = UIColor.lightGrayColor() }
         else { label11.backgroundColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label11)
         
         
         //adding won from cloud: label
-        label12 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25, screenWidth - 20, 45))
+        label12 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + (45*t), screenWidth - 20, 45))
         label12.textAlignment = NSTextAlignment.Right
         label12.font = UIFont(name: "Didot", size: 16)
         if darkMode { label12.textColor = UIColor.whiteColor() }
@@ -262,7 +369,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label12)
         
         //adding drawn from cloud: label
-        label13 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45, screenWidth - 20, 45))
+        label13 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + (45*t), screenWidth - 20, 45))
         label13.textAlignment = NSTextAlignment.Right
         label13.font = UIFont(name: "Didot", size: 16)
         if darkMode { label13.textColor = UIColor.whiteColor() }
@@ -270,7 +377,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label13)
         
         //adding lost from cloud: label
-        label14 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45, screenWidth - 20, 45))
+        label14 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + (45*t), screenWidth - 20, 45))
         label14.textAlignment = NSTextAlignment.Right
         label14.font = UIFont(name: "Didot", size: 16)
         if darkMode { label14.textColor = UIColor.whiteColor() }
@@ -278,7 +385,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label14)
         
         //adding rating from cloud: label
-        label15 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45, screenWidth - 20, 45))
+        label15 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + (45*t), screenWidth - 20, 45))
         label15.textAlignment = NSTextAlignment.Right
         label15.font = UIFont(name: "Didot", size: 16)
         if darkMode { label15.textColor = UIColor.whiteColor() }
@@ -287,7 +394,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
 
         
         //adding white bc to friends button
-        let label16 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65, screenWidth, 45))
+        label16 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + (45*t), screenWidth, 45))
         label16.text = ""
         label16.backgroundColor = UIColor.whiteColor()
         scrollView.addSubview(label16)
@@ -298,7 +405,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         friendsButton.layer.borderColor = blue.CGColor
         friendsButton.frame.origin.x = 20
         friendsButton.frame.origin.y
-            = contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65
+            = contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65  + (45*t)
         friendsButton.frame.size.height = 44
         friendsButton.frame.size.width = screenWidth - 20
         friendsButton.userInteractionEnabled = true
@@ -306,14 +413,14 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         friendsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         scrollView.addSubview(friendsButton)
         
-        let friendsArrowImage = UIImageView(frame: CGRectMake(screenWidth - 30, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65, 15, 45))
+        friendsArrowImage = UIImageView(frame: CGRectMake(screenWidth - 30, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + (45*t), 15, 45))
         friendsArrowImage.contentMode = .ScaleAspectFit
         if darkMode { friendsArrowImage.image = UIImage(named: "arrow_white.png"); friendsArrowImage.alpha = 1 }
         else { friendsArrowImage.image = UIImage(named: "arrow_black.png"); friendsArrowImage.alpha = 0.3  }
         scrollView.addSubview(friendsArrowImage)
         
         
-        let label17 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + 50, screenWidth, 50))
+        label17 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + 50 + (45*t), screenWidth , 50))
         label17.textAlignment = NSTextAlignment.Center
         label17.text = "Chess♔"
         label17.font = UIFont(name: "Didot", size: 13)
@@ -321,35 +428,16 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         else { label17.textColor = UIColor.grayColor() }
         scrollView.addSubview(label17)
         
-        
-        //adding the checmark or cross
-        let ifFriend = UIImageView(frame: CGRectMake(screenWidth - 60, 20, (contentView.frame.size.height) - 65, (contentView.frame.size.height) - 65))
-        ifFriend.layer.cornerRadius = profilePic.frame.size.height / 2
-        ifFriend.clipsToBounds = true
-   //     profilePic.image = UIImage(named: <#T##String#>))
-        ifFriend.contentMode = UIViewContentMode.ScaleAspectFill
-        contentView.addSubview(ifFriend)
-        
-        let friendsQuery = PFQuery(className: "Friends")
-        friends.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
-        friendsQuery.whereKey("friends", equalTo: label.text!)
-            friendsQuery.findObjectsInBackgroundWithBlock({ (friendss:[AnyObject]?, error:NSError?) -> Void in
-                
-                if "\(friendss)" == "Optional([])" {
-                    ifFriend.image = UIImage(named: "cross1.png")
-                }
-                else {
-                    ifFriend.image = UIImage(named: "checkmark12.png")
-                }
-            })
-        
-        
-        
     }
     
     func friendRequestPressed(sender: UIButton!) {
         
-        
+        for var i = 0; i < self.underElements.count; i++ {
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.underElements[i].frame.origin.y -= 45
+            })
+            
+        }
         request["fromUser"] = PFUser.currentUser()?.username
         request["toUserr"] = NSUserDefaults.standardUserDefaults().objectForKey("other_username")
         request["status"] = "pending"
@@ -362,9 +450,14 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         request.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
             if success {
                 self.friendRequestButton.userInteractionEnabled = false
-                self.friendRequestButton.setTitleColor(UIColor.grayColor(), forState: .Normal)
-                self.friendRequestButton.setTitle("Pending Friend Request", forState: UIControlState.Normal)
+                self.friendStatusLabel.text = "Pending Friend Request"
                 print("request was saved in background")
+                self.t = 0
+                
+
+                
+                
+
             }
             else {
                 self.friendRequestButton.userInteractionEnabled = true
@@ -389,7 +482,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
             
             profilePicBlur.frame.size.height = contentView.frame.size.height + yPos
             profilePicBlur.contentMode = .ScaleAspectFill
-            friendRequestButton.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height
+            friendRequestButton.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 45
             
         }
 
