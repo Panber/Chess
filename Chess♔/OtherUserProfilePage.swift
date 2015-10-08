@@ -331,14 +331,15 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         contentView.addSubview(ifFriend)
         
         let friendsQuery = PFQuery(className: "Friends")
-        friends.whereKey("username", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username") as! String)
-        friendsQuery.whereKey("friends", containsString: PFUser.currentUser()?.username)
+        friends.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
+        friendsQuery.whereKey("friends", equalTo: label.text!)
             friendsQuery.findObjectsInBackgroundWithBlock({ (friendss:[AnyObject]?, error:NSError?) -> Void in
                 
-                if error == nil {
+            
+                if friendss != nil {
                     ifFriend.image = UIImage(named: "checkmark12.png")
                 }
-                else {
+                else if friendss == nil{
                     ifFriend.image = UIImage(named: "close1.png")
                     }
             })
