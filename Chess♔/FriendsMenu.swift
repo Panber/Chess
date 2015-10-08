@@ -200,6 +200,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        if users.count == 0 {
+            self.searchDisplayController?.searchResultsTableView.rowHeight = 70
+        }
+        
         return users.count
         
     }
@@ -305,6 +309,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             friendsScope = false
             users.removeAllObjects()
             tableView.reloadData()
+            if searchBar.text?.characters.count > 0 {
+                searchUsers(searchBar.text!)
+            }
             break
         case 1:
             print("Friends")
