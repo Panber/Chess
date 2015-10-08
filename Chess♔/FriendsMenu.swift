@@ -15,7 +15,7 @@ let usersObject = PFObject(className: "_User")
 class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDelegate{
     
     // Array for users that are being searched for
-    var users:NSMutableArray = NSMutableArray()
+    var users:NSMutableArray = []
     
     @IBOutlet weak var top10World: UIScrollView!
     @IBOutlet weak var top10Friends: UIScrollView!
@@ -60,7 +60,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         addTop10World()
         
     }
-
+    
     
     
     //func to set up people in top10WorldView
@@ -70,7 +70,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         let ratingQuery = PFQuery(className: "_User")
         ratingQuery.orderByDescending("rating")
-        ratingQuery.limit = 10 
+        ratingQuery.limit = 10
         ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
                 for usersObject in usersObject! {
@@ -140,13 +140,13 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                             profilePicture.image = image
                                             // tableView.reloadInputViews()
                                             //bluring bc
-//                                            profilePicBlur.image = image
-//                                            //bluring bc of profile pic
-//                                            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
-//                                            if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-//                                            else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-//                                            visualEffectView.frame = profilePicBlur.bounds
-//                                            profilePicBlur.addSubview(visualEffectView)
+                                            //                                            profilePicBlur.image = image
+                                            //                                            //bluring bc of profile pic
+                                            //                                            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+                                            //                                            if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+                                            //                                            else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+                                            //                                            visualEffectView.frame = profilePicBlur.bounds
+                                            //                                            profilePicBlur.addSubview(visualEffectView)
                                         }
                                         
                                     }
@@ -164,48 +164,27 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             }
         })
         
-    
+        
     }
     
     // Func that searches for user with key and stores it in an array
     func searchUsers(searchString: String) {
         
+        self.users.removeAllObjects()
         var query: PFQuery = PFQuery(className:"_User")
         query.whereKey("username", matchesRegex:searchString, modifiers:"i")
         query.orderByAscending("username")
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
-//                if objects?.count != 0 {
-//                  <- I'm not sure where to put this yet
-//                }
-//                self.tableView.reloadData()
-                print(objects?.count)
-                self.users.removeAllObjects()
-                self.users.addObjectsFromArray(objects!)
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.tableView.reloadData()
-                })
+                for object in objects! {
+                    self.users.addObject(object)
+                }
                 print(self.users.count)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
             }
-            
         }
-        
-        
-        
-        //        query.whereKey("username", matchesRegex:searchText.text!, modifiers:"i")
-        //        query.orderByAscending("username")
-        //        query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-        //            if error == nil {
-        //                self.users.removeAllObjects()
-        //                self.users.addObjectsFromArray(objects!)
-        //                self.tableView.reloadData()
-        //                //print(search_string)
-        //            }
-        //            else {
-        //                print("error")
-        //            }
-        //
-        //        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -221,32 +200,23 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     
-        if tableView == self.searchDisplayController?.searchResultsTableView {
+        
         return users.count
-        } else {
-            return 0
-        }
         
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 0 && usersScope == true {
-        searchUsers(searchText)
+            searchUsers(searchText)
         }
         tableView.hidden = false
     }
     
-//    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-//       
-//    }
-//    
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
+        
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
-
+        
         
         
         // Declare user object and set cell text to username
@@ -267,7 +237,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 
             }
         }
-        
+        //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         return cell
     }
     
@@ -318,15 +288,14 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
         
-       tableView.hidden = false
-        
-       return true
+        tableView.hidden = false
+        return true
     }
     
-        func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-    
-            return true
-        }
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        
+        return true
+    }
     
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         switch selectedScope {
@@ -344,10 +313,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             users.removeAllObjects()
             tableView.reloadData()
             break
-        
+            
         default:
             break
-        
+            
         }
     }
     
@@ -358,6 +327,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
+        //searchUsers(searchBar.text!)
     }
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
