@@ -12,7 +12,7 @@ import Parse
 let usersObject = PFObject(className: "_User")
 
 
-class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate{
+class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDelegate{
     
     // Array for users that are being searched for
     var users:NSMutableArray = NSMutableArray()

@@ -2,4 +2,54 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chess&#x2654;/FriendRequestsPage.swift"
+            timestampString = "466006504.676093"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chess_.FriendRequestsPage.(viewWillAppear (Chess_.FriendRequestsPage) -&gt; (Swift.Bool) -&gt; ()).(closure #1)"
+                  moduleName = "Chess&#x2654;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Johannes/Documents/Chess%E2%99%94/Chess%E2%99%94/FriendRequestsPage.swift"
+                  timestampString = "466006504.678283"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "3072">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chess_.FriendRequestsPage.(viewWillAppear (Chess_.FriendRequestsPage) -&gt; (Swift.Bool) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "Chess&#x2654;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Johannes/Documents/Chess%E2%99%94/Chess%E2%99%94/FriendRequestsPage.swift"
+                  timestampString = "466006504.678794"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "104"
+                  endingLineNumber = "104"
+                  offsetFromSymbolStart = "33">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
