@@ -20,6 +20,34 @@
                ReferencedContainer = "container:Chess&#x2654;.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8FA5C8A01B9A264F0097637E"
+               BuildableName = "Chess&#x2654;.xctest"
+               BlueprintName = "Chess&#x2654;Tests"
+               ReferencedContainer = "container:Chess&#x2654;.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8FA5C8AB1B9A264F0097637E"
+               BuildableName = "Chess&#x2654;.xctest"
+               BlueprintName = "Chess&#x2654;UITests"
+               ReferencedContainer = "container:Chess&#x2654;.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,26 +56,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8FA5C8A01B9A264F0097637E"
-               BuildableName = "Chess&#x2654;.xctest"
-               BlueprintName = "Chess&#x2654;Tests"
-               ReferencedContainer = "container:Chess&#x2654;.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8FA5C8AB1B9A264F0097637E"
-               BuildableName = "Chess&#x2654;.xctest"
-               BlueprintName = "Chess&#x2654;UITests"
-               ReferencedContainer = "container:Chess&#x2654;.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
