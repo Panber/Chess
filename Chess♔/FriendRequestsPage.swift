@@ -14,82 +14,132 @@ var frequests = PFObject(className: "FriendRequest")
 
 class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
 
-    var userss:NSMutableArray = NSMutableArray()
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var userArray: Array<String> = []
+    var profilePicArray: Array<UIImage> = []
     var i = 0
 
-    var scrollView = UIScrollView()
-    var scrollViewView = UIView()
-    
-
+    var profilePic = UIImageView()
+    var nameText = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        scrollView = UIScrollView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
-        scrollView.userInteractionEnabled = true
-        scrollView.showsVerticalScrollIndicator = true
-        scrollView.bounces = true
-        scrollView.scrollEnabled = true
-        view.addSubview(scrollView)
-        
-        scrollViewView = UIView(frame: CGRectMake(0, 0, screenWidth, screenHeight + 200))
-       // scrollView.addSubview(scrollViewView)
-        
-        
-        
-        
-    }
-    
-    
-    func loadRequestToView( t:CGFloat, _name:String) {
-        
-        //create bc
-        let bcLabel = UILabel(frame: CGRectMake(0, 0 + (70 * t), screenWidth, 70))
-        bcLabel.backgroundColor = UIColor.whiteColor()
-        scrollView.addSubview(bcLabel)
-        
-        //create seperator
-        let seperator = UILabel(frame: CGRectMake(0, 0 + (70 * t), screenWidth, 0.5))
-        seperator.backgroundColor = UIColor.lightGrayColor()
-        scrollView.addSubview(seperator)
-        
-        //create namelabel
-        let name = UILabel(frame: CGRectMake(30, bcLabel.frame.size.height / 2 + (t*70), 200, 40))
-        name.font = UIFont(name: "Didot", size: 20)
-        name.textAlignment = .Left
-        name.text = _name
-        scrollView.addSubview(name)
-    
-        
-        let profilePic = UIImageView(frame: CGRectMake(10, 10 + (70 * t), 50, 50))
-        
+        getUsers()
         
     }
     
 
     
-    
-    
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
+
         
+    }
+    
+    // MARK - Table View
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func getUsers() {
+     
         let frequestsQuery = PFQuery(className: "FriendRequest")
-        
         if let user = PFUser.currentUser()?.username {
             frequestsQuery.whereKey("toUserr", equalTo: (user))
             frequestsQuery.orderByDescending("updatedAt")
             frequestsQuery.whereKey("status", equalTo: "pending")
-            
             frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
+
                 
                 for frequests in frequests! {
-                    self.i++
-                    self.loadRequestToView(CGFloat(self.i), _name: frequests["fromUser"] as! String)
+                    let username:String? = frequests["fromUser"] as? String
+                    self.userArray.append(username!)
+                    print(username)
+                    self.tableView.reloadData()
+
                 }
-                
+       
             })
+            self.tableView.reloadData()
         }
         
+        
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UserTableViewCell
+
+        cell.username.text = userArray[indexPath.row]
+        
+        
+        let userQuery = PFQuery(className: "_User")
+        userQuery.whereKey("username", equalTo: userArray[indexPath.row])
+        let  _user = userQuery.getFirstObject() as! PFUser
+        
+        let profilePictureObject = _user["profile_picture"] as? PFFile
+        
+        if(profilePictureObject != nil)
+        {
+            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                
+                if(imageData != nil)
+                {
+                    self.profilePicArray.append(UIImage(data: imageData!)!)
+                    cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
+                    cell.userProfileImage.image = self.profilePicArray[indexPath.row]
+                }
+                
+            }
+        }
+        
+        
+        
+        
+
+
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return userArray.count
+        
+    }
+    
+    /*
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
+        
+        let user:PFUser = userss[indexPath.row] as! PFUser
+        
+        NSUserDefaults.standardUserDefaults().setObject(cell.username.text, forKey: "other_username")
+        
+        let profilePictureObject = user["profile_picture"] as? PFFile
+        
+        
+        if(profilePictureObject != nil)
+        {
+            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                
+                if(imageData != nil)
+                {
+                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
+                    self.showViewController(vc as! UIViewController, sender: vc)
+                }
+                
+            }
+        }
+    }
+    */
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
     }
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
