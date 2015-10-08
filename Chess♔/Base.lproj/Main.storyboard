@@ -1366,6 +1366,7 @@
         <!--Settings Page-->
         <scene sceneID="iRK-HX-gK5">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Gn-Xp-6C1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Settings" id="0i7-NR-9Qe" customClass="SettingsPage" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AmW-HQ-zVM"/>
@@ -1378,7 +1379,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Gn-Xp-6C1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3199" y="3326"/>
         </scene>
