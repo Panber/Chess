@@ -14,26 +14,30 @@ var frequests = PFObject(className: "FriendRequest")
 
 class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    
     var userss:NSMutableArray = NSMutableArray()
     var i = 0
 
-    var scrollView = UIScrollView()
     var scrollViewView = UIView()
-    
+    var view2 = UIView()
+    var profilePic = UIImageView()
 
+    @IBOutlet weak var view1: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scrollView = UIScrollView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
-        scrollView.userInteractionEnabled = true
-        scrollView.showsVerticalScrollIndicator = true
-        scrollView.bounces = true
-        scrollView.scrollEnabled = true
-        view.addSubview(scrollView)
+       // scrollView = UIScrollView(frame: CGRectMake(0, 64, screenWidth, screenHeight))
+//        scrollView.userInteractionEnabled = true
+//        scrollView.showsVerticalScrollIndicator = true
+//        scrollView.bounces = true
+//        scrollView.scrollEnabled = true
+//        view.addSubview(scrollView)
         
-        scrollViewView = UIView(frame: CGRectMake(0, 0, screenWidth, screenHeight + 200))
-       // scrollView.addSubview(scrollViewView)
+//        view2 = UIView(frame: CGRectMake(0, 0, screenWidth, screenHeight + 200))
+//        scrollView.addSubview(scrollViewView)
         
         
         
@@ -49,19 +53,20 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         scrollView.addSubview(bcLabel)
         
         //create seperator
-        let seperator = UILabel(frame: CGRectMake(0, 0 + (70 * t), screenWidth, 0.5))
+        let seperator = UILabel(frame: CGRectMake(20, 0 + (70 * t), screenWidth - 20, 0.5))
         seperator.backgroundColor = UIColor.lightGrayColor()
         scrollView.addSubview(seperator)
         
         //create namelabel
-        let name = UILabel(frame: CGRectMake(30, bcLabel.frame.size.height / 2 + (t*70), 200, 40))
+        let name = UILabel(frame: CGRectMake(70, bcLabel.frame.size.height / 4 + (t*70) - 70, 200, 40))
         name.font = UIFont(name: "Didot", size: 20)
         name.textAlignment = .Left
         name.text = _name
         scrollView.addSubview(name)
     
         
-        let profilePic = UIImageView(frame: CGRectMake(10, 10 + (70 * t), 50, 50))
+        profilePic = UIImageView(frame: CGRectMake(10, 10 + (70 * t), 50, 50))
+        scrollView.addSubview(profilePic)
         
         
     }
@@ -85,6 +90,25 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                 for frequests in frequests! {
                     self.i++
                     self.loadRequestToView(CGFloat(self.i), _name: frequests["fromUser"] as! String)
+                    
+                    
+//                    // Declare user object and set cell text to username
+//                    let user:PFUser = frequests["fromUser"] as! PFUser
+//                                        
+//                    let profilePictureObject = user["profile_picture"] as? PFFile
+//                    
+//                    if(profilePictureObject != nil)
+//                    {
+//                        profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+//                            
+//                            if(imageData != nil)
+//                            {
+//                                self.profilePic.image = UIImage(data: imageData!)
+//                            }
+//                            
+//                        }
+//                    }
+                    
                 }
                 
             })
