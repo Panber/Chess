@@ -169,14 +169,13 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     // Func that searches for user with key and stores it in an array
     func searchUsers(searchString: String) {
-       
-        self.users.removeAllObjects()
         
         var query: PFQuery = PFQuery(className:"_User")
         query.whereKey("username", matchesRegex:searchString, modifiers:"i")
         query.orderByAscending("username")
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
+                self.users.removeAllObjects()
                 for object in objects! {
                     self.users.addObject(object)
                 }
