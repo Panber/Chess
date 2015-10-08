@@ -271,7 +271,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     
     func crossButtonPressed(sender:UIButton) {
         
-
+        
         
         let buttonRow = sender.tag
         let tmpButton = self.view.viewWithTag(buttonRow) as? UIButton
@@ -281,6 +281,30 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         let buttonRow2 = sender.tag - 99_999
         let tmpButton2 = self.view.viewWithTag(buttonRow2) as? UIButton
         checkmarkButton = tmpButton2!
+        
+        
+        
+        //handling cloud
+        let requestQuery2 = PFQuery(className: "FriendRequest")
+        if let user = PFUser.currentUser() {
+            requestQuery2.whereKey("toUserr", equalTo: user.username!)
+            requestQuery2.findObjectsInBackgroundWithBlock({ (request:[AnyObject]?, error:NSError?) -> Void in
+                
+                if error == nil {
+                    for request in request! {
+                        request.deleteEventually()
+                    }
+                }
+                    else {
+                        print("annerror accured")
+                    }
+                
+                })
+        }
+        
+        
+        //end of cloud handling
+        
         
         checkmarkButton.userInteractionEnabled = false
         crossButton.userInteractionEnabled = false

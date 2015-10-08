@@ -44,11 +44,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
 //            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
 //            self.showViewController(vc as! UIViewController, sender: vc)
 //            
-        let friends = PFObject(className: "Friends")
-        friends["user"] = PFUser.currentUser()
-        friends["username"] = PFUser.currentUser()?.username
-        friends["friends"] = []
-        friends.saveInBackground()
+//        let friends = PFObject(className: "Friends")
+//        friends["user"] = PFUser.currentUser()
+//        friends["username"] = PFUser.currentUser()?.username
+//        friends["friends"] = []
+//        friends.saveInBackground()
 
 //
 //        }
