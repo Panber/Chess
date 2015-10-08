@@ -331,8 +331,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         contentView.addSubview(ifFriend)
         
         let friendsQuery = PFQuery(className: "Friends")
-        friendsQuery.whereKey("friends", containsString: PFUser.currentUser()?.username)
         friends.whereKey("username", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username") as! String)
+        friendsQuery.whereKey("friends", containsString: PFUser.currentUser()?.username)
             friendsQuery.findObjectsInBackgroundWithBlock({ (friendss:[AnyObject]?, error:NSError?) -> Void in
                 
                 if error == nil {
