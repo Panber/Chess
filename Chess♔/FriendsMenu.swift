@@ -31,7 +31,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     var usersScope:Bool = false
     var friendsScope:Bool = true
     
-    var string = 0;
+    var string = ""
     
     override func viewWillDisappear(animated: Bool) {
         view.endEditing(true)
@@ -210,6 +210,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             searchUsers(searchText)
         }
         tableView.hidden = false
+        print(searchText)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -312,6 +313,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             friendsScope = false
             users.removeAllObjects()
             tableView.reloadData()
+            if searchBar.text?.characters.count > 0 {
+                searchUsers(searchBar.text!)
+            }
             break
             
         default:
