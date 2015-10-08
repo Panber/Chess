@@ -24,6 +24,12 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     var profilePic = UIImageView()
     var nameText = String()
     
+    var checkmarkButton = UIButton()
+    var crossButton = UIButton()
+    var checkButtons:Array<UIButton> = []
+    var crossButtons:Array<UIButton> = []
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getUsers()
@@ -73,20 +79,33 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UserTableViewCell
-
-        let checkmarkButton = UIButton(frame: CGRectMake(280, 15, 40, 40))
-        checkmarkButton.tag = indexPath.row
-        checkmarkButton.addTarget(self, action: "checkmarkButtonPressed:", forControlEvents: .TouchUpInside)
-        checkmarkButton.contentMode = UIViewContentMode.ScaleAspectFill
-        checkmarkButton.setBackgroundImage(UIImage(named: "checkmark11.png"), forState: .Normal)
-        cell.addSubview(checkmarkButton)
+        let cell:UserTableViewCell2 = self.tableView.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath) as! UserTableViewCell2
 
         
-        let cross = UIImageView(frame: CGRectMake(330, 15, 40, 40))
-        cross.image = UIImage(named: "close38.png")
-        cell.addSubview(cross)
+        cell.checkmarkButton.tag = indexPath.row + 1
+        cell.checkmarkButton.addTarget(self, action: "checkmarkButtonPressed:", forControlEvents: .TouchUpInside)
         
+        cell.crossButton.tag = indexPath.row + 100_000
+        cell.crossButton.addTarget(self, action: "crossButtonPressed:", forControlEvents: .TouchUpInside)
+        
+//        checkmarkButton = UIButton(frame: CGRectMake(280, 15, 40, 40))
+//        checkmarkButton.tag = indexPath.row
+//        checkmarkButton.addTarget(self, action: "checkmarkButtonPressed:", forControlEvents: .TouchUpInside)
+//        checkmarkButton.contentMode = UIViewContentMode.ScaleAspectFill
+//        checkmarkButton.setBackgroundImage(UIImage(named: "checkmark11.png"), forState: .Normal)
+//        cell.addSubview(checkmarkButton)
+//        
+//        checkButtons.append(checkmarkButton)
+//        
+//        crossButton = UIButton(frame: CGRectMake(330, 15, 40, 40))
+//        crossButton.tag = indexPath.row
+//        crossButton.addTarget(self, action: "crossButtonPressed:", forControlEvents: .TouchUpInside)
+//        crossButton.contentMode = UIViewContentMode.ScaleAspectFill
+//        crossButton.setBackgroundImage(UIImage(named: "close38.png"), forState: .Normal)
+//        cell.addSubview(crossButton)
+//
+//        crossButtons.append(crossButton)
+
         
         cell.username.text = userArray[indexPath.row]
         
@@ -155,6 +174,66 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 70
     }
+    
+    
+    
+    // MARK - funcs
+    
+    
+    func checkmarkButtonPressed(sender:UIButton) {
+
+        
+        let buttonRow = sender.tag
+        let tmpButton = self.view.viewWithTag(buttonRow) as? UIButton
+        checkmarkButton = tmpButton!
+        checkmarkButton.setBackgroundImage(UIImage(named: "checkmark12.png"), forState: .Normal)
+        
+        
+        let buttonRow2 = sender.tag + 99_999
+        let tmpButton2 = self.view.viewWithTag(buttonRow2) as? UIButton
+        crossButton = tmpButton2!
+        
+        UIButton.animateWithDuration(0.5) { () -> Void in
+            self.crossButton.alpha = 0
+            self.crossButton.frame.origin.x -= 10
+            
+            
+            
+            
+            
+        }
+
+    }
+    
+    func crossButtonPressed(sender:UIButton) {
+        
+
+        
+        let buttonRow = sender.tag
+        let tmpButton = self.view.viewWithTag(buttonRow) as? UIButton
+        crossButton = tmpButton!
+        self.crossButton.setBackgroundImage(UIImage(named: "close.png"), forState: .Normal)
+
+        let buttonRow2 = sender.tag - 99_999
+        let tmpButton2 = self.view.viewWithTag(buttonRow2) as? UIButton
+        checkmarkButton = tmpButton2!
+        
+        checkmarkButton.translatesAutoresizingMaskIntoConstraints = false
+
+        let rightConstraint = NSLayoutConstraint(item: checkmarkButton, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: crossButton, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 1)
+        
+        UIButton.animateWithDuration(0.5) { () -> Void in
+            self.checkmarkButton.alpha = 0
+            
+            
+            rightConstraint.constant = 0
+            self.view.addConstraint(rightConstraint)
+            self.view.layoutIfNeeded()
+            
+        }
+    }
+    
+    
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
     func lightOrDarkMode() {

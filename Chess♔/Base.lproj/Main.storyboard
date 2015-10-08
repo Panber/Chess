@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1271,7 +1272,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="sq9-R9-TIV" customClass="UserTableViewCell" customModule="Chess_" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell2" id="sq9-R9-TIV" customClass="UserTableViewCell2" customModule="Chess_" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sq9-R9-TIV" id="LZC-qL-3qU">
@@ -1289,25 +1290,51 @@
                                                     <rect key="frame" x="21" y="10" width="50" height="50"/>
                                                     <animations/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="h35-kO-ptC"/>
+                                                        <constraint firstAttribute="width" constant="50" id="qhg-j1-OAc"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksM-jX-ZSv">
+                                                    <rect key="frame" x="519" y="15" width="40" height="40"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="9Ax-HO-cv8"/>
+                                                    </constraints>
+                                                    <state key="normal" backgroundImage="close38.png"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2SN-BI-TKL">
+                                                    <rect key="frame" x="469" y="15" width="40" height="40"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="X2U-OV-Hgd"/>
+                                                    </constraints>
+                                                    <state key="normal" backgroundImage="checkmark11.png"/>
+                                                </button>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="9" id="HCJ-e6-8pU"/>
-                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="centerY" secondItem="LZC-qL-3qU" secondAttribute="centerY" id="JNd-MT-uW7"/>
-                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="2" id="MFL-kS-SD4"/>
-                                                <constraint firstAttribute="trailing" secondItem="vHV-qB-NFj" secondAttribute="trailing" id="PPA-Bm-MvH"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="vHV-qB-NFj" secondAttribute="bottom" constant="23" id="eoD-cn-Pjr"/>
-                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="leading" secondItem="x2c-1y-D8K" secondAttribute="trailing" constant="35" id="fbP-J6-bye"/>
-                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="leading" secondItem="LZC-qL-3qU" secondAttribute="leadingMargin" constant="13" id="gDM-cC-j0F"/>
+                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="baseline" secondItem="2SN-BI-TKL" secondAttribute="baseline" id="2Nz-bn-2vd"/>
+                                                <constraint firstAttribute="trailing" secondItem="vHV-qB-NFj" secondAttribute="trailing" id="34U-Sm-NuH"/>
+                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="bottom" secondItem="ksM-jX-ZSv" secondAttribute="bottom" id="7aT-Kw-eZ0"/>
+                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="leading" secondItem="x2c-1y-D8K" secondAttribute="trailing" constant="35" id="CtT-0O-8NZ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="vHV-qB-NFj" secondAttribute="bottom" constant="23" id="EwJ-Z9-XVw"/>
+                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="2" id="HnP-Es-770"/>
+                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="centerY" secondItem="LZC-qL-3qU" secondAttribute="centerY" id="JrU-Fp-c1v"/>
+                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="7" id="LME-fh-ONC"/>
+                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="trailing" secondItem="LZC-qL-3qU" secondAttribute="trailingMargin" id="NeC-lp-Pea"/>
+                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="leading" secondItem="LZC-qL-3qU" secondAttribute="leadingMargin" constant="13" id="Pgd-Lo-m7l"/>
+                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="top" secondItem="ksM-jX-ZSv" secondAttribute="top" id="RFs-fD-wkq"/>
+                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="leading" secondItem="2SN-BI-TKL" secondAttribute="trailing" constant="10" id="UyL-Wr-Bsb"/>
+                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="9" id="Var-qo-COx"/>
+                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="firstBaseline" secondItem="2SN-BI-TKL" secondAttribute="firstBaseline" id="kiS-cF-3j0"/>
+                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="centerY" secondItem="x2c-1y-D8K" secondAttribute="centerY" id="xaE-Zz-lSo"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
+                                            <outlet property="checkmarkButton" destination="2SN-BI-TKL" id="cmK-ds-kHM"/>
+                                            <outlet property="crossButton" destination="ksM-jX-ZSv" id="a6z-cF-Eyn"/>
                                             <outlet property="userProfileImage" destination="x2c-1y-D8K" id="NvC-T4-IdN"/>
-                                            <outlet property="username" destination="vHV-qB-NFj" id="FOb-Mg-wtP"/>
+                                            <outlet property="username" destination="vHV-qB-NFj" id="j7b-Zo-zsM"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1366,7 +1393,9 @@
         <image name="Data.png" width="30" height="30"/>
         <image name="Friends.png" width="30" height="30"/>
         <image name="LightModePreview.png" width="1472" height="1490"/>
+        <image name="checkmark11.png" width="256" height="256"/>
         <image name="clack and white board with half boarder copy.png" width="2000" height="2096"/>
+        <image name="close38.png" width="256" height="256"/>
         <image name="profileTabBarIcon.png" width="30" height="30"/>
     </resources>
 </document>
