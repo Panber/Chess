@@ -177,9 +177,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 for object in objects! {
                     self.users.removeAllObjects()
                     self.users.addObject(object)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.tableView.reloadData()
-                    }
                 }
                 print(self.users.count)
                 dispatch_async(dispatch_get_main_queue()) {
