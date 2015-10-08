@@ -309,6 +309,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             friendsScope = false
             users.removeAllObjects()
             tableView.reloadData()
+            if searchBar.text?.characters.count > 0 {
+                searchUsers(searchBar.text!)
+            }
             break
         case 1:
             print("Friends")
