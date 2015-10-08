@@ -103,6 +103,8 @@
 		8FBED2FC1BB1F35700CDAACC /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		F134DDDE1BC1C417005BA54C /* UsersProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */; settings = {ASSET_TAGS = (); }; };
 		F1A469CB1BC0347E0093A13D /* testScrollVoew.png in Resources */ = {isa = PBXBuildFile; fileRef = F1A469CA1BC0347E0093A13D /* testScrollVoew.png */; settings = {ASSET_TAGS = (); }; };
+		F1B4144E1BC6C56200FEE6A4 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1B4144D1BC6C56200FEE6A4 /* ParseUI.framework */; settings = {ASSET_TAGS = (); }; };
+		F1B414501BC6C62100FEE6A4 /* QueryTableViewController in Resources */ = {isa = PBXBuildFile; fileRef = F1B4144F1BC6C62100FEE6A4 /* QueryTableViewController */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +228,8 @@
 		8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersProfilePage.swift; sourceTree = "<group>"; };
 		F1A469CA1BC0347E0093A13D /* testScrollVoew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testScrollVoew.png; sourceTree = "<group>"; };
+		F1B4144D1BC6C56200FEE6A4 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		F1B4144F1BC6C62100FEE6A4 /* QueryTableViewController */ = {isa = PBXFileReference; lastKnownFileType = folder; path = QueryTableViewController; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +243,7 @@
 				8F4A02A51B9A42D40084024A /* Accounts.framework in Frameworks */,
 				8F4A02A31B9A429B0084024A /* SystemConfiguration.framework in Frameworks */,
 				8F4A02A11B9A428E0084024A /* StoreKit.framework in Frameworks */,
+				F1B4144E1BC6C56200FEE6A4 /* ParseUI.framework in Frameworks */,
 				8F4A029F1B9A42890084024A /* Security.framework in Frameworks */,
 				8F4A029D1B9A42820084024A /* QuartzCore.framework in Frameworks */,
 				8F4A029B1B9A427B0084024A /* MobileCoreServices.framework in Frameworks */,
@@ -377,6 +382,8 @@
 			children = (
 				8F3AC3831B9AFAE700815CDC /* libsqlite3.dylib */,
 				8F3AC3811B9AFADC00815CDC /* libz.dylib */,
+				F1B4144F1BC6C62100FEE6A4 /* QueryTableViewController */,
+				F1B4144D1BC6C56200FEE6A4 /* ParseUI.framework */,
 				8F4A02A61B9A42DC0084024A /* Social.framework */,
 				8F4A02A41B9A42D40084024A /* Accounts.framework */,
 				8F4A02A21B9A429B0084024A /* SystemConfiguration.framework */,
@@ -599,6 +606,7 @@
 				8F14D1881B9C823500A58CCF /* 1.jpg in Resources */,
 				8F4A027F1B9A3EE80084024A /* blackBishop.png in Resources */,
 				8FA018D91B9B1FAE002B410E /* ChessIconAndTExt.png in Resources */,
+				F1B414501BC6C62100FEE6A4 /* QueryTableViewController in Resources */,
 				8F4A02791B9A3EE80084024A /* whiteQueen.png in Resources */,
 				8FA018D71B9B1BDE002B410E /* blubutton.png in Resources */,
 				8F38EF6A1BB8399D00668B3B /* JBpp.jpg in Resources */,
@@ -823,7 +831,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Panayotov (8JHAHM7T3P)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

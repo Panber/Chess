@@ -179,12 +179,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 for object in objects! {
                     self.users.addObject(object)
                 }
-                self.tableView.reloadData()
                 print(self.users.count)
             }
             
             
         }
+        self.tableView.reloadData()
 
     }
     
@@ -200,7 +200,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
      
         return users.count
         
