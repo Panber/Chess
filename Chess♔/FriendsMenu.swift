@@ -200,6 +200,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        if users.count == 0 {
+            self.searchDisplayController?.searchResultsTableView.rowHeight = 70
+        }
+        
         return users.count
         
     }
