@@ -322,6 +322,27 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label17)
         
         
+        //adding the checmark or cross
+        let ifFriend = UIImageView(frame: CGRectMake(screenWidth - 60, 20, (contentView.frame.size.height) - 65, (contentView.frame.size.height) - 65))
+        ifFriend.layer.cornerRadius = profilePic.frame.size.height / 2
+        ifFriend.clipsToBounds = true
+   //     profilePic.image = UIImage(named: <#T##String#>))
+        ifFriend.contentMode = UIViewContentMode.ScaleAspectFill
+        contentView.addSubview(ifFriend)
+        
+        let friendsQuery = PFQuery(className: "Friends")
+        friendsQuery.whereKey("friends", containsString: PFUser.currentUser()?.username)
+        friends.whereKey("username", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username") as! String)
+            friendsQuery.findObjectsInBackgroundWithBlock({ (friendss:[AnyObject]?, error:NSError?) -> Void in
+                
+                if error == nil {
+                    ifFriend.image = UIImage(named: "checkmark12.png")
+                }
+                else {
+                    ifFriend.image = UIImage(named: "close1.png")
+                    }
+            })
+        
         
         
     }
