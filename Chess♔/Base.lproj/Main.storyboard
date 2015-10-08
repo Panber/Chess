@@ -1363,6 +1363,25 @@
             </objects>
             <point key="canvasLocation" x="2511" y="3323"/>
         </scene>
+        <!--Settings Page-->
+        <scene sceneID="iRK-HX-gK5">
+            <objects>
+                <viewController storyboardIdentifier="Settings" id="0i7-NR-9Qe" customClass="SettingsPage" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AmW-HQ-zVM"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zu5-sq-hdX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iXH-PB-gkh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Gn-Xp-6C1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3199" y="3326"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="FO7-1d-XLI">
             <objects>
