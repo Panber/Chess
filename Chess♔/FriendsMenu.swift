@@ -28,10 +28,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     var top10WorldArrayRating = [String]()
     var top10WorldArrayUsers:Array<String> = []
     
-    var usersScope:Bool = false
-    var friendsScope:Bool = true
-    
-    var string = 0;
+    var usersScope:Bool = true
+    var friendsScope:Bool = false
+
     
     override func viewWillDisappear(animated: Bool) {
         view.endEditing(true)
@@ -169,20 +168,18 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     // Func that searches for user with key and stores it in an array
     func searchUsers(searchString: String) {
-       
         
         var query: PFQuery = PFQuery(className:"_User")
         query.whereKey("username", matchesRegex:searchString, modifiers:"i")
         query.orderByAscending("username")
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-            self.users.removeAllObjects()
             if error == nil {
+                self.users.removeAllObjects()
                 for object in objects! {
                     self.users.addObject(object)
                 }
                 print(self.users.count)
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
                     self.searchDisplayController?.searchResultsTableView.reloadData()
                 }
             }
@@ -302,16 +299,17 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         switch selectedScope {
         case 0:
-            print("Friends")
-            friendsScope = true
-            usersScope = false
+            
+            print("Users")
+            usersScope = true
+            friendsScope = false
             users.removeAllObjects()
             tableView.reloadData()
             break
         case 1:
-            print("Users")
-            usersScope = true
-            friendsScope = false
+            print("Friends")
+            friendsScope = true
+            usersScope = false
             users.removeAllObjects()
             tableView.reloadData()
             break

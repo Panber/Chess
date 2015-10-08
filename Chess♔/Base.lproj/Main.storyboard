@@ -654,8 +654,8 @@
                                 <color key="barTintColor" red="0.93136452879999998" green="0.93136452879999998" blue="0.93136452879999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
-                                    <string>Friends</string>
                                     <string>Users</string>
+                                    <string>Friends</string>
                                 </scopeButtonTitles>
                                 <variation key="default">
                                     <mask key="constraints">
