@@ -170,7 +170,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         }
         
         //adding username to view
-        let label = UILabel(frame: CGRectMake(contentView.frame.size.height - 20 , contentView.frame.size.height/5, 250, 40))
+        let label = UILabel(frame: CGRectMake(contentView.frame.size.height - 30 , contentView.frame.size.height/5, 250, 40))
         label.textAlignment = NSTextAlignment.Left
         label.text = PFUser.currentUser()?.username
         label.font = UIFont(name: "Didot-Bold", size: 30)
@@ -180,7 +180,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         //adding rating label
-        label2 = UILabel(frame: CGRectMake(contentView.frame.size.height - 20 , label.frame.origin.y + 30, 100, 40))
+        label2 = UILabel(frame: CGRectMake(contentView.frame.size.height - 30 , label.frame.origin.y + 30, 100, 40))
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
