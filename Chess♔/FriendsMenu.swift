@@ -30,8 +30,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     var usersScope:Bool = false
     var friendsScope:Bool = true
-    
-    var string = ""
+
     
     override func viewWillDisappear(animated: Bool) {
         view.endEditing(true)
@@ -210,7 +209,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             searchUsers(searchText)
         }
         tableView.hidden = false
-        print(searchText)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
