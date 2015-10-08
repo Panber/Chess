@@ -335,13 +335,12 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         friendsQuery.whereKey("friends", equalTo: label.text!)
             friendsQuery.findObjectsInBackgroundWithBlock({ (friendss:[AnyObject]?, error:NSError?) -> Void in
                 
-            
-                if friendss != nil {
+                if "\(friendss)" == "Optional([])" {
+                    ifFriend.image = UIImage(named: "cross1.png")
+                }
+                else {
                     ifFriend.image = UIImage(named: "checkmark12.png")
                 }
-                else if friendss == nil{
-                    ifFriend.image = UIImage(named: "close1.png")
-                    }
             })
         
         
