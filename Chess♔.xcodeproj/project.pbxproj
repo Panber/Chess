@@ -85,6 +85,10 @@
 		8F8BD2A91BC41ED700B25CFE /* arrow_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F8BD2A71BC41ED700B25CFE /* arrow_black.png */; settings = {ASSET_TAGS = (); }; };
 		8F8BD2AB1BC524C600B25CFE /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8BD2AA1BC524C600B25CFE /* ProfilePage.swift */; settings = {ASSET_TAGS = (); }; };
 		8F8BD2AD1BC5380100B25CFE /* FriendRequestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8BD2AC1BC5380100B25CFE /* FriendRequestsPage.swift */; settings = {ASSET_TAGS = (); }; };
+		8F8BD2B41BC6C1C500B25CFE /* close39.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F8BD2B01BC6C1C500B25CFE /* close39.png */; settings = {ASSET_TAGS = (); }; };
+		8F8BD2B51BC6C1C500B25CFE /* checkmark12.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F8BD2B11BC6C1C500B25CFE /* checkmark12.png */; settings = {ASSET_TAGS = (); }; };
+		8F8BD2B61BC6C1C500B25CFE /* close38.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F8BD2B21BC6C1C500B25CFE /* close38.png */; settings = {ASSET_TAGS = (); }; };
+		8F8BD2B71BC6C1C500B25CFE /* checkmark11.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F8BD2B31BC6C1C500B25CFE /* checkmark11.png */; settings = {ASSET_TAGS = (); }; };
 		8F970FBD1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F970FBC1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png */; settings = {ASSET_TAGS = (); }; };
 		8F970FBF1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F970FBE1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png */; settings = {ASSET_TAGS = (); }; };
 		8FA018D31B9B0D76002B410E /* chessIconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA018D21B9B0D76002B410E /* chessIconRounded.png */; };
@@ -201,6 +205,10 @@
 		8F8BD2A71BC41ED700B25CFE /* arrow_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_black.png; sourceTree = "<group>"; };
 		8F8BD2AA1BC524C600B25CFE /* ProfilePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		8F8BD2AC1BC5380100B25CFE /* FriendRequestsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsPage.swift; sourceTree = "<group>"; };
+		8F8BD2B01BC6C1C500B25CFE /* close39.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close39.png; sourceTree = "<group>"; };
+		8F8BD2B11BC6C1C500B25CFE /* checkmark12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark12.png; sourceTree = "<group>"; };
+		8F8BD2B21BC6C1C500B25CFE /* close38.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close38.png; sourceTree = "<group>"; };
+		8F8BD2B31BC6C1C500B25CFE /* checkmark11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark11.png; sourceTree = "<group>"; };
 		8F970FBC1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessIconSmallTextAndLogo.png; sourceTree = "<group>"; };
 		8F970FBE1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessIconSmallTextAndLogoDarkMode.png; sourceTree = "<group>"; };
 		8FA018D21B9B0D76002B410E /* chessIconRounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessIconRounded.png; sourceTree = "<group>"; };
@@ -317,6 +325,10 @@
 			children = (
 				8F14D18A1B9C917800A58CCF /* LoginImages */,
 				8FA018D61B9B1BDE002B410E /* blubutton.png */,
+				8F8BD2B01BC6C1C500B25CFE /* close39.png */,
+				8F8BD2B11BC6C1C500B25CFE /* checkmark12.png */,
+				8F8BD2B21BC6C1C500B25CFE /* close38.png */,
+				8F8BD2B31BC6C1C500B25CFE /* checkmark11.png */,
 				8F8BD2A61BC41ED700B25CFE /* arrow_white.png */,
 				8F8BD2A71BC41ED700B25CFE /* arrow_black.png */,
 				8F970FBC1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png */,
@@ -578,6 +590,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F8BD2B41BC6C1C500B25CFE /* close39.png in Resources */,
 				8F4A02771B9A3EE80084024A /* whiteKnight.png in Resources */,
 				8F2DD6DF1B9AFFF80059CEFA /* ChessIconTab@3x.png in Resources */,
 				8F14D19F1B9C918700A58CCF /* 6.jpg in Resources */,
@@ -585,6 +598,7 @@
 				8F14D19C1B9C918700A58CCF /* 9.png in Resources */,
 				8F14D1971B9C918700A58CCF /* 14.jpg in Resources */,
 				8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */,
+				8F8BD2B71BC6C1C500B25CFE /* checkmark11.png in Resources */,
 				8F8BD2A81BC41ED700B25CFE /* arrow_white.png in Resources */,
 				8FA018DB1B9B2D8C002B410E /* DSCF0388.jpg in Resources */,
 				8F14D1961B9C918700A58CCF /* 15.jpg in Resources */,
@@ -624,6 +638,7 @@
 				8F2DD6E21B9AFFF80059CEFA /* Friends@3x.png in Resources */,
 				8F056AF81BAF533C00CD617B /* DarkModePreview.png in Resources */,
 				8F2DD6E11B9AFFF80059CEFA /* Data@3x.png in Resources */,
+				8F8BD2B61BC6C1C500B25CFE /* close38.png in Resources */,
 				8F2DD6E61B9AFFF80059CEFA /* piecePossibilities.png in Resources */,
 				8F8BD2A91BC41ED700B25CFE /* arrow_black.png in Resources */,
 				8F2DD6E41B9AFFF80059CEFA /* moveOption.png in Resources */,
@@ -638,6 +653,7 @@
 				8F1BB5591BA22BAF0043E2B7 /* profileTabBarIcon@3x.png in Resources */,
 				8FA5C8961B9A264F0097637E /* Main.storyboard in Resources */,
 				8F4A027A1B9A3EE80084024A /* whiteRook.png in Resources */,
+				8F8BD2B51BC6C1C500B25CFE /* checkmark12.png in Resources */,
 				8F2DD6E71B9AFFF80059CEFA /* pieces vlack and white board blurred.png in Resources */,
 				8F2DD6DE1B9AFFF80059CEFA /* board black and white no border.png in Resources */,
 				8F4A02781B9A3EE80084024A /* whitePawn.png in Resources */,

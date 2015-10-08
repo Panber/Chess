@@ -246,6 +246,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
+
+        
+        
         // Declare user object and set cell text to username
         let user:PFUser = users[indexPath.row] as! PFUser
         

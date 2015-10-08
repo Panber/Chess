@@ -58,12 +58,13 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                     let username:String? = frequests["fromUser"] as? String
                     self.userArray.append(username!)
                     print(username)
-                    self.tableView.reloadData()
-
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                    }
                 }
        
             })
-            self.tableView.reloadData()
+            //self.tableView.reloadData()
         }
         
         
@@ -74,6 +75,19 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UserTableViewCell
 
+        let checkmarkButton = UIButton(frame: CGRectMake(280, 15, 40, 40))
+        checkmarkButton.tag = indexPath.row
+        checkmarkButton.addTarget(self, action: "checkmarkButtonPressed:", forControlEvents: .TouchUpInside)
+        checkmarkButton.contentMode = UIViewContentMode.ScaleAspectFill
+        checkmarkButton.setBackgroundImage(UIImage(named: "checkmark11.png"), forState: .Normal)
+        cell.addSubview(checkmarkButton)
+
+        
+        let cross = UIImageView(frame: CGRectMake(330, 15, 40, 40))
+        cross.image = UIImage(named: "close38.png")
+        cell.addSubview(cross)
+        
+        
         cell.username.text = userArray[indexPath.row]
         
         
@@ -97,12 +111,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
             }
         }
         
-        
-        
-        
 
-
-        
         return cell
     }
     
@@ -112,32 +121,37 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         
     }
     
-    /*
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
-        let user:PFUser = userss[indexPath.row] as! PFUser
+//        NSUserDefaults.standardUserDefaults().setObject(userArray[indexPath.row], forKey: "other_username")
+//        
+//        let userQuery = PFQuery(className: "_User")
+//        userQuery.whereKey("username", equalTo: userArray[indexPath.row])
+//        let  _user = userQuery.getFirstObject() as! PFUser
+//        
+//        let profilePictureObject = _user["profile_picture"] as? PFFile
         
-        NSUserDefaults.standardUserDefaults().setObject(cell.username.text, forKey: "other_username")
+//        if(profilePictureObject != nil)
+//        {
+//            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+//                
+//                if(imageData != nil)
+//                {
+////                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
+////                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
+////                    self.showViewController(vc as! UIViewController, sender: vc)
+//                }
+//                
+//            }
+//        }
+       
         
-        let profilePictureObject = user["profile_picture"] as? PFFile
         
         
-        if(profilePictureObject != nil)
-        {
-            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                
-                if(imageData != nil)
-                {
-                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
-                    self.showViewController(vc as! UIViewController, sender: vc)
-                }
-                
-            }
-        }
     }
-    */
+    
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 70
     }

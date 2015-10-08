@@ -21,9 +21,7 @@ class UserTableViewCell: UITableViewCell {
         //changing profileImage
         self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
         self.userProfileImage.clipsToBounds = true
-        
-        username.frame.origin.y = self.frame.size.height / 2
-        
+                
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -1278,7 +1278,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHV-qB-NFj">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHV-qB-NFj">
                                                     <rect key="frame" x="106" y="17" width="461" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="17"/>
@@ -1289,21 +1289,19 @@
                                                     <rect key="frame" x="21" y="10" width="50" height="50"/>
                                                     <animations/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="t7N-fo-kIv"/>
+                                                        <constraint firstAttribute="width" constant="50" id="h35-kO-ptC"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="vHV-qB-NFj" secondAttribute="trailing" id="KhP-jw-p0J"/>
-                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="leading" secondItem="LZC-qL-3qU" secondAttribute="leadingMargin" constant="13" id="P8P-Lo-5pw"/>
-                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="9" id="Yrw-jE-AWI"/>
-                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="2" id="bKo-bQ-w1Q"/>
-                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="centerY" secondItem="LZC-qL-3qU" secondAttribute="centerY" id="ehc-71-e6Z"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="vHV-qB-NFj" secondAttribute="bottom" constant="23" id="lPw-Qw-MZG"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="x2c-1y-D8K" secondAttribute="bottom" constant="-25" id="o59-cp-cQb"/>
-                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="leading" secondItem="x2c-1y-D8K" secondAttribute="trailing" constant="35" id="oJf-dm-dbF"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="vHV-qB-NFj" secondAttribute="bottom" constant="-3" id="u8p-uO-RcD"/>
+                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="9" id="HCJ-e6-8pU"/>
+                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="centerY" secondItem="LZC-qL-3qU" secondAttribute="centerY" id="JNd-MT-uW7"/>
+                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="2" id="MFL-kS-SD4"/>
+                                                <constraint firstAttribute="trailing" secondItem="vHV-qB-NFj" secondAttribute="trailing" id="PPA-Bm-MvH"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="vHV-qB-NFj" secondAttribute="bottom" constant="23" id="eoD-cn-Pjr"/>
+                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="leading" secondItem="x2c-1y-D8K" secondAttribute="trailing" constant="35" id="fbP-J6-bye"/>
+                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="leading" secondItem="LZC-qL-3qU" secondAttribute="leadingMargin" constant="13" id="gDM-cC-j0F"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
