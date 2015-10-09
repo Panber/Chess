@@ -11,7 +11,6 @@ import Parse
 
 var frequests = PFObject(className: "FriendRequest")
 
-var usersFrom = String()
 
 
 class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
@@ -31,6 +30,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     var checkButtons:Array<UIButton> = []
     var crossButtons:Array<UIButton> = []
     var userFriends = NSMutableArray()
+    var usersFrom = String()
 
     var friendRequestUsers: Array<String> = []
     
@@ -190,13 +190,13 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                     
                     
                     for request in request! {
-                        usersFrom = request["fromUser"] as! String
+                        self.usersFrom = request["fromUser"] as! String
                         
                         request.deleteEventually()
                     }
                     
                     let userFriendsQuery = PFQuery(className: "Friends")
-                    userFriendsQuery.whereKey("username", equalTo: usersFrom)
+                    userFriendsQuery.whereKey("username", equalTo: self.usersFrom)
                     userFriendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
                         
                         if error == nil {
@@ -207,7 +207,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                                     let r = friends["friends"]
                                     print("his friends are \(r)")
                                     friends.saveInBackground()
-                                    usersFrom = ""
+                                    self.usersFrom = ""
                                 }
                             }
                         }
