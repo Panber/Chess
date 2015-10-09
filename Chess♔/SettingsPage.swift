@@ -72,7 +72,7 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
         label.backgroundColor = UIColor.whiteColor()
         scrollView.addSubview(label)
         
-        //adding Receive notofocations: label
+        //adding Receive notifications: label
         let label1 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 25, screenWidth, 45))
         label1.textAlignment = NSTextAlignment.Left
         label1.text = "Receive notifications"
@@ -132,6 +132,12 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
         if darkMode { label6.backgroundColor = UIColor.lightGrayColor() }
         else { label6.backgroundColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label6)
+        
+        notificationsSwitch.setOn(true, animated: true)
+        notificationsSwitch.frame = CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 35, 0, 0)
+        notificationsSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Right
+        scrollView.addSubview(notificationsSwitch)
+        
 
     }
     
