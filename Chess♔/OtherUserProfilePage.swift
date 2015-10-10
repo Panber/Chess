@@ -285,7 +285,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         }
         
         let friendsQuery = PFQuery(className: "Friends")
-        friendsQuery.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
+        if let username = PFUser.currentUser()?.username {
+        friendsQuery.whereKey("username", equalTo: username)
         friendsQuery.whereKey("friends", equalTo: label.text!)
         friendsQuery.findObjectsInBackgroundWithBlock({ (friendss:[AnyObject]?, error:NSError?) -> Void in
             
@@ -308,12 +309,12 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                         self.elementSetup()
                         self.friendStatusLabel.text = "Recieved Friend Request"
 
-                        self.acceptRequest = UIButton(frame: CGRectMake(self.profilePic.frame.origin.x, self.ifFriend.frame.origin.y, 30, 30))
+                        self.acceptRequest = UIButton(frame: CGRectMake(self.friendStatusLabel.frame.origin.x - 80, self.ifFriend.frame.origin.y, 30, 30))
                         self.acceptRequest.setBackgroundImage(UIImage(named: "checkmark11.png"), forState: .Normal)
                         self.acceptRequest.addTarget(self, action: "acceptFriendRequestPressed:", forControlEvents: .TouchUpInside)
                         self.scrollView.addSubview(self.acceptRequest)
                         
-                        self.denyRequest = UIButton(frame: CGRectMake(self.acceptRequest.frame.origin.x + 40, self.ifFriend.frame.origin.y, 30, 30))
+                        self.denyRequest = UIButton(frame: CGRectMake(self.friendStatusLabel.frame.origin.x - 40, self.ifFriend.frame.origin.y, 30, 30))
                         self.denyRequest.setBackgroundImage(UIImage(named: "close38.png"), forState: .Normal)
                         self.denyRequest.addTarget(self, action: "denyFriendRequestPressed:", forControlEvents: .TouchUpInside)
                         self.scrollView.addSubview(self.denyRequest)
@@ -365,7 +366,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                 print("\(friendss)")
                 
                 self.ifFriend.image = UIImage(named: "checkmark13.png")
-                self.friendStatusLabel.text = "You are friends"
+                self.friendStatusLabel.text = "You are Friends"
                 self.scrollView.addSubview(self.settingsButton)
                 
                 self.elementSetup()
@@ -377,7 +378,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
             }
         })
         //end of add friend
-        
+        }
         
 
     }
@@ -555,13 +556,6 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                 self.friendStatusLabel.text = "Pending Friend Request"
                 print("request was saved in background")
                 self.t = 0
-                
-                
-                
-                
-
-                
-                
 
             }
             else {
@@ -585,6 +579,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
 //        let requestQuery2 = PFQuery(className: "FriendRequest")
 //        if let user = PFUser.currentUser() {
 //            requestQuery2.whereKey("toUserr", equalTo: user.username!)
+//            requestQuery2.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username")!)
+
 //            requestQuery2.findObjectsInBackgroundWithBlock({ (request:[AnyObject]?, error:NSError?) -> Void in
 //                
 //                if error == nil {
@@ -648,8 +644,11 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         UIView.animateWithDuration(0.5) { () -> Void in
             self.acceptRequest.setBackgroundImage(UIImage(named: "checkmark13.png"), forState: .Normal)
-            self.acceptRequest.frame.origin.x = self.profilePic.frame.origin.x + (self.profilePic.frame.size.width / 3)
+            self.acceptRequest.frame.origin.x = self.profilePic.frame.origin.x + (self.profilePic.frame.size.width / 2) - 15 
             
+            self.denyRequest.frame.origin.x = self.profilePic.frame.origin.x + (self.profilePic.frame.size.width / 2) - 15
+            self.denyRequest.alpha = 0
+            self.friendStatusLabel.text = "Friend Request Accepted"
             
             
         }
@@ -659,7 +658,41 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     
     func denyFriendRequestPressed(sender: UIButton!) {
         
+//        //handling cloud
+//        let requestQuery2 = PFQuery(className: "FriendRequest")
+//        if let user = PFUser.currentUser() {
+//            requestQuery2.whereKey("toUserr", equalTo: user.username!)
+//            requestQuery2.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username")!)
+//            requestQuery2.findObjectsInBackgroundWithBlock({ (request:[AnyObject]?, error:NSError?) -> Void in
+//                
+//                if error == nil {
+//                    for request in request! {
+//                        request.deleteEventually()
+//                    }
+//                }
+//                else {
+//                    print("annerror accured")
+//                }
+//                
+//            })
+//        }
         
+        acceptRequest.userInteractionEnabled = false
+        denyRequest.userInteractionEnabled = false
+        
+        
+        UIView.animateWithDuration(0.5) { () -> Void in
+            self.acceptRequest.frame.origin.x = self.profilePic.frame.origin.x + (self.profilePic.frame.size.width / 2) - 15
+            self.acceptRequest.alpha = 0
+
+            
+            self.denyRequest.setBackgroundImage(UIImage(named: "close1.png"), forState: .Normal)
+            self.denyRequest.frame.origin.x = self.profilePic.frame.origin.x + (self.profilePic.frame.size.width / 2) - 15
+            
+            self.friendStatusLabel.text = "Friend Request Denied"
+            
+            
+        }
         
     }
     
@@ -684,6 +717,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
             label2o5.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height
             friendStatusLabel.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height
             sep.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 45
+            acceptRequest.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 7.5
+            denyRequest.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 7.5
             
             
         }

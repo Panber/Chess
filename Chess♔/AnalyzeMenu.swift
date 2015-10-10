@@ -13,7 +13,9 @@ class AnalyzeMenu: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        navigationController?.navigationBar.topItem?.title = "Analyze"
+        self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         
         // Do any additional setup after loading the view.
     }
