@@ -285,7 +285,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         }
         
         let friendsQuery = PFQuery(className: "Friends")
-        friendsQuery.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
+        if let username = PFUser.currentUser()?.username {
+        friendsQuery.whereKey("username", equalTo: username)
         friendsQuery.whereKey("friends", equalTo: label.text!)
         friendsQuery.findObjectsInBackgroundWithBlock({ (friendss:[AnyObject]?, error:NSError?) -> Void in
             
@@ -377,7 +378,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
             }
         })
         //end of add friend
-        
+        }
         
 
     }
