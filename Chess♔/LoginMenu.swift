@@ -439,147 +439,147 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
     
     
     @IBAction func signUpFacebook(sender: AnyObject) {
-        
-        // Create Permissions array
-        let permissions = ["public_profile","email","user_friends"]
-        
-        // Login to Facebook with Permissions
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions, block: { (user:PFUser?, error:NSError?) -> Void in
-            
-            // If error, display message
-            if(error != nil)
-            {
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-                    
-                    let userMessage = error!.localizedDescription
-                    let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                    
-                    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                    
-                    myAlert.addAction(okAction)
-                    
-                    self.presentViewController(myAlert, animated: true, completion: nil)
-                    return
-                } // end of async
-            }
-            
-            
-            // Load facebook user details like user First name, Last name and email address
-            //self.loadFacebookUserDetails()
-            
-        })
-        
+//        
+//        // Create Permissions array
+//        let permissions = ["public_profile","email","user_friends"]
+//        
+//        // Login to Facebook with Permissions
+//        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions, block: { (user:PFUser?, error:NSError?) -> Void in
+//            
+//            // If error, display message
+//            if(error != nil)
+//            {
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    
+//                    
+//                    let userMessage = error!.localizedDescription
+//                    let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+//                    
+//                    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+//                    
+//                    myAlert.addAction(okAction)
+//                    
+//                    self.presentViewController(myAlert, animated: true, completion: nil)
+//                    return
+//                } // end of async
+//            }
+//            
+//            
+//            // Load facebook user details like user First name, Last name and email address
+//            //self.loadFacebookUserDetails()
+//            
+//        })
+//        
     }
-    
-    func loadFacebookUserDetails() {
-
-        
-        // Define fields we would like to read from Facebook User object
-        let requestParameters = ["fields": "id, email, first_name, last_name, name"]
-        
-        // Send Facebook Graph API Request for /me
-        let userDetails = FBSDKGraphRequest(graphPath: "me", parameters: requestParameters)
-        userDetails.startWithCompletionHandler({
-            (connection, result, error: NSError!) -> Void in
-            
-            
-            
-            if error != nil {
-                
-                let userMessage = error!.localizedDescription
-                let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                
-                myAlert.addAction(okAction)
-                
-                self.presentViewController(myAlert, animated: true, completion: nil)
-                
-                
-                PFUser.logOut()
-                
-                return
-            }
-            
-            
-            // Extract user fields
-            let userId:String = result["id"] as! String
-            let userEmail:String? = result["email"] as? String
-            let userFirstName:String?  = result["first_name"] as? String
-            let userLastName:String? = result["last_name"] as? String
-            
-            
-            
-            // Get Facebook profile picture
-            let userProfile = "https://graph.facebook.com/" + userId + "/picture?type=large"
-            
-            let profilePictureUrl = NSURL(string: userProfile)
-            
-            let profilePictureData = NSData(contentsOfURL: profilePictureUrl!)
-            
-            
-            // Prepare PFUser object
-            if(profilePictureData != nil)
-            {
-                let profileFileObject = PFFile(data:profilePictureData!)
-                PFUser.currentUser()?.setObject(profileFileObject, forKey: "profile_picture")
-            }
-            
-            PFUser.currentUser()?.setObject(userId, forKey: "username")
-            
-            
-            
-            if let userEmail = userEmail
-            {
-                PFUser.currentUser()?.email = userEmail
-                PFUser.currentUser()?.username = userEmail
-            }
-
-            PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) -> Void in
-                
-                if(error != nil)
-                {
-                    let userMessage = error!.localizedDescription
-                    let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                    
-                    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                    
-                    myAlert.addAction(okAction)
-                    
-                    self.presentViewController(myAlert, animated: true, completion: nil)
-                    
-                    
-                    PFUser.logOut()
-                    return
-                    
-                    
-                }
-                
-                if(success)
-                {
-                    if !userId.isEmpty
-                    {
-                        NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "user_name")
-                        NSUserDefaults.standardUserDefaults().synchronize()
-                        
-                        
-                        dispatch_async(dispatch_get_main_queue()) {
-                            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
-                            self.showViewController(vc as! UIViewController, sender: vc)
-                        }
-                        
-                    }
-                    
-                }
-                
-            })
-            
-            
-        })
-        
-    }
-    
+//    
+//    func loadFacebookUserDetails() {
+//
+//        
+//        // Define fields we would like to read from Facebook User object
+//        let requestParameters = ["fields": "id, email, first_name, last_name, name"]
+//        
+//        // Send Facebook Graph API Request for /me
+//        let userDetails = FBSDKGraphRequest(graphPath: "me", parameters: requestParameters)
+//        userDetails.startWithCompletionHandler({
+//            (connection, result, error: NSError!) -> Void in
+//            
+//            
+//            
+//            if error != nil {
+//                
+//                let userMessage = error!.localizedDescription
+//                let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+//                
+//                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+//                
+//                myAlert.addAction(okAction)
+//                
+//                self.presentViewController(myAlert, animated: true, completion: nil)
+//                
+//                
+//                PFUser.logOut()
+//                
+//                return
+//            }
+//            
+//            
+//            // Extract user fields
+//            let userId:String = result["id"] as! String
+//            let userEmail:String? = result["email"] as? String
+//            let userFirstName:String?  = result["first_name"] as? String
+//            let userLastName:String? = result["last_name"] as? String
+//            
+//            
+//            
+//            // Get Facebook profile picture
+//            let userProfile = "https://graph.facebook.com/" + userId + "/picture?type=large"
+//            
+//            let profilePictureUrl = NSURL(string: userProfile)
+//            
+//            let profilePictureData = NSData(contentsOfURL: profilePictureUrl!)
+//            
+//            
+//            // Prepare PFUser object
+//            if(profilePictureData != nil)
+//            {
+//                let profileFileObject = PFFile(data:profilePictureData!)
+//                PFUser.currentUser()?.setObject(profileFileObject, forKey: "profile_picture")
+//            }
+//            
+//            PFUser.currentUser()?.setObject(userId, forKey: "username")
+//            
+//            
+//            
+//            if let userEmail = userEmail
+//            {
+//                PFUser.currentUser()?.email = userEmail
+//                PFUser.currentUser()?.username = userEmail
+//            }
+//
+//            PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) -> Void in
+//                
+//                if(error != nil)
+//                {
+//                    let userMessage = error!.localizedDescription
+//                    let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+//                    
+//                    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+//                    
+//                    myAlert.addAction(okAction)
+//                    
+//                    self.presentViewController(myAlert, animated: true, completion: nil)
+//                    
+//                    
+//                    PFUser.logOut()
+//                    return
+//                    
+//                    
+//                }
+//                
+//                if(success)
+//                {
+//                    if !userId.isEmpty
+//                    {
+//                        NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "user_name")
+//                        NSUserDefaults.standardUserDefaults().synchronize()
+//                        
+//                        
+//                        dispatch_async(dispatch_get_main_queue()) {
+//                            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
+//                            self.showViewController(vc as! UIViewController, sender: vc)
+//                        }
+//                        
+//                    }
+//                    
+//                }
+//                
+//            })
+//            
+//            
+//        })
+//        
+//    }
+//    
     @IBAction func signUpEmail(sender: AnyObject) {
         
         emailUEnabled = true
