@@ -46,6 +46,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         top10World.scrollEnabled = true
         top10World.contentSize = CGSizeMake(1400, 140)
+        top10Friends.bounces = false
         top10World.showsHorizontalScrollIndicator = false
         
         
@@ -82,7 +83,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     print(self.top10WorldArrayUsers)
                 }
                 var t = 0
-                for var i:CGFloat = 0; i < 6; i++, t++ {
+                for var i:CGFloat = 0; i < 7; i++, t++ {
                     
                     let personView = UIView(frame: CGRectMake((self.top10World.frame.size.height) * i, 5, self.top10World.frame.size.height, self.top10World.frame.size.height))
                   //  personView.layer.cornerRadius = cornerRadius
