@@ -405,6 +405,12 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         self.showViewController(vc as! UIViewController, sender: vc)
     }
     
+    func friendsPressed(sender: UIButton!) {
+        
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Friends")
+        self.showViewController(vc as! UIViewController, sender: vc)
+    }
+    
     
     func removeProfile() {
         contentView.removeFromSuperview()
