@@ -70,9 +70,9 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                 for frequests in frequests! {
                     
                     let username:String? = frequests["fromUser"] as? String
-                //    dispatch_async(dispatch_get_main_queue()) {
-//                    self.userArray.append(username!)
-//                    }
+                    dispatch_async(dispatch_get_main_queue()) {
+                    self.userArray.append(username!)
+                    }
 //                    print(username)
                     self.friendRequestUsers.append(username!)
                 
