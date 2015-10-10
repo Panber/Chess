@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class SettingsPage: UIViewController, UIScrollViewDelegate {
-
+    
     var scrollView: UIScrollView!
     var contentView = UIView()
     
@@ -22,11 +22,12 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
     
     let notificationsSwitch = UISwitch()
     let gameSoundsSwitch = UISwitch()
+    let submitSwitch = UISwitch()
     let darkModeSwitch = UISwitch()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         //setting scrollview
         view.frame.size.height = 1000
@@ -47,7 +48,7 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
         setUpSettings()
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -58,14 +59,14 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
         
         view.addSubview(scrollView)
         //creating the view
-//        contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
-//        
-//        //creating the view
-//        contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
-//        if darkMode { contentView.backgroundColor = UIColor(red: 0.12, green: 0.12 , blue: 0.12, alpha: 1) }
-//        else { contentView.backgroundColor = UIColor.whiteColor() }
-//        contentView.clipsToBounds = true
-//        scrollView.addSubview(contentView)
+        //        contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
+        //
+        //        //creating the view
+        //        contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
+        //        if darkMode { contentView.backgroundColor = UIColor(red: 0.12, green: 0.12 , blue: 0.12, alpha: 1) }
+        //        else { contentView.backgroundColor = UIColor.whiteColor() }
+        //        contentView.clipsToBounds = true
+        //        scrollView.addSubview(contentView)
         
         let label = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 25, screenWidth, 45*4))
         label.text = ""
@@ -134,11 +135,27 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label6)
         
         notificationsSwitch.setOn(true, animated: true)
-        notificationsSwitch.frame = CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 35, 0, 0)
-        notificationsSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Right
+        notificationsSwitch.onTintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
+        notificationsSwitch.tintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
+        notificationsSwitch.frame = CGRectMake(screenWidth - 65, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 35, 0, 0)
+        notificationsSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
         scrollView.addSubview(notificationsSwitch)
         
-
+        darkModeSwitch.setOn(false, animated: true)
+        darkModeSwitch.onTintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
+        darkModeSwitch.tintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
+        darkModeSwitch.frame = CGRectMake(screenWidth - 65, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 35 + 45, 0, 0)
+        darkModeSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
+        scrollView.addSubview(darkModeSwitch)
+        
+        submitSwitch.setOn(true, animated: true)
+        submitSwitch.onTintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
+        submitSwitch.tintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
+        submitSwitch.frame = CGRectMake(screenWidth - 65, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 35 + 45 + 45, 0, 0)
+        submitSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
+        scrollView.addSubview(submitSwitch)
+        
+        
     }
     
     func logOutPressed(sender: UIButton!) {
@@ -159,7 +176,7 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
         }
         
     }
-
+    
     //func to check if dark or light mode should be enabled, keep this at the bottom
     func lightOrDarkMode() {
         if darkMode == true {
@@ -194,5 +211,5 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
         
         
     }
-
+    
 }
