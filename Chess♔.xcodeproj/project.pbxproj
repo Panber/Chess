@@ -43,8 +43,9 @@
 		8F31DCE51BC716F9004544CC /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCE41BC716F9004544CC /* add.png */; settings = {ASSET_TAGS = (); }; };
 		8F31DCE71BC7189B004544CC /* add1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCE61BC7189B004544CC /* add1.png */; settings = {ASSET_TAGS = (); }; };
 		8F31DCE91BC7B426004544CC /* equalization1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCE81BC7B426004544CC /* equalization1.png */; settings = {ASSET_TAGS = (); }; };
-		8F31DCEB1BC7B661004544CC /* equalization2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCEA1BC7B661004544CC /* equalization2.png */; settings = {ASSET_TAGS = (); }; };
 		8F31DCED1BC7C8B5004544CC /* pending.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCEC1BC7C8B5004544CC /* pending.png */; settings = {ASSET_TAGS = (); }; };
+		8F31DCF11BC9503D004544CC /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCF01BC9503D004544CC /* gear.png */; settings = {ASSET_TAGS = (); }; };
+		8F31DCF31BC9513B004544CC /* equalization2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCF21BC9513B004544CC /* equalization2.png */; settings = {ASSET_TAGS = (); }; };
 		8F38EF681BB8302300668B3B /* slogen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F38EF671BB8302300668B3B /* slogen.jpg */; settings = {ASSET_TAGS = (); }; };
 		8F38EF6A1BB8399D00668B3B /* JBpp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F38EF691BB8399D00668B3B /* JBpp.jpg */; settings = {ASSET_TAGS = (); }; };
 		8F3AC3821B9AFADC00815CDC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3AC3811B9AFADC00815CDC /* libz.dylib */; };
@@ -176,8 +177,9 @@
 		8F31DCE41BC716F9004544CC /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		8F31DCE61BC7189B004544CC /* add1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add1.png; sourceTree = "<group>"; };
 		8F31DCE81BC7B426004544CC /* equalization1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = equalization1.png; sourceTree = "<group>"; };
-		8F31DCEA1BC7B661004544CC /* equalization2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = equalization2.png; sourceTree = "<group>"; };
 		8F31DCEC1BC7C8B5004544CC /* pending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pending.png; sourceTree = "<group>"; };
+		8F31DCF01BC9503D004544CC /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		8F31DCF21BC9513B004544CC /* equalization2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = equalization2.png; sourceTree = "<group>"; };
 		8F38EF671BB8302300668B3B /* slogen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = slogen.jpg; sourceTree = "<group>"; };
 		8F38EF691BB8399D00668B3B /* JBpp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JBpp.jpg; sourceTree = "<group>"; };
 		8F3AC3811B9AFADC00815CDC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -357,7 +359,8 @@
 				8F14D18A1B9C917800A58CCF /* LoginImages */,
 				8FA018D61B9B1BDE002B410E /* blubutton.png */,
 				8F31DCE81BC7B426004544CC /* equalization1.png */,
-				8F31DCEA1BC7B661004544CC /* equalization2.png */,
+				8F31DCF21BC9513B004544CC /* equalization2.png */,
+				8F31DCF01BC9503D004544CC /* gear.png */,
 				8F8BD2B11BC6C1C500B25CFE /* checkmark12.png */,
 				8F31DCEC1BC7C8B5004544CC /* pending.png */,
 				8F31DCE01BC70E30004544CC /* checkmark13.png */,
@@ -590,7 +593,7 @@
 				TargetAttributes = {
 					8FA5C88C1B9A264F0097637E = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = G542NRN7XT;
+						DevelopmentTeam = V47FUAKS5S;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -639,6 +642,7 @@
 				8F31DCE31BC70F6C004544CC /* tool.png in Resources */,
 				8F4A02771B9A3EE80084024A /* whiteKnight.png in Resources */,
 				8F2DD6DF1B9AFFF80059CEFA /* ChessIconTab@3x.png in Resources */,
+				8F31DCF31BC9513B004544CC /* equalization2.png in Resources */,
 				8F14D19F1B9C918700A58CCF /* 6.jpg in Resources */,
 				F1A469CB1BC0347E0093A13D /* testScrollVoew.png in Resources */,
 				8F14D19C1B9C918700A58CCF /* 9.png in Resources */,
@@ -683,8 +687,8 @@
 				8F2DD6E91B9AFFF80059CEFA /* whiteSquare.png in Resources */,
 				8F38EF681BB8302300668B3B /* slogen.jpg in Resources */,
 				8F2DD6E01B9AFFF80059CEFA /* clack and white board with half boarder copy.png in Resources */,
-				8F31DCEB1BC7B661004544CC /* equalization2.png in Resources */,
 				8F14D19A1B9C918700A58CCF /* 11.jpg in Resources */,
+				8F31DCF11BC9503D004544CC /* gear.png in Resources */,
 				8F2DD6E21B9AFFF80059CEFA /* Friends@3x.png in Resources */,
 				8F056AF81BAF533C00CD617B /* DarkModePreview.png in Resources */,
 				8F2DD6E11B9AFFF80059CEFA /* Data@3x.png in Resources */,

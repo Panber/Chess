@@ -113,9 +113,9 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         //creating the view
         contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
         
-        label0 = UILabel(frame: CGRectMake(0, 63 + contentView.frame.size.height, screenWidth, 1))
+        label0 = UILabel(frame: CGRectMake(0, 63 + contentView.frame.size.height - 9, screenWidth, 10))
         label0.layer.shadowColor = UIColor.blackColor().CGColor
-        label0.layer.shadowOpacity = 0.1
+        label0.layer.shadowOpacity = 0.2
         label0.backgroundColor = UIColor.whiteColor()
         label0.layer.shadowOffset = CGSizeZero
         scrollView.addSubview(label0)
@@ -422,7 +422,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
             
             
             contentView.frame.origin.y = scrollView.contentOffset.y + 64
-            label0.frame.origin.y = scrollView.contentOffset.y + 63
+            label0.frame.origin.y = scrollView.contentOffset.y + 63 + contentView.frame.size.height - 9
 
             
             profilePicBlur.frame.size.height = contentView.frame.size.height + yPos
