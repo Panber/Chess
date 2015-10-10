@@ -90,6 +90,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         underElements = [label3,label4,label5,label6,label7,label8,label9,label10,label11,label12,label13,label14,label15,label16,label17]
         
         
+        
         self.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         // Do any additional setup after loading the view.
