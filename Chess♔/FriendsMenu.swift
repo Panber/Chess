@@ -21,7 +21,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     @IBOutlet weak var top10Friends: UIScrollView!
     @IBOutlet weak var grossing: UIScrollView!
 //    @IBOutlet weak var top10WorldView: UIView!
-    @IBOutlet weak var contentScrollView: UIScrollView!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -43,8 +42,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         navigationController?.navigationBar.topItem?.title = "Explore"
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         
-        contentScrollView.scrollEnabled = true
-        contentScrollView.contentSize = CGSizeMake(screenWidth, 1400)
+ 
         
         top10World.scrollEnabled = true
         top10World.contentSize = CGSizeMake(1400, 140)
