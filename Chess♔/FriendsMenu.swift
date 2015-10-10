@@ -46,18 +46,18 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         top10World.scrollEnabled = true
         top10World.contentSize = CGSizeMake(1400, 140)
-        top10Friends.bounces = false
         top10World.showsHorizontalScrollIndicator = false
+        top10World.bounces = false
         
         
         top10Friends.scrollEnabled = true
         top10Friends.contentSize = CGSizeMake(1400, 140)
-        top10Friends.showsHorizontalScrollIndicator = true
+        top10Friends.showsHorizontalScrollIndicator = false
         top10Friends.bounces = false
         
         grossing.scrollEnabled = true
         grossing.contentSize = CGSizeMake(1400, 140)
-        grossing.showsHorizontalScrollIndicator = true
+        grossing.showsHorizontalScrollIndicator = false
         grossing.bounces = false
         
         addTop10World()
