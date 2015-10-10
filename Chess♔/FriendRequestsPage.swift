@@ -65,16 +65,22 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
             frequestsQuery.whereKey("status", equalTo: "pending")
             frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
 
+
                 
                 for frequests in frequests! {
+                    
                     let username:String? = frequests["fromUser"] as? String
-                    self.userArray.append(username!)
-                    print(username)
+                //    dispatch_async(dispatch_get_main_queue()) {
+//                    self.userArray.append(username!)
+//                    }
+//                    print(username)
                     self.friendRequestUsers.append(username!)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.tableView.reloadData()
-                    }
+                
                 }
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+
        
             })
             //self.tableView.reloadData()
