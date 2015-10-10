@@ -86,12 +86,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
         newButtonOutlet.frame.size.width = 50
         editButtonOutlet.frame.size.width = 50
 
-        //logo things
-        logoView.contentMode = UIViewContentMode.ScaleAspectFit
-        logoView.frame.size.height = 50
-        self.navigationItem.titleView = logoView
+//        //logo things
+//        logoView.contentMode = UIViewContentMode.ScaleAspectFit
+//        logoView.frame.size.height = 50
+//        self.navigationItem.titleView = logoView
+//        
         
-        
+        navigationController?.navigationBar.topItem?.title = "Chess♔"
+        self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
     
       //setting scrollview
         view.frame.size.height = 2000
@@ -240,12 +242,12 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
                 self.newButtonOutlet.tintColor = UIColor.whiteColor()
                 self.editButtonOutlet.tintColor = UIColor.whiteColor()
             
-            //setting top logo
-            logo = UIImage(named: "ChessIconSmallTextAndLogoDarkMode.png")
-            logoView = UIImageView(image:logo)
-            logoView.contentMode = UIViewContentMode.ScaleAspectFit
-            logoView.frame.size.height = 50
-            self.navigationItem.titleView = logoView
+//            //setting top logo
+//            logo = UIImage(named: "ChessIconSmallTextAndLogoDarkMode.png")
+//            logoView = UIImageView(image:logo)
+//            logoView.contentMode = UIViewContentMode.ScaleAspectFit
+//            logoView.frame.size.height = 50
+//            self.navigationItem.titleView = logoView
             
             
             
@@ -262,13 +264,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
                 self.newButtonOutlet.tintColor = blue
                 self.editButtonOutlet.tintColor = blue
             
-            //setting top logo
-            logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
-            logoView = UIImageView(image:logo)
-            logoView.contentMode = UIViewContentMode.ScaleAspectFit
-            logoView.frame.size.height = 50
-            self.navigationItem.titleView = logoView
-            
+//            //setting top logo
+//            logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
+//            logoView = UIImageView(image:logo)
+//            logoView.contentMode = UIViewContentMode.ScaleAspectFit
+//            logoView.frame.size.height = 50
+//            self.navigationItem.titleView = logoView
+//            
 
   
         

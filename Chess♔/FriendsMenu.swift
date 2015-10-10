@@ -39,7 +39,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        navigationController?.navigationBar.topItem?.title = "Explore"
+        self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         
         top10World.scrollEnabled = true
         top10World.contentSize = CGSizeMake(796, 105)

@@ -184,6 +184,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         let requestQuery2 = PFQuery(className: "FriendRequest")
         if let user = PFUser.currentUser() {
             requestQuery2.whereKey("toUserr", equalTo: user.username!)
+            requestQuery2.whereKey("fromUser", equalTo: userArray[buttonRow - 1])
             requestQuery2.findObjectsInBackgroundWithBlock({ (request:[AnyObject]?, error:NSError?) -> Void in
                 
                 if error == nil {
@@ -288,6 +289,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         let requestQuery2 = PFQuery(className: "FriendRequest")
         if let user = PFUser.currentUser() {
             requestQuery2.whereKey("toUserr", equalTo: user.username!)
+            requestQuery2.whereKey("fromUser", equalTo: userArray[buttonRow - 100_000])
             requestQuery2.findObjectsInBackgroundWithBlock({ (request:[AnyObject]?, error:NSError?) -> Void in
                 
                 if error == nil {
