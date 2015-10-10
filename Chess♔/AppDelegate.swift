@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId("2PsQGHMlwrvTSYb3rUS1kJGiISfjYAK0hzH9sDF8",
             clientKey: "uDXStFAvReKWOdzhcy4taikalkY12OQOaAkS2414")
         
+        // Use this to initialize facebook
          PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
         // [Optional] Track statistics around application opens.
