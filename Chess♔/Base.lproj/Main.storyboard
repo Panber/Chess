@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -51,7 +51,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1910" y="420"/>
+            <point key="canvasLocation" x="1910" y="314"/>
         </scene>
         <!--Welcome!-->
         <scene sceneID="Jma-vQ-5Il">
@@ -165,7 +165,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFl-en-0nA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2553" y="420"/>
+            <point key="canvasLocation" x="2553" y="314"/>
         </scene>
         <!--Game Inter Face2-->
         <scene sceneID="JAV-20-ocj">
@@ -225,7 +225,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6O-UH-Vj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="bfG-SZ-G87"/>
             </objects>
-            <point key="canvasLocation" x="3219" y="420"/>
+            <point key="canvasLocation" x="3219" y="314"/>
         </scene>
         <!--Login Menu-->
         <scene sceneID="Ycv-dp-2az">
@@ -589,7 +589,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EIa-lm-c1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1899" y="1169"/>
+            <point key="canvasLocation" x="1899" y="995"/>
         </scene>
         <!--Analyze-->
         <scene sceneID="XDQ-dG-Skb">
@@ -643,7 +643,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZt-ni-vmc">
+                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="mZt-ni-vmc">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <animations/>
                                 <constraints>
@@ -867,7 +867,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gMB-l5-JYR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2582" y="1891"/>
+            <point key="canvasLocation" x="2574" y="1691"/>
         </scene>
         <!--Users Profile Page-->
         <scene sceneID="Bnx-wm-G3O">
@@ -1001,7 +1001,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2DG-vU-Ixe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1899" y="3323"/>
+            <point key="canvasLocation" x="1899" y="3415"/>
         </scene>
         <!--Friend Requests-->
         <scene sceneID="z8D-wX-084">
@@ -1110,7 +1110,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Zf-Nu-aID" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2511" y="3323"/>
+            <point key="canvasLocation" x="2513" y="3415"/>
         </scene>
         <!--Other User Profile Page From Friend Request-->
         <scene sceneID="GEd-Go-pQK">
@@ -1130,7 +1130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GtC-gl-NyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3183" y="3323"/>
+            <point key="canvasLocation" x="3161" y="3415"/>
         </scene>
         <!--Settings Page-->
         <scene sceneID="iRK-HX-gK5">
@@ -1149,7 +1149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Gn-Xp-6C1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1899" y="2590"/>
+            <point key="canvasLocation" x="1899" y="2732"/>
         </scene>
         <!--Friends Page-->
         <scene sceneID="MoS-bc-4pj">
@@ -1213,7 +1213,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUn-n9-QT6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2544" y="2590"/>
+            <point key="canvasLocation" x="2542" y="2732"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FO7-1d-XLI">
