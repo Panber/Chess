@@ -39,6 +39,8 @@ class UserTableViewCell2: UITableViewCell {
     @IBOutlet weak var checkmarkButton: UIButton!
     @IBOutlet weak var crossButton: UIButton!
     
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -48,6 +50,8 @@ class UserTableViewCell2: UITableViewCell {
         self.userProfileImage.clipsToBounds = true
         
     }
+    
+
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

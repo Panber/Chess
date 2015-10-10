@@ -31,6 +31,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     var crossButtons:Array<UIButton> = []
     var userFriends = NSMutableArray()
     var usersFrom = String()
+    var imageDataArray: Array<NSData> = []
 
     var friendRequestUsers: Array<String> = []
     
@@ -64,16 +65,22 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
             frequestsQuery.whereKey("status", equalTo: "pending")
             frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
 
+
                 
                 for frequests in frequests! {
+                    
                     let username:String? = frequests["fromUser"] as? String
-                    self.userArray.append(username!)
-                    print(username)
+                //    dispatch_async(dispatch_get_main_queue()) {
+//                    self.userArray.append(username!)
+//                    }
+//                    print(username)
                     self.friendRequestUsers.append(username!)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.tableView.reloadData()
-                    }
+                
                 }
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+
        
             })
             //self.tableView.reloadData()
@@ -95,7 +102,8 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         cell.crossButton.addTarget(self, action: "crossButtonPressed:", forControlEvents: .TouchUpInside)
 
         cell.username.text = userArray[indexPath.row]
-        NSUserDefaults.standardUserDefaults().setObject(cell.username.text, forKey: "other_username")
+        NSUserDefaults.standardUserDefaults().setObject(cell.username.text, forKey: "other_username_from_friendrequest")
+        cell.username.sizeToFit()
         
         
         let userQuery = PFQuery(className: "_User")
@@ -113,9 +121,8 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                     self.profilePicArray.append(UIImage(data: imageData!)!)
                     cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
                     cell.userProfileImage.image = self.profilePicArray[indexPath.row]
-                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
-                    self.showViewController(vc as! UIViewController, sender: vc)
+                    self.imageDataArray.append(imageData!)
+//                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage_from_friendrequest")
                 }
                 
             }
@@ -134,30 +141,13 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-//        NSUserDefaults.standardUserDefaults().setObject(userArray[indexPath.row], forKey: "other_username")
-//        
-//        let userQuery = PFQuery(className: "_User")
-//        userQuery.whereKey("username", equalTo: userArray[indexPath.row])
-//        let  _user = userQuery.getFirstObject() as! PFUser
-//        
-//        let profilePictureObject = _user["profile_picture"] as? PFFile
+        print("row selected")
         
-//        if(profilePictureObject != nil)
-//        {
-//            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-//                
-//                if(imageData != nil)
-//                {
-////                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
-////                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
-////                    self.showViewController(vc as! UIViewController, sender: vc)
-//                }
-//                
-//            }
-//        }
-       
+        let cell:UserTableViewCell2 = self.tableView.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath) as! UserTableViewCell2
+        NSUserDefaults.standardUserDefaults().setObject(userArray[indexPath.row], forKey: "other_username_from_friendrequest")
         
-        
+        var p = imageDataArray[indexPath.row]
+        NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friendrequest")
         
     }
     
@@ -364,6 +354,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         
     }
 
+    
     
 
 

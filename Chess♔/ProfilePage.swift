@@ -175,6 +175,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         label.textAlignment = NSTextAlignment.Left
         label.text = PFUser.currentUser()?.username
         label.font = UIFont(name: "Didot-Bold", size: 30)
+        label.sizeToFit()
         if darkMode { label.textColor = UIColor.whiteColor() }
         else { label.textColor = UIColor.blackColor() }
         contentView.addSubview(label)

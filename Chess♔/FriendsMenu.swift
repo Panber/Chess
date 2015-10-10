@@ -20,7 +20,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     @IBOutlet weak var top10World: UIScrollView!
     @IBOutlet weak var top10Friends: UIScrollView!
     @IBOutlet weak var grossing: UIScrollView!
-    @IBOutlet weak var top10WorldView: UIView!
+//    @IBOutlet weak var top10WorldView: UIView!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -42,19 +42,22 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         navigationController?.navigationBar.topItem?.title = "Explore"
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         
+ 
+        
         top10World.scrollEnabled = true
-        top10World.contentSize = CGSizeMake(796, 105)
+        top10World.contentSize = CGSizeMake(1400, 140)
+        top10Friends.bounces = false
         top10World.showsHorizontalScrollIndicator = false
-        top10World.bounces = false
+        
         
         top10Friends.scrollEnabled = true
-        top10Friends.contentSize = CGSizeMake(796, 105)
-        top10Friends.showsHorizontalScrollIndicator = false
+        top10Friends.contentSize = CGSizeMake(1400, 140)
+        top10Friends.showsHorizontalScrollIndicator = true
         top10Friends.bounces = false
         
         grossing.scrollEnabled = true
-        grossing.contentSize = CGSizeMake(796, 105)
-        grossing.showsHorizontalScrollIndicator = false
+        grossing.contentSize = CGSizeMake(1400, 140)
+        grossing.showsHorizontalScrollIndicator = true
         grossing.bounces = false
         
         addTop10World()
@@ -80,15 +83,15 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     print(self.top10WorldArrayUsers)
                 }
                 var t = 0
-                for var i:CGFloat = 0; i < 5; i++, t++ {
+                for var i:CGFloat = 0; i < 7; i++, t++ {
                     
-                    let personView = UIView(frame: CGRectMake(5 + (self.top10WorldView.frame.size.height) * i, 5, self.top10WorldView.frame.size.height - 10, self.top10WorldView.frame.size.height - 10))
-                    personView.layer.cornerRadius = cornerRadius
+                    let personView = UIView(frame: CGRectMake((self.top10World.frame.size.height) * i, 5, self.top10World.frame.size.height, self.top10World.frame.size.height))
+                  //  personView.layer.cornerRadius = cornerRadius
                     personView.backgroundColor = UIColor.whiteColor()
-                    personView.layer.borderWidth = 0.5
-                    personView.layer.borderColor = UIColor.lightGrayColor().CGColor
+                   // personView.layer.borderWidth = 0.5
+                  //  personView.layer.borderColor = UIColor.lightGrayColor().CGColor
                     personView.clipsToBounds = true
-                    self.top10WorldView.addSubview(personView)
+                    self.top10World.addSubview(personView)
                     
                     
                     
@@ -123,6 +126,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     profilePicture.clipsToBounds = true
                     profilePicture.contentMode = UIViewContentMode.ScaleAspectFill
                     personView.addSubview(profilePicture)
+                    
+                    let sep = UIImageView(frame: CGRectMake(personView.frame.size.width - 1, 0, 0.5, personView.frame.size.height))
+                    sep.backgroundColor = UIColor.lightGrayColor()
+                    personView.addSubview(sep)
                     
                     
                     let findUserName: PFQuery = PFQuery(className:"_User")
