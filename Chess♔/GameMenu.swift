@@ -241,7 +241,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
                 self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
                 self.newButtonOutlet.tintColor = UIColor.whiteColor()
                 self.editButtonOutlet.tintColor = UIColor.whiteColor()
-            
+//            
 //            //setting top logo
 //            logo = UIImage(named: "ChessIconSmallTextAndLogoDarkMode.png")
 //            logoView = UIImageView(image:logo)
