@@ -95,6 +95,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         cell.crossButton.addTarget(self, action: "crossButtonPressed:", forControlEvents: .TouchUpInside)
 
         cell.username.text = userArray[indexPath.row]
+        cell.username.sizeToFit()
         
         
         let userQuery = PFQuery(className: "_User")

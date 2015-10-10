@@ -202,6 +202,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         label.textAlignment = NSTextAlignment.Left
         label.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username")as? String
         label.font = UIFont(name: "Didot-Bold", size: 30)
+        label.sizeToFit()
         if darkMode { label.textColor = UIColor.whiteColor() }
         else { label.textColor = UIColor.blackColor() }
         contentView.addSubview(label)
