@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -665,11 +665,11 @@
                                     <outlet property="delegate" destination="NkV-B6-IDt" id="AvH-dw-Af1"/>
                                 </connections>
                             </searchBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YOz-dR-tdf">
-                                <rect key="frame" x="0.0" y="234" width="600" height="121"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YOz-dR-tdf">
+                                <rect key="frame" x="0.0" y="278" width="600" height="77"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r8E-0k-kSW">
-                                        <rect key="frame" x="0.0" y="0.0" width="1210" height="121"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8E-0k-kSW">
+                                        <rect key="frame" x="0.0" y="0.0" width="1210" height="77"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="1210" id="bOF-ei-8bA"/>
@@ -685,8 +685,8 @@
                                     <constraint firstItem="r8E-0k-kSW" firstAttribute="leading" secondItem="YOz-dR-tdf" secondAttribute="leading" id="m6U-bv-O5m"/>
                                 </constraints>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Top 10 - World" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Yk-0F-990">
-                                <rect key="frame" x="11" y="213" width="128" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top 10 - World" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Yk-0F-990">
+                                <rect key="frame" x="11" y="257" width="128" height="19"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="9zp-IL-WL0"/>
@@ -709,8 +709,8 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="     Explore the world of Chess♔" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crt-9Y-Mx8">
-                                <rect key="frame" x="0.0" y="108" width="600" height="70"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     Explore the world of Chess♔" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crt-9Y-Mx8">
+                                <rect key="frame" x="0.0" y="152" width="600" height="70"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="17"/>
@@ -758,8 +758,8 @@
                                     <constraint firstItem="eRa-wG-i4w" firstAttribute="leading" secondItem="9rG-85-TBI" secondAttribute="leading" id="ytU-ZR-wtv"/>
                                 </constraints>
                             </scrollView>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-dp-8si">
-                                <rect key="frame" x="0.0" y="108" width="600" height="58"/>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-dp-8si">
+                                <rect key="frame" x="0.0" y="152" width="600" height="58"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1157,10 +1157,10 @@
             </objects>
             <point key="canvasLocation" x="2511" y="3323"/>
         </scene>
-        <!--Other User Profile Page-->
+        <!--Other User Profile Page From Friend Request-->
         <scene sceneID="GEd-Go-pQK">
             <objects>
-                <viewController id="OIB-Kw-uek" customClass="OtherUserProfilePage" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OIB-Kw-uek" customClass="OtherUserProfilePageFromFriendRequest" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3RP-kO-Cf0"/>
                         <viewControllerLayoutGuide type="bottom" id="uWZ-Nh-3vS"/>
@@ -1169,7 +1169,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Z0z-LO-BP9"/>
                 </viewController>
