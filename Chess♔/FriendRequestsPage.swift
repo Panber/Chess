@@ -95,6 +95,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         cell.crossButton.addTarget(self, action: "crossButtonPressed:", forControlEvents: .TouchUpInside)
 
         cell.username.text = userArray[indexPath.row]
+        NSUserDefaults.standardUserDefaults().setObject(cell.username.text, forKey: "other_username")
         
         
         let userQuery = PFQuery(className: "_User")
@@ -112,6 +113,9 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                     self.profilePicArray.append(UIImage(data: imageData!)!)
                     cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
                     cell.userProfileImage.image = self.profilePicArray[indexPath.row]
+                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
+                    self.showViewController(vc as! UIViewController, sender: vc)
                 }
                 
             }
