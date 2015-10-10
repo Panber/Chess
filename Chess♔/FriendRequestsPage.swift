@@ -113,6 +113,9 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                     self.profilePicArray.append(UIImage(data: imageData!)!)
                     cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
                     cell.userProfileImage.image = self.profilePicArray[indexPath.row]
+                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
+                    self.showViewController(vc as! UIViewController, sender: vc)
                 }
                 
             }
