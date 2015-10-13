@@ -57,7 +57,8 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     }
     
     func getUsers() {
-     
+        var array:Array<String> = []
+
         let frequestsQuery = PFQuery(className: "FriendRequest")
         if let user = PFUser.currentUser()?.username {
             frequestsQuery.whereKey("toUserr", equalTo: (user))
@@ -66,23 +67,45 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
             frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
 
 
-                
                 for frequests in frequests! {
                     
                     let username:String? = frequests["fromUser"] as? String
-                    dispatch_async(dispatch_get_main_queue()) {
-                    self.userArray.append(username!)
-                    }
+                    array.append(username!)
 //                    print(username)
                     self.friendRequestUsers.append(username!)
                 
                 }
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                }
+//                var GlobalUserInitiatedQueue: dispatch_queue_t {
+//                    return dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)
+//                }
+//                var GlobalBackgroundQueue: dispatch_queue_t {
+//                    return dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
+//                }
+//                var GlobalMainQueue: dispatch_queue_t {
+//                    return dispatch_get_main_queue()
+//                }
+                self.userArray = array
+//
+//
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+//                    Int64(1 * Double(NSEC_PER_SEC))), GlobalBackgroundQueue, { () -> Void in
+                        self.tableView.reloadData()
 
-       
+//                })
+                
+//                dispatch_async(GlobalBackgroundQueue) { // 1
+//
+//
+//
+//                    dispatch_async(dispatch_get_main_queue()) { // 2
+//
+//
+//                    }
+//                }
+
+
             })
+
             //self.tableView.reloadData()
         }
         
@@ -102,7 +125,6 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         cell.crossButton.addTarget(self, action: "crossButtonPressed:", forControlEvents: .TouchUpInside)
 
         cell.username.text = userArray[indexPath.row]
-        NSUserDefaults.standardUserDefaults().setObject(cell.username.text, forKey: "other_username_from_friendrequest")
         cell.username.sizeToFit()
         
         
@@ -122,7 +144,6 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                     cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
                     cell.userProfileImage.image = self.profilePicArray[indexPath.row]
                     self.imageDataArray.append(imageData!)
-//                    NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage_from_friendrequest")
                 }
                 
             }

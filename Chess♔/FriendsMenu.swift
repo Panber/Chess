@@ -17,10 +17,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     // Array for users that are being searched for
     var users:NSMutableArray = []
     
-    @IBOutlet weak var top10World: UIScrollView!
-    @IBOutlet weak var top10Friends: UIScrollView!
-    @IBOutlet weak var grossing: UIScrollView!
-//    @IBOutlet weak var top10WorldView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+//    @IBOutlet weak var top10World: UIScrollView!
+//    @IBOutlet weak var top10Friends: UIScrollView!
+//    @IBOutlet weak var grossing: UIScrollView!
+////    @IBOutlet weak var top10WorldView: UIView!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -42,23 +43,29 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         navigationController?.navigationBar.topItem?.title = "Explore"
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         
- 
+        scrollView.scrollEnabled = true
+        scrollView.contentSize = CGSizeMake(screenWidth, 2000)
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+        scrollView.bounces = false
+
         
-        top10World.scrollEnabled = true
-        top10World.contentSize = CGSizeMake(1400, 140)
-        top10World.showsHorizontalScrollIndicator = false
-        top10World.bounces = false
         
-        
-        top10Friends.scrollEnabled = true
-        top10Friends.contentSize = CGSizeMake(1400, 140)
-        top10Friends.showsHorizontalScrollIndicator = false
-        top10Friends.bounces = false
-        
-        grossing.scrollEnabled = true
-        grossing.contentSize = CGSizeMake(1400, 140)
-        grossing.showsHorizontalScrollIndicator = false
-        grossing.bounces = false
+//        top10World.scrollEnabled = true
+//        top10World.contentSize = CGSizeMake(1400, 140)
+//        top10World.showsHorizontalScrollIndicator = false
+//        top10World.bounces = false
+//        
+//        
+//        top10Friends.scrollEnabled = true
+//        top10Friends.contentSize = CGSizeMake(1400, 140)
+//        top10Friends.showsHorizontalScrollIndicator = false
+//        top10Friends.bounces = false
+//        
+//        grossing.scrollEnabled = true
+//        grossing.contentSize = CGSizeMake(1400, 140)
+//        grossing.showsHorizontalScrollIndicator = false
+//        grossing.bounces = false
         
         addTop10World()
         
@@ -69,7 +76,70 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     //func to set up people in top10WorldView
     func addTop10World () {
         
-        var image = UIImage()
+        var blurBC = UIImageView(frame: CGRectMake(10, 55, screenWidth - 20, (screenWidth - 20)/(16/9)))
+        blurBC.image = UIImage(named: "JBpp.jpg")
+        blurBC.layer.cornerRadius = cornerRadius
+        blurBC.contentMode = .ScaleAspectFill
+        blurBC.layer.borderColor = UIColor.lightGrayColor().CGColor
+        blurBC.layer.borderWidth = 0.5
+        blurBC.clipsToBounds = true
+        scrollView.addSubview(blurBC)
+        
+        //bluring bc of profile pic
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight)) as UIVisualEffectView
+        if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+        else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+        visualEffectView.frame = blurBC.bounds
+        blurBC.addSubview(visualEffectView)
+        
+        let whiteF = UILabel(frame: CGRectMake(0, 0, blurBC.frame.size.width, blurBC.frame.size.height * (1/3)))
+        whiteF.backgroundColor = UIColor.whiteColor()
+        whiteF.alpha = 0.8
+        blurBC.addSubview(whiteF)
+        
+        let identifierLabel = UILabel(frame: CGRectMake(20, whiteF.frame.origin.y, blurBC.frame.size.width - 20, whiteF.frame.size.height))
+        identifierLabel.font = UIFont(name: "Didot", size: 20)
+        identifierLabel.text = "Top 10 - World"
+        identifierLabel.textColor = UIColor.blackColor()
+        blurBC.addSubview(identifierLabel)
+        
+        let arrow = UIImageView(frame: CGRectMake(blurBC.frame.size.width - 30, 0, 15, whiteF.frame.size.height))
+        arrow.image = UIImage(named: "arrow_black.png")
+        arrow.alpha = 0.3
+        arrow.contentMode = .ScaleAspectFit
+        blurBC.addSubview(arrow)
+        
+        let currentToLabel = UILabel(frame: CGRectMake(20, whiteF.frame.size.height + 10, blurBC.frame.size.width - 20, 20))
+        currentToLabel.font = UIFont(name: "Didot-Italic", size: 15)
+        currentToLabel.text = "Current top-user"
+        currentToLabel.textColor = UIColor.grayColor()
+        blurBC.addSubview(currentToLabel)
+        
+        let profilePic = UIImageView(frame: CGRectMake(20, whiteF.frame.size.height + 10 + currentToLabel.frame.size.height + 5, 70, 70))
+        profilePic.layer.cornerRadius = profilePic.frame.size.width/2
+        profilePic.image = UIImage(named: "JBpp.jpg")
+        profilePic.clipsToBounds = true
+        profilePic.layer.borderColor = UIColor.whiteColor().CGColor
+        profilePic.layer.borderWidth = 3
+        blurBC.addSubview(profilePic)
+        
+        let usernameLabel = UILabel(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width + 20, profilePic.frame.origin.y, 200, 40))
+        usernameLabel.font = UIFont(name: "Didot-Bold", size: 30)
+        usernameLabel.text = "b3rge"
+        blurBC.addSubview(usernameLabel)
+        
+        let ratingLabel = UILabel(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width + 20, profilePic.frame.origin.y + usernameLabel.frame.size.height, 200, 30))
+        ratingLabel.font = UIFont(name: "Didot-Italic", size: 15)
+        ratingLabel.text = "Rating: 1600"
+        ratingLabel.textColor = UIColor.grayColor()
+        blurBC.addSubview(ratingLabel)
+        
+//        let headerImage = UIImageView(frame: CGRectMake(0, 0, blurBC.frame.size.width, blurBC.frame.size.height - 70))
+//        headerImage.image = UIImage(named: "earth53.png")
+//        headerImage.contentMode = .ScaleAspectFit
+//        headerImage.alpha = 0.6
+//        blurBC.addSubview(headerImage)
+        
         
         let ratingQuery = PFQuery(className: "_User")
         ratingQuery.orderByDescending("rating")
@@ -82,6 +152,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     self.top10WorldArrayUsers.append(usersObject["username"] as! String)
                     print(self.top10WorldArrayUsers)
                 }
+                
+                /*
                 var t = 0
                 for var i:CGFloat = 0; i < 7; i++, t++ {
                     
@@ -164,6 +236,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     }
                     
                 }
+*/
                 
             }
             else {
