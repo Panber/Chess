@@ -252,6 +252,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         var query: PFQuery = PFQuery(className:"_User")
         query.whereKey("username", matchesRegex:searchString, modifiers:"i")
+        query.whereKey("username", notEqualTo: (PFUser.currentUser()?.username)!)
         query.orderByAscending("username")
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {

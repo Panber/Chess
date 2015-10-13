@@ -15,11 +15,11 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var userArray: NSMutableArray = []
-    
     var friendsArray: Array<String> = []
     
     var profilePicArray: Array<UIImage> = []
+    
+    var imageDataArray: Array<NSData> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +65,10 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        if friendsArray.count == 0 {
+            self.tableView.rowHeight = 70
+        }
+        
         return friendsArray.count
         
     }
@@ -90,6 +94,7 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
                     self.profilePicArray.append(UIImage(data: imageData!)!)
                     cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
                     cell.userProfileImage.image = self.profilePicArray[indexPath.row]
+                    self.imageDataArray.append(imageData!)
                 }
                 
             }
@@ -97,6 +102,14 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
         
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell:UserTableViewCell3 = self.tableView.dequeueReusableCellWithIdentifier("cell3", forIndexPath: indexPath) as! UserTableViewCell3
+        NSUserDefaults.standardUserDefaults().setObject(friendsArray[indexPath.row], forKey: "other_username_from_friends")
+        
+        var p = imageDataArray[indexPath.row]
+        NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friends")
     }
     
     
