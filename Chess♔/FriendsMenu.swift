@@ -83,7 +83,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         blurBC.layer.borderColor = UIColor.lightGrayColor().CGColor
         blurBC.layer.borderWidth = 0.5
         blurBC.clipsToBounds = true
-        scrollView.addSubview(blurBC)
         
         //bluring bc of profile pic
         var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight)) as UIVisualEffectView
@@ -163,15 +162,18 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                     if error == nil {
                                         let image = UIImage(data: imageData!)!
                                         profilePic.image = image
-                                         //tableView.reloadInputViews()
-                                       // bluring bc
                                         blurBC.image = image
-                                        //bluring bc of profile pic
                                         visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
                                             if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
                                             else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
                                         visualEffectView.frame = blurBC.bounds
-                                       // blurBC.addSubview(visualEffectView)
+                                        blurBC.alpha = 0
+                                        self.scrollView.addSubview(blurBC)
+
+                                        UIView.animateWithDuration(0.5, animations: {
+                                            blurBC.alpha = 1
+                                            })
+
                                     }
                                     
                                     
