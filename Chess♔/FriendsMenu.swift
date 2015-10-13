@@ -77,7 +77,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func addTop10World () {
         
         var blurBC = UIImageView(frame: CGRectMake(10, 55, screenWidth - 20, (screenWidth - 20)/(16/9)))
-        blurBC.image = UIImage(named: "JBpp.jpg")
+      //  blurBC.image = UIImage(named: "JBpp.jpg")
         blurBC.layer.cornerRadius = cornerRadius
         blurBC.contentMode = .ScaleAspectFill
         blurBC.layer.borderColor = UIColor.lightGrayColor().CGColor
@@ -86,7 +86,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         scrollView.addSubview(blurBC)
         
         //bluring bc of profile pic
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight)) as UIVisualEffectView
+        var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight)) as UIVisualEffectView
         if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
         else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
         visualEffectView.frame = blurBC.bounds
@@ -111,13 +111,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         let currentToLabel = UILabel(frame: CGRectMake(20, whiteF.frame.size.height + 10, blurBC.frame.size.width - 20, 20))
         currentToLabel.font = UIFont(name: "Didot-Italic", size: 15)
-        currentToLabel.text = "Current top-user"
+        currentToLabel.text = "Current no.1"
         currentToLabel.textColor = UIColor.grayColor()
         blurBC.addSubview(currentToLabel)
         
         let profilePic = UIImageView(frame: CGRectMake(20, whiteF.frame.size.height + 10 + currentToLabel.frame.size.height + 5, 70, 70))
         profilePic.layer.cornerRadius = profilePic.frame.size.width/2
-        profilePic.image = UIImage(named: "JBpp.jpg")
         profilePic.clipsToBounds = true
         profilePic.layer.borderColor = UIColor.whiteColor().CGColor
         profilePic.layer.borderWidth = 3
@@ -125,20 +124,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         let usernameLabel = UILabel(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width + 20, profilePic.frame.origin.y, 200, 40))
         usernameLabel.font = UIFont(name: "Didot-Bold", size: 30)
-        usernameLabel.text = "b3rge"
         blurBC.addSubview(usernameLabel)
         
         let ratingLabel = UILabel(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width + 20, profilePic.frame.origin.y + usernameLabel.frame.size.height, 200, 30))
         ratingLabel.font = UIFont(name: "Didot-Italic", size: 15)
-        ratingLabel.text = "Rating: 1600"
         ratingLabel.textColor = UIColor.grayColor()
         blurBC.addSubview(ratingLabel)
-        
-//        let headerImage = UIImageView(frame: CGRectMake(0, 0, blurBC.frame.size.width, blurBC.frame.size.height - 70))
-//        headerImage.image = UIImage(named: "earth53.png")
-//        headerImage.contentMode = .ScaleAspectFit
-//        headerImage.alpha = 0.6
-//        blurBC.addSubview(headerImage)
         
         
         let ratingQuery = PFQuery(className: "_User")
@@ -151,8 +142,63 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     print(self.top10WorldArrayRating)
                     self.top10WorldArrayUsers.append(usersObject["username"] as! String)
                     print(self.top10WorldArrayUsers)
+        
+                }
+                usernameLabel.text = self.top10WorldArrayUsers[0]
+                ratingLabel.text = "Rating: " + self.top10WorldArrayRating[0]
+                
+                
+                
+                
+                let findUserName: PFQuery = PFQuery(className:"_User")
+                findUserName.whereKey("username", containsString: self.top10WorldArrayUsers[0])
+                
+                findUserName.findObjectsInBackgroundWithBlock{(usersObject: [AnyObject]?, error: NSError?) -> Void in
+                    if (error == nil) {
+                        
+                        for usersObject in usersObject! {
+                            if let profileImage:PFFile = usersObject["profile_picture"] as? PFFile {
+                                profileImage.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                                    
+                                    if error == nil {
+                                        let image = UIImage(data: imageData!)!
+                                        profilePic.image = image
+                                         //tableView.reloadInputViews()
+                                       // bluring bc
+                                        blurBC.image = image
+                                        //bluring bc of profile pic
+                                        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+                                            if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+                                            else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+                                        visualEffectView.frame = blurBC.bounds
+                                       // blurBC.addSubview(visualEffectView)
+                                    }
+                                    
+                                    
+                                }
+                            }
+                            
+                        }
+                    }
                 }
                 
+            
+
+            
+            
+            }
+        
+        })
+    
+    
+//        let headerImage = UIImageView(frame: CGRectMake(0, 0, blurBC.frame.size.width, blurBC.frame.size.height - 70))
+//        headerImage.image = UIImage(named: "earth53.png")
+//        headerImage.contentMode = .ScaleAspectFit
+//        headerImage.alpha = 0.6
+//        blurBC.addSubview(headerImage)
+        
+        
+
                 /*
                 var t = 0
                 for var i:CGFloat = 0; i < 7; i++, t++ {
@@ -239,14 +285,14 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 */
                 
             }
-            else {
-                
-            }
-        })
-        
-        
-    }
+//            else {
+//                
+//            }
+//        })
     
+        
+
+
     // Func that searches for user with key and stores it in an array
     func searchUsers(searchString: String) {
         
