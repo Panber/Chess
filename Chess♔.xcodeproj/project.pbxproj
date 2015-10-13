@@ -50,6 +50,8 @@
 		8F31DD171BC976D6004544CC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F31DD161BC976D6004544CC /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
 		8F31DD191BC976DF004544CC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F31DD181BC976DF004544CC /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
 		8F31DD1B1BC97710004544CC /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F31DD1A1BC97710004544CC /* ParseFacebookUtilsV4.framework */; settings = {ASSET_TAGS = (); }; };
+		8F31DD1F1BC9BE9D004544CC /* world-map.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DD1E1BC9BE9D004544CC /* world-map.png */; settings = {ASSET_TAGS = (); }; };
+		8F31DD231BC9BFE6004544CC /* earth53.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DD221BC9BFE6004544CC /* earth53.png */; settings = {ASSET_TAGS = (); }; };
 		8F38EF681BB8302300668B3B /* slogen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F38EF671BB8302300668B3B /* slogen.jpg */; settings = {ASSET_TAGS = (); }; };
 		8F38EF6A1BB8399D00668B3B /* JBpp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F38EF691BB8399D00668B3B /* JBpp.jpg */; settings = {ASSET_TAGS = (); }; };
 		8F3AC3821B9AFADC00815CDC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3AC3811B9AFADC00815CDC /* libz.dylib */; };
@@ -185,6 +187,8 @@
 		8F31DD161BC976D6004544CC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		8F31DD181BC976DF004544CC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		8F31DD1A1BC97710004544CC /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
+		8F31DD1E1BC9BE9D004544CC /* world-map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "world-map.png"; sourceTree = "<group>"; };
+		8F31DD221BC9BFE6004544CC /* earth53.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth53.png; sourceTree = "<group>"; };
 		8F38EF671BB8302300668B3B /* slogen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = slogen.jpg; sourceTree = "<group>"; };
 		8F38EF691BB8399D00668B3B /* JBpp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JBpp.jpg; sourceTree = "<group>"; };
 		8F3AC3811B9AFADC00815CDC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -363,6 +367,7 @@
 				8F31DCE81BC7B426004544CC /* equalization1.png */,
 				8F31DCF21BC9513B004544CC /* equalization2.png */,
 				8F31DCF01BC9503D004544CC /* gear.png */,
+				8F31DD1E1BC9BE9D004544CC /* world-map.png */,
 				8F8BD2B11BC6C1C500B25CFE /* checkmark12.png */,
 				8F31DCEC1BC7C8B5004544CC /* pending.png */,
 				8F31DCE01BC70E30004544CC /* checkmark13.png */,
@@ -395,6 +400,7 @@
 				8F2DD6D91B9AFFF80059CEFA /* pieceMarked.png */,
 				8F2DD6DA1B9AFFF80059CEFA /* piecePossibilities.png */,
 				8F2DD6DB1B9AFFF80059CEFA /* pieces vlack and white board blurred.png */,
+				8F31DD221BC9BFE6004544CC /* earth53.png */,
 				8F2DD6DC1B9AFFF80059CEFA /* settingsTabBarIcon@3x.png */,
 				8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */,
 				8F8639321B9B09F90055608B /* BlackBC.jpg */,
@@ -673,6 +679,7 @@
 				8F38EF6A1BB8399D00668B3B /* JBpp.jpg in Resources */,
 				8F31DCE71BC7189B004544CC /* add1.png in Resources */,
 				8F4A02691B9A3E890084024A /* PANBERlogo.png in Resources */,
+				8F31DD231BC9BFE6004544CC /* earth53.png in Resources */,
 				8F14D19D1B9C918700A58CCF /* 8.jpg in Resources */,
 				8F970FBF1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png in Resources */,
 				8F2DD6E51B9AFFF80059CEFA /* pieceMarked.png in Resources */,
@@ -688,6 +695,7 @@
 				8F056AF71BAF533C00CD617B /* LightModePreview.png in Resources */,
 				8F4A02761B9A3EE80084024A /* whiteKing.png in Resources */,
 				8F2DD6E91B9AFFF80059CEFA /* whiteSquare.png in Resources */,
+				8F31DD1F1BC9BE9D004544CC /* world-map.png in Resources */,
 				8F38EF681BB8302300668B3B /* slogen.jpg in Resources */,
 				8F2DD6E01B9AFFF80059CEFA /* clack and white board with half boarder copy.png in Resources */,
 				8F14D19A1B9C918700A58CCF /* 11.jpg in Resources */,
@@ -901,7 +909,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Panayotov (8JHAHM7T3P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

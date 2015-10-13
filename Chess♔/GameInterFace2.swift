@@ -190,6 +190,8 @@ class GameInterFace2: UIViewController {
     //retrieve board from cloud
     func retrieveBoardFromCloud() {
         
+        //you should rather store the piece moved in a collum called "pieces moved", and then limit the search this way in order to make more efficient code to parse
+        
         
         let query = PFQuery(className:"BoardState")
         query.whereKey("GameWith", equalTo:"b3rge")
