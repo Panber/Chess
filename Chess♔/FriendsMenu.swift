@@ -16,6 +16,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     // Array for users that are being searched for
     var users:NSMutableArray = []
+    var friends: Array<String> = []
     
     @IBOutlet weak var scrollView: UIScrollView!
 //    @IBOutlet weak var top10World: UIScrollView!
@@ -90,7 +91,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 for friends in friends! {
                     self.friendsArray = friends["friends"] as! NSMutableArray
                 }
-                print(self.friendsArray)
+                //print(self.friendsArray)
                 self.addTop10Friends()
 
             }
@@ -177,9 +178,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             if error == nil {
                 for usersObject in usersObject! {
                     self.top10WorldArrayRating.append(usersObject["rating"] as! String)
-                    print(self.top10WorldArrayRating)
+                    //print(self.top10WorldArrayRating)
                     self.top10WorldArrayUsers.append(usersObject["username"] as! String)
-                    print(self.top10WorldArrayUsers)
+                    //print(self.top10WorldArrayUsers)
         
                 }
                 usernameLabel.text = self.top10WorldArrayUsers[0]
@@ -420,9 +421,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     usernameLabel.text = self.top10FriendsArrayUsers[0]
                     ratingLabel.text = self.top10FriendsArrayRating[0]
                     
-                    
-                    
-                    
+
                     let findUserName: PFQuery = PFQuery(className:"_User")
                     findUserName.whereKey("username", containsString: self.top10FriendsArrayUsers[0])
                     
@@ -561,14 +560,15 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         if users.count == 0 {
             self.searchDisplayController?.searchResultsTableView.rowHeight = 70
         }
-        
         return users.count
-        
+
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 0 && usersScope == true {
             searchUsers(searchText)
+        }
+        if searchText.characters.count > 0 && friendsScope == true {
         }
         tableView.hidden = false
     }
@@ -576,10 +576,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
-        
-        
-        
-        
+
         // Declare user object and set cell text to username
         let user:PFUser = users[indexPath.row] as! PFUser
         
@@ -676,6 +673,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             usersScope = false
             users.removeAllObjects()
             tableView.reloadData()
+            if searchBar.text?.characters.count > 0 {
+            }
             break
             
         default:
