@@ -633,8 +633,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 if(imageData != nil)
                 {
                     NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
-                    self.showViewController(vc as! UIViewController, sender: vc)
+
                 }
                 
             }
