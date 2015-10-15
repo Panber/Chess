@@ -576,8 +576,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
-        
-        if usersScope == true {
 
         // Declare user object and set cell text to username
         let user:PFUser = users[indexPath.row] as! PFUser
@@ -595,27 +593,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     cell.userProfileImage.image = UIImage(data: imageData!)
                 }
                 
-                }
-            }
-        } else if friendsScope == true {
-            cell.username.text = friends[indexPath.row] as! String
-            
-            let userQuery = PFQuery(className: "_User")
-            userQuery.whereKey("username", equalTo: friends[indexPath.row])
-            let _user = userQuery.getFirstObject() as! PFUser
-            
-            let profilePictureObject = _user["profile_picture"] as? PFFile
-            
-            if(profilePictureObject != nil)
-            {
-                profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                    
-                    if(imageData != nil)
-                    {
-                        cell.userProfileImage.image = UIImage(data: imageData!)
-                    }
-                    
-                }
             }
         }
         //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
