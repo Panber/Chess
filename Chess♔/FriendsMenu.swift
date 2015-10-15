@@ -29,9 +29,16 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     var top10WorldArrayRating = [String]()
     var top10WorldArrayUsers:Array<String> = []
     
+    var top10FriendsArrayRating = [String]()
+    var top10FriendsArrayUsers:Array<String> = []
+    
     var usersScope:Bool = true
     var friendsScope:Bool = false
 
+    var blurBC1 = UIImageView()
+    var blurBC2 = UIImageView()
+
+    var friendsArray = NSMutableArray()
     
     override func viewWillDisappear(animated: Bool) {
         view.endEditing(true)
@@ -69,6 +76,21 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         addTop10World()
         
+        
+        let findFriends = PFQuery(className:"Friends")
+        findFriends.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
+        
+        findFriends.findObjectsInBackgroundWithBlock { (friends:[AnyObject]?, error:NSError?) -> Void in
+            if error == nil {
+                for friends in friends! {
+                    self.friendsArray = friends["friends"] as! NSMutableArray
+                }
+                print(self.friendsArray)
+                self.addTop10Friends()
+
+            }
+        }
+        
     }
     
     
@@ -76,43 +98,43 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     //func to set up people in top10WorldView
     func addTop10World () {
         
-        var blurBC = UIImageView(frame: CGRectMake(10, 55, screenWidth - 20, (screenWidth - 20)/(16/9)))
+        blurBC1 = UIImageView(frame: CGRectMake(10, 55, screenWidth - 20, (screenWidth - 20)/(16/9)))
       //  blurBC.image = UIImage(named: "JBpp.jpg")
-        blurBC.layer.cornerRadius = cornerRadius
-        blurBC.contentMode = .ScaleAspectFill
-        blurBC.layer.borderColor = UIColor.lightGrayColor().CGColor
-        blurBC.layer.borderWidth = 0.5
-        blurBC.clipsToBounds = true
+        blurBC1.layer.cornerRadius = cornerRadius
+        blurBC1.contentMode = .ScaleAspectFill
+        blurBC1.layer.borderColor = UIColor.lightGrayColor().CGColor
+        blurBC1.layer.borderWidth = 0.5
+        blurBC1.clipsToBounds = true
         
         //bluring bc of profile pic
         var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight)) as UIVisualEffectView
         if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
         else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-        visualEffectView.frame = blurBC.bounds
-        blurBC.addSubview(visualEffectView)
+        visualEffectView.frame = blurBC1.bounds
+        blurBC1.addSubview(visualEffectView)
         
-        let whiteF = UILabel(frame: CGRectMake(0, 0, blurBC.frame.size.width, blurBC.frame.size.height * (1/3)))
+        let whiteF = UILabel(frame: CGRectMake(0, 0, blurBC1.frame.size.width, blurBC1.frame.size.height * (1/3)))
         whiteF.backgroundColor = UIColor.whiteColor()
         whiteF.alpha = 0.8
-        blurBC.addSubview(whiteF)
+        blurBC1.addSubview(whiteF)
         
-        let identifierLabel = UILabel(frame: CGRectMake(20, whiteF.frame.origin.y, blurBC.frame.size.width - 20, whiteF.frame.size.height))
+        let identifierLabel = UILabel(frame: CGRectMake(20, whiteF.frame.origin.y, blurBC1.frame.size.width - 20, whiteF.frame.size.height))
         identifierLabel.font = UIFont(name: "Didot", size: 20)
         identifierLabel.text = "Top 10 - World"
         identifierLabel.textColor = UIColor.blackColor()
-        blurBC.addSubview(identifierLabel)
+        blurBC1.addSubview(identifierLabel)
         
-        let arrow = UIImageView(frame: CGRectMake(blurBC.frame.size.width - 30, 0, 15, whiteF.frame.size.height))
+        let arrow = UIImageView(frame: CGRectMake(blurBC1.frame.size.width - 30, 0, 15, whiteF.frame.size.height))
         arrow.image = UIImage(named: "arrow_black.png")
         arrow.alpha = 0.3
         arrow.contentMode = .ScaleAspectFit
-        blurBC.addSubview(arrow)
+        blurBC1.addSubview(arrow)
         
-        let currentToLabel = UILabel(frame: CGRectMake(20, whiteF.frame.size.height + 10, blurBC.frame.size.width - 20, 20))
+        let currentToLabel = UILabel(frame: CGRectMake(20, whiteF.frame.size.height + 10, blurBC1.frame.size.width - 20, 20))
         currentToLabel.font = UIFont(name: "Didot-Italic", size: 15)
         currentToLabel.text = "Current no.1"
         currentToLabel.textColor = UIColor.grayColor()
-        blurBC.addSubview(currentToLabel)
+        blurBC1.addSubview(currentToLabel)
         
         let profilePic = UIImageView(frame: CGRectMake(20, whiteF.frame.size.height + 10 + currentToLabel.frame.size.height + 5, 70, 70))
         profilePic.layer.cornerRadius = profilePic.frame.size.width/2
@@ -120,16 +142,16 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         profilePic.layer.borderColor = UIColor.whiteColor().CGColor
         profilePic.layer.borderWidth = 3
         profilePic.contentMode = .ScaleAspectFill
-        blurBC.addSubview(profilePic)
+        blurBC1.addSubview(profilePic)
         
         let usernameLabel = UILabel(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width + 20, profilePic.frame.origin.y, 200, 40))
         usernameLabel.font = UIFont(name: "Didot-Bold", size: 30)
-        blurBC.addSubview(usernameLabel)
+        blurBC1.addSubview(usernameLabel)
         
         let ratingLabel = UILabel(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width + 20, profilePic.frame.origin.y + usernameLabel.frame.size.height, 200, 30))
         ratingLabel.font = UIFont(name: "Didot-Italic", size: 15)
         ratingLabel.textColor = UIColor.grayColor()
-        blurBC.addSubview(ratingLabel)
+        blurBC1.addSubview(ratingLabel)
         
         for var i = 0; i < 5; i++ {
         
@@ -164,17 +186,17 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                     if error == nil {
                                         let image = UIImage(data: imageData!)!
                                         profilePic.image = image
-                                        blurBC.image = image
+                                        self.blurBC1.image = image
                                         visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
                                             if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
                                             else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-                                        visualEffectView.frame = blurBC.bounds
-                                        blurBC.alpha = 0
-                                        self.scrollView.addSubview(blurBC)
+                                        visualEffectView.frame = self.blurBC1.bounds
+                                        self.blurBC1.alpha = 0
+                                        self.scrollView.addSubview(self.blurBC1)
+                                        self.blurBC1.alpha = 1
 
-                                        UIView.animateWithDuration(0.5, animations: {
-                                            blurBC.alpha = 1
-                                            })
+//                                        UIView.animateWithDuration(0.5, animations: {
+//                                            })
 
                                     }
                                     
@@ -292,6 +314,130 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 
     func addTop10Friends () {
     
+        blurBC2 = UIImageView(frame: CGRectMake(10, 55 + blurBC1.frame.size.height + 15, screenWidth - 20, (screenWidth - 20)/(16/9)))
+        //  blurBC.image = UIImage(named: "JBpp.jpg")
+        blurBC2.layer.cornerRadius = cornerRadius
+        blurBC2.contentMode = .ScaleAspectFill
+        blurBC2.layer.borderColor = UIColor.lightGrayColor().CGColor
+        blurBC2.layer.borderWidth = 0.5
+        blurBC2.clipsToBounds = true
+        
+        //bluring bc of profile pic
+        var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight)) as UIVisualEffectView
+        if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+        else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+        visualEffectView.frame = blurBC2.bounds
+        blurBC2.addSubview(visualEffectView)
+        
+        let whiteF = UILabel(frame: CGRectMake(0, 0, blurBC2.frame.size.width, blurBC2.frame.size.height * (1/3)))
+        whiteF.backgroundColor = UIColor.whiteColor()
+        whiteF.alpha = 0.8
+        blurBC2.addSubview(whiteF)
+        
+        let identifierLabel = UILabel(frame: CGRectMake(20, whiteF.frame.origin.y, blurBC2.frame.size.width - 20, whiteF.frame.size.height))
+        identifierLabel.font = UIFont(name: "Didot", size: 20)
+        identifierLabel.text = "Top 10 - Friends"
+        identifierLabel.textColor = UIColor.blackColor()
+        blurBC2.addSubview(identifierLabel)
+        
+        let arrow = UIImageView(frame: CGRectMake(blurBC2.frame.size.width - 30, 0, 15, whiteF.frame.size.height))
+        arrow.image = UIImage(named: "arrow_black.png")
+        arrow.alpha = 0.3
+        arrow.contentMode = .ScaleAspectFit
+        blurBC2.addSubview(arrow)
+        
+        let currentToLabel = UILabel(frame: CGRectMake(20, whiteF.frame.size.height + 10, blurBC2.frame.size.width - 20, 20))
+        currentToLabel.font = UIFont(name: "Didot-Italic", size: 15)
+        currentToLabel.text = "Current no.1"
+        currentToLabel.textColor = UIColor.grayColor()
+        blurBC2.addSubview(currentToLabel)
+        
+        let profilePic = UIImageView(frame: CGRectMake(20, whiteF.frame.size.height + 10 + currentToLabel.frame.size.height + 5, 70, 70))
+        profilePic.layer.cornerRadius = profilePic.frame.size.width/2
+        profilePic.clipsToBounds = true
+        profilePic.layer.borderColor = UIColor.whiteColor().CGColor
+        profilePic.layer.borderWidth = 3
+        profilePic.contentMode = .ScaleAspectFill
+        blurBC2.addSubview(profilePic)
+        
+        let usernameLabel = UILabel(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width + 20, profilePic.frame.origin.y, 200, 40))
+        usernameLabel.font = UIFont(name: "Didot-Bold", size: 30)
+        blurBC2.addSubview(usernameLabel)
+        
+        let ratingLabel = UILabel(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width + 20, profilePic.frame.origin.y + usernameLabel.frame.size.height, 200, 30))
+        ratingLabel.font = UIFont(name: "Didot-Italic", size: 15)
+        ratingLabel.textColor = UIColor.grayColor()
+        blurBC2.addSubview(ratingLabel)
+        
+        
+
+        
+        for var i = 0; i < friendsArray.count; i++ {
+        
+            
+            let ratingQuery = PFQuery(className: "_User")
+            ratingQuery.whereKey("username", equalTo: friendsArray[i])
+            ratingQuery.orderByDescending("rating")
+            ratingQuery.limit = 10
+            ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
+                if error == nil {
+                    for usersObject in usersObject! {
+                        self.top10FriendsArrayRating.append(usersObject["rating"] as! String)
+                        print(self.top10FriendsArrayRating)
+                        self.top10FriendsArrayUsers.append(usersObject["username"] as! String)
+                        print(self.top10FriendsArrayUsers)
+                        
+                    }
+                    usernameLabel.text = self.top10FriendsArrayUsers[0]
+                    ratingLabel.text = "Rating: " + self.top10FriendsArrayRating[0]
+                    
+                    
+                    
+                    
+                    let findUserName: PFQuery = PFQuery(className:"_User")
+                    findUserName.whereKey("username", containsString: self.top10FriendsArrayUsers[0])
+                    
+                    findUserName.findObjectsInBackgroundWithBlock{(usersObject: [AnyObject]?, error: NSError?) -> Void in
+                        if (error == nil) {
+                            
+                            for usersObject in usersObject! {
+                                if let profileImage:PFFile = usersObject["profile_picture"] as? PFFile {
+                                    profileImage.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                                        
+                                        if error == nil {
+                                            let image = UIImage(data: imageData!)!
+                                            profilePic.image = image
+                                            self.blurBC2.image = image
+                                            visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+                                            if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+                                            else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+                                            visualEffectView.frame = self.blurBC2.bounds
+                                            self.blurBC2.alpha = 0
+                                            self.scrollView.addSubview(self.blurBC2)
+                                            self.blurBC2.alpha = 1
+
+//                                            UIView.animateWithDuration(0.5, animations: {
+//                                            })
+                                            
+                                        }
+                                        
+                                        
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                    
+                    
+                    
+                    
+                    
+                }
+                
+            })
+        }
+
     
     
     }
