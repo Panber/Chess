@@ -135,7 +135,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                     self.label13.text = self.userDrawn
                     self.label14.text = self.userLost
                     self.label15.text = self.userRating
-                    self.label2.text = "Rating: \(self.userRating)"
+                    self.label2.text = "\(self.userRating)"
                     
                     
                     
@@ -1144,7 +1144,7 @@ class OtherUserProfilePageFromFriendRequest: UIViewController, UIScrollViewDeleg
                     self.label13.text = self.userDrawn
                     self.label14.text = self.userLost
                     self.label15.text = self.userRating
-                    self.label2.text = "Rating: \(self.userRating)"
+                    self.label2.text = "\(self.userRating)"
                     
                     
                     
@@ -2154,7 +2154,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                     self.label13.text = self.userDrawn
                     self.label14.text = self.userLost
                     self.label15.text = self.userRating
-                    self.label2.text = "Rating: \(self.userRating)"
+                    self.label2.text = "\(self.userRating)"
                     
                     
                     

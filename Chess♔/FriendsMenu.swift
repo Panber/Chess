@@ -183,7 +183,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
                 }
                 usernameLabel.text = self.top10WorldArrayUsers[0]
-                ratingLabel.text = "Rating: " + self.top10WorldArrayRating[0]
+                ratingLabel.text = self.top10WorldArrayRating[0]
                 
                 
                 
@@ -418,7 +418,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                         
                     }
                     usernameLabel.text = self.top10FriendsArrayUsers[0]
-                    ratingLabel.text = "Rating: " + self.top10FriendsArrayRating[0]
+                    ratingLabel.text = self.top10FriendsArrayRating[0]
                     
                     
                     
