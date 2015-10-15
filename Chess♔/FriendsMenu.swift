@@ -88,7 +88,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 for friends in friends! {
                     self.friendsArray = friends["friends"] as! NSMutableArray
                 }
-                print(self.friendsArray)
+                //print(self.friendsArray)
                 self.addTop10Friends()
 
             }
@@ -176,9 +176,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             if error == nil {
                 for usersObject in usersObject! {
                     self.top10WorldArrayRating.append(usersObject["rating"] as! String)
-                    print(self.top10WorldArrayRating)
+                    //print(self.top10WorldArrayRating)
                     self.top10WorldArrayUsers.append(usersObject["username"] as! String)
-                    print(self.top10WorldArrayUsers)
+                    //print(self.top10WorldArrayUsers)
         
                 }
                 usernameLabel.text = self.top10WorldArrayUsers[0]
@@ -527,6 +527,28 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         }
     }
     
+    func searchFriends() {
+        
+        let query = PFQuery(className: "Friends")
+        if let user = PFUser.currentUser()?.username {
+            query.whereKey("username", equalTo: (user))
+            // pfQuery.orderByDescending("updatedAt")
+            query.findObjectsInBackgroundWithBlock({ (friends:[AnyObject]?, error:NSError?) -> Void in
+                for friends in friends! {
+                    self.users = friends["friends"] as! NSMutableArray
+                    print(self.users)
+                    print("searchFriends")
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                    }
+                }
+                
+            })
+        }
+        
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -552,6 +574,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 0 && usersScope == true {
             searchUsers(searchText)
+        }
+        if searchText.characters.count > 0 && friendsScope == true {
+            searchFriends()
         }
         tableView.hidden = false
     }
