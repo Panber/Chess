@@ -16,6 +16,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     // Array for users that are being searched for
     var users:NSMutableArray = []
+    var friends: Array<String> = []
     
     @IBOutlet weak var scrollView: UIScrollView!
 //    @IBOutlet weak var top10World: UIScrollView!
@@ -415,9 +416,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     usernameLabel.text = self.top10FriendsArrayUsers[0]
                     ratingLabel.text = "Rating: " + self.top10FriendsArrayRating[0]
                     
-                    
-                    
-                    
+
                     let findUserName: PFQuery = PFQuery(className:"_User")
                     findUserName.whereKey("username", containsString: self.top10FriendsArrayUsers[0])
                     
@@ -527,28 +526,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         }
     }
     
-    func searchFriends() {
-        
-        let query = PFQuery(className: "Friends")
-        if let user = PFUser.currentUser()?.username {
-            query.whereKey("username", equalTo: (user))
-            // pfQuery.orderByDescending("updatedAt")
-            query.findObjectsInBackgroundWithBlock({ (friends:[AnyObject]?, error:NSError?) -> Void in
-                for friends in friends! {
-                    self.users = friends["friends"] as! NSMutableArray
-                    print(self.users)
-                    print("searchFriends")
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.tableView.reloadData()
-                    }
-                }
-                
-            })
-        }
-        
-        
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -566,9 +543,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         if users.count == 0 {
             self.searchDisplayController?.searchResultsTableView.rowHeight = 70
         }
-        
         return users.count
-        
+
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -576,7 +552,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             searchUsers(searchText)
         }
         if searchText.characters.count > 0 && friendsScope == true {
-            searchFriends()
         }
         tableView.hidden = false
     }
@@ -585,9 +560,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
-        
-        
-        
+        if usersScope == true {
+
         // Declare user object and set cell text to username
         let user:PFUser = users[indexPath.row] as! PFUser
         
@@ -604,6 +578,27 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     cell.userProfileImage.image = UIImage(data: imageData!)
                 }
                 
+                }
+            }
+        } else if friendsScope == true {
+            cell.username.text = friends[indexPath.row] as! String
+            
+            let userQuery = PFQuery(className: "_User")
+            userQuery.whereKey("username", equalTo: friends[indexPath.row])
+            let _user = userQuery.getFirstObject() as! PFUser
+            
+            let profilePictureObject = _user["profile_picture"] as? PFFile
+            
+            if(profilePictureObject != nil)
+            {
+                profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                    
+                    if(imageData != nil)
+                    {
+                        cell.userProfileImage.image = UIImage(data: imageData!)
+                    }
+                    
+                }
             }
         }
         //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
@@ -685,6 +680,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             usersScope = false
             users.removeAllObjects()
             tableView.reloadData()
+            if searchBar.text?.characters.count > 0 {
+            }
             break
             
         default:
