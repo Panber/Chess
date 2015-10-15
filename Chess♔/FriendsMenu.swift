@@ -29,10 +29,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     var top10WorldArrayRating = [String]()
     var top10WorldArrayUsers:Array<String> = []
+    var top10WorldArrayImage: Array<NSData> = []
     var top10WorldUserImage = NSData()
     
     var top10FriendsArrayRating = [String]()
     var top10FriendsArrayUsers:Array<String> = []
+    var top10FriendsArrayImage: Array<NSData> = []
     var top10FriendsUserImage = NSData()
 
     
@@ -168,7 +170,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         toTop10WorldUser.backgroundColor = UIColor.clearColor()
         blurBC1.addSubview(toTop10WorldUser)
         
-        for var i = 0; i < 5; i++ {
         
         let ratingQuery = PFQuery(className: "_User")
         ratingQuery.orderByDescending("rating")
@@ -183,14 +184,14 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
                 }
                 usernameLabel.text = self.top10WorldArrayUsers[0]
-                ratingLabel.text = "Rating: " + self.top10WorldArrayRating[0]
+                ratingLabel.text = self.top10WorldArrayRating[0]
                 
                 
                 
                 
                 let findUserName: PFQuery = PFQuery(className:"_User")
                 findUserName.whereKey("username", containsString: self.top10WorldArrayUsers[0])
-                
+            
                 findUserName.findObjectsInBackgroundWithBlock{(usersObject: [AnyObject]?, error: NSError?) -> Void in
                     if (error == nil) {
                         
@@ -203,13 +204,17 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                         profilePic.image = image
                                         self.blurBC1.image = image
                                         self.top10WorldUserImage = imageData!
+                                        
                                         visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
                                             if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
                                             else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
                                         visualEffectView.frame = self.blurBC1.bounds
+                                        
                                         self.blurBC1.alpha = 0
                                         self.scrollView.addSubview(self.blurBC1)
                                         self.blurBC1.alpha = 1
+
+                                        self.top10WorldArrayImage.append(imageData!)
 
 //                                        UIView.animateWithDuration(0.5, animations: {
 //                                            })
@@ -231,7 +236,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             }
         
         })
-        }
+        
     
 //        let headerImage = UIImageView(frame: CGRectMake(0, 0, blurBC.frame.size.width, blurBC.frame.size.height - 70))
 //        headerImage.image = UIImage(named: "earth53.png")
@@ -414,7 +419,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                         
                     }
                     usernameLabel.text = self.top10FriendsArrayUsers[0]
-                    ratingLabel.text = "Rating: " + self.top10FriendsArrayRating[0]
+                    ratingLabel.text = self.top10FriendsArrayRating[0]
                     
 
                     let findUserName: PFQuery = PFQuery(className:"_User")
@@ -439,6 +444,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                             self.blurBC2.alpha = 0
                                             self.scrollView.addSubview(self.blurBC2)
                                             self.blurBC2.alpha = 1
+                                            
+                                            self.top10FriendsArrayImage.append(imageData!)
 
 //                                            UIView.animateWithDuration(0.5, animations: {
 //                                            })
@@ -468,11 +475,21 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     func toTop10WorldPressed(sender: UIButton!) {
     
+        NSUserDefaults.standardUserDefaults().setObject(top10WorldArrayUsers, forKey: "userArray")
+        NSUserDefaults.standardUserDefaults().setObject(top10WorldArrayRating, forKey: "ratingArray")
+        NSUserDefaults.standardUserDefaults().setObject(top10WorldArrayImage, forKey: "profilePicArray")
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("LeaderBoard")
+        self.showViewController(vc as! UIViewController, sender: vc)
     
     }
     
     func toTop10FriendsPressed(sender: UIButton!) {
-    
+        
+        NSUserDefaults.standardUserDefaults().setObject(top10FriendsArrayUsers, forKey: "userArray")
+        NSUserDefaults.standardUserDefaults().setObject(top10FriendsArrayRating, forKey: "ratingArray")
+        NSUserDefaults.standardUserDefaults().setObject(top10FriendsArrayImage, forKey: "profilePicArray")
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("LeaderBoard")
+        self.showViewController(vc as! UIViewController, sender: vc)
     
     }
     
@@ -636,8 +653,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 if(imageData != nil)
                 {
                     NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
-                    self.showViewController(vc as! UIViewController, sender: vc)
+
                 }
                 
             }
