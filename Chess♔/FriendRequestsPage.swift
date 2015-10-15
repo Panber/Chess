@@ -166,9 +166,11 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         
         let cell:UserTableViewCell2 = self.tableView.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath) as! UserTableViewCell2
         NSUserDefaults.standardUserDefaults().setObject(userArray[indexPath.row], forKey: "other_username_from_friendrequest")
+        cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friendrequest") as! String
         
         var p = imageDataArray[indexPath.row]
         NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friendrequest")
+        cell.userProfileImage.image = UIImage(data: p)
         
     }
     

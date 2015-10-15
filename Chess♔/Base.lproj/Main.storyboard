@@ -990,8 +990,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHV-qB-NFj">
-                                                    <rect key="frame" x="106" y="17" width="461" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vHV-qB-NFj">
+                                                    <rect key="frame" x="106" y="17" width="355" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1000,15 +1000,12 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="x2c-1y-D8K">
                                                     <rect key="frame" x="21" y="10" width="50" height="50"/>
                                                     <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="qhg-j1-OAc"/>
-                                                    </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksM-jX-ZSv">
                                                     <rect key="frame" x="519" y="15" width="40" height="40"/>
                                                     <animations/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="9Ax-HO-cv8"/>
+                                                        <constraint firstAttribute="width" constant="40" id="CbN-Vz-wpm"/>
                                                     </constraints>
                                                     <state key="normal" backgroundImage="close38.png"/>
                                                 </button>
@@ -1016,28 +1013,29 @@
                                                     <rect key="frame" x="469" y="15" width="40" height="40"/>
                                                     <animations/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="X2U-OV-Hgd"/>
+                                                        <constraint firstAttribute="width" constant="40" id="bWk-NU-Uzl"/>
                                                     </constraints>
                                                     <state key="normal" backgroundImage="checkmark11.png"/>
                                                 </button>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="baseline" secondItem="2SN-BI-TKL" secondAttribute="baseline" id="2Nz-bn-2vd"/>
-                                                <constraint firstAttribute="trailing" secondItem="vHV-qB-NFj" secondAttribute="trailing" id="34U-Sm-NuH"/>
-                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="bottom" secondItem="ksM-jX-ZSv" secondAttribute="bottom" id="7aT-Kw-eZ0"/>
-                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="leading" secondItem="x2c-1y-D8K" secondAttribute="trailing" constant="35" id="CtT-0O-8NZ"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="vHV-qB-NFj" secondAttribute="bottom" constant="23" id="EwJ-Z9-XVw"/>
-                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="2" id="HnP-Es-770"/>
-                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="centerY" secondItem="LZC-qL-3qU" secondAttribute="centerY" id="JrU-Fp-c1v"/>
-                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="7" id="LME-fh-ONC"/>
-                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="trailing" secondItem="LZC-qL-3qU" secondAttribute="trailingMargin" id="NeC-lp-Pea"/>
-                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="leading" secondItem="LZC-qL-3qU" secondAttribute="leadingMargin" constant="13" id="Pgd-Lo-m7l"/>
-                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="top" secondItem="ksM-jX-ZSv" secondAttribute="top" id="RFs-fD-wkq"/>
-                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="leading" secondItem="2SN-BI-TKL" secondAttribute="trailing" constant="10" id="UyL-Wr-Bsb"/>
-                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="9" id="Var-qo-COx"/>
-                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="firstBaseline" secondItem="2SN-BI-TKL" secondAttribute="firstBaseline" id="kiS-cF-3j0"/>
-                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="centerY" secondItem="x2c-1y-D8K" secondAttribute="centerY" id="xaE-Zz-lSo"/>
+                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="leading" secondItem="vHV-qB-NFj" secondAttribute="trailing" constant="8" symbolic="YES" id="0W6-21-bIw"/>
+                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="2" id="4DZ-ri-PXL"/>
+                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="centerY" secondItem="x2c-1y-D8K" secondAttribute="centerY" id="97q-vy-vhb"/>
+                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="centerX" secondItem="LZC-qL-3qU" secondAttribute="centerX" id="DaQ-ZG-FfV"/>
+                                                <constraint firstItem="x2c-1y-D8K" firstAttribute="leading" secondItem="LZC-qL-3qU" secondAttribute="leadingMargin" constant="13" id="HTa-9z-Fau"/>
+                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="bottom" secondItem="ksM-jX-ZSv" secondAttribute="bottom" id="KjC-0v-iqx"/>
+                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="9" id="S6M-yg-38S"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="vHV-qB-NFj" secondAttribute="bottom" constant="23" id="WWa-vS-I5d"/>
+                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="top" secondItem="ksM-jX-ZSv" secondAttribute="top" id="jhj-a1-UOk"/>
+                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="trailing" secondItem="LZC-qL-3qU" secondAttribute="trailingMargin" id="jyY-c6-SeU"/>
+                                                <constraint firstItem="vHV-qB-NFj" firstAttribute="leading" secondItem="x2c-1y-D8K" secondAttribute="trailing" constant="35" id="lBH-dm-O1T"/>
+                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="leading" secondItem="2SN-BI-TKL" secondAttribute="trailing" constant="10" id="lEX-dR-3MI"/>
+                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="top" secondItem="LZC-qL-3qU" secondAttribute="topMargin" constant="7" id="mIS-Av-82i"/>
+                                                <constraint firstItem="ksM-jX-ZSv" firstAttribute="baseline" secondItem="2SN-BI-TKL" secondAttribute="baseline" id="nvj-A3-lgt"/>
+                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="centerY" secondItem="LZC-qL-3qU" secondAttribute="centerY" id="qbe-v3-qmp"/>
+                                                <constraint firstItem="2SN-BI-TKL" firstAttribute="firstBaseline" secondItem="ksM-jX-ZSv" secondAttribute="firstBaseline" id="wC5-Rv-7A6"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>

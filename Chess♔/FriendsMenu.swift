@@ -131,6 +131,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         ratingLabel.textColor = UIColor.grayColor()
         blurBC.addSubview(ratingLabel)
         
+        for var i = 0; i < 5; i++ {
         
         let ratingQuery = PFQuery(className: "_User")
         ratingQuery.orderByDescending("rating")
@@ -192,7 +193,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             }
         
         })
-    
+        }
     
 //        let headerImage = UIImageView(frame: CGRectMake(0, 0, blurBC.frame.size.width, blurBC.frame.size.height - 70))
 //        headerImage.image = UIImage(named: "earth53.png")
@@ -288,10 +289,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 */
                 
             }
-//            else {
-//                
-//            }
-//        })
+
+    func addTop10Friends () {
+    
+    
+    
+    }
     
         
 
