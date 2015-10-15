@@ -28,9 +28,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     var top10WorldArrayRating = [String]()
     var top10WorldArrayUsers:Array<String> = []
+    var top10WorldUserImage = NSData()
     
     var top10FriendsArrayRating = [String]()
     var top10FriendsArrayUsers:Array<String> = []
+    var top10FriendsUserImage = NSData()
+
     
     var usersScope:Bool = true
     var friendsScope:Bool = false
@@ -54,7 +57,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         scrollView.contentSize = CGSizeMake(screenWidth, 2000)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
-        scrollView.bounces = false
+       // scrollView.bounces = false
 
         
         
@@ -104,6 +107,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         blurBC1.contentMode = .ScaleAspectFill
         blurBC1.layer.borderColor = UIColor.lightGrayColor().CGColor
         blurBC1.layer.borderWidth = 0.5
+        blurBC1.userInteractionEnabled = true
         blurBC1.clipsToBounds = true
         
         //bluring bc of profile pic
@@ -130,6 +134,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         arrow.contentMode = .ScaleAspectFit
         blurBC1.addSubview(arrow)
         
+        let toTop10World = UIButton(frame: CGRectMake(0, 0, blurBC1.frame.size.width, blurBC1.frame.size.height / 3))
+        toTop10World.addTarget(self, action: "toTop10WorldPressed:", forControlEvents: .TouchUpInside)
+        toTop10World.backgroundColor = UIColor.clearColor()
+        blurBC1.addSubview(toTop10World)
+        
         let currentToLabel = UILabel(frame: CGRectMake(20, whiteF.frame.size.height + 10, blurBC1.frame.size.width - 20, 20))
         currentToLabel.font = UIFont(name: "Didot-Italic", size: 15)
         currentToLabel.text = "Current no.1"
@@ -152,6 +161,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         ratingLabel.font = UIFont(name: "Didot-Italic", size: 15)
         ratingLabel.textColor = UIColor.grayColor()
         blurBC1.addSubview(ratingLabel)
+        
+        let toTop10WorldUser = UIButton(frame: CGRectMake(0, blurBC1.frame.size.height/3, blurBC1.frame.size.width, blurBC1.frame.size.height * (2/3)))
+        toTop10WorldUser.addTarget(self, action: "toTop10WorldUserPressed:", forControlEvents: .TouchUpInside)
+        toTop10WorldUser.backgroundColor = UIColor.clearColor()
+        blurBC1.addSubview(toTop10WorldUser)
         
         for var i = 0; i < 5; i++ {
         
@@ -187,6 +201,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                         let image = UIImage(data: imageData!)!
                                         profilePic.image = image
                                         self.blurBC1.image = image
+                                        self.top10WorldUserImage = imageData!
                                         visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
                                             if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
                                             else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
@@ -320,6 +335,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         blurBC2.contentMode = .ScaleAspectFill
         blurBC2.layer.borderColor = UIColor.lightGrayColor().CGColor
         blurBC2.layer.borderWidth = 0.5
+        blurBC2.userInteractionEnabled = true
         blurBC2.clipsToBounds = true
         
         //bluring bc of profile pic
@@ -346,6 +362,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         arrow.contentMode = .ScaleAspectFit
         blurBC2.addSubview(arrow)
         
+        let toTop10Friends = UIButton(frame: CGRectMake(0, 0, blurBC2.frame.size.width, blurBC2.frame.size.height / 3))
+        toTop10Friends.addTarget(self, action: "toTop10FriendsPressed:", forControlEvents: .TouchUpInside)
+        toTop10Friends.backgroundColor = UIColor.clearColor()
+        blurBC2.addSubview(toTop10Friends)
+        
         let currentToLabel = UILabel(frame: CGRectMake(20, whiteF.frame.size.height + 10, blurBC2.frame.size.width - 20, 20))
         currentToLabel.font = UIFont(name: "Didot-Italic", size: 15)
         currentToLabel.text = "Current no.1"
@@ -369,8 +390,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         ratingLabel.textColor = UIColor.grayColor()
         blurBC2.addSubview(ratingLabel)
         
+        let toTop10FriendsUser = UIButton(frame: CGRectMake(0, blurBC2.frame.size.height/3, blurBC2.frame.size.width, blurBC2.frame.size.height * (2/3)))
+        toTop10FriendsUser.addTarget(self, action: "toTop10FriendsUserPressed:", forControlEvents: .TouchUpInside)
+        toTop10FriendsUser.backgroundColor = UIColor.clearColor()
+        blurBC2.addSubview(toTop10FriendsUser)
         
-
         
         for var i = 0; i < friendsArray.count; i++ {
         
@@ -408,6 +432,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                             let image = UIImage(data: imageData!)!
                                             profilePic.image = image
                                             self.blurBC2.image = image
+                                            self.top10FriendsUserImage = imageData!
                                             visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
                                             if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
                                             else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
@@ -442,13 +467,49 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     }
     
+    func toTop10WorldPressed(sender: UIButton!) {
+    
+    
+    }
+    
+    func toTop10FriendsPressed(sender: UIButton!) {
+    
+    
+    }
+    
+    func toTop10WorldUserPressed(sender: UIButton!) {
+//        sender.highlighted = true
+//        if sender.highlighted == true {
+//        sender.backgroundColor = UIColor.purpleColor()
+//        sender.alpha = 0.2
+//        }
+//        
+//        UIView.animateWithDuration(0.5, animations: {            sender.alpha = 1
+//}) { (Bool) -> Void in
+//        }
         
+        NSUserDefaults.standardUserDefaults().setObject(top10WorldArrayUsers[0], forKey: "other_username")
+        NSUserDefaults.standardUserDefaults().setObject(top10WorldUserImage, forKey: "other_userImage")
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
+        self.showViewController(vc as! UIViewController, sender: vc)
+
+    }
+    
+    func toTop10FriendsUserPressed(sender: UIButton!) {
+    
+        NSUserDefaults.standardUserDefaults().setObject(top10FriendsArrayUsers[0], forKey: "other_username")
+        NSUserDefaults.standardUserDefaults().setObject(top10FriendsUserImage, forKey: "other_userImage")
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
+        self.showViewController(vc as! UIViewController, sender: vc)
+
+    }
+    
 
 
     // Func that searches for user with key and stores it in an array
     func searchUsers(searchString: String) {
         
-        var query: PFQuery = PFQuery(className:"_User")
+        let query: PFQuery = PFQuery(className:"_User")
         query.whereKey("username", matchesRegex:searchString, modifiers:"i")
         query.whereKey("username", notEqualTo: (PFUser.currentUser()?.username)!)
         query.orderByAscending("username")

@@ -65,7 +65,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
                                 users["won"] = "0"
                                 users["drawn"] = "0"
                                 users["lost"] = "0"
-                                users["rating"] = "200"
+                                users["rating"] = "300"
                                 users.saveInBackground()
                             }
                         }

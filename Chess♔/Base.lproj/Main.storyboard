@@ -816,7 +816,7 @@
         <!--Other User Profile Page-->
         <scene sceneID="Srx-nY-I3g">
             <objects>
-                <viewController id="6OR-ar-Hvm" customClass="OtherUserProfilePage" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OtherProfile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6OR-ar-Hvm" customClass="OtherUserProfilePage" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YcI-6Z-81K"/>
                         <viewControllerLayoutGuide type="bottom" id="cqz-27-4jZ"/>
