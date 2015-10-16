@@ -599,7 +599,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         }
     }
     
-    func getFriends(searchString: String) {
+    func searchFriends(searchString: String) {
         
         let query = PFQuery(className: "Friends")
         if let user = PFUser.currentUser()?.username {
@@ -660,7 +660,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             searchUsers(searchText)
         }
         if searchText.characters.count > 0 && friendsScope == true {
-            getFriends(searchText)
+            searchFriends(searchText)
         }
         tableView.hidden = false
     }
@@ -766,6 +766,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             users.removeAllObjects()
             tableView.reloadData()
             if searchBar.text?.characters.count > 0 {
+                searchFriends(searchBar.text!)
             }
             break
             
