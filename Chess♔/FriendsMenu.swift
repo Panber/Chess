@@ -543,6 +543,35 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         }
     }
     
+    func getFriends(searchString: String) {
+        
+//        let query = PFQuery(className: "Friends")
+//        if let user = PFUser.currentUser()?.username {
+//            query.whereKey("username", equalTo: (user))
+//            // pfQuery.orderByDescending("updatedAt")
+//            query.findObjectsInBackgroundWithBlock({ (friends:[AnyObject]?, error:NSError?) -> Void in
+//                for friends in friends! {
+//                    self.friends = (friends["friends"] as? Array<String>)!
+//                }
+//                print(friends?.count)
+//            })
+//        }
+//        for var i = 0; i < friends.count; i++ {
+//            if friends[i].containsString(searchString.lowercaseString) || friends[i].containsString(searchString.capitalizedString) {
+//                let query: PFQuery = PFQuery(className:"_User")
+//            query.whereKey("username", equalTo: friends[i])
+//            let _user = query.getFirstObject() as! PFUser
+//            self.users.removeAllObjects()
+//            self.users.addObject(_user)
+//            dispatch_async(dispatch_get_main_queue()) {
+//                self.searchDisplayController?.searchResultsTableView.reloadData()
+//            }
+//            }
+//
+//        }
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -569,6 +598,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             searchUsers(searchText)
         }
         if searchText.characters.count > 0 && friendsScope == true {
+            getFriends(searchText)
         }
         tableView.hidden = false
     }
