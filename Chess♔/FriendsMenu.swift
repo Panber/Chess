@@ -27,12 +27,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var top10WorldArrayRating = [String]()
+    var top10WorldArrayRating = [Int]()
     var top10WorldArrayUsers:Array<String> = []
     var top10WorldArrayImage: Array<NSData> = []
     var top10WorldUserImage = NSData()
     
-    var top10FriendsArrayRating = [String]()
+    var top10FriendsArrayRating = [Int]()
     var top10FriendsArrayUsers:Array<String> = []
     var top10FriendsArrayImage: Array<NSData> = []
     var top10FriendsUserImage = NSData()
@@ -172,71 +172,127 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         
         let ratingQuery = PFQuery(className: "_User")
+       // ratingQuery.orderByDescending("username")
         ratingQuery.orderByDescending("rating")
         ratingQuery.limit = 10
         ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
+                self.top10WorldArrayUsers = []
+                self.top10WorldArrayRating = []
+                self.top10WorldArrayImage = []
+                
                 for usersObject in usersObject! {
-                    self.top10WorldArrayRating.append(usersObject["rating"] as! String)
+                    
+                    
+                    self.top10WorldArrayRating.append(usersObject["rating"] as! Int)
                     //print(self.top10WorldArrayRating)
                     self.top10WorldArrayUsers.append(usersObject["username"] as! String)
                     //print(self.top10WorldArrayUsers)
-        
+                    usernameLabel.text = self.top10WorldArrayUsers.first
+                    ratingLabel.text = "\(self.top10WorldArrayRating.first!)"
+                    
+                  
+           
                 }
-                usernameLabel.text = self.top10WorldArrayUsers[0]
-                ratingLabel.text = self.top10WorldArrayRating[0]
+           
+           
+                var alreadyRan = false
                 
                 
+                let query = PFQuery(className: "_User")
                 
+                query.whereKey("username", containedIn: self.top10WorldArrayUsers)
                 
-                let findUserName: PFQuery = PFQuery(className:"_User")
-                findUserName.whereKey("username", containsString: self.top10WorldArrayUsers[0])
-            
-                findUserName.findObjectsInBackgroundWithBlock{(usersObject: [AnyObject]?, error: NSError?) -> Void in
+                // Find the matching users asynchronously
+                query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
                     if (error == nil) {
-                        
-                        for usersObject in usersObject! {
-                            if let profileImage:PFFile = usersObject["profile_picture"] as? PFFile {
-                                profileImage.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                        // Fetch the images of the users
+                        if let userArray = objects as? [PFUser] {
+                            for user in userArray {
+                                if let userPicture = user["profile_picture"] as? PFFile {
                                     
-                                    if error == nil {
-                                        let image = UIImage(data: imageData!)!
-                                        profilePic.image = image
-                                        self.blurBC1.image = image
-                                        self.top10WorldUserImage = imageData!
-                                        
-                                        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
-                                            if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-                                            else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-                                        visualEffectView.frame = self.blurBC1.bounds
-                                        
-                                        self.blurBC1.alpha = 0
-                                        self.scrollView.addSubview(self.blurBC1)
-                                        self.blurBC1.alpha = 1
-
-                                        self.top10WorldArrayImage.append(imageData!)
-
-//                                        UIView.animateWithDuration(0.5, animations: {
-//                                            })
-
+                                    userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                        if (error == nil) {
+                                            
+                                            if alreadyRan == false {
+                                                let image = UIImage(data: imageData!)!
+                                                profilePic.image = image
+                                                self.blurBC1.image = image
+                                                self.top10WorldUserImage = imageData!
+                                                
+                                                visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+                                                if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+                                                else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+                                                visualEffectView.frame = self.blurBC1.bounds
+                                                
+                                                self.blurBC1.alpha = 0
+                                                self.scrollView.addSubview(self.blurBC1)
+                                                self.blurBC1.alpha = 1
+                                                alreadyRan = true
+                                            }
+                                            
+                                            self.top10WorldArrayImage.append(imageData!)
+                                            
+                                        } else {
+                                            // Error handling
+                                        }
                                     }
-                                    
-                                    
                                 }
                             }
-                            
                         }
+                    } else {
+                        // Log details of the failure
+                        print("query error: \(error) \(error!.userInfo)")
                     }
                 }
-                
-            
+                /*
+                for var i = 0; i < 10; i++ {
+                    let imageQuery = PFQuery(className: "_User")
+                    imageQuery.whereKey("username", equalTo: self.top10WorldArrayUsers[i])
+                    let user = imageQuery.getFirstObject() as! PFUser
+                    
+                    let profileImage:PFFile = user["profile_picture"] as! PFFile
+                    profileImage.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                        
+                        if error == nil {
+                            if alreadyRan == false {
+                                let image = UIImage(data: imageData!)!
+                                profilePic.image = image
+                                self.blurBC1.image = image
+                                self.top10WorldUserImage = imageData!
+                                
+                                visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+                                if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+                                else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+                                visualEffectView.frame = self.blurBC1.bounds
+                                
+                                self.blurBC1.alpha = 0
+                                self.scrollView.addSubview(self.blurBC1)
+                                self.blurBC1.alpha = 1
+                                alreadyRan = true
+                            }
+                            
+                            self.top10WorldArrayImage.append(imageData!)
+                            
+                            
+                            //                                        UIView.animateWithDuration(0.5, animations: {
+                            //                                            })
+                        }
+                        
+                    }
+                }
 
-            
+*/
+
             
             }
         
         })
         
+
+
+        
+
     
 //        let headerImage = UIImageView(frame: CGRectMake(0, 0, blurBC.frame.size.width, blurBC.frame.size.height - 70))
 //        headerImage.image = UIImage(named: "earth53.png")
@@ -412,14 +468,14 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
                 if error == nil {
                     for usersObject in usersObject! {
-                        self.top10FriendsArrayRating.append(usersObject["rating"] as! String)
+                        self.top10FriendsArrayRating.append(usersObject["rating"] as! Int)
                         print(self.top10FriendsArrayRating)
                         self.top10FriendsArrayUsers.append(usersObject["username"] as! String)
                         print(self.top10FriendsArrayUsers)
                         
                     }
                     usernameLabel.text = self.top10FriendsArrayUsers[0]
-                    ratingLabel.text = self.top10FriendsArrayRating[0]
+                    ratingLabel.text = "\(self.top10FriendsArrayRating[0])"
                     
 
                     let findUserName: PFQuery = PFQuery(className:"_User")

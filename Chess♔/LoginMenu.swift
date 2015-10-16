@@ -343,7 +343,9 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
             
             if let profileImageData = profilePhotoImageView.image
             {
-                let profileImageDataJPEG = UIImageJPEGRepresentation(profileImageData, 0.1)
+   
+                
+                let profileImageDataJPEG = UIImageJPEGRepresentation(profileImageData, 0)
                 
                 let profileImageFile = PFFile(data: profileImageDataJPEG!)
                 myUser.setObject(profileImageFile, forKey: "profile_picture")

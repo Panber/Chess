@@ -65,7 +65,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
                                 users["won"] = "0"
                                 users["drawn"] = "0"
                                 users["lost"] = "0"
-                                users["rating"] = "100"
+                                users["rating"] = 101
                                 users.saveInBackground()
                             }
                         }
@@ -77,9 +77,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
             }
         
         
+        
+        
         //...and remove this after a while
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
-                    self.showViewController(vc as! UIViewController, sender: vc)
+//                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
+//                    self.showViewController(vc as! UIViewController, sender: vc)
 
         
         //setting new-button and edit button

@@ -2525,6 +2525,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label15)
         
         
+        
         //adding white bc to friends button
         label16 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + (45*t), screenWidth, 45))
         label16.text = ""
@@ -2543,6 +2544,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         friendsButton.userInteractionEnabled = true
         friendsButton.addTarget(self, action: "friendsPressed:", forControlEvents: .TouchUpInside)
         friendsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+        friendsButton.showsTouchWhenHighlighted = true
         scrollView.addSubview(friendsButton)
         
         friendsArrowImage = UIImageView(frame: CGRectMake(screenWidth - 30, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + (45*t), 15, 45))
