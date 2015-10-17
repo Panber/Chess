@@ -205,10 +205,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 
                 }
                 //image
+                var alreadyRan = false
+
                 for var i = 0; i < 2; i++ {
                 let query = PFQuery(className: "_User")
                 
-           
+
                     query.whereKey("username", equalTo: self.top10WorldArrayUsers[i])
                 query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
                     if (error == nil) {
@@ -219,8 +221,27 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                     
                                     userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                         if (error == nil) {
+                                            
+                                            if alreadyRan == false {
+                                                let image = UIImage(data: imageData!)!
+                                                profilePic.image = image
+                                                self.blurBC1.image = image
+                                                self.top10WorldUserImage = imageData!
+                                                
+                                                visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+                                                if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+                                                else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+                                                visualEffectView.frame = self.blurBC1.bounds
+                                                
+                                                self.blurBC1.alpha = 0
+                                                self.scrollView.addSubview(self.blurBC1)
+                                                self.blurBC1.alpha = 1
+                                                alreadyRan = true
+                                            }
+                                            
+                                            
                                             self.top10WorldArrayImage.append(imageData!)
-                                            print("this is  tp10 before: \(self.top10WorldArrayImage)")
+                                           // print("this is  tp10 before: \(self.top10WorldArrayImage)")
                                         } else {
                                         }
                                     }
@@ -237,47 +258,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 }
                 }
                 
-                dispatch_async(GlobalMainQueue) { // 1
-                    var alreadyRan = false
-                    
-                    let query2 = PFQuery(className: "_User")
-                    query2.whereKey("username", equalTo: self.top10WorldArrayUsers.first!)
-                    query2.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
-                        if (error == nil) {
-                            // Fetch the images of the users
-                            if let userArray = objects as? [PFUser] {
-                                for user in userArray {
-                                    if let userPicture = user["profile_picture"] as? PFFile {
-                                        
-                                        userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                                            
-                                                    let image = UIImage(data: imageData!)!
-                                                    profilePic.image = image
-                                                    self.blurBC1.image = image
-                                                    self.top10WorldUserImage = imageData!
-                                                    
-                                                    visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
-                                                    if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-                                                    else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-                                                    visualEffectView.frame = self.blurBC1.bounds
-                                                    
-                                                    self.blurBC1.alpha = 0
-                                                    self.scrollView.addSubview(self.blurBC1)
-                                                    self.blurBC1.alpha = 1
-                                                
-                                           
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            // Log details of the failure
-                            print("query error: \(error) \(error!.userInfo)")
-                        }
-                    }
-                    
-                    
-                }
+  
                 
 //                let query = PFQuery(className: "_User")
 //                
