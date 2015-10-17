@@ -53,6 +53,45 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
 
 
         
+            let query = PFQuery(className: "_User")
+            let usernamee = NSUserDefaults.standardUserDefaults().objectForKey("userArray") as! NSMutableArray
+            
+            query.whereKey("username", equalTo: usernamee[indexPath.row] as! String)
+            query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+                if (error == nil) {
+                    
+                    if let userArray = objects as? [PFUser] {
+                        for user in userArray {
+                            if let userPicture = user["profile_picture"] as? PFFile {
+                                
+                                userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                    if (error == nil) {
+                                        
+                                    cell.userProfileImage.image = UIImage(data: imageData!)
+                                    self.imageDataArray.append(imageData!)
+
+                                        
+                                        
+                                        //     self.top10WorldArrayImage.append(imageData!)
+                                        
+                                        // print("this is  tp10 before: \(self.top10WorldArrayImage)")
+                                    } else {
+                                    }
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                } else {
+                    // Log details of the failure
+                    print("query error: \(error) \(error!.userInfo)")
+                }
+                
+            }
+        
+        
+        
  //       cell.userProfileImage.image = UIImage(data: self.imageDataArray[indexPath.row])
 
         
@@ -86,11 +125,11 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
 //        }
         
 //        //image
-        let p = NSUserDefaults.standardUserDefaults().objectForKey("profilePicArray") as! NSMutableArray
-        cell.userProfileImage.image = UIImage(data: p[indexPath.row] as! NSData)
-        self.imageDataArray.append(p[indexPath.row] as! NSData)
+//        let p = NSUserDefaults.standardUserDefaults().objectForKey("profilePicArray") as! NSMutableArray
+//        cell.userProfileImage.image = UIImage(data: p[indexPath.row] as! NSData)
+//        self.imageDataArray.append(p[indexPath.row] as! NSData)
+//        print("this is  tp10 after: \(UIImage(data:p[indexPath.row] as! NSData))")
 
-    //    print("this is  tp10 after: \(top10WorldArrayImage[indexPath.row])")
 
         
         //rating
