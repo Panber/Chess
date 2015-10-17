@@ -170,11 +170,21 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         toTop10WorldUser.backgroundColor = UIColor.clearColor()
         blurBC1.addSubview(toTop10WorldUser)
         
+        var GlobalUserInitiatedQueue: dispatch_queue_t {
+            return dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)
+        }
+        var GlobalBackgroundQueue: dispatch_queue_t {
+            return dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
+        }
+        var GlobalMainQueue: dispatch_queue_t {
+            return dispatch_get_main_queue()
+        }
+        
         
         let ratingQuery = PFQuery(className: "_User")
        // ratingQuery.orderByDescending("username")
         ratingQuery.orderByDescending("rating")
-        ratingQuery.limit = 10
+        ratingQuery.limit = 2
         ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
                 self.top10WorldArrayUsers = []
@@ -192,65 +202,119 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     ratingLabel.text = "\(self.top10WorldArrayRating.first!)"
                     
                   
-           
+                
                 }
-           
-           
-                var alreadyRan = false
-                
-                
+                //image
+                for var i = 0; i < 2; i++ {
                 let query = PFQuery(className: "_User")
                 
-                query.whereKey("username", containedIn: self.top10WorldArrayUsers)
-                
-                // Find the matching users asynchronously
+           
+                    query.whereKey("username", equalTo: self.top10WorldArrayUsers[i])
                 query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
                     if (error == nil) {
-                        // Fetch the images of the users
+                        
                         if let userArray = objects as? [PFUser] {
                             for user in userArray {
                                 if let userPicture = user["profile_picture"] as? PFFile {
                                     
                                     userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                         if (error == nil) {
-                                            
-                                            if alreadyRan == false {
-                                                let image = UIImage(data: imageData!)!
-                                                profilePic.image = image
-                                                self.blurBC1.image = image
-                                                self.top10WorldUserImage = imageData!
-                                                
-                                                visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
-                                                if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-                                                else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-                                                visualEffectView.frame = self.blurBC1.bounds
-                                                
-                                                self.blurBC1.alpha = 0
-                                                self.scrollView.addSubview(self.blurBC1)
-                                                self.blurBC1.alpha = 1
-                                                alreadyRan = true
-                                            }
-                                            
                                             self.top10WorldArrayImage.append(imageData!)
-                                            
+                                            print("this is  tp10 before: \(self.top10WorldArrayImage)")
                                         } else {
-                                            // Error handling
                                         }
                                     }
+                                    
                                 }
                             }
+                            
                         }
                     } else {
                         // Log details of the failure
                         print("query error: \(error) \(error!.userInfo)")
                     }
+                    
                 }
+                }
+                
+                dispatch_async(GlobalMainQueue) { // 1
+                    var alreadyRan = false
+                    
+                    let query2 = PFQuery(className: "_User")
+                    query2.whereKey("username", equalTo: self.top10WorldArrayUsers.first!)
+                    query2.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+                        if (error == nil) {
+                            // Fetch the images of the users
+                            if let userArray = objects as? [PFUser] {
+                                for user in userArray {
+                                    if let userPicture = user["profile_picture"] as? PFFile {
+                                        
+                                        userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                            
+                                                    let image = UIImage(data: imageData!)!
+                                                    profilePic.image = image
+                                                    self.blurBC1.image = image
+                                                    self.top10WorldUserImage = imageData!
+                                                    
+                                                    visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+                                                    if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+                                                    else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+                                                    visualEffectView.frame = self.blurBC1.bounds
+                                                    
+                                                    self.blurBC1.alpha = 0
+                                                    self.scrollView.addSubview(self.blurBC1)
+                                                    self.blurBC1.alpha = 1
+                                                
+                                           
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            // Log details of the failure
+                            print("query error: \(error) \(error!.userInfo)")
+                        }
+                    }
+                    
+                    
+                }
+                
+//                let query = PFQuery(className: "_User")
+//                
+//                query.orderByDescending("rating")
+//                query.limit = 10
+//                query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+//                    if (error == nil) {
+//                        // Fetch the images of the users
+//                        if let userArray = objects as? [PFUser] {
+//                            for user in userArray {
+//                                if let userPicture = user["profile_picture"] as? PFFile {
+//                                    
+//                                    userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+//                                        if (error == nil) {
+//                                            
+//                                            self.top10WorldArrayImage.append(imageData!)
+//                                            
+//                                        } else {
+//                                            // Error handling
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        // Log details of the failure
+//                        print("query error: \(error) \(error!.userInfo)")
+//                    }
+//                }
+//                
+
                 /*
                 for var i = 0; i < 10; i++ {
                     let imageQuery = PFQuery(className: "_User")
                     imageQuery.whereKey("username", equalTo: self.top10WorldArrayUsers[i])
                     let user = imageQuery.getFirstObject() as! PFUser
-                    
+                
                     let profileImage:PFFile = user["profile_picture"] as! PFFile
                     profileImage.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
                         
@@ -288,6 +352,15 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             }
         
         })
+        
+        
+        
+
+        
+        
+        
+        
+
         
 
 

@@ -341,6 +341,55 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
         myUser.setObject(userName!, forKey: "username")
             
             
+            func resizeImage(image:UIImage) -> UIImage
+            {
+                var actualHeight = image.size.height
+                var actualWidth = image.size.width
+                let maxHeight: CGFloat = 1000.0
+                let maxWidth: CGFloat = 1000.0
+                var imgRatio = actualWidth/actualHeight
+                let maxRatio = maxWidth/maxHeight
+                let compressionQuality: CGFloat = 0.0
+                //50 percent compression
+                
+                if (actualHeight > maxHeight || actualWidth > maxWidth)
+                {
+                    if(imgRatio < maxRatio)
+                    {
+                        //adjust width according to maxHeight
+                        imgRatio = maxHeight / actualHeight;
+                        actualWidth = imgRatio * actualWidth;
+                        actualHeight = maxHeight;
+                    }
+                    else if(imgRatio > maxRatio)
+                    {
+                        //adjust height according to maxWidth
+                        imgRatio = maxWidth / actualWidth;
+                        actualHeight = imgRatio * actualHeight;
+                        actualWidth = maxWidth;
+                    }
+                    else
+                    {
+                        actualHeight = maxHeight;
+                        actualWidth = maxWidth;
+                    }
+                }
+                
+                let rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
+                UIGraphicsBeginImageContext(rect.size);
+                image.drawInRect(rect)
+                let img = UIGraphicsGetImageFromCurrentImageContext();
+                let imageData = UIImageJPEGRepresentation(img, compressionQuality)
+                UIGraphicsEndImageContext();
+                
+                return UIImage(data:imageData!)!
+                
+                
+                
+            }
+            
+            profilePhotoImageView.image = resizeImage(profilePhotoImageView.image!)
+            
             if let profileImageData = profilePhotoImageView.image
             {
    

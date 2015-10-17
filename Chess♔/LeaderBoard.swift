@@ -11,7 +11,10 @@ import UIKit
 class LeaderBoard: UIViewController,UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    
+
+    override func viewWillAppear(animated: Bool) {
+       
+    }
     
     var profilePicArray: Array<UIImage> = []
     
@@ -41,22 +44,30 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:UserTableViewCell4 = self.tableView.dequeueReusableCellWithIdentifier("cell4", forIndexPath: indexPath) as! UserTableViewCell4
+        let cell:UserTableViewCell4 = self.tableView.dequeueReusableCellWithIdentifier("cell4") as! UserTableViewCell4
+
         
         //username
         let userName = NSUserDefaults.standardUserDefaults().objectForKey("userArray") as! NSMutableArray
         cell.username.text = userName[indexPath.row] as? String
 
+
+        
+ //       cell.userProfileImage.image = UIImage(data: self.imageDataArray[indexPath.row])
+
+        
+
+        
 //        //image
 //        let userQuery = PFQuery(className: "_User")
 //        userQuery.whereKey("username", equalTo: userName[indexPath.row])
 //        let  user = userQuery.getFirstObject() as! PFUser
 //
-//        
+//
 //        cell.username.text = user["username"] as? String
-//        
+//
 //        let profilePictureObject = user["profile_picture"] as? PFFile
-//        
+//
 //        if(profilePictureObject != nil)
 //        {
 //            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
@@ -74,10 +85,14 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
 //            }
 //        }
         
-        //image
+//        //image
         let p = NSUserDefaults.standardUserDefaults().objectForKey("profilePicArray") as! NSMutableArray
         cell.userProfileImage.image = UIImage(data: p[indexPath.row] as! NSData)
+        self.imageDataArray.append(p[indexPath.row] as! NSData)
 
+    //    print("this is  tp10 after: \(top10WorldArrayImage[indexPath.row])")
+
+        
         //rating
         let rating = NSUserDefaults.standardUserDefaults().objectForKey("ratingArray") as! NSMutableArray
         cell.rating.text = "\(rating[indexPath.row] as! Int)"
