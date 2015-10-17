@@ -68,6 +68,8 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
                                     if (error == nil) {
                                         
                                     cell.userProfileImage.image = UIImage(data: imageData!)
+                                    self.imageDataArray.append(imageData!)
+
                                         
                                         
                                         //     self.top10WorldArrayImage.append(imageData!)
