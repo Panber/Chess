@@ -1083,7 +1083,7 @@ class OtherUserProfilePageFromFriendRequest: UIViewController, UIScrollViewDeleg
     var ifFriend = UIImageView()
     var label2o5 = UILabel()
     
-    var userRating = String()
+    var userRating = Int()
     var userWon = String()
     var userDrawn = String()
     var userLost = String()
@@ -1139,7 +1139,7 @@ class OtherUserProfilePageFromFriendRequest: UIViewController, UIScrollViewDeleg
                 
                 for users in users as! [PFObject] {
                     //remember to assign them these values in advance!!!
-                    self.userRating = users["rating"] as! String
+                    self.userRating = users["rating"] as! Int
                     self.userWon = users["won"] as! String
                     self.userDrawn = users["drawn"] as! String
                     self.userLost = users["lost"] as! String
@@ -1148,7 +1148,7 @@ class OtherUserProfilePageFromFriendRequest: UIViewController, UIScrollViewDeleg
                     self.label12.text = self.userWon
                     self.label13.text = self.userDrawn
                     self.label14.text = self.userLost
-                    self.label15.text = self.userRating
+                    self.label15.text = "\(self.userRating)"
                     self.label2.text = "\(self.userRating)"
                     
                     
@@ -2093,7 +2093,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
     var ifFriend = UIImageView()
     var label2o5 = UILabel()
     
-    var userRating = String()
+    var userRating = Int()
     var userWon = String()
     var userDrawn = String()
     var userLost = String()
@@ -2149,7 +2149,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                 
                 for users in users as! [PFObject] {
                     //remember to assign them these values in advance!!!
-                    self.userRating = users["rating"] as! String
+                    self.userRating = users["rating"] as! Int
                     self.userWon = users["won"] as! String
                     self.userDrawn = users["drawn"] as! String
                     self.userLost = users["lost"] as! String
@@ -2158,7 +2158,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                     self.label12.text = self.userWon
                     self.label13.text = self.userDrawn
                     self.label14.text = self.userLost
-                    self.label15.text = self.userRating
+                    self.label15.text = "\(self.userRating)"
                     self.label2.text = "\(self.userRating)"
                     
                     
@@ -2541,6 +2541,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         friendsButton.setTitle("Friends", forState: .Normal)
         friendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
         friendsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        friendsButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
         friendsButton.layer.borderColor = blue.CGColor
         friendsButton.frame.origin.x = 20
         friendsButton.frame.origin.y
@@ -3105,7 +3106,7 @@ class OtherUserProfilePageFromUsersFriends: UIViewController, UIScrollViewDelega
     var ifFriend = UIImageView()
     var label2o5 = UILabel()
     
-    var userRating = String()
+    var userRating = Int()
     var userWon = String()
     var userDrawn = String()
     var userLost = String()
@@ -3161,7 +3162,7 @@ class OtherUserProfilePageFromUsersFriends: UIViewController, UIScrollViewDelega
                 
                 for users in users as! [PFObject] {
                     //remember to assign them these values in advance!!!
-                    self.userRating = users["rating"] as! String
+                    self.userRating = users["rating"] as! Int
                     self.userWon = users["won"] as! String
                     self.userDrawn = users["drawn"] as! String
                     self.userLost = users["lost"] as! String
@@ -3170,7 +3171,7 @@ class OtherUserProfilePageFromUsersFriends: UIViewController, UIScrollViewDelega
                     self.label12.text = self.userWon
                     self.label13.text = self.userDrawn
                     self.label14.text = self.userLost
-                    self.label15.text = self.userRating
+                    self.label15.text = "\(self.userRating)"
                     self.label2.text = "\(self.userRating)"
                     
                     
