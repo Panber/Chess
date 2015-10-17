@@ -75,6 +75,9 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                     self.friendRequestUsers.append(username!)
                 
                 }
+                self.userArray = array
+                self.tableView.reloadData()
+
 //                var GlobalUserInitiatedQueue: dispatch_queue_t {
 //                    return dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)
 //                }
@@ -84,12 +87,10 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
 //                var GlobalMainQueue: dispatch_queue_t {
 //                    return dispatch_get_main_queue()
 //                }
-                self.userArray = array
 //
 //
 //                dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
 //                    Int64(1 * Double(NSEC_PER_SEC))), GlobalBackgroundQueue, { () -> Void in
-                        self.tableView.reloadData()
 
 //                })
                 
