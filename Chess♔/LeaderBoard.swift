@@ -11,7 +11,7 @@ import UIKit
 class LeaderBoard: UIViewController,UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    
+
     override func viewWillAppear(animated: Bool) {
        
     }
@@ -51,40 +51,11 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         let userName = NSUserDefaults.standardUserDefaults().objectForKey("userArray") as! NSMutableArray
         cell.username.text = userName[indexPath.row] as? String
 
-        //image
-            
-        let query = PFQuery(className: "_User")
+
         
-        query.orderByDescending("rating")
-        query.limit = 10
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
-            if (error == nil) {
-                
-                if let userArray = objects as? [PFUser] {
-                    for user in userArray {
-                        if let userPicture = user["profile_picture"] as? PFFile {
-                            
-                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                                if (error == nil) {
-                                    self.imageDataArray.append(imageData!)
-                                    cell.userProfileImage.image = UIImage(data: self.imageDataArray[indexPath.row])
+ //       cell.userProfileImage.image = UIImage(data: self.imageDataArray[indexPath.row])
 
-                                } else {
-                                }
-                            }
-
-                        }
-                    }
-
-                }
-            } else {
-                // Log details of the failure
-                print("query error: \(error) \(error!.userInfo)")
-            }
-
-        }
         
-            
 
         
 //        //image
@@ -115,8 +86,11 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
 //        }
         
 //        //image
-//        let p = NSUserDefaults.standardUserDefaults().objectForKey("profilePicArray") as! Array<NSData>
-//        cell.userProfileImage.image = UIImage(data: p[indexPath.row])
+        let p = NSUserDefaults.standardUserDefaults().objectForKey("profilePicArray") as! NSMutableArray
+        cell.userProfileImage.image = UIImage(data: p[indexPath.row] as! NSData)
+        self.imageDataArray.append(p[indexPath.row] as! NSData)
+
+    //    print("this is  tp10 after: \(top10WorldArrayImage[indexPath.row])")
 
         
         //rating

@@ -184,7 +184,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         let ratingQuery = PFQuery(className: "_User")
        // ratingQuery.orderByDescending("username")
         ratingQuery.orderByDescending("rating")
-        ratingQuery.limit = 10
+        ratingQuery.limit = 2
         ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
                 self.top10WorldArrayUsers = []
@@ -202,15 +202,47 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     ratingLabel.text = "\(self.top10WorldArrayRating.first!)"
                     
                   
-           
+                
                 }
+                //image
+                for var i = 0; i < 2; i++ {
+                let query = PFQuery(className: "_User")
+                
            
+                    query.whereKey("username", equalTo: self.top10WorldArrayUsers[i])
+                query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+                    if (error == nil) {
+                        
+                        if let userArray = objects as? [PFUser] {
+                            for user in userArray {
+                                if let userPicture = user["profile_picture"] as? PFFile {
+                                    
+                                    userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                        if (error == nil) {
+                                            self.top10WorldArrayImage.append(imageData!)
+                                            print("this is  tp10 before: \(self.top10WorldArrayImage)")
+                                        } else {
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            
+                        }
+                    } else {
+                        // Log details of the failure
+                        print("query error: \(error) \(error!.userInfo)")
+                    }
+                    
+                }
+                }
+                
                 dispatch_async(GlobalMainQueue) { // 1
                     var alreadyRan = false
                     
-                    let query = PFQuery(className: "_User")
-                    query.whereKey("username", equalTo: self.top10WorldArrayUsers.first!)
-                    query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+                    let query2 = PFQuery(className: "_User")
+                    query2.whereKey("username", equalTo: self.top10WorldArrayUsers.first!)
+                    query2.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
                         if (error == nil) {
                             // Fetch the images of the users
                             if let userArray = objects as? [PFUser] {
