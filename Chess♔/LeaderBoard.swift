@@ -18,7 +18,8 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     
     var profilePicArray: Array<UIImage> = []
     
-    var imageDataArray: Array<NSData> = []
+    var imageDataArray = NSMutableArray()
+    var imageDataDict = [1 : NSData(),2:NSData(),3:NSData(),4 : NSData(),5 : NSData(),6 : NSData(),7 : NSData(),8 : NSData(),9 : NSData(),10 : NSData()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,7 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:UserTableViewCell4 = self.tableView.dequeueReusableCellWithIdentifier("cell4") as! UserTableViewCell4
+        let cell:UserTableViewCell4 = self.tableView.dequeueReusableCellWithIdentifier("cell4", forIndexPath: indexPath) as! UserTableViewCell4
 
         
         //username
@@ -68,13 +69,11 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
                                     if (error == nil) {
                                         
                                     cell.userProfileImage.image = UIImage(data: imageData!)
-                                    self.imageDataArray.append(imageData!)
+                                    //self.imageDataArray.append(imageData!)
+                                        self.imageDataDict[indexPath.row] = imageData!
+                                        self.imageDataArray.addObject(imageData!)
+                                        
 
-                                        
-                                        
-                                        //     self.top10WorldArrayImage.append(imageData!)
-                                        
-                                        // print("this is  tp10 before: \(self.top10WorldArrayImage)")
                                     } else {
                                     }
                                 }
@@ -145,7 +144,7 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let cell:UserTableViewCell4 = self.tableView.dequeueReusableCellWithIdentifier("cell4", forIndexPath: indexPath) as! UserTableViewCell4
+        let cell:UserTableViewCell4 = self.tableView.dequeueReusableCellWithIdentifier("cell4") as! UserTableViewCell4
         
         //username
         var userName = NSUserDefaults.standardUserDefaults().objectForKey("userArray") as! Array<String>
@@ -154,8 +153,15 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         cell.username.text = userName[indexPath.row]
         
         //image
-        NSUserDefaults.standardUserDefaults().setObject(imageDataArray[indexPath.row], forKey: "other_userImage")
-        cell.userProfileImage.image = UIImage(data: imageDataArray[indexPath.row])
+        
+//        
+//        let image = cell.userProfileImage.image
+//        let imageData: NSData = UIImageJPEGRepresentation(image!, 1.0)!
+        let data = imageDataDict[indexPath.row]!
+        
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "other_userImage")
+        
+        //cell.userProfileImage.image = UIImage(data: imageDataArray[indexPath.row])
         
         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
         self.showViewController(vc as! UIViewController, sender: vc)
