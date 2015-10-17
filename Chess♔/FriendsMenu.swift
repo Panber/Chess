@@ -16,7 +16,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     // Array for users that are being searched for
     var users:NSMutableArray = []
-    var friends: Array<String> = []
+    var userFriends: Array<String> = []
     
     @IBOutlet weak var scrollView: UIScrollView!
 //    @IBOutlet weak var top10World: UIScrollView!
@@ -640,6 +640,41 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         }
     }
     
+    func searchFriends(searchString: String) {
+        
+        let query = PFQuery(className: "Friends")
+        if let user = PFUser.currentUser()?.username {
+            query.whereKey("username", equalTo: (user))
+            // pfQuery.orderByDescending("updatedAt")
+            query.findObjectsInBackgroundWithBlock({ (friends:[AnyObject]?, error:NSError?) -> Void in
+                for friends in friends! {
+                    self.userFriends = (friends["friends"] as? Array<String>)!
+                }
+                print(self.userFriends)
+            })
+        }
+
+       for var i = 0; i < userFriends.count; i++ {
+        if (userFriends[i].lowercaseString.rangeOfString(searchString.lowercaseString) != nil) {
+        let userQuery = PFQuery(className: "_User")
+        userQuery.whereKey("username", equalTo: userFriends[i])
+            userQuery.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
+                if error == nil {
+                    self.users.removeAllObjects()
+                    for object in objects! {
+                        self.users.addObject(object)
+                    }
+                    print(self.users.count)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.searchDisplayController?.searchResultsTableView.reloadData()
+                    }
+                }
+            }
+            }
+        }
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -666,6 +701,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             searchUsers(searchText)
         }
         if searchText.characters.count > 0 && friendsScope == true {
+            searchFriends(searchText)
         }
         tableView.hidden = false
     }
@@ -771,6 +807,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             users.removeAllObjects()
             tableView.reloadData()
             if searchBar.text?.characters.count > 0 {
+                searchFriends(searchBar.text!)
             }
             break
             
