@@ -184,7 +184,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         let ratingQuery = PFQuery(className: "_User")
        // ratingQuery.orderByDescending("username")
         ratingQuery.orderByDescending("rating")
-        ratingQuery.limit = 2
+        ratingQuery.limit = 10
         ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
                 self.top10WorldArrayUsers = []
@@ -207,7 +207,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 //image
                 var alreadyRan = false
 
-                for var i = 0; i < 2; i++ {
+                for var i = 0; i < 10; i++ {
                 let query = PFQuery(className: "_User")
                 
 
