@@ -205,13 +205,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 
                 }
                 //image
-                var alreadyRan = false
 
-                for var i = 0; i < 10; i++ {
                 let query = PFQuery(className: "_User")
                 
 
-                    query.whereKey("username", equalTo: self.top10WorldArrayUsers[i])
+                    query.whereKey("username", equalTo: self.top10WorldArrayUsers.first!)
                 query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
                     if (error == nil) {
                         
@@ -222,7 +220,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                     userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                         if (error == nil) {
                                             
-                                            if alreadyRan == false {
                                                 let image = UIImage(data: imageData!)!
                                                 profilePic.image = image
                                                 self.blurBC1.image = image
@@ -236,11 +233,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                                 self.blurBC1.alpha = 0
                                                 self.scrollView.addSubview(self.blurBC1)
                                                 self.blurBC1.alpha = 1
-                                                alreadyRan = true
-                                            }
                                             
                                             
-                                            self.top10WorldArrayImage.append(imageData!)
+                                            
+                                       //     self.top10WorldArrayImage.append(imageData!)
+                                            
                                            // print("this is  tp10 before: \(self.top10WorldArrayImage)")
                                         } else {
                                         }
@@ -256,7 +253,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     }
                     
                 }
-                }
+                
                 
   
                 
