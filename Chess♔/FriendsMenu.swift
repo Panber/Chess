@@ -182,7 +182,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         
         let ratingQuery = PFQuery(className: "_User")
-       // ratingQuery.orderByDescending("username")
         ratingQuery.orderByDescending("rating")
         ratingQuery.limit = 10
         ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
@@ -256,19 +255,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         })
         
-        
-        
-
-        
-        
-        
-        
-
-        
-
-
-        
-
     
 //        let headerImage = UIImageView(frame: CGRectMake(0, 0, blurBC.frame.size.width, blurBC.frame.size.height - 70))
 //        headerImage.image = UIImage(named: "earth53.png")
@@ -454,45 +440,49 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     ratingLabel.text = "\(self.top10FriendsArrayRating[0])"
                     
 
-                    let findUserName: PFQuery = PFQuery(className:"_User")
-                    findUserName.whereKey("username", containsString: self.top10FriendsArrayUsers[0])
+                    //image
                     
-                    findUserName.findObjectsInBackgroundWithBlock{(usersObject: [AnyObject]?, error: NSError?) -> Void in
+                    let query = PFQuery(className: "_User")
+                    
+                    
+                    query.whereKey("username", equalTo: self.top10FriendsArrayUsers.first!)
+                    query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
                         if (error == nil) {
                             
-                            for usersObject in usersObject! {
-                                if let profileImage:PFFile = usersObject["profile_picture"] as? PFFile {
-                                    profileImage.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                            if let userArray = objects as? [PFUser] {
+                                for user in userArray {
+                                    if let userPicture = user["profile_picture"] as? PFFile {
                                         
-                                        if error == nil {
-                                            let image = UIImage(data: imageData!)!
-                                            profilePic.image = image
-                                            self.blurBC2.image = image
-                                            self.top10FriendsUserImage = imageData!
-                                            visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
-                                            if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-                                            else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-                                            visualEffectView.frame = self.blurBC2.bounds
-                                            self.blurBC2.alpha = 0
-                                            self.scrollView.addSubview(self.blurBC2)
-                                            self.blurBC2.alpha = 1
-                                            
-                                            self.top10FriendsArrayImage.append(imageData!)
-
-//                                            UIView.animateWithDuration(0.5, animations: {
-//                                            })
-                                            
+                                        userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                            if (error == nil) {
+                                                
+                                                let image = UIImage(data: imageData!)!
+                                                profilePic.image = image
+                                                self.blurBC2.image = image
+                                                self.top10FriendsUserImage = imageData!
+                                                visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+                                                if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+                                                else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+                                                visualEffectView.frame = self.blurBC2.bounds
+                                                self.blurBC2.alpha = 0
+                                                self.scrollView.addSubview(self.blurBC2)
+                                                self.blurBC2.alpha = 1
+                                                
+                                                
+                                            } else {
+                                            }
                                         }
-                                        
                                         
                                     }
                                 }
                                 
                             }
+                        } else {
+                            // Log details of the failure
+                            print("query error: \(error) \(error!.userInfo)")
                         }
+                        
                     }
-                    
-                    
                     
                     
                     
