@@ -35,15 +35,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        check if user has logged in before
    //     rememrber to delete at logout
-        let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
-        
-        if userName != nil {
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let mainPage = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.window?.rootViewController = mainPage
-
-        }
+//        let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
+//        
+//        if userName != nil {
+//            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let mainPage = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
+//            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//            appDelegate.window?.rootViewController = mainPage
+//
+//        }
         
         //notifications
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)

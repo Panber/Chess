@@ -420,6 +420,9 @@ class LoginMenu: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UI
                 if success {
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
                     self.showViewController(vc as! UIViewController, sender: vc)
+                    
+                    
+                    
                 }
             }
             myAlert.addAction(okAction)

@@ -395,8 +395,38 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
     
     func friendRequestsPressed(sender: UIButton!) {
     
-        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("FriendRequests")
-        self.showViewController(vc as! UIViewController, sender: vc)
+        
+            let frequestsQuery = PFQuery(className: "FriendRequest")
+            if let user = PFUser.currentUser()?.username {
+                
+                frequestsQuery.whereKey("toUserr", equalTo: (user))
+                frequestsQuery.orderByDescending("updatedAt")
+                frequestsQuery.whereKey("status", equalTo: "pending")
+                
+                frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
+                    var users: Array<String> = []
+                    if error == nil {
+                        
+                        for frequests in frequests! {
+
+                        users.append(frequests["fromUser"] as! String)
+                            
+                        }
+                        
+                        NSUserDefaults.standardUserDefaults().setObject(users, forKey: "friend_requests_user")
+                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("FriendRequests")
+                        self.showViewController(vc as! UIViewController, sender: vc)
+                        
+                    }
+                    else {
+                        print("å")
+                        //  return
+                    }
+                    
+                })
+                
+            }
+
     }
     
     func settingsPressed(sender: UIButton!) {
