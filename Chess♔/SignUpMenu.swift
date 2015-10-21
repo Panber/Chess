@@ -9,6 +9,11 @@
 import UIKit
 import Parse
 
+let cornerRadius:CGFloat = 8
+let screenSize: CGRect = UIScreen.mainScreen().bounds
+let screenWidth = screenSize.width
+let screenHeight = screenSize.height
+
 class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!

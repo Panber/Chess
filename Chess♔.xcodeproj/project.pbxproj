@@ -30,6 +30,7 @@
 		8F1E8EC41BD78F9600C41D37 /* nasaearth.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F1E8EC31BD78F9600C41D37 /* nasaearth.jpg */; settings = {ASSET_TAGS = (); }; };
 		8F1E8ECE1BD7F66C00C41D37 /* profilePicPlaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F1E8ECD1BD7F66C00C41D37 /* profilePicPlaceholder.jpg */; settings = {ASSET_TAGS = (); }; };
 		8F1E8ED01BD7F74500C41D37 /* profilePicPlaceholderDark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F1E8ECF1BD7F74500C41D37 /* profilePicPlaceholderDark.jpg */; settings = {ASSET_TAGS = (); }; };
+		8F1E8ED21BD833F100C41D37 /* PanBerLogoDark_4000.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F1E8ED11BD833F100C41D37 /* PanBerLogoDark_4000.png */; settings = {ASSET_TAGS = (); }; };
 		8F2DD6DE1B9AFFF80059CEFA /* board black and white no border.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D21B9AFFF80059CEFA /* board black and white no border.png */; };
 		8F2DD6DF1B9AFFF80059CEFA /* ChessIconTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D31B9AFFF80059CEFA /* ChessIconTab@3x.png */; };
 		8F2DD6E01B9AFFF80059CEFA /* clack and white board with half boarder copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D41B9AFFF80059CEFA /* clack and white board with half boarder copy.png */; };
@@ -168,6 +169,7 @@
 		8F1E8EC31BD78F9600C41D37 /* nasaearth.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nasaearth.jpg; sourceTree = "<group>"; };
 		8F1E8ECD1BD7F66C00C41D37 /* profilePicPlaceholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profilePicPlaceholder.jpg; sourceTree = "<group>"; };
 		8F1E8ECF1BD7F74500C41D37 /* profilePicPlaceholderDark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profilePicPlaceholderDark.jpg; sourceTree = "<group>"; };
+		8F1E8ED11BD833F100C41D37 /* PanBerLogoDark_4000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PanBerLogoDark_4000.png; sourceTree = "<group>"; };
 		8F2DD6D21B9AFFF80059CEFA /* board black and white no border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "board black and white no border.png"; sourceTree = "<group>"; };
 		8F2DD6D31B9AFFF80059CEFA /* ChessIconTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChessIconTab@3x.png"; sourceTree = "<group>"; };
 		8F2DD6D41B9AFFF80059CEFA /* clack and white board with half boarder copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clack and white board with half boarder copy.png"; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				F1431A5F1BD298E700C5854A /* LaunchImages */,
 				8F14D18A1B9C917800A58CCF /* LoginImages */,
 				8F1E8ECD1BD7F66C00C41D37 /* profilePicPlaceholder.jpg */,
+				8F1E8ED11BD833F100C41D37 /* PanBerLogoDark_4000.png */,
 				8F1E8ECF1BD7F74500C41D37 /* profilePicPlaceholderDark.jpg */,
 				8F1E8EC11BD78EE900C41D37 /* mountain.jpg */,
 				8F1E8EC31BD78F9600C41D37 /* nasaearth.jpg */,
@@ -731,6 +734,7 @@
 				8FA5C8961B9A264F0097637E /* Main.storyboard in Resources */,
 				8F4A027A1B9A3EE80084024A /* whiteRook.png in Resources */,
 				8F8BD2B51BC6C1C500B25CFE /* checkmark12.png in Resources */,
+				8F1E8ED21BD833F100C41D37 /* PanBerLogoDark_4000.png in Resources */,
 				8F2DD6E71B9AFFF80059CEFA /* pieces vlack and white board blurred.png in Resources */,
 				8F2DD6DE1B9AFFF80059CEFA /* board black and white no border.png in Resources */,
 				8F4A02781B9A3EE80084024A /* whitePawn.png in Resources */,

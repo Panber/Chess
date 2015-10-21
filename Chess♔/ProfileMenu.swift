@@ -52,7 +52,7 @@ class ProfileMenu: UITableViewController {
             
             let mainStoryBoard:UIStoryboard = UIStoryboard(name:"Main", bundle:nil)
             
-            let signInPage:LoginMenu = mainStoryBoard.instantiateViewControllerWithIdentifier("LoginMenu") as! LoginMenu
+            let signInPage:SignUpMenu = mainStoryBoard.instantiateViewControllerWithIdentifier("LoginMenu") as! SignUpMenu
             
             let signInPageNav = UINavigationController(rootViewController: signInPage)
             
