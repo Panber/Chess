@@ -44,6 +44,8 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+        
     }
     
 
@@ -51,7 +53,8 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
 
-        
+
+
     }
     
     // MARK - Table View

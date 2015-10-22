@@ -20,34 +20,17 @@
                         <animations/>
                     </view>
                     <navigationItem key="navigationItem" title="Play" id="bfc-qg-EO6">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="dwq-aW-MXQ">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="q8f-St-ouB">
-                                <rect key="frame" x="20" y="7" width="133" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="19"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                <state key="normal" title="Edit"/>
-                            </button>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="ysv-p2-HdS">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aKg-7t-OJF">
-                                <rect key="frame" x="447" y="7" width="133" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="19"/>
-                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="New"/>
-                                <connections>
-                                    <action selector="newGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ikF-Kq-AbN"/>
-                                    <segue destination="2sG-Vo-YGM" kind="show" id="X9F-2B-LMQ"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="K2R-6d-JTA"/>
+                        <barButtonItem key="rightBarButtonItem" title="New" id="tTS-aY-AqN">
+                            <connections>
+                                <action selector="newGame:" destination="BYZ-38-t0r" id="3QB-ip-XiB"/>
+                                <segue destination="2sG-Vo-YGM" kind="show" id="lrI-Ky-yo2"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="editButtonOutlet" destination="q8f-St-ouB" id="L6B-eE-eks"/>
-                        <outlet property="newButtonOutlet" destination="aKg-7t-OJF" id="4pG-iL-Tkd"/>
+                        <outlet property="editButtonOutlet" destination="K2R-6d-JTA" id="oJS-rc-iMF"/>
+                        <outlet property="newButtonOutlet" destination="tTS-aY-AqN" id="Tg0-Nt-X0t"/>
                         <segue destination="Z2e-Fv-mEq" kind="presentation" id="aXo-hn-lFb"/>
                     </connections>
                 </viewController>
@@ -185,7 +168,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7t-ac-5Wg">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7t-ac-5Wg">
                                 <rect key="frame" x="277" y="513" width="46" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Save"/>
@@ -193,7 +176,7 @@
                                     <action selector="submitMove:" destination="2sG-Vo-YGM" eventType="touchUpInside" id="SYj-Js-m1P"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftm-aB-KqO">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftm-aB-KqO">
                                 <rect key="frame" x="277" y="72" width="46" height="30"/>
                                 <animations/>
                                 <constraints>

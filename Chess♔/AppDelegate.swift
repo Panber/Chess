@@ -15,9 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+        
+        let customFont = UIFont(name: "Didot", size: 18.0)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+        
+        let customFont2 = UIFont(name: "Didot", size: 11.0)
+        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: customFont2!], forState: UIControlState.Normal)
+        
+        return true
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
         
         // [Optional] Power your app with Local Datastore. For more info, go to
         // https://parse.com/docs/ios_guide#localdatastore/iOS
@@ -35,15 +46,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        check if user has logged in before
    //     rememrber to delete at logout
-//        let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
-//        
-//        if userName != nil {
-//            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//            let mainPage = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
-//            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//            appDelegate.window?.rootViewController = mainPage
-//
-//        }
+        let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
+        
+        if userName != nil {
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainPage = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window?.rootViewController = mainPage
+
+        }
         
         //notifications
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
@@ -79,10 +90,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+
         
         FBSDKAppEvents.activateApp()
     }

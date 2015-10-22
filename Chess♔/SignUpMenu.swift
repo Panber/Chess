@@ -747,6 +747,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
+        
 
 
     }

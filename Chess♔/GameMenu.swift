@@ -19,14 +19,26 @@ var scrollView: UIScrollView!
 var logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
 var logoView = UIImageView(image:logo)
 
-class GameMenu: UIViewController, UIScrollViewDelegate {
+class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate {
 
-    @IBOutlet weak var newButtonOutlet: UIButton!
+
     
-    @IBOutlet weak var editButtonOutlet: UIButton!
+    @IBOutlet weak var newButtonOutlet: UIBarButtonItem!
+    
+    @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
+
     
     override func viewDidLoad() {
+        
+
+        
         super.viewDidLoad()
+        
+        let customFont = UIFont(name: "Didot", size: 18.0)
+        newButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+        editButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+
+        
         
         print("the current installation is \(PFInstallation.currentInstallation())")
 
@@ -40,10 +52,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
 //        }
 //        else {
 //            print("First launch, setting NSUserDefault.")
-//            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
+          //  NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
 //            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
 //            self.showViewController(vc as! UIViewController, sender: vc)
-//            
+//
 //        let friends = PFObject(className: "Friends")
 //        friends["user"] = PFUser.currentUser()
 //        friends["username"] = PFUser.currentUser()?.username
@@ -52,6 +64,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
 
 //
 //        }
+        
         
         //setting the different variables for the current user, remember to implement this in a firstload method
             let users = PFQuery(className: "_User")
@@ -84,9 +97,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
 //                    self.showViewController(vc as! UIViewController, sender: vc)
 
         
-        //setting new-button and edit button
-        newButtonOutlet.frame.size.width = 50
-        editButtonOutlet.frame.size.width = 50
+ 
 
 //        //logo things
 //        logoView.contentMode = UIViewContentMode.ScaleAspectFit
@@ -135,7 +146,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
         
         //creating the view
       //  var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
-        var contentView: UIView = UIView(frame: CGRectMake(10, 75, screenWidth - 20 , screenHeight/7))
+        let contentView: UIView = UIView(frame: CGRectMake(10, 75, screenWidth - 20 , screenHeight/7))
         contentView.layer.cornerRadius = cornerRadius
         
         if darkMode { contentView.backgroundColor = UIColor(red: 0.12, green: 0.12 , blue: 0.12, alpha: 1) }
@@ -224,6 +235,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
+
         lightOrDarkMode()
     }
 
