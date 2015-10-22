@@ -464,8 +464,8 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             
             let userEmail = emailInput.text
             let userPassword = passwordInputSignup.text
-            let userName = usernameInputSignup.text
-            
+            var userName = usernameInputSignup.text?.lowercaseString
+        
             //checking if forms are typed in
             if (userName == "" || userPassword == "" || userEmail == "" || profilePicImageView.image == UIImage(named:"profilePicPlaceholderDark.jpg") ){
                 
