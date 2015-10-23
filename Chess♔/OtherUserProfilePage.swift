@@ -2665,6 +2665,11 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         
     }
     
+    func friendsPressed(sender: UIButton!) {
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("UsersFriends")
+        self.showViewController(vc as! UIViewController, sender: vc)
+    }
+    
     func unfriendPressed(sender: UIButton!) {
         print("pressed")
         
