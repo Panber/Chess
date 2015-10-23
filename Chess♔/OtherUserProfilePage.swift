@@ -213,12 +213,20 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
-        label2.font = UIFont(name: "Didot-Italic", size: 10)
+        label2.font = UIFont(name: "Didot-Italic", size: 15)
         if darkMode { label2.textColor = UIColor.whiteColor() }
         else { label2.textColor = UIColor.blackColor() }
         contentView.addSubview(label2)
         
-        
+        let inviteButton = UIButton(frame: CGRectMake(label.frame.origin.x, 80, 80, 20))
+        inviteButton.setTitle("Send Gameinvite", forState: .Normal)
+        inviteButton.backgroundColor = UIColor.clearColor()
+        inviteButton.tintColor = blue
+        inviteButton.layer.borderWidth = 2
+        inviteButton.layer.borderColor = blue.CGColor
+        inviteButton.layer.cornerRadius = cornerRadius
+        contentView.addSubview(inviteButton)
+
         
         //adding freinds request button
         let friends = PFQuery(className: "friends")
@@ -1023,92 +1031,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     }
     
 }
-class OtherUserProfilePageFromFriendRequest: UIViewController, UIScrollViewDelegate {
-    
-    var scrollView: UIScrollView!
-    var profilePicBlur = UIImageView()
-    
-    var popOverView = UIView()
-    var dismissButton = UIButton()
-    var unfriendButton = UIButton()
-    var bcView = UIButton()
-    
-    let friendRequestButton = UIButton()
-    var contentView = UIView()
-    var request = PFObject(className: "FriendRequest")
-    let friendsButton = UIButton()
-    var label2 = UILabel()
-    var label3 = UILabel()
-    var label4 = UILabel()
-    var label5 = UILabel()
-    
-    var label6 = UILabel()
-    var label7 = UILabel()
-    var label8 = UILabel()
-    
-    var label9 = UILabel()
-    
-    var label10 = UILabel()
-    var label11 = UILabel()
-    
-    var label12 = UILabel()
-    var label13 = UILabel()
-    var label14 = UILabel()
-    var label15 = UILabel()
-    var label16 = UILabel()
-    var label17 = UILabel()
-    var usersFrom = String()
-    
-    var label18 = UILabel()
-    
-    var label19 = UILabel()
-    var label20 = UILabel()
-    
-    var sep = UILabel()
-    
-    var profilePic = UIImageView()
-    
-    var settingsButton = UIButton()
-    
-    var friendsArrowImage = UIImageView()
-    
-    var friendStatusLabel = UILabel()
-    
-    var t:CGFloat = 0
-    var pendingOrRecievedFQ = false
-    var friendRequestbuttonAlereadyLoadedOnce = false
-    
-    var underElements:Array<UILabel> = []
-    
-    var ifFriend = UIImageView()
-    var label2o5 = UILabel()
-    
-    var userRating = Int()
-    var userWon = String()
-    var userDrawn = String()
-    var userLost = String()
-    var userJoined = NSDate()
-    
-    
-    var acceptRequest = UIButton()
-    var denyRequest = UIButton()
-    
-    override func viewWillAppear(animated: Bool) {
-        //  setUpProfile()
-        lightOrDarkMode()
 
-    }
-    override func viewDidAppear(animated: Bool) {
-        setUpProfile()
-    }
-    override func viewWillDisappear(animated: Bool) {
-        self.removeProfile()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        underElements = [label3,label4,label5,label6,label7,label8,label9,label10,label11,label12,label13,label14,label15,label16,label17]
 
         
         

@@ -142,21 +142,45 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell", forIndexPath: indexPath) as! GameMenuTableViewCell
         
         cell.username.text = "b3rge"
+        cell.rating.text = "601"
+        cell.updated.text = "Last Update:"
+        cell.timeleft.text = "Time Left:"
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      
         return 1
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+    
+    
+
+//    func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
+//        return nil
+//    }
+//
+//    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+//    {
+//        let header = view as! UITableViewHeaderFooterView
+//        header.textLabel?.font = UIFont(name: "Didot", size: 16)!
+//        header.textLabel?.textColor = UIColor.lightGrayColor()
+//        header.backgroundColor = UIColor.lightGrayColor()
+//        header.textLabel?.text? = (header.textLabel?.text?.lowercaseString)!
+//        
+//    }
+    
+
+
+    
     
 //    func newGameSetup() {
 //        
