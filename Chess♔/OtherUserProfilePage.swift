@@ -1033,8 +1033,6 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     
 }
 
-
-        
         
         self.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friendrequest") as? String
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
