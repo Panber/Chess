@@ -187,7 +187,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         profilePicBlur.addSubview(visualEffectView)
         
         //adding the profile pic
-        profilePic = UIImageView(frame: CGRectMake(20, 20, (contentView.frame.size.height) - 65, (contentView.frame.size.height) - 65))
+        profilePic = UIImageView(frame: CGRectMake(20, 20, 75 , 75))
         profilePic.layer.cornerRadius = profilePic.frame.size.height / 2
         profilePic.clipsToBounds = true
         profilePic.layer.borderColor = UIColor.whiteColor().CGColor
@@ -198,7 +198,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         //adding username to view
-        let label = UILabel(frame: CGRectMake(contentView.frame.size.height - 30 , contentView.frame.size.height/5, 250, 40))
+        let label = UILabel(frame: CGRectMake(profilePic.frame.origin.x + 95 , contentView.frame.size.height/5, 250, 40))
         label.textAlignment = NSTextAlignment.Left
         label.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username")as? String
         label.font = UIFont(name: "Didot-Bold", size: 30)
@@ -209,20 +209,21 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         //adding rating label
-        label2 = UILabel(frame: CGRectMake(contentView.frame.size.height - 30 , label.frame.origin.y + 30, 100, 40))
+        label2 = UILabel(frame: CGRectMake(label.frame.origin.x , label.frame.origin.y + 30, 100, 40))
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
         label2.font = UIFont(name: "Didot-Italic", size: 15)
         if darkMode { label2.textColor = UIColor.whiteColor() }
-        else { label2.textColor = UIColor.blackColor() }
+        else { label2.textColor = UIColor.darkGrayColor() }
         contentView.addSubview(label2)
         
-        let inviteButton = UIButton(frame: CGRectMake(label.frame.origin.x, 80, 80, 20))
-        inviteButton.setTitle("Send Gameinvite", forState: .Normal)
+        let inviteButton = UIButton(frame: CGRectMake(label.frame.origin.x, label2.frame.origin.y + 40,110, 25))
+        inviteButton.setTitleColor(blue, forState: .Normal)
+        inviteButton.titleLabel?.font = UIFont(name: "Didot", size: 13)
+        inviteButton.setTitle("Request Game", forState: .Normal)
         inviteButton.backgroundColor = UIColor.clearColor()
-        inviteButton.tintColor = blue
-        inviteButton.layer.borderWidth = 2
+        inviteButton.layer.borderWidth = 1
         inviteButton.layer.borderColor = blue.CGColor
         inviteButton.layer.cornerRadius = cornerRadius
         contentView.addSubview(inviteButton)
