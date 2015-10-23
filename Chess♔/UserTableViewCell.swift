@@ -139,9 +139,9 @@ class GameMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var userProfileImageBC: UIImageView!
     @IBOutlet weak var username: UILabel!
-//    @IBOutlet weak var rating: UILabel!
-//    @IBOutlet weak var updated: UILabel!
-//    @IBOutlet weak var timeleft: UILabel!
+    @IBOutlet weak var rating: UILabel!
+    @IBOutlet weak var updated: UILabel!
+    @IBOutlet weak var timeleft: UILabel!
     @IBOutlet weak var colorIndicator: UILabel!
     @IBOutlet weak var content: UIView!
 

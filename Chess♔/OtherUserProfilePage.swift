@@ -213,7 +213,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
-        label2.font = UIFont(name: "Didot-Italic", size: 10)
+        label2.font = UIFont(name: "Didot-Italic", size: 15)
         if darkMode { label2.textColor = UIColor.whiteColor() }
         else { label2.textColor = UIColor.blackColor() }
         contentView.addSubview(label2)
@@ -1228,7 +1228,7 @@ class OtherUserProfilePageFromFriendRequest: UIViewController, UIScrollViewDeleg
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
-        label2.font = UIFont(name: "Didot-Italic", size: 10)
+        label2.font = UIFont(name: "Didot-Italic", size: 15)
         if darkMode { label2.textColor = UIColor.whiteColor() }
         else { label2.textColor = UIColor.blackColor() }
         contentView.addSubview(label2)
@@ -2238,7 +2238,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
-        label2.font = UIFont(name: "Didot-Italic", size: 10)
+        label2.font = UIFont(name: "Didot-Italic", size: 15)
         if darkMode { label2.textColor = UIColor.whiteColor() }
         else { label2.textColor = UIColor.blackColor() }
         contentView.addSubview(label2)
@@ -3251,7 +3251,7 @@ class OtherUserProfilePageFromUsersFriends: UIViewController, UIScrollViewDelega
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
-        label2.font = UIFont(name: "Didot-Italic", size: 10)
+        label2.font = UIFont(name: "Didot-Italic", size: 15)
         if darkMode { label2.textColor = UIColor.whiteColor() }
         else { label2.textColor = UIColor.blackColor() }
         contentView.addSubview(label2)
