@@ -2423,11 +2423,6 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
     func elementSetup() {
         
         
-        
-        
-        
-        
-        
         //adding stats label
         label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + contentView.frame.origin.y + 65 + (45*t), 150, 25))
         label3.textAlignment = NSTextAlignment.Left
