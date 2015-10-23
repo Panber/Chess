@@ -150,7 +150,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

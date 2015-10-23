@@ -1,17 +1,15 @@
 //
-//  OtherUserProfilePage.swift
+//  OtherUserProfilePageFromFriends.swift
 //  Chess♔
 //
-//  Created by Johannes Berge on 05/10/15.
+//  Created by Johannes Berge on 23/10/15.
 //  Copyright © 2015 Panber. All rights reserved.
 //
 
 import UIKit
-import Parse
 
-let users = PFObject(className: "_User")
-
-class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
+class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
+    
     var scrollView: UIScrollView!
     var profilePicBlur = UIImageView()
     
@@ -83,6 +81,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(animated: Bool) {
         //  setUpProfile()
         lightOrDarkMode()
+        
     }
     override func viewDidAppear(animated: Bool) {
         setUpProfile()
@@ -96,8 +95,9 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         underElements = [label3,label4,label5,label6,label7,label8,label9,label10,label11,label12,label13,label14,label15,label16,label17]
         
-   
-        self.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String
+        
+        
+        self.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as? String
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         // Do any additional setup after loading the view.
         //setting scrollview
@@ -118,7 +118,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     func loadUserInfoFromCloud () {
         
         let usersQuery = PFQuery(className: "_User")
-        usersQuery.whereKey("username", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username") as! String)
+        usersQuery.whereKey("username", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as! String)
         usersQuery.findObjectsInBackgroundWithBlock { (users:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
                 
@@ -154,7 +154,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         bcView = UIButton(frame: CGRectMake(0, 0, screenWidth, view.frame.size.height))
         
         
-        navigationController?.navigationBar.topItem?.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String
+        navigationController?.navigationBar.topItem?.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as? String
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         //creating the view
         //  var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
@@ -168,10 +168,10 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         //setting up bc image of profile pic
-        if NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") == nil {
+        if NSUserDefaults.standardUserDefaults().objectForKey("other_userImage_from_friends") == nil {
             sleep(5)
         }
-        let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") as! NSData
+        let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage_from_friends") as! NSData
         
         profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height+1))
         profilePicBlur.contentMode = .ScaleAspectFill
@@ -200,7 +200,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         //adding username to view
         let label = UILabel(frame: CGRectMake(contentView.frame.size.height - 30 , contentView.frame.size.height/5, 250, 40))
         label.textAlignment = NSTextAlignment.Left
-        label.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username")as? String
+        label.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")as? String
         label.font = UIFont(name: "Didot-Bold", size: 30)
         label.sizeToFit()
         if darkMode { label.textColor = UIColor.whiteColor() }
@@ -218,21 +218,13 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         else { label2.textColor = UIColor.blackColor() }
         contentView.addSubview(label2)
         
-        let inviteButton = UIButton(frame: CGRectMake(label.frame.origin.x, 80, 80, 20))
-        inviteButton.setTitle("Send Gameinvite", forState: .Normal)
-        inviteButton.backgroundColor = UIColor.clearColor()
-        inviteButton.tintColor = blue
-        inviteButton.layer.borderWidth = 2
-        inviteButton.layer.borderColor = blue.CGColor
-        inviteButton.layer.cornerRadius = cornerRadius
-        contentView.addSubview(inviteButton)
-
+        
         
         //adding freinds request button
         let friends = PFQuery(className: "friends")
         if let user = PFUser.currentUser() {
             friends.whereKey("user", equalTo: user)
-            friends.whereKey("friends", containsString: NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String)
+            friends.whereKey("friends", containsString: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as? String)
         }
         
         //adding white bc to fridnrequest
@@ -316,7 +308,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                     let friendRequestQuery = PFQuery(className: "FriendRequest")
                     if let username = PFUser.currentUser()?.username {
                         friendRequestQuery.whereKey("toUserr", equalTo: username)
-                        friendRequestQuery.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username")!)
+                        friendRequestQuery.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")!)
                         friendRequestQuery.whereKey("status", equalTo: "pending")
                         
                         friendRequestQuery.findObjectsInBackgroundWithBlock({ (requests:[AnyObject]?, error:NSError?) -> Void in
@@ -347,7 +339,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                                 let friendRequestQuery2 = PFQuery(className: "FriendRequest")
                                 if let username = PFUser.currentUser()?.username {
                                     friendRequestQuery2.whereKey("fromUser", equalTo: username)
-                                    friendRequestQuery2.whereKey("toUserr", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username")!)
+                                    friendRequestQuery2.whereKey("toUserr", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")!)
                                     friendRequestQuery2.whereKey("status", equalTo: "pending")
                                     
                                     friendRequestQuery2.findObjectsInBackgroundWithBlock({ (requests:[AnyObject]?, error:NSError?) -> Void in
@@ -514,6 +506,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label15)
         
         
+        
         //adding white bc to friends button
         label16 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + (45*t), screenWidth, 45))
         label16.text = ""
@@ -523,6 +516,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         friendsButton.setTitle("Friends", forState: .Normal)
         friendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
         friendsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        friendsButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
         friendsButton.layer.borderColor = blue.CGColor
         friendsButton.frame.origin.x = 20
         friendsButton.frame.origin.y
@@ -532,6 +526,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         friendsButton.userInteractionEnabled = true
         friendsButton.addTarget(self, action: "friendsPressed:", forControlEvents: .TouchUpInside)
         friendsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+        friendsButton.showsTouchWhenHighlighted = true
         scrollView.addSubview(friendsButton)
         
         friendsArrowImage = UIImageView(frame: CGRectMake(screenWidth - 30, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + (45*t), 15, 45))
@@ -551,12 +546,6 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
     }
     
-    func friendsPressed(sender: UIButton!) {
-        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("UsersFriends")
-        self.showViewController(vc as! UIViewController, sender: vc)
-        print(NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String)
-    }
-    
     func friendRequestPressed(sender: UIButton!) {
         
         for var i = 0; i < self.underElements.count; i++ {
@@ -566,7 +555,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
             
         }
         request["fromUser"] = PFUser.currentUser()?.username
-        request["toUserr"] = NSUserDefaults.standardUserDefaults().objectForKey("other_username")
+        request["toUserr"] = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")
         request["status"] = "pending"
         
         let toUserQuery = PFQuery(className: "FriendRequest")
@@ -660,7 +649,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         let friendsQuery2 = PFQuery(className: "Friends")
         if let user = PFUser.currentUser() {
             friendsQuery2.whereKey("username", equalTo: user.username!)
-            friendsQuery2.whereKey("friends", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username")!)
+            friendsQuery2.whereKey("friends", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")!)
             
             friendsQuery2.findObjectsInBackgroundWithBlock({ (friends:[AnyObject]?, error:NSError?) -> Void in
                 
@@ -675,7 +664,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                     }
                     for var i = 0; i < ff.count; i++ {
                         
-                        if ff[i] as! String == NSUserDefaults.standardUserDefaults().objectForKey("other_username") as! String {
+                        if ff[i] as! String == NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as! String {
                             ff.removeObjectAtIndex(i)
                             print(ff)
                             
@@ -695,7 +684,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         var off = NSMutableArray()
         
         let userFriendsQuery = PFQuery(className: "Friends")
-        userFriendsQuery.whereKey("username", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username") as! String)
+        userFriendsQuery.whereKey("username", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as! String)
         userFriendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
             
             if error == nil {
@@ -740,7 +729,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                         self.denyRequest.userInteractionEnabled = true
                         self.friendRequestButton.userInteractionEnabled = true
                         self.settingsButton.hidden = true
-
+                        
                         
                 })
                 
@@ -754,7 +743,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         //edn of adding friends
         
         
-
+        
         
         
     }
@@ -819,7 +808,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         let requestQuery2 = PFQuery(className: "FriendRequest")
         if let user = PFUser.currentUser() {
             requestQuery2.whereKey("toUserr", equalTo: user.username!)
-            requestQuery2.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username")!)
+            requestQuery2.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")!)
             
             requestQuery2.findObjectsInBackgroundWithBlock({ (request:[AnyObject]?, error:NSError?) -> Void in
                 
@@ -865,7 +854,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                 if error == nil {
                     if let friends = friends as? [PFObject]{
                         for friends in friends {
-                            friends["friends"]?.addObject(NSUserDefaults.standardUserDefaults().objectForKey("other_username")!)
+                            friends["friends"]?.addObject(NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")!)
                             friends.saveInBackground()
                         }
                     }
@@ -902,7 +891,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         let requestQuery2 = PFQuery(className: "FriendRequest")
         if let user = PFUser.currentUser() {
             requestQuery2.whereKey("toUserr", equalTo: user.username!)
-            requestQuery2.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username")!)
+            requestQuery2.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")!)
             requestQuery2.findObjectsInBackgroundWithBlock({ (request:[AnyObject]?, error:NSError?) -> Void in
                 
                 if error == nil {
@@ -992,7 +981,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
             self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
             self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-
+            
             //
             //            //setting top logo
             //            logo = UIImage(named: "ChessIconSmallTextAndLogoDarkMode.png")
@@ -1013,7 +1002,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
-          
+            
             
             //            //setting top logo
             //            logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
@@ -1021,7 +1010,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
             //            logoView.contentMode = UIViewContentMode.ScaleAspectFit
             //            logoView.frame.size.height = 50
             //            self.navigationItem.titleView = logoView
-            //            
+            //
             
             
             
@@ -1031,7 +1020,3 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     }
     
 }
-
-
-
-
