@@ -198,7 +198,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         //adding username to view
-        let label = UILabel(frame: CGRectMake(profilePic.frame.origin.x + 95 , contentView.frame.size.height/5, 250, 40))
+        let label = UILabel(frame: CGRectMake(profilePic.frame.origin.x + 95 , contentView.frame.size.height/8, 250, 40))
         label.textAlignment = NSTextAlignment.Left
         label.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username")as? String
         label.font = UIFont(name: "Didot-Bold", size: 30)
