@@ -74,7 +74,7 @@ class UsersFriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDeleg
         
         let cell:UserTableViewCell5 = self.tableView.dequeueReusableCellWithIdentifier("cell5", forIndexPath: indexPath) as! UserTableViewCell5
         
-        cell.username.text = friendsArray[indexPath.row] as! String
+        cell.username.text = friendsArray[indexPath.row] 
         
         let userQuery = PFQuery(className: "_User")
         userQuery.whereKey("username", equalTo: friendsArray[indexPath.row])
@@ -104,9 +104,9 @@ class UsersFriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDeleg
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell:UserTableViewCell5 = self.tableView.dequeueReusableCellWithIdentifier("cell5", forIndexPath: indexPath) as! UserTableViewCell5
         NSUserDefaults.standardUserDefaults().setObject(friendsArray[indexPath.row], forKey: "other_username_from_usersfriends")
-        cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_usersfriends") as! String
+        cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_usersfriends") as? String
         
-        var p = imageDataArray[indexPath.row]
+        let p = imageDataArray[indexPath.row]
         NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_usersfriends")
         cell.userProfileImage.image = UIImage(data: p)
     }

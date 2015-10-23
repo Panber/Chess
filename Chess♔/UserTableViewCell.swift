@@ -134,4 +134,49 @@ class UserTableViewCell5: UITableViewCell {
     
 }
 
+class GameMenuTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet weak var userProfileImageBC: UIImageView!
+    @IBOutlet weak var username: UILabel!
+//    @IBOutlet weak var rating: UILabel!
+//    @IBOutlet weak var updated: UILabel!
+//    @IBOutlet weak var timeleft: UILabel!
+    @IBOutlet weak var colorIndicator: UILabel!
+    @IBOutlet weak var content: UIView!
+
+
+
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        self.content.layer.cornerRadius = cornerRadius
+        self.content.clipsToBounds = true
+        
+        //changing profileImage
+        self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
+        self.userProfileImage.clipsToBounds = true
+        self.userProfileImage.layer.borderColor = UIColor.whiteColor().CGColor
+        self.userProfileImage.layer.borderWidth = 3
+        
+        self.userProfileImageBC.clipsToBounds = true
+        
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight)) as UIVisualEffectView
+        if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+        else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+        visualEffectView.frame = self.userProfileImageBC.bounds
+        visualEffectView.frame.size.height += 1
+        self.userProfileImageBC.addSubview(visualEffectView)
+        
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state /
+    }
+    
+}
+
 ///////Fornøyd???

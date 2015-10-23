@@ -19,6 +19,8 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     @IBOutlet weak var tableView: UITableView!
     
     var userArray: Array<String> = []
+    var userCount: Array<String> = []
+
     var profilePicArray: Array<UIImage> = []
     var i = 0
 
@@ -35,10 +37,14 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
 
     var friendRequestUsers: Array<String> = []
     
+    var imageDataDict = [1 : NSData(),2:NSData(),3:NSData(),4 : NSData(),5 : NSData(),6 : NSData(),7 : NSData(),8 : NSData(),9 : NSData(),10 : NSData()]
+    
+    var img : Array<UIImage> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getUsers()
+        
+
         
     }
     
@@ -47,7 +53,8 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
 
-        
+
+
     }
     
     // MARK - Table View
@@ -56,67 +63,17 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         return 1
     }
     
-    func getUsers() {
-        var array:Array<String> = []
-
-        let frequestsQuery = PFQuery(className: "FriendRequest")
-        if let user = PFUser.currentUser()?.username {
-            frequestsQuery.whereKey("toUserr", equalTo: (user))
-            frequestsQuery.orderByDescending("updatedAt")
-            frequestsQuery.whereKey("status", equalTo: "pending")
-            frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
-
-
-                for frequests in frequests! {
-                    
-                    let username:String? = frequests["fromUser"] as? String
-                    array.append(username!)
-//                    print(username)
-                    self.friendRequestUsers.append(username!)
-                
-                }
-                self.userArray = array
-                self.tableView.reloadData()
-
-//                var GlobalUserInitiatedQueue: dispatch_queue_t {
-//                    return dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)
-//                }
-//                var GlobalBackgroundQueue: dispatch_queue_t {
-//                    return dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
-//                }
-//                var GlobalMainQueue: dispatch_queue_t {
-//                    return dispatch_get_main_queue()
-//                }
-//
-//
-//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-//                    Int64(1 * Double(NSEC_PER_SEC))), GlobalBackgroundQueue, { () -> Void in
-
-//                })
-                
-//                dispatch_async(GlobalBackgroundQueue) { // 1
-//
-//
-//
-//                    dispatch_async(dispatch_get_main_queue()) { // 2
-//
-//
-//                    }
-//                }
-
-
-            })
-
-            //self.tableView.reloadData()
-        }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        let hey = NSUserDefaults.standardUserDefaults().objectForKey("friend_requests_user") as! Array<String>
+        let count: Int = hey.count
+        return count
         
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:UserTableViewCell2 = self.tableView.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath) as! UserTableViewCell2
+        let cell:UserTableViewCell2 = self.tableView.dequeueReusableCellWithIdentifier("cell2") as! UserTableViewCell2
 
         
         cell.checkmarkButton.tag = indexPath.row + 1
@@ -125,49 +82,108 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         cell.crossButton.tag = indexPath.row + 100_000
         cell.crossButton.addTarget(self, action: "crossButtonPressed:", forControlEvents: .TouchUpInside)
 
-        cell.username.text = userArray[indexPath.row]
-        cell.username.sizeToFit()
         
+        var array:Array<String> = []
         
-        let userQuery = PFQuery(className: "_User")
-        userQuery.whereKey("username", equalTo: userArray[indexPath.row])
-        let  _user = userQuery.getFirstObject() as! PFUser
-        
-        let profilePictureObject = _user["profile_picture"] as? PFFile
-        
-        if(profilePictureObject != nil)
-        {
-            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                
-                if(imageData != nil)
-                {
-                    self.profilePicArray.append(UIImage(data: imageData!)!)
-                    cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
-                    cell.userProfileImage.image = self.profilePicArray[indexPath.row]
-                    self.imageDataArray.append(imageData!)
-                }
-                
-            }
+        var GlobalBackgroundQueue: dispatch_queue_t {
+            return dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
         }
         
+        let frequestsQuery = PFQuery(className: "FriendRequest")
+        if let user = PFUser.currentUser()?.username {
+            frequestsQuery.whereKey("toUserr", equalTo: (user))
+            frequestsQuery.orderByDescending("updatedAt")
+            frequestsQuery.whereKey("status", equalTo: "pending")
+            frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
+                
+                
+                for frequests in frequests! {
+                    
+                    let username:String? = frequests["fromUser"] as? String
+                    self.userArray.append(username!)
+                    cell.username.text = self.userArray[indexPath.row]
+                    cell.username.sizeToFit()
+
+
+                    //                    print(username)
+                    self.friendRequestUsers.append(username!)
+                    
+                    ///////
+                    
+                    let query = PFQuery(className: "_User")
+                    let usernamee = self.userArray
+                    
+                    query.whereKey("username", equalTo: usernamee[indexPath.row])
+                    query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+                        if (error == nil) {
+                            
+                            
+                            if let userArray = objects as? [PFUser] {
+                                for user in userArray {
+                                    if let userPicture = user["profile_picture"] as? PFFile {
+                                        
+                                        userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                            if (error == nil) {
+                                                cell.userProfileImage.contentMode = .ScaleAspectFill
+                                                cell.userProfileImage.image = UIImage(data: imageData!)
+
+                                                self.imageDataArray.append(imageData!)
+                                              //  tableView.reloadData()
+                                                
+                                            } else {
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                                
+                            }
+                        } else {
+                            // Log details of the failure
+                            print("query error: \(error) \(error!.userInfo)")
+                        }
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+                
+
+                
+                
+            })
+            
+           // self.tableView.reloadData()
+        }
+        
+        
+
 
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return userArray.count
-        
-    }
+
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         print("row selected")
         
+        
+        let indexPath = tableView.indexPathForSelectedRow!
+        
+      //  let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
+     //   println(currentCell.textLabel!.text)
+        
         let cell:UserTableViewCell2 = self.tableView.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath) as! UserTableViewCell2
+        
         NSUserDefaults.standardUserDefaults().setObject(userArray[indexPath.row], forKey: "other_username_from_friendrequest")
         cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friendrequest") as! String
+        
+        
         
         var p = imageDataArray[indexPath.row]
         NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friendrequest")
