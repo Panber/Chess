@@ -552,10 +552,11 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
     }
     
+  // MARK: Friends list: Future Imporvements
     func friendsPressed(sender: UIButton!) {
-        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("UsersFriends")
-        self.showViewController(vc as! UIViewController, sender: vc)
-        print(NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String)
+///        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("UsersFriends")
+///        self.showViewController(vc as! UIViewController, sender: vc)
+///        print(NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String)
     }
     
     func friendRequestPressed(sender: UIButton!) {
