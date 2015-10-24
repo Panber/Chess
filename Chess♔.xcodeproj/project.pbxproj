@@ -84,8 +84,6 @@
 		8F4A02A51B9A42D40084024A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A41B9A42D40084024A /* Accounts.framework */; };
 		8F4A02A71B9A42DC0084024A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A61B9A42DC0084024A /* Social.framework */; };
 		8F4CF77D1BDBABB10037865C /* NewGamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF77C1BDBABB10037865C /* NewGamePage.swift */; settings = {ASSET_TAGS = (); }; };
-		8F4CF77F1BDBAF1E0037865C /* NewGameFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF77E1BDBAF1E0037865C /* NewGameFriends.swift */; settings = {ASSET_TAGS = (); }; };
-		8F4CF7811BDBB6AD0037865C /* NewGameSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage.swift */; settings = {ASSET_TAGS = (); }; };
 		8F5250C01BD01A67005D4682 /* LeaderBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5250BF1BD01A66005D4682 /* LeaderBoard.swift */; settings = {ASSET_TAGS = (); }; };
 		8F768D9B1BD6AC4F007A7BFC /* SignUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */; settings = {ASSET_TAGS = (); }; };
 		8F840BCC1BBDAE6600511F44 /* FriendRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F840BCB1BBDAE6600511F44 /* FriendRequests.swift */; settings = {ASSET_TAGS = (); }; };
@@ -452,8 +450,8 @@
 				8F4CF77C1BDBABB10037865C /* NewGamePage.swift */,
 				8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */,
 				8FBD3A361BB498A200212314 /* GameInterFace2.swift */,
-				F1BFB27A1BDBD79100660020 /* Board.swift */,
 				F1BFB27B1BDBD79100660020 /* Pieces.swift */,
+				F1BFB27A1BDBD79100660020 /* Board.swift */,
 				F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */,
 				8F8BD2A41BC28E1100B25CFE /* OtherUserProfilePage.swift */,
 				8F9A9A2A1BDAE08600EA5953 /* OtherUserProfilePageFromFriendRequest.swift */,
