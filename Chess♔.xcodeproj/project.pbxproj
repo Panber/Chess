@@ -130,6 +130,7 @@
 		F1648B511BDBF49700AE1BC3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1648B4E1BDBF49700AE1BC3 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
 		F1648B521BDBF49700AE1BC3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1648B4F1BDBF49700AE1BC3 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
 		F1648B531BDBF49700AE1BC3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1648B501BDBF49700AE1BC3 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
+		F1648B611BDC19CA00AE1BC3 /* GameInterFace3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1648B601BDC19CA00AE1BC3 /* GameInterFace3.swift */; settings = {ASSET_TAGS = (); }; };
 		F1B414601BC72E5D00FEE6A4 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B4145F1BC72E5D00FEE6A4 /* SettingsPage.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -284,6 +285,7 @@
 		F1648B4E1BDBF49700AE1BC3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		F1648B4F1BDBF49700AE1BC3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		F1648B501BDBF49700AE1BC3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		F1648B601BDC19CA00AE1BC3 /* GameInterFace3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInterFace3.swift; sourceTree = "<group>"; };
 		F1B4145F1BC72E5D00FEE6A4 /* SettingsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -446,6 +448,7 @@
 				8F4CF77C1BDBABB10037865C /* NewGamePage.swift */,
 				8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */,
 				8FBD3A361BB498A200212314 /* GameInterFace2.swift */,
+				F1648B601BDC19CA00AE1BC3 /* GameInterFace3.swift */,
 				F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */,
 				8F8BD2A41BC28E1100B25CFE /* OtherUserProfilePage.swift */,
 				8F9A9A2A1BDAE08600EA5953 /* OtherUserProfilePageFromFriendRequest.swift */,
@@ -787,6 +790,7 @@
 				8F5250C01BD01A67005D4682 /* LeaderBoard.swift in Sources */,
 				8F4A028A1B9A40FF0084024A /* GameInterface.swift in Sources */,
 				8F768D9B1BD6AC4F007A7BFC /* SignUpMenu.swift in Sources */,
+				F1648B611BDC19CA00AE1BC3 /* GameInterFace3.swift in Sources */,
 				8F9A9A2B1BDAE08600EA5953 /* OtherUserProfilePageFromFriendRequest.swift in Sources */,
 				8F9A9A2D1BDAE0EE00EA5953 /* OtherUserProfilePageFromFriends.swift in Sources */,
 				8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */,

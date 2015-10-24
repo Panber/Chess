@@ -168,7 +168,7 @@
                         <barButtonItem key="rightBarButtonItem" title="New" id="tTS-aY-AqN">
                             <connections>
                                 <action selector="newGame:" destination="BYZ-38-t0r" id="3QB-ip-XiB"/>
-                                <segue destination="m3T-nO-hHo" kind="show" id="Owl-7j-6EY"/>
+                                <segue destination="fQ8-pX-Vlb" kind="push" id="y5Q-1N-fvC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -181,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1910" y="314"/>
+            <point key="canvasLocation" x="1825" y="314"/>
         </scene>
         <!--New Game Page-->
         <scene sceneID="WEk-WN-sjn">
@@ -195,7 +195,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJL-EZ-9qO">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJL-EZ-9qO">
                                 <rect key="frame" x="20" y="72" width="124" height="73"/>
                                 <animations/>
                                 <constraints>
@@ -238,7 +238,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="newGameFriendsCell" rowHeight="70" id="qog-Rb-mCo" customClass="NewGameFriendsTableViewCell" customModule="Chess_" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="70"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qog-Rb-mCo" id="KVc-6s-0iP">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="69"/>
@@ -642,15 +642,11 @@
                         <viewControllerLayoutGuide type="bottom" id="iyC-cT-A3R"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LlF-cf-qyW">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clack and white board with half boarder copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="9fb-On-dtq">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <animations/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7t-ac-5Wg">
-                                <rect key="frame" x="277" y="513" width="46" height="30"/>
+                                <rect key="frame" x="184" y="649" width="46" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Save"/>
                                 <connections>
@@ -658,7 +654,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftm-aB-KqO">
-                                <rect key="frame" x="277" y="72" width="46" height="30"/>
+                                <rect key="frame" x="184" y="72" width="46" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="rmt-Bu-LTc"/>
@@ -668,6 +664,10 @@
                                     <action selector="loadBoard:" destination="2sG-Vo-YGM" eventType="touchUpInside" id="cfZ-T9-lry"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clack and white board with half boarder copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="9fb-On-dtq">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <animations/>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -687,11 +687,46 @@
                             <outletCollection property="gestureRecognizers" destination="bfG-SZ-G87" appends="YES" id="We8-wf-ka8"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" id="iII-6E-aR2"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6O-UH-Vj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="bfG-SZ-G87"/>
             </objects>
-            <point key="canvasLocation" x="3219" y="314"/>
+            <point key="canvasLocation" x="3788" y="428"/>
+        </scene>
+        <!--Game Inter Face3-->
+        <scene sceneID="o3Z-PJ-QUL">
+            <objects>
+                <viewController id="fQ8-pX-Vlb" customClass="GameInterFace3" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gDL-lJ-l4c"/>
+                        <viewControllerLayoutGuide type="bottom" id="z5L-Fj-p9P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7RF-8p-e4K">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clack and white board with half boarder copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="lJ5-we-mZL">
+                                <rect key="frame" x="0.0" y="150" width="414" height="435"/>
+                                <animations/>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lJ5-we-mZL" firstAttribute="leading" secondItem="7RF-8p-e4K" secondAttribute="leading" id="G9e-5l-0Mj"/>
+                            <constraint firstItem="lJ5-we-mZL" firstAttribute="top" secondItem="gDL-lJ-l4c" secondAttribute="bottom" constant="86" id="YJp-sa-dyB"/>
+                            <constraint firstAttribute="trailing" secondItem="lJ5-we-mZL" secondAttribute="trailing" id="lyk-zr-nay"/>
+                            <constraint firstItem="lJ5-we-mZL" firstAttribute="centerY" secondItem="7RF-8p-e4K" secondAttribute="centerY" id="pcf-6y-saw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="MJf-zF-viF"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GlK-wH-heK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3172" y="428"/>
         </scene>
         <!--Play-->
         <scene sceneID="ICd-Pm-2GB">
@@ -1572,7 +1607,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wH9-7B-skl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3845" y="-361"/>
+            <point key="canvasLocation" x="3903" y="-361"/>
         </scene>
     </scenes>
     <resources>
