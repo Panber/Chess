@@ -582,6 +582,11 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         
     }
     
+   // MARK: Friends list: Future Imporvements
+    func friendsPressed(sender: UIButton!) {
+   ///
+    }
+    
     func settingsPressed(sender: UIButton!) {
         
         
