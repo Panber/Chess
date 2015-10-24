@@ -225,7 +225,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         inviteButton.backgroundColor = UIColor.clearColor()
         inviteButton.layer.borderWidth = 1
         inviteButton.layer.borderColor = blue.CGColor
-        inviteButton.layer.cornerRadius = cornerRadius
+        inviteButton.layer.cornerRadius = cornerRadius - 2
         contentView.addSubview(inviteButton)
         
         
