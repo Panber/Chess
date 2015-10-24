@@ -19,8 +19,11 @@ class NewGameSettingsPage: UIViewController {
     
     @IBOutlet weak var gameSpeedSegemnt: UISegmentedControl!
     
-    @IBOutlet weak var ratedSegment: NSLayoutConstraint!
+    @IBOutlet weak var modeSegment: UISegmentedControl!
     
+    var color = "White"
+    var speed = "Normal"
+    var mode = "Rated"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +48,57 @@ class NewGameSettingsPage: UIViewController {
 
     }
 
+    
+    @IBAction func blackOrWhiteChanged(sender: UISegmentedControl) {
+        
+        switch whiteOrBlack.selectedSegmentIndex
+        {
+        case 0:
+            color = "White"
+        case 1:
+            color = "Black"
+        default:
+            break; 
+        }
+        
+    }
+
+    
+    @IBAction func speedChanged(sender: UISegmentedControl) {
+        switch gameSpeedSegemnt.selectedSegmentIndex {
+        case 0:
+            speed = "Fast"
+        case 1:
+            speed = "Normal"
+        case 2:
+            speed = "Slow"
+        default:
+            break;
+        }
+    }
+    
+    @IBAction func modeChanged(sender: UISegmentedControl) {
+        
+        switch whiteOrBlack.selectedSegmentIndex
+        {
+        case 0:
+            color = "Rated"
+        case 1:
+            color = "Unrated"
+        default:
+            break;
+        }
+        
+    }
+    
+    @IBAction func sendButton(sender: AnyObject) {
+        
+
+        
+        
+    }
+    
+    
     //func to check if dark or light mode should be enabled, keep this at the bottom
     func lightOrDarkMode() {
         if darkMode == true {

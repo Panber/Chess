@@ -21,7 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
         
         let customFont2 = UIFont(name: "Didot", size: 11.0)
+        
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: customFont2!], forState: UIControlState.Normal)
+        
+        let attr = NSDictionary(object: UIFont(name: "Didot", size: 10.0)!, forKey: NSFontAttributeName)
+       // UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject], forState: .Normal)
         
         return true
     }

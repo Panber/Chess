@@ -129,7 +129,9 @@ class NewGameFriends: UIViewController, UITableViewDelegate, UIScrollViewDelegat
     }
     
     
-    
+    override func viewWillAppear(animated: Bool) {
+        self.title = "Friends"
+    }
     
     
     

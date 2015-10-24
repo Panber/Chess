@@ -22,7 +22,6 @@ class UsersFriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDeleg
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
         getFriends()
     }
     
@@ -109,6 +108,11 @@ class UsersFriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDeleg
         let p = imageDataArray[indexPath.row]
         NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_usersfriends")
         cell.userProfileImage.image = UIImage(data: p)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.title = "Friends"
+
     }
 
 }
