@@ -10,19 +10,39 @@ import UIKit
 
 class NewGameSettingsPage: UIViewController {
 
+    
+    @IBOutlet weak var userProfilePic: UIImageView!
+    @IBOutlet weak var userRating: UILabel!
+    @IBOutlet weak var useruserName: UILabel!
+    
+    @IBOutlet weak var whiteOrBlack: UISegmentedControl!
+    
+    @IBOutlet weak var gameSpeedSegemnt: UISegmentedControl!
+    
+    @IBOutlet weak var ratedSegment: NSLayoutConstraint!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.title = "Invite"
+        
+        userProfilePic.layer.cornerRadius = userProfilePic.frame.size.width/2
+        let p = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage_from_friends_gamemenu") as! NSData
+        userProfilePic.image = UIImage(data: p)
+        
+        useruserName.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends_gamemenu") as? String
+        
+        userRating.text = String(NSUserDefaults.standardUserDefaults().objectForKey("other_userrating_from_friends_gamemenu")!)
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
+        
+
     }
 
     //func to check if dark or light mode should be enabled, keep this at the bottom

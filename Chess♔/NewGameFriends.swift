@@ -14,6 +14,7 @@ class NewGameFriends: UIViewController, UITableViewDelegate, UIScrollViewDelegat
     @IBOutlet weak var tableView: UITableView!
     
     var friendsArray: Array<String> = []
+    var ratingArray: Array<Int> = []
     
     var profilePicArray: Array<UIImage> = []
     
@@ -81,10 +82,15 @@ class NewGameFriends: UIViewController, UITableViewDelegate, UIScrollViewDelegat
         
         let userQuery = PFQuery(className: "_User")
         userQuery.whereKey("username", equalTo: friendsArray[indexPath.row])
+        
         let _user = userQuery.getFirstObject() as! PFUser
+        
+        cell.rating.text = String(_user["rating"] as! Int)
+        ratingArray.append(_user["rating"] as! Int)
         
         let profilePictureObject = _user["profile_picture"] as? PFFile
         
+    
         if(profilePictureObject != nil)
         {
             profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
@@ -100,19 +106,26 @@ class NewGameFriends: UIViewController, UITableViewDelegate, UIScrollViewDelegat
             }
         }
         
-        cell.rating.text = "3"
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell:NewGameFriendsTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("newGameFriendsCell", forIndexPath: indexPath) as! NewGameFriendsTableViewCell
-        NSUserDefaults.standardUserDefaults().setObject(friendsArray[indexPath.row], forKey: "other_username_from_friends")
-        cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as! String
         
-        var p = imageDataArray[indexPath.row]
-        NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friends")
+        NSUserDefaults.standardUserDefaults().setObject(friendsArray[indexPath.row], forKey: "other_username_from_friends_gamemenu")
+        cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends_gamemenu") as? String
+        
+        let p = imageDataArray[indexPath.row]
+        NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friends_gamemenu")
         cell.userProfileImage.image = UIImage(data: p)
+        cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
+
+        
+        NSUserDefaults.standardUserDefaults().setObject(ratingArray[indexPath.row], forKey: "other_userrating_from_friends_gamemenu")
+        cell.rating.text = String(NSUserDefaults.standardUserDefaults().objectForKey("other_userrating_from_friends_gamemenu") as! Int)
+        
+        
     }
     
     
