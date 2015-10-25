@@ -35,6 +35,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         super.viewDidLoad()
         
+        let installation = PFInstallation.currentInstallation()
+        installation["username"] = PFUser.currentUser()!.username
+        installation.saveInBackground()
+
+        
         let customFont = UIFont(name: "Didot", size: 18.0)
         newButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
         editButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
