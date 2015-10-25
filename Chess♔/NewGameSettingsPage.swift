@@ -82,9 +82,9 @@ class NewGameSettingsPage: UIViewController {
         switch whiteOrBlack.selectedSegmentIndex
         {
         case 0:
-            color = "Rated"
+            mode = "Rated"
         case 1:
-            color = "Unrated"
+            mode = "Unrated"
         default:
             break;
         }
@@ -93,6 +93,30 @@ class NewGameSettingsPage: UIViewController {
     
     @IBAction func sendButton(sender: AnyObject) {
         
+        var white = ""
+        var black = ""
+        
+        if color == "White" {
+            white = (PFUser.currentUser()?.username)!
+            black = useruserName.text!
+        }
+        else {
+            black = (PFUser.currentUser()?.username)!
+            white = useruserName.text!
+        }
+      
+        let game = PFObject(className: "Games")
+        game["whitePlayer"] = white
+        game["blackPlayer"] = black
+        game["speed"] = speed
+        game["mode"] = mode
+
+        game.saveInBackgroundWithBlock { (bool:Bool, error:NSError?) -> Void in
+            if error == nil {
+                print("game Made!!")
+            
+            }
+        }
 
         
         
