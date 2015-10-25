@@ -700,6 +700,9 @@
                             <outletCollection property="gestureRecognizers" destination="bfG-SZ-G87" appends="YES" id="We8-wf-ka8"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="boardImage" destination="9fb-On-dtq" id="wFv-m9-1hR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6O-UH-Vj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="bfG-SZ-G87"/>

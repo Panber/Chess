@@ -93,6 +93,8 @@ import Parse
 
 class GameInterFace2: UIViewController {
 
+    @IBOutlet weak var boardImage: UIImageView!
+    
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
         
