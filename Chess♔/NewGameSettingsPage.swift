@@ -7,6 +7,19 @@
 //
 
 import UIKit
+import Parse
+
+extension NSDate
+{
+    convenience
+    init(dateString:String) {
+        let dateStringFormatter = NSDateFormatter()
+        dateStringFormatter.dateFormat = "yyyy-MM-dd"
+        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        let d = dateStringFormatter.dateFromString(dateString)!
+        self.init(timeInterval:0, sinceDate:d)
+    }
+}
 
 class NewGameSettingsPage: UIViewController {
 
@@ -82,9 +95,9 @@ class NewGameSettingsPage: UIViewController {
         switch whiteOrBlack.selectedSegmentIndex
         {
         case 0:
-            color = "Rated"
+            mode = "Rated"
         case 1:
-            color = "Unrated"
+            mode = "Unrated"
         default:
             break;
         }
@@ -93,6 +106,67 @@ class NewGameSettingsPage: UIViewController {
     
     @IBAction func sendButton(sender: AnyObject) {
         
+        var white = ""
+        var black = ""
+        var pushto = ""
+        
+
+        if color == "White" {
+            white = (PFUser.currentUser()?.username)!
+            black = useruserName.text!
+            pushto = black
+        }
+        else {
+            black = (PFUser.currentUser()?.username)!
+            white = useruserName.text!
+            pushto = white
+        }
+        
+        let game = PFObject(className: "Games")
+        game["whitePlayer"] = white
+        game["blackPlayer"] = black
+        game["speed"] = speed
+        game["mode"] = mode
+        game["confirmed"] = false
+        game["piecePosition"] = NSMutableArray()
+        game["turn"] = white
+
+        game["timeLeftToMove"] = NSDate()
+        
+        if speed == "Normal" {
+            
+            game["timePerMove"] = 1
+            
+//            let now = NSDate()
+//            let daysToAdd: Double = 1
+//            let newDate = now.dateByAddingTimeInterval(60 * 60 * 24 * daysToAdd)
+//            
+//            game["gameEnds"] = newDate
+        
+        }
+        else if speed == "Slow" {
+            game["timePerMove"] = 3
+        }
+        else if speed == "Fast" {
+            game["timePerMove"] = 0.25
+        }
+
+        game.saveInBackgroundWithBlock { (bool:Bool, error:NSError?) -> Void in
+            if error == nil {
+                print("game Made!!")
+                
+                // Create our Installation query
+                let pushQuery = PFInstallation.query()
+                pushQuery!.whereKey("username", equalTo: pushto)
+                
+                // Send push notification to query
+                let push = PFPush()
+                push.setQuery(pushQuery) // Set our Installation query
+                push.setMessage("\(PFUser.currentUser()?.username) has invited you to play Chess!")
+                push.sendPushInBackground()
+            
+            }
+        }
 
         
         

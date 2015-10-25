@@ -79,6 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Store the deviceToken in the current Installation and save it to Parse
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
+        installation["username"] = PFUser.currentUser()?.username
         installation.saveInBackground()
     }
 
