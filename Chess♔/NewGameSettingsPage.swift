@@ -22,7 +22,7 @@ extension NSDate
 }
 
 class NewGameSettingsPage: UIViewController {
-
+    
     
     @IBOutlet weak var userProfilePic: UIImageView!
     @IBOutlet weak var userRating: UILabel!
@@ -40,7 +40,7 @@ class NewGameSettingsPage: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.title = "Invite"
         
         userProfilePic.layer.cornerRadius = userProfilePic.frame.size.width/2
@@ -52,15 +52,15 @@ class NewGameSettingsPage: UIViewController {
         userRating.text = String(NSUserDefaults.standardUserDefaults().objectForKey("other_userrating_from_friends_gamemenu")!)
         
     }
-
+    
     
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
         
-
+        
     }
-
+    
     
     @IBAction func blackOrWhiteChanged(sender: UISegmentedControl) {
         
@@ -71,11 +71,11 @@ class NewGameSettingsPage: UIViewController {
         case 1:
             color = "Black"
         default:
-            break; 
+            break;
         }
         
     }
-
+    
     
     @IBAction func speedChanged(sender: UISegmentedControl) {
         switch gameSpeedSegemnt.selectedSegmentIndex {
@@ -110,7 +110,7 @@ class NewGameSettingsPage: UIViewController {
         var black = ""
         var pushto = ""
         
-
+        
         if color == "White" {
             white = (PFUser.currentUser()?.username)!
             black = useruserName.text!
@@ -130,19 +130,19 @@ class NewGameSettingsPage: UIViewController {
         game["confirmed"] = false
         game["piecePosition"] = NSMutableArray()
         game["turn"] = white
-
+        
         game["timeLeftToMove"] = NSDate()
         
         if speed == "Normal" {
             
             game["timePerMove"] = 1
             
-//            let now = NSDate()
-//            let daysToAdd: Double = 1
-//            let newDate = now.dateByAddingTimeInterval(60 * 60 * 24 * daysToAdd)
-//            
-//            game["gameEnds"] = newDate
-        
+            //            let now = NSDate()
+            //            let daysToAdd: Double = 1
+            //            let newDate = now.dateByAddingTimeInterval(60 * 60 * 24 * daysToAdd)
+            //
+            //            game["gameEnds"] = newDate
+            
         }
         else if speed == "Slow" {
             game["timePerMove"] = 3
@@ -150,7 +150,7 @@ class NewGameSettingsPage: UIViewController {
         else if speed == "Fast" {
             game["timePerMove"] = 0.25
         }
-
+        
         game.saveInBackgroundWithBlock { (bool:Bool, error:NSError?) -> Void in
             if error == nil {
                 print("game Made!!")
@@ -164,10 +164,10 @@ class NewGameSettingsPage: UIViewController {
                 push.setQuery(pushQuery) // Set our Installation query
                 push.setMessage("\(PFUser.currentUser()!.username!) has invited you to play Chess!")
                 push.sendPushInBackground()
-            
+                
             }
         }
-
+        
         
         
     }
@@ -207,5 +207,5 @@ class NewGameSettingsPage: UIViewController {
         
         
     }
-
+    
 }
