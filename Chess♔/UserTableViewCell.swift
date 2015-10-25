@@ -186,9 +186,6 @@ class NewGameFriendsTableViewCell: UITableViewCell {
     @IBOutlet weak var rating: UILabel!
 
     
-    
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

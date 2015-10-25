@@ -168,7 +168,7 @@
                         <barButtonItem key="rightBarButtonItem" title="New" id="tTS-aY-AqN">
                             <connections>
                                 <action selector="newGame:" destination="BYZ-38-t0r" id="3QB-ip-XiB"/>
-                                <segue destination="fQ8-pX-Vlb" kind="push" id="y5Q-1N-fvC"/>
+                                <segue destination="m3T-nO-hHo" kind="push" id="aYA-BS-cwV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -195,7 +195,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJL-EZ-9qO">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJL-EZ-9qO">
                                 <rect key="frame" x="20" y="72" width="124" height="73"/>
                                 <animations/>
                                 <constraints>
@@ -215,6 +215,7 @@
                             <constraint firstItem="LJL-EZ-9qO" firstAttribute="leading" secondItem="OiD-bG-W3n" secondAttribute="leadingMargin" id="zeY-yB-YvG"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Wv6-Mu-Msw"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pSF-v8-sik" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -238,7 +239,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="newGameFriendsCell" rowHeight="70" id="qog-Rb-mCo" customClass="NewGameFriendsTableViewCell" customModule="Chess_" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="70"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qog-Rb-mCo" id="KVc-6s-0iP">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="69"/>
@@ -720,7 +721,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clack and white board with half boarder copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="lJ5-we-mZL">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="clack and white board with half boarder copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="lJ5-we-mZL">
                                 <rect key="frame" x="0.0" y="150" width="414" height="435"/>
                                 <animations/>
                             </imageView>
@@ -1620,7 +1621,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wH9-7B-skl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3903" y="-361"/>
+            <point key="canvasLocation" x="3939" y="-361"/>
         </scene>
     </scenes>
     <resources>
@@ -1636,6 +1637,6 @@
         <image name="profileTabBarIcon.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yX0-R2-72x"/>
+        <segue reference="Bfb-VA-y75"/>
     </inferredMetricsTieBreakers>
 </document>
