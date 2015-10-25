@@ -203,7 +203,7 @@
                                 </constraints>
                                 <state key="normal" title="invite friends"/>
                                 <connections>
-                                    <segue destination="I1M-MK-bqe" kind="show" id="7cH-b6-MJc"/>
+                                    <segue destination="I1M-MK-bqe" kind="push" id="sqw-jh-yHM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -300,6 +300,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Spi-yn-1VJ"/>
                     <connections>
                         <outlet property="tableView" destination="nfa-ht-nDa" id="7LN-pn-VD5"/>
                     </connections>
