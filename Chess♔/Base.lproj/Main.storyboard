@@ -292,8 +292,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="I1M-MK-bqe" id="PrP-8D-4hS"/>
-                                    <outlet property="delegate" destination="I1M-MK-bqe" id="zTV-6S-k5i"/>
+                                    <outlet property="dataSource" destination="I1M-MK-bqe" id="DHa-bX-GbQ"/>
+                                    <outlet property="delegate" destination="I1M-MK-bqe" id="phX-Sh-XJI"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -308,7 +308,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Spi-yn-1VJ"/>
                     <connections>
-                        <outlet property="tableView" destination="nfa-ht-nDa" id="7LN-pn-VD5"/>
+                        <outlet property="tableView" destination="nfa-ht-nDa" id="JT0-ZR-ilo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIK-B4-3DB" userLabel="First Responder" sceneMemberID="firstResponder"/>
