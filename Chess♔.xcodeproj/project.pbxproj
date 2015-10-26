@@ -45,6 +45,7 @@
 		8F2DD6E81B9AFFF80059CEFA /* settingsTabBarIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6DC1B9AFFF80059CEFA /* settingsTabBarIcon@3x.png */; };
 		8F2DD6E91B9AFFF80059CEFA /* whiteSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */; };
 		8F2F6C4A1BDED9100048342A /* NewGameFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF77E1BDBAF1E0037865C /* NewGameFriends.swift */; settings = {ASSET_TAGS = (); }; };
+		8F2F6C4B1BDEDCC00048342A /* NewGameSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage.swift */; settings = {ASSET_TAGS = (); }; };
 		8F31DCE11BC70E30004544CC /* checkmark13.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCE01BC70E30004544CC /* checkmark13.png */; settings = {ASSET_TAGS = (); }; };
 		8F31DCE51BC716F9004544CC /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCE41BC716F9004544CC /* add.png */; settings = {ASSET_TAGS = (); }; };
 		8F31DCE71BC7189B004544CC /* add1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCE61BC7189B004544CC /* add1.png */; settings = {ASSET_TAGS = (); }; };
@@ -796,6 +797,7 @@
 				8F9A9A2D1BDAE0EE00EA5953 /* OtherUserProfilePageFromFriends.swift in Sources */,
 				8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */,
 				F14E644E1BC98B7900751F20 /* FriendsPage.swift in Sources */,
+				8F2F6C4B1BDEDCC00048342A /* NewGameSettingsPage.swift in Sources */,
 				8F8BD2AD1BC5380100B25CFE /* FriendRequestsPage.swift in Sources */,
 				8F86392B1B9B01D00055608B /* ProfileMenu.swift in Sources */,
 				8F4CF77D1BDBABB10037865C /* NewGamePage.swift in Sources */,
