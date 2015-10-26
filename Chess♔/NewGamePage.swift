@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class NewGamePage: UIViewController {
 
@@ -16,9 +17,5 @@ class NewGamePage: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
-    
-    
-    
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -233,7 +233,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nfa-ht-nDa">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nfa-ht-nDa">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -292,17 +292,23 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="I1M-MK-bqe" id="PrP-8D-4hS"/>
-                                    <outlet property="delegate" destination="I1M-MK-bqe" id="zTV-6S-k5i"/>
+                                    <outlet property="dataSource" destination="I1M-MK-bqe" id="DHa-bX-GbQ"/>
+                                    <outlet property="delegate" destination="I1M-MK-bqe" id="phX-Sh-XJI"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="nfa-ht-nDa" secondAttribute="trailing" id="H3v-Ij-9Ym"/>
+                            <constraint firstItem="nfa-ht-nDa" firstAttribute="top" secondItem="RsQ-U0-q8u" secondAttribute="top" id="KpM-tW-Ohu"/>
+                            <constraint firstAttribute="bottom" secondItem="nfa-ht-nDa" secondAttribute="bottom" id="oG4-qO-Ksq"/>
+                            <constraint firstItem="nfa-ht-nDa" firstAttribute="leading" secondItem="RsQ-U0-q8u" secondAttribute="leading" id="yne-cT-EYb"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Spi-yn-1VJ"/>
                     <connections>
-                        <outlet property="tableView" destination="nfa-ht-nDa" id="7LN-pn-VD5"/>
+                        <outlet property="tableView" destination="nfa-ht-nDa" id="JT0-ZR-ilo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIK-B4-3DB" userLabel="First Responder" sceneMemberID="firstResponder"/>
