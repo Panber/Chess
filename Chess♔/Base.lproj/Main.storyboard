@@ -168,7 +168,7 @@
                         <barButtonItem key="rightBarButtonItem" title="New" id="tTS-aY-AqN">
                             <connections>
                                 <action selector="newGame:" destination="BYZ-38-t0r" id="3QB-ip-XiB"/>
-                                <segue destination="fQ8-pX-Vlb" kind="presentation" id="Lc1-Lh-1C3"/>
+                                <segue destination="m3T-nO-hHo" kind="show" id="vg9-06-SCX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -239,7 +239,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="newGameFriendsCell" rowHeight="70" id="qog-Rb-mCo" customClass="NewGameFriendsTableViewCell" customModule="Chess_" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="70"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qog-Rb-mCo" id="KVc-6s-0iP">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="69"/>
