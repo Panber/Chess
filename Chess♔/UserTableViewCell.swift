@@ -166,8 +166,11 @@ class GameMenuTableViewCell: UITableViewCell {
         if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
         else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
         visualEffectView.frame = self.userProfileImageBC.bounds
-        visualEffectView.frame.size.height += 1
-        self.userProfileImageBC.addSubview(visualEffectView)
+        visualEffectView.frame.size.height += 20
+        visualEffectView.frame.size.width += 20
+        visualEffectView.frame.origin.y -= 10
+        visualEffectView.frame.origin.x -= 10
+        self.userProfileImageBC.insertSubview(visualEffectView, atIndex: 0)
         
     }
     

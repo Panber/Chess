@@ -29,6 +29,15 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
 
     
+    var usernameArray: Array<String> = []
+    var ratingArray: Array<Int> = []
+    var updatedArray: Array<String> = []
+    var timeleftArray: Array<String> = []
+    var profilePicArray: Array<UIImage> = []
+    var imageDataArray: Array<NSData> = []
+
+    
+    
     override func viewDidLoad() {
         
 
@@ -49,7 +58,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         print("the current installation is \(PFInstallation.currentInstallation())")
 
-        
+        findGames()
 
         //check this before launching!!!!!!
 //        //Checking if first launch
@@ -138,15 +147,91 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
     }
     
+    func findGames() {
+        
+        usernameArray = []
+        let gamesQuery = PFQuery(className: "Games")
+        //fix this
+        gamesQuery.whereKey("whitePlayer", equalTo: PFUser.currentUser()!.username!)
+        gamesQuery.findObjectsInBackgroundWithBlock { (games:[AnyObject]?, error:NSError?) -> Void in
+            for games in games! {
+                
+                self.usernameArray.append((games["blackPlayer"] as? String)!)
+                //self.ratingArray.append(games["blackPlayer"] as! Int)
+                //  updatedArrayppend(games["blackPlayer"] as! String)
+                //  timeleftArrayppend(games["blackPlayer"] as! String)
+                
+            }
+            self.tableView.reloadData()
+
+        }
+    
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 140
+        return 110
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell", forIndexPath: indexPath) as! GameMenuTableViewCell
         
-        cell.username.text = "b3rge"
+        
+
+                
+       // cell.username.text = self.usernameArray[indexPath.row]
+
+        
+        let query = PFQuery(className: "_User")
+        
+        query.whereKey("username", equalTo: usernameArray[indexPath.row] )
+        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+            if (error == nil) {
+                
+                if let userArray = objects as? [PFUser] {
+                    for user in userArray {
+                        
+                        cell.username.text = user["username"] as? String
+
+                        
+                        if let userPicture = user["profile_picture"] as? PFFile {
+                            
+                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                if (error == nil) {
+                                    
+                                    cell.userProfileImage.image = UIImage(data: imageData!)
+                                    cell.userProfileImageBC.image = UIImage(data: imageData!)
+                                    //self.imageDataArray.append(imageData!)
+                                   // self.Z[indexPath.row] = imageData!
+                                    self.imageDataArray.append(imageData!)
+                                    
+                                    //        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight)) as UIVisualEffectView
+                                    //        if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
+                                    //        else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
+                                    //        visualEffectView.frame = self.userProfileImageBC.bounds
+                                    //        visualEffectView.frame.size.height += 1
+                                    //        self.userProfileImageBC.addSubview(visualEffectView)
+                                    
+                                    
+                                } else {
+                                }
+                            }
+                            
+                        }
+                    }
+                    
+                }
+            } else {
+                // Log details of the failure
+                print("query error: \(error) \(error!.userInfo)")
+            }
+            
+        }
+        
+        
+        
+
+        
         cell.rating.text = "601"
         cell.updated.text = "Last Update:"
         cell.timeleft.text = "Time Left:"
@@ -160,7 +245,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
-        return 1
+        return usernameArray.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
