@@ -168,7 +168,7 @@
                         <barButtonItem key="rightBarButtonItem" title="New" id="tTS-aY-AqN">
                             <connections>
                                 <action selector="newGame:" destination="BYZ-38-t0r" id="3QB-ip-XiB"/>
-                                <segue destination="m3T-nO-hHo" kind="show" id="iIi-yT-Wa4"/>
+                                <segue destination="fQ8-pX-Vlb" kind="presentation" id="Lc1-Lh-1C3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -181,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1812" y="314"/>
+            <point key="canvasLocation" x="1824" y="314"/>
         </scene>
         <!--New Game Page-->
         <scene sceneID="WEk-WN-sjn">
@@ -195,7 +195,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJL-EZ-9qO">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJL-EZ-9qO">
                                 <rect key="frame" x="20" y="72" width="124" height="73"/>
                                 <animations/>
                                 <constraints>
@@ -219,7 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pSF-v8-sik" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2542" y="-364"/>
+            <point key="canvasLocation" x="2542" y="-361"/>
         </scene>
         <!--New Game Friends-->
         <scene sceneID="SOa-Qi-xt5">
@@ -239,7 +239,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="newGameFriendsCell" rowHeight="70" id="qog-Rb-mCo" customClass="NewGameFriendsTableViewCell" customModule="Chess_" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="70"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qog-Rb-mCo" id="KVc-6s-0iP">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="69"/>
@@ -313,7 +313,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIK-B4-3DB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3215" y="-361"/>
+            <point key="canvasLocation" x="3254" y="-361"/>
         </scene>
         <!--New Game Settings Page-->
         <scene sceneID="dny-OR-sFx">
