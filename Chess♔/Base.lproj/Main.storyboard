@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -169,8 +169,8 @@
                         <barButtonItem key="leftBarButtonItem" title="Edit" id="K2R-6d-JTA"/>
                         <barButtonItem key="rightBarButtonItem" title="New" id="tTS-aY-AqN">
                             <connections>
-                                <action selector="newGame:" destination="BYZ-38-t0r" id="3QB-ip-XiB"/>
-                                <segue destination="m3T-nO-hHo" kind="show" id="vg9-06-SCX"/>
+                                <action selector="newGame:" destination="BYZ-38-t0r" id="p3j-bU-HEH"/>
+                                <segue destination="fQ8-pX-Vlb" kind="show" id="fyg-Z5-RJM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -241,7 +241,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="newGameFriendsCell" rowHeight="70" id="qog-Rb-mCo" customClass="NewGameFriendsTableViewCell" customModule="Chess_" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="70"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qog-Rb-mCo" id="KVc-6s-0iP">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="69"/>
@@ -654,7 +654,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFl-en-0nA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2542" y="314"/>
+            <point key="canvasLocation" x="2522" y="314"/>
         </scene>
         <!--Game Inter Face2-->
         <scene sceneID="JAV-20-ocj">
@@ -716,12 +716,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6O-UH-Vj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="bfG-SZ-G87"/>
             </objects>
-            <point key="canvasLocation" x="3788" y="428"/>
+            <point key="canvasLocation" x="3586" y="382"/>
         </scene>
         <!--Game Inter Face3-->
         <scene sceneID="o3Z-PJ-QUL">
             <objects>
-                <viewController id="fQ8-pX-Vlb" customClass="GameInterFace3" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameInterFace3" id="fQ8-pX-Vlb" customClass="GameInterFace3" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gDL-lJ-l4c"/>
                         <viewControllerLayoutGuide type="bottom" id="z5L-Fj-p9P"/>
@@ -730,7 +730,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="clack and white board with half boarder copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="lJ5-we-mZL">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clack and white board with half boarder copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="lJ5-we-mZL">
                                 <rect key="frame" x="0.0" y="150" width="414" height="435"/>
                                 <animations/>
                             </imageView>
@@ -738,21 +738,18 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lJ5-we-mZL" firstAttribute="leading" secondItem="7RF-8p-e4K" secondAttribute="leading" id="G9e-5l-0Mj"/>
-                            <constraint firstItem="lJ5-we-mZL" firstAttribute="top" secondItem="gDL-lJ-l4c" secondAttribute="bottom" constant="86" id="YJp-sa-dyB"/>
-                            <constraint firstAttribute="trailing" secondItem="lJ5-we-mZL" secondAttribute="trailing" id="lyk-zr-nay"/>
-                            <constraint firstItem="lJ5-we-mZL" firstAttribute="centerY" secondItem="7RF-8p-e4K" secondAttribute="centerY" id="pcf-6y-saw"/>
+                            <constraint firstItem="lJ5-we-mZL" firstAttribute="leading" secondItem="7RF-8p-e4K" secondAttribute="leading" id="T7j-Ji-oUO"/>
+                            <constraint firstAttribute="trailing" secondItem="lJ5-we-mZL" secondAttribute="trailing" id="g0y-wt-brx"/>
+                            <constraint firstItem="lJ5-we-mZL" firstAttribute="top" secondItem="gDL-lJ-l4c" secondAttribute="bottom" constant="86" id="tHV-eP-v2z"/>
+                            <constraint firstItem="lJ5-we-mZL" firstAttribute="centerY" secondItem="7RF-8p-e4K" secondAttribute="centerY" id="vJl-gn-cC2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MJf-zF-viF"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-                    <connections>
-                        <outlet property="chessBoard" destination="lJ5-we-mZL" id="Ros-9h-VTf"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GlK-wH-heK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3161" y="382"/>
+            <point key="canvasLocation" x="3093" y="382"/>
         </scene>
         <!--Play-->
         <scene sceneID="ICd-Pm-2GB">
@@ -814,7 +811,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EIa-lm-c1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1899" y="995"/>
+            <point key="canvasLocation" x="1824" y="995"/>
         </scene>
         <!--Analyze-->
         <scene sceneID="XDQ-dG-Skb">

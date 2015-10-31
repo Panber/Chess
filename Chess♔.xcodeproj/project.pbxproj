@@ -121,7 +121,6 @@
 		8FA018DB1B9B2D8C002B410E /* DSCF0388.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FA018DA1B9B2D8C002B410E /* DSCF0388.jpg */; };
 		8FA5C8911B9A264F0097637E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8901B9A264F0097637E /* AppDelegate.swift */; };
 		8FA5C8931B9A264F0097637E /* LoginMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8921B9A264F0097637E /* LoginMenu.swift */; };
-		8FA5C8961B9A264F0097637E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8941B9A264F0097637E /* Main.storyboard */; };
 		8FA5C8981B9A264F0097637E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8971B9A264F0097637E /* Assets.xcassets */; };
 		8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8991B9A264F0097637E /* LaunchScreen.storyboard */; };
 		8FA5C8A61B9A264F0097637E /* Chess_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8A51B9A264F0097637E /* Chess_Tests.swift */; };
@@ -134,6 +133,7 @@
 		F14E644E1BC98B7900751F20 /* FriendsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14E644D1BC98B7900751F20 /* FriendsPage.swift */; };
 		F1648B611BDC19CA00AE1BC3 /* GameInterFace3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1648B601BDC19CA00AE1BC3 /* GameInterFace3.swift */; };
 		F1B414601BC72E5D00FEE6A4 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B4145F1BC72E5D00FEE6A4 /* SettingsPage.swift */; };
+		F1DECCAE1BE3FEA8009C08B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1DECCAC1BE3FEA8009C08B4 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -269,7 +269,6 @@
 		8FA5C88D1B9A264F0097637E /* Chess♔.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chess♔.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8901B9A264F0097637E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FA5C8921B9A264F0097637E /* LoginMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenu.swift; sourceTree = "<group>"; };
-		8FA5C8951B9A264F0097637E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8FA5C8971B9A264F0097637E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FA5C89A1B9A264F0097637E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8FA5C89C1B9A264F0097637E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -289,6 +288,7 @@
 		F14E644D1BC98B7900751F20 /* FriendsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsPage.swift; sourceTree = "<group>"; };
 		F1648B601BDC19CA00AE1BC3 /* GameInterFace3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInterFace3.swift; sourceTree = "<group>"; };
 		F1B4145F1BC72E5D00FEE6A4 /* SettingsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
+		F1DECCAD1BE3FEA8009C08B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -464,6 +464,7 @@
 				8FA5C8971B9A264F0097637E /* Assets.xcassets */,
 				8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage.swift */,
 				8F5250BF1BD01A66005D4682 /* LeaderBoard.swift */,
+				F1DECCAC1BE3FEA8009C08B4 /* Main.storyboard */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -539,7 +540,6 @@
 				8F4A02911B9A421D0084024A /* Frameworks */,
 				8F4A02651B9A3E590084024A /* Assets */,
 				8F4A02881B9A3F730084024A /* Swift */,
-				8FA5C8941B9A264F0097637E /* Main.storyboard */,
 				8FA5C8991B9A264F0097637E /* LaunchScreen.storyboard */,
 				8FA5C89C1B9A264F0097637E /* Info.plist */,
 			);
@@ -718,6 +718,7 @@
 				8F38EF6A1BB8399D00668B3B /* JBpp.jpg in Resources */,
 				8F31DCE71BC7189B004544CC /* add1.png in Resources */,
 				8F4A02691B9A3E890084024A /* PANBERlogo.png in Resources */,
+				F1DECCAE1BE3FEA8009C08B4 /* Main.storyboard in Resources */,
 				8F14D19D1B9C918700A58CCF /* 8.jpg in Resources */,
 				8F970FBF1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png in Resources */,
 				8F2DD6E51B9AFFF80059CEFA /* pieceMarked.png in Resources */,
@@ -756,7 +757,6 @@
 				8F4A027D1B9A3EE80084024A /* blackPawn.png in Resources */,
 				8F14D1891B9C823500A58CCF /* 4.jpg in Resources */,
 				8F1BB5591BA22BAF0043E2B7 /* profileTabBarIcon@3x.png in Resources */,
-				8FA5C8961B9A264F0097637E /* Main.storyboard in Resources */,
 				8F4A027A1B9A3EE80084024A /* whiteRook.png in Resources */,
 				8F8BD2B51BC6C1C500B25CFE /* checkmark12.png in Resources */,
 				8F1E8ED21BD833F100C41D37 /* PanBerLogoDark_4000.png in Resources */,
@@ -850,20 +850,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8FA5C8941B9A264F0097637E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8FA5C8951B9A264F0097637E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8FA5C8991B9A264F0097637E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8FA5C89A1B9A264F0097637E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F1DECCAC1BE3FEA8009C08B4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1DECCAD1BE3FEA8009C08B4 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
