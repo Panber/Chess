@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -716,7 +716,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6O-UH-Vj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="bfG-SZ-G87"/>
             </objects>
-            <point key="canvasLocation" x="3586" y="382"/>
+            <point key="canvasLocation" x="4055" y="382"/>
         </scene>
         <!--Game Inter Face3-->
         <scene sceneID="o3Z-PJ-QUL">
@@ -727,29 +727,28 @@
                         <viewControllerLayoutGuide type="bottom" id="z5L-Fj-p9P"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7RF-8p-e4K">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clack and white board with half boarder copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="lJ5-we-mZL">
-                                <rect key="frame" x="0.0" y="150" width="414" height="435"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clack and white board with half boarder copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="lJ5-we-mZL">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lJ5-we-mZL" firstAttribute="leading" secondItem="7RF-8p-e4K" secondAttribute="leading" id="T7j-Ji-oUO"/>
-                            <constraint firstAttribute="trailing" secondItem="lJ5-we-mZL" secondAttribute="trailing" id="g0y-wt-brx"/>
-                            <constraint firstItem="lJ5-we-mZL" firstAttribute="top" secondItem="gDL-lJ-l4c" secondAttribute="bottom" constant="86" id="tHV-eP-v2z"/>
-                            <constraint firstItem="lJ5-we-mZL" firstAttribute="centerY" secondItem="7RF-8p-e4K" secondAttribute="centerY" id="vJl-gn-cC2"/>
+                            <constraint firstAttribute="bottom" secondItem="lJ5-we-mZL" secondAttribute="bottom" id="TRf-M6-RNl"/>
+                            <constraint firstItem="lJ5-we-mZL" firstAttribute="leading" secondItem="7RF-8p-e4K" secondAttribute="leading" id="Zbk-tp-p9g"/>
+                            <constraint firstItem="lJ5-we-mZL" firstAttribute="top" secondItem="7RF-8p-e4K" secondAttribute="top" id="p6J-xS-Dpp"/>
+                            <constraint firstAttribute="trailing" secondItem="lJ5-we-mZL" secondAttribute="trailing" id="u8t-YV-VwK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MJf-zF-viF"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GlK-wH-heK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3093" y="382"/>
+            <point key="canvasLocation" x="3370" y="382"/>
         </scene>
         <!--Play-->
         <scene sceneID="ICd-Pm-2GB">
