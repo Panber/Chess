@@ -94,6 +94,8 @@ var pieceOptions: Array<UIImageView> = []
 //BOARDER
 let boarderBoard = UIImageView(frame: CGRectMake(-0.01*square, _1-7*square, 8*square, 8*square))
 
+var image: UIImage!
+
 import UIKit
 
 class GameInterFace3: UIViewController {
