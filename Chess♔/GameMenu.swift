@@ -37,7 +37,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var imageDataArray: Array<NSData> = []
     var indicatorDataArray: Array<String> = []
 
-    
+    var yourturnArray: Array<String> = []
+    var theirturnArray: Array<String> = []
+    var gameoverArray: Array<String> = []
     
     override func viewDidLoad() {
         
@@ -158,8 +160,21 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         gamesQuery.findObjectsInBackgroundWithBlock { (games:[AnyObject]?, error:NSError?) -> Void in
             for games in games! {
                 
-                self.usernameArray.append((games["blackPlayer"] as? String)!)
-                self.indicatorDataArray.append(games["status_white"] as! String)
+               // self.usernameArray.append((games["blackPlayer"] as? String)!)
+         //       self.indicatorDataArray.append((games["status_white"] as? String)!)
+                
+                if games["status_white"] as? String == "move" {
+                    self.yourturnArray.append((games["blackPlayer"] as? String)!)
+                }
+                else if games["status_white"] as? String == "notmove" {
+                    
+                    self.theirturnArray.append((games["blackPlayer"] as? String)!)
+                
+                }
+                else if games["status_white"] as? String == "won" || games["status_white"] as! String == "lost"{
+                    
+                    self.gameoverArray.append((games["blackPlayer"] as? String)!)
+                }
                 //self.ratingArray.append(games["blackPlayer"] as! Int)
                 //  updatedArrayppend(games["blackPlayer"] as! String)
                 //  timeleftArrayppend(games["blackPlayer"] as! String)
@@ -177,12 +192,12 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell", forIndexPath: indexPath) as! GameMenuTableViewCell
+        let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell") as! GameMenuTableViewCell
     
-
+        func find(name:String) {
         let query = PFQuery(className: "_User")
         
-        query.whereKey("username", equalTo: usernameArray[indexPath.row] )
+        query.whereKey("username", equalTo: name)
         //query.orderByDescending("username")
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             if (error == nil) {
@@ -196,22 +211,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                             
                             userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                 if (error == nil) {
-                                    
-//                                    switch indexPath.section {
-//                                    case 0:
-//                                        if self.indicatorDataArray[indexPath.row] == "move" {
-//                                            cell.colorIndicator.backgroundColor = blue
-                                            cell.username.text = user["username"] as? String
-                                            cell.userProfileImage.image = UIImage(data: imageData!)
-                                            
-                                            
-//                                        }
-//                                    default:
-//                                        ""
-//                                        
-//                                        
-//                                    }
-
+                                    cell.username.text = user["username"] as? String
+                                    cell.userProfileImage.image = UIImage(data: imageData!)
                                     self.imageDataArray.append(imageData!)
                        
                                 } else {
@@ -228,27 +229,38 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             }
             
         }
+        }
         
         
-        if indicatorDataArray[indexPath.row] == "move" {
-            cell.colorIndicator.backgroundColor = blue
-        }
-        if indicatorDataArray[indexPath.row] == "notmove" {
-            cell.colorIndicator.backgroundColor = UIColor.lightGrayColor()
-        }
-        if indicatorDataArray[indexPath.row] == "won" {
-            cell.colorIndicator.backgroundColor = UIColor.greenColor()
-        }
-        if indicatorDataArray[indexPath.row] == "lost" {
-            cell.colorIndicator.backgroundColor = UIColor.redColor()
-        }
+        
+        
+     
 
         
         cell.rating.text = "601"
         cell.updated.text = "Last Update: 1h 5min"
         cell.timeleft.text = "Time Left: 2h 29min"
         
-
+        switch indexPath.section {
+        case 0:
+                cell.colorIndicator.backgroundColor = blue
+                find(yourturnArray[indexPath.row])
+            
+            
+        case 1:
+                cell.colorIndicator.backgroundColor = UIColor.lightGrayColor()
+                find(theirturnArray[indexPath.row])
+            
+        case 2:
+            
+                cell.colorIndicator.backgroundColor = UIColor.redColor()
+                find(gameoverArray[indexPath.row])
+            
+        default:
+            ""
+        
+        
+        }
         
         return cell
     }
@@ -259,10 +271,23 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
-        return usernameArray.count
+        switch section {
+        case 0:
+            return yourturnArray.count
+        case 1:
+            return theirturnArray.count
+        case 2:
+            return gameoverArray.count
+        default:
+            return 0
+        
+        }
+       
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+       
+        
         return 3
     }
     
@@ -288,8 +313,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "Didot", size: 17)!
         header.textLabel?.textColor = UIColor.lightGrayColor()
-        header.backgroundColor = UIColor.lightGrayColor()
-        //header.textLabel?.text? = (header.textLabel?.text?.lowercaseString)!
+        header.backgroundColor = blue
+        header.contentView.backgroundColor = UIColor.whiteColor()
+        header.textLabel?.textAlignment = .Center
+        header.alpha = 0.97
+
+        
+        header.textLabel?.text? = (header.textLabel?.text?.uppercaseString)!
         
     }
     
