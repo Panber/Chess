@@ -125,6 +125,8 @@
 		8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8991B9A264F0097637E /* LaunchScreen.storyboard */; };
 		8FA5C8A61B9A264F0097637E /* Chess_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8A51B9A264F0097637E /* Chess_Tests.swift */; };
 		8FA5C8B11B9A264F0097637E /* Chess_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8B01B9A264F0097637E /* Chess_UITests.swift */; };
+		8FB94F991BE62EA80029EF00 /* chatIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB94F981BE62EA80029EF00 /* chatIcon.png */; };
+		8FB94F9B1BE62F360029EF00 /* Data@3x_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */; };
 		8FBD3A371BB498A200212314 /* GameInterFace2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD3A361BB498A200212314 /* GameInterFace2.swift */; };
 		8FBED2FC1BB1F35700CDAACC /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */; };
 		F134DDDE1BC1C417005BA54C /* UsersProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */; };
@@ -133,7 +135,7 @@
 		F14E644E1BC98B7900751F20 /* FriendsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14E644D1BC98B7900751F20 /* FriendsPage.swift */; };
 		F1648B611BDC19CA00AE1BC3 /* GameInterFace3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1648B601BDC19CA00AE1BC3 /* GameInterFace3.swift */; };
 		F1B414601BC72E5D00FEE6A4 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B4145F1BC72E5D00FEE6A4 /* SettingsPage.swift */; };
-		F1DECCAE1BE3FEA8009C08B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1DECCAC1BE3FEA8009C08B4 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		F1DECCAE1BE3FEA8009C08B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1DECCAC1BE3FEA8009C08B4 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -278,6 +280,8 @@
 		8FA5C8AC1B9A264F0097637E /* Chess♔.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chess♔.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8B01B9A264F0097637E /* Chess_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chess_UITests.swift; sourceTree = "<group>"; };
 		8FA5C8B21B9A264F0097637E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8FB94F981BE62EA80029EF00 /* chatIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatIcon.png; sourceTree = "<group>"; };
+		8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Data@3x_blue.png"; sourceTree = "<group>"; };
 		8FBD3A361BB498A200212314 /* GameInterFace2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInterFace2.swift; sourceTree = "<group>"; };
 		8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
@@ -385,6 +389,7 @@
 				F1431A5F1BD298E700C5854A /* LaunchImages */,
 				8F14D18A1B9C917800A58CCF /* LoginImages */,
 				8F1E8ECD1BD7F66C00C41D37 /* profilePicPlaceholder.jpg */,
+				8FB94F981BE62EA80029EF00 /* chatIcon.png */,
 				8F1E8ED31BD8362A00C41D37 /* PanBerLogoDark2.png */,
 				8F1E8ED11BD833F100C41D37 /* PanBerLogoDark_4000.png */,
 				8F1E8ECF1BD7F74500C41D37 /* profilePicPlaceholderDark.jpg */,
@@ -423,6 +428,7 @@
 				8F2DD6DB1B9AFFF80059CEFA /* pieces vlack and white board blurred.png */,
 				8F2DD6DC1B9AFFF80059CEFA /* settingsTabBarIcon@3x.png */,
 				8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */,
+				8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */,
 				8F8639321B9B09F90055608B /* BlackBC.jpg */,
 				8FA018D81B9B1FAE002B410E /* ChessIconAndTExt.png */,
 				8FA1F7CD1B9AFCA800A0C548 /* Pieces */,
@@ -732,6 +738,7 @@
 				8FA018D31B9B0D76002B410E /* chessIconRounded.png in Resources */,
 				8FA018D51B9B0E33002B410E /* Bauru.ttf in Resources */,
 				8F14D1991B9C918700A58CCF /* 12.jpg in Resources */,
+				8FB94F9B1BE62F360029EF00 /* Data@3x_blue.png in Resources */,
 				8F056AF71BAF533C00CD617B /* LightModePreview.png in Resources */,
 				8F1E8EC21BD78EE900C41D37 /* mountain.jpg in Resources */,
 				8F4A02761B9A3EE80084024A /* whiteKing.png in Resources */,
@@ -754,6 +761,7 @@
 				8F2DD6E31B9AFFF80059CEFA /* graySquare.png in Resources */,
 				8F31DCED1BC7C8B5004544CC /* pending.png in Resources */,
 				8F4A02871B9A3F240084024A /* chessIcon180.png in Resources */,
+				8FB94F991BE62EA80029EF00 /* chatIcon.png in Resources */,
 				8F4A027D1B9A3EE80084024A /* blackPawn.png in Resources */,
 				8F14D1891B9C823500A58CCF /* 4.jpg in Resources */,
 				8F1BB5591BA22BAF0043E2B7 /* profileTabBarIcon@3x.png in Resources */,

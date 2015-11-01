@@ -35,6 +35,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var timeleftArray: Array<String> = []
     var profilePicArray: Array<UIImage> = []
     var imageDataArray: Array<NSData> = []
+    var indicatorDataArray: Array<String> = []
 
     
     
@@ -158,6 +159,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             for games in games! {
                 
                 self.usernameArray.append((games["blackPlayer"] as? String)!)
+                self.indicatorDataArray.append(games["status_white"] as! String)
                 //self.ratingArray.append(games["blackPlayer"] as! Int)
                 //  updatedArrayppend(games["blackPlayer"] as! String)
                 //  timeleftArrayppend(games["blackPlayer"] as! String)
@@ -177,13 +179,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell", forIndexPath: indexPath) as! GameMenuTableViewCell
     
-        
-        
 
-                
-       // cell.username.text = self.usernameArray[indexPath.row]
-
-        
         let query = PFQuery(className: "_User")
         
         query.whereKey("username", equalTo: usernameArray[indexPath.row] )
@@ -200,22 +196,24 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                             
                             userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                 if (error == nil) {
-                                    cell.username.text = user["username"] as? String
+                                    
+//                                    switch indexPath.section {
+//                                    case 0:
+//                                        if self.indicatorDataArray[indexPath.row] == "move" {
+//                                            cell.colorIndicator.backgroundColor = blue
+                                            cell.username.text = user["username"] as? String
+                                            cell.userProfileImage.image = UIImage(data: imageData!)
+                                            
+                                            
+//                                        }
+//                                    default:
+//                                        ""
+//                                        
+//                                        
+//                                    }
 
-                                    cell.userProfileImage.image = UIImage(data: imageData!)
-                                   // cell.userProfileImageBC.image = UIImage(data: imageData!)
-                                    //self.imageDataArray.append(imageData!)
-                                   // self.Z[indexPath.row] = imageData!
                                     self.imageDataArray.append(imageData!)
-                                    
-                                    //        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight)) as UIVisualEffectView
-                                    //        if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-                                    //        else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-                                    //        visualEffectView.frame = self.userProfileImageBC.bounds
-                                    //        visualEffectView.frame.size.height += 1
-                                    //        self.userProfileImageBC.addSubview(visualEffectView)
-                                    
-                                    
+                       
                                 } else {
                                 }
                             }
@@ -232,12 +230,25 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         }
         
         
-        
+        if indicatorDataArray[indexPath.row] == "move" {
+            cell.colorIndicator.backgroundColor = blue
+        }
+        if indicatorDataArray[indexPath.row] == "notmove" {
+            cell.colorIndicator.backgroundColor = UIColor.lightGrayColor()
+        }
+        if indicatorDataArray[indexPath.row] == "won" {
+            cell.colorIndicator.backgroundColor = UIColor.greenColor()
+        }
+        if indicatorDataArray[indexPath.row] == "lost" {
+            cell.colorIndicator.backgroundColor = UIColor.redColor()
+        }
 
         
         cell.rating.text = "601"
-        cell.updated.text = "Last Update:"
-        cell.timeleft.text = "Time Left:"
+        cell.updated.text = "Last Update: 1h 5min"
+        cell.timeleft.text = "Time Left: 2h 29min"
+        
+
         
         return cell
     }
@@ -252,24 +263,35 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
     
     
 
-//    func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
-//        return nil
-//    }
-//
-//    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-//    {
-//        let header = view as! UITableViewHeaderFooterView
-//        header.textLabel?.font = UIFont(name: "Didot", size: 16)!
-//        header.textLabel?.textColor = UIColor.lightGrayColor()
-//        header.backgroundColor = UIColor.lightGrayColor()
-//        header.textLabel?.text? = (header.textLabel?.text?.lowercaseString)!
-//        
-//    }
+    func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
+        
+        switch section {
+        case 0:
+            return "Your Turn"
+        case 1:
+            return "Their Turn"
+        case 2:
+            return "Game Over"
+        default:
+            ""
+        }
+        return nil
+    }
+
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "Didot", size: 17)!
+        header.textLabel?.textColor = UIColor.lightGrayColor()
+        header.backgroundColor = UIColor.lightGrayColor()
+        //header.textLabel?.text? = (header.textLabel?.text?.lowercaseString)!
+        
+    }
     
 
 
