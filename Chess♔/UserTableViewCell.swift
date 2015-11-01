@@ -151,7 +151,12 @@ class GameMenuTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.content.layer.cornerRadius = cornerRadius
+       // self.content.layer.cornerRadius = cornerRadius
+//        self.contentView.layer.shadowColor = UIColor.blackColor().CGColor
+//                self.contentView.layer.shadowOpacity = 0.05
+//                //self.contentView.layer.shadowRadius = cornerRadius
+//               self.contentView.layer.shadowOffset = CGSizeZero
+//        
         self.content.clipsToBounds = true
         
         //changing profileImage
@@ -166,11 +171,11 @@ class GameMenuTableViewCell: UITableViewCell {
         if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
         else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
         visualEffectView.frame = self.userProfileImageBC.bounds
-        visualEffectView.frame.size.height += 20
-        visualEffectView.frame.size.width += 20
-        visualEffectView.frame.origin.y -= 10
-        visualEffectView.frame.origin.x -= 10
-        self.userProfileImageBC.insertSubview(visualEffectView, atIndex: 0)
+//        visualEffectView.frame.size.height += 20
+//        visualEffectView.frame.size.width += 20
+//        visualEffectView.frame.origin.y -= 10
+//        visualEffectView.frame.origin.x -= 10
+       // self.userProfileImageBC.insertSubview(visualEffectView, atIndex: 0)
         
     }
     

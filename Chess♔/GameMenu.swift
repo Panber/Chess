@@ -53,8 +53,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         newButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
         editButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
 
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.tableView.backgroundColor = UIColor.clearColor()
+       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        self.tableView.backgroundColor = UIColor.whiteColor()
         
         print("the current installation is \(PFInstallation.currentInstallation())")
 
@@ -152,6 +152,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         usernameArray = []
         let gamesQuery = PFQuery(className: "Games")
         //fix this
+        gamesQuery.orderByDescending("updatedAt")
         gamesQuery.whereKey("whitePlayer", equalTo: PFUser.currentUser()!.username!)
         gamesQuery.findObjectsInBackgroundWithBlock { (games:[AnyObject]?, error:NSError?) -> Void in
             for games in games! {
@@ -169,12 +170,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 110
+        return 150
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell", forIndexPath: indexPath) as! GameMenuTableViewCell
+    
         
         
 
@@ -185,22 +187,23 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         let query = PFQuery(className: "_User")
         
         query.whereKey("username", equalTo: usernameArray[indexPath.row] )
+        //query.orderByDescending("username")
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             if (error == nil) {
                 
                 if let userArray = objects as? [PFUser] {
                     for user in userArray {
                         
-                        cell.username.text = user["username"] as? String
 
                         
                         if let userPicture = user["profile_picture"] as? PFFile {
                             
                             userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                 if (error == nil) {
-                                    
+                                    cell.username.text = user["username"] as? String
+
                                     cell.userProfileImage.image = UIImage(data: imageData!)
-                                    cell.userProfileImageBC.image = UIImage(data: imageData!)
+                                   // cell.userProfileImageBC.image = UIImage(data: imageData!)
                                     //self.imageDataArray.append(imageData!)
                                    // self.Z[indexPath.row] = imageData!
                                     self.imageDataArray.append(imageData!)
