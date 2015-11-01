@@ -19,13 +19,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M9E-Ld-z3g">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="50" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M9E-Ld-z3g">
                                 <rect key="frame" x="-5" y="0.0" width="605" height="600"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="0.0" reuseIdentifier="gameCell" rowHeight="150" id="VfK-LQ-2OR" customClass="GameMenuTableViewCell" customModule="Chess_" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="605" height="150"/>
+                                        <rect key="frame" x="0.0" y="114" width="605" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VfK-LQ-2OR" id="19O-tq-CSU">
                                             <rect key="frame" x="0.0" y="0.0" width="572" height="150"/>
@@ -151,6 +151,7 @@
                             </tableView>
                         </subviews>
                         <animations/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="M9E-Ld-z3g" secondAttribute="trailing" id="CbV-bE-jrY"/>
                             <constraint firstItem="M9E-Ld-z3g" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SKk-Vo-z5j"/>
@@ -159,11 +160,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Play" id="bfc-qg-EO6">
-                        <barButtonItem key="leftBarButtonItem" title="Edit" id="K2R-6d-JTA"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="K2R-6d-JTA"/>
                         <barButtonItem key="rightBarButtonItem" title="New" id="tTS-aY-AqN">
                             <connections>
                                 <action selector="newGame:" destination="BYZ-38-t0r" id="p3j-bU-HEH"/>
-                                <segue destination="fQ8-pX-Vlb" kind="show" id="fyg-Z5-RJM"/>
+                                <segue destination="m3T-nO-hHo" kind="show" id="UjI-eg-56e"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -190,7 +191,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJL-EZ-9qO">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJL-EZ-9qO">
                                 <rect key="frame" x="20" y="72" width="124" height="73"/>
                                 <animations/>
                                 <constraints>
@@ -234,7 +235,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="newGameFriendsCell" rowHeight="70" id="qog-Rb-mCo" customClass="NewGameFriendsTableViewCell" customModule="Chess_" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="70"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qog-Rb-mCo" id="KVc-6s-0iP">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="69"/>
