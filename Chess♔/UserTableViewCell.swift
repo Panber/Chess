@@ -137,7 +137,6 @@ class UserTableViewCell5: UITableViewCell {
 class GameMenuTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userProfileImage: UIImageView!
-    @IBOutlet weak var userProfileImageBC: UIImageView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var rating: UILabel!
     @IBOutlet weak var updated: UILabel!
@@ -145,32 +144,36 @@ class GameMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var colorIndicator: UILabel!
     @IBOutlet weak var content: UIView!
 
+    @IBOutlet weak var analyzeButton: UIButton!
 
 
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.content.layer.cornerRadius = cornerRadius
+       // self.content.layer.cornerRadius = cornerRadius
+//        self.contentView.layer.shadowColor = UIColor.blackColor().CGColor
+//                self.contentView.layer.shadowOpacity = 0.05
+//                //self.contentView.layer.shadowRadius = cornerRadius
+//               self.contentView.layer.shadowOffset = CGSizeZero
+//        
         self.content.clipsToBounds = true
         
         //changing profileImage
         self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
         self.userProfileImage.clipsToBounds = true
-        self.userProfileImage.layer.borderColor = UIColor.whiteColor().CGColor
-        self.userProfileImage.layer.borderWidth = 3
         
-        self.userProfileImageBC.clipsToBounds = true
+        self.colorIndicator.layer.cornerRadius = (self.colorIndicator.frame.size.width)/2
+        self.colorIndicator.clipsToBounds = true
+//        self.userProfileImage.layer.borderColor = UIColor(red:0.91, green:0.91, blue:0.91, alpha:1.0).CGColor
+//        self.userProfileImage.layer.borderWidth = 3
         
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight)) as UIVisualEffectView
-        if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-        else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-        visualEffectView.frame = self.userProfileImageBC.bounds
-        visualEffectView.frame.size.height += 20
-        visualEffectView.frame.size.width += 20
-        visualEffectView.frame.origin.y -= 10
-        visualEffectView.frame.origin.x -= 10
-        self.userProfileImageBC.insertSubview(visualEffectView, atIndex: 0)
+
+//        visualEffectView.frame.size.height += 20
+//        visualEffectView.frame.size.width += 20
+//        visualEffectView.frame.origin.y -= 10
+//        visualEffectView.frame.origin.x -= 10
+       // self.userProfileImageBC.insertSubview(visualEffectView, atIndex: 0)
         
     }
     

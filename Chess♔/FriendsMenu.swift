@@ -12,7 +12,7 @@ import Parse
 let usersObject = PFObject(className: "_User")
 
 
-class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDelegate{
+class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDelegate, UIScrollViewDelegate{
     
     // Array for users that are being searched for
     var users:NSMutableArray = []
@@ -55,6 +55,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         scrollView.scrollEnabled = true
         scrollView.contentSize = CGSizeMake(screenWidth, 2000)
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.delegate = self
         scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         
 
@@ -83,12 +84,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     //func to set up people in top10WorldView
     func addTop10World () {
         
-        blurBC1 = UIImageView(frame: CGRectMake(10, 55, screenWidth - 20, (screenWidth - 20)/(16/9)))
+        blurBC1 = UIImageView(frame: CGRectMake(0, 44, screenWidth , (screenWidth )/(16/9)))
       //  blurBC.image = UIImage(named: "JBpp.jpg")
-        blurBC1.layer.cornerRadius = cornerRadius
+        //blurBC1.layer.cornerRadius = cornerRadius
         blurBC1.contentMode = .ScaleAspectFill
-        blurBC1.layer.borderColor = UIColor.lightGrayColor().CGColor
-        blurBC1.layer.borderWidth = 0.5
+        //blurBC1.layer.borderColor = UIColor.lightGrayColor().CGColor
+       // blurBC1.layer.borderWidth = 0
         blurBC1.userInteractionEnabled = true
         blurBC1.clipsToBounds = true
         
@@ -97,11 +98,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
         else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
         visualEffectView.frame = blurBC1.bounds
+        visualEffectView.frame.size.height += 1
         blurBC1.addSubview(visualEffectView)
         
         let whiteF = UILabel(frame: CGRectMake(0, 0, blurBC1.frame.size.width, blurBC1.frame.size.height * (1/3)))
         whiteF.backgroundColor = UIColor.whiteColor()
-        whiteF.alpha = 0.8
+        //whiteF.alpha = 0.8
         blurBC1.addSubview(whiteF)
         
         let identifierLabel = UILabel(frame: CGRectMake(20, whiteF.frame.origin.y, blurBC1.frame.size.width - 20, whiteF.frame.size.height))
@@ -240,12 +242,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 
     func addTop10Friends () {
     
-        blurBC2 = UIImageView(frame: CGRectMake(10, 55 + blurBC1.frame.size.height + 15, screenWidth - 20, (screenWidth - 20)/(16/9)))
-        //  blurBC.image = UIImage(named: "JBpp.jpg")
-        blurBC2.layer.cornerRadius = cornerRadius
+        blurBC2 = UIImageView(frame: CGRectMake(0, 44 + blurBC1.frame.size.height + 15, screenWidth, (screenWidth)/(16/9)))
         blurBC2.contentMode = .ScaleAspectFill
-        blurBC2.layer.borderColor = UIColor.lightGrayColor().CGColor
-        blurBC2.layer.borderWidth = 0.5
         blurBC2.userInteractionEnabled = true
         blurBC2.clipsToBounds = true
         
@@ -254,11 +252,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
         else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
         visualEffectView.frame = blurBC2.bounds
+        visualEffectView.frame.size.height += 1
         blurBC2.addSubview(visualEffectView)
         
         let whiteF = UILabel(frame: CGRectMake(0, 0, blurBC2.frame.size.width, blurBC2.frame.size.height * (1/3)))
         whiteF.backgroundColor = UIColor.whiteColor()
-        whiteF.alpha = 0.8
+        //whiteF.alpha = 0.8
         blurBC2.addSubview(whiteF)
         
         let identifierLabel = UILabel(frame: CGRectMake(20, whiteF.frame.origin.y, blurBC2.frame.size.width - 20, whiteF.frame.size.height))
@@ -380,6 +379,33 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 
     
     
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let yPos = -scrollView.contentOffset.y
+        
+        if yPos >= 0 {
+            
+            
+            
+        }
+        
+        if yPos < 64 {
+            
+            blurBC1.frame.origin.y = scrollView.contentOffset.y + 105
+ 
+           
+        }
+        
+        if yPos < 64 - blurBC1.frame.size.height {
+            
+            blurBC2.frame.origin.y = scrollView.contentOffset.y + 105
+            
+            
+        }
+        
+        
+        
     }
     
     func toTop10WorldPressed(sender: UIButton!) {

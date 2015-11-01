@@ -56,7 +56,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         
         // Do any additional setup after loading the view.
         //setting scrollview
-        view.frame.size.height = 1000
+        view.frame.size.height = 650
         scrollView = UIScrollView(frame: view.bounds)
         scrollView.contentSize = view.bounds.size
         scrollView.frame.size.height = screenHeight
@@ -111,21 +111,19 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         
         view.addSubview(scrollView)
         //creating the view
-        contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
+        contentView = UIView(frame: CGRectMake(0, 0, screenWidth, screenHeight/5))
         
-        label0 = UILabel(frame: CGRectMake(0, 63 + contentView.frame.size.height - 9, screenWidth, 10))
+        label0 = UILabel(frame: CGRectMake(0, -1 + contentView.frame.size.height - 9, screenWidth, 10))
         label0.layer.shadowColor = UIColor.blackColor().CGColor
         label0.layer.shadowOpacity = 0.2
         label0.backgroundColor = UIColor.whiteColor()
         label0.layer.shadowOffset = CGSizeZero
-        scrollView.addSubview(label0)
         
         //creating the view
-        contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
+        //contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
         if darkMode { contentView.backgroundColor = UIColor(red: 0.12, green: 0.12 , blue: 0.12, alpha: 1) }
         else { contentView.backgroundColor = UIColor.whiteColor() }
         contentView.clipsToBounds = true
-        scrollView.addSubview(contentView)
         
         
         profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height+1))
@@ -388,6 +386,10 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         else { label19.textColor = UIColor.grayColor() }
         scrollView.addSubview(label19)
         
+        scrollView.addSubview(label0)
+        scrollView.addSubview(contentView)
+
+        
         
         
         
@@ -465,6 +467,12 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
             profilePicBlur.frame.size.height = contentView.frame.size.height + yPos
             profilePicBlur.contentMode = .ScaleAspectFill
             
+        }
+        
+        if yPos < 0 {
+        
+            contentView.frame.origin.y = 64 + scrollView.contentOffset.y
+            label0.frame.origin.y = scrollView.contentOffset.y + 63 + contentView.frame.size.height - 9
         }
         
         
