@@ -55,6 +55,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         scrollView.scrollEnabled = true
         scrollView.contentSize = CGSizeMake(screenWidth, 2000)
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         
@@ -84,7 +85,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     //func to set up people in top10WorldView
     func addTop10World () {
         
-        blurBC1 = UIImageView(frame: CGRectMake(0, 44, screenWidth , (screenWidth )/(16/9)))
+        blurBC1 = UIImageView(frame: CGRectMake(0, 0, screenWidth , (screenWidth )/(16/9)))
       //  blurBC.image = UIImage(named: "JBpp.jpg")
         //blurBC1.layer.cornerRadius = cornerRadius
         blurBC1.contentMode = .ScaleAspectFill
@@ -244,7 +245,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 
     func addTop10Friends () {
     
-        blurBC2 = UIImageView(frame: CGRectMake(0, 44 + blurBC1.frame.size.height + 15, screenWidth, (screenWidth)/(16/9)))
+        blurBC2 = UIImageView(frame: CGRectMake(0,  blurBC1.frame.size.height + 10, screenWidth, (screenWidth)/(16/9)))
         blurBC2.contentMode = .ScaleAspectFill
         blurBC2.userInteractionEnabled = true
         blurBC2.clipsToBounds = true
@@ -389,25 +390,25 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let yPos = -scrollView.contentOffset.y
         
-        if yPos >= 0 {
+        if yPos > 0 {
             
-            
+       //     blurBC1.frame.origin.y = scrollView.contentOffset.y
+
             
         }
         
-        if yPos < 64 {
-            
-            blurBC1.frame.origin.y = scrollView.contentOffset.y + 105
- 
-           
-        }
-        
-        if yPos < 64 - blurBC1.frame.size.height {
-            
-            blurBC2.frame.origin.y = scrollView.contentOffset.y + 105
-            
-            
-        }
+//        if yPos < 64 {
+//            
+// 
+//           
+//        }
+//        
+//        if yPos < 64 - blurBC1.frame.size.height {
+//            
+//            blurBC2.frame.origin.y = scrollView.contentOffset.y
+//            
+//            
+//        }
         
         
         

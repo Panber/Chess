@@ -52,9 +52,20 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     var typeofGameover: Array<String> = []
     
+    var instructionsLabel = UILabel()
+    
     override func viewDidLoad() {
         
-
+        
+        instructionsLabel = UILabel(frame: CGRectMake(20, 64 ,screenWidth - 40,100))
+        let new = "-New-"
+        instructionsLabel.text = "Please add a new game by pressing \(new)"
+        instructionsLabel.font = UIFont(name: "Didot", size: 20)
+        instructionsLabel.textColor = UIColor.darkGrayColor()
+        instructionsLabel.numberOfLines = 0
+        instructionsLabel.textAlignment = .Center
+        view.addSubview(instructionsLabel)
+        
         
         super.viewDidLoad()
         
@@ -383,15 +394,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         tableView.hidden = true
         
-            let instructionsLabel = UILabel(frame: CGRectMake(20,screenHeight/2 - 100 ,screenWidth - 40,200))
-            let new = "-New-"
-            instructionsLabel.text = "Please add a new game by pressing \(new)"
-            instructionsLabel.font = UIFont(name: "Didot", size: 20)
-            instructionsLabel.textColor = UIColor.whiteColor()
-            instructionsLabel.numberOfLines = 0
-            instructionsLabel.textAlignment = .Center
-            view.addSubview(instructionsLabel)
+
             
+        }
+        else {
+        instructionsLabel.hidden = true
+        tableView.hidden = false
+
+        
         }
         
         switch section {

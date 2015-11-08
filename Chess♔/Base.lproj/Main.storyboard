@@ -860,7 +860,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTV-8r-Zkz">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <animations/>
                             </scrollView>
                             <searchBar contentMode="redraw" misplaced="YES" placeholder="Search" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZt-ni-vmc">
@@ -899,7 +899,7 @@
                                     <outlet property="delegate" destination="NkV-B6-IDt" id="AvH-dw-Af1"/>
                                 </connections>
                             </searchBar>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-dp-8si">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-dp-8si">
                                 <rect key="frame" x="0.0" y="152" width="600" height="448"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -974,7 +974,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vTV-8r-Zkz" firstAttribute="trailing" secondItem="iVT-dp-8si" secondAttribute="trailing" id="6c6-pf-DNb"/>
-                            <constraint firstItem="iVT-dp-8si" firstAttribute="top" secondItem="mZt-ni-vmc" secondAttribute="bottom" constant="44" id="6pG-g2-q9H"/>
+                            <constraint firstItem="iVT-dp-8si" firstAttribute="top" secondItem="mZt-ni-vmc" secondAttribute="bottom" id="6pG-g2-q9H"/>
                             <constraint firstItem="iVT-dp-8si" firstAttribute="top" secondItem="mZt-ni-vmc" secondAttribute="bottom" constant="44" id="9UC-KN-Vly"/>
                             <constraint firstAttribute="bottomMargin" secondItem="iVT-dp-8si" secondAttribute="bottom" constant="-87" id="ImB-yx-99v"/>
                             <constraint firstAttribute="bottom" secondItem="vTV-8r-Zkz" secondAttribute="bottom" id="JKm-D9-Eoo"/>
@@ -984,7 +984,7 @@
                             <constraint firstItem="mZt-ni-vmc" firstAttribute="trailing" secondItem="iVT-dp-8si" secondAttribute="trailing" id="OXR-AK-zMN"/>
                             <constraint firstItem="iVT-dp-8si" firstAttribute="top" secondItem="mZt-ni-vmc" secondAttribute="bottom" constant="44" id="Vcw-oh-fJs"/>
                             <constraint firstItem="mZt-ni-vmc" firstAttribute="top" secondItem="QpH-xe-MzJ" secondAttribute="bottom" id="W9y-sQ-GRP"/>
-                            <constraint firstItem="vTV-8r-Zkz" firstAttribute="top" secondItem="heB-LL-bz1" secondAttribute="top" id="Xf5-Ur-3i4"/>
+                            <constraint firstItem="vTV-8r-Zkz" firstAttribute="top" secondItem="heB-LL-bz1" secondAttribute="top" constant="44" id="Xf5-Ur-3i4"/>
                             <constraint firstItem="mZt-ni-vmc" firstAttribute="top" secondItem="QpH-xe-MzJ" secondAttribute="bottom" id="c01-YW-Sq9"/>
                             <constraint firstItem="mZt-ni-vmc" firstAttribute="leading" secondItem="heB-LL-bz1" secondAttribute="leading" id="cSl-00-c0p"/>
                             <constraint firstAttribute="trailing" secondItem="mZt-ni-vmc" secondAttribute="trailing" id="fi7-Po-vdJ"/>
