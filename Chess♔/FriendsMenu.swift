@@ -171,7 +171,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 self.top10WorldArrayRating = []
                 self.top10WorldArrayImage = []
                 
-                for usersObject in usersObject! {
+                if let usersObject = usersObject as! [PFObject]! {
+                for usersObject in usersObject {
                     
                     
                     self.top10WorldArrayRating.append(usersObject["rating"] as! Int)
@@ -183,6 +184,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     
                   
                 
+                }
                 }
                 //image
 
@@ -315,12 +317,15 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             ratingQuery.limit = 10
             ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
                 if error == nil {
-                    for usersObject in usersObject! {
+                    
+                    if let usersObject = usersObject as! [PFObject]! {
+                    for usersObject in usersObject {
                         self.top10FriendsArrayRating.append(usersObject["rating"] as! Int)
                         print(self.top10FriendsArrayRating)
                         self.top10FriendsArrayUsers.append(usersObject["username"] as! String)
                         print(self.top10FriendsArrayUsers)
                         
+                    }
                     }
                     usernameLabel.text = self.top10FriendsArrayUsers[0]
                     ratingLabel.text = "\(self.top10FriendsArrayRating[0])"

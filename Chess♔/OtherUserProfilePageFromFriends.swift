@@ -660,13 +660,16 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                 
                 if error == nil {
                     
-                    
-                    for friends in friends! {
+                    if let friends = friends as! [PFObject]!{
+
+                    for friends in friends {
                         
                         ff = friends["friends"] as! NSMutableArray
                         print(ff)
                         
                     }
+                    }
+                    
                     for var i = 0; i < ff.count; i++ {
                         
                         if ff[i] as! String == NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as! String {
@@ -693,11 +696,11 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         userFriendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
             
             if error == nil {
-                
-                for friends in friends! {
+                if let friends = friends as! [PFObject]!{
+                for friends in friends {
                     off = friends["friends"] as! NSMutableArray
                 }
-                
+                }
                 for var i = 0; i < off.count; i++ {
                     if off[i] as? String == PFUser.currentUser()?.username {
                         off.removeObjectAtIndex(i)
@@ -819,13 +822,14 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                 
                 if error == nil {
                     
-                    
-                    for request in request! {
+                    if let request = request as! [PFObject]!{
+
+                    for request in request {
                         self.usersFrom = request["fromUser"] as! String
                         
                         request.deleteEventually()
                     }
-                    
+                    }
                     let userFriendsQuery = PFQuery(className: "Friends")
                     userFriendsQuery.whereKey("username", equalTo: self.usersFrom)
                     userFriendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in

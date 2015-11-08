@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import Bolts
 
 var blue = UIColor(red:0.17, green:0.33, blue:0.71, alpha:1.0)
 
@@ -26,7 +27,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     @IBOutlet weak var newButtonOutlet: UIBarButtonItem!
     
-    @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
+  //  @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
 
     
     var usernameArray: Array<String> = []
@@ -64,7 +65,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         let customFont = UIFont(name: "Didot", size: 18.0)
         newButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
-        editButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+   //     editButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
 
        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         self.tableView.backgroundColor = UIColor.whiteColor()
@@ -169,7 +170,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         gamesQuery.orderByDescending("updatedAt")
         gamesQuery.whereKey("whitePlayer", equalTo: PFUser.currentUser()!.username!)
         gamesQuery.findObjectsInBackgroundWithBlock { (games:[AnyObject]?, error:NSError?) -> Void in
-            for games in games! {
+            
+            if let games = games as! [PFObject]! {
+            for games in games {
                 
                // self.usernameArray.append((games["blackPlayer"] as? String)!)
          //       self.indicatorDataArray.append((games["status_white"] as? String)!)
@@ -180,7 +183,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     
                     //adding updated since
                     let lastupdate = games.createdAt!
-                    let since = NSDate().timeIntervalSinceDate(lastupdate!)
+                    let since = NSDate().timeIntervalSinceDate(lastupdate)
                     self.yourturnUpdateSince.append(since)
                     
                     
@@ -192,7 +195,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     
                     //adding updated since
                     let lastupdate = games.createdAt!
-                    let since = NSDate().timeIntervalSinceDate(lastupdate!)
+                    let since = NSDate().timeIntervalSinceDate(lastupdate)
                     self.theirturnUpdateSince.append(since)
                 
                 }
@@ -203,7 +206,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     
                     //adding updated since
                     let lastupdate = games.createdAt!
-                    let since = NSDate().timeIntervalSinceDate(lastupdate!)
+                    let since = NSDate().timeIntervalSinceDate(lastupdate)
                     self.gameoverUpdateSince.append(since)
                     
                 }
@@ -211,6 +214,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 //  updatedArrayppend(games["blackPlayer"] as! String)
                 //  timeleftArrayppend(games["blackPlayer"] as! String)
                 
+            }
             }
             self.tableView.hidden = false
             self.tableView.reloadData()
@@ -600,7 +604,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
                 self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
                 self.newButtonOutlet.tintColor = UIColor.whiteColor()
-                self.editButtonOutlet.tintColor = UIColor.whiteColor()
+            //    self.editButtonOutlet.tintColor = UIColor.whiteColor()
 //            
 //            //setting top logo
 //            logo = UIImage(named: "ChessIconSmallTextAndLogoDarkMode.png")
@@ -622,7 +626,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 self.tabBarController?.tabBar.tintColor = blue
                 self.navigationController?.navigationBar.tintColor = blue
                 self.newButtonOutlet.tintColor = blue
-                self.editButtonOutlet.tintColor = blue
+           //     self.editButtonOutlet.tintColor = blue
             
 //            //setting top logo
 //            logo = UIImage(named: "ChessIconSmallTextAndLogo.png")

@@ -409,12 +409,13 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
                     var users: Array<String> = []
                     if error == nil {
                         
-                        for frequests in frequests! {
+                        if let frequests = frequests as! [PFObject]! {
+                        for frequests in frequests {
 
                         users.append(frequests["fromUser"] as! String)
                             
                         }
-                        
+                        }
                         NSUserDefaults.standardUserDefaults().setObject(users, forKey: "friend_requests_user")
                         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("FriendRequests")
                         self.showViewController(vc as! UIViewController, sender: vc)

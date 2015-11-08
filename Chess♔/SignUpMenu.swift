@@ -653,7 +653,6 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         let userDetails = FBSDKGraphRequest(graphPath: "me", parameters: requestParameters)
         userDetails.startWithCompletionHandler({
             (connection, result, error: NSError!) -> Void in
-            
             if error != nil {
                 
                 let userMessage = error!.localizedDescription
