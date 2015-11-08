@@ -196,7 +196,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     self.theirturnUpdateSince.append(since)
                 
                 }
-                else if games["status_white"] as? String == "won" || games["status_white"] as! String == "lost"{
+                else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost"{
                     
                     self.gameoverArray.append((games["blackPlayer"] as? String)!)
                     self.typeofGameover.append((games["status_white"] as? String)!)
@@ -375,6 +375,21 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
+        if yourturnArray.count == 0 && theirturnArray.count == 0 && gameoverArray.count == 0 {
+        
+        tableView.hidden = true
+        
+            let instructionsLabel = UILabel(frame: CGRectMake(20,screenHeight/2 - 100 ,screenWidth - 40,200))
+            let new = "-New-"
+            instructionsLabel.text = "Please add a new game by pressing \(new)"
+            instructionsLabel.font = UIFont(name: "Didot", size: 20)
+            instructionsLabel.textColor = UIColor.whiteColor()
+            instructionsLabel.numberOfLines = 0
+            instructionsLabel.textAlignment = .Center
+            view.addSubview(instructionsLabel)
+            
+        }
+        
         switch section {
         case 0:
             return yourturnArray.count
