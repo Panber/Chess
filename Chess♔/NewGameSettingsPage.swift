@@ -130,6 +130,9 @@ class NewGameSettingsPage: UIViewController {
         game["confirmed"] = false
         game["piecePosition"] = NSMutableArray()
         game["turn"] = white
+        game["status_white"] = "request"
+        game["status_black"] = "request"
+
         
         game["timeLeftToMove"] = NSDate()
         
@@ -137,11 +140,11 @@ class NewGameSettingsPage: UIViewController {
             
             game["timePerMove"] = 1
             
-            //            let now = NSDate()
-            //            let daysToAdd: Double = 1
-            //            let newDate = now.dateByAddingTimeInterval(60 * 60 * 24 * daysToAdd)
-            //
-            //            game["gameEnds"] = newDate
+//                        let now = NSDate()
+//                        let daysToAdd: Double = 1
+//                        let newDate = now.dateByAddingTimeInterval(60 * 60 * 24 * daysToAdd)
+//            
+//                        game["gameEnds"] = newDate
             
         }
         else if speed == "Slow" {

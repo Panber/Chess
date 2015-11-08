@@ -41,6 +41,16 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var theirturnArray: Array<String> = []
     var gameoverArray: Array<String> = []
     
+    var yourturnUpdateSince: Array<NSTimeInterval> = []
+    var theirturnUpdateSince: Array<NSTimeInterval> = []
+    var gameoverUpdateSince: Array<NSTimeInterval> = []
+    
+    var yourturnLeft: Array<NSTimeInterval> = []
+    var theirturnLeft: Array<NSTimeInterval> = []
+
+    
+    var typeofGameover: Array<String> = []
+    
     override func viewDidLoad() {
         
 
@@ -61,7 +71,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         print("the current installation is \(PFInstallation.currentInstallation())")
 
-        findGames()
 
         //check this before launching!!!!!!
 //        //Checking if first launch
@@ -141,6 +150,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 //        scrollView.showsVerticalScrollIndicator = false
     }
 
+
     
     @IBAction func newGame(sender: AnyObject) {
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "created_New_Game")
@@ -152,7 +162,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func findGames() {
         
-        usernameArray = []
+       // usernameArray = []
+        tableView.hidden = true
         let gamesQuery = PFQuery(className: "Games")
         //fix this
         gamesQuery.orderByDescending("updatedAt")
@@ -164,22 +175,44 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
          //       self.indicatorDataArray.append((games["status_white"] as? String)!)
                 
                 if games["status_white"] as? String == "move" {
+                    
                     self.yourturnArray.append((games["blackPlayer"] as? String)!)
+                    
+                    //adding updated since
+                    let lastupdate = games.createdAt!
+                    let since = NSDate().timeIntervalSinceDate(lastupdate!)
+                    self.yourturnUpdateSince.append(since)
+                    
+                    
+                    
                 }
                 else if games["status_white"] as? String == "notmove" {
                     
                     self.theirturnArray.append((games["blackPlayer"] as? String)!)
+                    
+                    //adding updated since
+                    let lastupdate = games.createdAt!
+                    let since = NSDate().timeIntervalSinceDate(lastupdate!)
+                    self.theirturnUpdateSince.append(since)
                 
                 }
                 else if games["status_white"] as? String == "won" || games["status_white"] as! String == "lost"{
                     
                     self.gameoverArray.append((games["blackPlayer"] as? String)!)
+                    self.typeofGameover.append((games["status_white"] as? String)!)
+                    
+                    //adding updated since
+                    let lastupdate = games.createdAt!
+                    let since = NSDate().timeIntervalSinceDate(lastupdate!)
+                    self.gameoverUpdateSince.append(since)
+                    
                 }
                 //self.ratingArray.append(games["blackPlayer"] as! Int)
                 //  updatedArrayppend(games["blackPlayer"] as! String)
                 //  timeleftArrayppend(games["blackPlayer"] as! String)
                 
             }
+            self.tableView.hidden = false
             self.tableView.reloadData()
 
         }
@@ -192,21 +225,24 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell") as! GameMenuTableViewCell
+        
+        
+        let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
     
+        
         func find(name:String) {
+            
         let query = PFQuery(className: "_User")
         
         query.whereKey("username", equalTo: name)
-        //query.orderByDescending("username")
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             if (error == nil) {
                 
                 if let userArray = objects as? [PFUser] {
                     for user in userArray {
                         
+                        cell.rating.text = String(user["rating"] as! Int)
 
-                        
                         if let userPicture = user["profile_picture"] as? PFFile {
                             
                             userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
@@ -237,8 +273,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
      
 
         
-        cell.rating.text = "601"
-        cell.updated.text = "Last Update: 1h 5min"
+       // cell.rating.text = "601"
+       // cell.updated.text = "Last Update: 1h 5min"
         cell.timeleft.text = "Time Left: 2h 29min"
         
         switch indexPath.section {
@@ -246,15 +282,83 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 cell.colorIndicator.backgroundColor = blue
                 find(yourturnArray[indexPath.row])
             
+                var since = yourturnUpdateSince[indexPath.row]
+                //making to minutes
+                if since >= 60 {
+                    since = since/60
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)min ago"
+                }
+                //making to hours
+                if since >= 60 {
+                    since = since/60
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)h ago"
+                    
+                }
+                //making to days
+                if since >= 24 {
+                    since = since/24
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                    
+                }
+            
             
         case 1:
                 cell.colorIndicator.backgroundColor = UIColor.lightGrayColor()
                 find(theirturnArray[indexPath.row])
             
-        case 2:
+                var since = theirturnUpdateSince[indexPath.row]
+                //making to minutes
+                if since >= 60 {
+                    since = since/60
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)min ago"
+                }
+                //making to hours
+                if since >= 60 {
+                    since = since/60
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)h ago"
+                    
+                }
+                //making to days
+                if since >= 24 {
+                    since = since/24
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                }
             
+        case 2:
+            if typeofGameover[indexPath.row] == "lost" {
                 cell.colorIndicator.backgroundColor = UIColor.redColor()
+            }
+            else {
+                cell.colorIndicator.backgroundColor = UIColor.greenColor()
+            }
                 find(gameoverArray[indexPath.row])
+            
+            var since = gameoverUpdateSince[indexPath.row]
+            //making to minutes
+            if since >= 60 {
+                since = since/60
+                let sinceOutput = Int(since)
+                cell.updated.text = "Last Updated: \(sinceOutput)min ago"
+            }
+            //making to hours
+            if since >= 60 {
+                since = since/60
+                let sinceOutput = Int(since)
+                cell.updated.text = "Last Updated: \(sinceOutput)h ago"
+                
+            }
+            //making to days
+            if since >= 24 {
+                since = since/24
+                let sinceOutput = Int(since)
+                cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+            }
             
         default:
             ""
@@ -431,8 +535,39 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
+        findGames()
+
 
         lightOrDarkMode()
+    }
+    override func viewDidAppear(animated: Bool) {
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        usernameArray = []
+        yourturnArray = []
+        theirturnArray = []
+        gameoverArray = []
+        imageDataArray = []
+        typeofGameover = []
+        
+         usernameArray = []
+         ratingArray = []
+         updatedArray = []
+         timeleftArray = []
+         profilePicArray = []
+         imageDataArray = []
+         indicatorDataArray = []
+        
+         yourturnUpdateSince = []
+         theirturnUpdateSince = []
+         gameoverUpdateSince = []
+        
+         yourturnLeft = []
+         theirturnLeft = []
+        
+        tableView.reloadData()
+        
     }
 
     
