@@ -49,6 +49,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var yourturnLeft: Array<NSTimeInterval> = []
     var theirturnLeft: Array<NSTimeInterval> = []
 
+    var yourTurnColor: Array<String> = []
+    var theirTurnColor: Array<String> = []
+    var gameoverTurnColor: Array<String> = []
+
+
     
     var typeofGameover: Array<String> = []
     
@@ -189,6 +194,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
          //       self.indicatorDataArray.append((games["status_white"] as? String)!)
                 if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
                 
+                    
                     if games["status_white"] as? String == "move" {
                         
                         self.yourturnArray.append((games["blackPlayer"] as? String)!)
@@ -198,7 +204,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.yourturnUpdateSince.append(since)
                         
-                        
+                        self.yourTurnColor.append("white")
+
                         
                     }
                     else if games["status_white"] as? String == "notmove" {
@@ -210,6 +217,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.theirturnUpdateSince.append(since)
                         
+                        self.theirTurnColor.append("white")
+
+                        
                     }
                     else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost"{
                         
@@ -220,6 +230,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let lastupdate = games.createdAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.gameoverUpdateSince.append(since)
+                        
+                        self.gameoverTurnColor.append("white")
+
                         
                     }
                     
@@ -235,6 +248,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.yourturnUpdateSince.append(since)
                         
+                        self.yourTurnColor.append("black")
+
+                        
                         
                         
                     }
@@ -247,6 +263,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.theirturnUpdateSince.append(since)
                         
+                        self.theirTurnColor.append("black")
+
+                        
                     }
                     else if games["status_black"] as? String == "won" || games["status_black"] as? String == "lost"{
                         
@@ -257,6 +276,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let lastupdate = games.createdAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.gameoverUpdateSince.append(since)
+                        
+                        self.gameoverTurnColor.append("black")
+
                         
                     }
 
@@ -345,6 +367,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 cell.colorIndicator.backgroundColor = blue
                 find(yourturnArray[indexPath.row])
             
+                if yourTurnColor[indexPath.row] == "white" {
+                    cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
+                }
+                else {
+                    cell.pieceIndicator.backgroundColor = UIColor.blackColor()
+                }
+                    
+                
                 var since = yourturnUpdateSince[indexPath.row]
                 //making to minutes
                 if since >= 60 {
@@ -372,6 +402,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 cell.colorIndicator.backgroundColor = UIColor.lightGrayColor()
                 find(theirturnArray[indexPath.row])
             
+                if theirTurnColor[indexPath.row] == "white" {
+                    cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
+                }
+                else {
+                    cell.pieceIndicator.backgroundColor = UIColor.blackColor()
+                }
+                
                 var since = theirturnUpdateSince[indexPath.row]
                 //making to minutes
                 if since >= 60 {
@@ -401,6 +438,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 cell.colorIndicator.backgroundColor = UIColor.greenColor()
             }
                 find(gameoverArray[indexPath.row])
+            
+            if gameoverTurnColor[indexPath.row] == "white" {
+                cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
+            }
+            else {
+                cell.pieceIndicator.backgroundColor = UIColor.blackColor()
+            }
             
             var since = gameoverUpdateSince[indexPath.row]
             //making to minutes

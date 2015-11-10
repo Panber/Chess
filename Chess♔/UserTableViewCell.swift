@@ -144,6 +144,7 @@ class GameMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var colorIndicator: UILabel!
     @IBOutlet weak var content: UIView!
 
+    @IBOutlet weak var pieceIndicator: UILabel!
     @IBOutlet weak var analyzeButton: UIButton!
 
 
@@ -165,8 +166,10 @@ class GameMenuTableViewCell: UITableViewCell {
         
         self.colorIndicator.layer.cornerRadius = (self.colorIndicator.frame.size.width)/2
         self.colorIndicator.clipsToBounds = true
-//        self.userProfileImage.layer.borderColor = UIColor(red:0.91, green:0.91, blue:0.91, alpha:1.0).CGColor
-//        self.userProfileImage.layer.borderWidth = 3
+        
+        self.pieceIndicator.layer.borderColor = UIColor.blackColor().CGColor
+        self.pieceIndicator.layer.borderWidth = 1
+        self.pieceIndicator.backgroundColor = UIColor.whiteColor()
         
 
 //        visualEffectView.frame.size.height += 20

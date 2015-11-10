@@ -125,6 +125,7 @@ class NewGameSettingsPage: UIViewController {
         let game = PFObject(className: "Games")
         game["whitePlayer"] = white
         game["blackPlayer"] = black
+        game["players"] = [white,black]
         game["speed"] = speed
         game["mode"] = mode
         game["confirmed"] = false
