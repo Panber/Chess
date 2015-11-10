@@ -179,48 +179,95 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         let gamesQuery = PFQuery(className: "Games")
         //fix this
         gamesQuery.orderByDescending("updatedAt")
-        gamesQuery.whereKey("whitePlayer", equalTo: PFUser.currentUser()!.username!)
+        gamesQuery.whereKey("players", equalTo: PFUser.currentUser()!.username!)
         gamesQuery.findObjectsInBackgroundWithBlock { (games:[AnyObject]?, error:NSError?) -> Void in
-            
+            if error == nil {
             if let games = games as! [PFObject]! {
             for games in games {
                 
                // self.usernameArray.append((games["blackPlayer"] as? String)!)
          //       self.indicatorDataArray.append((games["status_white"] as? String)!)
+                if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
                 
-                if games["status_white"] as? String == "move" {
-                    
-                    self.yourturnArray.append((games["blackPlayer"] as? String)!)
-                    
-                    //adding updated since
-                    let lastupdate = games.createdAt!
-                    let since = NSDate().timeIntervalSinceDate(lastupdate)
-                    self.yourturnUpdateSince.append(since)
-                    
-                    
+                    if games["status_white"] as? String == "move" {
+                        
+                        self.yourturnArray.append((games["blackPlayer"] as? String)!)
+                        
+                        //adding updated since
+                        let lastupdate = games.createdAt!
+                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        self.yourturnUpdateSince.append(since)
+                        
+                        
+                        
+                    }
+                    else if games["status_white"] as? String == "notmove" {
+                        
+                        self.theirturnArray.append((games["blackPlayer"] as? String)!)
+                        
+                        //adding updated since
+                        let lastupdate = games.createdAt!
+                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        self.theirturnUpdateSince.append(since)
+                        
+                    }
+                    else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost"{
+                        
+                        self.gameoverArray.append((games["blackPlayer"] as? String)!)
+                        self.typeofGameover.append((games["status_white"] as? String)!)
+                        
+                        //adding updated since
+                        let lastupdate = games.createdAt!
+                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        self.gameoverUpdateSince.append(since)
+                        
+                    }
                     
                 }
-                else if games["status_white"] as? String == "notmove" {
+                else {
                     
-                    self.theirturnArray.append((games["blackPlayer"] as? String)!)
-                    
-                    //adding updated since
-                    let lastupdate = games.createdAt!
-                    let since = NSDate().timeIntervalSinceDate(lastupdate)
-                    self.theirturnUpdateSince.append(since)
+                    if games["status_black"] as? String == "move" {
+                        
+                        self.yourturnArray.append((games["whitePlayer"] as? String)!)
+                        
+                        //adding updated since
+                        let lastupdate = games.createdAt!
+                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        self.yourturnUpdateSince.append(since)
+                        
+                        
+                        
+                    }
+                    else if games["status_black"] as? String == "notmove" {
+                        
+                        self.theirturnArray.append((games["whitePlayer"] as? String)!)
+                        
+                        //adding updated since
+                        let lastupdate = games.createdAt!
+                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        self.theirturnUpdateSince.append(since)
+                        
+                    }
+                    else if games["status_black"] as? String == "won" || games["status_black"] as? String == "lost"{
+                        
+                        self.gameoverArray.append((games["whitePlayer"] as? String)!)
+                        self.typeofGameover.append((games["status_black"] as? String)!)
+                        
+                        //adding updated since
+                        let lastupdate = games.createdAt!
+                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        self.gameoverUpdateSince.append(since)
+                        
+                    }
+
+                
                 
                 }
-                else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost"{
-                    
-                    self.gameoverArray.append((games["blackPlayer"] as? String)!)
-                    self.typeofGameover.append((games["status_white"] as? String)!)
-                    
-                    //adding updated since
-                    let lastupdate = games.createdAt!
-                    let since = NSDate().timeIntervalSinceDate(lastupdate)
-                    self.gameoverUpdateSince.append(since)
-                    
-                }
+                
+                
+                
+                
+                
                 //self.ratingArray.append(games["blackPlayer"] as! Int)
                 //  updatedArrayppend(games["blackPlayer"] as! String)
                 //  timeleftArrayppend(games["blackPlayer"] as! String)
@@ -229,6 +276,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             }
             self.tableView.hidden = false
             self.tableView.reloadData()
+            }
 
         }
     
