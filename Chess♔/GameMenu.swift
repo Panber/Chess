@@ -664,7 +664,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     override func viewDidAppear(animated: Bool) {
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewDidDisappear(animated: Bool) {
         usernameArray = []
         yourturnArray = []
         theirturnArray = []

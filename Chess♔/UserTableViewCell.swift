@@ -220,5 +220,29 @@ class NewGameFriendsTableViewCell: UITableViewCell {
     
 }
 
-
+class GameInvitesTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var rating: UILabel!
+    @IBOutlet weak var checkmarkButton: UIButton!
+    @IBOutlet weak var crossButton: UIButton!
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        //changing profileImage
+        self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
+        self.userProfileImage.clipsToBounds = true
+    }
+    
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state /
+    }
+    
+}
 ///////Fornøyd???
