@@ -143,7 +143,7 @@ class GameMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var timeleft: UILabel!
     @IBOutlet weak var colorIndicator: UILabel!
     @IBOutlet weak var content: UIView!
-
+    @IBOutlet weak var speedIndicator: UIImageView!
     @IBOutlet weak var pieceIndicator: UILabel!
     @IBOutlet weak var analyzeButton: UIButton!
 

@@ -36,6 +36,7 @@
 		8F273CF51BF29E4300275378 /* clock104.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F273CF21BF29E4300275378 /* clock104.png */; };
 		8F273CF61BF29E4300275378 /* flash31.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F273CF31BF29E4300275378 /* flash31.png */; };
 		8F273CF81BF2A36200275378 /* normalModeIndicator2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F273CF71BF2A36200275378 /* normalModeIndicator2.png */; };
+		8F273CFA1BF3969800275378 /* normalIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F273CF91BF3969800275378 /* normalIndicator.png */; };
 		8F2DD6DE1B9AFFF80059CEFA /* board black and white no border.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D21B9AFFF80059CEFA /* board black and white no border.png */; };
 		8F2DD6DF1B9AFFF80059CEFA /* ChessIconTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D31B9AFFF80059CEFA /* ChessIconTab@3x.png */; };
 		8F2DD6E01B9AFFF80059CEFA /* clack and white board with half boarder copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D41B9AFFF80059CEFA /* clack and white board with half boarder copy.png */; };
@@ -189,6 +190,7 @@
 		8F273CF21BF29E4300275378 /* clock104.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock104.png; sourceTree = "<group>"; };
 		8F273CF31BF29E4300275378 /* flash31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash31.png; sourceTree = "<group>"; };
 		8F273CF71BF2A36200275378 /* normalModeIndicator2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalModeIndicator2.png; sourceTree = "<group>"; };
+		8F273CF91BF3969800275378 /* normalIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalIndicator.png; sourceTree = "<group>"; };
 		8F2DD6D21B9AFFF80059CEFA /* board black and white no border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "board black and white no border.png"; sourceTree = "<group>"; };
 		8F2DD6D31B9AFFF80059CEFA /* ChessIconTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChessIconTab@3x.png"; sourceTree = "<group>"; };
 		8F2DD6D41B9AFFF80059CEFA /* clack and white board with half boarder copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clack and white board with half boarder copy.png"; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				8F1E8ECD1BD7F66C00C41D37 /* profilePicPlaceholder.jpg */,
 				8F273CF21BF29E4300275378 /* clock104.png */,
 				8F273CF71BF2A36200275378 /* normalModeIndicator2.png */,
+				8F273CF91BF3969800275378 /* normalIndicator.png */,
 				8F273CF31BF29E4300275378 /* flash31.png */,
 				8FB94F981BE62EA80029EF00 /* chatIcon.png */,
 				8F1E8ED31BD8362A00C41D37 /* PanBerLogoDark2.png */,
@@ -763,6 +766,7 @@
 				8F2DD6E21B9AFFF80059CEFA /* Friends@3x.png in Resources */,
 				8F910C301BD6C58F0003647E /* 20.jpg in Resources */,
 				8F056AF81BAF533C00CD617B /* DarkModePreview.png in Resources */,
+				8F273CFA1BF3969800275378 /* normalIndicator.png in Resources */,
 				8F2DD6E11B9AFFF80059CEFA /* Data@3x.png in Resources */,
 				8F8BD2B61BC6C1C500B25CFE /* close38.png in Resources */,
 				8F2DD6E61B9AFFF80059CEFA /* piecePossibilities.png in Resources */,

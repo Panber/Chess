@@ -53,6 +53,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var theirTurnColor: Array<String> = []
     var gameoverTurnColor: Array<String> = []
 
+    var yourTurnSpeed: Array<String> = []
+    var theirTurnSpeed: Array<String> = []
+    var gameoverTurnSpeed: Array<String> = []
 
     
     var typeofGameover: Array<String> = []
@@ -204,7 +207,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.yourturnUpdateSince.append(since)
                         
+                        
                         self.yourTurnColor.append("white")
+                        
+                        self.yourTurnSpeed.append((games["speed"] as? String)!)
 
                         
                     }
@@ -218,6 +224,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.theirturnUpdateSince.append(since)
                         
                         self.theirTurnColor.append("white")
+                        
+                        self.theirTurnSpeed.append((games["speed"] as? String)!)
+
 
                         
                     }
@@ -232,6 +241,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.gameoverUpdateSince.append(since)
                         
                         self.gameoverTurnColor.append("white")
+                        
+                        self.gameoverTurnSpeed.append((games["speed"] as? String)!)
+
 
                         
                     }
@@ -249,6 +261,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.yourturnUpdateSince.append(since)
                         
                         self.yourTurnColor.append("black")
+                        
+                        self.yourTurnSpeed.append((games["speed"] as? String)!)
+
 
                         
                         
@@ -264,6 +279,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.theirturnUpdateSince.append(since)
                         
                         self.theirTurnColor.append("black")
+                        
+                        self.theirTurnSpeed.append((games["speed"] as? String)!)
+
 
                         
                     }
@@ -278,6 +296,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.gameoverUpdateSince.append(since)
                         
                         self.gameoverTurnColor.append("black")
+                        
+                        self.gameoverTurnSpeed.append((games["speed"] as? String)!)
+
 
                         
                     }
@@ -373,7 +394,21 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 else {
                     cell.pieceIndicator.backgroundColor = UIColor.blackColor()
                 }
-                    
+                
+                
+                if yourTurnSpeed[indexPath.row] == "Normal" {
+                    cell.speedIndicator.image = UIImage(named: "normalIndicator.png")
+                }
+                else if yourTurnSpeed[indexPath.row] == "Fast" {
+                    cell.speedIndicator.image = UIImage(named: "flash31.png")
+
+                }
+                else if yourTurnSpeed[indexPath.row] == "Slow" {
+                    cell.speedIndicator.image = UIImage(named: "clock104.png")
+                }
+
+
+                
                 
                 var since = yourturnUpdateSince[indexPath.row]
                 //making to minutes
@@ -407,6 +442,17 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 }
                 else {
                     cell.pieceIndicator.backgroundColor = UIColor.blackColor()
+                }
+                
+                if theirTurnSpeed[indexPath.row] == "Normal" {
+                    cell.speedIndicator.image = UIImage(named: "normalIndicator.png")
+                }
+                else if theirTurnSpeed[indexPath.row] == "Fast" {
+                    cell.speedIndicator.image = UIImage(named: "flash31.png")
+                    
+                }
+                else if theirTurnSpeed[indexPath.row] == "Slow" {
+                    cell.speedIndicator.image = UIImage(named: "clock104.png")
                 }
                 
                 var since = theirturnUpdateSince[indexPath.row]
@@ -444,6 +490,17 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             }
             else {
                 cell.pieceIndicator.backgroundColor = UIColor.blackColor()
+            }
+            
+            if gameoverTurnSpeed[indexPath.row] == "Normal" {
+                cell.speedIndicator.image = UIImage(named: "normalIndicator.png")
+            }
+            else if gameoverTurnSpeed[indexPath.row] == "Fast" {
+                cell.speedIndicator.image = UIImage(named: "flash31.png")
+                
+            }
+            else if gameoverTurnSpeed[indexPath.row] == "Slow" {
+                cell.speedIndicator.image = UIImage(named: "clock104.png")
             }
             
             var since = gameoverUpdateSince[indexPath.row]
