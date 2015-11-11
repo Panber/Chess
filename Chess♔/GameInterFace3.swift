@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 //x-Axis coordinates
-let a:CGFloat = 0 * pieceSize
+let a: CGFloat = 0 * pieceSize
 let b =  pieceSize
 let c = 2 * pieceSize
 let d = 3 * pieceSize
