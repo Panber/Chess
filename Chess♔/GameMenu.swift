@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import Bolts
 
 var blue = UIColor(red:0.17, green:0.33, blue:0.71, alpha:1.0)
 
@@ -26,7 +27,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     @IBOutlet weak var newButtonOutlet: UIBarButtonItem!
     
-    @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
+  //  @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
 
     
     var usernameArray: Array<String> = []
@@ -41,9 +42,38 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var theirturnArray: Array<String> = []
     var gameoverArray: Array<String> = []
     
+    var yourturnUpdateSince: Array<NSTimeInterval> = []
+    var theirturnUpdateSince: Array<NSTimeInterval> = []
+    var gameoverUpdateSince: Array<NSTimeInterval> = []
+    
+    var yourturnLeft: Array<NSTimeInterval> = []
+    var theirturnLeft: Array<NSTimeInterval> = []
+
+    var yourTurnColor: Array<String> = []
+    var theirTurnColor: Array<String> = []
+    var gameoverTurnColor: Array<String> = []
+
+    var yourTurnSpeed: Array<String> = []
+    var theirTurnSpeed: Array<String> = []
+    var gameoverTurnSpeed: Array<String> = []
+
+    
+    var typeofGameover: Array<String> = []
+    
+    var instructionsLabel = UILabel()
+    
     override func viewDidLoad() {
         
-
+        
+        instructionsLabel = UILabel(frame: CGRectMake(20, 64 ,screenWidth - 40,100))
+        let new = "-New-"
+        instructionsLabel.text = "Please add a new game by pressing \(new)"
+        instructionsLabel.font = UIFont(name: "Didot", size: 20)
+        instructionsLabel.textColor = UIColor.darkGrayColor()
+        instructionsLabel.numberOfLines = 0
+        instructionsLabel.textAlignment = .Center
+        view.addSubview(instructionsLabel)
+        
         
         super.viewDidLoad()
         
@@ -54,14 +84,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         let customFont = UIFont(name: "Didot", size: 18.0)
         newButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
-        editButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+   //     editButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
 
        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         self.tableView.backgroundColor = UIColor.whiteColor()
         
         print("the current installation is \(PFInstallation.currentInstallation())")
 
-        findGames()
 
         //check this before launching!!!!!!
 //        //Checking if first launch
@@ -141,6 +170,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 //        scrollView.showsVerticalScrollIndicator = false
     }
 
+
     
     @IBAction func newGame(sender: AnyObject) {
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "created_New_Game")
@@ -152,35 +182,144 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func findGames() {
         
-        usernameArray = []
+       // usernameArray = []
+        tableView.hidden = true
         let gamesQuery = PFQuery(className: "Games")
         //fix this
         gamesQuery.orderByDescending("updatedAt")
-        gamesQuery.whereKey("whitePlayer", equalTo: PFUser.currentUser()!.username!)
+        gamesQuery.whereKey("players", equalTo: PFUser.currentUser()!.username!)
         gamesQuery.findObjectsInBackgroundWithBlock { (games:[AnyObject]?, error:NSError?) -> Void in
-            for games in games! {
+            if error == nil {
+            if let games = games as! [PFObject]! {
+            for games in games {
                 
                // self.usernameArray.append((games["blackPlayer"] as? String)!)
          //       self.indicatorDataArray.append((games["status_white"] as? String)!)
+                if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
                 
-                if games["status_white"] as? String == "move" {
-                    self.yourturnArray.append((games["blackPlayer"] as? String)!)
-                }
-                else if games["status_white"] as? String == "notmove" {
                     
-                    self.theirturnArray.append((games["blackPlayer"] as? String)!)
+                    if games["status_white"] as? String == "move" {
+                        
+                        self.yourturnArray.append((games["blackPlayer"] as? String)!)
+                        
+                        //adding updated since
+                        let lastupdate = games.createdAt!
+                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        self.yourturnUpdateSince.append(since)
+                        
+                        
+                        self.yourTurnColor.append("white")
+                        
+                        self.yourTurnSpeed.append((games["speed"] as? String)!)
+
+                        
+                    }
+                    else if games["status_white"] as? String == "notmove" {
+                        
+                        self.theirturnArray.append((games["blackPlayer"] as? String)!)
+                        
+                        //adding updated since
+                        let lastupdate = games.createdAt!
+                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        self.theirturnUpdateSince.append(since)
+                        
+                        self.theirTurnColor.append("white")
+                        
+                        self.theirTurnSpeed.append((games["speed"] as? String)!)
+
+
+                        
+                    }
+                    else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost"{
+                        
+                        self.gameoverArray.append((games["blackPlayer"] as? String)!)
+                        self.typeofGameover.append((games["status_white"] as? String)!)
+                        
+                        //adding updated since
+                        let lastupdate = games.createdAt!
+                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        self.gameoverUpdateSince.append(since)
+                        
+                        self.gameoverTurnColor.append("white")
+                        
+                        self.gameoverTurnSpeed.append((games["speed"] as? String)!)
+
+
+                        
+                    }
+                    
+                }
+                else {
+                    
+                    if games["status_black"] as? String == "move" {
+                        
+                        self.yourturnArray.append((games["whitePlayer"] as? String)!)
+                        
+                        //adding updated since
+                        let lastupdate = games.createdAt!
+                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        self.yourturnUpdateSince.append(since)
+                        
+                        self.yourTurnColor.append("black")
+                        
+                        self.yourTurnSpeed.append((games["speed"] as? String)!)
+
+
+                        
+                        
+                        
+                    }
+                    else if games["status_black"] as? String == "notmove" {
+                        
+                        self.theirturnArray.append((games["whitePlayer"] as? String)!)
+                        
+                        //adding updated since
+                        let lastupdate = games.createdAt!
+                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        self.theirturnUpdateSince.append(since)
+                        
+                        self.theirTurnColor.append("black")
+                        
+                        self.theirTurnSpeed.append((games["speed"] as? String)!)
+
+
+                        
+                    }
+                    else if games["status_black"] as? String == "won" || games["status_black"] as? String == "lost"{
+                        
+                        self.gameoverArray.append((games["whitePlayer"] as? String)!)
+                        self.typeofGameover.append((games["status_black"] as? String)!)
+                        
+                        //adding updated since
+                        let lastupdate = games.createdAt!
+                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        self.gameoverUpdateSince.append(since)
+                        
+                        self.gameoverTurnColor.append("black")
+                        
+                        self.gameoverTurnSpeed.append((games["speed"] as? String)!)
+
+
+                        
+                    }
+
+                
                 
                 }
-                else if games["status_white"] as? String == "won" || games["status_white"] as! String == "lost"{
-                    
-                    self.gameoverArray.append((games["blackPlayer"] as? String)!)
-                }
+                
+                
+                
+                
+                
                 //self.ratingArray.append(games["blackPlayer"] as! Int)
                 //  updatedArrayppend(games["blackPlayer"] as! String)
                 //  timeleftArrayppend(games["blackPlayer"] as! String)
                 
             }
+            }
+            self.tableView.hidden = false
             self.tableView.reloadData()
+            }
 
         }
     
@@ -192,21 +331,24 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell") as! GameMenuTableViewCell
+        
+        
+        let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
     
+        
         func find(name:String) {
+            
         let query = PFQuery(className: "_User")
         
         query.whereKey("username", equalTo: name)
-        //query.orderByDescending("username")
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             if (error == nil) {
                 
                 if let userArray = objects as? [PFUser] {
                     for user in userArray {
                         
+                        cell.rating.text = String(user["rating"] as! Int)
 
-                        
                         if let userPicture = user["profile_picture"] as? PFFile {
                             
                             userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
@@ -237,8 +379,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
      
 
         
-        cell.rating.text = "601"
-        cell.updated.text = "Last Update: 1h 5min"
+       // cell.rating.text = "601"
+       // cell.updated.text = "Last Update: 1h 5min"
         cell.timeleft.text = "Time Left: 2h 29min"
         
         switch indexPath.section {
@@ -246,15 +388,141 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 cell.colorIndicator.backgroundColor = blue
                 find(yourturnArray[indexPath.row])
             
+                if yourTurnColor[indexPath.row] == "white" {
+                    cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
+                }
+                else {
+                    cell.pieceIndicator.backgroundColor = UIColor.blackColor()
+                }
+                
+                
+                if yourTurnSpeed[indexPath.row] == "Normal" {
+                    cell.speedIndicator.image = UIImage(named: "normalIndicator.png")
+                }
+                else if yourTurnSpeed[indexPath.row] == "Fast" {
+                    cell.speedIndicator.image = UIImage(named: "flash31.png")
+
+                }
+                else if yourTurnSpeed[indexPath.row] == "Slow" {
+                    cell.speedIndicator.image = UIImage(named: "clock104.png")
+                }
+
+
+                
+                
+                var since = yourturnUpdateSince[indexPath.row]
+                //making to minutes
+                if since >= 60 {
+                    since = since/60
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)min ago"
+                }
+                //making to hours
+                if since >= 60 {
+                    since = since/60
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)h ago"
+                    
+                }
+                //making to days
+                if since >= 24 {
+                    since = since/24
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                    
+                }
+            
             
         case 1:
                 cell.colorIndicator.backgroundColor = UIColor.lightGrayColor()
                 find(theirturnArray[indexPath.row])
             
-        case 2:
+                if theirTurnColor[indexPath.row] == "white" {
+                    cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
+                }
+                else {
+                    cell.pieceIndicator.backgroundColor = UIColor.blackColor()
+                }
+                
+                if theirTurnSpeed[indexPath.row] == "Normal" {
+                    cell.speedIndicator.image = UIImage(named: "normalIndicator.png")
+                }
+                else if theirTurnSpeed[indexPath.row] == "Fast" {
+                    cell.speedIndicator.image = UIImage(named: "flash31.png")
+                    
+                }
+                else if theirTurnSpeed[indexPath.row] == "Slow" {
+                    cell.speedIndicator.image = UIImage(named: "clock104.png")
+                }
+                
+                var since = theirturnUpdateSince[indexPath.row]
+                //making to minutes
+                if since >= 60 {
+                    since = since/60
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)min ago"
+                }
+                //making to hours
+                if since >= 60 {
+                    since = since/60
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)h ago"
+                    
+                }
+                //making to days
+                if since >= 24 {
+                    since = since/24
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                }
             
+        case 2:
+            if typeofGameover[indexPath.row] == "lost" {
                 cell.colorIndicator.backgroundColor = UIColor.redColor()
+            }
+            else {
+                cell.colorIndicator.backgroundColor = UIColor.greenColor()
+            }
                 find(gameoverArray[indexPath.row])
+            
+            if gameoverTurnColor[indexPath.row] == "white" {
+                cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
+            }
+            else {
+                cell.pieceIndicator.backgroundColor = UIColor.blackColor()
+            }
+            
+            if gameoverTurnSpeed[indexPath.row] == "Normal" {
+                cell.speedIndicator.image = UIImage(named: "normalIndicator.png")
+            }
+            else if gameoverTurnSpeed[indexPath.row] == "Fast" {
+                cell.speedIndicator.image = UIImage(named: "flash31.png")
+                
+            }
+            else if gameoverTurnSpeed[indexPath.row] == "Slow" {
+                cell.speedIndicator.image = UIImage(named: "clock104.png")
+            }
+            
+            var since = gameoverUpdateSince[indexPath.row]
+            //making to minutes
+            if since >= 60 {
+                since = since/60
+                let sinceOutput = Int(since)
+                cell.updated.text = "Last Updated: \(sinceOutput)min ago"
+            }
+            //making to hours
+            if since >= 60 {
+                since = since/60
+                let sinceOutput = Int(since)
+                cell.updated.text = "Last Updated: \(sinceOutput)h ago"
+                
+            }
+            //making to days
+            if since >= 24 {
+                since = since/24
+                let sinceOutput = Int(since)
+                cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+            }
             
         default:
             ""
@@ -271,6 +539,20 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
+        if yourturnArray.count == 0 && theirturnArray.count == 0 && gameoverArray.count == 0 {
+        
+        tableView.hidden = true
+        
+
+            
+        }
+        else {
+        instructionsLabel.hidden = true
+        tableView.hidden = false
+
+        
+        }
+        
         switch section {
         case 0:
             return yourturnArray.count
@@ -431,8 +713,39 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
+        findGames()
+
 
         lightOrDarkMode()
+    }
+    override func viewDidAppear(animated: Bool) {
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        usernameArray = []
+        yourturnArray = []
+        theirturnArray = []
+        gameoverArray = []
+        imageDataArray = []
+        typeofGameover = []
+        
+         usernameArray = []
+         ratingArray = []
+         updatedArray = []
+         timeleftArray = []
+         profilePicArray = []
+         imageDataArray = []
+         indicatorDataArray = []
+        
+         yourturnUpdateSince = []
+         theirturnUpdateSince = []
+         gameoverUpdateSince = []
+        
+         yourturnLeft = []
+         theirturnLeft = []
+        
+        tableView.reloadData()
+        
     }
 
     
@@ -450,7 +763,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
                 self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
                 self.newButtonOutlet.tintColor = UIColor.whiteColor()
-                self.editButtonOutlet.tintColor = UIColor.whiteColor()
+            //    self.editButtonOutlet.tintColor = UIColor.whiteColor()
 //            
 //            //setting top logo
 //            logo = UIImage(named: "ChessIconSmallTextAndLogoDarkMode.png")
@@ -472,7 +785,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 self.tabBarController?.tabBar.tintColor = blue
                 self.navigationController?.navigationBar.tintColor = blue
                 self.newButtonOutlet.tintColor = blue
-                self.editButtonOutlet.tintColor = blue
+           //     self.editButtonOutlet.tintColor = blue
             
 //            //setting top logo
 //            logo = UIImage(named: "ChessIconSmallTextAndLogo.png")

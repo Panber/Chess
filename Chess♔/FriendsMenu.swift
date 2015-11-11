@@ -55,6 +55,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         scrollView.scrollEnabled = true
         scrollView.contentSize = CGSizeMake(screenWidth, 2000)
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         
@@ -84,7 +85,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     //func to set up people in top10WorldView
     func addTop10World () {
         
-        blurBC1 = UIImageView(frame: CGRectMake(0, 44, screenWidth , (screenWidth )/(16/9)))
+        blurBC1 = UIImageView(frame: CGRectMake(0, 0, screenWidth , (screenWidth )/(16/9)))
       //  blurBC.image = UIImage(named: "JBpp.jpg")
         //blurBC1.layer.cornerRadius = cornerRadius
         blurBC1.contentMode = .ScaleAspectFill
@@ -171,7 +172,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 self.top10WorldArrayRating = []
                 self.top10WorldArrayImage = []
                 
-                for usersObject in usersObject! {
+                if let usersObject = usersObject as! [PFObject]! {
+                for usersObject in usersObject {
                     
                     
                     self.top10WorldArrayRating.append(usersObject["rating"] as! Int)
@@ -183,6 +185,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     
                   
                 
+                }
                 }
                 //image
 
@@ -242,7 +245,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 
     func addTop10Friends () {
     
-        blurBC2 = UIImageView(frame: CGRectMake(0, 44 + blurBC1.frame.size.height + 15, screenWidth, (screenWidth)/(16/9)))
+        blurBC2 = UIImageView(frame: CGRectMake(0,  blurBC1.frame.size.height + 10, screenWidth, (screenWidth)/(16/9)))
         blurBC2.contentMode = .ScaleAspectFill
         blurBC2.userInteractionEnabled = true
         blurBC2.clipsToBounds = true
@@ -315,12 +318,15 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             ratingQuery.limit = 10
             ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
                 if error == nil {
-                    for usersObject in usersObject! {
+                    
+                    if let usersObject = usersObject as! [PFObject]! {
+                    for usersObject in usersObject {
                         self.top10FriendsArrayRating.append(usersObject["rating"] as! Int)
                         print(self.top10FriendsArrayRating)
                         self.top10FriendsArrayUsers.append(usersObject["username"] as! String)
                         print(self.top10FriendsArrayUsers)
                         
+                    }
                     }
                     usernameLabel.text = self.top10FriendsArrayUsers[0]
                     ratingLabel.text = "\(self.top10FriendsArrayRating[0])"
@@ -384,25 +390,25 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let yPos = -scrollView.contentOffset.y
         
-        if yPos >= 0 {
+        if yPos > 0 {
             
-            
+       //     blurBC1.frame.origin.y = scrollView.contentOffset.y
+
             
         }
         
-        if yPos < 64 {
-            
-            blurBC1.frame.origin.y = scrollView.contentOffset.y + 105
- 
-           
-        }
-        
-        if yPos < 64 - blurBC1.frame.size.height {
-            
-            blurBC2.frame.origin.y = scrollView.contentOffset.y + 105
-            
-            
-        }
+//        if yPos < 64 {
+//            
+// 
+//           
+//        }
+//        
+//        if yPos < 64 - blurBC1.frame.size.height {
+//            
+//            blurBC2.frame.origin.y = scrollView.contentOffset.y
+//            
+//            
+//        }
         
         
         

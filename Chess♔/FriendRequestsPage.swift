@@ -96,8 +96,8 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
             frequestsQuery.whereKey("status", equalTo: "pending")
             frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
                 
-                
-                for frequests in frequests! {
+                if let frequests = frequests as! [PFObject]! {
+                for frequests in frequests {
                     
                     let username:String? = frequests["fromUser"] as? String
                     self.userArray.append(username!)
@@ -150,7 +150,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                     
                 }
                 
-
+                }
                 
                 
             })
@@ -223,13 +223,13 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                 
                 if error == nil {
                     
-                    
-                    for request in request! {
+                    if let request = request as! [PFObject]! {
+                    for request in request {
                         self.usersFrom = request["fromUser"] as! String
                         
                         request.deleteEventually()
                     }
-                    
+                    }
                     let userFriendsQuery = PFQuery(className: "Friends")
                     userFriendsQuery.whereKey("username", equalTo: self.usersFrom)
                     userFriendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
