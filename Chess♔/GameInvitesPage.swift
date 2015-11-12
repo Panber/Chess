@@ -22,6 +22,8 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
     var imageDataArray: Array<NSData> = []
 
 
+    var checkmarkButton = UIButton()
+    var crossButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,6 +157,13 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         }
         
         
+        cell.checkmarkButton.tag = indexPath.row + 1
+        cell.checkmarkButton.addTarget(self, action: "checkmarkButtonPressed:", forControlEvents: .TouchUpInside)
+        
+        cell.crossButton.tag = indexPath.row + 100_000
+        cell.crossButton.addTarget(self, action: "crossButtonPressed:", forControlEvents: .TouchUpInside)
+        
+        
         return cell
     
     }
@@ -164,5 +173,30 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
     
     
     }
+    
+    func checkmarkButtonPressed(sender:UIButton) {
+        
+        
+        let buttonRow = sender.tag
+        let tmpButton = self.view.viewWithTag(buttonRow) as? UIButton
+        checkmarkButton = tmpButton!
+        checkmarkButton.setBackgroundImage(UIImage(named: "checkmark12.png"), forState: .Normal)
+    }
+
+    func crossButtonPressed(sender:UIButton) {
+        
+        
+        
+        let buttonRow = sender.tag
+        let tmpButton = self.view.viewWithTag(buttonRow) as? UIButton
+        crossButton = tmpButton!
+        self.crossButton.setBackgroundImage(UIImage(named: "close1.png"), forState: .Normal)
+        
+        let buttonRow2 = sender.tag - 99_999
+        let tmpButton2 = self.view.viewWithTag(buttonRow2) as? UIButton
+        checkmarkButton = tmpButton2!
+        
+    }
+    
 
 }
