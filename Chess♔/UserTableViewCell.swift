@@ -225,6 +225,16 @@ class GameInvitesTableViewCell: UITableViewCell {
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var rating: UILabel!
+    
+    @IBOutlet weak var speedIndicator: UIImageView!
+    @IBOutlet weak var pieceIndicator: UILabel!
+    @IBOutlet weak var ratedOrUnrated: UILabel!
+    @IBOutlet weak var whichColorText: UILabel!
+    @IBOutlet weak var speedmodeText: UILabel!
+
+
+
+    
     @IBOutlet weak var checkmarkButton: UIButton!
     @IBOutlet weak var crossButton: UIButton!
     
@@ -235,6 +245,10 @@ class GameInvitesTableViewCell: UITableViewCell {
         //changing profileImage
         self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
         self.userProfileImage.clipsToBounds = true
+        
+        self.pieceIndicator.layer.borderColor = UIColor.blackColor().CGColor
+        self.pieceIndicator.layer.borderWidth = 1
+        self.pieceIndicator.backgroundColor = UIColor.whiteColor()
     }
     
     
