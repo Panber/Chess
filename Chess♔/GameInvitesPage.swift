@@ -18,6 +18,8 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
     var ratedArray: Array<String> = []
     var colorArray: Array<String> = []
     var speedmodeArray: Array<String> = []
+    
+    var imageDataArray: Array<NSData> = []
 
 
     
@@ -115,6 +117,43 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         else if speedmodeArray[indexPath.row] == "Slow" {
             cell.speedIndicator.image = UIImage(named: "clock104.png")
         }
+        
+        
+        let query = PFQuery(className: "_User")
+        
+        query.whereKey("username", equalTo: cell.username.text!)
+        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+            if (error == nil) {
+                
+                if let userArray = objects as? [PFUser] {
+                    for user in userArray {
+                        
+                        cell.rating.text = String(user["rating"] as! Int)
+                        
+                        if let userPicture = user["profile_picture"] as? PFFile {
+                            
+                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                if (error == nil) {
+                                    cell.username.text = user["username"] as? String
+                                    cell.userProfileImage.image = UIImage(data: imageData!)
+                                    cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
+                                    self.imageDataArray.append(imageData!)
+                                    
+                                } else {
+                                }
+                            }
+                            
+                        }
+                    }
+                    
+                }
+            } else {
+                // Log details of the failure
+                print("query error: \(error) \(error!.userInfo)")
+            }
+            
+        }
+        
         
         return cell
     
