@@ -12,7 +12,14 @@ import Parse
 class GameInvitesPage: UIViewController,UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
 
-    var invites: Array<String> = ["d"]
+    var invites: Array<String> = []
+    
+    var inviteName: Array<String> = []
+    var ratedArray: Array<String> = []
+    var colorArray: Array<String> = []
+    var speedmodeArray: Array<String> = []
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +36,43 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
     func findRequests() {
     
         let requestQuery = PFQuery(className: "Games")
+        requestQuery.whereKey("inviteTo", equalTo: (PFUser.currentUser()?.username)!)
         requestQuery.whereKey("players", equalTo: (PFUser.currentUser()?.username)!)
+        requestQuery.whereKey("confirmed", equalTo: false)
+        
+        requestQuery.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, error:NSError?) -> Void in
+            if error == nil {
+                if let result = result as! [PFObject]! {
+                    for result in result {
+                        
+                        if result["blackPlayer"] as? String == PFUser.currentUser()!.username {
+                            
+                            self.inviteName.append((result["whitePlayer"] as? String)!)
+                             self.ratedArray.append((result["mode"] as? String)!)
+                             self.colorArray.append("Black")
+                             self.speedmodeArray.append((result["speed"] as? String)!)
+                        
+                        }
+                            
+                        else {
+                        
+                            self.inviteName.append((result["blackPlayer"] as? String)!)
+                            self.ratedArray.append((result["mode"] as? String)!)
+                            self.colorArray.append("White")
+                            self.speedmodeArray.append((result["speed"] as? String)!)
+
+                        }
+                    
+                    }
+                
+                
+                }
+            
+            
+            }
+            self.tableView.reloadData()
+
+        }
     
     }
     
@@ -43,11 +86,35 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return invites.count
+        return inviteName.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:GameInvitesTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("GameInviteCell", forIndexPath: indexPath) as! GameInvitesTableViewCell
+        
+        cell.username.text = inviteName[indexPath.row]
+        cell.ratedOrUnrated.text = ratedArray[indexPath.row]
+        cell.whichColorText.text = "You Play as " + colorArray[indexPath.row]
+        cell.speedmodeText.text = speedmodeArray[indexPath.row] + " Speedmode"
+        
+        
+        if colorArray[indexPath.row] == "Black" {
+        
+            cell.pieceIndicator.backgroundColor = UIColor.blackColor()
+        }
+        else {
+            cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
+        }
+        
+        if speedmodeArray[indexPath.row] == "Normal" {
+            cell.speedIndicator.image = UIImage(named: "normalIndicator.png")
+        }
+        else if speedmodeArray[indexPath.row] == "Fast" {
+            cell.speedIndicator.image = UIImage(named: "flash31.png")
+        }
+        else if speedmodeArray[indexPath.row] == "Slow" {
+            cell.speedIndicator.image = UIImage(named: "clock104.png")
+        }
         
         return cell
     
