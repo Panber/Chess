@@ -130,7 +130,6 @@ class NewGameSettingsPage: UIViewController {
         game["mode"] = mode
         game["confirmed"] = false
         game["piecePosition"] = NSMutableArray()
-        game["turn"] = white
         game["status_white"] = "request"
         game["status_black"] = "request"
 
