@@ -23,46 +23,9 @@ let xAxisArr = [a,b,c,d,e,f,g,h]
 
 let xAxisArrStr = ["a","b","c","d","e","f","g","h"]
 
-let canShow : Bool = true
-
-var check = false
-var checkBlack = false
-
-var showDangerOpt : Bool = true
-
-var dontRemove : Bool = false
-var show : Bool = true
-
 var canTake: Bool = true
 
 var size : CGFloat = pieceSize
-
-var num = 0
-
-var blackPawnCount = 0
-var blackBishopCount = 0
-var blackKnightCount = 0
-var blackRookCount = 0
-var blackQueenCount = 0
-
-var blackCuont : Array<Int> = [blackPawnCount,blackBishopCount,blackKnightCount,blackRookCount,blackQueenCount]
-
-var whiteMoves : Array<UILabel> = [whiteMove1, whiteMove2, whiteMove3]
-var whiteMove1 = UILabel(frame: CGRectMake(pieceSize * 6, screenHeight / 1.3 + CGFloat(0) * pieceSize * 0.4, pieceSize * 2, pieceSize * 2))
-var whiteMove2 = UILabel(frame: CGRectMake(pieceSize * 6, screenHeight / 1.3 + CGFloat(1) * pieceSize * 0.4, pieceSize * 2, pieceSize * 2))
-var whiteMove3 = UILabel(frame: CGRectMake(pieceSize * 6, screenHeight / 1.3 + CGFloat(2) * pieceSize * 0.4, pieceSize * 2, pieceSize * 2))
-var move = num + 1
-
-var takenPiece = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
-var takenBishop = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
-var takenKnight = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
-var takenRook = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
-var takenQueen = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
-var takenPiecesLbl :Array<UILabel> = [takenPiece, takenBishop, takenKnight, takenRook, takenQueen]
-var takenPiecesShow :Array<UILabel> = []
-
-var blackPiecesTypes = ["blackPawn","blackBishop","blackKnight","blackRook", "blackQueen"]
-
 
 //y-Axis coordinates
 let _1 = screenHeight/2 + 3 * pieceSize
@@ -84,6 +47,7 @@ let boarderBoard = UIImageView(frame: CGRectMake(-0.01*pieceSize, _1 - 7*pieceSi
 
 //size-properties
 let pieceSize = sqrt(screenWidth * screenWidth / 64)
+
 //timers
 var timerNumber:Double = 0
 var movementTimer = NSTimer()
@@ -91,6 +55,9 @@ var movementTimer = NSTimer()
 //markers
 var pieceMarked = UIImageView(frame: CGRectMake(0, 0, pieceSize, pieceSize))
 var pieceOptions : Array<UIImageView> = []
+
+// Logic options for Queen, Bishop and Rook
+var QBRLogicOptions : Array<UIImageView> = []
 
 var selectedPawn = 0
 var pieceOpt = whitePawn1
@@ -158,12 +125,6 @@ var whiteRooks = [whiteRook1, whiteRook2]
 var whiteQueens = [whiteQueen]
 var whiteKings = [whiteKing]
 
-var whitePiecesArrs = [whitePawns,whiteKnights,whiteBishops,whiteRooks,whiteQueens,whiteKings]
-var whitePiecesArrsString = ["whitePawn","whiteKnight","whiteBishop","whiteRook","whiteQueen","whiteKing"]
-
-var blackPiecesArrs = [blackKnights,blackBishops,blackRooks,blackPawns, blackQueens, blackKings]
-var blackPiecesArrsString = ["blackKnight","blackBishop","blackRook","blackPawn", "blackQueen", "blackKing"]
-
 var blackPieces = [blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
 var blackPiecesString = ["blackPawn","blackPawn","blackPawn", "blackPawn", "blackPawn", "blackPawn",  "blackPawn", "blackPawn", "blackKnight", "blackKnight", "blackBishop",  "blackBishop", "blackRook", "blackRook", "blackQueen", "blackKing" ]
 var whitePieces = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2 ,whiteBishop1, whiteBishop2, whiteRook1, whiteRook2 , whiteQueen, whiteKing]
@@ -177,12 +138,6 @@ var piecesString = ["whiteQueen","whiteKing","whitePawn","blackPawn","whiteKnigh
 
 var pieces = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen, whiteKing,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
 
-
-//bool to check if pieces are "alive"
-var whitePawn1Alive = true
-var whitePawn2Alive = true
-var blackPawn1Alive = true
-
 var moveByAmounty: CGFloat = 0.0
 var moveByAmountx: CGFloat = 0.0
 
@@ -191,10 +146,6 @@ var selectedPiece: UIImageView = whitePawn1
 var eatenPieces = UIImageView(frame: CGRectMake(a, _2, pieceSize , pieceSize))
 var pieceCanTake : UIImageView = whitePawn1
 var pieceToTake : UIImageView = whitePawn1
-
-
-var pawnState = 0
-var movementallowed: CGFloat = 2
 
 var takenWhitePieces : Array<UIImageView> = []
 var takenBlackPieces : Array<UIImageView> = []
@@ -229,7 +180,6 @@ class GameInterFace3: UIViewController {
         //tab-bar and navigation bar
         self.tabBarController?.tabBar.hidden = true
         let nav = self.navigationController?.navigationBar
-        nav?.barStyle = UIBarStyle.BlackTranslucent
         
         //load marker
         pieceMarked.image = UIImage(named: "pieceMarked.png")
@@ -290,6 +240,14 @@ class GameInterFace3: UIViewController {
             pieceOptions[p].removeFromSuperview()
         }
         pieceOptions = []
+    }
+    
+    func removeLogicOptions() {
+        for var p = 0 ; p < QBRLogicOptions.count; p++ {
+            QBRLogicOptions[p].hidden = true
+            QBRLogicOptions[p].removeFromSuperview()
+        }
+        QBRLogicOptions = []
     }
     
     
@@ -402,6 +360,18 @@ class GameInterFace3: UIViewController {
                         
                     }
                 }
+                
+                //				// Decides which squares the King can go to
+                //				if pieceid == 5 {
+                //					for var p = 0 ; p < pieceOptions.count; p++ {
+                //					for var o = 0 ; o < QBRLogicOptions.count; o++ {
+                //						if CGRectContainsPoint(pieceOptions[p].frame, QBRLogicOptions[o].center){
+                //							pieceOptions[p].hidden = true
+                //						}
+                //					}
+                //					}
+                //				}
+                
                 for var o = 0 ; o < pieceOptions.count; o++ {
                     if CGRectContainsPoint(boarderBoard.frame, pieceOptions[o].center) == false {
                         [pieceOptions[o] .removeFromSuperview()]
@@ -409,6 +379,125 @@ class GameInterFace3: UIViewController {
                     }
                 }
             }
+        }
+        // movementNumber = 9
+        if pieceid == 1 {
+            letThemAppear(1, byAmounty: 1, increaserx: 1, increasery: 1, byAmountz: 1,increaserz: 1)
+            letThemAppear(1,byAmounty: -1,increaserx: 1,increasery: -1, byAmountz: 1,increaserz: 1)
+            letThemAppear(-1,byAmounty: 1,increaserx: -1,increasery: 1, byAmountz: 1,increaserz: 1)
+            letThemAppear(-1,byAmounty: -1,increaserx: -1,increasery: -1, byAmountz: 1,increaserz: 1)
+        }
+        // movemenNumber = 2
+        if pieceid == 2 {
+            letThemAppear(2, byAmounty: 1, increaserx: 0, increasery: 0, byAmountz: 1 ,increaserz: 1)
+            letThemAppear(-2, byAmounty: 1, increaserx: 0, increasery: 0, byAmountz: 1 ,increaserz: 1)
+            letThemAppear(1, byAmounty: 2, increaserx: 0, increasery: 0, byAmountz: 1 ,increaserz: 1)
+            letThemAppear(1, byAmounty: -2, increaserx: 0, increasery: 0, byAmountz: 1 ,increaserz: 1)
+            letThemAppear(-1, byAmounty: 2, increaserx: 0, increasery: 0, byAmountz: 1 ,increaserz: 1)
+            letThemAppear(-1, byAmounty: -2, increaserx: 0, increasery: 0, byAmountz: 1 ,increaserz: 1)
+            letThemAppear(2, byAmounty: -1, increaserx: 0, increasery: 0, byAmountz: 1 ,increaserz: 1)
+            letThemAppear(-2, byAmounty: -1, increaserx: 0, increasery: 0, byAmountz: 1 ,increaserz: 1)
+            
+        }
+        // movementNumber = 9
+        if pieceid == 3 {
+            letThemAppear(0, byAmounty: 1, increaserx: 0, increasery: 1, byAmountz: 1,increaserz: 1)
+            letThemAppear(0, byAmounty: -1, increaserx: 0, increasery: -1, byAmountz: 1,increaserz: 1)
+            letThemAppear(1, byAmounty: 0, increaserx: 1, increasery: 0, byAmountz: 1,increaserz: 1)
+            letThemAppear(-1, byAmounty: 0, increaserx: -1, increasery: 0, byAmountz: 1,increaserz: 1)
+        }
+        // movementNumber = 9
+        if pieceid == 4 {
+            letThemAppear(0, byAmounty: 1, increaserx: 0, increasery: 1, byAmountz: 1, increaserz: 1)
+            letThemAppear(0, byAmounty: -1, increaserx: 0, increasery: -1,  byAmountz: 1, increaserz: 1)
+            letThemAppear(1, byAmounty: 0, increaserx: 1, increasery: 0,  byAmountz: 1, increaserz: 1)
+            letThemAppear(-1, byAmounty: 0, increaserx: -1, increasery: 0,  byAmountz: 1, increaserz: 1)
+            letThemAppear(1, byAmounty: 1, increaserx: 1, increasery: 1,  byAmountz: 1, increaserz: 1)
+            letThemAppear(1,byAmounty: -1,increaserx: 1,increasery: -1,  byAmountz: 1, increaserz: 1)
+            letThemAppear(-1,byAmounty: 1,increaserx: -1,increasery: 1,  byAmountz: 1, increaserz: 1)
+            letThemAppear(-1,byAmounty: -1,increaserx: -1,increasery: -1,  byAmountz: 1, increaserz: 1)
+            
+        }
+        // movementNumber = 2
+        if pieceid == 5 {
+            letThemAppear(0, byAmounty: 1, increaserx: 0, increasery: 1, byAmountz: 1, increaserz: 1)
+            letThemAppear(0, byAmounty: -1, increaserx: 0, increasery: -1, byAmountz: 1, increaserz: 1)
+            letThemAppear(1, byAmounty: 0, increaserx: 1, increasery: 0, byAmountz: 1, increaserz: 1)
+            letThemAppear(-1, byAmounty: 0, increaserx: -1, increasery: 0, byAmountz: 1, increaserz: 1)
+            letThemAppear(1, byAmounty: 1, increaserx: 1, increasery: 1, byAmountz: 1, increaserz: 1)
+            letThemAppear(1,byAmounty: -1,increaserx: 1,increasery: -1, byAmountz: 1, increaserz: 1)
+            letThemAppear(-1,byAmounty: 1,increaserx: -1,increasery: 1, byAmountz: 1, increaserz: 1)
+            letThemAppear(-1,byAmounty: -1,increaserx: -1,increasery: -1, byAmountz: 1, increaserz: 1)
+        }
+    }
+    
+    func chessPieceMovementLogic(var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView], var piece: UIImageView) {
+        pieceID = pieceid
+        var lastArrayCount = 0
+        var foundKing: Bool = false
+        
+        func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat, var byAmountz:CGFloat, increaserz:CGFloat ) {
+            var canThePieceGofurther: Bool = true
+            
+            for byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
+                
+                for var q = 0; q < friend.count; q++ {
+                    if friend[q].frame.origin.x == piece.frame.origin.x + byAmountx * pieceSize && friend[q].frame.origin.y == piece.frame.origin.y - byAmounty * pieceSize{
+                        canThePieceGofurther = false
+                    }
+                }
+                
+                for var q = 0; q < QBRLogicOptions.count; q++ {
+                    if CGRectContainsPoint(QBRLogicOptions[q].frame , blackKing.center) {
+                        foundKing = true
+                        canThePieceGofurther = false
+                        print("found the King!")
+                    }
+                }
+                
+                if canThePieceGofurther == true {
+                    
+                    let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
+                    pieceOption.image = UIImage(named: "piecePossibilities.png")
+                    self.view.addSubview(pieceOption)
+                    if pieceid == 1 || pieceid == 3 || pieceid == 4  {
+                        QBRLogicOptions += [pieceOption]
+                    }
+                }
+                
+                
+                for var r = 0; r < enemy.count; r++ {
+                    if enemy[r].frame.origin.x == piece.frame.origin.x + byAmountx * pieceSize && enemy[r].frame.origin.y == piece.frame.origin.y - byAmounty * pieceSize && canThePieceGofurther == true {
+                        
+                        let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
+                        pieceOption.image = UIImage(named: "piecePossibilities.png")
+                        self.view.addSubview(pieceOption)
+                        if pieceid == 1 || pieceid == 3 || pieceid == 4  {
+                            QBRLogicOptions += [pieceOption]
+                        }
+                        canThePieceGofurther = false
+                        
+                    }
+                }
+                
+                if pieceid == 1 || pieceid == 3 || pieceid == 4  {
+                    for var o = 0 ; o < QBRLogicOptions.count; o++ {
+                        if CGRectContainsPoint(boarderBoard.frame, QBRLogicOptions[o].center) == false {
+                            [QBRLogicOptions[o] .removeFromSuperview()]
+                            QBRLogicOptions.removeAtIndex(o)
+                        }
+                    }
+                }
+            }
+            if foundKing == false {
+                for var o = 0 ; o < QBRLogicOptions.count; o++ {
+                    [QBRLogicOptions[o] .removeFromSuperview()]
+                }
+                
+                QBRLogicOptions.removeAll()
+                QBRLogicOptions = []
+            }
+            print(QBRLogicOptions.count)
         }
         // movementNumber = 9
         if pieceid == 1 {
@@ -545,7 +634,7 @@ class GameInterFace3: UIViewController {
     }
     
     func updateMovementTimer() {
-        //              var piece: UIImageView = timer.userInfo! as UIImageView
+        
         timerNumber++
         if timerNumber > 10 {
             movementTimer.invalidate()
@@ -558,6 +647,7 @@ class GameInterFace3: UIViewController {
                 }
             }
             
+            chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueen)
         }
             
         else {
@@ -566,20 +656,10 @@ class GameInterFace3: UIViewController {
             positiony +=  moveByAmounty / 10
             positionx += moveByAmountx / 10
             selectedPiece.frame = CGRect(x: positionx, y: positiony, width: pieceSize, height: pieceSize)
+            canTake = true
+            removeLogicOptions()
         }
         
-    }
-    func contains(var _imageArray:Array<UIImageView>, _image: UIImageView) -> Bool {
-        
-        var bool = false
-        for var i = 0; i < _imageArray.count; i++ {
-            
-            if (_imageArray[i].image == _image.image) {
-                bool = true
-            }
-        }
-        
-        return bool
     }
     
     func containsDanger(var array: Array<UIImageView>, image: UIImageView) -> Bool {
@@ -594,18 +674,6 @@ class GameInterFace3: UIViewController {
         return bool
     }
     
-    func containsLabel(var _labelArray:Array<UILabel>, _label: UILabel) -> Bool {
-        
-        var bool = false
-        for var i = 0; i < _labelArray.count; i++ {
-            
-            if (_labelArray[i] == _label) {
-                bool = true
-            }
-        }
-        
-        return bool
-    }
     
     // MARK: - Touches began! 👆
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -641,49 +709,7 @@ class GameInterFace3: UIViewController {
                         pieceToTake = whitePieces[i]
                         whitePieces[i].removeFromSuperview()
                         whitePieces.removeAtIndex(i)
-                        
-                        if (!contains(takenWhitePieces, _image: pieceToTake)) {
-                            var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50, screenHeight / 2 - 5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
-                            takenPiece.image = UIImage(named: whitePiecesString[i])
-                            takenWhitePieces += [takenPiece]
-                            self.view.addSubview(takenPiece)
-                        }
                         whitePiecesString.removeAtIndex(i)
-                    }
-                    
-                    for var t = 0; t < 8; t++ {
-                        for var g = 0; g < 8; g++ {
-                            if (pieceOptions[o].frame.origin.x == xAxisArr[t] && pieceOptions[o].frame.origin.y == yAxisArr[g] && touch.view == pieceOptions[o] && selectedPiece == pieces[i]) {
-                                print(xAxisArrStr[t] + yAxisArrStr[g])
-                                if (num < 3) {
-                                    move = num + 1
-                                    whiteMoves[num].text = (move.description + ".   " ) + xAxisArrStr[t] + yAxisArrStr[g]
-                                    whiteMoves[num].textColor = UIColor .whiteColor()
-                                    whiteMoves[num].font = UIFont(name: "CaviarDreams", size: 20)
-                                    self.view.addSubview(whiteMoves[num])
-                                    num+=1
-                                } else {
-                                    whiteMoves[0].text = whiteMoves[1].text
-                                    whiteMoves[1].text = whiteMoves[2].text
-                                    move += 1
-                                    whiteMoves[2].text = (move.description + ".   " ) + xAxisArrStr[t] + yAxisArrStr[g]
-                                    if (move > 9) {
-                                        whiteMoves[2].frame = (frame: CGRectMake(pieceSize * 5.8, screenHeight / 1.3 + CGFloat(2) * pieceSize * 0.4, pieceSize * 2, pieceSize * 2))
-                                        print("working")
-                                    }
-                                    if (move > 10) {
-                                        whiteMoves[1].frame = (frame: CGRectMake(pieceSize * 5.8, screenHeight / 1.3 + CGFloat(1) * pieceSize * 0.4, pieceSize * 2, pieceSize * 2))
-                                        whiteMoves[2].frame = (frame: CGRectMake(pieceSize * 5.8, screenHeight / 1.3 + CGFloat(2) * pieceSize * 0.4, pieceSize * 2, pieceSize * 2))
-                                    }
-                                    if (move > 11) {
-                                        whiteMoves[0].frame = (frame: CGRectMake(pieceSize * 5.8, screenHeight / 1.3 + CGFloat(0) * pieceSize * 0.4, pieceSize * 2, pieceSize * 2))
-                                        whiteMoves[1].frame = (frame: CGRectMake(pieceSize * 5.8, screenHeight / 1.3 + CGFloat(1) * pieceSize * 0.4, pieceSize * 2, pieceSize * 2))
-                                        whiteMoves[2].frame = (frame: CGRectMake(pieceSize * 5.8, screenHeight / 1.3 + CGFloat(2) * pieceSize * 0.4, pieceSize * 2, pieceSize * 2))
-                                    }
-                                }
-                                
-                            }
-                        }
                     }
                 }
                 
@@ -701,31 +727,7 @@ class GameInterFace3: UIViewController {
                         pieceToTake = blackPieces[t]
                         blackPieces[t].removeFromSuperview()
                         blackPieces.removeAtIndex(t)
-                        
-                        if (!contains(takenBlackPieces, _image: pieceToTake)) {
-                            var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50, screenHeight / 2 + 4 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
-                            takenPiece.image = UIImage(named: blackPiecesString[t])
-                            
-                            takenBlackPieces += [takenPiece]
-                            self.view.addSubview(takenPiece)
-                        }
                         blackPiecesString.removeAtIndex(t)
-                        
-                        for var i = 0; i < takenPiecesLbl.count; i++ {
-                            if (pieceToTake.image == UIImage(named: blackPiecesTypes[i])) {
-                                blackCuont[i] += 1
-                                if (!containsLabel(takenPiecesShow, _label: takenPiecesLbl[i])) {
-                                    takenPiecesLbl[i].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65)
-                                    takenPiecesShow += [takenPiecesLbl[i]]
-                                }
-                                takenPiecesLbl[i].text = "x" + blackCuont[i].description
-                                takenPiecesLbl[i].textColor = UIColor.whiteColor()
-                                takenPiecesLbl[i].font = UIFont(name: "CaviarDreams", size: 18)
-                                takenPiecesLbl[i].textAlignment = NSTextAlignment.Center
-                                self.view.addSubview(takenPiecesLbl[i])
-                                
-                            }
-                        }
                         
                     }
                 }
@@ -761,7 +763,7 @@ class GameInterFace3: UIViewController {
             }
         }
         
-        for var i = 0; i < whiteRooks.count;i++ {
+        for var i = 0; i < whiteRooks.count; i++ {
             if touch.view == whiteRooks[i] && isWhiteTurn == true {
                 removePieceOptions()
                 selectedPiece = whiteRooks[i]
