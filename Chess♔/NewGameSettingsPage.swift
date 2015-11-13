@@ -132,6 +132,8 @@ class NewGameSettingsPage: UIViewController {
         game["piecePosition"] = NSMutableArray()
         game["status_white"] = "request"
         game["status_black"] = "request"
+        game["inviteTo"] = pushto
+        game["inviteFrom"] = PFUser.currentUser()?.username
 
         
         game["timeLeftToMove"] = NSDate()
