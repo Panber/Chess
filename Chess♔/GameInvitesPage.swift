@@ -181,6 +181,23 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         let tmpButton = self.view.viewWithTag(buttonRow) as? UIButton
         checkmarkButton = tmpButton!
         checkmarkButton.setBackgroundImage(UIImage(named: "checkmark12.png"), forState: .Normal)
+        
+        //editing the view
+        let buttonRow2 = sender.tag + 99_999
+        let tmpButton2 = self.view.viewWithTag(buttonRow2) as? UIButton
+        crossButton = tmpButton2!
+        
+        UIView.animateWithDuration(0.2) { () -> Void in
+            
+            self.crossButton.alpha = 0
+        }
+        
+        checkmarkButton.userInteractionEnabled = false
+        crossButton.userInteractionEnabled = false
+        
+        
+        
+        
     }
 
     func crossButtonPressed(sender:UIButton) {
@@ -190,11 +207,21 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         let buttonRow = sender.tag
         let tmpButton = self.view.viewWithTag(buttonRow) as? UIButton
         crossButton = tmpButton!
-        self.crossButton.setBackgroundImage(UIImage(named: "close1.png"), forState: .Normal)
+        self.crossButton.setBackgroundImage(UIImage(named: "close.png"), forState: .Normal)
+
+        
+        
         
         let buttonRow2 = sender.tag - 99_999
         let tmpButton2 = self.view.viewWithTag(buttonRow2) as? UIButton
         checkmarkButton = tmpButton2!
+        UIView.animateWithDuration(0.2) { () -> Void in
+
+        self.checkmarkButton.alpha = 0
+        }
+        
+        checkmarkButton.userInteractionEnabled = false
+        crossButton.userInteractionEnabled = false
         
     }
     
