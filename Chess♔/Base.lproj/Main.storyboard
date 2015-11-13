@@ -369,6 +369,7 @@
                                             <outlet property="updated" destination="ZAo-X8-72k" id="Wov-B5-wGy"/>
                                             <outlet property="userProfileImage" destination="pEs-KX-Xff" id="usm-HB-y0y"/>
                                             <outlet property="username" destination="NJf-pv-LyL" id="TmM-VJ-DLH"/>
+                                            <segue destination="fQ8-pX-Vlb" kind="show" id="wNo-PL-G0z"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -396,7 +397,7 @@
                         <barButtonItem key="rightBarButtonItem" title="New" id="tTS-aY-AqN">
                             <connections>
                                 <action selector="newGame:" destination="BYZ-38-t0r" id="p3j-bU-HEH"/>
-                                <segue destination="fQ8-pX-Vlb" kind="show" id="Djh-Bg-wAy"/>
+                                <segue destination="m3T-nO-hHo" kind="show" id="Gcq-S2-sjQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -466,7 +467,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="newGameFriendsCell" rowHeight="70" id="qog-Rb-mCo" customClass="NewGameFriendsTableViewCell" customModule="Chess_" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="70"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qog-Rb-mCo" id="KVc-6s-0iP">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="69"/>
