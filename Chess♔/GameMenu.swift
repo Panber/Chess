@@ -203,7 +203,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.yourturnArray.append((games["blackPlayer"] as? String)!)
                         
                         //adding updated since
-                        let lastupdate = games.createdAt!
+                        let lastupdate = games.updatedAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.yourturnUpdateSince.append(since)
                         
@@ -219,8 +219,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.theirturnArray.append((games["blackPlayer"] as? String)!)
                         
                         //adding updated since
-                        let lastupdate = games.createdAt!
+                        let lastupdate = games.updatedAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
+                        
                         self.theirturnUpdateSince.append(since)
                         
                         self.theirTurnColor.append("white")
@@ -236,7 +237,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.typeofGameover.append((games["status_white"] as? String)!)
                         
                         //adding updated since
-                        let lastupdate = games.createdAt!
+                        let lastupdate = games.updatedAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.gameoverUpdateSince.append(since)
                         
@@ -256,7 +257,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.yourturnArray.append((games["whitePlayer"] as? String)!)
                         
                         //adding updated since
-                        let lastupdate = games.createdAt!
+                        let lastupdate = games.updatedAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.yourturnUpdateSince.append(since)
                         
@@ -274,7 +275,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.theirturnArray.append((games["whitePlayer"] as? String)!)
                         
                         //adding updated since
-                        let lastupdate = games.createdAt!
+                        let lastupdate = games.updatedAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.theirturnUpdateSince.append(since)
                         
@@ -291,7 +292,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.typeofGameover.append((games["status_black"] as? String)!)
                         
                         //adding updated since
-                        let lastupdate = games.createdAt!
+                        let lastupdate = games.updatedAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.gameoverUpdateSince.append(since)
                         

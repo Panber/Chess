@@ -43,7 +43,7 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         requestQuery.whereKey("inviteTo", equalTo: (PFUser.currentUser()?.username)!)
         requestQuery.whereKey("players", equalTo: (PFUser.currentUser()?.username)!)
         requestQuery.whereKey("confirmed", equalTo: false)
-        
+        requestQuery.orderByDescending("createdAt")
         requestQuery.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
                 if let result = result as! [PFObject]! {
@@ -196,6 +196,67 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         crossButton.userInteractionEnabled = false
         
         
+        let requestQuery = PFQuery(className: "Games")
+        requestQuery.whereKey("inviteTo", equalTo: (PFUser.currentUser()?.username)!)
+        requestQuery.whereKey("players", equalTo: (PFUser.currentUser()?.username)!)
+        requestQuery.whereKey("confirmed", equalTo: false)
+        requestQuery.whereKey("inviteFrom", equalTo: inviteName[sender.tag - 1])
+        
+        requestQuery.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, error:NSError?) -> Void in
+            if error == nil {
+                
+                if let result = result as! [PFObject]! {
+                    for result in result {
+                        
+                        result["confirmed"] = true
+                        
+                        if result["whitePlayer"] as? String == PFUser.currentUser()?.username {
+                        
+                            result["status_white"] = "move"
+                            result["status_black"] = "notmove"
+                            
+
+                            
+                        }
+                        else {
+                        
+                            result["status_white"] = "notmove"
+                            result["status_black"] = "move"
+                        
+                        }
+                        
+                        let now = NSDate()
+                        var newDate = now.dateByAddingTimeInterval(60 * 60 * 24)
+                        
+                        if result["speed"] as? String == "Normal" {
+                            
+                            let daysToAdd: Double = 1
+                            newDate = now.dateByAddingTimeInterval(60 * 60 * 24 * daysToAdd)
+                        }
+                        else if result["speed"] as? String == "Fast" {
+                            
+                            let daysToAdd: Double = 0.25
+                            newDate = now.dateByAddingTimeInterval(60 * 60 * 24 * daysToAdd)
+                        }
+                            
+                        else if result["speed"] as? String == "Slow" {
+                            
+                            let daysToAdd: Double = 3
+                            newDate = now.dateByAddingTimeInterval(60 * 60 * 24 * daysToAdd)
+                        }
+                        
+                        
+                        result["timeLeftToMove"] = newDate
+                        result.saveEventually()
+                        
+                    }
+                    
+                }
+                
+                
+            }
+        }
+        
         
         
     }
@@ -222,6 +283,30 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         
         checkmarkButton.userInteractionEnabled = false
         crossButton.userInteractionEnabled = false
+        
+        
+        let requestQuery = PFQuery(className: "Games")
+        requestQuery.whereKey("inviteTo", equalTo: (PFUser.currentUser()?.username)!)
+        requestQuery.whereKey("players", equalTo: (PFUser.currentUser()?.username)!)
+        requestQuery.whereKey("confirmed", equalTo: false)
+        requestQuery.whereKey("inviteFrom", equalTo: inviteName[sender.tag - 99_999 - 1
+])
+        
+        requestQuery.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, error:NSError?) -> Void in
+            if error == nil {
+            
+                if let result = result as! [PFObject]! {
+                    for result in result {
+                    
+                    result.deleteEventually()
+                    
+                    }
+                
+                }
+            
+            
+            }
+        }
         
     }
     
