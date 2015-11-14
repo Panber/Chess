@@ -56,8 +56,18 @@ var movementTimer = NSTimer()
 var pieceMarked = UIImageView(frame: CGRectMake(0, 0, pieceSize, pieceSize))
 var pieceOptions : Array<UIImageView> = []
 
+// Logic options for all pieces
+var pieceWhiteLogicOptions: Array<UIImageView> = []
+var pieceBlackLogicOptions: Array<UIImageView> = []
+
 // Logic options for Queen, Bishop and Rook
-var QBRLogicOptions : Array<UIImageView> = []
+var queenLogicOptions : Array<UIImageView> = []
+var bishopLogicOptions : Array<UIImageView> = []
+var rookLogicOptions : Array<UIImageView> = []
+
+// Decides who makes check
+var checkByWhite = false
+var checkByBlack = false
 
 var selectedPawn = 0
 var pieceOpt = whitePawn1
@@ -162,6 +172,7 @@ var pieceID = 0
 
 class GameInterFace3: UIViewController {
     
+    
     @IBOutlet weak var chessBoard: UIImageView!
     
     // MARK: - View did load! 😄
@@ -243,11 +254,42 @@ class GameInterFace3: UIViewController {
     }
     
     func removeLogicOptions() {
-        for var p = 0 ; p < QBRLogicOptions.count; p++ {
-            QBRLogicOptions[p].hidden = true
-            QBRLogicOptions[p].removeFromSuperview()
+        for var p = 0 ; p < queenLogicOptions.count; p++ {
+            queenLogicOptions[p].hidden = true
+            queenLogicOptions[p].removeFromSuperview()
         }
-        QBRLogicOptions = []
+        queenLogicOptions = []
+    }
+    
+    func removeBishopLogicOptions() {
+        for var p = 0 ; p < bishopLogicOptions.count; p++ {
+            bishopLogicOptions[p].hidden = true
+            bishopLogicOptions[p].removeFromSuperview()
+        }
+        bishopLogicOptions = []
+    }
+    
+    func removeRookLogicOptions() {
+        for var p = 0 ; p < rookLogicOptions.count; p++ {
+            rookLogicOptions[p].hidden = true
+            rookLogicOptions[p].removeFromSuperview()
+        }
+        rookLogicOptions = []
+    }
+    func removeWhitePieceLogicOptions() {
+        for var p = 0 ; p < pieceWhiteLogicOptions.count; p++ {
+            pieceWhiteLogicOptions[p].hidden = true
+            pieceWhiteLogicOptions[p].removeFromSuperview()
+        }
+        pieceWhiteLogicOptions = []
+    }
+    
+    func removeBlackPieceLogicOptions() {
+        for var p = 0 ; p < pieceBlackLogicOptions.count; p++ {
+            pieceBlackLogicOptions[p].hidden = true
+            pieceBlackLogicOptions[p].removeFromSuperview()
+        }
+        pieceBlackLogicOptions = []
     }
     
     
@@ -361,16 +403,24 @@ class GameInterFace3: UIViewController {
                     }
                 }
                 
-                //				// Decides which squares the King can go to
-                //				if pieceid == 5 {
-                //					for var p = 0 ; p < pieceOptions.count; p++ {
-                //					for var o = 0 ; o < QBRLogicOptions.count; o++ {
-                //						if CGRectContainsPoint(pieceOptions[p].frame, QBRLogicOptions[o].center){
-                //							pieceOptions[p].hidden = true
-                //						}
-                //					}
-                //					}
-                //				}
+                //								// Decides which squares the King can go to
+                if pieceid == 5 && selectedPiece == whiteKing {
+                    for var p = 0 ; p < pieceOptions.count; p++ {
+                        for var o = 0 ; o < pieceBlackLogicOptions.count; o++ {
+                            if CGRectContainsPoint(pieceOptions[p].frame, pieceBlackLogicOptions[o].center){
+                                pieceOptions[p].hidden = true
+                            }
+                        }
+                    }
+                } else if pieceid == 5 && selectedPiece == blackKing {
+                    for var p = 0 ; p < pieceOptions.count; p++ {
+                        for var o = 0 ; o < pieceWhiteLogicOptions.count; o++ {
+                            if CGRectContainsPoint(pieceOptions[p].frame, pieceWhiteLogicOptions[o].center){
+                                pieceOptions[p].hidden = true
+                            }
+                        }
+                    }
+                }
                 
                 for var o = 0 ; o < pieceOptions.count; o++ {
                     if CGRectContainsPoint(boarderBoard.frame, pieceOptions[o].center) == false {
@@ -447,21 +497,66 @@ class GameInterFace3: UIViewController {
                     }
                 }
                 
-                for var q = 0; q < QBRLogicOptions.count; q++ {
-                    if CGRectContainsPoint(QBRLogicOptions[q].frame , blackKing.center) {
-                        foundKing = true
-                        canThePieceGofurther = false
-                        print("found the King!")
+                if pieceid == 4 {
+                    for var q = 0; q < queenLogicOptions.count; q++ {
+                        if CGRectContainsPoint(queenLogicOptions[q].frame , whiteKing.center) || CGRectContainsPoint(queenLogicOptions[q].frame , blackKing.center)  {
+                            foundKing = true
+                            canThePieceGofurther = false
+                            print("found the King!")
+                        }
+                    }
+                } else if pieceid == 1 {
+                    for var q = 0; q < bishopLogicOptions.count; q++ {
+                        if CGRectContainsPoint(bishopLogicOptions[q].frame , whiteKing.center) || CGRectContainsPoint(bishopLogicOptions[q].frame , blackKing.center) {
+                            foundKing = true
+                            canThePieceGofurther = false
+                            print("found the King!")
+                        }
+                    }
+                } else if pieceid == 3 {
+                    for var q = 0; q < rookLogicOptions.count; q++ {
+                        if CGRectContainsPoint(rookLogicOptions[q].frame , whiteKing.center) || CGRectContainsPoint(rookLogicOptions[q].frame , blackKing.center) {
+                            foundKing = true
+                            canThePieceGofurther = false
+                            print("found the King!")
+                        }
+                    }
+                }
+                
+                if foundKing == true {
+                    // This pieceOption is for where the king can move when checked
+                    let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
+                    //pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                    self.view.addSubview(pieceOption2)
+                    if friend == whitePieces {
+                        pieceWhiteLogicOptions += [pieceOption2]
+                    } else {
+                        pieceBlackLogicOptions += [pieceOption2]
                     }
                 }
                 
                 if canThePieceGofurther == true {
                     
                     let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
-                    pieceOption.image = UIImage(named: "piecePossibilities.png")
+                    //pieceOption.image = UIImage(named: "piecePossibilities.png")
                     self.view.addSubview(pieceOption)
-                    if pieceid == 1 || pieceid == 3 || pieceid == 4  {
-                        QBRLogicOptions += [pieceOption]
+                    
+                    // This pieceOption is for where the king can move when checked
+                    let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
+                    //pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                    self.view.addSubview(pieceOption2)
+                    if friend == whitePieces {
+                        pieceWhiteLogicOptions += [pieceOption2]
+                    } else {
+                        pieceBlackLogicOptions += [pieceOption2]
+                    }
+                    
+                    if  pieceid == 4  {
+                        queenLogicOptions += [pieceOption]
+                    } else if pieceid == 1 {
+                        bishopLogicOptions += [pieceOption]
+                    } else if pieceid == 3 {
+                        rookLogicOptions += [pieceOption]
                     }
                 }
                 
@@ -470,34 +565,94 @@ class GameInterFace3: UIViewController {
                     if enemy[r].frame.origin.x == piece.frame.origin.x + byAmountx * pieceSize && enemy[r].frame.origin.y == piece.frame.origin.y - byAmounty * pieceSize && canThePieceGofurther == true {
                         
                         let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
-                        pieceOption.image = UIImage(named: "piecePossibilities.png")
+                        //pieceOption.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption)
-                        if pieceid == 1 || pieceid == 3 || pieceid == 4  {
-                            QBRLogicOptions += [pieceOption]
+                        
+                        // This pieceOption is for where the king can move when checked
+                        let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
+                        //pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                        self.view.addSubview(pieceOption2)
+                        
+                        if friend == whitePieces {
+                            pieceWhiteLogicOptions += [pieceOption2]
+                        } else {
+                            pieceBlackLogicOptions += [pieceOption2]
+                        }
+                        
+                        if  pieceid == 4  {
+                            queenLogicOptions += [pieceOption]
+                        } else if pieceid == 1 {
+                            bishopLogicOptions += [pieceOption]
+                        } else if pieceid == 3 {
+                            rookLogicOptions += [pieceOption]
                         }
                         canThePieceGofurther = false
                         
                     }
                 }
                 
-                if pieceid == 1 || pieceid == 3 || pieceid == 4  {
-                    for var o = 0 ; o < QBRLogicOptions.count; o++ {
-                        if CGRectContainsPoint(boarderBoard.frame, QBRLogicOptions[o].center) == false {
-                            [QBRLogicOptions[o] .removeFromSuperview()]
-                            QBRLogicOptions.removeAtIndex(o)
+                if friend == whitePieces {
+                    for var o = 0 ; o < pieceWhiteLogicOptions.count; o++ {
+                        if CGRectContainsPoint(boarderBoard.frame, pieceWhiteLogicOptions[o].center) == false {
+                            [pieceWhiteLogicOptions[o] .removeFromSuperview()]
+                            pieceWhiteLogicOptions.removeAtIndex(o)
+                        }
+                    }
+                } else {
+                    for var o = 0 ; o < pieceBlackLogicOptions.count; o++ {
+                        if CGRectContainsPoint(boarderBoard.frame, pieceBlackLogicOptions[o].center) == false {
+                            [pieceBlackLogicOptions[o] .removeFromSuperview()]
+                            pieceBlackLogicOptions.removeAtIndex(o)
+                        }
+                    }
+                }
+                
+                if pieceid == 4  {
+                    for var o = 0 ; o < queenLogicOptions.count; o++ {
+                        if CGRectContainsPoint(boarderBoard.frame, queenLogicOptions[o].center) == false {
+                            [queenLogicOptions[o] .removeFromSuperview()]
+                            queenLogicOptions.removeAtIndex(o)
+                        }
+                    }
+                } else if pieceid == 1 {
+                    for var o = 0 ; o < bishopLogicOptions.count; o++ {
+                        if CGRectContainsPoint(boarderBoard.frame, bishopLogicOptions[o].center) == false {
+                            [bishopLogicOptions[o] .removeFromSuperview()]
+                            bishopLogicOptions.removeAtIndex(o)
+                        }
+                    }
+                } else if pieceid == 3 {
+                    for var o = 0 ; o < rookLogicOptions.count; o++ {
+                        if CGRectContainsPoint(boarderBoard.frame, rookLogicOptions[o].center) == false {
+                            [rookLogicOptions[o] .removeFromSuperview()]
+                            rookLogicOptions.removeAtIndex(o)
                         }
                     }
                 }
             }
-            if foundKing == false {
-                for var o = 0 ; o < QBRLogicOptions.count; o++ {
-                    [QBRLogicOptions[o] .removeFromSuperview()]
+            if foundKing == false && pieceid == 4 {
+                for var o = 0 ; o < queenLogicOptions.count; o++ {
+                    [queenLogicOptions[o] .removeFromSuperview()]
                 }
                 
-                QBRLogicOptions.removeAll()
-                QBRLogicOptions = []
+                queenLogicOptions.removeAll()
+                queenLogicOptions = []
+            } else if foundKing == false && pieceid == 1 {
+                for var o = 0 ; o < bishopLogicOptions.count; o++ {
+                    [bishopLogicOptions[o] .removeFromSuperview()]
+                }
+                
+                bishopLogicOptions.removeAll()
+                bishopLogicOptions = []
+            } else if foundKing == false && pieceid == 3 {
+                for var o = 0 ; o < rookLogicOptions.count; o++ {
+                    [rookLogicOptions[o] .removeFromSuperview()]
+                }
+                
+                rookLogicOptions.removeAll()
+                rookLogicOptions = []
             }
-            print(QBRLogicOptions.count)
+            print(queenLogicOptions.count)
         }
         // movementNumber = 9
         if pieceid == 1 {
@@ -648,6 +803,18 @@ class GameInterFace3: UIViewController {
             }
             
             chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueen)
+            chessPieceMovementLogic(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, piece: blackQueen)
+            
+            chessPieceMovementLogic(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, piece: whiteBishop1)
+            chessPieceMovementLogic(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, piece: whiteBishop2)
+            chessPieceMovementLogic(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, piece: blackBishop1)
+            chessPieceMovementLogic(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, piece: blackBishop2)
+            
+            
+            chessPieceMovementLogic(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, piece: whiteRook1)
+            chessPieceMovementLogic(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, piece: whiteRook2)
+            chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRook1)
+            chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRook2)
         }
             
         else {
@@ -658,6 +825,10 @@ class GameInterFace3: UIViewController {
             selectedPiece.frame = CGRect(x: positionx, y: positiony, width: pieceSize, height: pieceSize)
             canTake = true
             removeLogicOptions()
+            removeBishopLogicOptions()
+            removeRookLogicOptions()
+            removeWhitePieceLogicOptions()
+            removeBlackPieceLogicOptions()
         }
         
     }
@@ -742,7 +913,6 @@ class GameInterFace3: UIViewController {
                     whitePieces[t].removeFromSuperview()
                     whitePieces.removeAtIndex(t)
                 }
-                
                 
             }
         }
