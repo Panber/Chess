@@ -25,6 +25,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     @IBOutlet weak var tableView: UITableView!
 
     
+    @IBOutlet weak var invitesButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var newButtonOutlet: UIBarButtonItem!
     
   //  @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
@@ -168,6 +169,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 //        scrollView.scrollEnabled = true
 //        view.addSubview(scrollView)
 //        scrollView.showsVerticalScrollIndicator = false
+        
+        
     }
 
 
@@ -188,14 +191,19 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         //fix this
         gamesQuery.orderByDescending("updatedAt")
         gamesQuery.whereKey("players", equalTo: PFUser.currentUser()!.username!)
+      //  gamesQuery.whereKey("confirmed", equalTo: true)
         gamesQuery.findObjectsInBackgroundWithBlock { (games:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
             if let games = games as! [PFObject]! {
             for games in games {
                 
+                
                // self.usernameArray.append((games["blackPlayer"] as? String)!)
          //       self.indicatorDataArray.append((games["status_white"] as? String)!)
-                if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
+                
+                
+                if games["confirmed"] as? Bool == true {
+                    if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
                 
                     
                     if games["status_white"] as? String == "move" {
@@ -250,7 +258,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     }
                     
                 }
-                else {
+                    else {
                     
                     if games["status_black"] as? String == "move" {
                         
@@ -307,7 +315,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 
                 
                 }
-                
+                }
+                else {
+                    
+                    self.invitesButtonOutlet.title = "Invites"
+                    self.invitesButtonOutlet.enabled = true
+                    self.invitesButtonOutlet.tintColor = blue
+
+                }
                 
                 
                 
@@ -336,11 +351,18 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
     
+       // cell.userProfileImage.image = nil
+        cell.username.text = ""
+        
         
         func find(name:String) {
             
+            cell.username.text = name
+            cell.userProfileImage.image = nil
+            
         let query = PFQuery(className: "_User")
         
+            
         query.whereKey("username", equalTo: name)
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             if (error == nil) {
@@ -354,7 +376,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                             
                             userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                 if (error == nil) {
-                                    cell.username.text = user["username"] as? String
                                     cell.userProfileImage.image = UIImage(data: imageData!)
                                     self.imageDataArray.append(imageData!)
                        
@@ -413,6 +434,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 
                 var since = yourturnUpdateSince[indexPath.row]
                 //making to minutes
+                cell.updated.text = "Last Updated: Now"
+
                 if since >= 60 {
                     since = since/60
                     let sinceOutput = Int(since)
@@ -424,14 +447,17 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     let sinceOutput = Int(since)
                     cell.updated.text = "Last Updated: \(sinceOutput)h ago"
                     
-                }
-                //making to days
-                if since >= 24 {
-                    since = since/24
-                    let sinceOutput = Int(since)
-                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                    //making to days
+                    if since >= 24 {
+                        since = since/24
+                        let sinceOutput = Int(since)
+                        cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                        
+                    }
                     
                 }
+
+
             
             
         case 1:
@@ -458,6 +484,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 
                 var since = theirturnUpdateSince[indexPath.row]
                 //making to minutes
+                cell.updated.text = "Last Updated: Now"
+
                 if since >= 60 {
                     since = since/60
                     let sinceOutput = Int(since)
@@ -469,13 +497,15 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     let sinceOutput = Int(since)
                     cell.updated.text = "Last Updated: \(sinceOutput)h ago"
                     
+                    //making to days
+                    if since >= 24 {
+                        since = since/24
+                        let sinceOutput = Int(since)
+                        cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                    }
+                    
                 }
-                //making to days
-                if since >= 24 {
-                    since = since/24
-                    let sinceOutput = Int(since)
-                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
-                }
+
             
         case 2:
             if typeofGameover[indexPath.row] == "lost" {
@@ -506,6 +536,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             
             var since = gameoverUpdateSince[indexPath.row]
             //making to minutes
+            cell.updated.text = "Last Updated: Now"
+
             if since >= 60 {
                 since = since/60
                 let sinceOutput = Int(since)
@@ -517,13 +549,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 let sinceOutput = Int(since)
                 cell.updated.text = "Last Updated: \(sinceOutput)h ago"
                 
+                //making to days
+                if since >= 24 {
+                    since = since/24
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                }
             }
-            //making to days
-            if since >= 24 {
-                since = since/24
-                let sinceOutput = Int(since)
-                cell.updated.text = "Last Updated: \(sinceOutput)d ago"
-            }
+
             
         default:
             ""
@@ -715,6 +748,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
         findGames()
+
+        invitesButtonOutlet.title = "Invites"
+        invitesButtonOutlet.enabled = false
+        self.invitesButtonOutlet.tintColor = UIColor.grayColor()
+
 
 
         lightOrDarkMode()

@@ -218,10 +218,11 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
 
                             
                         }
-                        else {
+                        else if result["blackPlayer"] as? String == PFUser.currentUser()?.username {
+
                         
-                            result["status_white"] = "notmove"
-                            result["status_black"] = "move"
+                            result["status_white"] = "move"
+                            result["status_black"] = "notmove"
                         
                         }
                         
@@ -248,6 +249,17 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
                         
                         result["timeLeftToMove"] = newDate
                         result.saveEventually()
+                        
+                        // Create our Installation query
+                        let pushQuery = PFInstallation.query()
+                        pushQuery!.whereKey("username", equalTo: [sender.tag - 1])
+                        
+                        // Send push notification to query
+                        let push = PFPush()
+                        push.setQuery(pushQuery) // Set our Installation query
+                        push.setMessage("\(PFUser.currentUser()!.username!) accepted your invitation. Let's begin!")
+                        push.sendPushInBackground()
+                        
                         
                     }
                     
