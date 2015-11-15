@@ -48,6 +48,16 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tblView =  UIView(frame: CGRectZero)
+        searchDisplayController?.searchResultsTableView.tableFooterView = tblView
+        searchDisplayController?.searchResultsTableView.tableFooterView!.hidden = true
+        searchDisplayController?.searchResultsTableView.backgroundColor = UIColor.clearColor()
+        
+        tableView.hidden = true
+
+        
+        
         // Do any additional setup after loading the view.
         navigationController?.navigationBar.topItem?.title = "Explore"
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
@@ -544,9 +554,13 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         if searchText.characters.count > 0 && usersScope == true {
             searchUsers(searchText)
         }
+        
         if searchText.characters.count > 0 && friendsScope == true {
             searchFriends(searchText)
         }
+        
+
+        
         tableView.hidden = false
     }
     
@@ -557,6 +571,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         // Declare user object and set cell text to username
         let user:PFUser = users[indexPath.row] as! PFUser
         
+        let rating = user["rating"] as? Int
+        cell.rating.text = "\(rating!)"
         cell.username.text = user["username"] as? String
         
         let profilePictureObject = user["profile_picture"] as? PFFile
@@ -662,7 +678,18 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        tableView.hidden = true
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.tableView.alpha = 0
+            }, completion: { finish in
+        
+                self.tableView.alpha = 1
+                self.tableView.hidden = true
+
+
+
+        })
+        
     }
     
     

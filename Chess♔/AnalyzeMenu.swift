@@ -11,19 +11,21 @@ import Parse
 
 class AnalyzeMenu: UIViewController {
 
+    @IBOutlet weak var board: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         navigationController?.navigationBar.topItem?.title = "Analyze"
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         
+
+        
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
 
     /*
@@ -37,6 +39,14 @@ class AnalyzeMenu: UIViewController {
     */
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
+
+        board.alpha = 0
+        
+        
+        UIView.animateWithDuration(0.3) { () -> Void in
+            self.board.alpha = 1
+        }
+        
     }
     
     //func to check if dark or light mode should be enabled, keep this at the bottom

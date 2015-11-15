@@ -24,10 +24,10 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="B3s-5v-fBy" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="3ey-eU-v6g"/>
-                            <constraint firstItem="B3s-5v-fBy" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="AL4-Lz-Cvv"/>
-                            <constraint firstAttribute="trailing" secondItem="B3s-5v-fBy" secondAttribute="trailing" id="Rzp-0k-bd8"/>
-                            <constraint firstItem="B3s-5v-fBy" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="u7s-B4-nSf"/>
+                            <constraint firstAttribute="trailing" secondItem="B3s-5v-fBy" secondAttribute="trailing" id="l83-eD-8hy"/>
+                            <constraint firstItem="B3s-5v-fBy" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="pa1-M4-AMy"/>
+                            <constraint firstItem="B3s-5v-fBy" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="vhO-rM-7da"/>
+                            <constraint firstItem="B3s-5v-fBy" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="vtE-Kn-QC7"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

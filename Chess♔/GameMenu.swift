@@ -20,7 +20,7 @@ var scrollView: UIScrollView!
 var logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
 var logoView = UIImageView(image:logo)
 
-class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, UITableViewDelegate {
+class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, UITableViewDelegate, UITabBarControllerDelegate, UITabBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -57,6 +57,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var yourTurnSpeed: Array<String> = []
     var theirTurnSpeed: Array<String> = []
     var gameoverTurnSpeed: Array<String> = []
+    
+
 
     
     var typeofGameover: Array<String> = []
@@ -85,6 +87,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         let customFont = UIFont(name: "Didot", size: 18.0)
         newButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+        invitesButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+        
    //     editButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
 
        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
@@ -185,21 +189,17 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func findGames() {
         
-       // usernameArray = []
         tableView.hidden = true
         let gamesQuery = PFQuery(className: "Games")
         //fix this
         gamesQuery.orderByDescending("updatedAt")
         gamesQuery.whereKey("players", equalTo: PFUser.currentUser()!.username!)
-      //  gamesQuery.whereKey("confirmed", equalTo: true)
         gamesQuery.findObjectsInBackgroundWithBlock { (games:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
             if let games = games as! [PFObject]! {
             for games in games {
                 
-                
-               // self.usernameArray.append((games["blackPlayer"] as? String)!)
-         //       self.indicatorDataArray.append((games["status_white"] as? String)!)
+
                 
                 
                 if games["confirmed"] as? Bool == true {
@@ -341,6 +341,45 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     }
     
+    
+    /*func find(name:String) {
+        
+        let query = PFQuery(className: "_User")
+        
+        query.whereKey("username", equalTo: name)
+        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+            if (error == nil) {
+                
+                if let userArray = objects as? [PFUser] {
+                    for user in userArray {
+                        
+                        cell.rating.text = String(user["rating"] as! Int)
+                        
+                        if let userPicture = user["profile_picture"] as? PFFile {
+                            
+                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                if (error == nil) {
+                                    cell.userProfileImage.image = UIImage(data: imageData!)
+                                    self.imageDataArray.append(imageData!)
+                                    
+                                    
+                                    
+                                } else {
+                                }
+                            }
+                            
+                        }
+                    }
+                    
+                }
+            } else {
+                // Log details of the failure
+                print("query error: \(error) \(error!.userInfo)")
+            }
+            
+        }
+    }*/
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 150
     }
@@ -350,7 +389,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         
         let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
-    
+        
+        
        // cell.userProfileImage.image = nil
         cell.username.text = ""
         
@@ -360,8 +400,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             cell.username.text = name
             cell.userProfileImage.image = nil
             
+            
+            
         let query = PFQuery(className: "_User")
-        
             
         query.whereKey("username", equalTo: name)
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
@@ -376,8 +417,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                             
                             userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                 if (error == nil) {
+                                    cell.userProfileImage.alpha = 0
                                     cell.userProfileImage.image = UIImage(data: imageData!)
                                     self.imageDataArray.append(imageData!)
+                                    
+                                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                        cell.userProfileImage.alpha = 1
+
+                                    })
                        
                                 } else {
                                 }
@@ -641,6 +688,28 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
 
 
+    @IBAction func analyze(sender: AnyObject) {
+        
+
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            
+            self.tableView.frame.origin.x = -screenWidth
+            
+            self.newButtonOutlet.title = ""
+            self.invitesButtonOutlet.title = ""
+            self.navigationItem.title = "Analyze"
+            
+            }) { Finish in
+                
+                self.newButtonOutlet.title = "New"
+                self.invitesButtonOutlet.title = "Invites"
+                self.navigationItem.title = "Chess♔"
+                self.tabBarController?.selectedIndex = 1
+                self.tableView.frame.origin.x = 0
+        }
+        
+        
+    }
     
     
 //    func newGameSetup() {
