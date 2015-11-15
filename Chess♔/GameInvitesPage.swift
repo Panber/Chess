@@ -121,6 +121,7 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         }
         
         
+        
         let query = PFQuery(className: "_User")
         
         query.whereKey("username", equalTo: cell.username.text!)

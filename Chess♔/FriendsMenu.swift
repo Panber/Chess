@@ -557,6 +557,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         // Declare user object and set cell text to username
         let user:PFUser = users[indexPath.row] as! PFUser
         
+        let rating = user["rating"] as? Int
+        cell.rating.text = "\(rating!)"
         cell.username.text = user["username"] as? String
         
         let profilePictureObject = user["profile_picture"] as? PFFile

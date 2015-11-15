@@ -83,6 +83,9 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
         userQuery.whereKey("username", equalTo: friendsArray[indexPath.row])
         let _user = userQuery.getFirstObject() as! PFUser
         
+        let rating = _user["rating"] as? Int
+        cell.rating.text = "\(rating!)"
+        
         let profilePictureObject = _user["profile_picture"] as? PFFile
         
         if(profilePictureObject != nil)

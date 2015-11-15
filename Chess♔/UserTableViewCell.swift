@@ -13,6 +13,7 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var username: UILabel!
     
+    @IBOutlet weak var rating: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,6 +67,7 @@ class UserTableViewCell3: UITableViewCell {
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var username: UILabel!
     
+    @IBOutlet weak var rating: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -85,6 +85,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         let customFont = UIFont(name: "Didot", size: 18.0)
         newButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+        invitesButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+        
    //     editButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
 
        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
@@ -360,8 +362,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             cell.username.text = name
             cell.userProfileImage.image = nil
             
+            
+            
         let query = PFQuery(className: "_User")
-        
             
         query.whereKey("username", equalTo: name)
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
