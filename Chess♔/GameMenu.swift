@@ -381,6 +381,12 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                                 if (error == nil) {
                                     cell.userProfileImage.image = UIImage(data: imageData!)
                                     self.imageDataArray.append(imageData!)
+                                    cell.userProfileImage.alpha = 0
+                                    
+                                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                        cell.userProfileImage.alpha = 1
+
+                                    })
                        
                                 } else {
                                 }
