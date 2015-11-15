@@ -67,7 +67,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     override func viewDidLoad() {
         
-
         
         instructionsLabel = UILabel(frame: CGRectMake(20, 64 ,screenWidth - 40,100))
         let new = "-New-"

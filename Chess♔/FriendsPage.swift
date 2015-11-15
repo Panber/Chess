@@ -25,6 +25,12 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let tblView =  UIView(frame: CGRectZero)
+        tableView.tableFooterView = tblView
+        tableView.tableFooterView!.hidden = true
+        tableView.backgroundColor = UIColor.clearColor()
+        
+        self.navigationItem.title = "Friends"
         
         getFriends()
     }
@@ -103,6 +109,10 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
             }
         }
         
+        if cell.username.text == friendsArray.last {
+            cell.separatorInset = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
         
         return cell
     }
@@ -117,7 +127,42 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
         cell.userProfileImage.image = UIImage(data: p)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        lightOrDarkMode()
+    }
     
+    func lightOrDarkMode() {
+        if darkMode == true {
+            
+            
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            
+            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
+            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            
+            
+            
+            
+        }
+        else if darkMode == false {
+            
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
+            self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+            self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
+            self.tabBarController?.tabBar.tintColor = blue
+            self.navigationController?.navigationBar.tintColor = blue
+            
+            
+        }
+        
+        
+    }
+
     
     
     

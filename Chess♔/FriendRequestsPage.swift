@@ -44,6 +44,10 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tblView =  UIView(frame: CGRectZero)
+        tableView.tableFooterView = tblView
+        tableView.tableFooterView!.hidden = true
+        tableView.backgroundColor = UIColor.clearColor()
 
         
     }

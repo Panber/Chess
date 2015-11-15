@@ -24,6 +24,11 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        let tblView =  UIView(frame: CGRectZero)
+        tableView.tableFooterView = tblView
+        tableView.tableFooterView!.hidden = true
+        tableView.backgroundColor = UIColor.clearColor()
         // Do any additional setup after loading the view.
     }
 
@@ -97,6 +102,10 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         //position
         cell.position.text = "\(indexPath.row + 1)" + "."
         
+        if cell.username.text == usernamee.lastObject as? String {
+            cell.separatorInset = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
         
         return cell
     }
