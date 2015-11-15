@@ -5,6 +5,7 @@
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
     </dependencies>
     <scenes>
         <!--Invites-->
@@ -160,6 +161,7 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <animations/>
+                                        <inset key="separatorInset" minX="33" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="checkmarkButton" destination="21s-Su-ex5" id="awv-UP-7UE"/>
                                             <outlet property="crossButton" destination="n5D-b2-rc5" id="p9w-QX-csY"/>
@@ -270,6 +272,9 @@
                                                             <rect key="frame" x="33" y="83" width="50" height="50"/>
                                                             <animations/>
                                                             <state key="normal" backgroundImage="Data@3x_blue.png"/>
+                                                            <connections>
+                                                                <action selector="analyze:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kj2-kZ-gQC"/>
+                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFN-ie-KUw">
                                                             <rect key="frame" x="16" y="29" width="7" height="7"/>
@@ -369,7 +374,10 @@
                                             <outlet property="updated" destination="ZAo-X8-72k" id="Wov-B5-wGy"/>
                                             <outlet property="userProfileImage" destination="pEs-KX-Xff" id="usm-HB-y0y"/>
                                             <outlet property="username" destination="NJf-pv-LyL" id="TmM-VJ-DLH"/>
-                                            <segue destination="fQ8-pX-Vlb" kind="show" id="wNo-PL-G0z"/>
+                                            <segue destination="fQ8-pX-Vlb" kind="show" id="wNo-PL-G0z">
+                                                <segue key="commit" inheritsFrom="parent" id="Jan-Fo-ZlP"/>
+                                                <segue key="preview" inheritsFrom="commit" id="zru-9C-9yR"/>
+                                            </segue>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -998,12 +1006,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Yq-3u-w7Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1097" y="420"/>
+            <point key="canvasLocation" x="1099" y="288"/>
         </scene>
-        <!--Sett-->
+        <!--tabBarController-->
         <scene sceneID="suy-iP-UXV">
             <objects>
-                <tabBarController storyboardIdentifier="Sett" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bY1-z2-YMg" customClass="sett" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="Sett" title="tabBarController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bY1-z2-YMg" customClass="sett" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="FFH-hZ-yxt">
@@ -1033,14 +1041,29 @@
                     <view key="view" contentMode="scaleToFill" id="Zlx-z4-9hR">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clack and white board with half boarder copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="UtN-nI-iac">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                            </imageView>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.1450980392" green="0.1450980392" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="UtN-nI-iac" firstAttribute="leading" secondItem="Zlx-z4-9hR" secondAttribute="leading" id="0is-rr-0I8"/>
+                            <constraint firstAttribute="bottom" secondItem="UtN-nI-iac" secondAttribute="bottom" id="Hae-AS-FQ7"/>
+                            <constraint firstItem="UtN-nI-iac" firstAttribute="top" secondItem="Zlx-z4-9hR" secondAttribute="top" id="JHb-lb-ly4"/>
+                            <constraint firstAttribute="trailing" secondItem="UtN-nI-iac" secondAttribute="trailing" id="qRL-4N-e6O"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Analyze" id="ugG-nR-Luv"/>
+                    <connections>
+                        <outlet property="board" destination="UtN-nI-iac" id="LLN-zP-FLd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EIa-lm-c1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1824" y="995"/>
+            <point key="canvasLocation" x="1832" y="989"/>
         </scene>
         <!--Analyze-->
         <scene sceneID="XDQ-dG-Skb">
@@ -1060,7 +1083,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cxn-58-dmZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1097" y="1169"/>
+            <point key="canvasLocation" x="1140" y="891"/>
         </scene>
         <!--Explore-->
         <scene sceneID="SeI-Wo-YbG">
@@ -1890,6 +1913,7 @@
         <image name="profileTabBarIcon.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="wNo-PL-G0z"/>
         <segue reference="yX0-R2-72x"/>
     </inferredMetricsTieBreakers>
 </document>
