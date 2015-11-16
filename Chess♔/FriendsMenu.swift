@@ -157,6 +157,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         ratingLabel.textColor = UIColor.grayColor()
         blurBC1.addSubview(ratingLabel)
         
+        let seperator = UILabel(frame: CGRectMake(0,blurBC1.frame.size.height - 0.5,screenWidth,0.5))
+        seperator.backgroundColor = UIColor.lightGrayColor()
+        blurBC1.addSubview(seperator)
+        
+        
         let toTop10WorldUser = UIButton(frame: CGRectMake(0, blurBC1.frame.size.height/3, blurBC1.frame.size.width, blurBC1.frame.size.height * (2/3)))
         toTop10WorldUser.addTarget(self, action: "toTop10WorldUserPressed:", forControlEvents: .TouchUpInside)
         toTop10WorldUser.backgroundColor = UIColor.clearColor()
@@ -255,7 +260,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 
     func addTop10Friends () {
     
-        blurBC2 = UIImageView(frame: CGRectMake(0,  blurBC1.frame.size.height + 10, screenWidth, (screenWidth)/(16/9)))
+        blurBC2 = UIImageView(frame: CGRectMake(0,  blurBC1.frame.size.height, screenWidth, (screenWidth)/(16/9)))
         blurBC2.contentMode = .ScaleAspectFill
         blurBC2.userInteractionEnabled = true
         blurBC2.clipsToBounds = true
@@ -317,6 +322,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         toTop10FriendsUser.addTarget(self, action: "toTop10FriendsUserPressed:", forControlEvents: .TouchUpInside)
         toTop10FriendsUser.backgroundColor = UIColor.clearColor()
         blurBC2.addSubview(toTop10FriendsUser)
+        
+        let seperator = UILabel(frame: CGRectMake(0,blurBC2.frame.size.height - 0.5,screenWidth,0.5))
+        seperator.backgroundColor = UIColor.lightGrayColor()
+        blurBC2.addSubview(seperator)
         
         
         for var i = 0; i < friendsArray.count; i++ {
@@ -679,11 +688,17 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        
+        
+        UITableView.animateWithDuration(0.3, animations: { () -> Void in
             self.tableView.alpha = 0
+            self.searchDisplayController?.searchResultsTableView.alpha = 0
+            
             }, completion: { finish in
         
                 self.tableView.alpha = 1
+                self.searchDisplayController?.searchResultsTableView.alpha = 1
+
                 self.tableView.hidden = true
 
 
