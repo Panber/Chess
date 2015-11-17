@@ -134,6 +134,13 @@
 		8FB94F9B1BE62F360029EF00 /* Data@3x_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */; };
 		8FBD3A371BB498A200212314 /* GameInterFace2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD3A361BB498A200212314 /* GameInterFace2.swift */; };
 		8FBED2FC1BB1F35700CDAACC /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */; };
+		8FEF2A991BFA7C8A006E1359 /* aquaChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2A921BFA7C89006E1359 /* aquaChessBoard.png */; };
+		8FEF2A9A1BFA7C8A006E1359 /* blackChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2A931BFA7C89006E1359 /* blackChessBoard.png */; };
+		8FEF2A9B1BFA7C8A006E1359 /* blackSquareChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2A941BFA7C89006E1359 /* blackSquareChessBoard.png */; };
+		8FEF2A9C1BFA7C8A006E1359 /* brownChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2A951BFA7C89006E1359 /* brownChessBoard.png */; };
+		8FEF2A9D1BFA7C8A006E1359 /* greenblueChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2A961BFA7C89006E1359 /* greenblueChessBoard.png */; };
+		8FEF2A9E1BFA7C8A006E1359 /* oldSkoolChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2A971BFA7C89006E1359 /* oldSkoolChessBoard.png */; };
+		8FEF2A9F1BFA7C8A006E1359 /* whiteSquareChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2A981BFA7C89006E1359 /* whiteSquareChessBoard.png */; };
 		F134DDDE1BC1C417005BA54C /* UsersProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */; };
 		F1431A5E1BD281B600C5854A /* UsersFriendsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */; };
 		F1431A611BD298F400C5854A /* panBeriPhone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F1431A601BD298F400C5854A /* panBeriPhone.jpg */; };
@@ -295,6 +302,13 @@
 		8FBD3A361BB498A200212314 /* GameInterFace2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInterFace2.swift; sourceTree = "<group>"; };
 		8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		8FEF2A921BFA7C89006E1359 /* aquaChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aquaChessBoard.png; sourceTree = "<group>"; };
+		8FEF2A931BFA7C89006E1359 /* blackChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackChessBoard.png; sourceTree = "<group>"; };
+		8FEF2A941BFA7C89006E1359 /* blackSquareChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackSquareChessBoard.png; sourceTree = "<group>"; };
+		8FEF2A951BFA7C89006E1359 /* brownChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brownChessBoard.png; sourceTree = "<group>"; };
+		8FEF2A961BFA7C89006E1359 /* greenblueChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenblueChessBoard.png; sourceTree = "<group>"; };
+		8FEF2A971BFA7C89006E1359 /* oldSkoolChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oldSkoolChessBoard.png; sourceTree = "<group>"; };
+		8FEF2A981BFA7C89006E1359 /* whiteSquareChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteSquareChessBoard.png; sourceTree = "<group>"; };
 		F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersProfilePage.swift; sourceTree = "<group>"; };
 		F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersFriendsPage.swift; sourceTree = "<group>"; };
 		F1431A601BD298F400C5854A /* panBeriPhone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = panBeriPhone.jpg; sourceTree = "<group>"; };
@@ -399,6 +413,7 @@
 				F1431A5F1BD298E700C5854A /* LaunchImages */,
 				8F14D18A1B9C917800A58CCF /* LoginImages */,
 				8F1E8ECD1BD7F66C00C41D37 /* profilePicPlaceholder.jpg */,
+				8FEF2A911BFA7C7C006E1359 /* Boards */,
 				8F273CF21BF29E4300275378 /* clock104.png */,
 				8F273CF71BF2A36200275378 /* normalModeIndicator2.png */,
 				8F273CF91BF3969800275378 /* normalIndicator.png */,
@@ -430,7 +445,6 @@
 				8FA018D21B9B0D76002B410E /* chessIconRounded.png */,
 				8F2DD6D21B9AFFF80059CEFA /* board black and white no border.png */,
 				8F2DD6D31B9AFFF80059CEFA /* ChessIconTab@3x.png */,
-				8F2DD6D41B9AFFF80059CEFA /* clack and white board with half boarder copy.png */,
 				8F2DD6D51B9AFFF80059CEFA /* Data@3x.png */,
 				8F2DD6D61B9AFFF80059CEFA /* Friends@3x.png */,
 				8F1BB5581BA22BAF0043E2B7 /* profileTabBarIcon@3x.png */,
@@ -585,6 +599,21 @@
 			path = "Chess♔UITests";
 			sourceTree = "<group>";
 		};
+		8FEF2A911BFA7C7C006E1359 /* Boards */ = {
+			isa = PBXGroup;
+			children = (
+				8FEF2A921BFA7C89006E1359 /* aquaChessBoard.png */,
+				8FEF2A931BFA7C89006E1359 /* blackChessBoard.png */,
+				8FEF2A941BFA7C89006E1359 /* blackSquareChessBoard.png */,
+				8FEF2A951BFA7C89006E1359 /* brownChessBoard.png */,
+				8FEF2A961BFA7C89006E1359 /* greenblueChessBoard.png */,
+				8FEF2A971BFA7C89006E1359 /* oldSkoolChessBoard.png */,
+				8FEF2A981BFA7C89006E1359 /* whiteSquareChessBoard.png */,
+				8F2DD6D41B9AFFF80059CEFA /* clack and white board with half boarder copy.png */,
+			);
+			name = Boards;
+			sourceTree = "<group>";
+		};
 		F1431A5F1BD298E700C5854A /* LaunchImages */ = {
 			isa = PBXGroup;
 			children = (
@@ -715,11 +744,13 @@
 				8F1E8EC41BD78F9600C41D37 /* nasaearth.jpg in Resources */,
 				8F14D19C1B9C918700A58CCF /* 9.png in Resources */,
 				8F14D1971B9C918700A58CCF /* 14.jpg in Resources */,
+				8FEF2A9A1BFA7C8A006E1359 /* blackChessBoard.png in Resources */,
 				8F1E8ED01BD7F74500C41D37 /* profilePicPlaceholderDark.jpg in Resources */,
 				8F1E8ED41BD8362A00C41D37 /* PanBerLogoDark2.png in Resources */,
 				8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */,
 				8F8BD2B71BC6C1C500B25CFE /* checkmark11.png in Resources */,
 				8F8BD2A81BC41ED700B25CFE /* arrow_white.png in Resources */,
+				8FEF2A9F1BFA7C8A006E1359 /* whiteSquareChessBoard.png in Resources */,
 				8FA018DB1B9B2D8C002B410E /* DSCF0388.jpg in Resources */,
 				8F14D1961B9C918700A58CCF /* 15.jpg in Resources */,
 				8F31DCE51BC716F9004544CC /* add.png in Resources */,
@@ -743,6 +774,7 @@
 				8F31DCE71BC7189B004544CC /* add1.png in Resources */,
 				8F4A02691B9A3E890084024A /* PANBERlogo.png in Resources */,
 				F1DECCAE1BE3FEA8009C08B4 /* Main.storyboard in Resources */,
+				8FEF2A991BFA7C8A006E1359 /* aquaChessBoard.png in Resources */,
 				8F14D19D1B9C918700A58CCF /* 8.jpg in Resources */,
 				8F970FBF1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png in Resources */,
 				8F2DD6E51B9AFFF80059CEFA /* pieceMarked.png in Resources */,
@@ -756,6 +788,7 @@
 				8FA018D31B9B0D76002B410E /* chessIconRounded.png in Resources */,
 				8FA018D51B9B0E33002B410E /* Bauru.ttf in Resources */,
 				8F14D1991B9C918700A58CCF /* 12.jpg in Resources */,
+				8FEF2A9C1BFA7C8A006E1359 /* brownChessBoard.png in Resources */,
 				8FB94F9B1BE62F360029EF00 /* Data@3x_blue.png in Resources */,
 				8F056AF71BAF533C00CD617B /* LightModePreview.png in Resources */,
 				8F1E8EC21BD78EE900C41D37 /* mountain.jpg in Resources */,
@@ -765,6 +798,7 @@
 				8F14D19A1B9C918700A58CCF /* 11.jpg in Resources */,
 				8F2DD6E21B9AFFF80059CEFA /* Friends@3x.png in Resources */,
 				8F910C301BD6C58F0003647E /* 20.jpg in Resources */,
+				8FEF2A9D1BFA7C8A006E1359 /* greenblueChessBoard.png in Resources */,
 				8F056AF81BAF533C00CD617B /* DarkModePreview.png in Resources */,
 				8F273CFA1BF3969800275378 /* normalIndicator.png in Resources */,
 				8F2DD6E11B9AFFF80059CEFA /* Data@3x.png in Resources */,
@@ -774,6 +808,8 @@
 				8F2DD6E41B9AFFF80059CEFA /* moveOption.png in Resources */,
 				8F4A027C1B9A3EE80084024A /* blackKnight.png in Resources */,
 				8F970FBD1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png in Resources */,
+				8FEF2A9E1BFA7C8A006E1359 /* oldSkoolChessBoard.png in Resources */,
+				8FEF2A9B1BFA7C8A006E1359 /* blackSquareChessBoard.png in Resources */,
 				8F14D1871B9C823500A58CCF /* 2.JPG in Resources */,
 				8F14D1861B9C823500A58CCF /* 3.jpg in Resources */,
 				8F8BD2BD1BC6E22B00B25CFE /* close1.png in Resources */,
