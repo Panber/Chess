@@ -20,6 +20,10 @@ var scrollView: UIScrollView!
 var logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
 var logoView = UIImageView(image:logo)
 
+
+//newpressed
+var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+
 class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, UITableViewDelegate, UITabBarControllerDelegate, UITabBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
@@ -173,6 +177,12 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 //        scrollView.scrollEnabled = true
 //        view.addSubview(scrollView)
 //        scrollView.showsVerticalScrollIndicator = false
+        
+        //setting newgameView
+        visualEffectView.frame = view.bounds
+        visualEffectView.alpha = 0
+        visualEffectView.userInteractionEnabled = false
+
         
         
     }
@@ -856,6 +866,120 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
     }
 
+    
+    @IBAction func newPressed(sender: AnyObject) {
+        
+        if darkMode {  visualEffectView.effect = UIBlurEffect(style: .Dark) }
+        else { visualEffectView.effect = UIBlurEffect(style: .Light) }
+        
+        let currentWindow: UIWindow = UIApplication.sharedApplication().keyWindow!
+        currentWindow.addSubview(visualEffectView)
+
+        UIView.animateWithDuration(0.3) { () -> Void in
+            visualEffectView.alpha = 1
+        }
+        visualEffectView.userInteractionEnabled = true
+        
+        //friends
+        let friendsImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 85,120,50,50))
+        friendsImage.image = UIImage(named:"group4-2.png")
+        friendsImage.contentMode = .ScaleAspectFill
+        friendsImage.alpha = 0.7
+        visualEffectView.addSubview(friendsImage)
+        
+        let friendsButton = UIButton(frame: CGRectMake((screenWidth / 2) - 120,100,120,120))
+        friendsButton.setTitle("FRIENDS", forState: .Normal)
+        friendsButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        friendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        friendsButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        friendsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        visualEffectView.addSubview(friendsButton)
+        //-----friends end
+        
+        
+        //random
+        let randomImage = UIImageView(frame: CGRectMake((screenWidth / 2) + 35,120,50,50))
+        randomImage.image = UIImage(named:"multimedia option23.png")
+        randomImage.contentMode = .ScaleAspectFill
+        randomImage.alpha = 0.7
+        visualEffectView.addSubview(randomImage)
+        
+        let randomButton = UIButton(frame: CGRectMake((screenWidth / 2),100,120,120))
+        randomButton.setTitle("RANDOM", forState: .Normal)
+        randomButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        randomButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        randomButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        randomButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        visualEffectView.addSubview(randomButton)
+        //------random end
+        
+        //username
+        let usernameImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 85,120 + 140,50,50))
+        usernameImage.image = UIImage(named:"search74-2.png")
+        usernameImage.contentMode = .ScaleAspectFill
+        usernameImage.alpha = 0.7
+        visualEffectView.addSubview(usernameImage)
+        
+        let usernameButton = UIButton(frame: CGRectMake((screenWidth / 2) - 120,100 + 140,120,120))
+        usernameButton.setTitle("USERNAME", forState: .Normal)
+        usernameButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        usernameButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        usernameButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        usernameButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        visualEffectView.addSubview(usernameButton)
+        //------username end
+        
+        //rating
+        let ratingImage = UIImageView(frame: CGRectMake((screenWidth / 2) + 35,120 + 140,50,50))
+        ratingImage.image = UIImage(named:"search74-2.png")
+        ratingImage.contentMode = .ScaleAspectFill
+        ratingImage.alpha = 0.7
+        visualEffectView.addSubview(ratingImage)
+        
+        let ratingButton = UIButton(frame: CGRectMake((screenWidth / 2),100 + 140,120,120))
+        ratingButton.setTitle("RATING", forState: .Normal)
+        ratingButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        ratingButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        ratingButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        ratingButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        visualEffectView.addSubview(ratingButton)
+        //------rating end
+        
+        
+        //location
+        let locationImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 25,120 + 140 + 140,50,50))
+        locationImage.image = UIImage(named:"map-pointer7.png")
+        locationImage.contentMode = .ScaleAspectFill
+        locationImage.alpha = 0.7
+        visualEffectView.addSubview(locationImage)
+        
+        let locationButton = UIButton(frame: CGRectMake((screenWidth / 2) - 60,100 + 140 + 140,120,120))
+        locationButton.setTitle("NEARBY", forState: .Normal)
+        locationButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        locationButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        locationButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        locationButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        visualEffectView.addSubview(locationButton)
+        //------location end
+  
+        let gesture3 = UITapGestureRecognizer(target: self, action: "effectViewViewPressed:")
+        visualEffectView.userInteractionEnabled = true
+        visualEffectView.addGestureRecognizer(gesture3)
+        
+    }
+    
+    
+    
+    func effectViewViewPressed(sender:UITapGestureRecognizer){
+        
+        UIView.animateWithDuration(0.3) { () -> Void in
+            visualEffectView.alpha = 0
+        }
+        
+        visualEffectView.userInteractionEnabled = false
+        
+    }
+    
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
     func lightOrDarkMode() {

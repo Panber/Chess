@@ -116,11 +116,13 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     
     }
     
-    func loginViewPressed(sender:UITapGestureRecognizer){
+
+    
+    func effectViewViewPressed(sender:UITapGestureRecognizer){
         view.endEditing(true)
     }
     
-    func effectViewViewPressed(sender:UITapGestureRecognizer){
+    func loginViewPressed(sender:UITapGestureRecognizer){
         view.endEditing(true)
     }
     

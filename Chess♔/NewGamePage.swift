@@ -11,11 +11,16 @@ import Parse
 
 class NewGamePage: UIViewController {
 
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        scrollView.contentSize.height = 1000
         // Do any additional setup after loading the view.
     }
+    
 
 
 }

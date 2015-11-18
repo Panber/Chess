@@ -202,10 +202,10 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         //adding username to view
-        let label = UILabel(frame: CGRectMake(profilePic.frame.origin.x + 95 , contentView.frame.size.height/8, 250, 40))
+        let label = UILabel(frame: CGRectMake(profilePic.frame.origin.x + 95 , contentView.frame.size.height/8, 250, 30))
         label.textAlignment = NSTextAlignment.Left
         label.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username")as? String
-        label.font = UIFont(name: "Didot-Bold", size: 30)
+        label.font = UIFont(name: "Didot-Bold", size: 22)
         label.sizeToFit()
         if darkMode { label.textColor = UIColor.whiteColor() }
         else { label.textColor = UIColor.blackColor() }
@@ -213,23 +213,23 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         //adding rating label
-        label2 = UILabel(frame: CGRectMake(label.frame.origin.x , label.frame.origin.y + 30, 100, 40))
+        label2 = UILabel(frame: CGRectMake(label.frame.origin.x , label.frame.origin.y + 30, 100, 16))
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
-        label2.font = UIFont(name: "Didot-Italic", size: 15)
+        label2.font = UIFont(name: "Didot-Italic", size: 14)
         if darkMode { label2.textColor = UIColor.whiteColor() }
         else { label2.textColor = UIColor.darkGrayColor() }
         contentView.addSubview(label2)
         
-        let inviteButton = UIButton(frame: CGRectMake(label.frame.origin.x, label2.frame.origin.y + 40,110, 25))
+        let inviteButton = UIButton(frame: CGRectMake(label.frame.origin.x, label2.frame.origin.y + 22,110, 25))
         inviteButton.setTitleColor(blue, forState: .Normal)
         inviteButton.titleLabel?.font = UIFont(name: "Didot", size: 13)
         inviteButton.setTitle("Request Game", forState: .Normal)
         inviteButton.backgroundColor = UIColor.clearColor()
         inviteButton.layer.borderWidth = 1
         inviteButton.layer.borderColor = blue.CGColor
-        inviteButton.layer.cornerRadius = cornerRadius - 2
+        inviteButton.layer.cornerRadius = cornerRadius - 3
         contentView.addSubview(inviteButton)
         
         
