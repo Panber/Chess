@@ -23,6 +23,7 @@ var logoView = UIImageView(image:logo)
 
 //newpressed
 var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+var visualEffectSub = UIView()
 
 class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, UITableViewDelegate, UITabBarControllerDelegate, UITabBarDelegate {
 
@@ -182,6 +183,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         visualEffectView.frame = view.bounds
         visualEffectView.alpha = 0
         visualEffectView.userInteractionEnabled = false
+        
+        visualEffectSub.frame = view.bounds
+        visualEffectSub.alpha = 1
+        visualEffectSub.userInteractionEnabled = false
+        
+        visualEffectView.addSubview(visualEffectSub)
+
 
         
         
@@ -875,110 +883,151 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         let currentWindow: UIWindow = UIApplication.sharedApplication().keyWindow!
         currentWindow.addSubview(visualEffectView)
 
+        
         UIView.animateWithDuration(0.3) { () -> Void in
             visualEffectView.alpha = 1
         }
+        
         visualEffectView.userInteractionEnabled = true
+        visualEffectSub.userInteractionEnabled = true
         
         //friends
-        let friendsImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 85,120,50,50))
+        let friendsImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 85,100,50,50))
         friendsImage.image = UIImage(named:"group4-2.png")
         friendsImage.contentMode = .ScaleAspectFill
         friendsImage.alpha = 0.7
-        visualEffectView.addSubview(friendsImage)
+        visualEffectSub.addSubview(friendsImage)
         
-        let friendsButton = UIButton(frame: CGRectMake((screenWidth / 2) - 120,100,120,120))
+        let friendsButton = UIButton(frame: CGRectMake((screenWidth / 2) - 120,80,120,120))
         friendsButton.setTitle("FRIENDS", forState: .Normal)
         friendsButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
         friendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
         friendsButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        friendsButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        friendsButton.layer.cornerRadius = cornerRadius
+        friendsButton.clipsToBounds = true
         friendsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
-        visualEffectView.addSubview(friendsButton)
+        friendsButton.addTarget(self, action: "friendsButtonPressed:", forControlEvents: .TouchUpInside)
+        visualEffectSub.addSubview(friendsButton)
         //-----friends end
         
         
         //random
-        let randomImage = UIImageView(frame: CGRectMake((screenWidth / 2) + 35,120,50,50))
+        let randomImage = UIImageView(frame: CGRectMake((screenWidth / 2) + 35,100,50,50))
         randomImage.image = UIImage(named:"multimedia option23.png")
         randomImage.contentMode = .ScaleAspectFill
         randomImage.alpha = 0.7
-        visualEffectView.addSubview(randomImage)
+        visualEffectSub.addSubview(randomImage)
         
-        let randomButton = UIButton(frame: CGRectMake((screenWidth / 2),100,120,120))
+        let randomButton = UIButton(frame: CGRectMake((screenWidth / 2),80,120,120))
         randomButton.setTitle("RANDOM", forState: .Normal)
         randomButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
         randomButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
         randomButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         randomButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
-        visualEffectView.addSubview(randomButton)
+        randomButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        randomButton.layer.cornerRadius = cornerRadius
+        randomButton.clipsToBounds = true
+        visualEffectSub.addSubview(randomButton)
         //------random end
         
         //username
-        let usernameImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 85,120 + 140,50,50))
+        let usernameImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 85,100 + 140,50,50))
         usernameImage.image = UIImage(named:"search74-2.png")
         usernameImage.contentMode = .ScaleAspectFill
         usernameImage.alpha = 0.7
-        visualEffectView.addSubview(usernameImage)
+        visualEffectSub.addSubview(usernameImage)
         
-        let usernameButton = UIButton(frame: CGRectMake((screenWidth / 2) - 120,100 + 140,120,120))
+        let usernameButton = UIButton(frame: CGRectMake((screenWidth / 2) - 120,80 + 140,120,120))
         usernameButton.setTitle("USERNAME", forState: .Normal)
         usernameButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
         usernameButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
         usernameButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         usernameButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
-        visualEffectView.addSubview(usernameButton)
+        usernameButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        usernameButton.layer.cornerRadius = cornerRadius
+        usernameButton.clipsToBounds = true
+        visualEffectSub.addSubview(usernameButton)
         //------username end
         
         //rating
-        let ratingImage = UIImageView(frame: CGRectMake((screenWidth / 2) + 35,120 + 140,50,50))
+        let ratingImage = UIImageView(frame: CGRectMake((screenWidth / 2) + 35,100 + 140,50,50))
         ratingImage.image = UIImage(named:"search74-2.png")
         ratingImage.contentMode = .ScaleAspectFill
         ratingImage.alpha = 0.7
-        visualEffectView.addSubview(ratingImage)
+        visualEffectSub.addSubview(ratingImage)
         
-        let ratingButton = UIButton(frame: CGRectMake((screenWidth / 2),100 + 140,120,120))
+        let ratingButton = UIButton(frame: CGRectMake((screenWidth / 2),80 + 140,120,120))
         ratingButton.setTitle("RATING", forState: .Normal)
         ratingButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
         ratingButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
         ratingButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         ratingButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
-        visualEffectView.addSubview(ratingButton)
+        ratingButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        ratingButton.layer.cornerRadius = cornerRadius
+        ratingButton.clipsToBounds = true
+        visualEffectSub.addSubview(ratingButton)
         //------rating end
         
         
         //location
-        let locationImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 25,120 + 140 + 140,50,50))
+        let locationImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 25,100 + 140 + 140,50,50))
         locationImage.image = UIImage(named:"map-pointer7.png")
         locationImage.contentMode = .ScaleAspectFill
         locationImage.alpha = 0.7
-        visualEffectView.addSubview(locationImage)
+        visualEffectSub.addSubview(locationImage)
         
-        let locationButton = UIButton(frame: CGRectMake((screenWidth / 2) - 60,100 + 140 + 140,120,120))
+        let locationButton = UIButton(frame: CGRectMake((screenWidth / 2) - 60,80 + 140 + 140,120,120))
         locationButton.setTitle("NEARBY", forState: .Normal)
         locationButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
         locationButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
         locationButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         locationButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
-        visualEffectView.addSubview(locationButton)
+        locationButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        locationButton.layer.cornerRadius = cornerRadius
+        locationButton.clipsToBounds = true
+        visualEffectSub.addSubview(locationButton)
         //------location end
   
-        let gesture3 = UITapGestureRecognizer(target: self, action: "effectViewViewPressed:")
-        visualEffectView.userInteractionEnabled = true
-        visualEffectView.addGestureRecognizer(gesture3)
+        let gesture3 = UITapGestureRecognizer(target: self, action: "effectSubPressed:")
+        visualEffectSub.userInteractionEnabled = true
+        visualEffectSub.addGestureRecognizer(gesture3)
         
     }
     
+    func friendsButtonPressed(sender:UIButton) {
+        removeNewView()
     
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("newGameFriends")
+        self.showViewController(vc as! UIViewController, sender: vc)
+    }
     
-    func effectViewViewPressed(sender:UITapGestureRecognizer){
+    func effectSubPressed(sender:UITapGestureRecognizer){
+        removeNewView()
+  
+    }
+    
+    func removeNewView() {
         
-        UIView.animateWithDuration(0.3) { () -> Void in
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            
             visualEffectView.alpha = 0
-        }
+            
+            }, completion: {finish in
+                
+                for view in visualEffectSub.subviews {
+                    view.removeFromSuperview()
+                }
+                
+        })
         
         visualEffectView.userInteractionEnabled = false
-        
+        visualEffectSub.userInteractionEnabled = false
+    
     }
+    
+    
+    
     
     
     //func to check if dark or light mode should be enabled, keep this at the bottom

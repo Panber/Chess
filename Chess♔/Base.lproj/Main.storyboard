@@ -419,119 +419,10 @@
             </objects>
             <point key="canvasLocation" x="1824" y="313"/>
         </scene>
-        <!--New Game-->
-        <scene sceneID="WEk-WN-sjn">
-            <objects>
-                <viewController id="m3T-nO-hHo" customClass="NewGamePage" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lpY-v4-SEO"/>
-                        <viewControllerLayoutGuide type="bottom" id="cLh-aZ-75k"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="OiD-bG-W3n">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMV-yB-Ckb">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJL-EZ-9qO">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="160"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="18"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="65" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Invite  Friend">
-                                            <color key="titleColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="I1M-MK-bqe" kind="push" id="sqw-jh-yHM"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIo-2H-HA6">
-                                        <rect key="frame" x="0.0" y="160" width="600" height="160"/>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="160" id="6KP-dh-Mqh"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="15"/>
-                                        <state key="normal" title="Invite Random User">
-                                            <color key="titleColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdE-J4-dmU">
-                                        <rect key="frame" x="228" y="293" width="300" height="300"/>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="300" id="NJq-rq-0WE"/>
-                                            <constraint firstAttribute="width" constant="300" id="VFM-Lo-jaa"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="15"/>
-                                        <state key="normal" title="Find User by Rating">
-                                            <color key="titleColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z3L-48-pgJ">
-                                        <rect key="frame" x="300" y="300" width="300" height="300"/>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="YlK-5J-gOB"/>
-                                            <constraint firstAttribute="height" constant="300" id="ljp-MO-5Qd"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="15"/>
-                                        <state key="normal" title="Find User by Username">
-                                            <color key="titleColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="group4-2.png" translatesAutoresizingMaskIntoConstraints="NO" id="hxk-z1-y2M">
-                                        <rect key="frame" x="275" y="33" width="50" height="50"/>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="Xut-kb-TSm"/>
-                                            <constraint firstAttribute="height" constant="50" id="pZl-Ep-C44"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Z3L-48-pgJ" secondAttribute="bottom" id="6W5-Cu-nxG"/>
-                                    <constraint firstItem="uIo-2H-HA6" firstAttribute="trailing" secondItem="LJL-EZ-9qO" secondAttribute="trailing" id="7Po-jD-5wu"/>
-                                    <constraint firstItem="hxk-z1-y2M" firstAttribute="centerX" secondItem="LJL-EZ-9qO" secondAttribute="centerX" id="9k1-6h-4me"/>
-                                    <constraint firstItem="uIo-2H-HA6" firstAttribute="centerX" secondItem="iMV-yB-Ckb" secondAttribute="centerX" id="GOF-9k-8ea"/>
-                                    <constraint firstItem="LJL-EZ-9qO" firstAttribute="leading" secondItem="iMV-yB-Ckb" secondAttribute="leading" id="IGb-kx-V4o"/>
-                                    <constraint firstItem="Z3L-48-pgJ" firstAttribute="trailing" secondItem="uIo-2H-HA6" secondAttribute="trailing" id="QDD-Lp-TSn"/>
-                                    <constraint firstItem="uIo-2H-HA6" firstAttribute="top" secondItem="LJL-EZ-9qO" secondAttribute="bottom" id="QE6-qr-qc0"/>
-                                    <constraint firstItem="LJL-EZ-9qO" firstAttribute="top" secondItem="iMV-yB-Ckb" secondAttribute="top" id="UP5-EF-k1i"/>
-                                    <constraint firstItem="uIo-2H-HA6" firstAttribute="top" secondItem="hxk-z1-y2M" secondAttribute="bottom" constant="77" id="XEE-3s-bMN"/>
-                                    <constraint firstAttribute="trailing" secondItem="uIo-2H-HA6" secondAttribute="trailing" id="eaU-5M-MfU"/>
-                                    <constraint firstItem="LJL-EZ-9qO" firstAttribute="leading" secondItem="uIo-2H-HA6" secondAttribute="leading" id="gIX-FC-5mx"/>
-                                    <constraint firstAttribute="bottom" secondItem="kdE-J4-dmU" secondAttribute="bottom" constant="7" id="hCI-wc-7kc"/>
-                                    <constraint firstItem="kdE-J4-dmU" firstAttribute="top" secondItem="iMV-yB-Ckb" secondAttribute="top" constant="293" id="m7g-lz-dbB"/>
-                                    <constraint firstItem="hxk-z1-y2M" firstAttribute="top" secondItem="iMV-yB-Ckb" secondAttribute="top" constant="33" id="tpo-zC-5t0"/>
-                                    <constraint firstAttribute="trailing" secondItem="kdE-J4-dmU" secondAttribute="trailing" constant="72" id="wTW-c1-kfH"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="iMV-yB-Ckb" firstAttribute="top" secondItem="OiD-bG-W3n" secondAttribute="top" id="BRA-kc-Jpr"/>
-                            <constraint firstItem="iMV-yB-Ckb" firstAttribute="leading" secondItem="OiD-bG-W3n" secondAttribute="leading" id="Ie1-hn-xmG"/>
-                            <constraint firstAttribute="bottom" secondItem="iMV-yB-Ckb" secondAttribute="bottom" id="OJa-4K-OK2"/>
-                            <constraint firstAttribute="trailing" secondItem="iMV-yB-Ckb" secondAttribute="trailing" id="cE2-6e-RFB"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="New Game" id="Wv6-Mu-Msw"/>
-                    <connections>
-                        <outlet property="scrollView" destination="iMV-yB-Ckb" id="bYL-sE-YvC"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pSF-v8-sik" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2542" y="-361"/>
-        </scene>
         <!--New Game Friends-->
         <scene sceneID="SOa-Qi-xt5">
             <objects>
-                <viewController id="I1M-MK-bqe" customClass="NewGameFriends" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="newGameFriends" useStoryboardIdentifierAsRestorationIdentifier="YES" id="I1M-MK-bqe" customClass="NewGameFriends" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tGC-3R-Bp1"/>
                         <viewControllerLayoutGuide type="bottom" id="tEX-va-1Lg"/>
@@ -639,6 +530,9 @@
                                         <rect key="frame" x="21" y="8" width="50" height="50"/>
                                         <animations/>
                                         <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="RJ7-b1-mdq"/>
+                                            <constraint firstAttribute="height" constant="50" id="eUs-Rb-5kt"/>
+                                            <constraint firstAttribute="width" secondItem="JZU-UC-bgm" secondAttribute="height" multiplier="1:1" id="xHb-yS-59b"/>
                                             <constraint firstAttribute="width" constant="50" id="xgn-gP-BgF"/>
                                         </constraints>
                                     </imageView>
@@ -799,7 +693,7 @@
                             <constraint firstItem="RuG-3q-I8p" firstAttribute="top" secondItem="Jfp-Ng-8lO" secondAttribute="bottom" constant="265" id="pxF-bZ-rBJ"/>
                             <constraint firstItem="VBu-ym-CjT" firstAttribute="top" secondItem="7fK-oV-AvV" secondAttribute="bottom" constant="19" id="rFr-gv-ssa"/>
                             <constraint firstItem="RuG-3q-I8p" firstAttribute="top" secondItem="Jfp-Ng-8lO" secondAttribute="bottom" constant="285" id="tMr-4Z-0fl"/>
-                            <constraint firstItem="RuG-3q-I8p" firstAttribute="top" secondItem="Jfp-Ng-8lO" secondAttribute="bottom" constant="211" id="tVo-lH-5OX"/>
+                            <constraint firstItem="RuG-3q-I8p" firstAttribute="top" secondItem="Jfp-Ng-8lO" secondAttribute="bottom" constant="260" id="tVo-lH-5OX"/>
                             <constraint firstItem="Vfo-tr-haq" firstAttribute="leading" secondItem="VBu-ym-CjT" secondAttribute="leading" id="v8f-4o-Smw"/>
                             <constraint firstItem="RuG-3q-I8p" firstAttribute="top" secondItem="bze-4R-WzM" secondAttribute="bottom" constant="253" id="ygy-md-am2"/>
                             <constraint firstItem="h6f-K9-zYG" firstAttribute="leading" secondItem="bze-4R-WzM" secondAttribute="leading" id="zch-3c-BNd"/>
@@ -815,6 +709,7 @@
                                 <exclude reference="llM-r4-8z4"/>
                                 <exclude reference="pxF-bZ-rBJ"/>
                                 <exclude reference="tMr-4Z-0fl"/>
+                                <exclude reference="tVo-lH-5OX"/>
                                 <exclude reference="ygy-md-am2"/>
                             </mask>
                         </variation>
@@ -1973,7 +1868,6 @@
         <image name="checkmark11.png" width="256" height="256"/>
         <image name="clack and white board with half boarder copy.png" width="2000" height="2096"/>
         <image name="close38.png" width="256" height="256"/>
-        <image name="group4-2.png" width="512" height="512"/>
         <image name="oldSkoolChessBoard.png" width="2000" height="2096"/>
         <image name="profilePicPlaceholder.jpg" width="552" height="552"/>
         <image name="profileTabBarIcon.png" width="30" height="30"/>

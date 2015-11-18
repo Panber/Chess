@@ -151,6 +151,9 @@
 		8FEF2AAF1BFCE136006E1359 /* multimedia option23.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2AA71BFCE135006E1359 /* multimedia option23.png */; };
 		8FEF2AB21BFD0F2F006E1359 /* cross-mark1-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2AB01BFD0F2F006E1359 /* cross-mark1-3.png */; };
 		8FEF2AB31BFD0F2F006E1359 /* cross-mark1-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2AB11BFD0F2F006E1359 /* cross-mark1-2.png */; };
+		8FEF2AB51BFD1779006E1359 /* grayBC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2AB41BFD1779006E1359 /* grayBC.jpg */; };
+		8FEF2AB71BFD17DB006E1359 /* grayBC.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2AB61BFD17DB006E1359 /* grayBC.png */; };
+		8FEF2ABD1BFD1AE7006E1359 /* dBlackBC.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2ABC1BFD1AE7006E1359 /* dBlackBC.png */; };
 		F134DDDE1BC1C417005BA54C /* UsersProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */; };
 		F1431A5E1BD281B600C5854A /* UsersFriendsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */; };
 		F1431A611BD298F400C5854A /* panBeriPhone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F1431A601BD298F400C5854A /* panBeriPhone.jpg */; };
@@ -329,6 +332,9 @@
 		8FEF2AA71BFCE135006E1359 /* multimedia option23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "multimedia option23.png"; sourceTree = "<group>"; };
 		8FEF2AB01BFD0F2F006E1359 /* cross-mark1-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-mark1-3.png"; sourceTree = "<group>"; };
 		8FEF2AB11BFD0F2F006E1359 /* cross-mark1-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-mark1-2.png"; sourceTree = "<group>"; };
+		8FEF2AB41BFD1779006E1359 /* grayBC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grayBC.jpg; sourceTree = "<group>"; };
+		8FEF2AB61BFD17DB006E1359 /* grayBC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayBC.png; sourceTree = "<group>"; };
+		8FEF2ABC1BFD1AE7006E1359 /* dBlackBC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dBlackBC.png; sourceTree = "<group>"; };
 		F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersProfilePage.swift; sourceTree = "<group>"; };
 		F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersFriendsPage.swift; sourceTree = "<group>"; };
 		F1431A601BD298F400C5854A /* panBeriPhone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = panBeriPhone.jpg; sourceTree = "<group>"; };
@@ -487,6 +493,9 @@
 				8F2DD6DC1B9AFFF80059CEFA /* settingsTabBarIcon@3x.png */,
 				8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */,
 				8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */,
+				8FEF2AB41BFD1779006E1359 /* grayBC.jpg */,
+				8FEF2ABC1BFD1AE7006E1359 /* dBlackBC.png */,
+				8FEF2AB61BFD17DB006E1359 /* grayBC.png */,
 				8F8639321B9B09F90055608B /* BlackBC.jpg */,
 				8FA018D81B9B1FAE002B410E /* ChessIconAndTExt.png */,
 				8FA1F7CD1B9AFCA800A0C548 /* Pieces */,
@@ -794,10 +803,12 @@
 				8F8639331B9B09F90055608B /* BlackBC.jpg in Resources */,
 				8F2DD6E81B9AFFF80059CEFA /* settingsTabBarIcon@3x.png in Resources */,
 				8F14D1981B9C918700A58CCF /* 13.jpg in Resources */,
+				8FEF2ABD1BFD1AE7006E1359 /* dBlackBC.png in Resources */,
 				8F14D1A01B9C918700A58CCF /* 5.jpg in Resources */,
 				8F4A02861B9A3F240084024A /* chessIcon1024.png in Resources */,
 				8F4A027E1B9A3EE80084024A /* blackQueen.png in Resources */,
 				8F14D1881B9C823500A58CCF /* 1.jpg in Resources */,
+				8FEF2AB71BFD17DB006E1359 /* grayBC.png in Resources */,
 				8F4A027F1B9A3EE80084024A /* blackBishop.png in Resources */,
 				8FEF2AAB1BFCE136006E1359 /* group4-2.png in Resources */,
 				8FEF2AB21BFD0F2F006E1359 /* cross-mark1-3.png in Resources */,
@@ -808,6 +819,7 @@
 				8F31DCE71BC7189B004544CC /* add1.png in Resources */,
 				8F4A02691B9A3E890084024A /* PANBERlogo.png in Resources */,
 				F1DECCAE1BE3FEA8009C08B4 /* Main.storyboard in Resources */,
+				8FEF2AB51BFD1779006E1359 /* grayBC.jpg in Resources */,
 				8FEF2A991BFA7C8A006E1359 /* aquaChessBoard.png in Resources */,
 				8F14D19D1B9C918700A58CCF /* 8.jpg in Resources */,
 				8F970FBF1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png in Resources */,
