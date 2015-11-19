@@ -199,6 +199,97 @@
             </objects>
             <point key="canvasLocation" x="1819" y="-449"/>
         </scene>
+        <!--New Game Nearby-->
+        <scene sceneID="TfI-zN-RqH">
+            <objects>
+                <viewController storyboardIdentifier="NewGameNearby" id="Ebu-Dk-0wV" customClass="NewGameNearby" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GVb-wV-Hq1"/>
+                        <viewControllerLayoutGuide type="bottom" id="4bd-s4-C1f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EOU-rE-9LU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q5p-og-aTY">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="newGameNearbyCell" rowHeight="70" id="YSY-Yn-QhB" customClass="NewGameNearbyTableViewCell" customModule="Chess_" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YSY-Yn-QhB" id="Aij-HV-YIr">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="69"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uBH-Y6-pg3">
+                                                    <rect key="frame" x="21" y="8" width="50" height="50"/>
+                                                    <animations/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tda-YH-Vg3">
+                                                    <rect key="frame" x="84" y="35" width="400" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" name="Didot-Italic" family="Didot" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95n-wE-pWb">
+                                                    <rect key="frame" x="84" y="17" width="400" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstItem="95n-wE-pWb" firstAttribute="top" secondItem="Aij-HV-YIr" secondAttribute="topMargin" constant="9" id="0Tz-8b-9cN"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Tda-YH-Vg3" secondAttribute="bottom" constant="5" id="0YB-Ke-l3l"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="uBH-Y6-pg3" secondAttribute="bottom" constant="3" id="1V3-Vl-hJL"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="95n-wE-pWb" secondAttribute="bottom" constant="23" id="6gY-8n-PSk"/>
+                                                <constraint firstItem="95n-wE-pWb" firstAttribute="centerX" secondItem="Aij-HV-YIr" secondAttribute="centerX" id="Bhd-Oo-ziB"/>
+                                                <constraint firstItem="95n-wE-pWb" firstAttribute="leading" secondItem="Tda-YH-Vg3" secondAttribute="leading" id="CGy-T0-AIO"/>
+                                                <constraint firstItem="uBH-Y6-pg3" firstAttribute="leading" secondItem="Aij-HV-YIr" secondAttribute="leadingMargin" constant="13" id="MOH-6b-tgc"/>
+                                                <constraint firstItem="uBH-Y6-pg3" firstAttribute="top" secondItem="Aij-HV-YIr" secondAttribute="topMargin" id="Vc0-fn-tnQ"/>
+                                                <constraint firstItem="95n-wE-pWb" firstAttribute="trailing" secondItem="Tda-YH-Vg3" secondAttribute="trailing" id="YDo-8r-4dW"/>
+                                                <constraint firstItem="95n-wE-pWb" firstAttribute="leading" secondItem="uBH-Y6-pg3" secondAttribute="trailing" constant="13" id="hBm-Ox-FAk"/>
+                                                <constraint firstItem="Tda-YH-Vg3" firstAttribute="top" secondItem="Aij-HV-YIr" secondAttribute="topMargin" constant="27" id="kul-Nj-z45"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="95n-wE-pWb" secondAttribute="trailing" constant="75" id="pDV-SS-uSc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                        <connections>
+                                            <outlet property="rating" destination="Tda-YH-Vg3" id="e5M-iB-wPn"/>
+                                            <outlet property="userProfileImage" destination="uBH-Y6-pg3" id="h5G-bM-LSx"/>
+                                            <outlet property="username" destination="95n-wE-pWb" id="G67-2g-jxj"/>
+                                            <segue destination="jvY-pV-nF2" kind="show" id="MQQ-4I-QB9"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ebu-Dk-0wV" id="KM9-U4-KPB"/>
+                                    <outlet property="delegate" destination="Ebu-Dk-0wV" id="fxj-jo-iV2"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Q5p-og-aTY" firstAttribute="leading" secondItem="EOU-rE-9LU" secondAttribute="leading" id="2OD-Cf-NpG"/>
+                            <constraint firstAttribute="trailing" secondItem="Q5p-og-aTY" secondAttribute="trailing" id="7Sw-ML-4KO"/>
+                            <constraint firstItem="Q5p-og-aTY" firstAttribute="bottom" secondItem="4bd-s4-C1f" secondAttribute="top" id="Osx-0e-EER"/>
+                            <constraint firstItem="Q5p-og-aTY" firstAttribute="top" secondItem="EOU-rE-9LU" secondAttribute="top" id="hUD-5a-ZF4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Q5p-og-aTY" id="e1o-a3-fyw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="71T-lH-3BU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2460" y="-361"/>
+        </scene>
         <!--Play-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -1855,7 +1946,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wH9-7B-skl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3938" y="-361"/>
+            <point key="canvasLocation" x="3924" y="-361"/>
         </scene>
     </scenes>
     <resources>
@@ -1874,6 +1965,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wNo-PL-G0z"/>
-        <segue reference="yX0-R2-72x"/>
+        <segue reference="Bfb-VA-y75"/>
     </inferredMetricsTieBreakers>
 </document>

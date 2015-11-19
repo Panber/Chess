@@ -90,7 +90,6 @@
 		8F4A02A31B9A429B0084024A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A21B9A429B0084024A /* SystemConfiguration.framework */; };
 		8F4A02A51B9A42D40084024A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A41B9A42D40084024A /* Accounts.framework */; };
 		8F4A02A71B9A42DC0084024A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A61B9A42DC0084024A /* Social.framework */; };
-		8F4CF77D1BDBABB10037865C /* NewGamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF77C1BDBABB10037865C /* NewGamePage.swift */; };
 		8F4CF7831BDD83E20037865C /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CF7821BDD83E20037865C /* ParseFacebookUtilsV4.framework */; };
 		8F4CF7871BDD84CE0037865C /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CF7841BDD84CE0037865C /* FBSDKCoreKit.framework */; };
 		8F4CF7881BDD84CE0037865C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CF7851BDD84CE0037865C /* FBSDKLoginKit.framework */; };
@@ -154,6 +153,7 @@
 		8FEF2AB51BFD1779006E1359 /* grayBC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2AB41BFD1779006E1359 /* grayBC.jpg */; };
 		8FEF2AB71BFD17DB006E1359 /* grayBC.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2AB61BFD17DB006E1359 /* grayBC.png */; };
 		8FEF2ABD1BFD1AE7006E1359 /* dBlackBC.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2ABC1BFD1AE7006E1359 /* dBlackBC.png */; };
+		8FEF2ABF1BFE4CAA006E1359 /* NewGameNearby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEF2ABE1BFE4CAA006E1359 /* NewGameNearby.swift */; };
 		F134DDDE1BC1C417005BA54C /* UsersProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */; };
 		F1431A5E1BD281B600C5854A /* UsersFriendsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */; };
 		F1431A611BD298F400C5854A /* panBeriPhone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F1431A601BD298F400C5854A /* panBeriPhone.jpg */; };
@@ -262,7 +262,6 @@
 		8F4A02A21B9A429B0084024A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8F4A02A41B9A42D40084024A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8F4A02A61B9A42DC0084024A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		8F4CF77C1BDBABB10037865C /* NewGamePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGamePage.swift; sourceTree = "<group>"; };
 		8F4CF77E1BDBAF1E0037865C /* NewGameFriends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameFriends.swift; sourceTree = "<group>"; };
 		8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage.swift; sourceTree = "<group>"; };
 		8F4CF7821BDD83E20037865C /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
@@ -335,6 +334,7 @@
 		8FEF2AB41BFD1779006E1359 /* grayBC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grayBC.jpg; sourceTree = "<group>"; };
 		8FEF2AB61BFD17DB006E1359 /* grayBC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayBC.png; sourceTree = "<group>"; };
 		8FEF2ABC1BFD1AE7006E1359 /* dBlackBC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dBlackBC.png; sourceTree = "<group>"; };
+		8FEF2ABE1BFE4CAA006E1359 /* NewGameNearby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewGameNearby.swift; path = ../NewGameNearby.swift; sourceTree = "<group>"; };
 		F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersProfilePage.swift; sourceTree = "<group>"; };
 		F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersFriendsPage.swift; sourceTree = "<group>"; };
 		F1431A601BD298F400C5854A /* panBeriPhone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = panBeriPhone.jpg; sourceTree = "<group>"; };
@@ -520,7 +520,6 @@
 				8FA5C8901B9A264F0097637E /* AppDelegate.swift */,
 				F14E64321BC8FA8800751F20 /* Chess♔-Bridging-Header.h */,
 				8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */,
-				8F4CF77C1BDBABB10037865C /* NewGamePage.swift */,
 				8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */,
 				8FBD3A361BB498A200212314 /* GameInterFace2.swift */,
 				F1648B601BDC19CA00AE1BC3 /* GameInterFace3.swift */,
@@ -533,6 +532,7 @@
 				F1B4145F1BC72E5D00FEE6A4 /* SettingsPage.swift */,
 				F14E644D1BC98B7900751F20 /* FriendsPage.swift */,
 				8F4CF77E1BDBAF1E0037865C /* NewGameFriends.swift */,
+				8FEF2ABE1BFE4CAA006E1359 /* NewGameNearby.swift */,
 				F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */,
 				8FA5C8971B9A264F0097637E /* Assets.xcassets */,
 				8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage.swift */,
@@ -913,9 +913,9 @@
 				8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */,
 				F14E644E1BC98B7900751F20 /* FriendsPage.swift in Sources */,
 				8F2F6C4B1BDEDCC00048342A /* NewGameSettingsPage.swift in Sources */,
+				8FEF2ABF1BFE4CAA006E1359 /* NewGameNearby.swift in Sources */,
 				8F8BD2AD1BC5380100B25CFE /* FriendRequestsPage.swift in Sources */,
 				8F86392B1B9B01D00055608B /* ProfileMenu.swift in Sources */,
-				8F4CF77D1BDBABB10037865C /* NewGamePage.swift in Sources */,
 				8FBED2FC1BB1F35700CDAACC /* UserTableViewCell.swift in Sources */,
 				8F1AFCF91BAE05A7009D7299 /* FirstLaunchScreen.swift in Sources */,
 				8F86392F1B9B044F0055608B /* FriendsMenu.swift in Sources */,

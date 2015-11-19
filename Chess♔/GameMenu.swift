@@ -22,6 +22,8 @@ var logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
 var logoView = UIImageView(image:logo)
 
 
+var location = PFGeoPoint()
+
 //newpressed
 var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
 var visualEffectSub = UIView()
@@ -170,13 +172,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                                     if error == nil {
                                         users["location"] = geoPoint
                                         users.saveInBackground()
+                                        location = geoPoint!
                                         
+                                        //add later!!
+                                        //NSUserDefaults.standardUserDefaults().setObject(geoP, forKey: "user_geopoint")
                                         
                                     }
                                 }
 
-                                
-                               // users.saveInBackground()
                             }
                         }
                     }
@@ -229,9 +232,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         visualEffectView.addSubview(visualEffectSub)
 
-
-        
-        
     }
 
     // Location Manager helper stuff
@@ -1114,7 +1114,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         removeNewView()
         
-        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("newGameFriends")
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("NewGameNearby")
         self.showViewController(vc as! UIViewController, sender: vc)
         
     }
