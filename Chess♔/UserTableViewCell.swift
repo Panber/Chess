@@ -208,9 +208,37 @@ class NewGameFriendsTableViewCell: UITableViewCell {
         //changing profileImage
         self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
         self.userProfileImage.clipsToBounds = true
+  
+    }
+    
+    
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state /
+    }
+    
+}
+
+class NewGameNearbyTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var rating: UILabel!
+    
+    
+    
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
         
         
-        
+        //changing profileImage
+        self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
+        self.userProfileImage.clipsToBounds = true
         
     }
     

@@ -79,12 +79,13 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         findFriends.findObjectsInBackgroundWithBlock { (friends:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
-                for friends in friends! {
+                if let friends = friends as! [PFObject]! {
+                for friends in friends {
                     self.friendsArray = friends["friends"] as! NSMutableArray
                 }
                 //print(self.friendsArray)
                 self.addTop10Friends()
-
+                }
             }
         }
         
