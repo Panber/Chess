@@ -1128,16 +1128,50 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     let ranInt = arc4random_uniform(count)
                     let _count = Int(ranInt)
                     
-                    NSUserDefaults.standardUserDefaults().setObject(userArray[_count], forKey: "other_username_from_friends_gamemenu")
+
                     
                     
+                    let query2 = PFQuery(className: "_User")
+                    query2.whereKey("username", equalTo: userArray[_count])
+                    query2.findObjectsInBackgroundWithBlock({ (result2:[AnyObject]?, error2:NSError?) -> Void in
+                        
+                        if error2 == nil {
+                            if let userArray2 = result2 as? [PFUser] {
+                                    for user in userArray2 {
+                                        
+                                        NSUserDefaults.standardUserDefaults().setObject(user["rating"] as! Int, forKey: "other_userrating_from_friends_gamemenu")
+                                        
+                                        NSUserDefaults.standardUserDefaults().setObject(userArray[_count], forKey: "other_username_from_friends_gamemenu")
+                                        
+                                        if let userPicture = user["profile_picture"] as? PFFile {
+                                            
+                                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error3: NSError?) -> Void in
+                                                if (error3 == nil) {
+                                             
+                                                    NSUserDefaults.standardUserDefaults().setObject(imageData, forKey: "other_userImage_from_friends_gamemenu")
+                                                    
+                                                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInvite")
+                                                    self.showViewController(vc as! UIViewController, sender: vc)
+                                                    
+                                                    
+                                                } else {
+                                                }
+                                            }
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                                
+
+                                
+                            
+                        
+                        }
+                        
+                    })
                     
-                    NSUserDefaults.standardUserDefaults().setObject(600, forKey: "other_userrating_from_friends_gamemenu")
                     
-                    
-                    
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInvite")
-                    self.showViewController(vc as! UIViewController, sender: vc)
                 
                 }
             
