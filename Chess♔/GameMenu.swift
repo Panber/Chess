@@ -1025,6 +1025,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         randomButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
         randomButton.layer.cornerRadius = cornerRadius
         randomButton.clipsToBounds = true
+        randomButton.addTarget(self, action: "randomButtonPressed:", forControlEvents: .TouchUpInside)
         visualEffectSub.addSubview(randomButton)
         //------random end
         
@@ -1100,17 +1101,56 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         self.showViewController(vc as! UIViewController, sender: vc)
     }
     
+    func randomButtonPressed(sender:UIButton) {
     
+        removeNewView()
+        
+        let meUser = PFUser.currentUser() as PFUser!
+        let meRating = meUser["rating"] as! Int
+        
+        var userArray: Array<String> = []
+        
+        let query = PFQuery(className: "_User")
+        query.limit = 100
+        query.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, error:NSError?) -> Void in
+            
+            if error == nil {
+                if let result = result as! [PFObject]! {
+                    for result in result {
+                        if (result["rating"] as! Int) > (meRating - 100) && (result["rating"] as! Int) < (meRating + 100) {
+                            
+                            userArray.append(result["username"] as! String)
+                        }
+                    
+                    }
+                    
+                    let count = UInt32(userArray.count)
+                    let ranInt = arc4random_uniform(count)
+                    let _count = Int(ranInt)
+                    
+                    NSUserDefaults.standardUserDefaults().setObject(userArray[_count], forKey: "other_username_from_friends_gamemenu")
+                    
+                    
+                    
+                    NSUserDefaults.standardUserDefaults().setObject(600, forKey: "other_userrating_from_friends_gamemenu")
+                    
+                    
+                    
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInvite")
+                    self.showViewController(vc as! UIViewController, sender: vc)
+                
+                }
+            
+            
+            }
+            
+        }
+    
+
+    }
     
     
     func nearbyButtonPressed(sender:UIButton) {
-    
-//        PFGeoPoint.geoPointForCurrentLocationInBackground {
-//            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
-//            if error == nil {
-//                // do something with the new geoPoint
-//            }
-//        }
         
         removeNewView()
         

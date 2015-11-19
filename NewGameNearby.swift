@@ -166,7 +166,7 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
     
     
     override func viewWillAppear(animated: Bool) {
-        self.title = "Friends"
+        self.title = "Nearby"
         lightOrDarkMode()
     }
     
