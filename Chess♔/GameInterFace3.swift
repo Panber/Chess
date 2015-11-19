@@ -556,7 +556,7 @@ class GameInterFace3: UIViewController {
     func chessPieceMovementLogic(var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView], var piece: UIImageView) {
         
         // Check if the piece is taken
-        if !canSaveKing(piece, array: pieceToTake) {
+        if hasBeenTaken(piece, array: pieceToTake) == false {
             
             pieceID = pieceid
             var foundKing: Bool = false
@@ -1016,6 +1016,17 @@ class GameInterFace3: UIViewController {
         
     }
     
+    func hasBeenTaken(var image: UIImageView, var array: Array<UIImageView>) -> Bool {
+        
+        var bool = false
+        for var i = 0; i < array.count; i++ {
+            if image == array[i] {
+                bool = true
+            }
+        }
+        return bool
+    }
+    
     func canSaveKing(var image: UIImageView, var array: Array<UIImageView>) -> Bool {
         
         var bool = false
@@ -1056,14 +1067,6 @@ class GameInterFace3: UIViewController {
         for var o = 0 ; o < pieceOptions.count ; o++ {
             
             if touch.view == pieceOptions[o] {
-                for var i = 0; i < whitePieces.count; i++ {
-                    if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == whitePieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == whitePieces[i].frame.origin.y  {
-                        pieceToTake += [whitePieces[i]]
-                        whitePieces[i].removeFromSuperview()
-                        whitePieces.removeAtIndex(i)
-                        whitePiecesString.removeAtIndex(i)
-                    }
-                }
                 
                 for var i = 0; i < pieces.count; i++ {
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y  {
@@ -1073,19 +1076,8 @@ class GameInterFace3: UIViewController {
                         
                     }
                 }
-                
-                for var t = 0; t < blackPieces.count; t++ {
-                    if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackPieces[t].frame.origin.x && pieceOptions[o].frame.origin.y == blackPieces[t].frame.origin.y  {
-                        pieceToTake += [blackPieces[t]]
-                        blackPieces[t].removeFromSuperview()
-                        blackPieces.removeAtIndex(t)
-                        blackPiecesString.removeAtIndex(t)
-                        
-                    }
-                }
             }
         }
-        
         
         for var o = 0 ; o < pieceOptions.count ; o++ {
             for var t = 0; t < whitePieces.count; t++ {
