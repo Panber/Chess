@@ -714,7 +714,7 @@ class GameInterFace3: UIViewController {
                             } else if pieceid == 6 || pieceid == 7 {
                                 if CGRectContainsPoint(pieceOption.frame , whiteKing.center) || CGRectContainsPoint(pieceOption.frame , blackKing.center) {
                                     let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
-                                    pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                                    //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                     self.view.addSubview(pieceOption2)
                                 pawnLogicOptions += [pieceOption, pieceOption2 ]
                                 checkByPawn = true
@@ -724,7 +724,7 @@ class GameInterFace3: UIViewController {
                             } else if pieceid == 2 {
                                 if CGRectContainsPoint(pieceOption.frame , whiteKing.center) || CGRectContainsPoint(pieceOption.frame , blackKing.center) {
                                     let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
-                                    pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                                    //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                     self.view.addSubview(pieceOption2)
                                     knightLogicOptions += [pieceOption, pieceOption2 ]
                                     checkByKnight = true
@@ -763,7 +763,7 @@ class GameInterFace3: UIViewController {
                                 } else if pieceid == 6 || pieceid == 7 {
                                     if CGRectContainsPoint(pieceOption.frame , whiteKing.center) || CGRectContainsPoint(pieceOption.frame , blackKing.center) {
                                         let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
-                                        pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                                        //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                         self.view.addSubview(pieceOption2)
                                         pawnLogicOptions += [pieceOption, pieceOption2 ]
                                         checkByPawn = true
@@ -773,7 +773,7 @@ class GameInterFace3: UIViewController {
                                 } else if pieceid == 2 {
                                     if CGRectContainsPoint(pieceOption.frame , whiteKing.center) || CGRectContainsPoint(pieceOption.frame , blackKing.center) {
                                         let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
-                                        pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                                        //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                         self.view.addSubview(pieceOption2)
                                         knightLogicOptions += [pieceOption, pieceOption2 ]
                                         checkByKnight = true
