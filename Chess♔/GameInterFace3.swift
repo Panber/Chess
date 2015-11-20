@@ -63,6 +63,8 @@ var pieceBlackLogicOptions: Array<UIImageView> = []
 var queenLogicOptions : Array<UIImageView> = []
 var bishopLogicOptions : Array<UIImageView> = []
 var rookLogicOptions : Array<UIImageView> = []
+var knightLogicOptions : Array<UIImageView> = []
+var pawnLogicOptions : Array<UIImageView> = []
 
 // Decides who makes check
 var checkByWhite = false
@@ -71,6 +73,8 @@ var checkByBlack = false
 var checkByQueen = false
 var checkByBishop = false
 var checkByRook = false
+var checkByPawn = false
+var checkByKnight = false
 
 var selectedPawn = 0
 var pieceOpt = whitePawn1
@@ -281,6 +285,20 @@ class GameInterFace3: UIViewController {
         }
         rookLogicOptions = []
     }
+    func removeKnightLogicOptions() {
+        for var p = 0 ; p < knightLogicOptions.count; p++ {
+            knightLogicOptions[p].hidden = true
+            knightLogicOptions[p].removeFromSuperview()
+        }
+        knightLogicOptions = []
+    }
+    func removePawnLogicOptions() {
+        for var p = 0 ; p < pawnLogicOptions.count; p++ {
+            pawnLogicOptions[p].hidden = true
+            pawnLogicOptions[p].removeFromSuperview()
+        }
+        pawnLogicOptions = []
+    }
     func removeWhitePieceLogicOptions() {
         for var p = 0 ; p < pieceWhiteLogicOptions.count; p++ {
             pieceWhiteLogicOptions[p].hidden = true
@@ -338,6 +356,14 @@ class GameInterFace3: UIViewController {
                         if canSaveKing(pieceOption, array: rookLogicOptions) == false {
                             pieceOption.removeFromSuperview()
                         }
+                    } else if checkByPawn == true {
+                        if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
+                            pieceOption.removeFromSuperview()
+                        }
+                    } else if checkByKnight == true {
+                        if canSaveKing(pieceOption, array: knightLogicOptions) == false {
+                            pieceOption.removeFromSuperview()
+                        }
                     }
                     pieceOptions += [pieceOption]
                 } else if canThePieceGofurther == true {
@@ -355,6 +381,14 @@ class GameInterFace3: UIViewController {
                         }
                     } else if checkByRook == true {
                         if canSaveKing(pieceOption, array: rookLogicOptions) == false {
+                            pieceOption.removeFromSuperview()
+                        }
+                    } else if checkByPawn == true {
+                        if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
+                            pieceOption.removeFromSuperview()
+                        }
+                    } else if checkByKnight == true {
+                        if canSaveKing(pieceOption, array: knightLogicOptions) == false {
                             pieceOption.removeFromSuperview()
                         }
                     }
@@ -379,6 +413,14 @@ class GameInterFace3: UIViewController {
                             }
                         } else if checkByRook == true {
                             if canSaveKing(pieceOption, array: rookLogicOptions) == false {
+                                pieceOption.removeFromSuperview()
+                            }
+                        } else if checkByPawn == true {
+                            if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
+                                pieceOption.removeFromSuperview()
+                            }
+                        } else if checkByKnight == true {
+                            if canSaveKing(pieceOption, array: knightLogicOptions) == false {
                                 pieceOption.removeFromSuperview()
                             }
                         }
@@ -443,6 +485,14 @@ class GameInterFace3: UIViewController {
                         if canSaveKing(pieceOption, array: rookLogicOptions) == false {
                             pieceOption.removeFromSuperview()
                         }
+                    } else if checkByPawn == true && pieceid != 5 {
+                        if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
+                            pieceOption.removeFromSuperview()
+                        }
+                    } else if checkByKnight == true && pieceid != 5 {
+                        if canSaveKing(pieceOption, array: knightLogicOptions) == false {
+                            pieceOption.removeFromSuperview()
+                        }
                     }
                     pieceOptions += [pieceOption]
                 }
@@ -464,6 +514,14 @@ class GameInterFace3: UIViewController {
                             }
                         } else if checkByRook == true && pieceid != 5 {
                             if canSaveKing(pieceOption, array: rookLogicOptions) == false {
+                                pieceOption.removeFromSuperview()
+                            }
+                        } else if checkByPawn == true && pieceid != 5 {
+                            if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
+                                pieceOption.removeFromSuperview()
+                            }
+                        } else if checkByKnight == true && pieceid != 5 {
+                            if canSaveKing(pieceOption, array: knightLogicOptions) == false {
                                 pieceOption.removeFromSuperview()
                             }
                         }
@@ -556,7 +614,7 @@ class GameInterFace3: UIViewController {
     func chessPieceMovementLogic(var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView], var piece: UIImageView) {
         
         // Check if the piece is taken
-        if hasBeenTaken(piece, array: pieceToTake) == false {
+        if !hasBeenTaken(piece, array: pieceToTake) {
             
             pieceID = pieceid
             var foundKing: Bool = false
@@ -642,7 +700,7 @@ class GameInterFace3: UIViewController {
                     
                     if canThePieceGofurther == true {
                         
-                        if pieceid == 1 || pieceid == 3 || pieceid == 4 {
+                        if pieceid == 1 || pieceid == 3 || pieceid == 4 || pieceid == 2 || pieceid == 6 || pieceid == 7  {
                             let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
                             //pieceOption.image = UIImage(named: "piecePossibilities.png")
                             self.view.addSubview(pieceOption)
@@ -653,6 +711,26 @@ class GameInterFace3: UIViewController {
                                 bishopLogicOptions += [pieceOption]
                             } else if pieceid == 3 {
                                 rookLogicOptions += [pieceOption]
+                            } else if pieceid == 6 || pieceid == 7 {
+                                if CGRectContainsPoint(pieceOption.frame , whiteKing.center) || CGRectContainsPoint(pieceOption.frame , blackKing.center) {
+                                    let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
+                                    //pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                                    self.view.addSubview(pieceOption2)
+                                pawnLogicOptions += [pieceOption, pieceOption2 ]
+                                checkByPawn = true
+                                } else {
+                                    pieceOption.removeFromSuperview()
+                                }
+                            } else if pieceid == 2 {
+                                if CGRectContainsPoint(pieceOption.frame , whiteKing.center) || CGRectContainsPoint(pieceOption.frame , blackKing.center) {
+                                    let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
+                                    //pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                                    self.view.addSubview(pieceOption2)
+                                    knightLogicOptions += [pieceOption, pieceOption2 ]
+                                    checkByKnight = true
+                                } else {
+                                    pieceOption.removeFromSuperview()
+                                }
                             }
                         }
                         
@@ -671,7 +749,7 @@ class GameInterFace3: UIViewController {
                     for var r = 0; r < enemy.count; r++ {
                         if enemy[r].frame.origin.x == piece.frame.origin.x + byAmountx * pieceSize && enemy[r].frame.origin.y == piece.frame.origin.y - byAmounty * pieceSize && canThePieceGofurther == true {
                             
-                            if pieceid == 1 || pieceid == 3 || pieceid == 4 {
+                            if pieceid == 1 || pieceid == 3 || pieceid == 4 || pieceid == 2 || pieceid == 6 || pieceid == 7  {
                                 let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
                                 //pieceOption.image = UIImage(named: "piecePossibilities.png")
                                 self.view.addSubview(pieceOption)
@@ -682,6 +760,26 @@ class GameInterFace3: UIViewController {
                                     bishopLogicOptions += [pieceOption]
                                 } else if pieceid == 3 {
                                     rookLogicOptions += [pieceOption]
+                                } else if pieceid == 6 || pieceid == 7 {
+                                    if CGRectContainsPoint(pieceOption.frame , whiteKing.center) || CGRectContainsPoint(pieceOption.frame , blackKing.center) {
+                                        let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
+                                        //pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                                        self.view.addSubview(pieceOption2)
+                                        pawnLogicOptions += [pieceOption, pieceOption2 ]
+                                        checkByPawn = true
+                                    } else {
+                                        pieceOption.removeFromSuperview()
+                                    }
+                                } else if pieceid == 2 {
+                                    if CGRectContainsPoint(pieceOption.frame , whiteKing.center) || CGRectContainsPoint(pieceOption.frame , blackKing.center) {
+                                        let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
+                                        //pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                                        self.view.addSubview(pieceOption2)
+                                        knightLogicOptions += [pieceOption, pieceOption2 ]
+                                        checkByKnight = true
+                                    } else {
+                                        pieceOption.removeFromSuperview()
+                                    }
                                 }
                             }
                             
@@ -735,6 +833,20 @@ class GameInterFace3: UIViewController {
                             if CGRectContainsPoint(boarderBoard.frame, rookLogicOptions[o].center) == false {
                                 [rookLogicOptions[o] .removeFromSuperview()]
                                 rookLogicOptions.removeAtIndex(o)
+                            }
+                        }
+                    } else if pieceid == 6 || pieceid == 7  {
+                        for var o = 0 ; o < pawnLogicOptions.count; o++ {
+                            if CGRectContainsPoint(boarderBoard.frame, pawnLogicOptions[o].center) == false {
+                                [pawnLogicOptions[o] .removeFromSuperview()]
+                                pawnLogicOptions.removeAtIndex(o)
+                            }
+                        }
+                    } else if pieceid == 2  {
+                        for var o = 0 ; o < knightLogicOptions.count; o++ {
+                            if CGRectContainsPoint(boarderBoard.frame, knightLogicOptions[o].center) == false {
+                                [knightLogicOptions[o] .removeFromSuperview()]
+                                knightLogicOptions.removeAtIndex(o)
                             }
                         }
                     }
@@ -868,6 +980,14 @@ class GameInterFace3: UIViewController {
                         if canSaveKing(pieceOption, array: rookLogicOptions) == false {
                             pieceOption.removeFromSuperview()
                         }
+                    } else if checkByPawn == true {
+                        if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
+                            pieceOption.removeFromSuperview()
+                        }
+                    } else if checkByKnight == true {
+                        if canSaveKing(pieceOption, array: knightLogicOptions) == false {
+                            pieceOption.removeFromSuperview()
+                        }
                     }
                     
                     pieceOptions += [pieceOption]
@@ -886,6 +1006,14 @@ class GameInterFace3: UIViewController {
                         }
                     } else if checkByRook == true {
                         if canSaveKing(pieceOption, array: rookLogicOptions) == false {
+                            pieceOption.removeFromSuperview()
+                        }
+                    } else if checkByPawn == true {
+                        if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
+                            pieceOption.removeFromSuperview()
+                        }
+                    } else if checkByKnight == true {
+                        if canSaveKing(pieceOption, array: knightLogicOptions) == false {
                             pieceOption.removeFromSuperview()
                         }
                     }
@@ -908,6 +1036,14 @@ class GameInterFace3: UIViewController {
                             }
                         } else if checkByRook == true {
                             if canSaveKing(pieceOption, array: rookLogicOptions) == false {
+                                pieceOption.removeFromSuperview()
+                            }
+                        } else if checkByPawn == true {
+                            if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
+                                pieceOption.removeFromSuperview()
+                            }
+                        } else if checkByKnight == true {
+                            if canSaveKing(pieceOption, array: knightLogicOptions) == false {
                                 pieceOption.removeFromSuperview()
                             }
                         }
@@ -1007,11 +1143,15 @@ class GameInterFace3: UIViewController {
             checkByQueen = false
             checkByBishop = false
             checkByRook = false
+            checkByPawn = false
+            checkByKnight = false
             removeLogicOptions()
             removeBishopLogicOptions()
             removeRookLogicOptions()
             removeWhitePieceLogicOptions()
             removeBlackPieceLogicOptions()
+            removeKnightLogicOptions()
+            removePawnLogicOptions()
         }
         
     }
@@ -1067,6 +1207,14 @@ class GameInterFace3: UIViewController {
         for var o = 0 ; o < pieceOptions.count ; o++ {
             
             if touch.view == pieceOptions[o] {
+                for var i = 0; i < whitePieces.count; i++ {
+                    if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == whitePieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == whitePieces[i].frame.origin.y  {
+                        pieceToTake += [whitePieces[i]]
+                        whitePieces[i].removeFromSuperview()
+                        whitePieces.removeAtIndex(i)
+                        whitePiecesString.removeAtIndex(i)
+                    }
+                }
                 
                 for var i = 0; i < pieces.count; i++ {
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y  {
@@ -1076,8 +1224,19 @@ class GameInterFace3: UIViewController {
                         
                     }
                 }
+                
+                for var t = 0; t < blackPieces.count; t++ {
+                    if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackPieces[t].frame.origin.x && pieceOptions[o].frame.origin.y == blackPieces[t].frame.origin.y  {
+                        pieceToTake += [blackPieces[t]]
+                        blackPieces[t].removeFromSuperview()
+                        blackPieces.removeAtIndex(t)
+                        blackPiecesString.removeAtIndex(t)
+                        
+                    }
+                }
             }
         }
+        
         
         for var o = 0 ; o < pieceOptions.count ; o++ {
             for var t = 0; t < whitePieces.count; t++ {
