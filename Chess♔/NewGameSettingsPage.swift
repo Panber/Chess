@@ -159,7 +159,8 @@ class NewGameSettingsPage: UIViewController {
         game.saveInBackgroundWithBlock { (bool:Bool, error:NSError?) -> Void in
             if error == nil {
                 print("game Made!!")
-                
+                self.tabBarController?.selectedIndex = 0
+
                 // Create our Installation query
                 let pushQuery = PFInstallation.query()
                 pushQuery!.whereKey("username", equalTo: pushto)

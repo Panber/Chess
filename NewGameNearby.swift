@@ -44,6 +44,7 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
         
         let query1 = PFQuery(className:"_User")
         query1.whereKey("location", nearGeoPoint:location)
+        query1.whereKey("request_everyone", equalTo: true)
       //  query.limit = 10
         //let placesObjects = query1.findObjects()
         query1.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, error:NSError?) -> Void in

@@ -57,6 +57,16 @@ self.title = "Settings"
             darkModeSwitch.setOn(false, animated: true)
         
         }
+
+        
+        if PFUser.currentUser()!.objectForKey("request_everyone") as? Bool == true {
+            print(PFUser.currentUser()!.objectForKey("request_everyone") as? Bool)
+            everyoneSwitch.setOn(true, animated: true)
+        }
+        else {
+            everyoneSwitch.setOn(false, animated: true)
+        }
+        
         lightOrDarkMode()
 
         
@@ -283,8 +293,12 @@ self.title = "Settings"
     func everyoneSwitchValueDidChange(sender:UISwitch!)
     {
         if (sender.on == true){
+            PFUser.currentUser()?.setObject(true, forKey: "request_everyone")
+            PFUser.currentUser()?.saveInBackground()
         }
         else{
+            PFUser.currentUser()?.setObject(false, forKey: "request_everyone")
+            PFUser.currentUser()?.saveInBackground()
         }
     }
     
