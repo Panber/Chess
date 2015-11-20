@@ -33,10 +33,13 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     var label7 = UILabel()
     var label8 = UILabel()
     
+    var olabel9 = UILabel()
     var label9 = UILabel()
     
     var label10 = UILabel()
     var label11 = UILabel()
+    var olabel11 = UILabel()
+
     
     var label12 = UILabel()
     var label13 = UILabel()
@@ -93,10 +96,12 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         self.removeProfile()
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        underElements = [label3,label4,label5,label6,label7,label8,label9,label10,label11,label12,label13,label14,label15,label16,label17]
+        underElements = [label3,label4,label5,label6,label7,label8,olabel9,label9,label10,label11,olabel11,label12,label13,label14,label15,label16,label17]
         
         
         self.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String
@@ -472,23 +477,32 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         if darkMode { label8.textColor = UIColor.lightTextColor() }
         else { label8.textColor = UIColor.grayColor() }
 
+        //adding seperator: label
+        olabel9 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + (45*t), screenWidth, 0.2))
+        if darkMode { olabel9.backgroundColor = UIColor.lightGrayColor() }
+        else { olabel9.backgroundColor = UIColor.lightGrayColor() }
         
         //adding seperator: label
-        label9 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + (45*t), screenWidth, 0.5))
+        label9 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + (45*t), screenWidth, 0.2))
         if darkMode { label9.backgroundColor = UIColor.lightGrayColor() }
         else { label9.backgroundColor = UIColor.lightGrayColor() }
 
         
         //adding seperator2: label
-        label10 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + (45*t), screenWidth, 0.5))
+        label10 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + (45*t), screenWidth, 0.2))
         if darkMode { label10.backgroundColor = UIColor.lightGrayColor() }
         else { label10.backgroundColor = UIColor.lightGrayColor() }
 
         
         //adding seperator3: label
-        label11 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + (45*t), screenWidth, 0.5))
+        label11 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + (45*t), screenWidth, 0.2))
         if darkMode { label11.backgroundColor = UIColor.lightGrayColor() }
         else { label11.backgroundColor = UIColor.lightGrayColor() }
+        
+        //adding seperator3: label
+        olabel11 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 45 + (45*t), screenWidth, 0.2))
+        if darkMode { olabel11.backgroundColor = UIColor.lightGrayColor() }
+        else { olabel11.backgroundColor = UIColor.lightGrayColor() }
 
         
         
@@ -572,9 +586,11 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label6)
         scrollView.addSubview(label7)
         scrollView.addSubview(label8)
+        scrollView.addSubview(olabel9)
         scrollView.addSubview(label9)
         scrollView.addSubview(label10)
         scrollView.addSubview(label11)
+        scrollView.addSubview(olabel11)
         scrollView.addSubview(label12)
         scrollView.addSubview(label13)
         scrollView.addSubview(label14)

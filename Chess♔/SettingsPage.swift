@@ -23,29 +23,41 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
     let notificationsSwitch = UISwitch()
     let gameSoundsSwitch = UISwitch()
     let submitSwitch = UISwitch()
+    let everyoneSwitch = UISwitch()
     let darkModeSwitch = UISwitch()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+self.title = "Settings"
         // Do any additional setup after loading the view.
         //setting scrollview
         view.frame.size.height = 1000
         scrollView = UIScrollView(frame: view.bounds)
         scrollView.contentSize = view.bounds.size
         scrollView.frame.size.height = screenHeight
-        scrollView.showsHorizontalScrollIndicator = true
+        scrollView.showsHorizontalScrollIndicator = false
         scrollView.userInteractionEnabled = true
         scrollView.delegate = self
         scrollView.bounces = true
         scrollView.scrollEnabled = true
-        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = true
         
         lightOrDarkMode()
     }
     
     override func viewWillAppear(animated: Bool) {
         setUpSettings()
+        lightOrDarkMode()
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("dark_mode") as! Bool == true {
+            darkModeSwitch.setOn(true, animated: true)
+        
+        }
+        else {
+            darkModeSwitch.setOn(false, animated: true)
+        
+        }
         
     }
     
@@ -68,37 +80,63 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
         //        contentView.clipsToBounds = true
         //        scrollView.addSubview(contentView)
         
-        let label = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 25, screenWidth, 45*4))
+        let label = UILabel(frame: CGRectMake(0, 45, screenWidth, 45*2))
         label.text = ""
         label.backgroundColor = UIColor.whiteColor()
         scrollView.addSubview(label)
         
         //adding Receive notifications: label
-        let label1 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 25, screenWidth, 45))
+        let label1 = UILabel(frame: CGRectMake(20, 45, screenWidth, 45))
         label1.textAlignment = NSTextAlignment.Left
         label1.text = "Receive notifications"
         label1.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label1.textColor = UIColor.lightTextColor() }
-        else { label1.textColor = UIColor.grayColor() }
+        if darkMode { label1.textColor = UIColor.whiteColor() }
+        else { label1.textColor = UIColor.blackColor() }
         scrollView.addSubview(label1)
         
-        //adding Dark mode: label
-        let label2 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 25 + 45, screenWidth, 45))
-        label2.textAlignment = NSTextAlignment.Left
-        label2.text = "Dark mode"
-        label2.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label2.textColor = UIColor.lightTextColor() }
-        else { label2.textColor = UIColor.grayColor() }
-        scrollView.addSubview(label2)
+        //adding freindsonly button: label
+        let friendsOnlyText = UILabel(frame: CGRectMake(20, 45 + 45, screenWidth, 45))
+        friendsOnlyText.textAlignment = NSTextAlignment.Left
+        friendsOnlyText.text = "Game Request From Everyone"
+        friendsOnlyText.font = UIFont(name: "Didot", size: 16)
+        if darkMode { friendsOnlyText.textColor = UIColor.whiteColor() }
+        else { friendsOnlyText.textColor = UIColor.blackColor() }
+        scrollView.addSubview(friendsOnlyText)
+
+        let bc1 = UILabel(frame: CGRectMake(0, label.frame.origin.y + label.frame.size.height + 45, screenWidth, 45*2))
+        bc1.text = ""
+        bc1.backgroundColor = UIColor.whiteColor()
+        bc1.userInteractionEnabled = true
+        scrollView.addSubview(bc1)
         
         //adding Submit button: label
-        let label3 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 25 + 45 + 45, screenWidth, 45))
+        let label3 = UILabel(frame: CGRectMake(20, 45, screenWidth, 45))
         label3.textAlignment = NSTextAlignment.Left
         label3.text = "Submit button"
         label3.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label3.textColor = UIColor.lightTextColor() }
-        else { label3.textColor = UIColor.grayColor() }
-        scrollView.addSubview(label3)
+        if darkMode { label3.textColor = UIColor.whiteColor() }
+        else { label3.textColor = UIColor.blackColor() }
+        bc1.addSubview(label3)
+        
+
+        
+        //adding Dark mode: label
+        let label2 = UILabel(frame: CGRectMake(20, 0, screenWidth, 45))
+        label2.textAlignment = NSTextAlignment.Left
+        label2.text = "Dark mode"
+        label2.font = UIFont(name: "Didot", size: 16)
+        if darkMode { label2.textColor = UIColor.whiteColor() }
+        else { label2.textColor = UIColor.blackColor() }
+        bc1.addSubview(label2)
+        
+
+        
+
+        
+        let bc2 = UILabel(frame: CGRectMake(0, bc1.frame.origin.y + bc1.frame.size.height + 60, screenWidth, 45))
+        bc2.text = ""
+        bc2.backgroundColor = UIColor.whiteColor()
+        scrollView.addSubview(bc2)
         
         //logOutButton
         logOutButton.setTitle("Log Out", forState: .Normal)
@@ -107,7 +145,7 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
         logOutButton.layer.borderColor = blue.CGColor
         //logOutButton.frame.origin.x = 10
         logOutButton.frame.origin.y
-            = contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 25 + 45 + 45 + 45
+            =  bc1.frame.origin.y + bc1.frame.size.height + 60
         logOutButton.frame.size.height = 45
         logOutButton.frame.size.width = screenWidth
         logOutButton.userInteractionEnabled = true
@@ -117,43 +155,102 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
         
         
         //adding seperator1: label
-        let label4 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 25 + 45, screenWidth, 0.5))
+        let label4 = UILabel(frame: CGRectMake(0, 45, screenWidth, 0.2))
         if darkMode { label4.backgroundColor = UIColor.lightGrayColor() }
         else { label4.backgroundColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label4)
         
         //adding seperator2: label
-        let label5 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 25 + 45 + 45, screenWidth, 0.5))
+        let label5 = UILabel(frame: CGRectMake(20, 45 + 45, screenWidth, 0.2))
         if darkMode { label5.backgroundColor = UIColor.lightGrayColor() }
         else { label5.backgroundColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label5)
         
         //adding seperator1: label
-        let label6 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 25 + 45 + 45 + 45 , screenWidth, 0.5))
+        let label6 = UILabel(frame: CGRectMake(0, 45 + 45 + 45 , screenWidth, 0.2))
         if darkMode { label6.backgroundColor = UIColor.lightGrayColor() }
         else { label6.backgroundColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label6)
         
+        //adding seperator1: label
+        let label7 = UILabel(frame: CGRectMake(0, 0, screenWidth, 0.2))
+        if darkMode { label7.backgroundColor = UIColor.lightGrayColor() }
+        else { label7.backgroundColor = UIColor.lightGrayColor() }
+        bc1.addSubview(label7)
+        
+        //adding seperator1: label
+        let label8 = UILabel(frame: CGRectMake(20, 45, screenWidth, 0.2))
+        if darkMode { label8.backgroundColor = UIColor.lightGrayColor() }
+        else { label8.backgroundColor = UIColor.lightGrayColor() }
+        bc1.addSubview(label8)
+        
+        //adding seperator1: label
+        let label9 = UILabel(frame: CGRectMake(0, 45 + 45, screenWidth, 0.2))
+        if darkMode { label9.backgroundColor = UIColor.lightGrayColor() }
+        else { label9.backgroundColor = UIColor.lightGrayColor() }
+        bc1.addSubview(label9)
+        
+        //adding seperator1: label
+        let label10 = UILabel(frame: CGRectMake(0, 0, screenWidth, 0.2))
+        if darkMode { label10.backgroundColor = UIColor.lightGrayColor() }
+        else { label10.backgroundColor = UIColor.lightGrayColor() }
+        bc2.addSubview(label10)
+        
+        //adding seperator1: label
+        let label11 = UILabel(frame: CGRectMake(0, 45, screenWidth, 0.2))
+        if darkMode { label11.backgroundColor = UIColor.lightGrayColor() }
+        else { label11.backgroundColor = UIColor.lightGrayColor() }
+        bc2.addSubview(label11)
+        
         notificationsSwitch.setOn(true, animated: true)
         notificationsSwitch.onTintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
-        notificationsSwitch.tintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
-        notificationsSwitch.frame = CGRectMake(screenWidth - 65, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 35, 0, 0)
+        notificationsSwitch.tintColor = UIColor(red:0.93, green:0.92, blue:0.92, alpha:1.0)
+        notificationsSwitch.frame = CGRectMake(screenWidth - 65, label1.frame.origin.y + 7, 0, 0)
         notificationsSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
+        notificationsSwitch.addTarget(self, action: "notificationsSwitchValueDidChange:", forControlEvents: .ValueChanged)
         scrollView.addSubview(notificationsSwitch)
         
         darkModeSwitch.setOn(false, animated: true)
         darkModeSwitch.onTintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
-        darkModeSwitch.tintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
-        darkModeSwitch.frame = CGRectMake(screenWidth - 65, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 35 + 45, 0, 0)
+        darkModeSwitch.tintColor = UIColor(red:0.93, green:0.92, blue:0.92, alpha:1.0)
+        darkModeSwitch.frame = CGRectMake(screenWidth - 65, label2.frame.origin.y + 7, 0, 0)
         darkModeSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
-        scrollView.addSubview(darkModeSwitch)
+        darkModeSwitch.addTarget(self, action: "darkmodeSwitchValueDidChange:", forControlEvents: .ValueChanged)
+        bc1.addSubview(darkModeSwitch)
         
         submitSwitch.setOn(true, animated: true)
         submitSwitch.onTintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
-        submitSwitch.tintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
-        submitSwitch.frame = CGRectMake(screenWidth - 65, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 25 + 35 + 45 + 45, 0, 0)
+        submitSwitch.tintColor = UIColor(red:0.93, green:0.92, blue:0.92, alpha:1.0)
+        submitSwitch.frame = CGRectMake(screenWidth - 65,label3.frame.origin.y + 7, 0, 0)
         submitSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
-        scrollView.addSubview(submitSwitch)
+        submitSwitch.addTarget(self, action: "submitSwitchValueDidChange:", forControlEvents: .ValueChanged)
+        bc1.addSubview(submitSwitch)
+        
+        everyoneSwitch.setOn(true, animated: true)
+        everyoneSwitch.onTintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
+        everyoneSwitch.tintColor = UIColor(red:0.93, green:0.92, blue:0.92, alpha:1.0)
+        everyoneSwitch.frame = CGRectMake(screenWidth - 65, friendsOnlyText.frame.origin.y + 7, 0, 0)
+        everyoneSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
+        everyoneSwitch.addTarget(self, action: "everyoneSwitchValueDidChange:", forControlEvents: .ValueChanged)
+        scrollView.addSubview(everyoneSwitch)
+        
+        //adding comment: label
+        let comment1 = UILabel(frame: CGRectMake(10, 20, screenWidth, 25))
+        comment1.textAlignment = NSTextAlignment.Left
+        comment1.text = "General"
+        comment1.font = UIFont(name: "Didot-Italic", size: 16)
+        if darkMode { comment1.textColor = UIColor.lightTextColor() }
+        else { comment1.textColor = UIColor.lightGrayColor() }
+        scrollView.addSubview(comment1)
+        
+        //adding comment: label
+        let comment2 = UILabel(frame: CGRectMake(10, bc1.frame.origin.y - 25, screenWidth, 25))
+        comment2.textAlignment = NSTextAlignment.Left
+        comment2.text = "User Interface"
+        comment2.font = UIFont(name: "Didot-Italic", size: 16)
+        if darkMode { comment2.textColor = UIColor.lightTextColor() }
+        else { comment2.textColor = UIColor.lightGrayColor() }
+        scrollView.addSubview(comment2)
         
         
     }
