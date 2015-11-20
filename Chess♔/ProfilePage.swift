@@ -194,7 +194,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         //adding stats label
         let label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + contentView.frame.origin.y + 25, 150, 25))
         label3.textAlignment = NSTextAlignment.Left
-        label3.text = "Statisitics"
+        label3.text = "Statistics"
         label3.font = UIFont(name: "Didot-Italic", size: 16)
         if darkMode { label3.textColor = UIColor.lightTextColor() }
         else { label3.textColor = UIColor.lightGrayColor() }
@@ -243,22 +243,34 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(label8)
         
         //adding seperator: label
-        let label9 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45, screenWidth, 0.5))
+        let olabel9 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 , screenWidth, 0.2))
+        if darkMode { olabel9.backgroundColor = UIColor.lightGrayColor() }
+        else { olabel9.backgroundColor = UIColor.lightGrayColor() }
+        scrollView.addSubview(olabel9)
+        
+        //adding seperator: label
+        let label9 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45, screenWidth, 0.2))
         if darkMode { label9.backgroundColor = UIColor.lightGrayColor() }
         else { label9.backgroundColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label9)
         
         //adding seperator2: label
-        let label10 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45, screenWidth, 0.5))
+        let label10 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45, screenWidth, 0.2))
         if darkMode { label10.backgroundColor = UIColor.lightGrayColor() }
         else { label10.backgroundColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label10)
         
         //adding seperator3: label
-        let label11 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45, screenWidth, 0.5))
+        let label11 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45, screenWidth, 0.2))
         if darkMode { label11.backgroundColor = UIColor.lightGrayColor() }
         else { label11.backgroundColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label11)
+        
+        //adding seperator3: label
+        let olabel11 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 45, screenWidth, 0.2))
+        if darkMode { olabel11.backgroundColor = UIColor.lightGrayColor() }
+        else { olabel11.backgroundColor = UIColor.lightGrayColor() }
+        scrollView.addSubview(olabel11)
         
         
         //adding won from cloud: label
@@ -323,7 +335,13 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(friendsArrowImage)
         
         //seperator4: label
-        let label17 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 65 + 45, screenWidth, 0.5))
+        let olabel17 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 65 , screenWidth, 0.2))
+        if darkMode { olabel17.backgroundColor = UIColor.lightGrayColor() }
+        else { olabel17.backgroundColor = UIColor.lightGrayColor() }
+        scrollView.addSubview(olabel17)
+        
+        //seperator4: label
+        let label17 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 65 + 45, screenWidth, 0.2))
         if darkMode { label17.backgroundColor = UIColor.lightGrayColor() }
         else { label17.backgroundColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label17)
@@ -350,12 +368,18 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         else { friendRequestsArrowImage.image = UIImage(named: "arrow_black.png"); friendRequestsArrowImage.alpha = 0.3  }
         scrollView.addSubview(friendRequestsArrowImage)
         
+        
         //seperator5: label
-        let label18 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 65 + 45 + 45, screenWidth, 0.5))
+        let label18 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 65 + 45 + 45, screenWidth, 0.2))
         if darkMode { label18.backgroundColor = UIColor.lightGrayColor() }
         else { label18.backgroundColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label18)
         
+        //seperator5: label
+        let olabel18 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 65 + 45 + 45 + 45, screenWidth, 0.2))
+        if darkMode { olabel18.backgroundColor = UIColor.lightGrayColor() }
+        else { olabel18.backgroundColor = UIColor.lightGrayColor() }
+        scrollView.addSubview(olabel18)
         
         //settingsbutton
         settingsButton.setTitle("Settings", forState: .Normal)
