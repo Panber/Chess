@@ -48,9 +48,8 @@ self.title = "Settings"
     
     override func viewWillAppear(animated: Bool) {
         setUpSettings()
-        lightOrDarkMode()
         
-        if NSUserDefaults.standardUserDefaults().objectForKey("dark_mode") as! Bool == true {
+        if NSUserDefaults.standardUserDefaults().boolForKey("dark_mode") == true {
             darkModeSwitch.setOn(true, animated: true)
         
         }
@@ -58,6 +57,8 @@ self.title = "Settings"
             darkModeSwitch.setOn(false, animated: true)
         
         }
+        lightOrDarkMode()
+
         
     }
     
@@ -253,6 +254,46 @@ self.title = "Settings"
         scrollView.addSubview(comment2)
         
         
+    }
+    
+    func notificationsSwitchValueDidChange(sender:UISwitch!)
+    {
+        if (sender.on == true){
+        }
+        else{
+        }
+    }
+    
+    func darkmodeSwitchValueDidChange(sender:UISwitch!)
+    {
+        if (sender.on == true){
+            
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "dark_mode")
+            darkMode = true
+            lightOrDarkMode()
+        }
+        else{
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "dark_mode")
+            darkMode = false
+            lightOrDarkMode()
+
+        }
+    }
+    
+    func everyoneSwitchValueDidChange(sender:UISwitch!)
+    {
+        if (sender.on == true){
+        }
+        else{
+        }
+    }
+    
+    func submitSwitchValueDidChange(sender:UISwitch!)
+    {
+        if (sender.on == true){
+        }
+        else{
+        }
     }
     
     func logOutPressed(sender: UIButton!) {

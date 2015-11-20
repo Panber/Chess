@@ -938,7 +938,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         self.invitesButtonOutlet.tintColor = UIColor.grayColor()
 
 
-
+        darkMode = NSUserDefaults.standardUserDefaults().boolForKey("dark_mode")
         lightOrDarkMode()
     }
     override func viewDidAppear(animated: Bool) {
