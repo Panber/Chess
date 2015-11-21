@@ -498,12 +498,23 @@ class GameInterFace3: UIViewController {
         
         func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat, var byAmountz:CGFloat, increaserz:CGFloat ) {
             var canThePieceGofurther: Bool = true
+            var startLogicChecking: Bool = false
+            var foundImportantPiece: Bool = false
             
             for byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
                 
+               if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && pieceWhiteCanMove.count == 3 {
+                startLogicChecking = true
+                
+                }
+
+                
                 for var q = 0; q < friend.count; q++ {
-                    if friend[q].frame.origin.x == selectedPiece.frame.origin.x + byAmountx * pieceSize && friend[q].frame.origin.y == selectedPiece.frame.origin.y - byAmounty * pieceSize{
+                    if friend[q].frame.origin.x == selectedPiece.frame.origin.x + byAmountx * pieceSize && friend[q].frame.origin.y == selectedPiece.frame.origin.y - byAmounty * pieceSize  {
                         canThePieceGofurther = false
+                        if startLogicChecking == true && blackKing.frame.origin.x == selectedPiece.frame.origin.x + byAmountx * pieceSize && blackKing.frame.origin.y == selectedPiece.frame.origin.y - byAmounty * pieceSize {
+                            canThePieceGofurther = true
+                        }
                     }
                 }
                 
@@ -599,6 +610,24 @@ class GameInterFace3: UIViewController {
                         pieceOptions.removeAtIndex(o)
                     }
                 }
+                
+                for var q = 0; q < pieceOptions.count; q++ {
+                    if canSaveKing(pieceOptions[q], array: pieceWhiteCanMove) && startLogicChecking == true  {
+                        foundImportantPiece = true
+                        canThePieceGofurther = false
+                        print("foundImportantPiece")
+                    }
+                }
+                
+                if foundImportantPiece == false  && startLogicChecking == true {
+                    for var o = 0 ; o < pieceOptions.count; o++ {
+                        [pieceOptions[o] .removeFromSuperview()]
+                    }
+                    
+                    pieceOptions.removeAll()
+                    pieceOptions = []
+                }
+                
             }
         }
         // movementNumber = 9
