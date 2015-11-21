@@ -366,7 +366,11 @@ class GameInterFace3: UIViewController {
                     
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    self.view.addSubview(pieceOption)
+                    if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && pieceBlackCanMove.count == 3 {
+                        pieceOption.removeFromSuperview()
+                    } else {
+                        self.view.addSubview(pieceOption)
+                    }
                     // Check if a pawn can move when king is in check
                     if checkByQueen == true {
                         if canSaveKing(pieceOption, array: queenLogicOptions) == false {
@@ -393,7 +397,11 @@ class GameInterFace3: UIViewController {
                 } else if canThePieceGofurther == true {
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y - 1 * pieceSize, pieceSize, pieceSize))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    self.view.addSubview(pieceOption)
+                    if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && pieceBlackCanMove.count == 3 {
+                        pieceOption.removeFromSuperview()
+                    } else {
+                        self.view.addSubview(pieceOption)
+                    }
                     // Check if a pawn can move when king is in check
                     if checkByQueen == true {
                         if canSaveKing(pieceOption, array: queenLogicOptions) == false {
@@ -425,7 +433,11 @@ class GameInterFace3: UIViewController {
                         print("working")
                         let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y - 1 * pieceSize, pieceSize, pieceSize))
                         pieceOption.image = UIImage(named: "piecePossibilities.png")
-                        self.view.addSubview(pieceOption)
+                        if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && pieceBlackCanMove.count == 3 && canSaveKing(pieceOption, array: pieceBlackCanMove) == false {
+                            pieceOption.removeFromSuperview()
+                        } else {
+                            self.view.addSubview(pieceOption)
+                        }
                         // Check if a pawn can move when king is in check
                         if checkByQueen == true {
                             if canSaveKing(pieceOption, array: queenLogicOptions) == false  {
@@ -637,6 +649,8 @@ class GameInterFace3: UIViewController {
     
     func chessPieceMovementLogic(var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView], var piece: UIImageView, var logicOptions: [UIImageView])  {
         
+        print(pieceBlackCanMove.count)
+        
         // Check if the piece is taken
         if !hasBeenTaken(piece, array: pieceToTake) {
             
@@ -673,6 +687,7 @@ class GameInterFace3: UIViewController {
                         if CGRectContainsPoint(pieceWhiteCanMove[q].frame , blackKing.center) {
                             foundKingBlack = true
                             canGoFurtherWhite = false
+
                         }
                     }
                     
@@ -839,23 +854,48 @@ class GameInterFace3: UIViewController {
                             canThePieceGofurther = false
                         }
                     }
-                    
+                 
                     for var r = 0; r < logicOptions.count; r++ {
                         if logicOptions[r].frame.origin.x == piece.frame.origin.x + byAmountx * pieceSize && logicOptions[r].frame.origin.y == piece.frame.origin.y - byAmounty * pieceSize && canGoFurtherWhite == true {
                             let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
                             //pieceOption.image = UIImage(named: "piecePossibilities.png")
-                            self.view.addSubview(pieceOption)
-                            pieceWhiteCanMove += [pieceOption]
+                            if canSaveKing(pieceOption, array: pieceWhiteCanMove) {
+                            pieceOption.removeFromSuperview()
+                            } else {
+                                self.view.addSubview(pieceOption)
+                                 pieceWhiteCanMove += [pieceOption]
+                            }
+                            let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
+                            //pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                            if canSaveKing(pieceOption2, array: pieceWhiteCanMove) {
+                                pieceOption2.removeFromSuperview()
+                            } else {
+                                self.view.addSubview(pieceOption2)
+                                pieceWhiteCanMove += [pieceOption2]
+                            }
                         }
                     }
-                    
+                
                     for var r = 0; r < logicOptions.count; r++ {
                         if logicOptions[r].frame.origin.x == piece.frame.origin.x + byAmountx * pieceSize && logicOptions[r].frame.origin.y == piece.frame.origin.y - byAmounty * pieceSize && canGoFurtherBlack == true {
                             
                             let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
                             //pieceOption.image = UIImage(named: "piecePossibilities.png")
-                            self.view.addSubview(pieceOption)
-                            pieceBlackCanMove += [pieceOption]
+                            if canSaveKing(pieceOption, array: pieceBlackCanMove) {
+                                pieceOption.removeFromSuperview()
+                            } else {
+                                self.view.addSubview(pieceOption)
+                                pieceBlackCanMove += [pieceOption]
+                            }
+                            let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
+                            //pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                            if canSaveKing(pieceOption2, array: pieceBlackCanMove) {
+                                pieceOption2.removeFromSuperview()
+                            } else {
+                                self.view.addSubview(pieceOption2)
+                                pieceBlackCanMove += [pieceOption2]
+                            }
+
                         }
                     }
                     
@@ -1047,7 +1087,7 @@ class GameInterFace3: UIViewController {
                     
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + byAmounty * pieceSize, size, size))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && pieceWhiteCanMove.count == 2   {
+                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && pieceWhiteCanMove.count == 3 {
                         pieceOption.removeFromSuperview()
                     } else {
                         self.view.addSubview(pieceOption)
@@ -1079,7 +1119,7 @@ class GameInterFace3: UIViewController {
                 } else if canThePieceGofurther == true {
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + 1 * pieceSize, size, size))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && pieceWhiteCanMove.count == 2   {
+                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && pieceWhiteCanMove.count == 3   {
                         pieceOption.removeFromSuperview()
                         print("Cant move!")
                     } else {
@@ -1114,7 +1154,7 @@ class GameInterFace3: UIViewController {
                         
                         let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y + 1 * pieceSize, pieceSize, pieceSize))
                         pieceOption.image = UIImage(named: "piecePossibilities.png")
-                        if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && pieceWhiteCanMove.count == 2   {
+                        if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && pieceWhiteCanMove.count == 3 && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false {
                             pieceOption.removeFromSuperview()
                             print("Cant move!")
                         } else {
