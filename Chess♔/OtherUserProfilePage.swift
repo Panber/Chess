@@ -446,6 +446,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
                     self.inviteButton.setTitleColor(blue, forState: .Normal)
                     self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
                     self.inviteButton.addTarget(self, action: "inviteButtonPressed:", forControlEvents: .TouchUpInside)
+                  //  self.userOnlyAcceptsFriends = false
                     self.contentView.addSubview(self.inviteButton)
                     
                     
@@ -696,6 +697,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         }
         else {
         
+            
+            
         
         }
     
