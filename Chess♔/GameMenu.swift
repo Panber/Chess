@@ -143,7 +143,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
             self.initLocationManager()
 
-        
+        //query for friends, find out if the user already has friends, if not add friends
 //        let friends = PFObject(className: "Friends")
 //        friends["user"] = PFUser.currentUser()
 //        friends["username"] = PFUser.currentUser()?.username
@@ -166,6 +166,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                                 users["drawn"] = "0"
                                 users["lost"] = "0"
                                 users["rating"] = 601
+                                users["request_everyone"] = true
+                                
                                 
                                 PFGeoPoint.geoPointForCurrentLocationInBackground {
                                     (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
@@ -173,7 +175,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                                         users["location"] = geoPoint
                                         users.saveInBackground()
                                         location = geoPoint!
-                                        
+                                        print("location added to parse")
                                         //add later!!
                                         //NSUserDefaults.standardUserDefaults().setObject(geoP, forKey: "user_geopoint")
                                         
@@ -938,7 +940,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         self.invitesButtonOutlet.tintColor = UIColor.grayColor()
 
 
-
+        darkMode = NSUserDefaults.standardUserDefaults().boolForKey("dark_mode")
         lightOrDarkMode()
     }
     override func viewDidAppear(animated: Bool) {
@@ -1112,6 +1114,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         let query = PFQuery(className: "_User")
         query.limit = 100
+        query.whereKey("request_everyone", equalTo: true)
+        query.whereKey("username", notEqualTo: (PFUser.currentUser()?.username)!)
         query.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, error:NSError?) -> Void in
             
             if error == nil {

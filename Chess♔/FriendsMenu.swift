@@ -40,7 +40,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     var blurBC1 = UIImageView()
     var blurBC2 = UIImageView()
 
-    var friendsArray = NSMutableArray()
+    var friendsArray: Array<String> = []
     
     override func viewWillDisappear(animated: Bool) {
         view.endEditing(true)
@@ -81,9 +81,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             if error == nil {
                 if let friends = friends as! [PFObject]! {
                 for friends in friends {
-                    self.friendsArray = friends["friends"] as! NSMutableArray
+                    self.friendsArray = friends["friends"] as! Array<String>
                 }
-                //print(self.friendsArray)
+                print(self.friendsArray)
                 self.addTop10Friends()
                 }
             }
@@ -329,11 +329,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         blurBC2.addSubview(seperator)
         
         
-        for var i = 0; i < friendsArray.count; i++ {
+    //    for var i = 0; i < friendsArray.count; i++ {
         
             
             let ratingQuery = PFQuery(className: "_User")
-            ratingQuery.whereKey("username", equalTo: friendsArray[i])
+            ratingQuery.whereKey("username", containedIn: friendsArray)
             ratingQuery.orderByDescending("rating")
             ratingQuery.limit = 10
             ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
@@ -401,7 +401,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 }
                 
             })
-        }
+        //}
 
     
     

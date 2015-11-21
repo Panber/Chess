@@ -11,7 +11,7 @@ import Parse
 
 let users = PFObject(className: "_User")
 
-class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
+class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewDelegate {
     var scrollView: UIScrollView!
     var profilePicBlur = UIImageView()
     
@@ -66,6 +66,9 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     
     var visualEffectView = UIVisualEffectView()
     
+    var inviteButton = UIButton()
+    var userOnlyAcceptsFriends = false
+    
     var t:CGFloat = 0
     var pendingOrRecievedFQ = false
     var friendRequestbuttonAlereadyLoadedOnce = false
@@ -90,6 +93,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         lightOrDarkMode()
     }
     override func viewDidAppear(animated: Bool) {
+
         setUpProfile()
     }
     override func viewWillDisappear(animated: Bool) {
@@ -137,6 +141,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                     self.userWon = users["won"] as! String
                     self.userDrawn = users["drawn"] as! String
                     self.userLost = users["lost"] as! String
+                    
+                    
                     
                     //setting labels
                     self.label12.text = self.userWon
@@ -227,15 +233,17 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         else { label2.textColor = UIColor.darkGrayColor() }
         contentView.addSubview(label2)
         
-        let inviteButton = UIButton(frame: CGRectMake(label.frame.origin.x, label2.frame.origin.y + 22,110, 25))
-        inviteButton.setTitleColor(blue, forState: .Normal)
+
+        
+        
+        //invite to game btn
+        inviteButton = UIButton(frame: CGRectMake(label.frame.origin.x, label2.frame.origin.y + 22,80, 25))
         inviteButton.titleLabel?.font = UIFont(name: "Didot", size: 13)
-        inviteButton.setTitle("Request Game", forState: .Normal)
+        inviteButton.setTitle("New Game", forState: .Normal)
         inviteButton.backgroundColor = UIColor.clearColor()
         inviteButton.layer.borderWidth = 1
         inviteButton.layer.borderColor = blue.CGColor
         inviteButton.layer.cornerRadius = cornerRadius - 3
-        contentView.addSubview(inviteButton)
         
         
         //adding freinds request button
@@ -324,6 +332,36 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                 
                 if "\(friendss)" == "Optional([])" {
                     
+                   let allQuery = PFQuery(className: "_User")
+                  //  allQuery.whereKey("request_everyone", equalTo: false)
+                    allQuery.whereKey("username", equalTo: label.text!)
+                    allQuery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
+                        if error == nil {
+                            if let result = result as! [PFObject]! {
+                                for result in result {
+                                    if result["request_everyone"] as! Bool == false {
+                                    
+                                        self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+                                        self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+                                        self.inviteButton.addTarget(self, action: "inviteButtonPressed:",   forControlEvents: .TouchUpInside)
+                                        self.inviteButton.layer.borderColor = UIColor.lightGrayColor().CGColor
+                                        self.userOnlyAcceptsFriends = true
+                                        self.contentView.addSubview(self.inviteButton)
+                                    }
+                                    else {
+                                        self.inviteButton.setTitleColor(blue, forState: .Normal)
+                                        self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+                                        self.inviteButton.addTarget(self, action: "inviteButtonPressed:", forControlEvents: .TouchUpInside)
+                                        self.userOnlyAcceptsFriends = false
+                                        self.contentView.addSubview(self.inviteButton)
+                                        
+                                    }
+                                }
+                        }
+                        }
+
+                    })
+                    
                     let friendRequestQuery = PFQuery(className: "FriendRequest")
                     if let username = PFUser.currentUser()?.username {
                         friendRequestQuery.whereKey("toUserr", equalTo: username)
@@ -373,6 +411,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                                             self.pendingOrRecievedFQ = true
                                             self.loadUserInfoFromCloud()
                                             self.elementSetup()
+                                            self.userOnlyAcceptsFriends = false
                                             self.addSubViewBelowContentView()
 
                                             
@@ -403,6 +442,13 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
                     self.friendStatusLabel.text = "You are Friends"
                     self.scrollView.addSubview(self.settingsButton)
                     
+                    
+                    self.inviteButton.setTitleColor(blue, forState: .Normal)
+                    self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+                    self.inviteButton.addTarget(self, action: "inviteButtonPressed:", forControlEvents: .TouchUpInside)
+                    self.contentView.addSubview(self.inviteButton)
+                    
+                    
                     self.elementSetup()
                     self.loadUserInfoFromCloud()
                     self.addSubViewBelowContentView()
@@ -422,12 +468,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
     
     func elementSetup() {
         
-        
-        
-        
-        
-        
-        
+
         //adding stats label
         label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + contentView.frame.origin.y + 65 + (45*t), 150, 25))
         label3.textAlignment = NSTextAlignment.Left
@@ -642,6 +683,24 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate {
         }
         
     }
+    
+    
+    func inviteButtonPressed(sender:UIButton) {
+    
+        if userOnlyAcceptsFriends == true {
+        
+            let alert = UIAlertController(title: "WOW", message: "It appears that this person only allows friends to invite him.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+        else {
+        
+        
+        }
+    
+    }
+    
     
     func settingsPressed(sender: UIButton!) {
         
