@@ -55,9 +55,14 @@ var movementTimer = NSTimer()
 var pieceMarked = UIImageView(frame: CGRectMake(0, 0, pieceSize, pieceSize))
 var pieceOptions : Array<UIImageView> = []
 
+
 // Logic options for all pieces
 var pieceWhiteLogicOptions: Array<UIImageView> = []
 var pieceBlackLogicOptions: Array<UIImageView> = []
+
+// Logic options to check if piece can move if king is in danger
+var pieceWhiteCanMove: Array<UIImageView> = []
+var pieceBlackCanMove: Array<UIImageView> = []
 
 // Logic options for Queen, Bishop and Rook
 var queenLogicOptions : Array<UIImageView> = []
@@ -157,6 +162,10 @@ var piecesString = ["whiteQueen","whiteKing","whitePawn","blackPawn","whiteKnigh
 //
 
 var pieces = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen, whiteKing,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
+
+var piecesWhiteLogic = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, whiteKing]
+
+var piecesBlackLogic = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
 
 var moveByAmounty: CGFloat = 0.0
 var moveByAmountx: CGFloat = 0.0
@@ -314,6 +323,21 @@ class GameInterFace3: UIViewController {
         }
         pieceBlackLogicOptions = []
     }
+    
+        func removeWhiteCanMoveOptions() {
+            for var p = 0 ; p < pieceWhiteCanMove.count; p++ {
+                pieceWhiteCanMove[p].hidden = true
+                pieceWhiteCanMove[p].removeFromSuperview()
+            }
+            pieceWhiteCanMove = []
+        }
+        func removeBlackCanMoveOptions() {
+            for var p = 0 ; p < pieceBlackCanMove.count; p++ {
+                pieceBlackCanMove[p].hidden = true
+                pieceBlackCanMove[p].removeFromSuperview()
+            }
+            pieceBlackCanMove = []
+        }
     
     
     // MARK: - Pieces selected! 👾
@@ -611,16 +635,20 @@ class GameInterFace3: UIViewController {
         }
     }
     
-    func chessPieceMovementLogic(var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView], var piece: UIImageView) {
+    func chessPieceMovementLogic(var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView], var piece: UIImageView, var logicOptions: [UIImageView])  {
         
         // Check if the piece is taken
         if !hasBeenTaken(piece, array: pieceToTake) {
             
             pieceID = pieceid
             var foundKing: Bool = false
+            var foundKingWhite: Bool = false
+            var foundKingBlack: Bool = false
             
             func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat, var byAmountz:CGFloat, increaserz:CGFloat ) {
                 var canThePieceGofurther: Bool = true
+                var canGoFurtherWhite: Bool = true
+                var canGoFurtherBlack: Bool = true
                 
                 for byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
                     
@@ -638,6 +666,20 @@ class GameInterFace3: UIViewController {
                             }
                             
                             canThePieceGofurther = false
+                        }
+                    }
+                    
+                    for var q = 0; q < pieceWhiteCanMove.count; q++ {
+                        if CGRectContainsPoint(pieceWhiteCanMove[q].frame , blackKing.center) {
+                            foundKingBlack = true
+                            canGoFurtherWhite = false
+                        }
+                    }
+                    
+                    for var q = 0; q < pieceBlackCanMove.count; q++ {
+                        if CGRectContainsPoint(pieceBlackCanMove[q].frame , whiteKing.center) {
+                            foundKingWhite = true
+                            canGoFurtherBlack = false
                         }
                     }
                     
@@ -798,6 +840,25 @@ class GameInterFace3: UIViewController {
                         }
                     }
                     
+                    for var r = 0; r < logicOptions.count; r++ {
+                        if logicOptions[r].frame.origin.x == piece.frame.origin.x + byAmountx * pieceSize && logicOptions[r].frame.origin.y == piece.frame.origin.y - byAmounty * pieceSize && canGoFurtherWhite == true {
+                            let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
+                            //pieceOption.image = UIImage(named: "piecePossibilities.png")
+                            self.view.addSubview(pieceOption)
+                            pieceWhiteCanMove += [pieceOption]
+                        }
+                    }
+                    
+                    for var r = 0; r < logicOptions.count; r++ {
+                        if logicOptions[r].frame.origin.x == piece.frame.origin.x + byAmountx * pieceSize && logicOptions[r].frame.origin.y == piece.frame.origin.y - byAmounty * pieceSize && canGoFurtherBlack == true {
+                            
+                            let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
+                            //pieceOption.image = UIImage(named: "piecePossibilities.png")
+                            self.view.addSubview(pieceOption)
+                            pieceBlackCanMove += [pieceOption]
+                        }
+                    }
+                    
                     if friend == whitePieces {
                         for var o = 0 ; o < pieceWhiteLogicOptions.count; o++ {
                             if CGRectContainsPoint(boarderBoard.frame, pieceWhiteLogicOptions[o].center) == false {
@@ -851,6 +912,26 @@ class GameInterFace3: UIViewController {
                         }
                     }
                 }
+                if foundKingBlack == false {
+                    
+                    for var o = 0 ; o < pieceWhiteCanMove.count; o++ {
+                        [pieceWhiteCanMove[o] .removeFromSuperview()]
+                    }
+                    
+                    pieceWhiteCanMove.removeAll()
+                    pieceWhiteCanMove = []
+                }
+                
+                if foundKingWhite == false {
+                    
+                    for var o = 0 ; o < pieceBlackCanMove.count; o++ {
+                        [pieceBlackCanMove[o] .removeFromSuperview()]
+                    }
+                    
+                    pieceBlackCanMove.removeAll()
+                    pieceBlackCanMove = []
+                }
+                
                 if foundKing == false && pieceid == 4 {
                     
                     for var o = 0 ; o < queenLogicOptions.count; o++ {
@@ -966,7 +1047,11 @@ class GameInterFace3: UIViewController {
                     
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + byAmounty * pieceSize, size, size))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    self.view.addSubview(pieceOption)
+                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && pieceWhiteCanMove.count == 2   {
+                        pieceOption.removeFromSuperview()
+                    } else {
+                        self.view.addSubview(pieceOption)
+                    }
                     // Check if a pawn can move when king is in check
                     if checkByQueen == true {
                         if canSaveKing(pieceOption, array: queenLogicOptions) == false {
@@ -994,7 +1079,12 @@ class GameInterFace3: UIViewController {
                 } else if canThePieceGofurther == true {
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + 1 * pieceSize, size, size))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    self.view.addSubview(pieceOption)
+                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && pieceWhiteCanMove.count == 2   {
+                        pieceOption.removeFromSuperview()
+                        print("Cant move!")
+                    } else {
+                        self.view.addSubview(pieceOption)
+                    }
                     // Check if a pawn can move when king is in check
                     if checkByQueen == true {
                         if canSaveKing(pieceOption, array: queenLogicOptions) == false {
@@ -1024,7 +1114,12 @@ class GameInterFace3: UIViewController {
                         
                         let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y + 1 * pieceSize, pieceSize, pieceSize))
                         pieceOption.image = UIImage(named: "piecePossibilities.png")
-                        self.view.addSubview(pieceOption)
+                        if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && pieceWhiteCanMove.count == 2   {
+                            pieceOption.removeFromSuperview()
+                            print("Cant move!")
+                        } else {
+                            self.view.addSubview(pieceOption)
+                        }
                         // Check if a pawn can move when king is in check
                         if checkByQueen == true {
                             if canSaveKing(pieceOption, array: queenLogicOptions) == false {
@@ -1095,42 +1190,42 @@ class GameInterFace3: UIViewController {
                 }
             }
             
-            chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueen)
-            chessPieceMovementLogic(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, piece: blackQueen)
+            chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueen , logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, piece: blackQueen, logicOptions: piecesWhiteLogic)
             
-            chessPieceMovementLogic(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, piece: whiteBishop1)
-            chessPieceMovementLogic(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, piece: whiteBishop2)
-            chessPieceMovementLogic(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, piece: blackBishop1)
-            chessPieceMovementLogic(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, piece: blackBishop2)
+            chessPieceMovementLogic(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, piece: whiteBishop1, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, piece: whiteBishop2, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, piece: blackBishop1, logicOptions: piecesWhiteLogic)
+            chessPieceMovementLogic(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, piece: blackBishop2, logicOptions: piecesWhiteLogic)
             
             
-            chessPieceMovementLogic(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, piece: whiteRook1)
-            chessPieceMovementLogic(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, piece: whiteRook2)
-            chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRook1)
-            chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRook2)
+            chessPieceMovementLogic(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, piece: whiteRook1, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, piece: whiteRook2, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRook1, logicOptions: piecesWhiteLogic)
+            chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRook2, logicOptions: piecesWhiteLogic)
             
-            chessPieceMovementLogic(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, piece: whiteKnight1)
-            chessPieceMovementLogic(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, piece: whiteKnight2)
-            chessPieceMovementLogic(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, piece: blackKnight1)
-            chessPieceMovementLogic(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, piece: blackKnight2)
+            chessPieceMovementLogic(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, piece: whiteKnight1, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, piece: whiteKnight2, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, piece: blackKnight1, logicOptions: piecesWhiteLogic)
+            chessPieceMovementLogic(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, piece: blackKnight2, logicOptions: piecesWhiteLogic)
             
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn1)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn2)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn3)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn4)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn5)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn6)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn7)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn8)
+            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn1, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn2, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn3, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn4, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn5, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn6, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn7, logicOptions: piecesBlackLogic)
+            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn8, logicOptions: piecesBlackLogic)
             
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn1)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn2)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn3)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn4)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn5)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn6)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn7)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn8)
+            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn1, logicOptions: piecesWhiteLogic)
+            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn2, logicOptions: piecesWhiteLogic)
+            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn3, logicOptions: piecesWhiteLogic)
+            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn4, logicOptions: piecesWhiteLogic)
+            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn5, logicOptions: piecesWhiteLogic)
+            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn6, logicOptions: piecesWhiteLogic)
+            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn7, logicOptions: piecesWhiteLogic)
+            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn8, logicOptions: piecesWhiteLogic)
         }
             
         else {
@@ -1152,6 +1247,8 @@ class GameInterFace3: UIViewController {
             removeBlackPieceLogicOptions()
             removeKnightLogicOptions()
             removePawnLogicOptions()
+            removeWhiteCanMoveOptions()
+            removeBlackCanMoveOptions()
         }
         
     }
@@ -1221,7 +1318,6 @@ class GameInterFace3: UIViewController {
                         pieceToTake += [pieces[i]]
                         pieces[i].removeFromSuperview()
                         pieces.removeAtIndex(i)
-                        
                     }
                 }
                 
