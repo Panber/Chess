@@ -71,29 +71,29 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
 
         
-        addTop10World()
-        
-        
-        let findFriends = PFQuery(className:"Friends")
-        findFriends.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
-        
-        findFriends.findObjectsInBackgroundWithBlock { (friends:[AnyObject]?, error:NSError?) -> Void in
-            if error == nil {
-                if let friends = friends as! [PFObject]! {
-                for friends in friends {
-                    self.friendsArray = friends["friends"] as! Array<String>
-                }
-                print(self.friendsArray)
-                self.addTop10Friends()
-                }
-            }
-        }
+//        addTop10World()
+//        
+//        
+//        let findFriends = PFQuery(className:"Friends")
+//        findFriends.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
+//        
+//        findFriends.findObjectsInBackgroundWithBlock { (friends:[AnyObject]?, error:NSError?) -> Void in
+//            if error == nil {
+//                if let friends = friends as! [PFObject]! {
+//                for friends in friends {
+//                    self.friendsArray = friends["friends"] as! Array<String>
+//                }
+//                print(self.friendsArray)
+//                self.addTop10Friends()
+//                }
+//            }
+//        }
         
     }
     
     
     
-    //func to set up people in top10WorldView
+ /*   //func to set up people in top10WorldView
     func addTop10World () {
         
         blurBC1 = UIImageView(frame: CGRectMake(0, 0, screenWidth , (screenWidth )/(16/9)))
@@ -408,6 +408,24 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     
     }
+    */
+    
+    
+    func addFeatured() {
+    
+    
+    let featuredView = UIView(frame: CGRectMake(0,0,screenWidth , (screenWidth )/(16/9)))
+    featuredView.userInteractionEnabled = true
+    scrollView.addSubview(featuredView)
+    
+    let featuredViewText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
+    featuredViewText.font
+        
+    }
+    
+    
+    
+    
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let yPos = -scrollView.contentOffset.y
@@ -431,6 +449,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 //            
 //            
 //        }
+        
+        
         
         
         
