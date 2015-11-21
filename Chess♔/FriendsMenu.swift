@@ -348,6 +348,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                         
                     }
                     }
+                    if self.top10FriendsArrayUsers.count > 0 {
+                    
                     usernameLabel.text = self.top10FriendsArrayUsers[0]
                     ratingLabel.text = "\(self.top10FriendsArrayRating[0])"
                     
@@ -396,7 +398,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                         
                     }
                     
-                    
+                    }
                     
                 }
                 
