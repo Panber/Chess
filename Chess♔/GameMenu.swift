@@ -234,6 +234,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         visualEffectView.addSubview(visualEffectSub)
 
+        if darkMode {  visualEffectView.effect = UIBlurEffect(style: .Dark) }
+        else { visualEffectView.effect = UIBlurEffect(style: .Light) }
+        
+        let currentWindow: UIWindow = UIApplication.sharedApplication().keyWindow!
+        currentWindow.addSubview(visualEffectView)
     }
 
     // Location Manager helper stuff
@@ -975,12 +980,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
     
     @IBAction func newPressed(sender: AnyObject) {
-        
-        if darkMode {  visualEffectView.effect = UIBlurEffect(style: .Dark) }
-        else { visualEffectView.effect = UIBlurEffect(style: .Light) }
-        
-        let currentWindow: UIWindow = UIApplication.sharedApplication().keyWindow!
-        currentWindow.addSubview(visualEffectView)
 
         
         UIView.animateWithDuration(0.3) { () -> Void in

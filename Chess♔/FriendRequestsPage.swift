@@ -184,13 +184,13 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         
         let cell:UserTableViewCell2 = self.tableView.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath) as! UserTableViewCell2
         
-        NSUserDefaults.standardUserDefaults().setObject(userArray[indexPath.row], forKey: "other_username_from_friendrequest")
-        cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friendrequest") as! String
+        NSUserDefaults.standardUserDefaults().setObject(userArray[indexPath.row], forKey: "other_username_profile")
+        cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile") as! String
         
         
         
         var p = imageDataArray[indexPath.row]
-        NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friendrequest")
+        NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_profile")
         cell.userProfileImage.image = UIImage(data: p)
         
     }
@@ -213,7 +213,6 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         let buttonRow = sender.tag
         let tmpButton = self.view.viewWithTag(buttonRow) as? UIButton
         checkmarkButton = tmpButton!
-        checkmarkButton.setBackgroundImage(UIImage(named: "checkmark12.png"), forState: .Normal)
         
         
         
@@ -291,17 +290,18 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         checkmarkButton.userInteractionEnabled = false
         crossButton.userInteractionEnabled = false
         
-        checkmarkButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        let rightConstraint = NSLayoutConstraint(item: checkmarkButton, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: crossButton, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 1)
+//        checkmarkButton.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        let rightConstraint = NSLayoutConstraint(item: checkmarkButton, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: crossButton, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 1)
         
         UIButton.animateWithDuration(0.5) { () -> Void in
             self.crossButton.alpha = 0
+            self.checkmarkButton.setBackgroundImage(UIImage(named: "checkmark12.png"), forState: .Normal)
+
             
-            
-            rightConstraint.constant = 0
-            self.view.addConstraint(rightConstraint)
-            self.view.layoutIfNeeded()
+//            rightConstraint.constant = 0
+//            self.view.addConstraint(rightConstraint)
+//            self.view.layoutIfNeeded()
             
             
         }
@@ -315,7 +315,6 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         let buttonRow = sender.tag
         let tmpButton = self.view.viewWithTag(buttonRow) as? UIButton
         crossButton = tmpButton!
-        self.crossButton.setBackgroundImage(UIImage(named: "close1.png"), forState: .Normal)
 
         let buttonRow2 = sender.tag - 99_999
         let tmpButton2 = self.view.viewWithTag(buttonRow2) as? UIButton
@@ -350,17 +349,20 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         crossButton.userInteractionEnabled = false
         
         
-        checkmarkButton.translatesAutoresizingMaskIntoConstraints = false
-
-        let rightConstraint = NSLayoutConstraint(item: checkmarkButton, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: crossButton, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 1)
+//        checkmarkButton.translatesAutoresizingMaskIntoConstraints = false
+//
+//        let rightConstraint = NSLayoutConstraint(item: checkmarkButton, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: crossButton, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 1)
         
         
         UIButton.animateWithDuration(0.5) { () -> Void in
             self.checkmarkButton.alpha = 0
-            
-            rightConstraint.constant = 0
-            self.view.addConstraint(rightConstraint)
-            self.view.layoutIfNeeded()
+            self.crossButton.setBackgroundImage(UIImage(named: "close1.png"), forState: .Normal)
+
+//            
+//            
+//            rightConstraint.constant = 0
+//            self.view.addConstraint(rightConstraint)
+//            self.view.layoutIfNeeded()
             
         }
     }
