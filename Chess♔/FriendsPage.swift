@@ -119,11 +119,11 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell:UserTableViewCell3 = self.tableView.dequeueReusableCellWithIdentifier("cell3", forIndexPath: indexPath) as! UserTableViewCell3
-        NSUserDefaults.standardUserDefaults().setObject(friendsArray[indexPath.row], forKey: "other_username_from_friends")
-        cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as! String
+        NSUserDefaults.standardUserDefaults().setObject(friendsArray[indexPath.row], forKey: "other_username_profile")
+        cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile") as! String
         
         var p = imageDataArray[indexPath.row]
-        NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friends")
+        NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_profile")
         cell.userProfileImage.image = UIImage(data: p)
     }
     

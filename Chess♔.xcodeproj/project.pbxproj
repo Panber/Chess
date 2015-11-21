@@ -50,7 +50,7 @@
 		8F2DD6E81B9AFFF80059CEFA /* settingsTabBarIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6DC1B9AFFF80059CEFA /* settingsTabBarIcon@3x.png */; };
 		8F2DD6E91B9AFFF80059CEFA /* whiteSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */; };
 		8F2F6C4A1BDED9100048342A /* NewGameFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF77E1BDBAF1E0037865C /* NewGameFriends.swift */; };
-		8F2F6C4B1BDEDCC00048342A /* NewGameSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage.swift */; };
+		8F2F6C4B1BDEDCC00048342A /* NewGameSettingsPage_Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage_Play.swift */; };
 		8F31DCE11BC70E30004544CC /* checkmark13.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCE01BC70E30004544CC /* checkmark13.png */; };
 		8F31DCE51BC716F9004544CC /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCE41BC716F9004544CC /* add.png */; };
 		8F31DCE71BC7189B004544CC /* add1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCE61BC7189B004544CC /* add1.png */; };
@@ -95,6 +95,12 @@
 		8F4CF7881BDD84CE0037865C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CF7851BDD84CE0037865C /* FBSDKLoginKit.framework */; };
 		8F4CF7891BDD84CE0037865C /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CF7861BDD84CE0037865C /* FBSDKShareKit.framework */; };
 		8F5250C01BD01A67005D4682 /* LeaderBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5250BF1BD01A66005D4682 /* LeaderBoard.swift */; };
+		8F62C6801C00918700312A58 /* OtherUserProfilePage_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C67F1C00918700312A58 /* OtherUserProfilePage_Profile.swift */; };
+		8F62C6821C0091A600312A58 /* OtherUserProfilePage_Analyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6811C0091A600312A58 /* OtherUserProfilePage_Analyze.swift */; };
+		8F62C6841C0091C000312A58 /* OtherUserProfilePage_Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6831C0091C000312A58 /* OtherUserProfilePage_Play.swift */; };
+		8F62C6861C00977A00312A58 /* NewGameSettingsPage_Analyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6851C00977A00312A58 /* NewGameSettingsPage_Analyze.swift */; };
+		8F62C6881C00979500312A58 /* NewGameSettingsPage_Explore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6871C00979500312A58 /* NewGameSettingsPage_Explore.swift */; };
+		8F62C68A1C0097BD00312A58 /* NewGameSettingsPage_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6891C0097BD00312A58 /* NewGameSettingsPage_Profile.swift */; };
 		8F768D9B1BD6AC4F007A7BFC /* SignUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */; };
 		8F840BCC1BBDAE6600511F44 /* FriendRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F840BCB1BBDAE6600511F44 /* FriendRequests.swift */; };
 		8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */; };
@@ -103,7 +109,7 @@
 		8F86392F1B9B044F0055608B /* FriendsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86392E1B9B044F0055608B /* FriendsMenu.swift */; };
 		8F8639331B9B09F90055608B /* BlackBC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F8639321B9B09F90055608B /* BlackBC.jpg */; };
 		8F87E8BC1BD6DBE600506F2F /* arrow483.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F87E8BB1BD6DBE600506F2F /* arrow483.png */; };
-		8F8BD2A51BC28E1100B25CFE /* OtherUserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8BD2A41BC28E1100B25CFE /* OtherUserProfilePage.swift */; };
+		8F8BD2A51BC28E1100B25CFE /* OtherUserProfilePage_Explore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8BD2A41BC28E1100B25CFE /* OtherUserProfilePage_Explore.swift */; };
 		8F8BD2A81BC41ED700B25CFE /* arrow_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F8BD2A61BC41ED700B25CFE /* arrow_white.png */; };
 		8F8BD2A91BC41ED700B25CFE /* arrow_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F8BD2A71BC41ED700B25CFE /* arrow_black.png */; };
 		8F8BD2AB1BC524C600B25CFE /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8BD2AA1BC524C600B25CFE /* ProfilePage.swift */; };
@@ -116,9 +122,6 @@
 		8F910C301BD6C58F0003647E /* 20.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F910C2F1BD6C58F0003647E /* 20.jpg */; };
 		8F970FBD1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F970FBC1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png */; };
 		8F970FBF1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F970FBE1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png */; };
-		8F9A9A2B1BDAE08600EA5953 /* OtherUserProfilePageFromFriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9A9A2A1BDAE08600EA5953 /* OtherUserProfilePageFromFriendRequest.swift */; };
-		8F9A9A2D1BDAE0EE00EA5953 /* OtherUserProfilePageFromFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9A9A2C1BDAE0EE00EA5953 /* OtherUserProfilePageFromFriends.swift */; };
-		8F9A9A2F1BDAE11800EA5953 /* OtherUserProfilePageFromUsersFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9A9A2E1BDAE11800EA5953 /* OtherUserProfilePageFromUsersFriends.swift */; };
 		8FA018D31B9B0D76002B410E /* chessIconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA018D21B9B0D76002B410E /* chessIconRounded.png */; };
 		8FA018D51B9B0E33002B410E /* Bauru.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FA018D41B9B0E33002B410E /* Bauru.ttf */; };
 		8FA018D91B9B1FAE002B410E /* ChessIconAndTExt.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA018D81B9B1FAE002B410E /* ChessIconAndTExt.png */; };
@@ -264,12 +267,18 @@
 		8F4A02A41B9A42D40084024A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8F4A02A61B9A42DC0084024A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8F4CF77E1BDBAF1E0037865C /* NewGameFriends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameFriends.swift; sourceTree = "<group>"; };
-		8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage.swift; sourceTree = "<group>"; };
+		8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage_Play.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Play.swift; sourceTree = "<group>"; };
 		8F4CF7821BDD83E20037865C /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		8F4CF7841BDD84CE0037865C /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		8F4CF7851BDD84CE0037865C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		8F4CF7861BDD84CE0037865C /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		8F5250BF1BD01A66005D4682 /* LeaderBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderBoard.swift; sourceTree = "<group>"; };
+		8F62C67F1C00918700312A58 /* OtherUserProfilePage_Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePage_Profile.swift; sourceTree = "<group>"; };
+		8F62C6811C0091A600312A58 /* OtherUserProfilePage_Analyze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePage_Analyze.swift; sourceTree = "<group>"; };
+		8F62C6831C0091C000312A58 /* OtherUserProfilePage_Play.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePage_Play.swift; sourceTree = "<group>"; };
+		8F62C6851C00977A00312A58 /* NewGameSettingsPage_Analyze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Analyze.swift; sourceTree = "<group>"; };
+		8F62C6871C00979500312A58 /* NewGameSettingsPage_Explore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Explore.swift; sourceTree = "<group>"; };
+		8F62C6891C0097BD00312A58 /* NewGameSettingsPage_Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Profile.swift; sourceTree = "<group>"; };
 		8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpMenu.swift; sourceTree = "<group>"; };
 		8F840BCB1BBDAE6600511F44 /* FriendRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequests.swift; sourceTree = "<group>"; };
 		8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeMenu.swift; sourceTree = "<group>"; };
@@ -278,7 +287,7 @@
 		8F86392E1B9B044F0055608B /* FriendsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsMenu.swift; sourceTree = "<group>"; };
 		8F8639321B9B09F90055608B /* BlackBC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BlackBC.jpg; sourceTree = "<group>"; };
 		8F87E8BB1BD6DBE600506F2F /* arrow483.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow483.png; sourceTree = "<group>"; };
-		8F8BD2A41BC28E1100B25CFE /* OtherUserProfilePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePage.swift; sourceTree = "<group>"; };
+		8F8BD2A41BC28E1100B25CFE /* OtherUserProfilePage_Explore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePage_Explore.swift; sourceTree = "<group>"; };
 		8F8BD2A61BC41ED700B25CFE /* arrow_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_white.png; sourceTree = "<group>"; };
 		8F8BD2A71BC41ED700B25CFE /* arrow_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_black.png; sourceTree = "<group>"; };
 		8F8BD2AA1BC524C600B25CFE /* ProfilePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
@@ -291,9 +300,6 @@
 		8F910C2F1BD6C58F0003647E /* 20.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 20.jpg; sourceTree = "<group>"; };
 		8F970FBC1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessIconSmallTextAndLogo.png; sourceTree = "<group>"; };
 		8F970FBE1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessIconSmallTextAndLogoDarkMode.png; sourceTree = "<group>"; };
-		8F9A9A2A1BDAE08600EA5953 /* OtherUserProfilePageFromFriendRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePageFromFriendRequest.swift; sourceTree = "<group>"; };
-		8F9A9A2C1BDAE0EE00EA5953 /* OtherUserProfilePageFromFriends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePageFromFriends.swift; sourceTree = "<group>"; };
-		8F9A9A2E1BDAE11800EA5953 /* OtherUserProfilePageFromUsersFriends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePageFromUsersFriends.swift; sourceTree = "<group>"; };
 		8FA018D21B9B0D76002B410E /* chessIconRounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessIconRounded.png; sourceTree = "<group>"; };
 		8FA018D41B9B0E33002B410E /* Bauru.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bauru.ttf; sourceTree = "<group>"; };
 		8FA018D81B9B1FAE002B410E /* ChessIconAndTExt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessIconAndTExt.png; sourceTree = "<group>"; };
@@ -527,10 +533,10 @@
 				F1648B601BDC19CA00AE1BC3 /* GameInterFace3.swift */,
 				F12B6DFF1BFFE925009897FA /* Test.swift */,
 				F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */,
-				8F8BD2A41BC28E1100B25CFE /* OtherUserProfilePage.swift */,
-				8F9A9A2A1BDAE08600EA5953 /* OtherUserProfilePageFromFriendRequest.swift */,
-				8F9A9A2C1BDAE0EE00EA5953 /* OtherUserProfilePageFromFriends.swift */,
-				8F9A9A2E1BDAE11800EA5953 /* OtherUserProfilePageFromUsersFriends.swift */,
+				8F8BD2A41BC28E1100B25CFE /* OtherUserProfilePage_Explore.swift */,
+				8F62C67F1C00918700312A58 /* OtherUserProfilePage_Profile.swift */,
+				8F62C6811C0091A600312A58 /* OtherUserProfilePage_Analyze.swift */,
+				8F62C6831C0091C000312A58 /* OtherUserProfilePage_Play.swift */,
 				8F8BD2AC1BC5380100B25CFE /* FriendRequestsPage.swift */,
 				F1B4145F1BC72E5D00FEE6A4 /* SettingsPage.swift */,
 				F14E644D1BC98B7900751F20 /* FriendsPage.swift */,
@@ -538,7 +544,10 @@
 				8FEF2ABE1BFE4CAA006E1359 /* NewGameNearby.swift */,
 				F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */,
 				8FA5C8971B9A264F0097637E /* Assets.xcassets */,
-				8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage.swift */,
+				8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage_Play.swift */,
+				8F62C6851C00977A00312A58 /* NewGameSettingsPage_Analyze.swift */,
+				8F62C6871C00979500312A58 /* NewGameSettingsPage_Explore.swift */,
+				8F62C6891C0097BD00312A58 /* NewGameSettingsPage_Profile.swift */,
 				8F5250BF1BD01A66005D4682 /* LeaderBoard.swift */,
 				8F273CEF1BF28B7100275378 /* GameInvitesPage.swift */,
 				F1DECCAC1BE3FEA8009C08B4 /* Main.storyboard */,
@@ -908,31 +917,34 @@
 				8F4A028C1B9A414D0084024A /* GameMenu.swift in Sources */,
 				8FBD3A371BB498A200212314 /* GameInterFace2.swift in Sources */,
 				8F5250C01BD01A67005D4682 /* LeaderBoard.swift in Sources */,
+				8F62C68A1C0097BD00312A58 /* NewGameSettingsPage_Profile.swift in Sources */,
 				8F4A028A1B9A40FF0084024A /* GameInterface.swift in Sources */,
+				8F62C6881C00979500312A58 /* NewGameSettingsPage_Explore.swift in Sources */,
 				8F768D9B1BD6AC4F007A7BFC /* SignUpMenu.swift in Sources */,
 				F1648B611BDC19CA00AE1BC3 /* GameInterFace3.swift in Sources */,
-				8F9A9A2B1BDAE08600EA5953 /* OtherUserProfilePageFromFriendRequest.swift in Sources */,
-				8F9A9A2D1BDAE0EE00EA5953 /* OtherUserProfilePageFromFriends.swift in Sources */,
 				8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */,
 				F14E644E1BC98B7900751F20 /* FriendsPage.swift in Sources */,
-				8F2F6C4B1BDEDCC00048342A /* NewGameSettingsPage.swift in Sources */,
+				8F2F6C4B1BDEDCC00048342A /* NewGameSettingsPage_Play.swift in Sources */,
 				8FEF2ABF1BFE4CAA006E1359 /* NewGameNearby.swift in Sources */,
+				8F62C6801C00918700312A58 /* OtherUserProfilePage_Profile.swift in Sources */,
 				8F8BD2AD1BC5380100B25CFE /* FriendRequestsPage.swift in Sources */,
 				8F86392B1B9B01D00055608B /* ProfileMenu.swift in Sources */,
 				8FBED2FC1BB1F35700CDAACC /* UserTableViewCell.swift in Sources */,
 				8F1AFCF91BAE05A7009D7299 /* FirstLaunchScreen.swift in Sources */,
 				8F86392F1B9B044F0055608B /* FriendsMenu.swift in Sources */,
 				F12B6E001BFFE925009897FA /* Test.swift in Sources */,
-				8F8BD2A51BC28E1100B25CFE /* OtherUserProfilePage.swift in Sources */,
+				8F8BD2A51BC28E1100B25CFE /* OtherUserProfilePage_Explore.swift in Sources */,
 				8F86392D1B9B02780055608B /* ChatView.swift in Sources */,
 				8FA5C8931B9A264F0097637E /* LoginMenu.swift in Sources */,
 				8FA5C8911B9A264F0097637E /* AppDelegate.swift in Sources */,
 				F1431A5E1BD281B600C5854A /* UsersFriendsPage.swift in Sources */,
 				8F8BD2AB1BC524C600B25CFE /* ProfilePage.swift in Sources */,
 				F134DDDE1BC1C417005BA54C /* UsersProfilePage.swift in Sources */,
-				8F9A9A2F1BDAE11800EA5953 /* OtherUserProfilePageFromUsersFriends.swift in Sources */,
+				8F62C6841C0091C000312A58 /* OtherUserProfilePage_Play.swift in Sources */,
+				8F62C6821C0091A600312A58 /* OtherUserProfilePage_Analyze.swift in Sources */,
 				8F2F6C4A1BDED9100048342A /* NewGameFriends.swift in Sources */,
 				8F273CF01BF28B7100275378 /* GameInvitesPage.swift in Sources */,
+				8F62C6861C00977A00312A58 /* NewGameSettingsPage_Analyze.swift in Sources */,
 				F1B414601BC72E5D00FEE6A4 /* SettingsPage.swift in Sources */,
 				8F840BCC1BBDAE6600511F44 /* FriendRequests.swift in Sources */,
 			);

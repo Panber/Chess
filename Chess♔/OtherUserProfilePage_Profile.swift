@@ -1,15 +1,15 @@
 //
-//  OtherUserProfilePageFromFriends.swift
+//  OtherUserProfilePage_Profile.swift
 //  Chess♔
 //
-//  Created by Johannes Berge on 23/10/15.
+//  Created by Johannes Berge on 21/11/15.
 //  Copyright © 2015 Panber. All rights reserved.
 //
 
 import UIKit
+import Parse
 
-class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
-    
+class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAlertViewDelegate {
     var scrollView: UIScrollView!
     var profilePicBlur = UIImageView()
     
@@ -31,10 +31,13 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
     var label7 = UILabel()
     var label8 = UILabel()
     
+    var olabel9 = UILabel()
     var label9 = UILabel()
     
     var label10 = UILabel()
     var label11 = UILabel()
+    var olabel11 = UILabel()
+    
     
     var label12 = UILabel()
     var label13 = UILabel()
@@ -59,6 +62,11 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
     
     var friendStatusLabel = UILabel()
     
+    var visualEffectView = UIVisualEffectView()
+    
+    var inviteButton = UIButton()
+    var userOnlyAcceptsFriends = false
+    
     var t:CGFloat = 0
     var pendingOrRecievedFQ = false
     var friendRequestbuttonAlereadyLoadedOnce = false
@@ -81,27 +89,29 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(animated: Bool) {
         //  setUpProfile()
         lightOrDarkMode()
-        
     }
     override func viewDidAppear(animated: Bool) {
+        
         setUpProfile()
     }
     override func viewWillDisappear(animated: Bool) {
         self.removeProfile()
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        underElements = [label3,label4,label5,label6,label7,label8,label9,label10,label11,label12,label13,label14,label15,label16,label17]
+        underElements = [label3,label4,label5,label6,label7,label8,olabel9,label9,label10,label11,olabel11,label12,label13,label14,label15,label16,label17]
         
         
-        
-        self.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as? String
+        self.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile") as? String
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         // Do any additional setup after loading the view.
         //setting scrollview
-        view.frame.size.height = 1000
+        
+        view.frame.size.height = 630
         scrollView = UIScrollView(frame: view.bounds)
         scrollView.contentSize = view.bounds.size
         scrollView.frame.size.height = screenHeight
@@ -113,12 +123,13 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         view.addSubview(scrollView)
         scrollView.showsVerticalScrollIndicator = false
         
+        
     }
     
     func loadUserInfoFromCloud () {
         
         let usersQuery = PFQuery(className: "_User")
-        usersQuery.whereKey("username", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as! String)
+        usersQuery.whereKey("username", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile") as! String)
         usersQuery.findObjectsInBackgroundWithBlock { (users:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
                 
@@ -129,6 +140,8 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                     self.userDrawn = users["drawn"] as! String
                     self.userLost = users["lost"] as! String
                     
+                    
+                    
                     //setting labels
                     self.label12.text = self.userWon
                     self.label13.text = self.userDrawn
@@ -136,6 +149,8 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                     self.label15.text = "\(self.userRating)"
                     self.label2.text = "\(self.userRating)"
                     
+                    self.inviteButton.userInteractionEnabled = true
+
                     
                     
                 }
@@ -149,45 +164,45 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
     
     func setUpProfile () {
         
+        popOverView = UIView(frame: CGRectMake(0, screenHeight - 220, screenWidth, 200))
+        bcView = UIButton(frame: CGRectMake(0, 0, screenWidth, view.frame.size.height ))
         
-        popOverView = UIView(frame: CGRectMake(0, screenHeight - 155, screenWidth, 200))
-        bcView = UIButton(frame: CGRectMake(0, 0, screenWidth, view.frame.size.height))
         
-        
-        navigationController?.navigationBar.topItem?.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as? String
+        navigationController?.navigationBar.topItem?.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile") as? String
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         //creating the view
         //  var contentView: UIView = UIView(frame: CGRectMake(0, 0, screenWidth - 20 , screenHeight/7))
-        contentView = UIView(frame: CGRectMake(0, 64, screenWidth, screenHeight/5))
+        
+        contentView = UIView(frame: CGRectMake(0, 0, screenWidth, screenHeight/5))
         //contentView.layer.cornerRadius = cornerRadius
         if darkMode { contentView.backgroundColor = UIColor(red: 0.12, green: 0.12 , blue: 0.12, alpha: 1) }
         else { contentView.backgroundColor = UIColor.whiteColor() }
         contentView.clipsToBounds = true
-        scrollView.addSubview(contentView)
         
         
         
         //setting up bc image of profile pic
-        if NSUserDefaults.standardUserDefaults().objectForKey("other_userImage_from_friends") == nil {
+        if NSUserDefaults.standardUserDefaults().objectForKey("other_userImage_profile") == nil {
             sleep(5)
         }
-        let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage_from_friends") as! NSData
+        let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage_profile") as! NSData
         
-        profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height+1))
+        profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.width, (contentView.frame.size.height+1)*2))
         profilePicBlur.contentMode = .ScaleAspectFill
         profilePicBlur.image = UIImage(data: imageData)
         profilePicBlur.clipsToBounds = true
         contentView.addSubview(profilePicBlur)
         
         //bluring bc of profile pic
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
         if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
         else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
         visualEffectView.frame = profilePicBlur.bounds
+        visualEffectView.frame.size.height = contentView.frame.size.height + 2
         profilePicBlur.addSubview(visualEffectView)
         
         //adding the profile pic
-        profilePic = UIImageView(frame: CGRectMake(20, 20, (contentView.frame.size.height) - 65, (contentView.frame.size.height) - 65))
+        profilePic = UIImageView(frame: CGRectMake(20, 20, 75 , 75))
         profilePic.layer.cornerRadius = profilePic.frame.size.height / 2
         profilePic.clipsToBounds = true
         profilePic.layer.borderColor = UIColor.whiteColor().CGColor
@@ -198,10 +213,10 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         
         
         //adding username to view
-        let label = UILabel(frame: CGRectMake(contentView.frame.size.height - 30 , contentView.frame.size.height/5, 250, 40))
+        let label = UILabel(frame: CGRectMake(profilePic.frame.origin.x + 95 , contentView.frame.size.height/8, 250, 30))
         label.textAlignment = NSTextAlignment.Left
-        label.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")as? String
-        label.font = UIFont(name: "Didot-Bold", size: 30)
+        label.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile")as? String
+        label.font = UIFont(name: "Didot-Bold", size: 22)
         label.sizeToFit()
         if darkMode { label.textColor = UIColor.whiteColor() }
         else { label.textColor = UIColor.blackColor() }
@@ -209,22 +224,32 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         
         
         //adding rating label
-        label2 = UILabel(frame: CGRectMake(contentView.frame.size.height - 30 , label.frame.origin.y + 30, 100, 40))
+        label2 = UILabel(frame: CGRectMake(label.frame.origin.x , label.frame.origin.y + 30, 100, 16))
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
-        label2.font = UIFont(name: "Didot-Italic", size: 15)
+        label2.font = UIFont(name: "Didot-Italic", size: 14)
         if darkMode { label2.textColor = UIColor.whiteColor() }
-        else { label2.textColor = UIColor.blackColor() }
+        else { label2.textColor = UIColor.darkGrayColor() }
         contentView.addSubview(label2)
         
+        
+        
+        
+        //invite to game btn
+        inviteButton = UIButton(frame: CGRectMake(label.frame.origin.x, label2.frame.origin.y + 22,80, 25))
+        inviteButton.titleLabel?.font = UIFont(name: "Didot", size: 13)
+        inviteButton.setTitle("New Game", forState: .Normal)
+        inviteButton.backgroundColor = UIColor.whiteColor()
+        inviteButton.layer.cornerRadius = cornerRadius - 3
+        inviteButton.userInteractionEnabled = false
         
         
         //adding freinds request button
         let friends = PFQuery(className: "friends")
         if let user = PFUser.currentUser() {
             friends.whereKey("user", equalTo: user)
-            friends.whereKey("friends", containsString: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as? String)
+            friends.whereKey("friends", containsString: NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile") as? String)
         }
         
         //adding white bc to fridnrequest
@@ -293,6 +318,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                 })
             }
             self.elementSetup()
+            self.addSubViewBelowContentView()
             self.loadUserInfoFromCloud()
         }
         
@@ -305,10 +331,40 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                 
                 if "\(friendss)" == "Optional([])" {
                     
+                    let allQuery = PFQuery(className: "_User")
+                    //  allQuery.whereKey("request_everyone", equalTo: false)
+                    allQuery.whereKey("username", equalTo: label.text!)
+                    allQuery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
+                        if error == nil {
+                            if let result = result as! [PFObject]! {
+                                for result in result {
+                                    if result["request_everyone"] as! Bool == false {
+                                        
+                                        self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+                                        self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+                                        self.inviteButton.addTarget(self, action: "inviteButtonPressed:",   forControlEvents: .TouchUpInside)
+                                        self.inviteButton.layer.borderColor = UIColor.lightGrayColor().CGColor
+                                        self.userOnlyAcceptsFriends = true
+                                        self.contentView.addSubview(self.inviteButton)
+                                    }
+                                    else {
+                                        self.inviteButton.setTitleColor(blue, forState: .Normal)
+                                        self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+                                        self.inviteButton.addTarget(self, action: "inviteButtonPressed:", forControlEvents: .TouchUpInside)
+                                        self.userOnlyAcceptsFriends = false
+                                        self.contentView.addSubview(self.inviteButton)
+                                        
+                                    }
+                                }
+                            }
+                        }
+                        
+                    })
+                    
                     let friendRequestQuery = PFQuery(className: "FriendRequest")
                     if let username = PFUser.currentUser()?.username {
                         friendRequestQuery.whereKey("toUserr", equalTo: username)
-                        friendRequestQuery.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")!)
+                        friendRequestQuery.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile")!)
                         friendRequestQuery.whereKey("status", equalTo: "pending")
                         
                         friendRequestQuery.findObjectsInBackgroundWithBlock({ (requests:[AnyObject]?, error:NSError?) -> Void in
@@ -319,6 +375,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                                 self.pendingOrRecievedFQ = true
                                 self.loadUserInfoFromCloud()
                                 self.elementSetup()
+                                self.addSubViewBelowContentView()
                                 self.friendStatusLabel.text = "Recieved Friend Request"
                                 
                                 self.acceptRequest = UIButton(frame: CGRectMake(self.friendStatusLabel.frame.origin.x - 80, self.ifFriend.frame.origin.y, 30, 30))
@@ -339,7 +396,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                                 let friendRequestQuery2 = PFQuery(className: "FriendRequest")
                                 if let username = PFUser.currentUser()?.username {
                                     friendRequestQuery2.whereKey("fromUser", equalTo: username)
-                                    friendRequestQuery2.whereKey("toUserr", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")!)
+                                    friendRequestQuery2.whereKey("toUserr", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile")!)
                                     friendRequestQuery2.whereKey("status", equalTo: "pending")
                                     
                                     friendRequestQuery2.findObjectsInBackgroundWithBlock({ (requests:[AnyObject]?, error:NSError?) -> Void in
@@ -353,6 +410,9 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                                             self.pendingOrRecievedFQ = true
                                             self.loadUserInfoFromCloud()
                                             self.elementSetup()
+                                            self.userOnlyAcceptsFriends = false
+                                            self.addSubViewBelowContentView()
+                                            
                                             
                                         }
                                         else {
@@ -381,14 +441,25 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                     self.friendStatusLabel.text = "You are Friends"
                     self.scrollView.addSubview(self.settingsButton)
                     
+                    
+                    self.inviteButton.setTitleColor(blue, forState: .Normal)
+                    self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+                    self.inviteButton.addTarget(self, action: "inviteButtonPressed:", forControlEvents: .TouchUpInside)
+                    //  self.userOnlyAcceptsFriends = false
+                    self.contentView.addSubview(self.inviteButton)
+                    
+                    
                     self.elementSetup()
                     self.loadUserInfoFromCloud()
+                    self.addSubViewBelowContentView()
+                    
                     
                     UIView.animateWithDuration(0.5, animations: { () -> Void in
                         self.settingsButton.alpha = 1
                     })
                 }
             })
+            
             //end of add friend
         }
         
@@ -398,25 +469,19 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
     func elementSetup() {
         
         
-        
-        
-        
-        
-        
         //adding stats label
         label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + contentView.frame.origin.y + 65 + (45*t), 150, 25))
         label3.textAlignment = NSTextAlignment.Left
-        label3.text = "Statisitics"
+        label3.text = "Statistics"
         label3.font = UIFont(name: "Didot-Italic", size: 16)
         if darkMode { label3.textColor = UIColor.lightTextColor() }
         else { label3.textColor = UIColor.lightGrayColor() }
-        scrollView.addSubview(label3)
         
         //adding white bc to stats
         label4 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + (45*t), screenWidth, 45*4))
         label4.text = ""
         label4.backgroundColor = UIColor.whiteColor()
-        scrollView.addSubview(label4)
+        
         
         //adding won: label
         label5 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + (45*t), screenWidth, 45))
@@ -425,7 +490,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         label5.font = UIFont(name: "Didot", size: 16)
         if darkMode { label5.textColor = UIColor.lightTextColor() }
         else { label5.textColor = UIColor.grayColor() }
-        scrollView.addSubview(label5)
+        
         
         //adding drawn: label
         label6 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + (45*t), screenWidth, 45))
@@ -434,7 +499,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         label6.font = UIFont(name: "Didot", size: 16)
         if darkMode { label6.textColor = UIColor.lightTextColor() }
         else { label6.textColor = UIColor.grayColor() }
-        scrollView.addSubview(label6)
+        
         
         //adding lost: label
         label7 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + (45*t), screenWidth, 45))
@@ -443,7 +508,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         label7.font = UIFont(name: "Didot", size: 16)
         if darkMode { label7.textColor = UIColor.lightTextColor() }
         else { label7.textColor = UIColor.grayColor() }
-        scrollView.addSubview(label7)
+        
         
         //adding rating: label
         label8 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + (45*t), screenWidth, 45))
@@ -452,25 +517,34 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         label8.font = UIFont(name: "Didot", size: 16)
         if darkMode { label8.textColor = UIColor.lightTextColor() }
         else { label8.textColor = UIColor.grayColor() }
-        scrollView.addSubview(label8)
         
         //adding seperator: label
-        label9 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + (45*t), screenWidth, 0.5))
+        olabel9 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + (45*t), screenWidth, 0.2))
+        if darkMode { olabel9.backgroundColor = UIColor.lightGrayColor() }
+        else { olabel9.backgroundColor = UIColor.lightGrayColor() }
+        
+        //adding seperator: label
+        label9 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + (45*t), screenWidth, 0.2))
         if darkMode { label9.backgroundColor = UIColor.lightGrayColor() }
         else { label9.backgroundColor = UIColor.lightGrayColor() }
-        scrollView.addSubview(label9)
+        
         
         //adding seperator2: label
-        label10 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + (45*t), screenWidth, 0.5))
+        label10 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + (45*t), screenWidth, 0.2))
         if darkMode { label10.backgroundColor = UIColor.lightGrayColor() }
         else { label10.backgroundColor = UIColor.lightGrayColor() }
-        scrollView.addSubview(label10)
+        
         
         //adding seperator3: label
-        label11 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + (45*t), screenWidth, 0.5))
+        label11 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + (45*t), screenWidth, 0.2))
         if darkMode { label11.backgroundColor = UIColor.lightGrayColor() }
         else { label11.backgroundColor = UIColor.lightGrayColor() }
-        scrollView.addSubview(label11)
+        
+        //adding seperator3: label
+        olabel11 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 45 + (45*t), screenWidth, 0.2))
+        if darkMode { olabel11.backgroundColor = UIColor.lightGrayColor() }
+        else { olabel11.backgroundColor = UIColor.lightGrayColor() }
+        
         
         
         //adding won from cloud: label
@@ -479,7 +553,6 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         label12.font = UIFont(name: "Didot", size: 16)
         if darkMode { label12.textColor = UIColor.whiteColor() }
         else { label12.textColor = UIColor.blackColor() }
-        scrollView.addSubview(label12)
         
         //adding drawn from cloud: label
         label13 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + (45*t), screenWidth - 20, 45))
@@ -487,7 +560,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         label13.font = UIFont(name: "Didot", size: 16)
         if darkMode { label13.textColor = UIColor.whiteColor() }
         else { label13.textColor = UIColor.blackColor() }
-        scrollView.addSubview(label13)
+        
         
         //adding lost from cloud: label
         label14 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + (45*t), screenWidth - 20, 45))
@@ -495,7 +568,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         label14.font = UIFont(name: "Didot", size: 16)
         if darkMode { label14.textColor = UIColor.whiteColor() }
         else { label14.textColor = UIColor.blackColor() }
-        scrollView.addSubview(label14)
+        
         
         //adding rating from cloud: label
         label15 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + (45*t), screenWidth - 20, 45))
@@ -503,47 +576,76 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         label15.font = UIFont(name: "Didot", size: 16)
         if darkMode { label15.textColor = UIColor.whiteColor() }
         else { label15.textColor = UIColor.blackColor() }
-        scrollView.addSubview(label15)
         
         
+        //add later
+        //        //adding white bc to friends button
+        //        label16 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + (45*t), screenWidth, 45))
+        //        label16.text = ""
+        //        label16.backgroundColor = UIColor.whiteColor()
+        //        scrollView.addSubview(label16)
         
-        //adding white bc to friends button
-        label16 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + (45*t), screenWidth, 45))
-        label16.text = ""
-        label16.backgroundColor = UIColor.whiteColor()
-        scrollView.addSubview(label16)
+        //add later
+        //        friendsButton.setTitle("Friends", forState: .Normal)
+        //        friendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        //        friendsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        //        friendsButton.layer.borderColor = blue.CGColor
+        //        friendsButton.frame.origin.x = 20
+        //        friendsButton.frame.origin.y
+        //            = contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65  + (45*t)
+        //        friendsButton.frame.size.height = 44
+        //        friendsButton.frame.size.width = screenWidth - 20
+        //        friendsButton.userInteractionEnabled = true
+        //        friendsButton.addTarget(self, action: "friendsPressed:", forControlEvents: .TouchUpInside)
+        //        friendsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+        //        scrollView.addSubview(friendsButton)
         
-        friendsButton.setTitle("Friends", forState: .Normal)
-        friendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
-        friendsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        friendsButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
-        friendsButton.layer.borderColor = blue.CGColor
-        friendsButton.frame.origin.x = 20
-        friendsButton.frame.origin.y
-            = contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65  + (45*t)
-        friendsButton.frame.size.height = 44
-        friendsButton.frame.size.width = screenWidth - 20
-        friendsButton.userInteractionEnabled = true
-        friendsButton.addTarget(self, action: "friendsPressed:", forControlEvents: .TouchUpInside)
-        friendsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-        friendsButton.showsTouchWhenHighlighted = true
-        scrollView.addSubview(friendsButton)
-        
-        friendsArrowImage = UIImageView(frame: CGRectMake(screenWidth - 30, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + (45*t), 15, 45))
-        friendsArrowImage.contentMode = .ScaleAspectFit
-        if darkMode { friendsArrowImage.image = UIImage(named: "arrow_white.png"); friendsArrowImage.alpha = 1 }
-        else { friendsArrowImage.image = UIImage(named: "arrow_black.png"); friendsArrowImage.alpha = 0.3  }
-        scrollView.addSubview(friendsArrowImage)
+        //        //add later
+        //        friendsArrowImage = UIImageView(frame: CGRectMake(screenWidth - 30, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + (45*t), 15, 45))
+        //        friendsArrowImage.contentMode = .ScaleAspectFit
+        //        if darkMode { friendsArrowImage.image = UIImage(named: "arrow_white.png"); friendsArrowImage.alpha = 1 }
+        //        else { friendsArrowImage.image = UIImage(named: "arrow_black.png"); friendsArrowImage.alpha = 0.3  }
+        //        scrollView.addSubview(friendsArrowImage)
         
         
-        label17 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 65 + 50 + (45*t), screenWidth , 50))
+        label17 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 50 + (45*t), screenWidth , 50))
         label17.textAlignment = NSTextAlignment.Center
         label17.text = "Chess♔"
         label17.font = UIFont(name: "Didot", size: 13)
         if darkMode { label17.textColor = UIColor.lightTextColor() }
         else { label17.textColor = UIColor.grayColor() }
-        scrollView.addSubview(label17)
         
+        
+        
+        
+    }
+    
+    func addSubViewBelowContentView() {
+        scrollView.addSubview(label3)
+        scrollView.addSubview(label4)
+        scrollView.addSubview(label5)
+        scrollView.addSubview(label6)
+        scrollView.addSubview(label7)
+        scrollView.addSubview(label8)
+        scrollView.addSubview(olabel9)
+        scrollView.addSubview(label9)
+        scrollView.addSubview(label10)
+        scrollView.addSubview(label11)
+        scrollView.addSubview(olabel11)
+        scrollView.addSubview(label12)
+        scrollView.addSubview(label13)
+        scrollView.addSubview(label14)
+        scrollView.addSubview(label15)
+        scrollView.addSubview(label17)
+        scrollView.addSubview(contentView)
+        
+    }
+    
+    // MARK: Friends list: Future Imporvements
+    func friendsPressed(sender: UIButton!) {
+        ///        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("UsersFriends")
+        ///        self.showViewController(vc as! UIViewController, sender: vc)
+        ///        print(NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String)
     }
     
     func friendRequestPressed(sender: UIButton!) {
@@ -555,7 +657,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
             
         }
         request["fromUser"] = PFUser.currentUser()?.username
-        request["toUserr"] = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")
+        request["toUserr"] = NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile")
         request["status"] = "pending"
         
         let toUserQuery = PFQuery(className: "FriendRequest")
@@ -582,10 +684,42 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         
     }
     
-   // MARK: Friends list: Future Imporvements
-    func friendsPressed(sender: UIButton!) {
-   ///
+    
+    func inviteButtonPressed(sender:UIButton) {
+        
+        if userOnlyAcceptsFriends == true {
+            
+            let alert = UIAlertController(title: "WOW", message: "It appears that this person only allows friends to invite him.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+        else {
+            
+            
+            let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage_profile") as! NSData
+            
+            NSUserDefaults.standardUserDefaults().setObject(imageData, forKey: "other_userImage_from_profile")
+
+            
+            NSUserDefaults.standardUserDefaults().setObject(label2.text, forKey: "other_userrating_from_profile")
+            
+            let u = NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile")as? String
+            
+            NSUserDefaults.standardUserDefaults().setObject(u, forKey: "other_username_from_profile")
+            
+            
+            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("NewGameSettingsPage_Profile")
+            self.showViewController(vc as! UIViewController, sender: vc)
+            
+            
+            
+            
+            
+        }
+        
     }
+    
     
     func settingsPressed(sender: UIButton!) {
         
@@ -654,25 +788,23 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         let friendsQuery2 = PFQuery(className: "Friends")
         if let user = PFUser.currentUser() {
             friendsQuery2.whereKey("username", equalTo: user.username!)
-            friendsQuery2.whereKey("friends", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")!)
+            friendsQuery2.whereKey("friends", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile")!)
             
             friendsQuery2.findObjectsInBackgroundWithBlock({ (friends:[AnyObject]?, error:NSError?) -> Void in
                 
                 if error == nil {
                     
                     if let friends = friends as! [PFObject]!{
-
-                    for friends in friends {
-                        
-                        ff = friends["friends"] as! NSMutableArray
-                        print(ff)
-                        
+                        for friends in friends {
+                            
+                            ff = friends["friends"] as! NSMutableArray
+                            print(ff)
+                            
+                        }
                     }
-                    }
-                    
                     for var i = 0; i < ff.count; i++ {
                         
-                        if ff[i] as! String == NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as! String {
+                        if ff[i] as! String == NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile") as! String {
                             ff.removeObjectAtIndex(i)
                             print(ff)
                             
@@ -692,15 +824,18 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         var off = NSMutableArray()
         
         let userFriendsQuery = PFQuery(className: "Friends")
-        userFriendsQuery.whereKey("username", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as! String)
+        userFriendsQuery.whereKey("username", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile") as! String)
         userFriendsQuery.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
             
             if error == nil {
+                
                 if let friends = friends as! [PFObject]!{
-                for friends in friends {
-                    off = friends["friends"] as! NSMutableArray
+                    
+                    for friends in friends {
+                        off = friends["friends"] as! NSMutableArray
+                    }
                 }
-                }
+                
                 for var i = 0; i < off.count; i++ {
                     if off[i] as? String == PFUser.currentUser()?.username {
                         off.removeObjectAtIndex(i)
@@ -812,23 +947,23 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
     
     func acceptFriendRequestPressed(sender: UIButton!) {
         
+        
         //adding friends
         let requestQuery2 = PFQuery(className: "FriendRequest")
         if let user = PFUser.currentUser() {
             requestQuery2.whereKey("toUserr", equalTo: user.username!)
-            requestQuery2.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")!)
+            requestQuery2.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile")!)
             
             requestQuery2.findObjectsInBackgroundWithBlock({ (request:[AnyObject]?, error:NSError?) -> Void in
                 
                 if error == nil {
                     
                     if let request = request as! [PFObject]!{
-
-                    for request in request {
-                        self.usersFrom = request["fromUser"] as! String
-                        
-                        request.deleteEventually()
-                    }
+                        for request in request {
+                            self.usersFrom = request["fromUser"] as! String
+                            
+                            request.deleteEventually()
+                        }
                     }
                     let userFriendsQuery = PFQuery(className: "Friends")
                     userFriendsQuery.whereKey("username", equalTo: self.usersFrom)
@@ -863,8 +998,11 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
                 if error == nil {
                     if let friends = friends as? [PFObject]{
                         for friends in friends {
-                            friends["friends"]?.addObject(NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")!)
+                            friends["friends"]?.addObject(NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile")!)
                             friends.saveInBackground()
+                            
+                            self.navigationController?.popToRootViewControllerAnimated(true)
+                            
                         }
                     }
                 }
@@ -900,12 +1038,14 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
         let requestQuery2 = PFQuery(className: "FriendRequest")
         if let user = PFUser.currentUser() {
             requestQuery2.whereKey("toUserr", equalTo: user.username!)
-            requestQuery2.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends")!)
+            requestQuery2.whereKey("fromUser", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile")!)
             requestQuery2.findObjectsInBackgroundWithBlock({ (request:[AnyObject]?, error:NSError?) -> Void in
                 
                 if error == nil {
                     for request in request! {
                         request.deleteEventually()
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+
                     }
                 }
                 else {
@@ -949,8 +1089,10 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
             
             
             contentView.frame.origin.y = scrollView.contentOffset.y + 64
+            bcView.frame.origin.y = scrollView.contentOffset.y
             
-            profilePicBlur.frame.size.height = contentView.frame.size.height + yPos
+            
+            profilePicBlur.frame.size.height = contentView.frame.size.height + 64  + yPos
             profilePicBlur.contentMode = .ScaleAspectFill
             friendRequestButton.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 45
             ifFriend.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 7.5
@@ -961,10 +1103,25 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
             acceptRequest.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 7.5
             denyRequest.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 7.5
             
+            //  popOverView.frame.origin.y = scrollView.contentOffset.y
+            popOverView.frame.origin.y = -yPos + (screenHeight) - 155
+            
         }
         if yPos < 0 {
             
-            popOverView.frame.origin.y = scrollView.contentOffset.y + (screenHeight - 155)
+            contentView.frame.origin.y = 64 + scrollView.contentOffset.y
+            //            label0.frame.origin.y = scrollView.contentOffset.y + 63 + contentView.frame.size.height - 9
+            
+            friendRequestButton.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 45
+            ifFriend.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 7.5
+            settingsButton.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 7.5
+            label2o5.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height
+            friendStatusLabel.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height
+            sep.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 45
+            acceptRequest.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 7.5
+            denyRequest.frame.origin.y = scrollView.contentOffset.y + 64 + contentView.frame.size.height + 7.5
+            
+            popOverView.frame.origin.y = scrollView.contentOffset.y - (screenHeight) + 155
             bcView.frame.origin.y = scrollView.contentOffset.y
         }
         
@@ -1019,7 +1176,7 @@ class OtherUserProfilePageFromFriends: UIViewController, UIScrollViewDelegate {
             //            logoView.contentMode = UIViewContentMode.ScaleAspectFit
             //            logoView.frame.size.height = 50
             //            self.navigationItem.titleView = logoView
-            //
+            //            
             
             
             
