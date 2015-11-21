@@ -159,7 +159,45 @@ class NewGameSettingsPage: UIViewController {
         game.saveInBackgroundWithBlock { (bool:Bool, error:NSError?) -> Void in
             if error == nil {
                 print("game Made!!")
-                self.tabBarController?.selectedIndex = 0
+                //self.tabBarController?.selectedIndex = 0
+              //  navigationController.popViewControllerAnimated = true
+                
+                let completeSignal = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) - 50, 60, 60))
+                completeSignal.image = UIImage(named: "checkmark12.png")
+                
+                let completeText = UILabel(frame: CGRectMake((screenWidth/2) - 40,completeSignal.frame.size.height + completeSignal.frame.origin.y, 80, 40))
+                    completeText.text = "SENT!"
+                completeText.font = UIFont(name: "Didot", size: 16)
+                completeText.textAlignment = .Center
+                completeText.textColor = UIColor.lightGrayColor()
+                
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    visualEffectView.addSubview(completeSignal)
+                    visualEffectView.addSubview(completeText)
+                    visualEffectView.alpha = 1
+                    visualEffectView.userInteractionEnabled = true
+                    
+                    }, completion: {finish in
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+
+                        
+                        UIView.animateWithDuration(0.3, delay: 2, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+                            
+                            visualEffectView.alpha = 0
+                            visualEffectView.userInteractionEnabled = false
+
+                            
+                            }, completion: { finish in
+                            
+                                completeSignal.removeFromSuperview()
+                                completeText.removeFromSuperview()
+
+                            
+                            })
+                        
+                })
+                
+
 
                 // Create our Installation query
                 let pushQuery = PFInstallation.query()
