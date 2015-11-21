@@ -34,6 +34,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     var top10FriendsUserImage = NSData()
 
     
+    var featuredView = UIView()
+    
+    
     var usersScope:Bool = true
     var friendsScope:Bool = false
 
@@ -69,345 +72,167 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         
-
-        
-        addTop10World()
-        
-        
-        let findFriends = PFQuery(className:"Friends")
-        findFriends.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
-        
-        findFriends.findObjectsInBackgroundWithBlock { (friends:[AnyObject]?, error:NSError?) -> Void in
-            if error == nil {
-                if let friends = friends as! [PFObject]! {
-                for friends in friends {
-                    self.friendsArray = friends["friends"] as! Array<String>
-                }
-                print(self.friendsArray)
-                self.addTop10Friends()
-                }
-            }
-        }
+        addFeatured()
+        addTop()
+//        addTop10World()
+//        
+//        
+//        let findFriends = PFQuery(className:"Friends")
+//        findFriends.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
+//        
+//        findFriends.findObjectsInBackgroundWithBlock { (friends:[AnyObject]?, error:NSError?) -> Void in
+//            if error == nil {
+//                if let friends = friends as! [PFObject]! {
+//                for friends in friends {
+//                    self.friendsArray = friends["friends"] as! Array<String>
+//                }
+//                print(self.friendsArray)
+//                self.addTop10Friends()
+//                }
+//            }
+//        }
         
     }
     
     
     
-    //func to set up people in top10WorldView
-    func addTop10World () {
+    
+    
+    func addFeatured() {
+    
+    
+        featuredView = UIView(frame: CGRectMake(0,0,screenWidth , 200))
+        featuredView.userInteractionEnabled = true
+        scrollView.addSubview(featuredView)
+    
+        let featuredViewText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
+        featuredViewText.font = UIFont(name: "Didot", size: 25)
+        featuredViewText.text = "FEATURED"
+        featuredViewText.textColor = UIColor.darkGrayColor()
+        featuredViewText.textAlignment = .Center
+        scrollView.backgroundColor = UIColor.whiteColor()
+        featuredView.addSubview(featuredViewText)
         
-        blurBC1 = UIImageView(frame: CGRectMake(0, 0, screenWidth , (screenWidth )/(16/9)))
-      //  blurBC.image = UIImage(named: "JBpp.jpg")
-        //blurBC1.layer.cornerRadius = cornerRadius
-        blurBC1.contentMode = .ScaleAspectFill
-        //blurBC1.layer.borderColor = UIColor.lightGrayColor().CGColor
-       // blurBC1.layer.borderWidth = 0
-        blurBC1.userInteractionEnabled = true
-        blurBC1.clipsToBounds = true
+        let featuredProfilePicView = UIImageView(frame: CGRectMake(screenWidth/2 - 90, 85, 65, 65))
+        featuredProfilePicView.layer.cornerRadius = featuredProfilePicView.frame.size.width/2
+        featuredProfilePicView.clipsToBounds = true
+        featuredProfilePicView.alpha = 0
+        featuredProfilePicView.contentMode = .ScaleAspectFill
+        featuredView.addSubview(featuredProfilePicView)
         
-        //bluring bc of profile pic
-        var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight)) as UIVisualEffectView
-        if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-        else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-        visualEffectView.frame = blurBC1.bounds
-        visualEffectView.frame.size.height += 1
-        blurBC1.addSubview(visualEffectView)
+        let featuredUsername = UILabel(frame: CGRectMake(featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25,featuredProfilePicView.frame.origin.y + 16,screenWidth - (featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25),21))
+        featuredUsername.font = UIFont(name: "Didot", size: 22)
+        featuredUsername.text = "mufcjb"
+        featuredUsername.textAlignment = .Left
+        featuredUsername.alpha = 0
+        featuredView.addSubview(featuredUsername)
         
-        let whiteF = UILabel(frame: CGRectMake(0, 0, blurBC1.frame.size.width, blurBC1.frame.size.height * (1/3)))
-        whiteF.backgroundColor = UIColor.whiteColor()
-        //whiteF.alpha = 0.8
-        blurBC1.addSubview(whiteF)
+        let featuredRating = UILabel(frame: CGRectMake(featuredUsername.frame.origin.x,featuredUsername.frame.origin.y + featuredUsername.frame.size.height,screenWidth - (featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25),21))
+        featuredRating.font = UIFont(name: "Didot-Italic", size: 15)
+        featuredRating.textColor = UIColor.darkGrayColor()
+        featuredRating.alpha = 0
+        featuredView.addSubview(featuredRating)
         
-        let identifierLabel = UILabel(frame: CGRectMake(20, whiteF.frame.origin.y, blurBC1.frame.size.width - 20, whiteF.frame.size.height))
-        identifierLabel.font = UIFont(name: "Didot", size: 20)
-        identifierLabel.text = "Top 10 - World"
-        identifierLabel.textColor = UIColor.blackColor()
-        blurBC1.addSubview(identifierLabel)
+        let featuredSeperator = UILabel(frame: CGRectMake(0,featuredView.frame.origin.y + featuredView.frame.size.height - 1,screenWidth,0.2))
+        featuredSeperator.backgroundColor = UIColor.lightGrayColor()
+        featuredView.addSubview(featuredSeperator)
         
-        let arrow = UIImageView(frame: CGRectMake(blurBC1.frame.size.width - 30, 0, 15, whiteF.frame.size.height))
-        arrow.image = UIImage(named: "arrow_black.png")
-        arrow.alpha = 0.3
-        arrow.contentMode = .ScaleAspectFit
-        blurBC1.addSubview(arrow)
-        
-        let toTop10World = UIButton(frame: CGRectMake(0, 0, blurBC1.frame.size.width, blurBC1.frame.size.height / 3))
-        toTop10World.addTarget(self, action: "toTop10WorldPressed:", forControlEvents: .TouchUpInside)
-        toTop10World.backgroundColor = UIColor.clearColor()
-        blurBC1.addSubview(toTop10World)
-        
-        let currentToLabel = UILabel(frame: CGRectMake(20, whiteF.frame.size.height + 10, blurBC1.frame.size.width - 20, 20))
-        currentToLabel.font = UIFont(name: "Didot-Italic", size: 15)
-        currentToLabel.text = "Current no.1"
-        currentToLabel.textColor = UIColor.grayColor()
-        blurBC1.addSubview(currentToLabel)
-        
-        let profilePic = UIImageView(frame: CGRectMake(20, whiteF.frame.size.height + 10 + currentToLabel.frame.size.height + 5, 70, 70))
-        profilePic.layer.cornerRadius = profilePic.frame.size.width/2
-        profilePic.clipsToBounds = true
-        profilePic.layer.borderColor = UIColor.whiteColor().CGColor
-        profilePic.layer.borderWidth = 3
-        profilePic.contentMode = .ScaleAspectFill
-        blurBC1.addSubview(profilePic)
-        
-        let usernameLabel = UILabel(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width + 20, profilePic.frame.origin.y, 200, 40))
-        usernameLabel.font = UIFont(name: "Didot-Bold", size: 30)
-        blurBC1.addSubview(usernameLabel)
-        
-        let ratingLabel = UILabel(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width + 20, profilePic.frame.origin.y + usernameLabel.frame.size.height, 200, 30))
-        ratingLabel.font = UIFont(name: "Didot-Italic", size: 15)
-        ratingLabel.textColor = UIColor.grayColor()
-        blurBC1.addSubview(ratingLabel)
-        
-        let seperator = UILabel(frame: CGRectMake(0,blurBC1.frame.size.height - 0.5,screenWidth,0.5))
-        seperator.backgroundColor = UIColor.lightGrayColor()
-        blurBC1.addSubview(seperator)
-        
-        
-        let toTop10WorldUser = UIButton(frame: CGRectMake(0, blurBC1.frame.size.height/3, blurBC1.frame.size.width, blurBC1.frame.size.height * (2/3)))
-        toTop10WorldUser.addTarget(self, action: "toTop10WorldUserPressed:", forControlEvents: .TouchUpInside)
-        toTop10WorldUser.backgroundColor = UIColor.clearColor()
-        blurBC1.addSubview(toTop10WorldUser)
-        
-        var GlobalUserInitiatedQueue: dispatch_queue_t {
-            return dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)
-        }
-        var GlobalBackgroundQueue: dispatch_queue_t {
-            return dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
-        }
-        var GlobalMainQueue: dispatch_queue_t {
-            return dispatch_get_main_queue()
-        }
-        
-        
-        let ratingQuery = PFQuery(className: "_User")
-        ratingQuery.orderByDescending("rating")
-        ratingQuery.limit = 10
-        ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
-            if error == nil {
-                self.top10WorldArrayUsers = []
-                self.top10WorldArrayRating = []
-                self.top10WorldArrayImage = []
-                
-                if let usersObject = usersObject as! [PFObject]! {
-                for usersObject in usersObject {
+        let featuredQuery = PFQuery(className: "_User")
+        featuredQuery.orderByDescending("rating")
+        featuredQuery.limit = 1
+        featuredQuery.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, error:NSError?) -> Void in
+            if error == nil{
+                if let result = result as? [PFUser] {
+                    for result in result {
                     
-                    
-                    self.top10WorldArrayRating.append(usersObject["rating"] as! Int)
-                    //print(self.top10WorldArrayRating)
-                    self.top10WorldArrayUsers.append(usersObject["username"] as! String)
-                    //print(self.top10WorldArrayUsers)
-                    usernameLabel.text = self.top10WorldArrayUsers.first
-                    ratingLabel.text = "\(self.top10WorldArrayRating.first!)"
-                    
-                  
-                
-                }
-                }
-                //image
-
-                let query = PFQuery(className: "_User")
-                
-
-                    query.whereKey("username", equalTo: self.top10WorldArrayUsers.first!)
-                query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
-                    if (error == nil) {
-                        
-                        if let userArray = objects as? [PFUser] {
-                            for user in userArray {
-                                if let userPicture = user["profile_picture"] as? PFFile {
+                        if let userPicture = result["profile_picture"] as? PFFile {
+                            
+                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                if (error == nil) {
                                     
-                                    userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                                        if (error == nil) {
-                                            
-                                                let image = UIImage(data: imageData!)!
-                                                profilePic.image = image
-                                                self.blurBC1.image = image
-                                                self.top10WorldUserImage = imageData!
-                                                
-                                                visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
-                                                if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-                                                else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-                                                visualEffectView.frame = self.blurBC1.bounds
-                                                
-                                                self.blurBC1.alpha = 0
-                                                self.scrollView.addSubview(self.blurBC1)
-                                                self.blurBC1.alpha = 1
-                                            
-                                 
-                                        } else {
-                                        }
-                                    }
+                                    featuredProfilePicView.image = UIImage(data: imageData!)
+                                    let r = result["rating"] as! Int
+                                    featuredRating.text = "\(r)"
+                                    featuredUsername.text = result["username"] as? String
                                     
+                                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                        featuredProfilePicView.alpha = 1
+                                        featuredUsername.alpha = 1
+                                        featuredRating.alpha = 1
+                                        
+                                    })
+                                    
+                                } else {
                                 }
                             }
                             
                         }
-                    } else {
-                        // Log details of the failure
-                        print("query error: \(error) \(error!.userInfo)")
-                    }
+                        
                     
-                }
+                    }
                 
-
+                }
             
             }
-        
-        })
-        
-    
-        
-    }
-
-    func addTop10Friends () {
-    
-        blurBC2 = UIImageView(frame: CGRectMake(0,  blurBC1.frame.size.height, screenWidth, (screenWidth)/(16/9)))
-        blurBC2.contentMode = .ScaleAspectFill
-        blurBC2.userInteractionEnabled = true
-        blurBC2.clipsToBounds = true
-        
-        //bluring bc of profile pic
-        var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight)) as UIVisualEffectView
-        if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-        else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-        visualEffectView.frame = blurBC2.bounds
-        visualEffectView.frame.size.height += 1
-        blurBC2.addSubview(visualEffectView)
-        
-        let whiteF = UILabel(frame: CGRectMake(0, 0, blurBC2.frame.size.width, blurBC2.frame.size.height * (1/3)))
-        whiteF.backgroundColor = UIColor.whiteColor()
-        //whiteF.alpha = 0.8
-        blurBC2.addSubview(whiteF)
-        
-        let identifierLabel = UILabel(frame: CGRectMake(20, whiteF.frame.origin.y, blurBC2.frame.size.width - 20, whiteF.frame.size.height))
-        identifierLabel.font = UIFont(name: "Didot", size: 20)
-        identifierLabel.text = "Top 10 - Friends"
-        identifierLabel.textColor = UIColor.blackColor()
-        blurBC2.addSubview(identifierLabel)
-        
-        let arrow = UIImageView(frame: CGRectMake(blurBC2.frame.size.width - 30, 0, 15, whiteF.frame.size.height))
-        arrow.image = UIImage(named: "arrow_black.png")
-        arrow.alpha = 0.3
-        arrow.contentMode = .ScaleAspectFit
-        blurBC2.addSubview(arrow)
-        
-        let toTop10Friends = UIButton(frame: CGRectMake(0, 0, blurBC2.frame.size.width, blurBC2.frame.size.height / 3))
-        toTop10Friends.addTarget(self, action: "toTop10FriendsPressed:", forControlEvents: .TouchUpInside)
-        toTop10Friends.backgroundColor = UIColor.clearColor()
-        blurBC2.addSubview(toTop10Friends)
-        
-        let currentToLabel = UILabel(frame: CGRectMake(20, whiteF.frame.size.height + 10, blurBC2.frame.size.width - 20, 20))
-        currentToLabel.font = UIFont(name: "Didot-Italic", size: 15)
-        currentToLabel.text = "Current no.1"
-        currentToLabel.textColor = UIColor.grayColor()
-        blurBC2.addSubview(currentToLabel)
-        
-        let profilePic = UIImageView(frame: CGRectMake(20, whiteF.frame.size.height + 10 + currentToLabel.frame.size.height + 5, 70, 70))
-        profilePic.layer.cornerRadius = profilePic.frame.size.width/2
-        profilePic.clipsToBounds = true
-        profilePic.layer.borderColor = UIColor.whiteColor().CGColor
-        profilePic.layer.borderWidth = 3
-        profilePic.contentMode = .ScaleAspectFill
-        blurBC2.addSubview(profilePic)
-        
-        let usernameLabel = UILabel(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width + 20, profilePic.frame.origin.y, 200, 40))
-        usernameLabel.font = UIFont(name: "Didot-Bold", size: 30)
-        blurBC2.addSubview(usernameLabel)
-        
-        let ratingLabel = UILabel(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width + 20, profilePic.frame.origin.y + usernameLabel.frame.size.height, 200, 30))
-        ratingLabel.font = UIFont(name: "Didot-Italic", size: 15)
-        ratingLabel.textColor = UIColor.grayColor()
-        blurBC2.addSubview(ratingLabel)
-        
-        let toTop10FriendsUser = UIButton(frame: CGRectMake(0, blurBC2.frame.size.height/3, blurBC2.frame.size.width, blurBC2.frame.size.height * (2/3)))
-        toTop10FriendsUser.addTarget(self, action: "toTop10FriendsUserPressed:", forControlEvents: .TouchUpInside)
-        toTop10FriendsUser.backgroundColor = UIColor.clearColor()
-        blurBC2.addSubview(toTop10FriendsUser)
-        
-        let seperator = UILabel(frame: CGRectMake(0,blurBC2.frame.size.height - 0.5,screenWidth,0.5))
-        seperator.backgroundColor = UIColor.lightGrayColor()
-        blurBC2.addSubview(seperator)
-        
-        
-    //    for var i = 0; i < friendsArray.count; i++ {
-        
             
-            let ratingQuery = PFQuery(className: "_User")
-            ratingQuery.whereKey("username", containedIn: friendsArray)
-            ratingQuery.orderByDescending("rating")
-            ratingQuery.limit = 10
-            ratingQuery.findObjectsInBackgroundWithBlock({ (usersObject:[AnyObject]?, error:NSError?) -> Void in
-                if error == nil {
-                    
-                    if let usersObject = usersObject as! [PFObject]! {
-                    for usersObject in usersObject {
-                        self.top10FriendsArrayRating.append(usersObject["rating"] as! Int)
-                        print(self.top10FriendsArrayRating)
-                        self.top10FriendsArrayUsers.append(usersObject["username"] as! String)
-                        print(self.top10FriendsArrayUsers)
-                        
-                    }
-                    }
-                    if self.top10FriendsArrayUsers.count > 0 {
-                    
-                    usernameLabel.text = self.top10FriendsArrayUsers[0]
-                    ratingLabel.text = "\(self.top10FriendsArrayRating[0])"
-                    
-
-                    //image
-                    
-                    let query = PFQuery(className: "_User")
-                    
-                    
-                    query.whereKey("username", equalTo: self.top10FriendsArrayUsers.first!)
-                    query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
-                        if (error == nil) {
-                            
-                            if let userArray = objects as? [PFUser] {
-                                for user in userArray {
-                                    if let userPicture = user["profile_picture"] as? PFFile {
-                                        
-                                        userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                                            if (error == nil) {
-                                                
-                                                let image = UIImage(data: imageData!)!
-                                                profilePic.image = image
-                                                self.blurBC2.image = image
-                                                self.top10FriendsUserImage = imageData!
-                                                visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
-                                                if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-                                                else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-                                                visualEffectView.frame = self.blurBC2.bounds
-                                                self.blurBC2.alpha = 0
-                                                self.scrollView.addSubview(self.blurBC2)
-                                                self.blurBC2.alpha = 1
-                                                
-                                                
-                                            } else {
-                                            }
-                                        }
-                                        
-                                    }
-                                }
-                                
-                            }
-                        } else {
-                            // Log details of the failure
-                            print("query error: \(error) \(error!.userInfo)")
-                        }
-                        
-                    }
-                    
-                    }
-                    
-                }
-                
-            })
-        //}
-
-    
-    
+        }
+        
+        
     }
+    
+    
+    func addTop() {
+    
+        let topView = UIView(frame: CGRectMake(0,featuredView.frame.origin.y + featuredView.frame.size.height,screenWidth,400))
+        topView.userInteractionEnabled = true
+        scrollView.addSubview(topView)
+        
+        let topText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
+        topText.font = UIFont(name: "Didot", size: 22)
+        topText.text = "Top"
+        topText.textColor = UIColor.darkGrayColor()
+        topText.textAlignment = .Center
+        topView.addSubview(topText)
+        
+        let topWorldImage = UIImageView(frame: CGRectMake((screenWidth / 2) - (screenWidth/4)-25,100,50,50))
+        topWorldImage.image = UIImage(named:"map158.png")
+        topWorldImage.contentMode = .ScaleAspectFill
+        topWorldImage.alpha = 0.7
+        topView.addSubview(topWorldImage)
+        
+        let topWorldButton = UIButton(frame: CGRectMake(10,80,(screenWidth/2) - 20,120))
+        topWorldButton.setTitle("WORLD", forState: .Normal)
+        topWorldButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        topWorldButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        topWorldButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        topWorldButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        topWorldButton.layer.cornerRadius = cornerRadius
+        topWorldButton.clipsToBounds = true
+        topWorldButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+       // topWorldButton.addTarget(self, action: "topWorldButtonPressed:", forControlEvents: .TouchUpInside)
+        topView.addSubview(topWorldButton)
+        
+        let topFriendsImage = UIImageView(frame: CGRectMake((screenWidth / 2) + (screenWidth/4)-25,100,50,50))
+        topFriendsImage.image = UIImage(named:"group4-2.png")
+        topFriendsImage.contentMode = .ScaleAspectFill
+        topFriendsImage.alpha = 0.7
+        topView.addSubview(topFriendsImage)
+        
+        let topFriendsButton = UIButton(frame: CGRectMake((screenWidth / 2) + 10,80,(screenWidth/2) - 20,120))
+        topFriendsButton.setTitle("FRIENDS", forState: .Normal)
+        topFriendsButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        topFriendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        topFriendsButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        topFriendsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        topFriendsButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        topFriendsButton.layer.cornerRadius = cornerRadius
+        topFriendsButton.clipsToBounds = true
+      //  topFriendsButton.addTarget(self, action: "randomButtonPressed:", forControlEvents: .TouchUpInside)
+        topView.addSubview(topFriendsButton)
+        
+        
+    }
+    
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let yPos = -scrollView.contentOffset.y
@@ -431,6 +256,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 //            
 //            
 //        }
+        
+        
         
         
         
@@ -737,7 +564,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
             self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-            self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+     //       self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            self.view.backgroundColor = UIColor.whiteColor()
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
