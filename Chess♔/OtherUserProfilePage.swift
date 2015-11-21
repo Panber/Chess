@@ -333,27 +333,33 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
                 if "\(friendss)" == "Optional([])" {
                     
                    let allQuery = PFQuery(className: "_User")
+                  //  allQuery.whereKey("request_everyone", equalTo: false)
                     allQuery.whereKey("username", equalTo: label.text!)
-                    allQuery.whereKey("request_everyone", equalTo: false)
                     allQuery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
                         if error == nil {
-                            
-                            self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-                            self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
-                            self.inviteButton.addTarget(self, action: "inviteButtonPressed:", forControlEvents: .TouchUpInside)
-                            self.inviteButton.layer.borderColor = UIColor.lightGrayColor().CGColor
-                            self.userOnlyAcceptsFriends = true
-                            self.contentView.addSubview(self.inviteButton)
-                        
+                            if let result = result as! [PFObject]! {
+                                for result in result {
+                                    if result["request_everyone"] as! Bool == false {
+                                    
+                                        self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+                                        self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+                                        self.inviteButton.addTarget(self, action: "inviteButtonPressed:",   forControlEvents: .TouchUpInside)
+                                        self.inviteButton.layer.borderColor = UIColor.lightGrayColor().CGColor
+                                        self.userOnlyAcceptsFriends = true
+                                        self.contentView.addSubview(self.inviteButton)
+                                    }
+                                    else {
+                                        self.inviteButton.setTitleColor(blue, forState: .Normal)
+                                        self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+                                        self.inviteButton.addTarget(self, action: "inviteButtonPressed:", forControlEvents: .TouchUpInside)
+                                        self.userOnlyAcceptsFriends = false
+                                        self.contentView.addSubview(self.inviteButton)
+                                        
+                                    }
+                                }
                         }
-                        else {
-                            self.inviteButton.setTitleColor(blue, forState: .Normal)
-                            self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
-                            self.inviteButton.addTarget(self, action: "inviteButtonPressed:", forControlEvents: .TouchUpInside)
-                            self.userOnlyAcceptsFriends = false
-                            self.contentView.addSubview(self.inviteButton)
-                        
                         }
+
                     })
                     
                     let friendRequestQuery = PFQuery(className: "FriendRequest")
