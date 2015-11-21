@@ -503,6 +503,8 @@ class GameInterFace3: UIViewController {
             
             for byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
                 
+                foundImportantPiece = false
+                
                if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && pieceWhiteCanMove.count == 3 {
                 startLogicChecking = true
                 
@@ -619,7 +621,7 @@ class GameInterFace3: UIViewController {
                     }
                 }
                 
-                if foundImportantPiece == false  && startLogicChecking == true {
+                if foundImportantPiece == false && startLogicChecking == true {
                     for var o = 0 ; o < pieceOptions.count; o++ {
                         [pieceOptions[o] .removeFromSuperview()]
                     }
