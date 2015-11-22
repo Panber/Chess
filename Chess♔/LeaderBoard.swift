@@ -12,16 +12,108 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
 
-    override func viewWillAppear(animated: Bool) {
-        lightOrDarkMode()
-
-       
-    }
-    
-    var profilePicArray: Array<UIImage> = []
+    var userArray: Array<String> = []
+    var ratingArray: Array<Int> = []
+    var profilePicArray: Array<NSData> = []
     
     var imageDataArray = NSMutableArray()
     var imageDataDict = [1 : NSData(),2:NSData(),3:NSData(),4 : NSData(),5 : NSData(),6 : NSData(),7 : NSData(),8 : NSData(),9 : NSData(),10 : NSData()]
+    
+    var USER: Array<PFUser> = []
+    
+    var found = false
+    
+    override func viewWillAppear(animated: Bool) {
+        lightOrDarkMode()
+        findUsers()
+        
+    }
+    
+    
+    func findUsers() {
+    
+        if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "world" {
+        
+            let query = PFQuery(className: "_User")
+            query.limit = 10
+            query.orderByDescending("rating")
+            
+            query.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
+                if error ==  nil {
+                    if let result = result as? [PFUser] {
+                        for result in result {
+                        
+                            self.userArray.append(result["username"] as! String)
+                            self.ratingArray.append(result["rating"] as! Int)
+                            
+                            self.USER.append(result)
+                            
+                            
+                        
+                        }
+                    
+                    }
+                self.tableView.reloadData()
+                }
+                
+            })
+        
+        }
+    
+        if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "friends" {
+        
+            let friendsquery = PFQuery(className: "Friends")
+            friendsquery.whereKey("username", equalTo:(PFUser.currentUser()?.username)!)
+            friendsquery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
+                if error == nil {
+                    if let result = result as! [PFObject]! {
+                        for result in result {
+                            self.userArray = result["friends"] as! Array<String>
+                        
+                        }
+                    }
+                    
+                    self.tableView.reloadData()
+                    
+                
+                }
+            })
+            
+        
+        }
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "nearby" {
+        
+            let query = PFQuery(className: "_User")
+            query.limit = 10
+            query.orderByDescending("rating")
+            query.whereKey("location", nearGeoPoint: location)
+            
+            query.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
+                if error ==  nil {
+                    if let result = result as? [PFUser] {
+                        for result in result {
+                            
+                            self.userArray.append(result["username"] as! String)
+                            self.ratingArray.append(result["rating"] as! Int)
+                            
+                            self.USER.append(result)
+                            
+                            
+                            
+                        }
+                        
+                    }
+                    self.tableView.reloadData()
+                }
+                
+            })
+        
+        
+        }
+
+    
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +136,7 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let count = NSUserDefaults.standardUserDefaults().objectForKey("userArray") as! Array<String>
-        
-        return count.count
+        return userArray.count
         
     }
     
@@ -55,56 +145,133 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         let cell:UserTableViewCell4 = self.tableView.dequeueReusableCellWithIdentifier("cell4", forIndexPath: indexPath) as! UserTableViewCell4
 
         
-        //username
-        let userName = NSUserDefaults.standardUserDefaults().objectForKey("userArray") as! NSMutableArray
-        cell.username.text = userName[indexPath.row] as? String
+        cell.username.text = userArray[indexPath.row]
+        let r = ratingArray[indexPath.row]
+        cell.rating.text = "\(r)"
 
+        if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "world" {
 
         
-            let query = PFQuery(className: "_User")
-            let usernamee = NSUserDefaults.standardUserDefaults().objectForKey("userArray") as! NSMutableArray
+        if let userPicture = USER[indexPath.row]["profile_picture"] as? PFFile {
             
-            query.whereKey("username", equalTo: usernamee[indexPath.row] as! String)
-            query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                 if (error == nil) {
                     
-                    if let userArray = objects as? [PFUser] {
-                        for user in userArray {
-                            if let userPicture = user["profile_picture"] as? PFFile {
-                                
-                                userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                                    if (error == nil) {
-                                        
-                                    cell.userProfileImage.image = UIImage(data: imageData!)
-                                    //self.imageDataArray.append(imageData!)
-                                        self.imageDataDict[indexPath.row] = imageData!
-                                        self.imageDataArray.addObject(imageData!)
-                                        
-
-                                    } else {
-                                    }
-                                }
-                                
-                            }
-                        }
-                        
-                    }
+                    self.profilePicArray.append(imageData!)
+                    cell.userProfileImage.image = UIImage(data: imageData!)
+                    
+                    
                 } else {
-                    // Log details of the failure
-                    print("query error: \(error) \(error!.userInfo)")
+                }
+            }
+            
+        }
+        }
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "nearby" {
+            
+            
+            if let userPicture = USER[indexPath.row]["profile_picture"] as? PFFile {
+                
+                userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                    if (error == nil) {
+                        
+                        self.profilePicArray.append(imageData!)
+                        cell.userProfileImage.image = UIImage(data: imageData!)
+                        
+                        
+                    } else {
+                    }
                 }
                 
             }
+        }
         
-  
-        //rating
-        let rating = NSUserDefaults.standardUserDefaults().objectForKey("ratingArray") as! NSMutableArray
-        cell.rating.text = "\(rating[indexPath.row] as! Int)"
+        if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "friends" {
+
+        let query = PFQuery(className: "_User")
+        query.whereKey("username", equalTo: self.userArray[indexPath.row])
+        query.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
+            if error ==  nil {
+                if let result = result as? [PFUser] {
+                    for result in result {
+                        
+                        self.ratingArray.append(result["rating"] as! Int)
+                        
+                        self.USER.append(result)
+                        
+                        if let userPicture = self.USER[indexPath.row]["profile_picture"] as? PFFile {
+                            
+                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                if (error == nil) {
+                                    
+                                    self.profilePicArray.append(imageData!)
+                                    cell.userProfileImage.image = UIImage(data: imageData!)
+                                    
+                                    
+                                } else {
+                                }
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                }
+            }
+            else {
+            self.navigationController?.popToRootViewControllerAnimated(true)
+            }
+            
+        })
+        
+        }
+        
+//            let query = PFQuery(className: "_User")
+//            let usernamee = NSUserDefaults.standardUserDefaults().objectForKey("userArray") as! NSMutableArray
+//
+//            query.whereKey("username", equalTo: usernamee[indexPath.row] as! String)
+//            query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+//                if (error == nil) {
+//                    
+//                    if let userArray = objects as? [PFUser] {
+//                        for user in userArray {
+//                            if let userPicture = user["profile_picture"] as? PFFile {
+//                                
+//                                userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+//                                    if (error == nil) {
+//                                        
+//                                    cell.userProfileImage.image = UIImage(data: imageData!)
+//                                    //self.imageDataArray.append(imageData!)
+//                                        self.imageDataDict[indexPath.row] = imageData!
+//                                        self.imageDataArray.addObject(imageData!)
+//                                        
+//
+//                                    } else {
+//                                    }
+//                                }
+//                                
+//                            }
+//                        }
+//                        
+//                    }
+//                } else {
+//                    // Log details of the failure
+//                    print("query error: \(error) \(error!.userInfo)")
+//                }
+//                
+//            }
+//        
+//  
+//        //rating
+//        let rating = NSUserDefaults.standardUserDefaults().objectForKey("ratingArray") as! NSMutableArray
+//        cell.rating.text = "\(rating[indexPath.row] as! Int)"
         
         //position
         cell.position.text = "\(indexPath.row + 1)" + "."
         
-        if cell.username.text == usernamee.lastObject as? String {
+        if cell.username.text == userArray.last {
             cell.separatorInset = UIEdgeInsetsZero
             cell.layoutMargins = UIEdgeInsetsZero
         }

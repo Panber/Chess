@@ -8,11 +8,12 @@
 
 import UIKit
 import Parse
+import MessageUI
 
 let usersObject = PFObject(className: "_User")
 
 
-class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDelegate, UIScrollViewDelegate{
+class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDelegate, UIScrollViewDelegate,MFMailComposeViewControllerDelegate{
     
     // Array for users that are being searched for
     var users:NSMutableArray = []
@@ -36,6 +37,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     var featuredView = UIView()
     
+    var topView = UIView()
+    
+    var contactView = UIView()
     
     var usersScope:Bool = true
     var friendsScope:Bool = false
@@ -66,14 +70,17 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         
         scrollView.scrollEnabled = true
-        scrollView.contentSize = CGSizeMake(screenWidth, 2000)
+        scrollView.contentSize = CGSizeMake(screenWidth, 1000)
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = true
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         
         addFeatured()
         addTop()
+        addContact()
+        addCreatorAndLegal()
+        
 //        addTop10World()
 //        
 //        
@@ -183,7 +190,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     func addTop() {
     
-        let topView = UIView(frame: CGRectMake(0,featuredView.frame.origin.y + featuredView.frame.size.height,screenWidth,400))
+        topView = UIView(frame: CGRectMake(0,featuredView.frame.origin.y + featuredView.frame.size.height,screenWidth,375))
         topView.userInteractionEnabled = true
         scrollView.addSubview(topView)
         
@@ -209,7 +216,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         topWorldButton.layer.cornerRadius = cornerRadius
         topWorldButton.clipsToBounds = true
         topWorldButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
-       // topWorldButton.addTarget(self, action: "topWorldButtonPressed:", forControlEvents: .TouchUpInside)
+        topWorldButton.addTarget(self, action: "topWorldButtonPressed:", forControlEvents: .TouchUpInside)
         topView.addSubview(topWorldButton)
         
         let topFriendsImage = UIImageView(frame: CGRectMake((screenWidth / 2) + (screenWidth/4)-25,100,50,50))
@@ -227,8 +234,212 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         topFriendsButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
         topFriendsButton.layer.cornerRadius = cornerRadius
         topFriendsButton.clipsToBounds = true
-      //  topFriendsButton.addTarget(self, action: "randomButtonPressed:", forControlEvents: .TouchUpInside)
+        topFriendsButton.addTarget(self, action: "topFriendsButtonPressed:", forControlEvents: .TouchUpInside)
         topView.addSubview(topFriendsButton)
+        
+        let topNearbyImage = UIImageView(frame: CGRectMake((screenWidth / 2)-25,  210 + 30,50,50))
+        topNearbyImage.image = UIImage(named:"map-pointer7.png")
+        topNearbyImage.contentMode = .ScaleAspectFill
+        topNearbyImage.alpha = 0.7
+        topView.addSubview(topNearbyImage)
+        
+        let topNearbyButton = UIButton(frame: CGRectMake((screenWidth/2) - ((screenWidth/2) - 20)/2,190 + 30,(screenWidth/2) - 20,120))
+        topNearbyButton.setTitle("NEARBY", forState: .Normal)
+        topNearbyButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        topNearbyButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        topNearbyButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        topNearbyButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        topNearbyButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        topNearbyButton.layer.cornerRadius = cornerRadius
+        topNearbyButton.clipsToBounds = true
+        topNearbyButton.addTarget(self, action: "topNearbyButtonPressed:", forControlEvents: .TouchUpInside)
+        topView.addSubview(topNearbyButton)
+        
+        let topSeperator = UILabel(frame: CGRectMake(0,topView.frame.size.height - 1,screenWidth,0.2))
+        topSeperator.backgroundColor = UIColor.lightGrayColor()
+        topView.addSubview(topSeperator)
+        
+    }
+    
+    
+    func topWorldButtonPressed(sender:UIButton) {
+    
+        NSUserDefaults.standardUserDefaults().setObject("world", forKey: "leaderboard")
+        
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("LeaderBoard")
+        self.showViewController(vc as! UIViewController, sender: vc)
+        
+    }
+    
+    func topFriendsButtonPressed(sender:UIButton) {
+        
+        NSUserDefaults.standardUserDefaults().setObject("friends", forKey: "leaderboard")
+
+        
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("LeaderBoard")
+        self.showViewController(vc as! UIViewController, sender: vc)
+        
+    }
+    
+    
+    func topNearbyButtonPressed(sender:UIButton) {
+        
+        NSUserDefaults.standardUserDefaults().setObject("nearby", forKey: "leaderboard")
+
+        
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("LeaderBoard")
+        self.showViewController(vc as! UIViewController, sender: vc)
+        
+    }
+    
+    func addContact() {
+    
+        contactView = UIView(frame: CGRectMake(0,topView.frame.origin.y + topView.frame.size.height,screenWidth,235))
+        contactView.userInteractionEnabled = true
+        scrollView.addSubview(contactView)
+        
+        let contactText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
+        contactText.font = UIFont(name: "Didot", size: 22)
+        contactText.text = "Contact us"
+        contactText.textColor = UIColor.darkGrayColor()
+        contactText.textAlignment = .Center
+        contactView.addSubview(contactText)
+        
+        
+        let contactTwitterImage = UIImageView(frame: CGRectMake((screenWidth / 2) - (screenWidth/4)-25,100,50,50))
+        contactTwitterImage.image = UIImage(named:"TwitterLogo_#55acee.png")
+        contactTwitterImage.contentMode = .ScaleAspectFill
+        contactTwitterImage.alpha = 1
+        contactView.addSubview(contactTwitterImage)
+        
+        let contactTwitterButton = UIButton(frame: CGRectMake(10,80,(screenWidth/2) - 20,120))
+        contactTwitterButton.setTitle("TWITTER", forState: .Normal)
+        contactTwitterButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        contactTwitterButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        contactTwitterButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        contactTwitterButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        contactTwitterButton.layer.cornerRadius = cornerRadius
+        contactTwitterButton.clipsToBounds = true
+        contactTwitterButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        contactTwitterButton.addTarget(self, action: "contactTwitterButtonPressed:", forControlEvents: .TouchUpInside)
+        contactView.addSubview(contactTwitterButton)
+        
+        let contactMailImage = UIImageView(frame: CGRectMake((screenWidth / 2) + (screenWidth/4)-25,100,50,50))
+        if darkMode {contactMailImage.image = UIImage(named:"new100.png")}
+        else {contactMailImage.image = UIImage(named:"new100-2.png")}
+        contactMailImage.contentMode = .ScaleAspectFill
+        contactMailImage.alpha = 0.7
+        contactView.addSubview(contactMailImage)
+        
+        let contactMailButton = UIButton(frame: CGRectMake((screenWidth / 2) + 10,80,(screenWidth/2) - 20,120))
+        contactMailButton.setTitle("MAIL", forState: .Normal)
+        contactMailButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        contactMailButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        contactMailButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        contactMailButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        contactMailButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        contactMailButton.layer.cornerRadius = cornerRadius
+        contactMailButton.clipsToBounds = true
+        contactMailButton.addTarget(self, action: "contactMailButtonPressed:", forControlEvents: .TouchUpInside)
+        contactView.addSubview(contactMailButton)
+        
+        let contactSeperator = UILabel(frame: CGRectMake(0,contactView.frame.size.height - 1,screenWidth,0.2))
+        contactSeperator.backgroundColor = UIColor.lightGrayColor()
+        contactView.addSubview(contactSeperator)
+        
+    
+    }
+    
+
+    
+    func contactTwitterButtonPressed(sender:UIButton) {
+        
+        if let url = NSURL(string: "https://twitter.com/PanBerSoftware") {
+            UIApplication.sharedApplication().openURL(url)
+        }
+        
+    }
+    
+    func contactMailButtonPressed(sender:UIButton) {
+        
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["panber@panber.com"])
+            mail.setMessageBody("<p>I LOVE CHESS! :D</p>", isHTML: true)
+            
+            presentViewController(mail, animated: true, completion: nil)
+        } else {
+
+        }
+    
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func addCreatorAndLegal() {
+        
+        let creatorView = UIView(frame: CGRectMake(0,contactView.frame.origin.y + contactView.frame.size.height,screenWidth,100))
+        creatorView.userInteractionEnabled = true
+        scrollView.addSubview(creatorView)
+        
+        let creatorLegalButton = UIButton(frame: CGRectMake(0,10,screenWidth,50))
+        creatorLegalButton.titleLabel!.font = UIFont(name: "Didot", size: 15)
+        creatorLegalButton.setTitle("Legal", forState: .Normal)
+        creatorLegalButton.setTitleColor(blue, forState: .Normal)
+        creatorLegalButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+        creatorLegalButton.addTarget(self, action: "creatorLegalButtonPressed:", forControlEvents: .TouchUpInside)
+        creatorView.addSubview(creatorLegalButton)
+        
+        let creatorButton = UIButton(frame: CGRectMake(0,60,screenWidth,50))
+        creatorButton.titleLabel!.font = UIFont(name: "Didot", size: 15)
+        creatorButton.setTitle("A PANBER SOFTWARE PRODUCTION ©2015", forState: .Normal)
+        creatorButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        creatorButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+        creatorButton.addTarget(self, action: "creatorButtonPressed:", forControlEvents: .TouchUpInside)
+        creatorView.addSubview(creatorButton)
+        
+    }
+    
+    func creatorLegalButtonPressed(sender:UIButton) {
+        
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Legal")
+        self.showViewController(vc as! UIViewController, sender: vc)
+        
+    }
+    
+    
+    func creatorButtonPressed(sender:UIButton) {
+        
+        
+        let logo = UIImageView(frame: CGRectMake((screenWidth/2) - 75, (screenHeight/2) - 75, 150, 150))
+        logo.contentMode = .ScaleAspectFill
+        logo.image = UIImage(named: "PanBerLogo1.png")
+        visualEffectView.addSubview(logo)
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            
+            visualEffectView.alpha = 1
+            visualEffectView.userInteractionEnabled = true
+
+            
+            }, completion: {finish in
+                
+                UIView.animateWithDuration(0.3, delay: 3, options: .CurveEaseInOut, animations: { () -> Void in
+                    
+                    visualEffectView.alpha = 0
+                    visualEffectView.userInteractionEnabled = false
+                    
+                    }, completion: { finish in
+                
+                        logo.removeFromSuperview()
+                        
+                })
+        
+        })
+       
         
         
     }

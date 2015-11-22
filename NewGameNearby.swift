@@ -29,7 +29,6 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
         tableView.backgroundColor = UIColor.clearColor()
         // Do any additional setup after loading the view.
         
-        getFriends()
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,8 +44,7 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
         let query1 = PFQuery(className:"_User")
         query1.whereKey("location", nearGeoPoint:location)
         query1.whereKey("request_everyone", equalTo: true)
-      //  query.limit = 10
-        //let placesObjects = query1.findObjects()
+        
         query1.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
                 if let result = result as! [PFObject]! {
@@ -57,7 +55,6 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
                         else {
                         self.userArray.append((result["username"] as? String)!)
                         }
-                       // self.imageDataArray.append((result["profile_picture"] as? NSData)!)
                         
                     }
                     self.tableView.reloadData()
@@ -118,6 +115,7 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
         let _user = userQuery.getFirstObject() as! PFUser
         
         cell.rating.text = String(_user["rating"] as! Int)
+        
         ratingArray.append(_user["rating"] as! Int)
         
         let profilePictureObject = _user["profile_picture"] as? PFFile
@@ -169,6 +167,8 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
     override func viewWillAppear(animated: Bool) {
         self.title = "Nearby"
         lightOrDarkMode()
+        getFriends()
+
     }
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
