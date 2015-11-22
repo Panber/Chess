@@ -592,12 +592,12 @@ class GameInterFace3: UIViewController {
                                 pieceOption.removeFromSuperview()
                             }
                         }
-                        if startLogicChecking == true && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false  {
+                        if startLogicChecking == true && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false {
                             pieceOption.removeFromSuperview()
                         } else {
                             pieceOptions += [pieceOption]
                         }
-                        if startLogicCheckingWhite == true && canSaveKing(pieceOption, array: pieceBlackCanMove) == false  {
+                        if startLogicCheckingWhite == true && canSaveKing(pieceOption, array: pieceBlackCanMove) == false {
                             pieceOption.removeFromSuperview()
                         } else {
                             pieceOptions += [pieceOption]
@@ -613,19 +613,15 @@ class GameInterFace3: UIViewController {
                 //								// Decides which squares the King can go to
                 if pieceid == 5 && selectedPiece == whiteKing {
                     for var p = 0 ; p < pieceOptions.count; p++ {
-                        for var o = 0 ; o < pieceBlackLogicOptions.count; o++ {
-                            if CGRectContainsPoint(pieceOptions[p].frame, pieceBlackLogicOptions[o].center){
+                            if canSaveKing(pieceOptions[p], array: pieceBlackLogicOptions) == true {
                                 pieceOptions[p].hidden = true
                             }
-                        }
                     }
                 } else if pieceid == 5 && selectedPiece == blackKing {
                     for var p = 0 ; p < pieceOptions.count; p++ {
-                        for var o = 0 ; o < pieceWhiteLogicOptions.count; o++ {
-                            if CGRectContainsPoint(pieceOptions[p].frame, pieceWhiteLogicOptions[o].center){
+                            if canSaveKing(pieceOptions[p], array: pieceWhiteLogicOptions) == true {
                                 pieceOptions[p].hidden = true
                             }
-                        }
                     }
                 }
                 
@@ -713,7 +709,7 @@ class GameInterFace3: UIViewController {
                 for byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
                     
                     for var q = 0; q < friend.count; q++ {
-                        if friend[q].frame.origin.x == piece.frame.origin.x + byAmountx * pieceSize && friend[q].frame.origin.y == piece.frame.origin.y - byAmounty * pieceSize{
+                        if friend[q].frame.origin.x == piece.frame.origin.x + byAmountx * pieceSize && friend[q].frame.origin.y == piece.frame.origin.y - byAmounty * pieceSize && canThePieceGofurther == true {
                             
                             // This pieceOption is for where the king can move when checked
                             let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
