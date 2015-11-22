@@ -941,7 +941,7 @@ class GameInterFace3: UIViewController {
                                 self.view.addSubview(pieceOption2)
                                 pieceBlackCanMove += [pieceOption2]
                             }
-                            if whiteKing.frame.origin.x == piece.frame.origin.x && pieceWhiteCanMove.count == 3   {
+                            if whiteKing.frame.origin.x == piece.frame.origin.x && pieceBlackCanMove.count == 3   {
                                 print("Vertically alligned")
                                 verticallyAlignedBlack = true
                             }
