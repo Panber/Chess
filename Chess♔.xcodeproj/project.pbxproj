@@ -128,6 +128,11 @@
 		8FA018DB1B9B2D8C002B410E /* DSCF0388.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FA018DA1B9B2D8C002B410E /* DSCF0388.jpg */; };
 		8FA569091C011D0300AFC460 /* map158-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569071C011D0200AFC460 /* map158-2.png */; };
 		8FA5690A1C011D0300AFC460 /* map158.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569081C011D0200AFC460 /* map158.png */; };
+		8FA5690C1C02775C00AFC460 /* TwitterLogo_#55acee.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5690B1C02775C00AFC460 /* TwitterLogo_#55acee.png */; };
+		8FA5690F1C02795100AFC460 /* new100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5690D1C02795100AFC460 /* new100.png */; };
+		8FA569101C02795100AFC460 /* new100-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5690E1C02795100AFC460 /* new100-2.png */; };
+		8FA569121C02829700AFC460 /* PanBerLogo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569111C02829700AFC460 /* PanBerLogo1.png */; };
+		8FA569141C0284AA00AFC460 /* Legal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA569131C0284AA00AFC460 /* Legal.swift */; };
 		8FA5C8911B9A264F0097637E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8901B9A264F0097637E /* AppDelegate.swift */; };
 		8FA5C8931B9A264F0097637E /* LoginMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8921B9A264F0097637E /* LoginMenu.swift */; };
 		8FA5C8981B9A264F0097637E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8971B9A264F0097637E /* Assets.xcassets */; };
@@ -308,6 +313,11 @@
 		8FA018DA1B9B2D8C002B410E /* DSCF0388.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DSCF0388.jpg; sourceTree = "<group>"; };
 		8FA569071C011D0200AFC460 /* map158-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map158-2.png"; sourceTree = "<group>"; };
 		8FA569081C011D0200AFC460 /* map158.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map158.png; sourceTree = "<group>"; };
+		8FA5690B1C02775C00AFC460 /* TwitterLogo_#55acee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TwitterLogo_#55acee.png"; sourceTree = "<group>"; };
+		8FA5690D1C02795100AFC460 /* new100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new100.png; sourceTree = "<group>"; };
+		8FA5690E1C02795100AFC460 /* new100-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new100-2.png"; sourceTree = "<group>"; };
+		8FA569111C02829700AFC460 /* PanBerLogo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PanBerLogo1.png; sourceTree = "<group>"; };
+		8FA569131C0284AA00AFC460 /* Legal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legal.swift; sourceTree = "<group>"; };
 		8FA5C88D1B9A264F0097637E /* Chess♔.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chess♔.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8901B9A264F0097637E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FA5C8921B9A264F0097637E /* LoginMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenu.swift; sourceTree = "<group>"; };
@@ -471,6 +481,7 @@
 				8FB94F981BE62EA80029EF00 /* chatIcon.png */,
 				8F1E8ED31BD8362A00C41D37 /* PanBerLogoDark2.png */,
 				8F1E8ED11BD833F100C41D37 /* PanBerLogoDark_4000.png */,
+				8FA569111C02829700AFC460 /* PanBerLogo1.png */,
 				8F1E8ECF1BD7F74500C41D37 /* profilePicPlaceholderDark.jpg */,
 				8F1E8EC11BD78EE900C41D37 /* mountain.jpg */,
 				8F1E8EC31BD78F9600C41D37 /* nasaearth.jpg */,
@@ -511,6 +522,9 @@
 				8FEF2ABC1BFD1AE7006E1359 /* dBlackBC.png */,
 				8FEF2AB61BFD17DB006E1359 /* grayBC.png */,
 				8F8639321B9B09F90055608B /* BlackBC.jpg */,
+				8FA5690B1C02775C00AFC460 /* TwitterLogo_#55acee.png */,
+				8FA5690D1C02795100AFC460 /* new100.png */,
+				8FA5690E1C02795100AFC460 /* new100-2.png */,
 				8FA018D81B9B1FAE002B410E /* ChessIconAndTExt.png */,
 				8FA1F7CD1B9AFCA800A0C548 /* Pieces */,
 			);
@@ -557,6 +571,7 @@
 				8F5250BF1BD01A66005D4682 /* LeaderBoard.swift */,
 				8F273CEF1BF28B7100275378 /* GameInvitesPage.swift */,
 				F1DECCAC1BE3FEA8009C08B4 /* Main.storyboard */,
+				8FA569131C0284AA00AFC460 /* Legal.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -802,6 +817,8 @@
 				8F1E8EC41BD78F9600C41D37 /* nasaearth.jpg in Resources */,
 				8F14D19C1B9C918700A58CCF /* 9.png in Resources */,
 				8F14D1971B9C918700A58CCF /* 14.jpg in Resources */,
+				8FA569121C02829700AFC460 /* PanBerLogo1.png in Resources */,
+				8FA5690C1C02775C00AFC460 /* TwitterLogo_#55acee.png in Resources */,
 				8FEF2A9A1BFA7C8A006E1359 /* blackChessBoard.png in Resources */,
 				8F1E8ED01BD7F74500C41D37 /* profilePicPlaceholderDark.jpg in Resources */,
 				8F1E8ED41BD8362A00C41D37 /* PanBerLogoDark2.png in Resources */,
@@ -813,12 +830,14 @@
 				8FA018DB1B9B2D8C002B410E /* DSCF0388.jpg in Resources */,
 				8F14D1961B9C918700A58CCF /* 15.jpg in Resources */,
 				8F31DCE51BC716F9004544CC /* add.png in Resources */,
+				8FA569101C02795100AFC460 /* new100-2.png in Resources */,
 				8FA5690A1C011D0300AFC460 /* map158.png in Resources */,
 				8F1E8ECE1BD7F66C00C41D37 /* profilePicPlaceholder.jpg in Resources */,
 				8F4A027B1B9A3EE80084024A /* blackKing.png in Resources */,
 				8FA5C8981B9A264F0097637E /* Assets.xcassets in Resources */,
 				8F8BD2BB1BC6D83F00B25CFE /* close.png in Resources */,
 				8F273CF61BF29E4300275378 /* flash31.png in Resources */,
+				8FA5690F1C02795100AFC460 /* new100.png in Resources */,
 				8F8639331B9B09F90055608B /* BlackBC.jpg in Resources */,
 				8F2DD6E81B9AFFF80059CEFA /* settingsTabBarIcon@3x.png in Resources */,
 				8F14D1981B9C918700A58CCF /* 13.jpg in Resources */,
@@ -955,6 +974,7 @@
 				8F62C6861C00977A00312A58 /* NewGameSettingsPage_Analyze.swift in Sources */,
 				F1B414601BC72E5D00FEE6A4 /* SettingsPage.swift in Sources */,
 				8F840BCC1BBDAE6600511F44 /* FriendRequests.swift in Sources */,
+				8FA569141C0284AA00AFC460 /* Legal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

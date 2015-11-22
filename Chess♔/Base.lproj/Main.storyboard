@@ -1955,6 +1955,41 @@
             </objects>
             <point key="canvasLocation" x="6393" y="1853"/>
         </scene>
+        <!--Legal-->
+        <scene sceneID="20g-f9-4HD">
+            <objects>
+                <viewController storyboardIdentifier="Legal" title="Legal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="K6T-Tc-mxe" customClass="Legal" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s1z-xK-xOh"/>
+                        <viewControllerLayoutGuide type="bottom" id="0eo-fa-wS3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dzB-qB-EMx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPA-KG-VdG">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                            </scrollView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="QPA-KG-VdG" secondAttribute="trailing" id="0Jz-9T-cqn"/>
+                            <constraint firstItem="QPA-KG-VdG" firstAttribute="bottom" secondItem="0eo-fa-wS3" secondAttribute="top" id="5xp-g9-tAU"/>
+                            <constraint firstItem="QPA-KG-VdG" firstAttribute="leading" secondItem="dzB-qB-EMx" secondAttribute="leading" id="j3l-Gl-Lra"/>
+                            <constraint firstItem="QPA-KG-VdG" firstAttribute="top" secondItem="dzB-qB-EMx" secondAttribute="top" id="tVh-4s-eim"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Legal" id="nAY-Sq-nmp"/>
+                    <connections>
+                        <outlet property="scrollView" destination="QPA-KG-VdG" id="Qkx-vw-MiX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R2Y-53-qel" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7866" y="1853"/>
+        </scene>
         <!--Profile-->
         <scene sceneID="XVM-Bc-UrF">
             <objects>
@@ -2593,6 +2628,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Plg-IJ-tGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4682" y="1045"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="449-mB-HYT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NTV-i5-220" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="REZ-tM-oxT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="K6T-Tc-mxe" kind="relationship" relationship="rootViewController" id="bsG-wW-uZ0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OvJ-cU-fQV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7054" y="1853"/>
         </scene>
     </scenes>
     <resources>
