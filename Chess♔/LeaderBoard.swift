@@ -145,9 +145,7 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         let cell:UserTableViewCell4 = self.tableView.dequeueReusableCellWithIdentifier("cell4", forIndexPath: indexPath) as! UserTableViewCell4
 
         
-        cell.username.text = userArray[indexPath.row]
-        let r = ratingArray[indexPath.row]
-        cell.rating.text = "\(r)"
+
 
         if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "world" {
 
