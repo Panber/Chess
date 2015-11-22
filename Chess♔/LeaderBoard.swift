@@ -63,7 +63,7 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "friends" {
         
             let friendsquery = PFQuery(className: "Friends")
-            friendsquery.whereKey("username", equalTo:(PFUser.currentUser()?.username)!)
+            friendsquery.whereKey("username", equalTo:PFUser.currentUser()!.username!)
             friendsquery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
                 if error == nil {
                     if let result = result as! [PFObject]! {
@@ -151,6 +151,9 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
 
         if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "world" {
 
+            cell.username.text = userArray[indexPath.row]
+            let r = ratingArray[indexPath.row]
+            cell.rating.text = "\(r)"
         
         if let userPicture = USER[indexPath.row]["profile_picture"] as? PFFile {
             
@@ -170,6 +173,9 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         
         if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "nearby" {
             
+            cell.username.text = userArray[indexPath.row]
+            let r = ratingArray[indexPath.row]
+            cell.rating.text = "\(r)"
             
             if let userPicture = USER[indexPath.row]["profile_picture"] as? PFFile {
                 
@@ -197,6 +203,10 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
                     for result in result {
                         
                         self.ratingArray.append(result["rating"] as! Int)
+                        
+                        cell.username.text = self.userArray[indexPath.row]
+                        let r = self.ratingArray[indexPath.row]
+                        cell.rating.text = "\(r)"
                         
                         self.USER.append(result)
                         
