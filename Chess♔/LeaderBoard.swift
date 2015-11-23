@@ -34,6 +34,8 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     
         if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "world" {
         
+            self.title = "World"
+            
             let query = PFQuery(className: "_User")
             query.limit = 10
             query.orderByDescending("rating")
@@ -61,12 +63,14 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         }
     
         if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "friends" {
-        
+            self.title = "Friends"
+
+            
             let friendsquery = PFQuery(className: "Friends")
             friendsquery.whereKey("username", equalTo:PFUser.currentUser()!.username!)
             friendsquery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
                 if error == nil {
-                    if let result = result as! [PFObject]! {
+                    if let result = result as? [PFObject] {
                         for result in result {
                             self.userArray = result["friends"] as! Array<String>
                         
@@ -84,6 +88,9 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         
         if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "nearby" {
         
+            self.title = "Nearby"
+
+            
             let query = PFQuery(className: "_User")
             query.limit = 10
             query.orderByDescending("rating")
@@ -199,16 +206,17 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
             if error ==  nil {
                 if let result = result as? [PFUser] {
                     for result in result {
-                        
+     
                         self.ratingArray.append(result["rating"] as! Int)
                         
-                        cell.username.text = self.userArray[indexPath.row]
-                        let r = self.ratingArray[indexPath.row]
+                            cell.username.text = result["username"] as? String
+                        
+                            let r = result["rating"] as! Int
                         cell.rating.text = "\(r)"
                         
                         self.USER.append(result)
                         
-                        if let userPicture = self.USER[indexPath.row]["profile_picture"] as? PFFile {
+                        if let userPicture = result["profile_picture"] as? PFFile {
                             
                             userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                 if (error == nil) {
