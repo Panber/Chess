@@ -922,7 +922,7 @@ class GameInterFace3: UIViewController {
                         if canGoFurtherBlack == true && enemy == whitePieces {
                             
                             let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
-                            //pieceOption.image = UIImage(named: "piecePossibilities.png")
+                            pieceOption.image = UIImage(named: "piecePossibilities.png")
                             if canSaveKing(pieceOption, array: pieceBlackCanMove) {
                                 pieceOption.removeFromSuperview()
                             } else {
@@ -930,7 +930,7 @@ class GameInterFace3: UIViewController {
                                 pieceBlackCanMove += [pieceOption]
                             }
                             let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
-                            //pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                            pieceOption2.image = UIImage(named: "piecePossibilities.png")
                             if canSaveKing(pieceOption2, array: pieceBlackCanMove) {
                                 pieceOption2.removeFromSuperview()
                             } else {
@@ -1372,6 +1372,49 @@ class GameInterFace3: UIViewController {
             }
         }
         }
+        for var p = 0; p < blackBishops.count; p++ {
+            for var i = 0; i < array.count; i++ {
+                if CGRectContainsPoint(blackBishops[p].frame, array[i].center) {
+                    count = 3
+                }
+            }
+        }
+        for var p = 0; p < whiteBishops.count; p++ {
+            for var i = 0; i < array.count; i++ {
+                if CGRectContainsPoint(whiteBishops[p].frame, array[i].center) {
+                    count = 3
+                }
+            }
+        }
+        for var p = 0; p < whiteQueens.count; p++ {
+            for var i = 0; i < array.count; i++ {
+                if CGRectContainsPoint(whiteQueens[p].frame, array[i].center) {
+                    count = 3
+                }
+            }
+        }
+        for var p = 0; p < blackQueens.count; p++ {
+            for var i = 0; i < array.count; i++ {
+                if CGRectContainsPoint(blackQueens[p].frame, array[i].center) {
+                    count = 3
+                }
+            }
+        }
+        for var p = 0; p < blackRooks.count; p++ {
+            for var i = 0; i < array.count; i++ {
+                if CGRectContainsPoint(blackRooks[p].frame, array[i].center) {
+                    count = 3
+                }
+            }
+        }
+        for var p = 0; p < whiteRooks.count; p++ {
+            for var i = 0; i < array.count; i++ {
+                if CGRectContainsPoint(whiteRooks[p].frame, array[i].center) {
+                    count = 3
+                }
+            }
+        }
+        print(count)
         return count
     }
     
