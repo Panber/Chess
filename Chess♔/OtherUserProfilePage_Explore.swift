@@ -675,6 +675,18 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
                 print("request was saved in background")
                 self.t = 0
                 
+                
+                // Create our Installation query
+                let pushQuery = PFInstallation.query()
+                pushQuery!.whereKey("username", equalTo: NSUserDefaults.standardUserDefaults().objectForKey("other_username")!)
+                
+                // Send push notification to query
+                let push = PFPush()
+                push.setQuery(pushQuery) // Set our Installation query
+                push.setMessage("You have a friend request from \(PFUser.currentUser()!.username!)")
+                push.sendPushInBackground()
+                
+                
             }
             else {
                 self.friendRequestButton.userInteractionEnabled = true
