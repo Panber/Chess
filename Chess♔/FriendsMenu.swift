@@ -13,6 +13,20 @@ import MessageUI
 let usersObject = PFObject(className: "_User")
 
 
+
+var featuredViewText = UILabel()
+var featuredUsername = UILabel()
+var featuredRating = UILabel()
+
+var topText = UILabel()
+var topWorldImage = UIImageView()
+var topFriendsImage = UIImageView()
+var topNearbyImage = UIImageView()
+
+
+var contactMailImage = UIImageView()
+var contactText = UILabel()
+
 class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDelegate, UIScrollViewDelegate,MFMailComposeViewControllerDelegate{
     
     // Array for users that are being searched for
@@ -102,10 +116,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         featuredView.userInteractionEnabled = true
         scrollView.addSubview(featuredView)
     
-        let featuredViewText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
+        featuredViewText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
         featuredViewText.font = UIFont(name: "Didot", size: 25)
         featuredViewText.text = "FEATURED"
-        featuredViewText.textColor = UIColor.darkGrayColor()
+        if darkMode {featuredViewText.textColor = UIColor.lightGrayColor()}
+        else {featuredViewText.textColor = UIColor.darkGrayColor()}
         featuredViewText.textAlignment = .Center
         featuredView.addSubview(featuredViewText)
         
@@ -126,14 +141,14 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         featuredProfilePicView.contentMode = .ScaleAspectFill
         _scrollView.addSubview(featuredProfilePicView)
         
-        let featuredUsername = UILabel(frame: CGRectMake(featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25,featuredProfilePicView.frame.origin.y + 16,screenWidth - (featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25),21))
+        featuredUsername = UILabel(frame: CGRectMake(featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25,featuredProfilePicView.frame.origin.y + 16,screenWidth - (featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25),21))
         featuredUsername.font = UIFont(name: "Didot", size: 22)
         featuredUsername.text = "mufcjb"
         featuredUsername.textAlignment = .Left
         featuredUsername.alpha = 0
         _scrollView.addSubview(featuredUsername)
         
-        let featuredRating = UILabel(frame: CGRectMake(featuredUsername.frame.origin.x,featuredUsername.frame.origin.y + featuredUsername.frame.size.height,screenWidth - (featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25),21))
+        featuredRating = UILabel(frame: CGRectMake(featuredUsername.frame.origin.x,featuredUsername.frame.origin.y + featuredUsername.frame.size.height,screenWidth - (featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25),21))
         featuredRating.font = UIFont(name: "Didot-Italic", size: 15)
         featuredRating.textColor = UIColor.darkGrayColor()
         featuredRating.alpha = 0
@@ -224,14 +239,15 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         topView.userInteractionEnabled = true
         scrollView.addSubview(topView)
         
-        let topText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
+        topText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
         topText.font = UIFont(name: "Didot", size: 22)
         topText.text = "Top"
-        topText.textColor = UIColor.darkGrayColor()
+        if darkMode {topText.textColor = UIColor.lightGrayColor()}
+        else {topText.textColor = UIColor.darkGrayColor()}
         topText.textAlignment = .Center
         topView.addSubview(topText)
         
-        let topWorldImage = UIImageView(frame: CGRectMake((screenWidth / 2) - (screenWidth/4)-25,100,50,50))
+        topWorldImage = UIImageView(frame: CGRectMake((screenWidth / 2) - (screenWidth/4)-25,100,50,50))
         if darkMode {topWorldImage.image = UIImage(named:"map158-2.png")}
         else{topWorldImage.image = UIImage(named:"map158.png")}
         topWorldImage.contentMode = .ScaleAspectFill
@@ -250,7 +266,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         topWorldButton.addTarget(self, action: "topWorldButtonPressed:", forControlEvents: .TouchUpInside)
         topView.addSubview(topWorldButton)
         
-        let topFriendsImage = UIImageView(frame: CGRectMake((screenWidth / 2) + (screenWidth/4)-25,100,50,50))
+        topFriendsImage = UIImageView(frame: CGRectMake((screenWidth / 2) + (screenWidth/4)-25,100,50,50))
         if darkMode {topFriendsImage.image = UIImage(named:"group4.png")}
         else {topFriendsImage.image = UIImage(named:"group4-2.png")}
         topFriendsImage.contentMode = .ScaleAspectFill
@@ -269,7 +285,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         topFriendsButton.addTarget(self, action: "topFriendsButtonPressed:", forControlEvents: .TouchUpInside)
         topView.addSubview(topFriendsButton)
         
-        let topNearbyImage = UIImageView(frame: CGRectMake((screenWidth / 2)-25,  210 + 30,50,50))
+        topNearbyImage = UIImageView(frame: CGRectMake((screenWidth / 2)-25,  210 + 30,50,50))
         if darkMode {topNearbyImage.image = UIImage(named:"map-pointer7-2.png")}
         else {topNearbyImage.image = UIImage(named:"map-pointer7.png")}
         topNearbyImage.contentMode = .ScaleAspectFill
@@ -331,10 +347,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         contactView.userInteractionEnabled = true
         scrollView.addSubview(contactView)
         
-        let contactText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
+        contactText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
         contactText.font = UIFont(name: "Didot", size: 22)
         contactText.text = "Contact us"
-        contactText.textColor = UIColor.darkGrayColor()
+        if darkMode {contactText.textColor = UIColor.lightGrayColor()}
+        else {contactText.textColor = UIColor.darkGrayColor()}
         contactText.textAlignment = .Center
         contactView.addSubview(contactText)
         
@@ -357,7 +374,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         contactTwitterButton.addTarget(self, action: "contactTwitterButtonPressed:", forControlEvents: .TouchUpInside)
         contactView.addSubview(contactTwitterButton)
         
-        let contactMailImage = UIImageView(frame: CGRectMake((screenWidth / 2) + (screenWidth/4)-25,100,50,50))
+        contactMailImage = UIImageView(frame: CGRectMake((screenWidth / 2) + (screenWidth/4)-25,100,50,50))
         if darkMode {contactMailImage.image = UIImage(named:"new100.png")}
         else {contactMailImage.image = UIImage(named:"new100-2.png")}
         contactMailImage.contentMode = .ScaleAspectFill
@@ -717,27 +734,68 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.translucent = false
+            
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
             self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.scrollView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.tintColor = blue
+
             
             
+            
+            featuredViewText.textColor = UIColor.lightGrayColor()
+            featuredUsername.textColor = UIColor.whiteColor()
+            featuredRating.textColor = UIColor.lightGrayColor()
+
+            topText.textColor = UIColor.lightGrayColor()
+            topWorldImage.image = UIImage(named:"map158-2.png")
+            topFriendsImage.image = UIImage(named:"group4.png")
+            topNearbyImage.image = UIImage(named:"map-pointer7-2.png")
+            
+            contactMailImage.image = UIImage(named:"new100.png")
+            contactText.textColor = UIColor.lightGrayColor()
+
+            searchBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            searchBar.tintColor = UIColor.whiteColor()
+
             
         }
         else if darkMode == false {
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
             self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-     //       self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             self.view.backgroundColor = UIColor.whiteColor()
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
+
             
+            self.scrollView.backgroundColor = UIColor.whiteColor()
+
+            
+            featuredViewText.textColor = UIColor.darkGrayColor()
+            featuredUsername.textColor = UIColor.blackColor()
+            featuredRating.textColor = UIColor.darkGrayColor()
+            
+            topText.textColor = UIColor.darkGrayColor()
+            topWorldImage.image = UIImage(named:"map158.png")
+            topFriendsImage.image = UIImage(named:"group4-2.png")
+            topNearbyImage.image = UIImage(named:"map-pointer7.png")
+            
+            contactMailImage.image = UIImage(named:"new100-2.png")
+            contactText.textColor = UIColor.darkGrayColor()
+            
+            searchBar.barStyle = UIBarStyle.Default
+
+            searchBar.barTintColor = UIColor.whiteColor()
+            searchBar.tintColor = blue
             
         }
         

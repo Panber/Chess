@@ -549,7 +549,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         cell.username.textColor = UIColor.whiteColor()
         
         }
-        else {cell.backgroundColor = UIColor.whiteColor()}
+        else {cell.backgroundColor = UIColor.whiteColor()
+        
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            cell.rating.textColor = UIColor.darkGrayColor()
+            cell.username.textColor = UIColor.blackColor()
+
+
+        }
        // cell.userProfileImage.image = nil
         cell.username.text = ""
         
@@ -582,6 +589,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                                     
                                     UIView.animateWithDuration(0.3, animations: { () -> Void in
                                         cell.userProfileImage.alpha = 1
+
 
                                     })
                        
@@ -932,7 +940,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         //friends
         let friendsImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 85,100,50,50))
-        friendsImage.image = UIImage(named:"group4-2.png")
+        if darkMode {friendsImage.image = UIImage(named:"group4.png")}
+        else {friendsImage.image = UIImage(named:"group4-2.png")}
         friendsImage.contentMode = .ScaleAspectFill
         friendsImage.alpha = 0.7
         visualEffectSub.addSubview(friendsImage)
@@ -953,7 +962,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         //random
         let randomImage = UIImageView(frame: CGRectMake((screenWidth / 2) + 35,100,50,50))
-        randomImage.image = UIImage(named:"multimedia option23.png")
+        if darkMode {randomImage.image = UIImage(named:"multimedia option23-2.png")}
+        else {randomImage.image = UIImage(named:"multimedia option23.png")}
         randomImage.contentMode = .ScaleAspectFill
         randomImage.alpha = 0.7
         visualEffectSub.addSubview(randomImage)
@@ -973,7 +983,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         //username
         let usernameImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 85,100 + 140,50,50))
-        usernameImage.image = UIImage(named:"search74-2.png")
+        if darkMode {usernameImage.image = UIImage(named:"search74.png")}
+        else {usernameImage.image = UIImage(named:"search74-2.png")}
         usernameImage.contentMode = .ScaleAspectFill
         usernameImage.alpha = 0.7
         visualEffectSub.addSubview(usernameImage)
@@ -992,7 +1003,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         //rating
         let ratingImage = UIImageView(frame: CGRectMake((screenWidth / 2) + 35,100 + 140,50,50))
-        ratingImage.image = UIImage(named:"search74-2.png")
+        if darkMode {ratingImage.image = UIImage(named:"search74.png")}
+        else {ratingImage.image = UIImage(named:"search74-2.png")}
         ratingImage.contentMode = .ScaleAspectFill
         ratingImage.alpha = 0.7
         visualEffectSub.addSubview(ratingImage)
@@ -1012,7 +1024,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         //location
         let locationImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 25,100 + 140 + 140,50,50))
-        locationImage.image = UIImage(named:"map-pointer7.png")
+        if darkMode {locationImage.image = UIImage(named:"map-pointer7-2.png")}
+        else{locationImage.image = UIImage(named:"map-pointer7.png")}
         locationImage.contentMode = .ScaleAspectFill
         locationImage.alpha = 0.7
         visualEffectSub.addSubview(locationImage)
@@ -1172,32 +1185,30 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
 
                 self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-            self.navigationController?.navigationBar.translucent = false
+                self.navigationController?.navigationBar.translucent = false
 
-            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
-                self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
+                self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
                 self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
                 self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
                 self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-                self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
+                self.tabBarController?.tabBar.tintColor = blue
                 self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
-            self.navigationController?.navigationBar.tintColor = blue
-            self.newButtonOutlet.tintColor = blue
-
-            //    self.editButtonOutlet.tintColor = UIColor.whiteColor()
-//            
-//            //setting top logo
-//            logo = UIImage(named: "ChessIconSmallTextAndLogoDarkMode.png")
-//            logoView = UIImageView(image:logo)
-//            logoView.contentMode = UIViewContentMode.ScaleAspectFit
-//            logoView.frame.size.height = 50
-//            self.navigationItem.titleView = logoView
+                self.navigationController?.navigationBar.tintColor = blue
             
-            tableView.backgroundColor = UIColor.clearColor()
-            visualEffectView.effect = UIBlurEffect(style: .Dark)
+            
+            
+                    self.newButtonOutlet.tintColor = blue
+            
+            
+            
 
-            blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
+
+            
+                tableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+                visualEffectView.effect = UIBlurEffect(style: .Dark)
+
+                blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
 
             
         }
@@ -1209,23 +1220,17 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
                 self.tabBarController?.tabBar.tintColor = blue
                 self.navigationController?.navigationBar.tintColor = blue
+                self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
+
                 self.newButtonOutlet.tintColor = blue
-           //     self.editButtonOutlet.tintColor = blue
-            
-//            //setting top logo
-//            logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
-//            logoView = UIImageView(image:logo)
-//            logoView.contentMode = UIViewContentMode.ScaleAspectFit
-//            logoView.frame.size.height = 50
-//            self.navigationItem.titleView = logoView
-//            
+           
 
   
-             visualEffectView.effect = UIBlurEffect(style: .Light)
+                visualEffectView.effect = UIBlurEffect(style: .Light)
             
-            tableView.backgroundColor = UIColor.whiteColor()
+                tableView.backgroundColor = UIColor.whiteColor()
 
-            blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
+                blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
 
             
         }
