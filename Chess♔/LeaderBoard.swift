@@ -23,9 +23,10 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     
     var found = false
     
+    
+    
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
-        findUsers()
         
     }
     
@@ -124,6 +125,7 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        findUsers()
 
         
         let tblView =  UIView(frame: CGRectZero)
@@ -243,53 +245,19 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         })
         
         }
-        
-//            let query = PFQuery(className: "_User")
-//            let usernamee = NSUserDefaults.standardUserDefaults().objectForKey("userArray") as! NSMutableArray
-//
-//            query.whereKey("username", equalTo: usernamee[indexPath.row] as! String)
-//            query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
-//                if (error == nil) {
-//                    
-//                    if let userArray = objects as? [PFUser] {
-//                        for user in userArray {
-//                            if let userPicture = user["profile_picture"] as? PFFile {
-//                                
-//                                userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-//                                    if (error == nil) {
-//                                        
-//                                    cell.userProfileImage.image = UIImage(data: imageData!)
-//                                    //self.imageDataArray.append(imageData!)
-//                                        self.imageDataDict[indexPath.row] = imageData!
-//                                        self.imageDataArray.addObject(imageData!)
-//                                        
-//
-//                                    } else {
-//                                    }
-//                                }
-//                                
-//                            }
-//                        }
-//                        
-//                    }
-//                } else {
-//                    // Log details of the failure
-//                    print("query error: \(error) \(error!.userInfo)")
-//                }
-//                
-//            }
-//        
-//  
-//        //rating
-//        let rating = NSUserDefaults.standardUserDefaults().objectForKey("ratingArray") as! NSMutableArray
-//        cell.rating.text = "\(rating[indexPath.row] as! Int)"
-        
+   
         //position
         cell.position.text = "\(indexPath.row + 1)" + "."
         
         if cell.username.text == userArray.last {
             cell.separatorInset = UIEdgeInsetsZero
             cell.layoutMargins = UIEdgeInsetsZero
+        }
+
+        if cell.username.text == PFUser.currentUser()?.username {
+            cell.accessoryType = .None
+            cell.userInteractionEnabled = false
+        
         }
         
         return cell
@@ -298,23 +266,14 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let cell:UserTableViewCell4 = self.tableView.dequeueReusableCellWithIdentifier("cell4") as! UserTableViewCell4
+
         
-        //username
-        var userName = NSUserDefaults.standardUserDefaults().objectForKey("userArray") as! Array<String>
-        
-        NSUserDefaults.standardUserDefaults().setObject(userName[indexPath.row], forKey: "other_username")
-        cell.username.text = userName[indexPath.row]
-        
-        //image
-        
-//        
-//        let image = cell.userProfileImage.image
-//        let imageData: NSData = UIImageJPEGRepresentation(image!, 1.0)!
-        let data = imageDataDict[indexPath.row]!
+        NSUserDefaults.standardUserDefaults().setObject(userArray[indexPath.row], forKey: "other_username")
+        cell.username.text = userArray[indexPath.row]
+
+        let data = profilePicArray[indexPath.row]
         
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: "other_userImage")
-        
-        //cell.userProfileImage.image = UIImage(data: imageDataArray[indexPath.row])
         
         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
         self.showViewController(vc as! UIViewController, sender: vc)

@@ -393,7 +393,7 @@
                                                         </label>
                                                     </subviews>
                                                     <animations/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="sFN-ie-KUw" firstAttribute="top" secondItem="jTn-pO-yqy" secondAttribute="top" constant="29" id="0ul-7d-4Bb"/>
                                                         <constraint firstItem="ZAp-lF-oxW" firstAttribute="baseline" secondItem="NJf-pv-LyL" secondAttribute="baseline" id="3Zg-g0-Z5y"/>
@@ -441,7 +441,7 @@
                                                 </imageView>
                                             </subviews>
                                             <animations/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="KAg-E5-bTk" secondAttribute="bottom" constant="62" id="ADQ-hl-KGo"/>
                                                 <constraint firstItem="jTn-pO-yqy" firstAttribute="leading" secondItem="19O-tq-CSU" secondAttribute="leading" id="CST-0o-lR7"/>

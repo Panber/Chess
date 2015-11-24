@@ -34,6 +34,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     var top10FriendsArrayImage: Array<NSData> = []
     var top10FriendsUserImage = NSData()
 
+    var userNameFromFeatured = String()
+    var ratingFromFeatured = Int()
+    var imageFromFeatured = NSData()
+
+    
     
     var featuredView = UIView()
     
@@ -70,34 +75,19 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         
         scrollView.scrollEnabled = true
-        scrollView.contentSize = CGSizeMake(screenWidth, 1000)
+        scrollView.contentSize = CGSizeMake(screenWidth, 910)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = true
         scrollView.delegate = self
-        scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+        
+        if darkMode {scrollView.backgroundColor = UIColor.clearColor()}
+        else{scrollView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)}
         
         addFeatured()
         addTop()
         addContact()
         addCreatorAndLegal()
         
-//        addTop10World()
-//        
-//        
-//        let findFriends = PFQuery(className:"Friends")
-//        findFriends.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
-//        
-//        findFriends.findObjectsInBackgroundWithBlock { (friends:[AnyObject]?, error:NSError?) -> Void in
-//            if error == nil {
-//                if let friends = friends as! [PFObject]! {
-//                for friends in friends {
-//                    self.friendsArray = friends["friends"] as! Array<String>
-//                }
-//                print(self.friendsArray)
-//                self.addTop10Friends()
-//                }
-//            }
-//        }
         
     }
     
@@ -117,28 +107,37 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         featuredViewText.text = "FEATURED"
         featuredViewText.textColor = UIColor.darkGrayColor()
         featuredViewText.textAlignment = .Center
-        scrollView.backgroundColor = UIColor.whiteColor()
         featuredView.addSubview(featuredViewText)
+        
+        
+        let _scrollView = UIScrollView(frame: CGRectMake(0,0,screenWidth,200))
+        _scrollView.delegate = self
+        _scrollView.userInteractionEnabled = true
+        _scrollView.scrollEnabled = true
+        _scrollView.pagingEnabled = true
+        _scrollView.contentSize = CGSizeMake(screenWidth, 200)
+        featuredView.addSubview(_scrollView)
+        
         
         let featuredProfilePicView = UIImageView(frame: CGRectMake(screenWidth/2 - 90, 85, 65, 65))
         featuredProfilePicView.layer.cornerRadius = featuredProfilePicView.frame.size.width/2
         featuredProfilePicView.clipsToBounds = true
         featuredProfilePicView.alpha = 0
         featuredProfilePicView.contentMode = .ScaleAspectFill
-        featuredView.addSubview(featuredProfilePicView)
+        _scrollView.addSubview(featuredProfilePicView)
         
         let featuredUsername = UILabel(frame: CGRectMake(featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25,featuredProfilePicView.frame.origin.y + 16,screenWidth - (featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25),21))
         featuredUsername.font = UIFont(name: "Didot", size: 22)
         featuredUsername.text = "mufcjb"
         featuredUsername.textAlignment = .Left
         featuredUsername.alpha = 0
-        featuredView.addSubview(featuredUsername)
+        _scrollView.addSubview(featuredUsername)
         
         let featuredRating = UILabel(frame: CGRectMake(featuredUsername.frame.origin.x,featuredUsername.frame.origin.y + featuredUsername.frame.size.height,screenWidth - (featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25),21))
         featuredRating.font = UIFont(name: "Didot-Italic", size: 15)
         featuredRating.textColor = UIColor.darkGrayColor()
         featuredRating.alpha = 0
-        featuredView.addSubview(featuredRating)
+        _scrollView.addSubview(featuredRating)
         
         let featuredSeperator = UILabel(frame: CGRectMake(0,featuredView.frame.origin.y + featuredView.frame.size.height - 1,screenWidth,0.2))
         featuredSeperator.backgroundColor = UIColor.lightGrayColor()
@@ -162,6 +161,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                     featuredRating.text = "\(r)"
                                     featuredUsername.text = result["username"] as? String
                                     
+                                    self.userNameFromFeatured = (result["username"] as? String)!
+                                    self.ratingFromFeatured = result["rating"] as! Int
+                                    self.imageFromFeatured = imageData!
+                                    
                                     UIView.animateWithDuration(0.3, animations: { () -> Void in
                                         featuredProfilePicView.alpha = 1
                                         featuredUsername.alpha = 1
@@ -184,7 +187,34 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             
         }
         
+        let featuredButton1 = UIButton(frame: CGRectMake(0,0,screenWidth,200))
+        featuredButton1.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        featuredButton1.clipsToBounds = true
+        featuredButton1.addTarget(self, action: "featuredButton1Pressed:", forControlEvents: .TouchUpInside)
+        _scrollView.addSubview(featuredButton1)
         
+    }
+    
+    func featuredButton1Pressed(sender:UIButton) {
+    
+        if userNameFromFeatured == PFUser.currentUser()?.username {
+        
+        
+        
+        }
+        else {
+        
+        NSUserDefaults.standardUserDefaults().setObject(userNameFromFeatured, forKey: "other_username")
+        
+        let data = imageFromFeatured
+        
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "other_userImage")
+        
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
+        self.showViewController(vc as! UIViewController, sender: vc)
+    
+        }
+            
     }
     
     
@@ -202,7 +232,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         topView.addSubview(topText)
         
         let topWorldImage = UIImageView(frame: CGRectMake((screenWidth / 2) - (screenWidth/4)-25,100,50,50))
-        topWorldImage.image = UIImage(named:"map158.png")
+        if darkMode {topWorldImage.image = UIImage(named:"map158-2.png")}
+        else{topWorldImage.image = UIImage(named:"map158.png")}
         topWorldImage.contentMode = .ScaleAspectFill
         topWorldImage.alpha = 0.7
         topView.addSubview(topWorldImage)
@@ -220,7 +251,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         topView.addSubview(topWorldButton)
         
         let topFriendsImage = UIImageView(frame: CGRectMake((screenWidth / 2) + (screenWidth/4)-25,100,50,50))
-        topFriendsImage.image = UIImage(named:"group4-2.png")
+        if darkMode {topFriendsImage.image = UIImage(named:"group4.png")}
+        else {topFriendsImage.image = UIImage(named:"group4-2.png")}
         topFriendsImage.contentMode = .ScaleAspectFill
         topFriendsImage.alpha = 0.7
         topView.addSubview(topFriendsImage)
@@ -238,7 +270,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         topView.addSubview(topFriendsButton)
         
         let topNearbyImage = UIImageView(frame: CGRectMake((screenWidth / 2)-25,  210 + 30,50,50))
-        topNearbyImage.image = UIImage(named:"map-pointer7.png")
+        if darkMode {topNearbyImage.image = UIImage(named:"map-pointer7-2.png")}
+        else {topNearbyImage.image = UIImage(named:"map-pointer7.png")}
         topNearbyImage.contentMode = .ScaleAspectFill
         topNearbyImage.alpha = 0.7
         topView.addSubview(topNearbyImage)
@@ -385,7 +418,16 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         creatorView.userInteractionEnabled = true
         scrollView.addSubview(creatorView)
         
-        let creatorLegalButton = UIButton(frame: CGRectMake(0,10,screenWidth,50))
+        
+        let creatorButton = UIButton(frame: CGRectMake(0,10,screenWidth,50))
+        creatorButton.titleLabel!.font = UIFont(name: "Didot", size: 15)
+        creatorButton.setTitle("A PANBER SOFTWARE PRODUCTION ©2015", forState: .Normal)
+        creatorButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        creatorButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+        creatorButton.addTarget(self, action: "creatorButtonPressed:", forControlEvents: .TouchUpInside)
+        creatorView.addSubview(creatorButton)
+        
+        let creatorLegalButton = UIButton(frame: CGRectMake(0,60,screenWidth,50))
         creatorLegalButton.titleLabel!.font = UIFont(name: "Didot", size: 15)
         creatorLegalButton.setTitle("Legal", forState: .Normal)
         creatorLegalButton.setTitleColor(blue, forState: .Normal)
@@ -393,13 +435,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         creatorLegalButton.addTarget(self, action: "creatorLegalButtonPressed:", forControlEvents: .TouchUpInside)
         creatorView.addSubview(creatorLegalButton)
         
-        let creatorButton = UIButton(frame: CGRectMake(0,60,screenWidth,50))
-        creatorButton.titleLabel!.font = UIFont(name: "Didot", size: 15)
-        creatorButton.setTitle("A PANBER SOFTWARE PRODUCTION ©2015", forState: .Normal)
-        creatorButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        creatorButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
-        creatorButton.addTarget(self, action: "creatorButtonPressed:", forControlEvents: .TouchUpInside)
-        creatorView.addSubview(creatorButton)
+
         
     }
     
@@ -430,10 +466,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 UIView.animateWithDuration(0.3, delay: 3, options: .CurveEaseInOut, animations: { () -> Void in
                     
                     visualEffectView.alpha = 0
-                    visualEffectView.userInteractionEnabled = false
                     
                     }, completion: { finish in
-                
+                        
+                        visualEffectView.userInteractionEnabled = false
                         logo.removeFromSuperview()
                         
                 })
@@ -449,78 +485,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         let yPos = -scrollView.contentOffset.y
         
         if yPos > 0 {
-            
-       //     blurBC1.frame.origin.y = scrollView.contentOffset.y
 
-            
-        }
-        
-//        if yPos < 64 {
-//            
-// 
-//           
-//        }
-//        
-//        if yPos < 64 - blurBC1.frame.size.height {
-//            
-//            blurBC2.frame.origin.y = scrollView.contentOffset.y
-//            
-//            
-//        }
-        
-        
-        
         
         
     }
-    
-    func toTop10WorldPressed(sender: UIButton!) {
-    
-        NSUserDefaults.standardUserDefaults().setObject(top10WorldArrayUsers, forKey: "userArray")
-        NSUserDefaults.standardUserDefaults().setObject(top10WorldArrayRating, forKey: "ratingArray")
-        NSUserDefaults.standardUserDefaults().setObject(top10WorldArrayImage, forKey: "profilePicArray")
-        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("LeaderBoard")
-        self.showViewController(vc as! UIViewController, sender: vc)
-    
     }
-    
-    func toTop10FriendsPressed(sender: UIButton!) {
-        
-        NSUserDefaults.standardUserDefaults().setObject(top10FriendsArrayUsers, forKey: "userArray")
-        NSUserDefaults.standardUserDefaults().setObject(top10FriendsArrayRating, forKey: "ratingArray")
-        NSUserDefaults.standardUserDefaults().setObject(top10FriendsArrayImage, forKey: "profilePicArray")
-        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("LeaderBoard")
-        self.showViewController(vc as! UIViewController, sender: vc)
-    
-    }
-    
-    func toTop10WorldUserPressed(sender: UIButton!) {
-//        sender.highlighted = true
-//        if sender.highlighted == true {
-//        sender.backgroundColor = UIColor.purpleColor()
-//        sender.alpha = 0.2
-//        }
-//        
-//        UIView.animateWithDuration(0.5, animations: {            sender.alpha = 1
-//}) { (Bool) -> Void in
-//        }
-        
-        NSUserDefaults.standardUserDefaults().setObject(top10WorldArrayUsers[0], forKey: "other_username")
-        NSUserDefaults.standardUserDefaults().setObject(top10WorldUserImage, forKey: "other_userImage")
-        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
-        self.showViewController(vc as! UIViewController, sender: vc)
-
-    }
-    
-    func toTop10FriendsUserPressed(sender: UIButton!) {
-    
-        NSUserDefaults.standardUserDefaults().setObject(top10FriendsArrayUsers[0], forKey: "other_username")
-        NSUserDefaults.standardUserDefaults().setObject(top10FriendsUserImage, forKey: "other_userImage")
-        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
-        self.showViewController(vc as! UIViewController, sender: vc)
-
-    }
-    
 
 
     // Func that searches for user with key and stores it in an array
@@ -642,19 +611,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         return cell
     }
     
-    //     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    //
-    //
-    //
-    //        let currentCell = tableView.cellForRowAtIndexPath(indexPath)
-    //
-    //
-    //
-    //        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    //
-    //
-    //
-    //    }
+ 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
