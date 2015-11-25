@@ -1394,6 +1394,7 @@ class GameInterFace3: UIViewController {
             }
         }
         
+        if friends == whitePieces {
         for var p = 0; p < blackQueens.count; p++ {
             for var i = 0; i < array.count; i++ {
                 if CGRectContainsPoint(blackQueens[p].frame, array[i].center) && !hasBeenTaken(blackQueens[p], array: pieceToTake) {
@@ -1413,6 +1414,30 @@ class GameInterFace3: UIViewController {
             for var i = 0; i < array.count; i++ {
                 if CGRectContainsPoint(blackRooks[p].frame, array[i].center) && !hasBeenTaken(blackRooks[p], array: pieceToTake) && horizontallyAlignedBlack == true || CGRectContainsPoint(blackRooks[p].frame, array[i].center) && !hasBeenTaken(blackRooks[p], array: pieceToTake) && verticallyAlignedBlack == true{
                     count--
+                }
+            }
+        }
+        } else if friends == blackPieces {
+            for var p = 0; p < whiteQueens.count; p++ {
+                for var i = 0; i < array.count; i++ {
+                    if CGRectContainsPoint(whiteQueens[p].frame, array[i].center) && !hasBeenTaken(whiteQueens[p], array: pieceToTake) {
+                        count--
+                    }
+                }
+            }
+            
+            for var p = 0; p < whiteBishops.count; p++ {
+                for var i = 0; i < array.count; i++ {
+                    if CGRectContainsPoint(whiteBishops[p].frame, array[i].center) && !hasBeenTaken(whiteBishops[p], array: pieceToTake) && verticallyAlignedWhite == false && horizontallyAlignedWhite == false {
+                        count--
+                    }
+                }
+            }
+            for var p = 0; p < whiteRooks.count; p++ {
+                for var i = 0; i < array.count; i++ {
+                    if CGRectContainsPoint(whiteRooks[p].frame, array[i].center) && !hasBeenTaken(whiteRooks[p], array: pieceToTake) && horizontallyAlignedWhite == true || CGRectContainsPoint(whiteRooks[p].frame, array[i].center) && !hasBeenTaken(whiteRooks[p], array: pieceToTake) && verticallyAlignedWhite == true {
+                        count--
+                    }
                 }
             }
         }
