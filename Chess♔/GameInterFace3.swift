@@ -71,6 +71,10 @@ var rookLogicOptions : Array<UIImageView> = []
 var knightLogicOptions : Array<UIImageView> = []
 var pawnLogicOptions : Array<UIImageView> = []
 
+//
+var blackPieceLogic: Array<UIImageView> = []
+var whitePieceLogic: Array<UIImageView> = []
+
 // Decides who makes check
 var checkByWhite = false
 var checkByBlack = false
@@ -83,7 +87,10 @@ var checkByKnight = false
 
 // Used in check logic to see if pieces are vertically aligned
 var verticallyAlignedWhite = false
+var horizontallyAlignedWhite = false
+
 var verticallyAlignedBlack = false
+var horizontallyAlignedBlack = false
 
 
 var selectedPawn = 0
@@ -371,7 +378,7 @@ class GameInterFace3: UIViewController {
                     
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove)  == 3 && verticallyAlignedBlack == false {
+                    if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove, friends:  whitePieces)  == 2 && verticallyAlignedBlack == false {
                         pieceOption.removeFromSuperview()
                     } else {
                         self.view.addSubview(pieceOption)
@@ -402,7 +409,7 @@ class GameInterFace3: UIViewController {
                 } else if canThePieceGofurther == true {
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y - 1 * pieceSize, pieceSize, pieceSize))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove)  == 3 && verticallyAlignedBlack == false {
+                    if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove, friends:  whitePieces)  == 2 && verticallyAlignedBlack == false {
                         pieceOption.removeFromSuperview()
                     } else {
                         self.view.addSubview(pieceOption)
@@ -438,7 +445,7 @@ class GameInterFace3: UIViewController {
                         print("working")
                         let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y - 1 * pieceSize, pieceSize, pieceSize))
                         pieceOption.image = UIImage(named: "piecePossibilities.png")
-                        if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove)  == 3 && canSaveKing(pieceOption, array: pieceBlackCanMove) == false {
+                        if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove, friends:  whitePieces)  == 2 && canSaveKing(pieceOption, array: pieceBlackCanMove) == false && canSaveKing(pieceOption, array: blackPieceLogic) == false {
                             pieceOption.removeFromSuperview()
                         } else {
                             self.view.addSubview(pieceOption)
@@ -504,9 +511,9 @@ class GameInterFace3: UIViewController {
             
             for byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
                 
-               if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove)  == 3 && enemy == whitePieces {
+               if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  friend)  == 2 && enemy == whitePieces {
                 startLogicChecking = true
-               } else if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove)  == 3 && enemy == blackPieces {
+               } else if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove, friends:  friend)  == 2 && enemy == blackPieces {
                 startLogicCheckingWhite = true
                 }
                 
@@ -548,12 +555,12 @@ class GameInterFace3: UIViewController {
                             pieceOption.removeFromSuperview()
                         }
                     }
-                    if startLogicChecking == true && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false && pieceid != 5 {
+                    if startLogicChecking == true && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false && pieceid != 5 && canSaveKing(pieceOption, array: whitePieceLogic) == false {
                         pieceOption.removeFromSuperview()
                     } else {
                         pieceOptions += [pieceOption]
                         }
-                    if startLogicCheckingWhite == true && canSaveKing(pieceOption, array: pieceBlackCanMove) == false && pieceid != 5  {
+                    if startLogicCheckingWhite == true && canSaveKing(pieceOption, array: pieceBlackCanMove) == false && pieceid != 5 && canSaveKing(pieceOption, array: blackPieceLogic) == false  {
                         pieceOption.removeFromSuperview()
                     } else {
                         pieceOptions += [pieceOption]
@@ -592,12 +599,12 @@ class GameInterFace3: UIViewController {
                                 pieceOption.removeFromSuperview()
                             }
                         }
-                        if startLogicChecking == true && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false {
+                        if startLogicChecking == true && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false && canSaveKing(pieceOption, array: whitePieceLogic) == false {
                             pieceOption.removeFromSuperview()
                         } else {
                             pieceOptions += [pieceOption]
                         }
-                        if startLogicCheckingWhite == true && canSaveKing(pieceOption, array: pieceBlackCanMove) == false {
+                        if startLogicCheckingWhite == true && canSaveKing(pieceOption, array: pieceBlackCanMove) == false && canSaveKing(pieceOption, array: blackPieceLogic) == false {
                             pieceOption.removeFromSuperview()
                         } else {
                             pieceOptions += [pieceOption]
@@ -910,19 +917,22 @@ class GameInterFace3: UIViewController {
                             if canSaveKing(pieceOption2, array: pieceWhiteCanMove) {
                                 pieceOption2.removeFromSuperview()
                             } else {
-                                self.view.addSubview(pieceOption2)
-                                pieceWhiteCanMove += [pieceOption2]
+                                whitePieceLogic += [piece]
                             }
                             if blackKing.frame.origin.x == piece.frame.origin.x && pieceWhiteCanMove.count == 3   {
                              print("Vertically alligned")
                             verticallyAlignedWhite = true
+                            }
+                            if blackKing.frame.origin.y == piece.frame.origin.y && pieceWhiteCanMove.count == 3   {
+                                print("Vertically alligned")
+                                horizontallyAlignedWhite = true
                             }
                         }
 
                         if canGoFurtherBlack == true && enemy == whitePieces {
                             
                             let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
-                            pieceOption.image = UIImage(named: "piecePossibilities.png")
+                            //pieceOption.image = UIImage(named: "piecePossibilities.png")
                             if canSaveKing(pieceOption, array: pieceBlackCanMove) {
                                 pieceOption.removeFromSuperview()
                             } else {
@@ -930,16 +940,19 @@ class GameInterFace3: UIViewController {
                                 pieceBlackCanMove += [pieceOption]
                             }
                             let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
-                            pieceOption2.image = UIImage(named: "piecePossibilities.png")
+                            //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                             if canSaveKing(pieceOption2, array: pieceBlackCanMove) {
                                 pieceOption2.removeFromSuperview()
                             } else {
-                                self.view.addSubview(pieceOption2)
-                                pieceBlackCanMove += [pieceOption2]
+                                blackPieceLogic += [piece]
                             }
-                            if whiteKing.frame.origin.x == piece.frame.origin.x && pieceBlackCanMove.count == 3   {
+                            if whiteKing.frame.origin.x == piece.frame.origin.x && pieceBlackCanMove.count == 3  {
                                 print("Vertically alligned")
                                 verticallyAlignedBlack = true
+                            }
+                            if whiteKing.frame.origin.y == piece.frame.origin.y && pieceBlackCanMove.count == 3 {
+                                print("Vertically alligned")
+                                horizontallyAlignedBlack = true
                             }
 
                         }
@@ -1005,6 +1018,9 @@ class GameInterFace3: UIViewController {
                     
                     pieceWhiteCanMove.removeAll()
                     pieceWhiteCanMove = []
+                    
+                    whitePieceLogic.removeAll()
+                    whitePieceLogic = []
                 }
                 
                 if foundKingWhite == false {
@@ -1015,6 +1031,9 @@ class GameInterFace3: UIViewController {
                     
                     pieceBlackCanMove.removeAll()
                     pieceBlackCanMove = []
+                    
+                    blackPieceLogic.removeAll()
+                    blackPieceLogic = []
                 }
                 
                 if foundKing == false && pieceid == 4 {
@@ -1132,7 +1151,7 @@ class GameInterFace3: UIViewController {
                     
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + byAmounty * pieceSize, size, size))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove)  == 3 && verticallyAlignedWhite == false {
+                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  blackPieces)  == 2 && verticallyAlignedWhite == false {
                         pieceOption.removeFromSuperview()
                     } else {
                         self.view.addSubview(pieceOption)
@@ -1164,7 +1183,7 @@ class GameInterFace3: UIViewController {
                 } else if canThePieceGofurther == true {
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + 1 * pieceSize, size, size))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove)  == 3 && verticallyAlignedWhite == false {
+                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  blackPieces)  == 2 && verticallyAlignedWhite == false {
                         pieceOption.removeFromSuperview()
                         print("Cant move!")
                     } else {
@@ -1199,7 +1218,7 @@ class GameInterFace3: UIViewController {
                         
                         let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y + 1 * pieceSize, pieceSize, pieceSize))
                         pieceOption.image = UIImage(named: "piecePossibilities.png")
-                        if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove)  == 3 && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false {
+                        if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  blackPieces)  == 2 && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false && canSaveKing(pieceOption, array: whitePieceLogic) == false  {
                             pieceOption.removeFromSuperview()
                             print("Cant move!")
                         } else {
@@ -1326,7 +1345,9 @@ class GameInterFace3: UIViewController {
             checkByPawn = false
             checkByKnight = false
             verticallyAlignedWhite = false
+            horizontallyAlignedWhite = false
             verticallyAlignedBlack = false
+            horizontallyAlignedBlack = false
             removeLogicOptions()
             removeBishopLogicOptions()
             removeRookLogicOptions()
@@ -1362,58 +1383,40 @@ class GameInterFace3: UIViewController {
         return bool
     }
     
-    func logicCheck(var pieces: Array<UIImageView>, var array: Array<UIImageView>) -> Int {
+    func logicCheck(var pieces: Array<UIImageView>, var array: Array<UIImageView>, var friends: Array<UIImageView>) -> Int {
         
         var count = 0
         for var p = 0; p < pieces.count; p++ {
         for var i = 0; i < array.count; i++ {
             if CGRectContainsPoint(pieces[p].frame, array[i].center) {
                 count++
-            }
-        }
-        }
-        for var p = 0; p < blackBishops.count; p++ {
-            for var i = 0; i < array.count; i++ {
-                if CGRectContainsPoint(blackBishops[p].frame, array[i].center) {
-                    count = 3
                 }
             }
         }
-        for var p = 0; p < whiteBishops.count; p++ {
-            for var i = 0; i < array.count; i++ {
-                if CGRectContainsPoint(whiteBishops[p].frame, array[i].center) {
-                    count = 3
-                }
-            }
-        }
-        for var p = 0; p < whiteQueens.count; p++ {
-            for var i = 0; i < array.count; i++ {
-                if CGRectContainsPoint(whiteQueens[p].frame, array[i].center) {
-                    count = 3
-                }
-            }
-        }
+        
         for var p = 0; p < blackQueens.count; p++ {
             for var i = 0; i < array.count; i++ {
-                if CGRectContainsPoint(blackQueens[p].frame, array[i].center) {
-                    count = 3
+                if CGRectContainsPoint(blackQueens[p].frame, array[i].center) && !hasBeenTaken(blackQueens[p], array: pieceToTake) {
+                    count--
+                }
+            }
+        }
+        
+        for var p = 0; p < blackBishops.count; p++ {
+            for var i = 0; i < array.count; i++ {
+                if CGRectContainsPoint(blackBishops[p].frame, array[i].center) && !hasBeenTaken(blackBishops[p], array: pieceToTake) && verticallyAlignedBlack == false && horizontallyAlignedBlack == false {
+                    count--
                 }
             }
         }
         for var p = 0; p < blackRooks.count; p++ {
             for var i = 0; i < array.count; i++ {
-                if CGRectContainsPoint(blackRooks[p].frame, array[i].center) {
-                    count = 3
+                if CGRectContainsPoint(blackRooks[p].frame, array[i].center) && !hasBeenTaken(blackRooks[p], array: pieceToTake) && horizontallyAlignedBlack == true || CGRectContainsPoint(blackRooks[p].frame, array[i].center) && !hasBeenTaken(blackRooks[p], array: pieceToTake) && verticallyAlignedBlack == true{
+                    count--
                 }
             }
         }
-        for var p = 0; p < whiteRooks.count; p++ {
-            for var i = 0; i < array.count; i++ {
-                if CGRectContainsPoint(whiteRooks[p].frame, array[i].center) {
-                    count = 3
-                }
-            }
-        }
+
         print(count)
         return count
     }
