@@ -133,6 +133,7 @@
 		8FA569101C02795100AFC460 /* new100-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5690E1C02795100AFC460 /* new100-2.png */; };
 		8FA569121C02829700AFC460 /* PanBerLogo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569111C02829700AFC460 /* PanBerLogo1.png */; };
 		8FA569141C0284AA00AFC460 /* Legal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA569131C0284AA00AFC460 /* Legal.swift */; };
+		8FA569161C063CCD00AFC460 /* PanBerLogoFadeSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569151C063CCC00AFC460 /* PanBerLogoFadeSquare.png */; };
 		8FA5C8911B9A264F0097637E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8901B9A264F0097637E /* AppDelegate.swift */; };
 		8FA5C8931B9A264F0097637E /* LoginMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8921B9A264F0097637E /* LoginMenu.swift */; };
 		8FA5C8981B9A264F0097637E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8971B9A264F0097637E /* Assets.xcassets */; };
@@ -318,6 +319,7 @@
 		8FA5690E1C02795100AFC460 /* new100-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new100-2.png"; sourceTree = "<group>"; };
 		8FA569111C02829700AFC460 /* PanBerLogo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PanBerLogo1.png; sourceTree = "<group>"; };
 		8FA569131C0284AA00AFC460 /* Legal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legal.swift; sourceTree = "<group>"; };
+		8FA569151C063CCC00AFC460 /* PanBerLogoFadeSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PanBerLogoFadeSquare.png; sourceTree = "<group>"; };
 		8FA5C88D1B9A264F0097637E /* Chess♔.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chess♔.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8901B9A264F0097637E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FA5C8921B9A264F0097637E /* LoginMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenu.swift; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 				8FB94F981BE62EA80029EF00 /* chatIcon.png */,
 				8F1E8ED31BD8362A00C41D37 /* PanBerLogoDark2.png */,
 				8F1E8ED11BD833F100C41D37 /* PanBerLogoDark_4000.png */,
+				8FA569151C063CCC00AFC460 /* PanBerLogoFadeSquare.png */,
 				8FA569111C02829700AFC460 /* PanBerLogo1.png */,
 				8F1E8ECF1BD7F74500C41D37 /* profilePicPlaceholderDark.jpg */,
 				8F1E8EC11BD78EE900C41D37 /* mountain.jpg */,
@@ -862,6 +865,7 @@
 				8F14D19D1B9C918700A58CCF /* 8.jpg in Resources */,
 				8F970FBF1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png in Resources */,
 				8F2DD6E51B9AFFF80059CEFA /* pieceMarked.png in Resources */,
+				8FA569161C063CCD00AFC460 /* PanBerLogoFadeSquare.png in Resources */,
 				8F87E8BC1BD6DBE600506F2F /* arrow483.png in Resources */,
 				8F4A02811B9A3F0B0084024A /* blackRook.png in Resources */,
 				8F4A02851B9A3F240084024A /* chessIcon.png in Resources */,

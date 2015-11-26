@@ -207,7 +207,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         profilePic.layer.cornerRadius = profilePic.frame.size.height / 2
         profilePic.clipsToBounds = true
         profilePic.layer.borderColor = UIColor.whiteColor().CGColor
-        profilePic.layer.borderWidth = 3
+        profilePic.layer.borderWidth = 1
         profilePic.image = UIImage(data: imageData)
         profilePic.contentMode = UIViewContentMode.ScaleAspectFill
         contentView.addSubview(profilePic)
@@ -1151,14 +1151,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
             self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
             self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
             
-            //
-            //            //setting top logo
-            //            logo = UIImage(named: "ChessIconSmallTextAndLogoDarkMode.png")
-            //            logoView = UIImageView(image:logo)
-            //            logoView.contentMode = UIViewContentMode.ScaleAspectFit
-            //            logoView.frame.size.height = 50
-            //            self.navigationItem.titleView = logoView
-            
+
             
             
             
@@ -1171,16 +1164,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
-            
-            
-            //            //setting top logo
-            //            logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
-            //            logoView = UIImageView(image:logo)
-            //            logoView.contentMode = UIViewContentMode.ScaleAspectFit
-            //            logoView.frame.size.height = 50
-            //            self.navigationItem.titleView = logoView
-            //            
-            
+  
             
             
         }

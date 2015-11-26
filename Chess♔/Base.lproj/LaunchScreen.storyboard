@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PanBerLogoDark2.png" translatesAutoresizingMaskIntoConstraints="NO" id="B3s-5v-fBy">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PanBerLogoFadeSquare.png" translatesAutoresizingMaskIntoConstraints="NO" id="B3s-5v-fBy">
                                 <rect key="frame" x="-22" y="-23" width="645" height="646"/>
                                 <animations/>
                             </imageView>
@@ -42,6 +42,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="PanBerLogoDark2.png" width="4000" height="4000"/>
+        <image name="PanBerLogoFadeSquare.png" width="3840" height="3840"/>
     </resources>
 </document>
