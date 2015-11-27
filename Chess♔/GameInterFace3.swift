@@ -110,11 +110,13 @@ var horizontallyAlignedBlack = false
 
 // Castling White
 var hasWhiteRookMoved = false
+var hasWhiteRookMoved2 = false
 var hasWhiteKingMoved = false
 var whiteCastle = false
 
 // Castling Black
 var hasBlackRookMoved = false
+var hasBlackRookMoved2 = false
 var hasBlackKingMoved = false
 var blackCastle = false
 
@@ -666,7 +668,7 @@ class GameInterFace3: UIViewController {
                             }
                         }
                         for var i = 1; i < 3; i++ {
-                            if pieceid == 5 && hasWhiteKingMoved == false && hasWhiteRookMoved == false {
+                            if pieceid == 5 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false {
                                 let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                 if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: rightWhiteCastleLogic) == false  {
@@ -688,7 +690,7 @@ class GameInterFace3: UIViewController {
                             }
                         }
                         for var i = 1; i < 3; i++ {
-                            if pieceid == 5 && hasBlackKingMoved == false && hasBlackRookMoved == false {
+                            if pieceid == 5 && hasBlackKingMoved == false && hasBlackRookMoved2 == false {
                                 let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                 if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceWhiteLogicOptions) == false && canSaveKing(pieceOption2, array: rightBlackCastleLogic) == false  {
@@ -706,7 +708,7 @@ class GameInterFace3: UIViewController {
                         whiteCastlingLeft += [pieceOption3]
                         castlePiece = whiteRook2
                     }
-                    if rightWhiteCastleLogic.count == 2 && hasWhiteKingMoved == false && hasWhiteRookMoved == false && pieceid == 5  {
+                    if rightWhiteCastleLogic.count == 2 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false && pieceid == 5  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption3)
@@ -720,7 +722,7 @@ class GameInterFace3: UIViewController {
                         blackCastlingLeft += [pieceOption3]
                         castlePiece = blackRook2
                     }
-                    if rightBlackCastleLogic.count == 2 && hasBlackKingMoved == false && hasBlackRookMoved == false && pieceid == 5  {
+                    if rightBlackCastleLogic.count == 2 && hasBlackKingMoved == false && hasBlackRookMoved2 == false && pieceid == 5  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption3)
@@ -1553,6 +1555,25 @@ class GameInterFace3: UIViewController {
             removeLeftWhiteCastleLogic()
             removeRightWhiteCastleLogic()
         }
+        
+        if selectedPiece == whiteKing {
+            hasWhiteKingMoved = true
+        }
+        if selectedPiece == whiteRook1 {
+            hasWhiteRookMoved2 = true
+        }
+        if selectedPiece == whiteRook2 {
+            hasWhiteRookMoved = true
+        }
+        if selectedPiece == blackKing {
+            hasBlackKingMoved = true
+        }
+        if selectedPiece == blackRook1 {
+            hasBlackRookMoved = true
+        }
+        if selectedPiece == blackRook2 {
+            hasBlackRookMoved2 = true
+        }
     }
     
     func hasBeenTaken(var image: UIImageView, var array: Array<UIImageView>) -> Bool {
@@ -1848,7 +1869,7 @@ class GameInterFace3: UIViewController {
                 whiteCastle = true
                 movePiece(whiteCastlingRight[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: whiteCastlingRight[o].frame.origin.y - whiteKing.frame.origin.y)
                 hasWhiteKingMoved = true
-                hasWhiteRookMoved = true
+                hasWhiteRookMoved2 = true
             }
         }
         for var o = 0 ; o < blackCastlingLeft.count; o++ {
@@ -1874,7 +1895,7 @@ class GameInterFace3: UIViewController {
                 blackCastle = true
                 movePiece(blackCastlingRight[o].frame.origin.x - blackKing.frame.origin.x, _moveByAmounty: blackCastlingRight[o].frame.origin.y - blackKing.frame.origin.y)
                 hasBlackKingMoved = true
-                hasBlackRookMoved = true
+                hasBlackRookMoved2 = true
             }
         }
     }
