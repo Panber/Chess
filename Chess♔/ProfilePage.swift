@@ -104,12 +104,13 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
     
     func setUpProfile () {
         
+        view.addSubview(scrollView)
+
         loadUserInfoFromCloud()
         
         
         
         
-        view.addSubview(scrollView)
         //creating the view
         contentView = UIView(frame: CGRectMake(0, 0, screenWidth, screenHeight/5))
         
@@ -511,22 +512,29 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
     func lightOrDarkMode() {
         if darkMode == true {
             
+           // contentView.frame.origin.y = 64 + scrollView.contentOffset.y
+
+//            self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+//            self.navigationController?.navigationBar.translucent = false
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
             
-            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-            self.scrollView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.tintColor = blue
             
             
             
             
         }
         else if darkMode == false {
+    
+    //        contentView.frame.origin.y = 64 + scrollView.contentOffset.y
+
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
             self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()

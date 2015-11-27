@@ -27,7 +27,20 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
+
+        findUsers()
         
+    }
+    override func viewDidDisappear(animated: Bool) {
+        
+        
+        userArray = []
+        ratingArray = []
+        profilePicArray = []
+        USER = []
+        
+        tableView.reloadData()
+
     }
     
     
@@ -125,7 +138,6 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        findUsers()
 
         
         let tblView =  UIView(frame: CGRectZero)
@@ -152,10 +164,27 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UserTableViewCell4 = self.tableView.dequeueReusableCellWithIdentifier("cell4", forIndexPath: indexPath) as! UserTableViewCell4
-
         
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
 
 
+        if darkMode {
+            cell.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            cell.rating.textColor = UIColor.lightTextColor()
+            cell.username.textColor =  UIColor.whiteColor()
+            cell.position.textColor = UIColor.whiteColor()
+        
+        }
+        else {
+        
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.rating.textColor = UIColor.darkGrayColor()
+            cell.username.textColor =  UIColor.blackColor()
+            cell.position.textColor = UIColor.blackColor()
+        }
+        
+        
+        
         if NSUserDefaults.standardUserDefaults().objectForKey("leaderboard") as! String == "world" {
 
             cell.username.text = userArray[indexPath.row]
@@ -252,6 +281,7 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         if cell.username.text == userArray.last {
             cell.separatorInset = UIEdgeInsetsZero
             cell.layoutMargins = UIEdgeInsetsZero
+
         }
 
         if cell.username.text == PFUser.currentUser()?.username {
@@ -290,13 +320,17 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
             
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
             
-            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.tintColor = blue
+            
+            self.tableView.backgroundColor = UIColor(red: 0.20, green: 0.20 , blue: 0.20, alpha: 1)
+      
             
             
             
@@ -309,6 +343,8 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
+            self.tableView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+
             
             
         }
