@@ -116,6 +116,7 @@
                                                 </imageView>
                                             </subviews>
                                             <animations/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="rhM-tE-umw" firstAttribute="top" secondItem="e4D-Z0-hy8" secondAttribute="topMargin" constant="36" id="0hX-pH-OAq"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="JnA-XE-hc0" secondAttribute="bottom" constant="12" id="1QB-Zb-gfd"/>
@@ -161,6 +162,7 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <animations/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="33" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="checkmarkButton" destination="21s-Su-ex5" id="awv-UP-7UE"/>
@@ -796,6 +798,8 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="bc1" destination="YCz-2R-6VE" id="Io9-GC-Rpp"/>
+                        <outlet property="bc2" destination="Jfp-Ng-8lO" id="Eli-ed-QI1"/>
                         <outlet property="gameSpeedSegemnt" destination="bze-4R-WzM" id="xKU-Eq-3g6"/>
                         <outlet property="modeSegment" destination="ghD-ff-eyN" id="btf-rM-fCO"/>
                         <outlet property="userProfilePic" destination="JZU-UC-bgm" id="8Mu-D9-8x6"/>
@@ -1633,6 +1637,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bc1" destination="Qbh-fk-CnM" id="Ni1-1X-eWj"/>
+                        <outlet property="bc2" destination="1x8-Pc-6gK" id="e6G-y5-yk7"/>
                         <outlet property="gameSpeedSegemnt" destination="Olq-Wi-4e1" id="212-gp-pg2"/>
                         <outlet property="modeSegment" destination="1lr-Ia-ayW" id="8Ei-A0-c7A"/>
                         <outlet property="userProfilePic" destination="c5A-Oz-fBE" id="AkP-Bo-MIH"/>
@@ -1945,6 +1951,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bc1" destination="GVx-qq-g8G" id="IGP-w3-iqE"/>
+                        <outlet property="bc2" destination="LNz-oq-hEJ" id="GXf-33-ecT"/>
                         <outlet property="gameSpeedSegemnt" destination="JRv-C6-dlt" id="q6k-PM-1gt"/>
                         <outlet property="modeSegment" destination="fGy-it-Veh" id="yY4-V2-zaX"/>
                         <outlet property="userProfilePic" destination="aeH-js-oCF" id="lnQ-w3-clX"/>
@@ -2487,6 +2495,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bc1" destination="h6t-AF-bbC" id="5YN-Et-EDd"/>
+                        <outlet property="bc2" destination="KUt-nc-Opa" id="SxF-vm-ulD"/>
                         <outlet property="gameSpeedSegemnt" destination="Exe-G8-KqT" id="arw-S2-aMT"/>
                         <outlet property="modeSegment" destination="8bn-MO-4xs" id="vxS-yt-gYl"/>
                         <outlet property="userProfilePic" destination="sfi-3D-Ciz" id="RR6-CL-tlF"/>

@@ -339,6 +339,7 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
             self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+                        self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
             self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
