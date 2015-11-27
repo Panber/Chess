@@ -16,6 +16,8 @@ class NewGameSettingsPage_Explore: UIViewController {
     @IBOutlet weak var userRating: UILabel!
     @IBOutlet weak var useruserName: UILabel!
     
+    @IBOutlet weak var bc2: UILabel!
+    @IBOutlet weak var bc1: UIView!
     @IBOutlet weak var whiteOrBlack: UISegmentedControl!
     
     @IBOutlet weak var gameSpeedSegemnt: UISegmentedControl!
@@ -211,29 +213,38 @@ class NewGameSettingsPage_Explore: UIViewController {
             
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
             
-            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-            //self.scrollView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.tintColor = blue
             
+            useruserName.textColor = UIColor.whiteColor()
+            userRating.textColor = UIColor.lightTextColor()
+            bc1.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            bc2.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
             
             
         }
         else if darkMode == false {
             
+            
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
             self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+                        self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
             self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
-            //scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             
+            useruserName.textColor = UIColor.blackColor()
+            userRating.textColor = UIColor.lightGrayColor()
+            bc1.backgroundColor = UIColor.whiteColor()
+            bc2.backgroundColor = UIColor.whiteColor()
             
         }
         

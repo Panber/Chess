@@ -32,9 +32,18 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
     }
 
     override func viewWillAppear(animated: Bool) {
+        inviteName = []
+        ratedArray = []
+        colorArray = []
+        speedmodeArray = []
+        imageDataArray = []
+        invites = []
+        tableView.reloadData()
         self.title = "Invites"
         findRequests()
+        lightOrDarkMode()
     }
+    
     
     
     func findRequests() {
@@ -95,6 +104,32 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:GameInvitesTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("GameInviteCell", forIndexPath: indexPath) as! GameInvitesTableViewCell
+        
+        
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        
+        if darkMode {
+            cell.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            cell.rating.textColor = UIColor.lightTextColor()
+            cell.username.textColor =  UIColor.whiteColor()
+            cell.ratedOrUnrated.textColor = UIColor.lightTextColor()
+            cell.whichColorText.textColor = UIColor.lightTextColor()
+            cell.speedmodeText.textColor = UIColor.lightTextColor()
+
+
+            
+        }
+        else {
+            
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.rating.textColor = UIColor.darkGrayColor()
+            cell.username.textColor =  UIColor.blackColor()
+            cell.ratedOrUnrated.textColor = UIColor.lightGrayColor()
+            cell.whichColorText.textColor = UIColor.lightGrayColor()
+            cell.speedmodeText.textColor = UIColor.lightGrayColor()
+        }
+        
         
         cell.username.text = inviteName[indexPath.row]
         cell.ratedOrUnrated.text = ratedArray[indexPath.row]
@@ -322,6 +357,45 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         }
         
     }
+    //func to check if dark or light mode should be enabled, keep this at the bottom
+    func lightOrDarkMode() {
+        if darkMode == true {
+            
+            
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
+            
+            self.view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
+            self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.tintColor = blue
+            
+            self.tableView.backgroundColor = UIColor(red: 0.20, green: 0.20 , blue: 0.20, alpha: 1)
+            
+            
+            
+            
+        }
+        else if darkMode == false {
+            
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
+            self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+            self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
+            self.tabBarController?.tabBar.tintColor = blue
+            self.navigationController?.navigationBar.tintColor = blue
+            self.tableView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            
+            
+            
+        }
+        
+    }
+
+    
     
 
 }
