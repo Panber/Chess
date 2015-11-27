@@ -206,7 +206,7 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         profilePic.layer.cornerRadius = profilePic.frame.size.height / 2
         profilePic.clipsToBounds = true
         profilePic.layer.borderColor = UIColor.whiteColor().CGColor
-        profilePic.layer.borderWidth = 3
+        profilePic.layer.borderWidth = 0
         profilePic.image = UIImage(data: imageData)
         profilePic.contentMode = UIViewContentMode.ScaleAspectFill
         contentView.addSubview(profilePic)

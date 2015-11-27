@@ -1152,7 +1152,7 @@
                                 <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <animations/>
                             </scrollView>
-                            <searchBar contentMode="redraw" misplaced="YES" placeholder="Search" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZt-ni-vmc">
+                            <searchBar opaque="NO" contentMode="redraw" misplaced="YES" placeholder="Search" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZt-ni-vmc">
                                 <rect key="frame" x="0.0" y="64" width="600" height="88"/>
                                 <animations/>
                                 <constraints>
@@ -1165,7 +1165,7 @@
                                     <constraint firstAttribute="height" constant="44" id="xGg-Jk-5hY"/>
                                     <constraint firstAttribute="height" constant="44" id="yqQ-dR-IBB"/>
                                 </constraints>
-                                <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.27450980392156865" green="0.59215686274509804" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.93136452879999998" green="0.93136452879999998" blue="0.93136452879999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
@@ -1191,7 +1191,7 @@
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-dp-8si">
                                 <rect key="frame" x="0.0" y="152" width="600" height="448"/>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="579" id="tnG-Sz-Kpu"/>
                                 </constraints>
