@@ -91,19 +91,26 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
     override func viewWillAppear(animated: Bool) {
         //  setUpProfile()
         lightOrDarkMode()
+        self.removeProfile()
+
+
+    }
+    override func viewDidDisappear(animated: Bool) {
+
     }
     override func viewDidAppear(animated: Bool) {
-
         setUpProfile()
+
     }
-    override func viewWillDisappear(animated: Bool) {
-        self.removeProfile()
-    }
+ 
     
     
     
     override func viewDidLoad() {
+        
+
         super.viewDidLoad()
+
         
         underElements = [label3,label4,label5,label6,label7,label8,olabel9,label9,label10,label11,olabel11,label12,label13,label14,label15,label16,label17]
         

@@ -678,7 +678,7 @@
                                     <segment title="White"/>
                                     <segment title="Black"/>
                                 </segments>
-                                <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="blackOrWhiteChanged:" destination="jvY-pV-nF2" eventType="valueChanged" id="57M-c9-jVZ"/>
                                 </connections>
@@ -694,7 +694,7 @@
                                     <segment title="Normal"/>
                                     <segment title="Slow"/>
                                 </segments>
-                                <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="speedChanged:" destination="jvY-pV-nF2" eventType="valueChanged" id="ny2-20-5l2"/>
                                 </connections>
@@ -706,7 +706,7 @@
                                     <segment title="Rated"/>
                                     <segment title="Unrated"/>
                                 </segments>
-                                <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="modeChanged:" destination="jvY-pV-nF2" eventType="valueChanged" id="pqa-l7-Bzx"/>
                                 </connections>
@@ -1514,7 +1514,7 @@
                                             <segment title="White"/>
                                             <segment title="Black"/>
                                         </segments>
-                                        <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="blackOrWhiteChanged:" destination="zUw-nd-SNI" eventType="valueChanged" id="E8J-ho-kcC"/>
                                         </connections>
@@ -1527,7 +1527,7 @@
                                             <segment title="Normal"/>
                                             <segment title="Slow"/>
                                         </segments>
-                                        <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="speedChanged:" destination="zUw-nd-SNI" eventType="valueChanged" id="1St-pk-GNZ"/>
                                         </connections>
@@ -1539,7 +1539,7 @@
                                             <segment title="Rated"/>
                                             <segment title="Unrated"/>
                                         </segments>
-                                        <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="modeChanged:" destination="zUw-nd-SNI" eventType="valueChanged" id="uyD-Nq-9Ax"/>
                                         </connections>
@@ -1826,7 +1826,7 @@
                                             <segment title="White"/>
                                             <segment title="Black"/>
                                         </segments>
-                                        <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.36470588235294116" green="0.56470588235294117" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="blackOrWhiteChanged:" destination="Xl0-Gg-Jfa" eventType="valueChanged" id="IXa-5p-HIt"/>
                                         </connections>
@@ -1839,7 +1839,7 @@
                                             <segment title="Normal"/>
                                             <segment title="Slow"/>
                                         </segments>
-                                        <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="speedChanged:" destination="Xl0-Gg-Jfa" eventType="valueChanged" id="Xlg-pc-4SR"/>
                                         </connections>
@@ -1851,7 +1851,7 @@
                                             <segment title="Rated"/>
                                             <segment title="Unrated"/>
                                         </segments>
-                                        <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="modeChanged:" destination="Xl0-Gg-Jfa" eventType="valueChanged" id="RUD-qS-jhK"/>
                                         </connections>
@@ -2367,7 +2367,7 @@
                                             <segment title="White"/>
                                             <segment title="Black"/>
                                         </segments>
-                                        <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="blackOrWhiteChanged:" destination="jvY-pV-nF2" eventType="valueChanged" id="9Mr-SP-hnf"/>
                                             <action selector="blackOrWhiteChanged:" destination="puU-8z-Kqo" eventType="valueChanged" id="ioQ-wa-0FF"/>
@@ -2381,7 +2381,7 @@
                                             <segment title="Normal"/>
                                             <segment title="Slow"/>
                                         </segments>
-                                        <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="speedChanged:" destination="puU-8z-Kqo" eventType="valueChanged" id="8Fj-bn-MRd"/>
                                         </connections>
@@ -2393,7 +2393,7 @@
                                             <segment title="Rated"/>
                                             <segment title="Unrated"/>
                                         </segments>
-                                        <color key="tintColor" red="0.17242259660000001" green="0.3294666336" blue="0.71196338380000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="modeChanged:" destination="puU-8z-Kqo" eventType="valueChanged" id="qNw-bQ-hBU"/>
                                         </connections>
