@@ -744,7 +744,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
 
-            
+            self.scrollView.backgroundColor = UIColor(red:0.15, green:0.15, blue:0.15, alpha:1.0)
+
             
             
             featuredViewText.textColor = UIColor.lightGrayColor()

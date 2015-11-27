@@ -28,7 +28,14 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
     var label15 = UILabel()
     
     
+    var label3 = UILabel()
+    var label4 = UILabel()
+    var label5 = UILabel()
+    var label6 = UILabel()
+    var label7 = UILabel()
+    var label8 = UILabel()
     
+    var label16 = UILabel()
     
     var userRating = Int()
     var userWon = String()
@@ -39,14 +46,14 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
           setUpProfile()
+        lightOrDarkMode()
         //loadUserInfoFromCloud()
     }
     override func viewDidDisappear(animated: Bool) {
         removeProfile()
 
     }
-    override func viewWillDisappear(animated: Bool) {
-
+    override func viewDidAppear(animated: Bool) {
     }
     
     override func viewDidLoad() {
@@ -67,7 +74,6 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         scrollView.scrollEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         
-        lightOrDarkMode()
     }
     
     func loadUserInfoFromCloud () {
@@ -193,54 +199,43 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
 
         
         //adding stats label
-        let label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + contentView.frame.origin.y + 25, 150, 25))
+        label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + contentView.frame.origin.y + 25, 150, 25))
         label3.textAlignment = NSTextAlignment.Left
         label3.text = "Statistics"
         label3.font = UIFont(name: "Didot-Italic", size: 16)
-        if darkMode { label3.textColor = UIColor.lightTextColor() }
-        else { label3.textColor = UIColor.lightGrayColor() }
         scrollView.addSubview(label3)
         
         //adding white bc to stats
-        let label4 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25, screenWidth, 45*4))
+        label4 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25, screenWidth, 45*4))
         label4.text = ""
-        label4.backgroundColor = UIColor.whiteColor()
         scrollView.addSubview(label4)
         
         //adding won: label
-        let label5 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25, screenWidth, 45))
+        label5 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25, screenWidth, 45))
         label5.textAlignment = NSTextAlignment.Left
         label5.text = "Won"
         label5.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label5.textColor = UIColor.lightTextColor() }
-        else { label5.textColor = UIColor.grayColor() }
         scrollView.addSubview(label5)
         
         //adding drawn: label
-        let label6 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45, screenWidth, 45))
+        label6 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45, screenWidth, 45))
         label6.textAlignment = NSTextAlignment.Left
         label6.text = "Drawn"
         label6.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label6.textColor = UIColor.lightTextColor() }
-        else { label6.textColor = UIColor.grayColor() }
         scrollView.addSubview(label6)
         
         //adding lost: label
-        let label7 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45, screenWidth, 45))
+        label7 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45, screenWidth, 45))
         label7.textAlignment = NSTextAlignment.Left
         label7.text = "Lost"
         label7.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label7.textColor = UIColor.lightTextColor() }
-        else { label7.textColor = UIColor.grayColor() }
         scrollView.addSubview(label7)
         
         //adding rating: label
-        let label8 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45, screenWidth, 45))
+        label8 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45, screenWidth, 45))
         label8.textAlignment = NSTextAlignment.Left
         label8.text = "Rating"
         label8.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label8.textColor = UIColor.lightTextColor() }
-        else { label8.textColor = UIColor.grayColor() }
         scrollView.addSubview(label8)
         
         //adding seperator: label
@@ -278,46 +273,35 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         label12 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25, screenWidth - 20, 45))
         label12.textAlignment = NSTextAlignment.Right
         label12.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label12.textColor = UIColor.whiteColor() }
-        else { label12.textColor = UIColor.blackColor() }
         scrollView.addSubview(label12)
         
         //adding drawn from cloud: label
         label13 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45, screenWidth - 20, 45))
         label13.textAlignment = NSTextAlignment.Right
         label13.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label13.textColor = UIColor.whiteColor() }
-        else { label13.textColor = UIColor.blackColor() }
         scrollView.addSubview(label13)
         
         //adding lost from cloud: label
         label14 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45, screenWidth - 20, 45))
         label14.textAlignment = NSTextAlignment.Right
         label14.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label14.textColor = UIColor.whiteColor() }
-        else { label14.textColor = UIColor.blackColor() }
         scrollView.addSubview(label14)
         
         //adding rating from cloud: label
         label15 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45, screenWidth - 20, 45))
         label15.textAlignment = NSTextAlignment.Right
         label15.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label15.textColor = UIColor.whiteColor() }
-        else { label15.textColor = UIColor.blackColor() }
         scrollView.addSubview(label15)
         
         
         //adding white bc to friends button and friendsrequeust settingsbutton
-        let label16 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 65, screenWidth, 45 + 45 + 45))
-        label16.text = ""
-        label16.backgroundColor = UIColor.whiteColor()
+        label16 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 65, screenWidth, 45 + 45 + 45))
         scrollView.addSubview(label16)
         
         
         //freidnsbutton
         friendsButton.setTitle("Friends", forState: .Normal)
         friendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
-        friendsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         friendsButton.layer.borderColor = blue.CGColor
         friendsButton.frame.origin.x = 20
         friendsButton.frame.origin.y
@@ -351,7 +335,6 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         //friendRequestsbutton
         friendRequestsButton.setTitle("Friend Requests", forState: .Normal)
         friendRequestsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
-        friendRequestsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         friendRequestsButton.layer.borderColor = blue.CGColor
         friendRequestsButton.frame.origin.x = 20
         friendRequestsButton.frame.origin.y
@@ -385,7 +368,6 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         //settingsbutton
         settingsButton.setTitle("Settings", forState: .Normal)
         settingsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
-        settingsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         settingsButton.layer.borderColor = blue.CGColor
         settingsButton.frame.origin.x = 20
         settingsButton.frame.origin.y
@@ -512,10 +494,8 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
     func lightOrDarkMode() {
         if darkMode == true {
             
-           // contentView.frame.origin.y = 64 + scrollView.contentOffset.y
-
-//            self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-//            self.navigationController?.navigationBar.translucent = false
+           
+            
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
             self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
@@ -526,7 +506,25 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
+            self.scrollView.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
             
+            
+            label3.textColor = UIColor.lightTextColor()
+            label4.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            label5.textColor = UIColor.lightTextColor()
+            label6.textColor = UIColor.lightTextColor()
+            label7.textColor = UIColor.lightTextColor()
+            label8.textColor = UIColor.lightTextColor()
+            label12.textColor = UIColor.whiteColor()
+            label13.textColor = UIColor.whiteColor()
+            label14.textColor = UIColor.whiteColor()
+            label15.textColor = UIColor.whiteColor()
+            label16.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            friendsButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            friendRequestsButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+
+            settingsButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+
             
             
             
@@ -542,7 +540,24 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
-            scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            self.scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            
+            
+            label3.textColor = UIColor.lightGrayColor()
+            label4.backgroundColor = UIColor.whiteColor()
+            label5.textColor = UIColor.lightGrayColor()
+            label6.textColor = UIColor.lightGrayColor()
+            label7.textColor = UIColor.lightGrayColor()
+            label8.textColor = UIColor.lightGrayColor()
+            label12.textColor = UIColor.blackColor()
+            label13.textColor = UIColor.blackColor()
+            label14.textColor = UIColor.blackColor()
+            label15.textColor = UIColor.blackColor()
+            label16.backgroundColor = UIColor.whiteColor()
+            friendsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+            friendRequestsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+            
+            settingsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
     
 
         }

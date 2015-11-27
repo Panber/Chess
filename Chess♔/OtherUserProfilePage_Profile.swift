@@ -62,7 +62,7 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
     
     var friendStatusLabel = UILabel()
     
-    var visualEffectView = UIVisualEffectView()
+    var visualEffectViewO = UIVisualEffectView()
     
     var inviteButton = UIButton()
     var userOnlyAcceptsFriends = false
@@ -194,12 +194,12 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         contentView.addSubview(profilePicBlur)
         
         //bluring bc of profile pic
-        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
-        if darkMode { visualEffectView.effect = UIBlurEffect(style: .Dark) }
-        else { visualEffectView.effect = UIBlurEffect(style: .ExtraLight) }
-        visualEffectView.frame = profilePicBlur.bounds
-        visualEffectView.frame.size.height = contentView.frame.size.height + 2
-        profilePicBlur.addSubview(visualEffectView)
+        visualEffectViewO = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+        if darkMode { visualEffectViewO.effect = UIBlurEffect(style: .Dark) }
+        else { visualEffectViewO.effect = UIBlurEffect(style: .ExtraLight) }
+        visualEffectViewO.frame = profilePicBlur.bounds
+        visualEffectViewO.frame.size.height = contentView.frame.size.height + 2
+        profilePicBlur.addSubview(visualEffectViewO)
         
         //adding the profile pic
         profilePic = UIImageView(frame: CGRectMake(20, 20, 75 , 75))
@@ -240,7 +240,6 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         inviteButton = UIButton(frame: CGRectMake(label.frame.origin.x, label2.frame.origin.y + 22,80, 25))
         inviteButton.titleLabel?.font = UIFont(name: "Didot", size: 13)
         inviteButton.setTitle("New Game", forState: .Normal)
-        inviteButton.backgroundColor = UIColor.whiteColor()
         inviteButton.layer.cornerRadius = cornerRadius - 3
         inviteButton.userInteractionEnabled = false
         
@@ -299,7 +298,8 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
                     = self.contentView.frame.height + self.contentView.frame.origin.y + 45
                 self.friendRequestButton.frame.size.height = 45
                 self.friendRequestButton.frame.size.width = screenWidth
-                self.friendRequestButton.backgroundColor = UIColor.whiteColor()
+                if darkMode {self.friendRequestButton.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)}
+                else {self.friendRequestButton.backgroundColor = UIColor.whiteColor()}
                 self.friendRequestButton.userInteractionEnabled = true
                 self.friendRequestButton.addTarget(self, action: "friendRequestPressed:", forControlEvents: .TouchUpInside)
                 self.friendRequestButton.alpha = 0
@@ -320,6 +320,8 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
             self.elementSetup()
             self.addSubViewBelowContentView()
             self.loadUserInfoFromCloud()
+            self.lightOrDarkMode()
+
         }
         
         let friendsQuery = PFQuery(className: "Friends")
@@ -342,14 +344,16 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
                                         
                                         self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
                                         self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+                                        self.inviteButton.backgroundColor = UIColor.darkGrayColor()
                                         self.inviteButton.addTarget(self, action: "inviteButtonPressed:",   forControlEvents: .TouchUpInside)
                                         self.inviteButton.layer.borderColor = UIColor.lightGrayColor().CGColor
                                         self.userOnlyAcceptsFriends = true
                                         self.contentView.addSubview(self.inviteButton)
                                     }
                                     else {
-                                        self.inviteButton.setTitleColor(blue, forState: .Normal)
+                                        self.inviteButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
                                         self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+                                        self.inviteButton.backgroundColor = blue
                                         self.inviteButton.addTarget(self, action: "inviteButtonPressed:", forControlEvents: .TouchUpInside)
                                         self.userOnlyAcceptsFriends = false
                                         self.contentView.addSubview(self.inviteButton)
@@ -387,7 +391,6 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
                                 self.denyRequest.setBackgroundImage(UIImage(named: "close38.png"), forState: .Normal)
                                 self.denyRequest.addTarget(self, action: "denyFriendRequestPressed:", forControlEvents: .TouchUpInside)
                                 self.scrollView.addSubview(self.denyRequest)
-                                
                                 
                                 
                             }
@@ -442,8 +445,9 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
                     self.scrollView.addSubview(self.settingsButton)
                     
                     
-                    self.inviteButton.setTitleColor(blue, forState: .Normal)
+                    self.inviteButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
                     self.inviteButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+                    self.inviteButton.backgroundColor = blue
                     self.inviteButton.addTarget(self, action: "inviteButtonPressed:", forControlEvents: .TouchUpInside)
                     //  self.userOnlyAcceptsFriends = false
                     self.contentView.addSubview(self.inviteButton)
@@ -452,7 +456,8 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
                     self.elementSetup()
                     self.loadUserInfoFromCloud()
                     self.addSubViewBelowContentView()
-                    
+                    self.lightOrDarkMode()
+
                     
                     UIView.animateWithDuration(0.5, animations: { () -> Void in
                         self.settingsButton.alpha = 1
@@ -474,13 +479,11 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         label3.textAlignment = NSTextAlignment.Left
         label3.text = "Statistics"
         label3.font = UIFont(name: "Didot-Italic", size: 16)
-        if darkMode { label3.textColor = UIColor.lightTextColor() }
-        else { label3.textColor = UIColor.lightGrayColor() }
+
         
         //adding white bc to stats
         label4 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + (45*t), screenWidth, 45*4))
         label4.text = ""
-        label4.backgroundColor = UIColor.whiteColor()
         
         
         //adding won: label
@@ -488,8 +491,7 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         label5.textAlignment = NSTextAlignment.Left
         label5.text = "Won"
         label5.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label5.textColor = UIColor.lightTextColor() }
-        else { label5.textColor = UIColor.grayColor() }
+     
         
         
         //adding drawn: label
@@ -497,8 +499,7 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         label6.textAlignment = NSTextAlignment.Left
         label6.text = "Drawn"
         label6.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label6.textColor = UIColor.lightTextColor() }
-        else { label6.textColor = UIColor.grayColor() }
+
         
         
         //adding lost: label
@@ -506,8 +507,7 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         label7.textAlignment = NSTextAlignment.Left
         label7.text = "Lost"
         label7.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label7.textColor = UIColor.lightTextColor() }
-        else { label7.textColor = UIColor.grayColor() }
+
         
         
         //adding rating: label
@@ -515,8 +515,7 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         label8.textAlignment = NSTextAlignment.Left
         label8.text = "Rating"
         label8.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label8.textColor = UIColor.lightTextColor() }
-        else { label8.textColor = UIColor.grayColor() }
+   
         
         //adding seperator: label
         olabel9 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + (45*t), screenWidth, 0.2))
@@ -551,31 +550,27 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         label12 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + (45*t), screenWidth - 20, 45))
         label12.textAlignment = NSTextAlignment.Right
         label12.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label12.textColor = UIColor.whiteColor() }
-        else { label12.textColor = UIColor.blackColor() }
+
         
         //adding drawn from cloud: label
         label13 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + (45*t), screenWidth - 20, 45))
         label13.textAlignment = NSTextAlignment.Right
         label13.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label13.textColor = UIColor.whiteColor() }
-        else { label13.textColor = UIColor.blackColor() }
+
         
         
         //adding lost from cloud: label
         label14 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + (45*t), screenWidth - 20, 45))
         label14.textAlignment = NSTextAlignment.Right
         label14.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label14.textColor = UIColor.whiteColor() }
-        else { label14.textColor = UIColor.blackColor() }
+
         
         
         //adding rating from cloud: label
         label15 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + (45*t), screenWidth - 20, 45))
         label15.textAlignment = NSTextAlignment.Right
         label15.font = UIFont(name: "Didot", size: 16)
-        if darkMode { label15.textColor = UIColor.whiteColor() }
-        else { label15.textColor = UIColor.blackColor() }
+
         
         
         //add later
@@ -612,8 +607,7 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         label17.textAlignment = NSTextAlignment.Center
         label17.text = "Chess♔"
         label17.font = UIFont(name: "Didot", size: 13)
-        if darkMode { label17.textColor = UIColor.lightTextColor() }
-        else { label17.textColor = UIColor.grayColor() }
+
         
         
         
@@ -756,6 +750,8 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         unfriendButton.backgroundColor = UIColor.whiteColor()
         unfriendButton.layer.cornerRadius = cornerRadius
         unfriendButton.userInteractionEnabled = true
+        if darkMode {unfriendButton.backgroundColor = UIColor(red: 0.10, green: 0.10 , blue: 0.10, alpha: 1)}
+        else {unfriendButton.backgroundColor = UIColor.whiteColor()}
         popOverView.addSubview(unfriendButton)
         
         dismissButton = UIButton(frame: CGRectMake(screenWidth + 60, 55, screenWidth - 10, 45))
@@ -764,8 +760,10 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         dismissButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
         dismissButton.backgroundColor = UIColor.whiteColor()
         dismissButton.layer.cornerRadius = cornerRadius
-        dismissButton.alpha = 0.9
+        dismissButton.alpha = 1
         dismissButton.userInteractionEnabled = true
+        if darkMode {dismissButton.backgroundColor = UIColor(red: 0.10, green: 0.10 , blue: 0.10, alpha: 1)}
+        else {dismissButton.backgroundColor = UIColor.whiteColor()}
         popOverView.addSubview(dismissButton)
         
         unfriendButton.addTarget(self, action: "unfriendPressed:", forControlEvents: .TouchUpInside)
@@ -783,7 +781,6 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
             self.dismissButton.frame.origin.x = 5
             self.unfriendButton.frame.origin.x = 5
             self.bcView.alpha = 0.3
-            
             
             }, completion: {Void in
                 
@@ -1154,23 +1151,34 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
             
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
             
-            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
+            self.scrollView.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-            
-            //
-            //            //setting top logo
-            //            logo = UIImage(named: "ChessIconSmallTextAndLogoDarkMode.png")
-            //            logoView = UIImageView(image:logo)
-            //            logoView.contentMode = UIViewContentMode.ScaleAspectFit
-            //            logoView.frame.size.height = 50
-            //            self.navigationItem.titleView = logoView
+            self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.tintColor = blue
             
             
+
+            label2o5.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            friendStatusLabel.textColor = UIColor.lightTextColor()
+            label3.textColor = UIColor.lightTextColor()
+            label4.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            label5.textColor = UIColor.lightTextColor()
+            label6.textColor = UIColor.lightTextColor()
+            label7.textColor = UIColor.lightTextColor()
+            label8.textColor = UIColor.lightTextColor()
+            label12.textColor = UIColor.whiteColor()
+            label13.textColor = UIColor.whiteColor()
+            label14.textColor = UIColor.whiteColor()
+            label15.textColor = UIColor.whiteColor()
+            label17.textColor = UIColor.lightTextColor()
+        
+            unfriendButton.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            dismissButton.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
             
         }
@@ -1179,20 +1187,29 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
             self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
             self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            self.scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
             
             
-            //            //setting top logo
-            //            logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
-            //            logoView = UIImageView(image:logo)
-            //            logoView.contentMode = UIViewContentMode.ScaleAspectFit
-            //            logoView.frame.size.height = 50
-            //            self.navigationItem.titleView = logoView
-            //            
             
+            label2o5.backgroundColor = UIColor.whiteColor()
+            friendStatusLabel.textColor = UIColor.lightGrayColor()
+            label3.textColor = UIColor.lightGrayColor()
+            label4.backgroundColor = UIColor.whiteColor()
+            label5.textColor = UIColor.lightGrayColor()
+            label6.textColor = UIColor.lightGrayColor()
+            label7.textColor = UIColor.lightGrayColor()
+            label8.textColor = UIColor.lightGrayColor()
+            label12.textColor = UIColor.blackColor()
+            label13.textColor = UIColor.blackColor()
+            label14.textColor = UIColor.blackColor()
+            label15.textColor = UIColor.blackColor()
+            label17.textColor = UIColor.lightGrayColor()
             
+            unfriendButton.backgroundColor = UIColor.whiteColor()
+            dismissButton.backgroundColor = UIColor.whiteColor()
             
         }
         
