@@ -214,7 +214,7 @@ self.title = "Settings"
         bc2.addSubview(label11)
         
         notificationsSwitch.setOn(true, animated: true)
-        notificationsSwitch.onTintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
+        notificationsSwitch.onTintColor = blue
         notificationsSwitch.tintColor = UIColor(red:0.93, green:0.92, blue:0.92, alpha:1.0)
         notificationsSwitch.frame = CGRectMake(screenWidth - 65, label1.frame.origin.y + 7, 0, 0)
         notificationsSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
@@ -222,7 +222,7 @@ self.title = "Settings"
         scrollView.addSubview(notificationsSwitch)
         
         darkModeSwitch.setOn(false, animated: true)
-        darkModeSwitch.onTintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
+        darkModeSwitch.onTintColor = blue
         darkModeSwitch.tintColor = UIColor(red:0.93, green:0.92, blue:0.92, alpha:1.0)
         darkModeSwitch.frame = CGRectMake(screenWidth - 65, label2.frame.origin.y + 7, 0, 0)
         darkModeSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
@@ -230,7 +230,7 @@ self.title = "Settings"
         bc1.addSubview(darkModeSwitch)
         
         submitSwitch.setOn(true, animated: true)
-        submitSwitch.onTintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
+        submitSwitch.onTintColor = blue
         submitSwitch.tintColor = UIColor(red:0.93, green:0.92, blue:0.92, alpha:1.0)
         submitSwitch.frame = CGRectMake(screenWidth - 65,label3.frame.origin.y + 7, 0, 0)
         submitSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
@@ -238,7 +238,7 @@ self.title = "Settings"
         bc1.addSubview(submitSwitch)
         
         everyoneSwitch.setOn(true, animated: true)
-        everyoneSwitch.onTintColor = UIColor(red: 44/225, green: 84/225, blue: 184/225, alpha: 1)
+        everyoneSwitch.onTintColor = blue
         everyoneSwitch.tintColor = UIColor(red:0.93, green:0.92, blue:0.92, alpha:1.0)
         everyoneSwitch.frame = CGRectMake(screenWidth - 65, friendsOnlyText.frame.origin.y + 7, 0, 0)
         everyoneSwitch.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
@@ -333,18 +333,29 @@ self.title = "Settings"
     func lightOrDarkMode() {
         if darkMode == true {
             
-            
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.translucent = false
+            
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
             self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.tintColor = blue
+            
+            
+            visualEffectView.effect = UIBlurEffect(style: .Dark)
+            
+            blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
+            
+            
+            
             self.scrollView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
-            
+            blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
+
             
             
         }
@@ -360,7 +371,7 @@ self.title = "Settings"
             
             self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
 
-            
+            blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
             
         }
         

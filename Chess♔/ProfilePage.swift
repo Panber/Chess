@@ -137,7 +137,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         profilePic.layer.cornerRadius = profilePic.frame.size.height / 2
         profilePic.clipsToBounds = true
         profilePic.layer.borderColor = UIColor.whiteColor().CGColor
-        profilePic.layer.borderWidth = 1
+        profilePic.layer.borderWidth = 0
         profilePic.contentMode = UIViewContentMode.ScaleAspectFill
         contentView.addSubview(profilePic)
         
@@ -169,10 +169,10 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         }
         
         //adding username to view
-        let label = UILabel(frame: CGRectMake(profilePic.frame.origin.x + 95 , contentView.frame.size.height/8, 250, 30))
+        let label = UILabel(frame: CGRectMake(profilePic.frame.origin.x + 95 , contentView.frame.size.height/8 + 13.5, 250, 30))
         label.textAlignment = NSTextAlignment.Left
         label.text = PFUser.currentUser()?.username
-        label.font = UIFont(name: "Didot", size: 22)
+        label.font = UIFont(name: "Didot-Bold", size: 22)
         label.sizeToFit()
         if darkMode { label.textColor = UIColor.whiteColor() }
         else { label.textColor = UIColor.blackColor() }
@@ -186,7 +186,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         label2.numberOfLines = 0
         label2.font = UIFont(name: "Didot-Italic", size: 14)
         if darkMode { label2.textColor = UIColor.whiteColor() }
-        else { label2.textColor = UIColor.blackColor() }
+        else { label2.textColor = UIColor.darkGrayColor() }
         contentView.addSubview(label2)
         
 

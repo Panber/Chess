@@ -32,7 +32,8 @@ public class Reachability {
 
 
 //var blue = UIColor(red:0.17, green:0.33, blue:0.71, alpha:1.0)
-var blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
+//var blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
+var blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
 
 
 var gameIDS = []
@@ -1209,6 +1210,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 visualEffectView.effect = UIBlurEffect(style: .Dark)
 
                 blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
+                blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
+
 
             
         }
@@ -1231,6 +1234,12 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 tableView.backgroundColor = UIColor.whiteColor()
 
                 blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
+           // blue = UIColor(red:0.23, green:0.53, blue:0.85, alpha:1.0)
+            // blue = UIColor(red:0.17, green:0.33, blue:0.71, alpha:1.0)
+                blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
+
+
+
 
             
         }
