@@ -32,6 +32,7 @@
 		8F1E8ED01BD7F74500C41D37 /* profilePicPlaceholderDark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F1E8ECF1BD7F74500C41D37 /* profilePicPlaceholderDark.jpg */; };
 		8F1E8ED21BD833F100C41D37 /* PanBerLogoDark_4000.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F1E8ED11BD833F100C41D37 /* PanBerLogoDark_4000.png */; };
 		8F1E8ED41BD8362A00C41D37 /* PanBerLogoDark2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F1E8ED31BD8362A00C41D37 /* PanBerLogoDark2.png */; };
+		8F2392A11C08C7E200CC4B0F /* PanBerLogo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2392A01C08C7E200CC4B0F /* PanBerLogo2.png */; };
 		8F273CF01BF28B7100275378 /* GameInvitesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F273CEF1BF28B7100275378 /* GameInvitesPage.swift */; };
 		8F273CF51BF29E4300275378 /* clock104.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F273CF21BF29E4300275378 /* clock104.png */; };
 		8F273CF61BF29E4300275378 /* flash31.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F273CF31BF29E4300275378 /* flash31.png */; };
@@ -218,6 +219,7 @@
 		8F1E8ECF1BD7F74500C41D37 /* profilePicPlaceholderDark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profilePicPlaceholderDark.jpg; sourceTree = "<group>"; };
 		8F1E8ED11BD833F100C41D37 /* PanBerLogoDark_4000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PanBerLogoDark_4000.png; sourceTree = "<group>"; };
 		8F1E8ED31BD8362A00C41D37 /* PanBerLogoDark2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PanBerLogoDark2.png; sourceTree = "<group>"; };
+		8F2392A01C08C7E200CC4B0F /* PanBerLogo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PanBerLogo2.png; sourceTree = "<group>"; };
 		8F273CEF1BF28B7100275378 /* GameInvitesPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInvitesPage.swift; sourceTree = "<group>"; };
 		8F273CF21BF29E4300275378 /* clock104.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock104.png; sourceTree = "<group>"; };
 		8F273CF31BF29E4300275378 /* flash31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash31.png; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				8F2DD6D91B9AFFF80059CEFA /* pieceMarked.png */,
 				8F2DD6DA1B9AFFF80059CEFA /* piecePossibilities.png */,
 				8F2DD6DB1B9AFFF80059CEFA /* pieces vlack and white board blurred.png */,
+				8F2392A01C08C7E200CC4B0F /* PanBerLogo2.png */,
 				8F2DD6DC1B9AFFF80059CEFA /* settingsTabBarIcon@3x.png */,
 				8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */,
 				8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */,
@@ -855,6 +858,7 @@
 				8FEF2AB21BFD0F2F006E1359 /* cross-mark1-3.png in Resources */,
 				8FA018D91B9B1FAE002B410E /* ChessIconAndTExt.png in Resources */,
 				8F273CF51BF29E4300275378 /* clock104.png in Resources */,
+				8F2392A11C08C7E200CC4B0F /* PanBerLogo2.png in Resources */,
 				8F4A02791B9A3EE80084024A /* whiteQueen.png in Resources */,
 				8F38EF6A1BB8399D00668B3B /* JBpp.jpg in Resources */,
 				8F31DCE71BC7189B004544CC /* add1.png in Resources */,
@@ -1121,7 +1125,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Panayotov (8JHAHM7T3P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

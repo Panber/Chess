@@ -751,7 +751,7 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         
         unfriendButton = UIButton(frame: CGRectMake(screenWidth + 120, 5, screenWidth - 10, 45))
         unfriendButton.setTitle("Unfriend", forState: .Normal)
-        unfriendButton.setTitleColor(UIColor.redColor(), forState: .Normal)
+        unfriendButton.setTitleColor(red, forState: .Normal)
         unfriendButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
         unfriendButton.backgroundColor = UIColor.whiteColor()
         unfriendButton.layer.cornerRadius = cornerRadius

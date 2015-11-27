@@ -746,7 +746,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         
         unfriendButton = UIButton(frame: CGRectMake(screenWidth + 120, 5, screenWidth - 10, 45))
         unfriendButton.setTitle("Unfriend", forState: .Normal)
-        unfriendButton.setTitleColor(UIColor.redColor(), forState: .Normal)
+        unfriendButton.setTitleColor(red, forState: .Normal)
         unfriendButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
         unfriendButton.backgroundColor = UIColor.whiteColor()
         unfriendButton.layer.cornerRadius = cornerRadius
@@ -1143,13 +1143,20 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
             
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.translucent = false
             
-            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            
+            self.view.backgroundColor = UIColor(red: 0.20, green: 0.20 , blue: 0.20, alpha: 1)
+            self.scrollView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.tintColor = blue
+            
+            
             
 
             
