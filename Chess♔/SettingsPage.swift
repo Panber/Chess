@@ -26,6 +26,20 @@ class SettingsPage: UIViewController, UIScrollViewDelegate {
     let everyoneSwitch = UISwitch()
     let darkModeSwitch = UISwitch()
     
+    
+    var label = UILabel()
+    var bc1 = UILabel()
+    var bc2 = UILabel()
+    
+    
+    
+    var label1 = UILabel()
+    var friendsOnlyText = UILabel()
+    var label3 = UILabel()
+    var label2 = UILabel()
+    var comment1 = UILabel()
+    var comment2 = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -91,13 +105,13 @@ self.title = "Settings"
         //        contentView.clipsToBounds = true
         //        scrollView.addSubview(contentView)
         
-        let label = UILabel(frame: CGRectMake(0, 45, screenWidth, 45*2))
+        label = UILabel(frame: CGRectMake(0, 45, screenWidth, 45*2))
         label.text = ""
         label.backgroundColor = UIColor.whiteColor()
         scrollView.addSubview(label)
         
         //adding Receive notifications: label
-        let label1 = UILabel(frame: CGRectMake(20, 45, screenWidth, 45))
+        label1 = UILabel(frame: CGRectMake(20, 45, screenWidth, 45))
         label1.textAlignment = NSTextAlignment.Left
         label1.text = "Receive notifications"
         label1.font = UIFont(name: "Didot", size: 16)
@@ -106,7 +120,7 @@ self.title = "Settings"
         scrollView.addSubview(label1)
         
         //adding freindsonly button: label
-        let friendsOnlyText = UILabel(frame: CGRectMake(20, 45 + 45, screenWidth, 45))
+        friendsOnlyText = UILabel(frame: CGRectMake(20, 45 + 45, screenWidth, 45))
         friendsOnlyText.textAlignment = NSTextAlignment.Left
         friendsOnlyText.text = "Game Request From Everyone"
         friendsOnlyText.font = UIFont(name: "Didot", size: 16)
@@ -114,14 +128,14 @@ self.title = "Settings"
         else { friendsOnlyText.textColor = UIColor.blackColor() }
         scrollView.addSubview(friendsOnlyText)
 
-        let bc1 = UILabel(frame: CGRectMake(0, label.frame.origin.y + label.frame.size.height + 45, screenWidth, 45*2))
+        bc1 = UILabel(frame: CGRectMake(0, label.frame.origin.y + label.frame.size.height + 45, screenWidth, 45*2))
         bc1.text = ""
         bc1.backgroundColor = UIColor.whiteColor()
         bc1.userInteractionEnabled = true
         scrollView.addSubview(bc1)
         
         //adding Submit button: label
-        let label3 = UILabel(frame: CGRectMake(20, 45, screenWidth, 45))
+        label3 = UILabel(frame: CGRectMake(20, 45, screenWidth, 45))
         label3.textAlignment = NSTextAlignment.Left
         label3.text = "Submit button"
         label3.font = UIFont(name: "Didot", size: 16)
@@ -132,7 +146,7 @@ self.title = "Settings"
 
         
         //adding Dark mode: label
-        let label2 = UILabel(frame: CGRectMake(20, 0, screenWidth, 45))
+        label2 = UILabel(frame: CGRectMake(20, 0, screenWidth, 45))
         label2.textAlignment = NSTextAlignment.Left
         label2.text = "Dark mode"
         label2.font = UIFont(name: "Didot", size: 16)
@@ -144,7 +158,7 @@ self.title = "Settings"
         
 
         
-        let bc2 = UILabel(frame: CGRectMake(0, bc1.frame.origin.y + bc1.frame.size.height + 60, screenWidth, 45))
+        bc2 = UILabel(frame: CGRectMake(0, bc1.frame.origin.y + bc1.frame.size.height + 60, screenWidth, 45))
         bc2.text = ""
         bc2.backgroundColor = UIColor.whiteColor()
         scrollView.addSubview(bc2)
@@ -152,7 +166,7 @@ self.title = "Settings"
         //logOutButton
         logOutButton.setTitle("Log Out", forState: .Normal)
         logOutButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
-        logOutButton.setTitleColor(UIColor.redColor(), forState: .Normal)
+        logOutButton.setTitleColor(red, forState: .Normal)
         logOutButton.layer.borderColor = blue.CGColor
         //logOutButton.frame.origin.x = 10
         logOutButton.frame.origin.y
@@ -246,7 +260,7 @@ self.title = "Settings"
         scrollView.addSubview(everyoneSwitch)
         
         //adding comment: label
-        let comment1 = UILabel(frame: CGRectMake(10, 20, screenWidth, 25))
+        comment1 = UILabel(frame: CGRectMake(10, 20, screenWidth, 25))
         comment1.textAlignment = NSTextAlignment.Left
         comment1.text = "General"
         comment1.font = UIFont(name: "Didot-Italic", size: 16)
@@ -255,7 +269,7 @@ self.title = "Settings"
         scrollView.addSubview(comment1)
         
         //adding comment: label
-        let comment2 = UILabel(frame: CGRectMake(10, bc1.frame.origin.y - 25, screenWidth, 25))
+        comment2 = UILabel(frame: CGRectMake(10, bc1.frame.origin.y - 25, screenWidth, 25))
         comment2.textAlignment = NSTextAlignment.Left
         comment2.text = "User Interface"
         comment2.font = UIFont(name: "Didot-Italic", size: 16)
@@ -335,26 +349,32 @@ self.title = "Settings"
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
             self.navigationController?.navigationBar.translucent = false
-            
             self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
-            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
-            
-            
             visualEffectView.effect = UIBlurEffect(style: .Dark)
             
-            blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
+            
+            label.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            bc1.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            bc2.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+
+
+             label1.textColor = UIColor.whiteColor()
+             friendsOnlyText.textColor = UIColor.whiteColor()
+             label3.textColor = UIColor.whiteColor()
+             label2.textColor = UIColor.whiteColor()
+             comment1.textColor = UIColor.lightTextColor()
+             comment2.textColor = UIColor.lightTextColor()
             
             
+            self.scrollView.backgroundColor = UIColor(red: 0.20, green: 0.20, blue: 0.20, alpha: 1)
             
-            self.scrollView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
-            
-            blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
 
             
             
@@ -369,9 +389,21 @@ self.title = "Settings"
             self.navigationController?.navigationBar.tintColor = blue
             scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             
+            
+            label.backgroundColor = UIColor.whiteColor()
+            bc1.backgroundColor = UIColor.whiteColor()
+            bc2.backgroundColor = UIColor.whiteColor()
+            
+            
+            label1.textColor = UIColor.blackColor()
+            friendsOnlyText.textColor = UIColor.blackColor()
+            label3.textColor = UIColor.blackColor()
+            label2.textColor = UIColor.blackColor()
+            comment1.textColor = UIColor.lightGrayColor()
+            comment2.textColor = UIColor.lightGrayColor()
+            
             self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
 
-            blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
             
         }
         

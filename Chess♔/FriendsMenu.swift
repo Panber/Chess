@@ -437,7 +437,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         
         let creatorButton = UIButton(frame: CGRectMake(0,10,screenWidth,50))
-        creatorButton.titleLabel!.font = UIFont(name: "Didot", size: 15)
+        creatorButton.titleLabel!.font = UIFont(name: "Didot", size: 14)
         creatorButton.setTitle("A PANBER SOFTWARE PRODUCTION ©2015", forState: .Normal)
         creatorButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
         creatorButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
@@ -469,7 +469,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         let logo = UIImageView(frame: CGRectMake((screenWidth/2) - 75, (screenHeight/2) - 75, 150, 150))
         logo.contentMode = .ScaleAspectFill
-        logo.image = UIImage(named: "PanBerLogo1.png")
+        if darkMode {logo.image = UIImage(named: "PanBerLogo2.png")}
+        else {logo.image = UIImage(named: "PanBerLogo1.png")}
         visualEffectView.addSubview(logo)
         
         UIView.animateWithDuration(0.3, animations: { () -> Void in

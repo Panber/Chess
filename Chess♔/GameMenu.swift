@@ -34,6 +34,7 @@ public class Reachability {
 //var blue = UIColor(red:0.17, green:0.33, blue:0.71, alpha:1.0)
 //var blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
 var blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
+var red = UIColor(red:0.89, green:0.36, blue:0.36, alpha:1.0)
 
 
 var gameIDS = []
@@ -1196,21 +1197,18 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 self.tabBarController?.tabBar.tintColor = blue
                 self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
                 self.navigationController?.navigationBar.tintColor = blue
-            
+                visualEffectView.effect = UIBlurEffect(style: .Dark)
+
             
             
                     self.newButtonOutlet.tintColor = blue
             
-            
+                
             
 
 
             
                 tableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
-                visualEffectView.effect = UIBlurEffect(style: .Dark)
-
-                blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
-                blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
 
 
             
@@ -1226,17 +1224,12 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
 
                 self.newButtonOutlet.tintColor = blue
-           
 
-  
                 visualEffectView.effect = UIBlurEffect(style: .Light)
             
                 tableView.backgroundColor = UIColor.whiteColor()
 
-                blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
-           // blue = UIColor(red:0.23, green:0.53, blue:0.85, alpha:1.0)
-            // blue = UIColor(red:0.17, green:0.33, blue:0.71, alpha:1.0)
-                blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
+
 
 
 
