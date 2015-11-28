@@ -308,7 +308,7 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
         self.showViewController(vc as! UIViewController, sender: vc)
         
-        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
     }
     
