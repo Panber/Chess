@@ -467,10 +467,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 }
                 else {
                     
+                    if games["inviteTo"] as? String == PFUser.currentUser()?.username {
                     self.invitesButtonOutlet.title = "Invites"
                     self.invitesButtonOutlet.enabled = true
                     self.invitesButtonOutlet.tintColor = blue
-
+                    }
                 }
                 
                 
