@@ -44,6 +44,10 @@ var pieceString = ""
 let xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
 let yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
 var pieceStringPos = ""
+var piecesNotationSeperator = "-"
+var chessNotationCheck = ""
+var chessNotationx = ""
+var chessNotationy = ""
 
 
 //BOARDER
@@ -125,6 +129,8 @@ var hasWhiteRookMoved = false
 var hasWhiteRookMoved2 = false
 var hasWhiteKingMoved = false
 var whiteCastle = false
+var castleLeft = false
+var castleRight = false
 
 // Castling Black
 var hasBlackRookMoved = false
@@ -941,7 +947,8 @@ class Game: UIViewController {
                                 checkByQueen = true
                                 //checkByPiece = piece
                                 canThePieceGofurther = false
-                                print("found the King!")
+                                //print("found the King!")
+                                //chessNotationCheck = "+"
                             }
                         }
                     } else if pieceid == 1 {
@@ -950,7 +957,7 @@ class Game: UIViewController {
                                 foundKing = true
                                 checkByBishop = true
                                 canThePieceGofurther = false
-                                print("found the King!")
+                                //print("found the King!")
                             }
                         }
                         
@@ -960,7 +967,7 @@ class Game: UIViewController {
                                 foundKing = true
                                 checkByRook = true
                                 canThePieceGofurther = false
-                                print("found the King!")
+                                //print("found the King!")
                             }
                         }
                     }
@@ -1524,6 +1531,20 @@ class Game: UIViewController {
             for var w = 0; w < blackPawns.count; w++ {
                 chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawns[w], logicOptions: piecesWhiteLogic)
             }
+            if checkByQueen == true {
+                chessNotationCheck = "+"
+            }
+            if castleLeft == true {
+                print("o-o-o")
+            } else if castleRight == true {
+                print("o-o")
+            } else {
+            print(pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck)
+            piecesNotationSeperator = "-"
+            chessNotationCheck = ""
+            }
+            castleLeft = false
+            castleRight = false
         }
             
         else {
@@ -1751,10 +1772,17 @@ class Game: UIViewController {
                             } else if hasBeenTaken(selectedPiece, array: whitePawns) || hasBeenTaken(selectedPiece, array: blackPawns) {
                                 pieceString = ""
                             }
-                            print(pieceString + pieceStringPos + "-" + xAxisArrStr[t] + yAxisArrStr[g])
+                            for var i = 0; i < pieces.count; i++ {
+                                if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y  {
+                                    piecesNotationSeperator = "x"
+                                }
+                            }
+                            chessNotationx = xAxisArrStr[t]
+                            chessNotationy = yAxisArrStr[t]
                         }
                     }
                 }
+                
                 
                 for var i = 0; i < whitePawns.count;i++ {
                 if selectedPiece == whitePawns[i] && selectedPiece.frame.origin.y == _7 {
@@ -1879,7 +1907,6 @@ class Game: UIViewController {
                         blackPieces.removeAtIndex(t)
                         whitePassant = false
                         canPassant = false
-                        //print("Passant white occured")
                     }
                 }
             }
@@ -2048,6 +2075,7 @@ class Game: UIViewController {
                 movePiece(whiteCastlingLeft[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: whiteCastlingLeft[o].frame.origin.y - whiteKing.frame.origin.y)
                 hasWhiteKingMoved = true
                 hasWhiteRookMoved = true
+                castleLeft = true
             }
         }
         for var o = 0 ; o < whiteCastlingRight.count; o++ {
@@ -2061,6 +2089,7 @@ class Game: UIViewController {
                 movePiece(whiteCastlingRight[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: whiteCastlingRight[o].frame.origin.y - whiteKing.frame.origin.y)
                 hasWhiteKingMoved = true
                 hasWhiteRookMoved2 = true
+                castleRight = true
             }
         }
         for var o = 0 ; o < blackCastlingLeft.count; o++ {
@@ -2074,6 +2103,7 @@ class Game: UIViewController {
                 movePiece(blackCastlingLeft[o].frame.origin.x - blackKing.frame.origin.x, _moveByAmounty: blackCastlingLeft[o].frame.origin.y - blackKing.frame.origin.y)
                 hasBlackKingMoved = true
                 hasBlackRookMoved = true
+                castleLeft = true
             }
         }
         for var o = 0 ; o < blackCastlingRight.count; o++ {
@@ -2087,6 +2117,7 @@ class Game: UIViewController {
                 movePiece(blackCastlingRight[o].frame.origin.x - blackKing.frame.origin.x, _moveByAmounty: blackCastlingRight[o].frame.origin.y - blackKing.frame.origin.y)
                 hasBlackKingMoved = true
                 hasBlackRookMoved2 = true
+                castleRight = true
             }
         }
     }
