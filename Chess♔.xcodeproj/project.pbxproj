@@ -37,6 +37,7 @@
 		8F2392A51C09EF3A00CC4B0F /* cm2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2392A41C09EF3A00CC4B0F /* cm2.png */; };
 		8F2392A71C09FAE600CC4B0F /* cm3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2392A61C09FAE600CC4B0F /* cm3.png */; };
 		8F2392A91C09FBA900CC4B0F /* cm4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2392A81C09FBA900CC4B0F /* cm4.png */; };
+		8F2392AB1C0A397500CC4B0F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2392AA1C0A397500CC4B0F /* Game.swift */; };
 		8F273CF01BF28B7100275378 /* GameInvitesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F273CEF1BF28B7100275378 /* GameInvitesPage.swift */; };
 		8F273CF51BF29E4300275378 /* clock104.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F273CF21BF29E4300275378 /* clock104.png */; };
 		8F273CF61BF29E4300275378 /* flash31.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F273CF31BF29E4300275378 /* flash31.png */; };
@@ -228,6 +229,7 @@
 		8F2392A41C09EF3A00CC4B0F /* cm2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cm2.png; sourceTree = "<group>"; };
 		8F2392A61C09FAE600CC4B0F /* cm3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cm3.png; sourceTree = "<group>"; };
 		8F2392A81C09FBA900CC4B0F /* cm4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cm4.png; sourceTree = "<group>"; };
+		8F2392AA1C0A397500CC4B0F /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		8F273CEF1BF28B7100275378 /* GameInvitesPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInvitesPage.swift; sourceTree = "<group>"; };
 		8F273CF21BF29E4300275378 /* clock104.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock104.png; sourceTree = "<group>"; };
 		8F273CF31BF29E4300275378 /* flash31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash31.png; sourceTree = "<group>"; };
@@ -555,6 +557,7 @@
 				8FA5C8921B9A264F0097637E /* LoginMenu.swift */,
 				8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */,
 				8F4A028B1B9A414D0084024A /* GameMenu.swift */,
+				8F2392AA1C0A397500CC4B0F /* Game.swift */,
 				8F4A02891B9A40FF0084024A /* GameInterface.swift */,
 				8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */,
 				8F86392A1B9B01D00055608B /* ProfileMenu.swift */,
@@ -981,6 +984,7 @@
 				8F8BD2AD1BC5380100B25CFE /* FriendRequestsPage.swift in Sources */,
 				8F86392B1B9B01D00055608B /* ProfileMenu.swift in Sources */,
 				8FBED2FC1BB1F35700CDAACC /* UserTableViewCell.swift in Sources */,
+				8F2392AB1C0A397500CC4B0F /* Game.swift in Sources */,
 				8F1AFCF91BAE05A7009D7299 /* FirstLaunchScreen.swift in Sources */,
 				8F86392F1B9B044F0055608B /* FriendsMenu.swift in Sources */,
 				F12B6E001BFFE925009897FA /* Test.swift in Sources */,
