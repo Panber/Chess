@@ -37,7 +37,11 @@ var blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
 var red = UIColor(red:0.89, green:0.36, blue:0.36, alpha:1.0)
 
 
-var gameIDS = []
+var gameIDSYourTurn:Array<String> = []
+var gameIDSTheirTurn:Array<String> = []
+var gameIDSGameOver:Array<String> = []
+var gameID = ""
+
 var pressedCreateNewGame = NSUserDefaults()
 
 var scrollView: UIScrollView!
@@ -357,7 +361,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             if let games = games as! [PFObject]! {
             for games in games {
                 
-
+                
                 
                 
                 if games["confirmed"] as? Bool == true {
@@ -373,7 +377,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.yourturnUpdateSince.append(since)
                         
-                        
+                        gameIDSYourTurn.append(games.objectId!)
                         self.yourTurnColor.append("white")
                         
                         self.yourTurnSpeed.append((games["speed"] as? String)!)
@@ -390,6 +394,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         
                         self.theirturnUpdateSince.append(since)
                         
+                        gameIDSTheirTurn.append(games.objectId!)
+
                         self.theirTurnColor.append("white")
                         
                         self.theirTurnSpeed.append((games["speed"] as? String)!)
@@ -407,6 +413,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.gameoverUpdateSince.append(since)
                         
+                        gameIDSGameOver.append(games.objectId!)
+
                         self.gameoverTurnColor.append("white")
                         
                         self.gameoverTurnSpeed.append((games["speed"] as? String)!)
@@ -427,6 +435,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.yourturnUpdateSince.append(since)
                         
+                        gameIDSYourTurn.append(games.objectId!)
+
                         self.yourTurnColor.append("black")
                         
                         self.yourTurnSpeed.append((games["speed"] as? String)!)
@@ -445,6 +455,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.theirturnUpdateSince.append(since)
                         
+                        gameIDSTheirTurn.append(games.objectId!)
+
                         self.theirTurnColor.append("black")
                         
                         self.theirTurnSpeed.append((games["speed"] as? String)!)
@@ -462,6 +474,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.gameoverUpdateSince.append(since)
                         
+                        gameIDSGameOver.append(games.objectId!)
+
                         self.gameoverTurnColor.append("black")
                         
                         self.gameoverTurnSpeed.append((games["speed"] as? String)!)
@@ -810,6 +824,21 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
+        let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
+        
+        switch indexPath.section {
+        case 0:
+            gameID = gameIDSYourTurn[indexPath.row]
+        case 1:
+            gameID = gameIDSTheirTurn[indexPath.row]
+        case 2:
+            gameID = gameIDSGameOver[indexPath.row]
+        default :
+            ""
+            
+        }
+        print("this is \(gameID)")
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -901,7 +930,7 @@ var loaded = false
         if yPos > 64 {
             
             self.loadingView.alpha = (((yPos/1000) * 10)) - 0.5
-            //self.tableView.alpha = (2-((yPos/1000) * 10))
+            self.tableView.alpha = (2-((yPos/1000) * 15))
 
         }
 //        else {
@@ -916,10 +945,10 @@ var loaded = false
             
        
             if loaded == false {
+                self.tableView.alpha = 0
 
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 
-                self.tableView.alpha = 0
                 
                 }, completion: { (finished) -> Void in
                 if finished {
@@ -946,7 +975,7 @@ var loaded = false
                     self.yourturnLeft = []
                     self.theirturnLeft = []
                     
-                   // self.tableView.reloadData()
+                    self.tableView.reloadData()
 
                     self.findGames()
                     

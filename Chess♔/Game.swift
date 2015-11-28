@@ -250,6 +250,10 @@ class Game: UIViewController {
     
     @IBOutlet weak var chessBoard: UIImageView!
     
+    override func viewWillAppear(animated: Bool) {
+        lightOrDarkMode()
+    }
+    
     // MARK: - View did load! 😄
     override func viewDidLoad() {
         
@@ -264,8 +268,8 @@ class Game: UIViewController {
         }
         
         //tab-bar and navigation bar
-        self.tabBarController?.tabBar.hidden = true
-        let nav = self.navigationController?.navigationBar
+     //   self.tabBarController?.tabBar.hidden = true
+       // let nav = self.navigationController?.navigationBar
         
         //load marker
         pieceMarked.image = UIImage(named: "pieceMarked.png")
@@ -284,6 +288,79 @@ class Game: UIViewController {
             }
         }
         
+        let otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) - (screenWidth/1.4), 60, 60))
+        otherImage.contentMode = .ScaleAspectFill
+        otherImage.clipsToBounds = true
+        otherImage.layer.cornerRadius = otherImage.frame.size.width/2
+        
+        
+        let query = PFQuery(className: "Games")
+        query.whereKey("objectId", equalTo: gameID)
+        let r = query.getFirstObject()
+
+        if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
+        
+            self.title = r!["blackPlayer"] as? String
+            
+            
+            let userQuery = PFQuery(className: "_User")
+            userQuery.whereKey("username", equalTo: r!["blackPlayer"]!)
+            let _user = userQuery.getFirstObject() as! PFUser
+            
+            let rating = _user["rating"] as? Int
+            
+            
+            let profilePictureObject = _user["profile_picture"] as? PFFile
+            
+            if(profilePictureObject != nil)
+            {
+                profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                    
+                    if(imageData != nil)
+                    {
+                        otherImage.image = UIImage(data: imageData!)
+                        self.view.addSubview(otherImage)
+                    }
+                    
+                }
+            }
+            
+            
+            
+        }
+        else {
+            self.title = r!["whitePlayer"] as? String
+
+            
+            let userQuery = PFQuery(className: "_User")
+            userQuery.whereKey("username", equalTo: r!["whitePlayer"]!)
+            let _user = userQuery.getFirstObject() as! PFUser
+            
+            let rating = _user["rating"] as? Int
+
+            
+            let profilePictureObject = _user["profile_picture"] as? PFFile
+            
+            if(profilePictureObject != nil)
+            {
+                profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                    
+                    if(imageData != nil)
+                    {
+                        otherImage.image = UIImage(data: imageData!)
+                        self.view.addSubview(otherImage)
+
+                    }
+                    
+                }
+            }
+            
+            
+        }
+        
+        
+        
+        
         //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
         
     }
@@ -291,13 +368,13 @@ class Game: UIViewController {
     
     
     // MARK: - Setup-functions 🔍
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
+//    override func prefersStatusBarHidden() -> Bool {
+//        return true
+//    }
     
-    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return UIStatusBarAnimation.Slide
-    }
+//    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+//        return UIStatusBarAnimation.Slide
+//    }
     
     // MARK: - Functions to make life easier 💕
     func movePiece(_moveByAmountx:CGFloat,_moveByAmounty:CGFloat) {
@@ -307,7 +384,6 @@ class Game: UIViewController {
         moveByAmounty = _moveByAmounty
         movementTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: Selector("updateMovementTimer"), userInfo: nil, repeats: true)
         if isWhiteTurn == true {
-            
             
             
             
@@ -2121,5 +2197,47 @@ class Game: UIViewController {
             }
         }
     }
+    
+    //func to check if dark or light mode should be enabled, keep this at the bottom
+    func lightOrDarkMode() {
+        if darkMode == true {
+            
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
+            
+            self.view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
+            self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.tintColor = blue
+            
+            
+            
+            
+            
+            
+            
+            
+        }
+        else if darkMode == false {
+            
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
+            self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+            self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
+            self.tabBarController?.tabBar.tintColor = blue
+            self.navigationController?.navigationBar.tintColor = blue
+            
+            
+            self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
+            
+            
+        }
+        
+        
+    }
+
     
 }
