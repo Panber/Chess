@@ -288,10 +288,17 @@ class Game: UIViewController {
             }
         }
         
-        let otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) - (screenWidth/1.4), 60, 60))
+        let otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
         otherImage.contentMode = .ScaleAspectFill
         otherImage.clipsToBounds = true
         otherImage.layer.cornerRadius = otherImage.frame.size.width/2
+        print(screenHeight)
+        if screenHeight == 667.0 {
+            otherImage.frame.origin.y = 64 + 8
+        }
+        else if screenHeight == 736.0 {
+            otherImage.frame.origin.y = 64 + 13
+        }
         
         
         let query = PFQuery(className: "Games")

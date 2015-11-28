@@ -1014,7 +1014,9 @@
                             <constraint firstAttribute="bottom" secondItem="lJ5-we-mZL" secondAttribute="bottom" id="kcj-Fs-k5s"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="MJf-zF-viF"/>
+                    <navigationItem key="navigationItem" id="MJf-zF-viF">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="0lX-gW-zhg"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="chessBoard" destination="lJ5-we-mZL" id="fjD-dF-RNP"/>
                     </connections>
