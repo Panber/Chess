@@ -789,13 +789,12 @@ class GameInterFace3: UIViewController {
                         }
                         pieceOptions += [pieceOption]
                         pieceCanTake = pieceOption
-                        //pieceToTake = blackPieces[r]
                         canThePieceGofurther = false
                         
                     }
                 }
                 
-                //								// Decides which squares the King can go to
+               // Decides which squares the King can go to
                 if pieceid == 5 && selectedPiece == whiteKing {
                     for var p = 0 ; p < pieceOptions.count; p++ {
                             if canSaveKing(pieceOptions[p], array: pieceBlackLogicOptions) == true {
