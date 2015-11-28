@@ -485,7 +485,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 
                 
                 
-                
+                self.loaded = false
                 //self.ratingArray.append(games["blackPlayer"] as! Int)
                 //  updatedArrayppend(games["blackPlayer"] as! String)
                 //  timeleftArrayppend(games["blackPlayer"] as! String)
