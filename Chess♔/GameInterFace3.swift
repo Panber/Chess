@@ -71,6 +71,14 @@ var blackCastlingRight : Array<UIImageView> = []
 
 var castlePiece: UIImageView = whitePawn1
 
+// En Passant
+var blackPassant: Bool = false
+var canPassant: Bool = false
+
+var whitePassant: Bool = false
+
+var whitePassantPieces: Array<UIImageView> = []
+var blackPassantPieces: Array<UIImageView> = []
 
 // Logic options for all pieces
 var pieceWhiteLogicOptions: Array<UIImageView> = []
@@ -562,6 +570,18 @@ class GameInterFace3: UIViewController {
                         
                     }
                 }
+                
+                for var r = 0; r < blackPassantPieces.count; r++ {
+                    if selectedPiece.frame.origin.y == screenHeight/2 - 1 * pieceSize && blackPassantPieces[r].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && blackPassantPieces[r].frame.origin.y == selectedPiece.frame.origin.y && canPassant == true && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
+                        print("Passant!")
+                        whitePassant = true
+                        let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y - 1 * pieceSize, pieceSize, pieceSize))
+                        pieceOption.image = UIImage(named: "piecePossibilities.png")
+                        self.view.addSubview(pieceOption)
+                        pieceOptions += [pieceOption]
+                    }
+                }
+                
                 for var o = 0 ; o < pieceOptions.count; o++ {
                     if CGRectContainsPoint(boarderBoard.frame, pieceOptions[o].center) == false {
                         [pieceOptions[o] .removeFromSuperview()]
@@ -1411,6 +1431,18 @@ class GameInterFace3: UIViewController {
                         
                     }
                 }
+                
+                for var r = 0; r < whitePassantPieces.count; r++ {
+                if selectedPiece.frame.origin.y == screenHeight/2 && whitePassantPieces[r].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && whitePassantPieces[r].frame.origin.y == selectedPiece.frame.origin.y && canPassant == true && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
+                    print("Passant!")
+                    blackPassant = true
+                    let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y + 1 * pieceSize, pieceSize, pieceSize))
+                    pieceOption.image = UIImage(named: "piecePossibilities.png")
+                    self.view.addSubview(pieceOption)
+                    pieceOptions += [pieceOption]
+                    }
+                }
+                
                 for var o = 0 ; o < pieceOptions.count; o++ {
                     if CGRectContainsPoint(boarderBoard.frame, pieceOptions[o].center) == false {
                         [pieceOptions[o] .removeFromSuperview()]
@@ -1716,10 +1748,17 @@ class GameInterFace3: UIViewController {
                         blackPiecesString.removeAtIndex(t)
                         
                     }
+                    if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackPieces[t].frame.origin.x && pieceOptions[o].frame.origin.y == blackPieces[t].frame.origin.y - 1 * pieceSize && whitePassant == true && hasBeenTaken(selectedPiece, array: whitePieces) && canPassant == true  {
+                        blackPieces[t].removeFromSuperview()
+                        blackPieces.removeAtIndex(t)
+                        whitePassant = false
+                        canPassant = false
+                        print("Passant white occured")
+                        blackPassantPieces = []
+                    }
                 }
             }
         }
-        
         
         for var o = 0 ; o < pieceOptions.count ; o++ {
             whiteCastle = false
@@ -1730,6 +1769,13 @@ class GameInterFace3: UIViewController {
                 if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == whitePieces[t].frame.origin.x && pieceOptions[o].frame.origin.y == whitePieces[t].frame.origin.y  {
                     whitePieces[t].removeFromSuperview()
                     whitePieces.removeAtIndex(t)
+                }
+                if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == whitePieces[t].frame.origin.x && pieceOptions[o].frame.origin.y == whitePieces[t].frame.origin.y + 1 * pieceSize && blackPassant == true && hasBeenTaken(selectedPiece, array: blackPieces) && canPassant == true  {
+                    whitePieces[t].removeFromSuperview()
+                    whitePieces.removeAtIndex(t)
+                    blackPassant = false
+                    canPassant = false
+                    whitePassantPieces = []
                 }
                 
             }
@@ -1841,9 +1887,19 @@ class GameInterFace3: UIViewController {
             pieceOptions[o].userInteractionEnabled = true
             pieceOptions[o].multipleTouchEnabled = true
             
+            if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _4 && hasBeenTaken(selectedPiece, array: whitePieces) && selectedPiece.frame.origin.y == _2   {
+                canPassant = true
+                print("can passant!")
+                whitePassantPieces += [selectedPiece]
+            }
+            
+            if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _5 && hasBeenTaken(selectedPiece, array: blackPieces) && selectedPiece.frame.origin.y == _7   {
+                canPassant = true
+                print("can passant white!")
+                blackPassantPieces += [selectedPiece]
+            }
             if touch.view == pieceOptions[o] {
                 movePiece(pieceOptions[o].frame.origin.x - selectedPiece.frame.origin.x, _moveByAmounty: pieceOptions[o].frame.origin.y - selectedPiece.frame.origin.y)
-                
             }
         }
         for var o = 0 ; o < whiteCastlingLeft.count; o++ {
