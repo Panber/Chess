@@ -40,6 +40,10 @@ let _8 = screenHeight/2 - 4 * pieceSize
 let yAxisArr = [_1,_2,_3,_4,_5,_6,_7,_8]
 
 let yAxisArrStr = ["1","2","3","4","5","6","7","8"]
+var pieceString = ""
+let xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
+let yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
+var pieceStringPos = ""
 
 
 //BOARDER
@@ -274,7 +278,7 @@ class Game: UIViewController {
             }
         }
         
-        print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
+        //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
         
     }
     
@@ -538,7 +542,7 @@ class Game: UIViewController {
                 for var r = 0; r < blackPieces.count; r++ {
                     if blackPieces[r].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && blackPieces[r].frame.origin.y == selectedPiece.frame.origin.y - 1 * pieceSize {
                         
-                        print("working")
+                        //print("working")
                         let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y - 1 * pieceSize, pieceSize, pieceSize))
                         pieceOption.image = UIImage(named: "piecePossibilities.png")
                         if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove, friends:  whitePieces)  == 2 && canSaveKing(pieceOption, array: pieceBlackCanMove) == false && canSaveKing(pieceOption, array: blackPieceLogic) == false {
@@ -575,7 +579,7 @@ class Game: UIViewController {
                 }
                 
                     if selectedPiece.frame.origin.y == screenHeight/2 - 1 * pieceSize && blackPassantPieces.frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && blackPassantPieces.frame.origin.y == selectedPiece.frame.origin.y && canPassant == true && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
-                        print("Passant!")
+                        //print("Passant!")
                         whitePassant = true
                         let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y - 1 * pieceSize, pieceSize, pieceSize))
                         pieceOption.image = UIImage(named: "piecePossibilities.png")
@@ -879,7 +883,7 @@ class Game: UIViewController {
     
     func chessPieceMovementLogic(var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView], var piece: UIImageView, var logicOptions: [UIImageView])  {
         
-        print(pieceWhiteCanMove.count)
+        //print(pieceWhiteCanMove.count)
         
         // Check if the piece is taken
         if !hasBeenTaken(piece, array: pieceToTake) {
@@ -1242,7 +1246,7 @@ class Game: UIViewController {
                     rookLogicOptions.removeAll()
                     rookLogicOptions = []
                 }
-                print(queenLogicOptions.count)
+                //print(queenLogicOptions.count)
             }
             
             // movementNumber = 2
@@ -1366,7 +1370,7 @@ class Game: UIViewController {
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
                     if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  blackPieces)  == 2 && verticallyAlignedWhite == false {
                         pieceOption.removeFromSuperview()
-                        print("Cant move!")
+                        //print("Cant move!")
                     } else {
                         self.view.addSubview(pieceOption)
                     }
@@ -1401,7 +1405,7 @@ class Game: UIViewController {
                         pieceOption.image = UIImage(named: "piecePossibilities.png")
                         if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  blackPieces)  == 2 && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false && canSaveKing(pieceOption, array: whitePieceLogic) == false  {
                             pieceOption.removeFromSuperview()
-                            print("Cant move!")
+                            //print("Cant move!")
                         } else {
                             self.view.addSubview(pieceOption)
                         }
@@ -1434,7 +1438,7 @@ class Game: UIViewController {
                 }
                 
                 if selectedPiece.frame.origin.y == screenHeight/2 && whitePassantPieces.frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && whitePassantPieces.frame.origin.y == selectedPiece.frame.origin.y && canPassant == true && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
-                    print("Passant!")
+                    //print("Passant!")
                     blackPassant = true
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y + 1 * pieceSize, pieceSize, pieceSize))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
@@ -1684,7 +1688,7 @@ class Game: UIViewController {
             }
         }
 
-        print(count)
+        //print(count)
         return count
     }
     
@@ -1715,6 +1719,16 @@ class Game: UIViewController {
             
         }
         
+         for var o = 0 ; o < pieceOptions.count ; o++ {
+        for var t = 0; t < 8; t++ {
+            for var g = 0; g < 8; g++ {
+                if (selectedPiece.frame.origin.x == xAxisArr[t] && selectedPiece.frame.origin.y == yAxisArr[g]) {
+                    pieceStringPos = xAxisArrStr2[t] + yAxisArrStr2[g]
+                }
+            }
+        }
+        }
+        
         for var o = 0 ; o < pieceOptions.count ; o++ {
             
             if touch.view == pieceOptions[o] {
@@ -1723,7 +1737,20 @@ class Game: UIViewController {
                 for var t = 0; t < 8; t++ {
                     for var g = 0; g < 8; g++ {
                         if (pieceOptions[o].frame.origin.x == xAxisArr[t] && pieceOptions[o].frame.origin.y == yAxisArr[g] && touch.view == pieceOptions[o]) {
-                            print(xAxisArrStr[t] + yAxisArrStr[g])
+                            if hasBeenTaken(selectedPiece, array: whiteKnights) || hasBeenTaken(selectedPiece, array: blackKnights) {
+                                pieceString = "N"
+                            } else if hasBeenTaken(selectedPiece, array: whiteBishops) || hasBeenTaken(selectedPiece, array: blackBishops) {
+                                pieceString = "B"
+                            } else if hasBeenTaken(selectedPiece, array: whiteRooks) || hasBeenTaken(selectedPiece, array: blackRooks)  {
+                                pieceString = "R"
+                            } else if hasBeenTaken(selectedPiece, array: whiteQueens) || hasBeenTaken(selectedPiece, array: blackQueens) {
+                                pieceString = "Q"
+                            } else if hasBeenTaken(selectedPiece, array: whiteKings) || hasBeenTaken(selectedPiece, array: blackKings)  {
+                                pieceString = "K"
+                            } else if hasBeenTaken(selectedPiece, array: whitePawns) || hasBeenTaken(selectedPiece, array: blackPawns) {
+                                pieceString = ""
+                            }
+                            print(pieceString + pieceStringPos + "-" + xAxisArrStr[t] + yAxisArrStr[g])
                         }
                     }
                 }
@@ -1737,7 +1764,7 @@ class Game: UIViewController {
                         selectedPiece.image = UIImage(named:"whiteQueen")
                         whitePawns.removeAtIndex(i-1)
                         whiteQueens += [selectedPiece]
-                        print(whitePawns.count)
+                       // print(whitePawns.count)
                         for var q = 0; q < whiteQueens.count; q++ {
                             self.chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueens[q] , logicOptions: piecesBlackLogic)
                         }
@@ -1783,7 +1810,7 @@ class Game: UIViewController {
                             selectedPiece.image = UIImage(named:"blackQueen")
                             blackPawns.removeAtIndex(i-1)
                             blackQueens += [selectedPiece]
-                            print(blackPawns.count)
+                            //print(blackPawns.count)
                             for var q = 0; q < blackQueens.count; q++ {
                                 self.chessPieceMovementLogic(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, piece: blackQueens[q], logicOptions: piecesWhiteLogic)
                             }
@@ -1851,7 +1878,7 @@ class Game: UIViewController {
                         blackPieces.removeAtIndex(t)
                         whitePassant = false
                         canPassant = false
-                        print("Passant white occured")
+                        //print("Passant white occured")
                     }
                 }
             }
@@ -1995,13 +2022,13 @@ class Game: UIViewController {
             
             if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _4 && hasBeenTaken(selectedPiece, array: whitePieces) && selectedPiece.frame.origin.y == _2   {
                 canPassant = true
-                print("can passant!")
+                //print("can passant!")
                 whitePassantPieces = selectedPiece
             }
             
             if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _5 && hasBeenTaken(selectedPiece, array: blackPieces) && selectedPiece.frame.origin.y == _7   {
                 canPassant = true
-                print("can passant white!")
+                //print("can passant white!")
                 blackPassantPieces = selectedPiece
             }
           
