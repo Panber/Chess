@@ -79,6 +79,23 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         
         let cell:UserTableViewCell2 = self.tableView.dequeueReusableCellWithIdentifier("cell2") as! UserTableViewCell2
 
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        
+        if darkMode {
+            cell.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            cell.rating.textColor = UIColor.lightTextColor()
+            cell.username.textColor =  UIColor.whiteColor()
+            
+        }
+        else {
+            
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.rating.textColor = UIColor.darkGrayColor()
+            cell.username.textColor =  UIColor.blackColor()
+        }
+        
+        
         
         cell.checkmarkButton.tag = indexPath.row + 1
         cell.checkmarkButton.addTarget(self, action: "checkmarkButtonPressed:", forControlEvents: .TouchUpInside)
@@ -124,6 +141,9 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                             
                             if let userArray = objects as? [PFUser] {
                                 for user in userArray {
+                                    
+                                    let r = user["rating"] as! Int
+                                    cell.rating.text = "\(r)"
                                     if let userPicture = user["profile_picture"] as? PFFile {
                                         
                                         userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
@@ -187,6 +207,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         NSUserDefaults.standardUserDefaults().setObject(userArray[indexPath.row], forKey: "other_username_profile")
         cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile") as! String
         
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         
         var p = imageDataArray[indexPath.row]
@@ -375,13 +396,17 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
             
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
             
-            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.tintColor = blue
+            
+            self.tableView.backgroundColor = UIColor(red: 0.20, green: 0.20 , blue: 0.20, alpha: 1)
+            
             
             
             
@@ -390,11 +415,13 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
             self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
             self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
-            
+            self.tableView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+
             
         }
         

@@ -40,6 +40,7 @@ class UserTableViewCell2: UITableViewCell {
     @IBOutlet weak var checkmarkButton: UIButton!
     @IBOutlet weak var crossButton: UIButton!
     
+    @IBOutlet weak var rating: UILabel!
     
     
     override func awakeFromNib() {

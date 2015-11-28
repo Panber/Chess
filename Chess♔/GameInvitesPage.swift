@@ -107,7 +107,7 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         if darkMode {
             cell.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)

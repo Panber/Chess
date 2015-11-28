@@ -673,7 +673,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 if(imageData != nil)
                 {
                     NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
-
+                    tableView.deselectRowAtIndexPath(indexPath, animated: true)
                 }
                 
             }

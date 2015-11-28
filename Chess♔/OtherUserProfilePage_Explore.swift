@@ -92,6 +92,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         //  setUpProfile()
         lightOrDarkMode()
         self.removeProfile()
+        setUpProfile()
 
 
     }
@@ -99,7 +100,6 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
 
     }
     override func viewDidAppear(animated: Bool) {
-        setUpProfile()
 
     }
  

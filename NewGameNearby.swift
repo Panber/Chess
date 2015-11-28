@@ -105,6 +105,23 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
         
         let cell:NewGameNearbyTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("newGameNearbyCell", forIndexPath: indexPath) as! NewGameNearbyTableViewCell
         
+        
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        
+        if darkMode {
+            cell.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            cell.rating.textColor = UIColor.lightTextColor()
+            cell.username.textColor =  UIColor.whiteColor()
+            
+        }
+        else {
+            
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.rating.textColor = UIColor.darkGrayColor()
+            cell.username.textColor =  UIColor.blackColor()
+        }
+        
         cell.username.text = userArray[indexPath.row]
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
@@ -160,6 +177,9 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
         NSUserDefaults.standardUserDefaults().setObject(ratingArray[indexPath.row], forKey: "other_userrating_from_friends_gamemenu")
         cell.rating.text = String(NSUserDefaults.standardUserDefaults().objectForKey("other_userrating_from_friends_gamemenu") as! Int)
         
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        
         
     }
     
@@ -168,7 +188,18 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
         self.title = "Nearby"
         lightOrDarkMode()
         getFriends()
-
+        
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        userArray = []
+        ratingArray = []
+        
+        profilePicArray = []
+        
+        imageDataArray = []
+        
+        tableView.reloadData()
     }
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
@@ -177,13 +208,16 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
             
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
             
-            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.tintColor = blue
+            
+            self.tableView.backgroundColor = UIColor(red: 0.20, green: 0.20 , blue: 0.20, alpha: 1)
             
             
             
@@ -192,10 +226,12 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
             self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
             self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
+            self.tableView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             
             
         }

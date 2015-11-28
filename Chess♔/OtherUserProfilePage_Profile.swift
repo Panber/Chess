@@ -90,11 +90,12 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         //  setUpProfile()
         lightOrDarkMode()
         self.removeProfile()
+        setUpProfile()
+
 
     }
     override func viewDidAppear(animated: Bool) {
         
-        setUpProfile()
     }
     override func viewWillDisappear(animated: Bool) {
     }
@@ -255,7 +256,6 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         //adding white bc to fridnrequest
         label2o5 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y, screenWidth, 45))
         label2o5.text = ""
-        label2o5.backgroundColor = UIColor.whiteColor()
         scrollView.addSubview(label2o5)
         
         
