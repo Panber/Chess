@@ -1720,6 +1720,15 @@ class Game: UIViewController {
             
             if touch.view == pieceOptions[o] {
                 
+                // This is for showing which square the pieces are in
+                for var t = 0; t < 8; t++ {
+                    for var g = 0; g < 8; g++ {
+                        if (pieceOptions[o].frame.origin.x == xAxisArr[t] && pieceOptions[o].frame.origin.y == yAxisArr[g] && touch.view == pieceOptions[o]) {
+                            print(xAxisArrStr[t] + yAxisArrStr[g])
+                        }
+                    }
+                }
+                
                 for var i = 0; i < whitePawns.count;i++ {
                 if selectedPiece == whitePawns[i] && selectedPiece.frame.origin.y == _7 {
                     let actionSheet = UIAlertController(title: nil, message: "Promote pawn to:", preferredStyle: UIAlertControllerStyle.ActionSheet)
