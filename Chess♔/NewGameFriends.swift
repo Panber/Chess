@@ -174,6 +174,25 @@ class NewGameFriends: UIViewController, UITableViewDelegate, UIScrollViewDelegat
   
     }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+    
+    let yPos = -tableView.contentOffset.y
+        
+        if yPos > 180 {
+        
+//            friendsArray = []
+//            ratingArray = []
+//            
+//            profilePicArray = []
+//            
+//            imageDataArray = []
+            
+            getFriends()
+        
+        }
+    
+    }
+    
     //func to check if dark or light mode should be enabled, keep this at the bottom
     func lightOrDarkMode() {
         if darkMode == true {
