@@ -900,7 +900,7 @@ var loaded = false
         
         if yPos > 64 {
             
-            self.loadingView.alpha = (((yPos/1000) * 5)) - 0.2
+            self.loadingView.alpha = (((yPos/1000) * 10)) - 0.5
             //self.tableView.alpha = (2-((yPos/1000) * 10))
 
         }
@@ -935,8 +935,8 @@ var loaded = false
                     self.ratingArray = []
                     self.updatedArray = []
                     self.timeleftArray = []
-                    self.profilePicArray = []
-                    self.imageDataArray = []
+                    //self.profilePicArray = []
+                  //  self.imageDataArray = []
                     self.indicatorDataArray = []
                     
                     self.yourturnUpdateSince = []
