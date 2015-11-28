@@ -77,8 +77,8 @@ var canPassant: Bool = false
 
 var whitePassant: Bool = false
 
-var whitePassantPieces: Array<UIImageView> = []
-var blackPassantPieces: Array<UIImageView> = []
+var whitePassantPieces: UIImageView = whitePawn1
+var blackPassantPieces: UIImageView = whitePawn1
 
 // Logic options for all pieces
 var pieceWhiteLogicOptions: Array<UIImageView> = []
@@ -571,8 +571,7 @@ class GameInterFace3: UIViewController {
                     }
                 }
                 
-                for var r = 0; r < blackPassantPieces.count; r++ {
-                    if selectedPiece.frame.origin.y == screenHeight/2 - 1 * pieceSize && blackPassantPieces[r].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && blackPassantPieces[r].frame.origin.y == selectedPiece.frame.origin.y && canPassant == true && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
+                    if selectedPiece.frame.origin.y == screenHeight/2 - 1 * pieceSize && blackPassantPieces.frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && blackPassantPieces.frame.origin.y == selectedPiece.frame.origin.y && canPassant == true && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
                         print("Passant!")
                         whitePassant = true
                         let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y - 1 * pieceSize, pieceSize, pieceSize))
@@ -580,7 +579,6 @@ class GameInterFace3: UIViewController {
                         self.view.addSubview(pieceOption)
                         pieceOptions += [pieceOption]
                     }
-                }
                 
                 for var o = 0 ; o < pieceOptions.count; o++ {
                     if CGRectContainsPoint(boarderBoard.frame, pieceOptions[o].center) == false {
@@ -1432,8 +1430,7 @@ class GameInterFace3: UIViewController {
                     }
                 }
                 
-                for var r = 0; r < whitePassantPieces.count; r++ {
-                if selectedPiece.frame.origin.y == screenHeight/2 && whitePassantPieces[r].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && whitePassantPieces[r].frame.origin.y == selectedPiece.frame.origin.y && canPassant == true && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
+                if selectedPiece.frame.origin.y == screenHeight/2 && whitePassantPieces.frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && whitePassantPieces.frame.origin.y == selectedPiece.frame.origin.y && canPassant == true && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
                     print("Passant!")
                     blackPassant = true
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y + 1 * pieceSize, pieceSize, pieceSize))
@@ -1441,7 +1438,6 @@ class GameInterFace3: UIViewController {
                     self.view.addSubview(pieceOption)
                     pieceOptions += [pieceOption]
                     }
-                }
                 
                 for var o = 0 ; o < pieceOptions.count; o++ {
                     if CGRectContainsPoint(boarderBoard.frame, pieceOptions[o].center) == false {
@@ -1489,6 +1485,7 @@ class GameInterFace3: UIViewController {
             chessPieceMovementLogic(2, pieceid: 5, friend: whitePieces, enemy: blackPieces, piece: whiteKing , logicOptions: piecesBlackLogic)
             chessPieceMovementLogic(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, piece: blackKing, logicOptions: piecesWhiteLogic)
             
+            // Starts logic for all pieces
             for var q = 0; q < whiteQueens.count; q++ {
             chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueens[q] , logicOptions: piecesBlackLogic)
             }
@@ -1580,6 +1577,7 @@ class GameInterFace3: UIViewController {
             // Castle Logic
             removeLeftWhiteCastleLogic()
             removeRightWhiteCastleLogic()
+            
         }
         
         if selectedPiece == whiteKing {
@@ -1717,6 +1715,76 @@ class GameInterFace3: UIViewController {
         for var o = 0 ; o < pieceOptions.count ; o++ {
             
             if touch.view == pieceOptions[o] {
+                
+                for var i = 0; i < whitePawns.count;i++ {
+                if selectedPiece == whitePawns[i] && selectedPiece.frame.origin.y == _7 {
+                    let actionSheet = UIAlertController(title: nil, message: "Promote pawn to:", preferredStyle: UIAlertControllerStyle.ActionSheet)
+                    
+                    let promoteToQueen = UIAlertAction(title: "Queen", style: .Default, handler: {
+                        (alert: UIAlertAction!) -> Void in
+                        selectedPiece.image = UIImage(named:"whiteQueen")
+                        whitePawns.removeAtIndex(i-1)
+                        whiteQueens += [selectedPiece]
+                        print(whitePawns.count)
+                    })
+                    let promoteToRook = UIAlertAction(title: "Rook", style: .Default, handler: {
+                        (alert: UIAlertAction!) -> Void in
+                        selectedPiece.image = UIImage(named:"whiteRook")
+                        whiteRooks += [selectedPiece]
+                    })
+                    let promoteToBishop = UIAlertAction(title: "Bishop", style: .Default, handler: {
+                        (alert: UIAlertAction!) -> Void in
+                        selectedPiece.image = UIImage(named:"whiteBishop")
+                        whiteBishops += [selectedPiece]
+                    })
+                    let promoteToKnight = UIAlertAction(title: "Knight", style: .Default, handler: {
+                        (alert: UIAlertAction!) -> Void in
+                        selectedPiece.image = UIImage(named:"whiteKnight")
+                        whiteKnights += [selectedPiece]
+                    })
+                    
+                    actionSheet.addAction(promoteToQueen)
+                    actionSheet.addAction(promoteToRook)
+                    actionSheet.addAction(promoteToBishop)
+                    actionSheet.addAction(promoteToKnight)
+                    self.presentViewController(actionSheet, animated: true, completion: nil)
+                        }
+                    }
+                for var i = 0; i < blackPawns.count;i++ {
+                    if selectedPiece == blackPawns[i] && selectedPiece.frame.origin.y == _2 {
+                        let actionSheet = UIAlertController(title: nil, message: "Promote pawn to:", preferredStyle: UIAlertControllerStyle.ActionSheet)
+                        
+                        let promoteToQueen = UIAlertAction(title: "Queen", style: .Default, handler: {
+                            (alert: UIAlertAction!) -> Void in
+                            selectedPiece.image = UIImage(named:"blackQueen")
+                            blackPawns.removeAtIndex(i-1)
+                            blackQueens += [selectedPiece]
+                            print(blackPawns.count)
+                        })
+                        let promoteToRook = UIAlertAction(title: "Rook", style: .Default, handler: {
+                            (alert: UIAlertAction!) -> Void in
+                            selectedPiece.image = UIImage(named:"blackRook")
+                            blackRooks += [selectedPiece]
+                        })
+                        let promoteToBishop = UIAlertAction(title: "Bishop", style: .Default, handler: {
+                            (alert: UIAlertAction!) -> Void in
+                            selectedPiece.image = UIImage(named:"blackBishop")
+                            blackBishops += [selectedPiece]
+                        })
+                        let promoteToKnight = UIAlertAction(title: "Knight", style: .Default, handler: {
+                            (alert: UIAlertAction!) -> Void in
+                            selectedPiece.image = UIImage(named:"blackKnight")
+                            blackKnights += [selectedPiece]
+                        })
+                        
+                        actionSheet.addAction(promoteToQueen)
+                        actionSheet.addAction(promoteToRook)
+                        actionSheet.addAction(promoteToBishop)
+                        actionSheet.addAction(promoteToKnight)
+                        self.presentViewController(actionSheet, animated: true, completion: nil)
+                    }
+                }
+                
                 for var i = 0; i < whitePieces.count; i++ {
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == whitePieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == whitePieces[i].frame.origin.y  {
                         pieceToTake += [whitePieces[i]]
@@ -1748,7 +1816,6 @@ class GameInterFace3: UIViewController {
                         whitePassant = false
                         canPassant = false
                         print("Passant white occured")
-                        blackPassantPieces = []
                     }
                 }
             }
@@ -1769,7 +1836,12 @@ class GameInterFace3: UIViewController {
                     whitePieces.removeAtIndex(t)
                     blackPassant = false
                     canPassant = false
-                    whitePassantPieces = []
+                }
+                if touch.view == pieceOptions[o] &&  hasBeenTaken(selectedPiece, array: whitePieces)   {
+                    canPassant = false
+                }
+                if touch.view == pieceOptions[o] &&  hasBeenTaken(selectedPiece, array: blackPieces)   {
+                    canPassant = false
                 }
                 
             }
@@ -1804,13 +1876,15 @@ class GameInterFace3: UIViewController {
                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 3, friend: whitePieces, enemy: blackPieces)
             }
         }
-        
-        if touch.view == whiteQueen && isWhiteTurn == true {
-            selectedPiece = whiteQueen
+     
+        for var i = 0; i < whiteQueens.count; i++ {
+        if touch.view == whiteQueens[i] && isWhiteTurn == true {
+            selectedPiece = whiteQueens[i]
             removePieceOptions()
             removeWhiteCastlingLeft()
             removeWhiteCastlingRight()
             chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 4, friend: whitePieces, enemy: blackPieces)
+        }
         }
         
         if touch.view == whiteKing && isWhiteTurn == true {
@@ -1860,12 +1934,14 @@ class GameInterFace3: UIViewController {
             }
         }
         
-        if touch.view == blackQueen && isWhiteTurn == false {
-            selectedPiece = blackQueen
+        for var i = 0; i < blackQueens.count; i++ {
+        if touch.view == blackQueens[i] && isWhiteTurn == false {
+            selectedPiece = blackQueens[i]
             removePieceOptions()
             removeBlackCastlingLeft()
             removeBlackCastlingRight()
             chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 4, friend: blackPieces, enemy: whitePieces)
+        }
         }
         
         if touch.view == blackKing && isWhiteTurn == false {
@@ -1884,14 +1960,15 @@ class GameInterFace3: UIViewController {
             if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _4 && hasBeenTaken(selectedPiece, array: whitePieces) && selectedPiece.frame.origin.y == _2   {
                 canPassant = true
                 print("can passant!")
-                whitePassantPieces += [selectedPiece]
+                whitePassantPieces = selectedPiece
             }
             
             if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _5 && hasBeenTaken(selectedPiece, array: blackPieces) && selectedPiece.frame.origin.y == _7   {
                 canPassant = true
                 print("can passant white!")
-                blackPassantPieces += [selectedPiece]
+                blackPassantPieces = selectedPiece
             }
+          
             if touch.view == pieceOptions[o] {
                 movePiece(pieceOptions[o].frame.origin.x - selectedPiece.frame.origin.x, _moveByAmounty: pieceOptions[o].frame.origin.y - selectedPiece.frame.origin.y)
             }
