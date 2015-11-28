@@ -901,7 +901,7 @@ var loaded = false
         if yPos > 64 {
             
             self.loadingView.alpha = (((yPos/1000) * 10)) - 0.5
-            //self.tableView.alpha = (2-((yPos/1000) * 10))
+            self.tableView.alpha = (2-((yPos/1000) * 15))
 
         }
 //        else {
@@ -916,10 +916,10 @@ var loaded = false
             
        
             if loaded == false {
+                self.tableView.alpha = 0
 
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 
-                self.tableView.alpha = 0
                 
                 }, completion: { (finished) -> Void in
                 if finished {
@@ -946,7 +946,7 @@ var loaded = false
                     self.yourturnLeft = []
                     self.theirturnLeft = []
                     
-                   // self.tableView.reloadData()
+                    self.tableView.reloadData()
 
                     self.findGames()
                     

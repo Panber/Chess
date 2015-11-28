@@ -300,7 +300,6 @@ class Game: UIViewController {
             
             
             
-            
             isWhiteTurn = false
         }
         else if isWhiteTurn == false {
