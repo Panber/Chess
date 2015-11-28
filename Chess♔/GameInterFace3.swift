@@ -1726,21 +1726,33 @@ class GameInterFace3: UIViewController {
                         whitePawns.removeAtIndex(i-1)
                         whiteQueens += [selectedPiece]
                         print(whitePawns.count)
+                        for var q = 0; q < whiteQueens.count; q++ {
+                            self.chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueens[q] , logicOptions: piecesBlackLogic)
+                        }
                     })
                     let promoteToRook = UIAlertAction(title: "Rook", style: .Default, handler: {
                         (alert: UIAlertAction!) -> Void in
                         selectedPiece.image = UIImage(named:"whiteRook")
                         whiteRooks += [selectedPiece]
+                        for var w = 0; w < whiteRooks.count; w++ {
+                            self.chessPieceMovementLogic(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, piece: whiteRooks[w], logicOptions: piecesBlackLogic)
+                        }
                     })
                     let promoteToBishop = UIAlertAction(title: "Bishop", style: .Default, handler: {
                         (alert: UIAlertAction!) -> Void in
                         selectedPiece.image = UIImage(named:"whiteBishop")
                         whiteBishops += [selectedPiece]
+                        for var w = 0; w < whiteBishops.count; w++ {
+                            self.chessPieceMovementLogic(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, piece: whiteBishops[w], logicOptions: piecesBlackLogic)
+                        }
                     })
                     let promoteToKnight = UIAlertAction(title: "Knight", style: .Default, handler: {
                         (alert: UIAlertAction!) -> Void in
                         selectedPiece.image = UIImage(named:"whiteKnight")
                         whiteKnights += [selectedPiece]
+                        for var w = 0; w < whiteKnights.count; w++ {
+                            self.chessPieceMovementLogic(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, piece: whiteKnights[w], logicOptions: piecesBlackLogic)
+                        }
                     })
                     
                     actionSheet.addAction(promoteToQueen)
@@ -1760,21 +1772,33 @@ class GameInterFace3: UIViewController {
                             blackPawns.removeAtIndex(i-1)
                             blackQueens += [selectedPiece]
                             print(blackPawns.count)
+                            for var q = 0; q < blackQueens.count; q++ {
+                                self.chessPieceMovementLogic(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, piece: blackQueens[q], logicOptions: piecesWhiteLogic)
+                            }
                         })
                         let promoteToRook = UIAlertAction(title: "Rook", style: .Default, handler: {
                             (alert: UIAlertAction!) -> Void in
                             selectedPiece.image = UIImage(named:"blackRook")
                             blackRooks += [selectedPiece]
+                            for var w = 0; w < blackRooks.count; w++ {
+                                self.chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRooks[w], logicOptions: piecesWhiteLogic)
+                            }
                         })
                         let promoteToBishop = UIAlertAction(title: "Bishop", style: .Default, handler: {
                             (alert: UIAlertAction!) -> Void in
                             selectedPiece.image = UIImage(named:"blackBishop")
                             blackBishops += [selectedPiece]
+                            for var w = 0; w < blackBishops.count; w++ {
+                                self.chessPieceMovementLogic(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, piece: blackBishops[w], logicOptions: piecesWhiteLogic)
+                            }
                         })
                         let promoteToKnight = UIAlertAction(title: "Knight", style: .Default, handler: {
                             (alert: UIAlertAction!) -> Void in
                             selectedPiece.image = UIImage(named:"blackKnight")
                             blackKnights += [selectedPiece]
+                            for var w = 0; w < blackKnights.count; w++ {
+                                self.chessPieceMovementLogic(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, piece: blackKnights[w], logicOptions: piecesWhiteLogic)
+                            }
                         })
                         
                         actionSheet.addAction(promoteToQueen)
