@@ -71,6 +71,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     override func viewWillDisappear(animated: Bool) {
         view.endEditing(true)
     }
+    override func viewDidDisappear(animated: Bool) {
+        self.searchDisplayController?.searchResultsTableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +81,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         let tblView =  UIView(frame: CGRectZero)
         searchDisplayController?.searchResultsTableView.tableFooterView = tblView
         searchDisplayController?.searchResultsTableView.tableFooterView!.hidden = true
-        searchDisplayController?.searchResultsTableView.backgroundColor = UIColor.clearColor()
+//        searchDisplayController?.searchResultsTableView.backgroundColor = UIColor.clearColor()
         
         tableView.hidden = true
 
@@ -605,6 +608,28 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
 
+        
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.searchDisplayController?.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+
+        
+        if darkMode {
+            cell.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            cell.rating.textColor = UIColor.lightTextColor()
+            cell.username.textColor =  UIColor.whiteColor()
+            cell.backgroundColor = UIColor(red:0.15, green:0.15, blue:0.15, alpha:1.0)
+            
+        }
+        else {
+            
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.rating.textColor = UIColor.darkGrayColor()
+            cell.username.textColor =  UIColor.blackColor()
+            cell.backgroundColor = UIColor.whiteColor()
+        }
+        
+        
+        
         // Declare user object and set cell text to username
         let user:PFUser = users[indexPath.row] as! PFUser
         
@@ -764,6 +789,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             searchBar.tintColor = UIColor.whiteColor()
 
             
+            self.searchDisplayController?.searchResultsTableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            
         }
         else if darkMode == false {
             
@@ -776,6 +803,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             self.navigationController?.navigationBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
 
+            
+            self.searchDisplayController?.searchResultsTableView.backgroundColor = UIColor.whiteColor()
             
             self.scrollView.backgroundColor = UIColor.whiteColor()
 

@@ -296,7 +296,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         
         UIButton.animateWithDuration(0.5) { () -> Void in
             self.crossButton.alpha = 0
-            self.checkmarkButton.setBackgroundImage(UIImage(named: "checkmark12.png"), forState: .Normal)
+            self.checkmarkButton.setBackgroundImage(UIImage(named: "checkmark13.png"), forState: .Normal)
 
             
 //            rightConstraint.constant = 0
