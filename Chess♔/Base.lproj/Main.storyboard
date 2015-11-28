@@ -1000,7 +1000,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oldSkoolChessBoard.png" translatesAutoresizingMaskIntoConstraints="NO" id="lJ5-we-mZL">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clack and white board with half boarder copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="lJ5-we-mZL">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </imageView>
@@ -2685,7 +2685,6 @@
         <image name="checkmark11.png" width="256" height="256"/>
         <image name="clack and white board with half boarder copy.png" width="2000" height="2096"/>
         <image name="close38.png" width="256" height="256"/>
-        <image name="oldSkoolChessBoard.png" width="2000" height="2096"/>
         <image name="profilePicPlaceholder.jpg" width="552" height="552"/>
         <image name="profileTabBarIcon.png" width="30" height="30"/>
     </resources>
