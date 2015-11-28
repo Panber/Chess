@@ -988,10 +988,10 @@
             </objects>
             <point key="canvasLocation" x="4055" y="382"/>
         </scene>
-        <!--Game Inter Face3-->
+        <!--Game-->
         <scene sceneID="o3Z-PJ-QUL">
             <objects>
-                <viewController storyboardIdentifier="GameInterFace3" id="fQ8-pX-Vlb" customClass="GameInterFace3" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameInterFace3" id="fQ8-pX-Vlb" customClass="Game" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gDL-lJ-l4c"/>
                         <viewControllerLayoutGuide type="bottom" id="z5L-Fj-p9P"/>

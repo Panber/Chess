@@ -1,10 +1,3 @@
-////
-////  ViewController.swift
-////  ChessNow
-////
-////  Created by Johannes Berge on 21/11/14.
-////  Copyright (c) 2014 Johannes Berge & Alexander Panayotov. All rights reserved.
-////
 //
 //  ViewController.swift
 //  ChessNow
@@ -243,7 +236,7 @@ var isWhiteTurn = true
 // bishop = 1, knight = 2, rook = 3, queen = 4, king = 5
 var pieceID = 0
 
-class GameInterFace3: UIViewController {
+class Game: UIViewController {
     
     @IBOutlet weak var chessBoard: UIImageView!
     
@@ -304,6 +297,10 @@ class GameInterFace3: UIViewController {
         moveByAmounty = _moveByAmounty
         movementTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: Selector("updateMovementTimer"), userInfo: nil, repeats: true)
         if isWhiteTurn == true {
+            
+            
+            
+            
             isWhiteTurn = false
         }
         else if isWhiteTurn == false {
@@ -796,12 +793,13 @@ class GameInterFace3: UIViewController {
                         }
                         pieceOptions += [pieceOption]
                         pieceCanTake = pieceOption
+                        //pieceToTake = blackPieces[r]
                         canThePieceGofurther = false
                         
                     }
                 }
                 
-               // Decides which squares the King can go to
+                //								// Decides which squares the King can go to
                 if pieceid == 5 && selectedPiece == whiteKing {
                     for var p = 0 ; p < pieceOptions.count; p++ {
                             if canSaveKing(pieceOptions[p], array: pieceBlackLogicOptions) == true {
