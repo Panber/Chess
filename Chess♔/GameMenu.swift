@@ -91,6 +91,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var gameoverTurnSpeed: Array<String> = []
     
 
+    var loadingAlphas: Array<CGFloat> = [0.1,0.2,0.3,0.4,0.5,0.4,0.3,0.2,0.1,0.2,0.3,0.4,0.5]
 
     
     var typeofGameover: Array<String> = []
@@ -108,8 +109,12 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var locationFixAchieved : Bool = false
     var locationStatus : NSString = "Not Started"
 
+    
+    
     override func viewDidLoad() {
         
+
+
         
         instructionsLabel = UILabel(frame: CGRectMake(20, 64 ,screenWidth - 40,100))
         let new = "-New-"
@@ -264,7 +269,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         let currentWindow: UIWindow = UIApplication.sharedApplication().keyWindow!
         currentWindow.addSubview(visualEffectView)
         
-
+        loadingView.image = UIImage(named: "cm3.png")
+        loadingView.alpha = 0
+        self.tableView.addSubview(loadingView)
+        
+        
         
     }
 
@@ -338,7 +347,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func findGames() {
         
-        tableView.hidden = true
+        //tableView.hidden = true
         let gamesQuery = PFQuery(className: "Games")
         //fix this
         gamesQuery.orderByDescending("updatedAt")
@@ -483,8 +492,23 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 
             }
             }
-            self.tableView.hidden = false
+                
             self.tableView.reloadData()
+            self.tableView.hidden = false
+                
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.tableView.alpha = 1
+                    }, completion: { (finished) -> Void in
+                        if finished {
+                        
+                        
+                        
+                        }
+                })
+                
+
+                
+      
             }
 
         }
@@ -493,7 +517,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     
     /*func find(name:String) {
-        
+    
         let query = PFQuery(className: "_User")
         
         query.whereKey("username", equalTo: name)
@@ -859,6 +883,87 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
     }
     
+    let loadingView = UIImageView(frame: CGRectMake((screenWidth/2)-30,-70,60,60))
+var loaded = false
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        
+
+        
+        let yPos = -tableView.contentOffset.y
+        
+        if yPos > 150 {
+    
+            tableView.contentOffset.y = -150
+        }
+        
+        if yPos > 64 {
+            
+            self.loadingView.alpha = (((yPos/1000) * 5)) - 0.2
+            //self.tableView.alpha = (2-((yPos/1000) * 10))
+
+        }
+//        else {
+//            
+////            UIView.animateWithDuration(0.2, animations: { () -> Void in
+////                self.tableView.alpha = 1
+////
+////            })
+//        }
+        
+        if yPos > 150 {
+            
+       
+            if loaded == false {
+
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                
+                self.tableView.alpha = 0
+                
+                }, completion: { (finished) -> Void in
+                if finished {
+                
+                    self.usernameArray = []
+                    self.yourturnArray = []
+                    self.theirturnArray = []
+                    self.gameoverArray = []
+                    self.imageDataArray = []
+                    self.typeofGameover = []
+                    
+                    self.usernameArray = []
+                    self.ratingArray = []
+                    self.updatedArray = []
+                    self.timeleftArray = []
+                    self.profilePicArray = []
+                    self.imageDataArray = []
+                    self.indicatorDataArray = []
+                    
+                    self.yourturnUpdateSince = []
+                    self.theirturnUpdateSince = []
+                    self.gameoverUpdateSince = []
+                    
+                    self.yourturnLeft = []
+                    self.theirturnLeft = []
+                    
+                   // self.tableView.reloadData()
+
+                    self.findGames()
+                    
+                    
+                    self.loaded = true
+                    
+                    
+                    
+                    
+                }
+            })
+            }
+            
+        }
+        
+    }
+    
 
 
     @IBAction func analyze(sender: AnyObject) {
@@ -925,7 +1030,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
          yourturnLeft = []
          theirturnLeft = []
-        
+        tableView.alpha = 0
         tableView.reloadData()
         
     }

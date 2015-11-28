@@ -575,7 +575,13 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     }
     
     
+    
+    
     // MARK - Table View
+    
+    
+
+    
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -753,6 +759,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         lightOrDarkMode()
         //searchUsers(searchBar.text!)
     }
+    
+    
+    
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
     func lightOrDarkMode() {
