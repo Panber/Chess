@@ -1489,42 +1489,36 @@ class GameInterFace3: UIViewController {
             chessPieceMovementLogic(2, pieceid: 5, friend: whitePieces, enemy: blackPieces, piece: whiteKing , logicOptions: piecesBlackLogic)
             chessPieceMovementLogic(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, piece: blackKing, logicOptions: piecesWhiteLogic)
             
-            chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueen , logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, piece: blackQueen, logicOptions: piecesWhiteLogic)
-            
-            chessPieceMovementLogic(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, piece: whiteBishop1, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, piece: whiteBishop2, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, piece: blackBishop1, logicOptions: piecesWhiteLogic)
-            chessPieceMovementLogic(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, piece: blackBishop2, logicOptions: piecesWhiteLogic)
-            
-            
-            chessPieceMovementLogic(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, piece: whiteRook1, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, piece: whiteRook2, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRook1, logicOptions: piecesWhiteLogic)
-            chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRook2, logicOptions: piecesWhiteLogic)
-            
-            chessPieceMovementLogic(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, piece: whiteKnight1, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, piece: whiteKnight2, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, piece: blackKnight1, logicOptions: piecesWhiteLogic)
-            chessPieceMovementLogic(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, piece: blackKnight2, logicOptions: piecesWhiteLogic)
-            
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn1, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn2, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn3, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn4, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn5, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn6, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn7, logicOptions: piecesBlackLogic)
-            chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawn8, logicOptions: piecesBlackLogic)
-            
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn1, logicOptions: piecesWhiteLogic)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn2, logicOptions: piecesWhiteLogic)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn3, logicOptions: piecesWhiteLogic)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn4, logicOptions: piecesWhiteLogic)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn5, logicOptions: piecesWhiteLogic)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn6, logicOptions: piecesWhiteLogic)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn7, logicOptions: piecesWhiteLogic)
-            chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawn8, logicOptions: piecesWhiteLogic)
+            for var q = 0; q < whiteQueens.count; q++ {
+            chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueens[q] , logicOptions: piecesBlackLogic)
+            }
+            for var q = 0; q < blackQueens.count; q++ {
+            chessPieceMovementLogic(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, piece: blackQueens[q], logicOptions: piecesWhiteLogic)
+            }
+            for var w = 0; w < whiteBishops.count; w++ {
+            chessPieceMovementLogic(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, piece: whiteBishops[w], logicOptions: piecesBlackLogic)
+            }
+            for var w = 0; w < blackBishops.count; w++ {
+            chessPieceMovementLogic(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, piece: blackBishops[w], logicOptions: piecesWhiteLogic)
+            }
+            for var w = 0; w < whiteRooks.count; w++ {
+                chessPieceMovementLogic(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, piece: whiteRooks[w], logicOptions: piecesBlackLogic)
+            }
+            for var w = 0; w < blackRooks.count; w++ {
+                chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRooks[w], logicOptions: piecesWhiteLogic)
+            }
+            for var w = 0; w < whiteKnights.count; w++ {
+                chessPieceMovementLogic(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, piece: whiteKnights[w], logicOptions: piecesBlackLogic)
+            }
+            for var w = 0; w < blackKnights.count; w++ {
+                 chessPieceMovementLogic(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, piece: blackKnights[w], logicOptions: piecesWhiteLogic)
+            }
+            for var w = 0; w < whitePawns.count; w++ {
+                chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawns[w], logicOptions: piecesBlackLogic)
+            }
+            for var w = 0; w < blackPawns.count; w++ {
+                chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawns[w], logicOptions: piecesWhiteLogic)
+            }
         }
             
         else {
