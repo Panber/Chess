@@ -283,12 +283,6 @@ class Game: UIViewController, UICollectionViewDataSource {
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
-    }
-    
-    // MARK: - View did load! 😄
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
         
         for var i = 0 ; i < 8; i++ {
             for var t = 0; t < 8; t++ {
@@ -299,8 +293,8 @@ class Game: UIViewController, UICollectionViewDataSource {
         }
         
         //tab-bar and navigation bar
-     //   self.tabBarController?.tabBar.hidden = true
-       // let nav = self.navigationController?.navigationBar
+        //   self.tabBarController?.tabBar.hidden = true
+        // let nav = self.navigationController?.navigationBar
         
         //load marker
         pieceMarked.image = UIImage(named: "pieceMarked.png")
@@ -320,7 +314,7 @@ class Game: UIViewController, UICollectionViewDataSource {
         }
         
         
-
+        
         let otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
         otherImage.contentMode = .ScaleAspectFill
         otherImage.clipsToBounds = true
@@ -339,7 +333,7 @@ class Game: UIViewController, UICollectionViewDataSource {
         if screenHeight == 667.0 {
             otherImage.frame.origin.y = 64 + 8
             meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 22
-
+            
             
         }
         else if screenHeight == 736.0 {
@@ -353,39 +347,88 @@ class Game: UIViewController, UICollectionViewDataSource {
         query.whereKey("objectId", equalTo: gameID)
         let r = query.getFirstObject()
         game = r!
-
+        
         
         notations = r!["piecePosition"] as! Array<String>
         
         var moves: Array<String> = []
-
+        
         for var i = 0; i < notations.count; i++ {
             
             print("\(i+1).")
             var putIntoMoves = ""
             for var o = 0; o < notations[i].characters.count; o++ {
-            let output = notations[i][o]
-            let letter = String(output)
-
-            if letter.lowercaseString == String(output){
-            
-                if output != "-" && output != "x" {
-                    //print(output)
-                    putIntoMoves.append(output)
+                let output = notations[i][o]
+                let letter = String(output)
+                
+                if letter.lowercaseString == String(output){
+                    
+                    if output != "-" && output != "x" {
+                        //print(output)
+                        putIntoMoves.append(output)
+                        
+                    }
                     
                 }
-                
             }
-        }
             print(putIntoMoves)
             moves.append(putIntoMoves)
-    }
+        }
         print(moves)
         
         
         
-        if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
+        //this is where the magic happens
+        for var o = 0; o < moves.count; o++ {
+            for var t = 0; t < xAxisArrStr2.count; t++ {
+                if String(moves[o][0]) == xAxisArrStr2[t] {
+                    for var p = 0; p < yAxisArrStr2.count; p++ {
+                        if String(moves[o][1]) == yAxisArrStr2[p] {
+                            for var i = 0; i < pieces.count; i++ {
+                                if pieces[i].frame.origin.x == xAxisArr[t] {
+                                    if pieces[i].frame.origin.y == yAxisArr[p] {
+                                        
+                                        print("this is complicated")
+                                        
+                                        for var q = 0; q < xAxisArrStr2.count; q++ {
+                                            if String(moves[o][2]) == xAxisArrStr2[q] {
+                                                for var a = 0; a < yAxisArrStr2.count; a++ {
+                                                    if String(moves[o][3]) == yAxisArrStr2[a] {
+                                                        
+                                                        
+                                                        pieces[i].frame.origin.x = xAxisArr[q]
+                                                        pieces[i].frame.origin.y = yAxisArr[a]
+                                                        
+                                                        
+                                                        
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            
+        }
         
+   
+        
+        
+        
+        
+        if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
+            
             self.title = r!["blackPlayer"] as? String
             
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
@@ -418,7 +461,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 meImage.alpha = 1
                                             })
-
+                                            
                                         }
                                         else {
                                             otherImage.image = UIImage(data: imageData!)
@@ -430,25 +473,25 @@ class Game: UIViewController, UICollectionViewDataSource {
                                     }
                                     
                                 }
-                   
-
+                                
+                                
                             }
-                        
+                            
                         }
                     }
-
-
+                    
+                    
                 }
             })
             
-
+            
             
             
             
         }
         else {
             self.title = r!["whitePlayer"] as? String
-
+            
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
             
             let userQuery = PFQuery(className: "_User")
@@ -502,11 +545,29 @@ class Game: UIViewController, UICollectionViewDataSource {
                     
                 }
             })
-
+            
             
             
         }
         
+        
+
+        
+        
+        
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        notations = []
+    
+    }
+    
+    // MARK: - View did load! 😄
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+
         
         
         
