@@ -24,11 +24,11 @@ extension String
     }
 }
 
-
-
 var game = PFObject(className: "Games")
 var notations: Array<String> = []
 
+var allMoves: Array<String> = []
+var LAN = ""
 
 //x-Axis coordinates
 let a:CGFloat = 0 * pieceSize
@@ -388,7 +388,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                                 if pieces[i].frame.origin.x == xAxisArr[t] {
                                     if pieces[i].frame.origin.y == yAxisArr[p] {
                                         
-                                        print("this is complicated")
+                                        //print("this is complicated")
                                         
                                         for var q = 0; q < xAxisArrStr2.count; q++ {
                                             if String(moves[o][2]) == xAxisArrStr2[q] {
@@ -398,9 +398,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                                                         
                                                         pieces[i].frame.origin.x = xAxisArr[q]
                                                         pieces[i].frame.origin.y = yAxisArr[a]
-                                                        
-                                                        
-                                                        
+
                                                     }
                                                 }
                                             }
@@ -421,11 +419,7 @@ class Game: UIViewController, UICollectionViewDataSource {
             
             
         }
-        
-   
-        
-        
-        
+
         
         if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
             
@@ -483,10 +477,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                     
                 }
             })
-            
-            
-            
-            
+
             
         }
         else {
@@ -546,15 +537,8 @@ class Game: UIViewController, UICollectionViewDataSource {
                 }
             })
             
-            
-            
         }
-        
-        
-
-        
-        
-        
+    
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -748,15 +732,15 @@ class Game: UIViewController, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Move", forIndexPath: indexPath) as! MoveCell
         cell.configureWithColor()
-        cell.notation.text = notations.last
+         let move = allMoves[indexPath.item]
+        cell.notation.text = move
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return notations.count
+        return allMoves.count
     }
-    
-    
+
     // MARK: - Pieces selected! 👾
     
     func whitePawnSelected(var _event:UIEvent, var _touch:UITouch) {
@@ -1832,7 +1816,7 @@ class Game: UIViewController, UICollectionViewDataSource {
             if checkByQueen == true {
                 chessNotationCheck = "+"
             }
-            var LAN = ""
+            
             if castleLeft == true {
                 print("0-0-0")
                 LAN = "0-0-0"
@@ -1845,15 +1829,11 @@ class Game: UIViewController, UICollectionViewDataSource {
                 
                 
             } else {
-            print(pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck)
+            //print(pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck)
                 LAN = pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck
             piecesNotationSeperator = "-"
             chessNotationCheck = ""
-//            let newIndexPath = NSIndexPath(forItem: 0, inSection: 0)
-//            collectionView.insertItemsAtIndexPaths([newIndexPath])
-//                collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
-//                collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
-
+            allMoves += [LAN]
                 
             }
             notations.append(LAN)
@@ -1862,12 +1842,7 @@ class Game: UIViewController, UICollectionViewDataSource {
             
             castleLeft = false
             castleRight = false
-            
-            
-            
-            
-            
-            
+
         }
             
         else {
@@ -2269,6 +2244,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 2, pieceid: 2, friend: whitePieces, enemy: blackPieces)
+                
             }
         }
         
