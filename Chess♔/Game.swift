@@ -250,7 +250,12 @@ var isWhiteTurn = true
 // bishop = 1, knight = 2, rook = 3, queen = 4, king = 5
 var pieceID = 0
 
-class Game: UIViewController {
+class MoveCell: UICollectionViewCell {
+    @IBOutlet weak var captionLabel: UILabel!
+
+}
+
+class Game: UIViewController, UICollectionViewDataSource {
     
     @IBOutlet weak var chessBoard: UIImageView!
     
@@ -627,7 +632,18 @@ class Game: UIViewController {
         }
         blackCastlingRight = []
     }
+   
+    // MARK: - Display chess notation
     
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Move", forIndexPath: indexPath)
+        cell.backgroundColor = UIColor.greenColor()
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
     
     
     // MARK: - Pieces selected! 👾
