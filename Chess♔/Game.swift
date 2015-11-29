@@ -1889,7 +1889,7 @@ class Game: UIViewController {
                                 pieceString = ""
                             }
                             for var i = 0; i < pieces.count; i++ {
-                                if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y  {
+                                if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y || canPassant == true  {
                                     piecesNotationSeperator = "x"
                                 }
                             }
@@ -2021,6 +2021,7 @@ class Game: UIViewController {
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackPieces[t].frame.origin.x && pieceOptions[o].frame.origin.y == blackPieces[t].frame.origin.y - 1 * pieceSize && whitePassant == true && hasBeenTaken(selectedPiece, array: whitePieces) && canPassant == true  {
                         blackPieces[t].removeFromSuperview()
                         blackPieces.removeAtIndex(t)
+                        
                         whitePassant = false
                         canPassant = false
                     }
