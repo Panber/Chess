@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chess&#x2654;/Game.swift"
-            timestampString = "470517153.005909"
+            timestampString = "470519060.744697"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
+            startingLineNumber = "371"
+            endingLineNumber = "371"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>

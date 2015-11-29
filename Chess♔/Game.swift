@@ -353,13 +353,25 @@ class Game: UIViewController {
         
         for var i = 0; i < notations.count; i++ {
             
-            let output = notations[i][0]
-            
+            print("\(i+1).")
+            let moves: Array<String> = []
+            var putIntoMoves = ""
+            for var o = 0; o < notations[i].characters.count; o++ {
+            let output = notations[i][o]
+            let letter = String(output)
 
-            if output.lowe =
+            if letter.lowercaseString == String(output){
             
-            print(output)
+                if output != "-" && output != "x" {
+                    //print(output)
+                    putIntoMoves.append(output)
+                    
+                }
+                
+            }
         }
+            print(putIntoMoves)
+    }
         
         
         
