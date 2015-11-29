@@ -292,6 +292,8 @@ class Game: UIViewController {
             }
         }
         
+        
+
         let otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
         otherImage.contentMode = .ScaleAspectFill
         otherImage.clipsToBounds = true
