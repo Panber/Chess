@@ -277,6 +277,22 @@ class Game: UIViewController {
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
         
+        for var i = 0 ; i < 8; i++ {
+            for var t = 0; t < 8; t++ {
+                let pieceSqr = UIImageView(frame: CGRectMake(xAxisArr[t] , yAxisArr[i] , pieceSize, pieceSize))
+                self.view.addSubview(pieceSqr)
+                piecePos += [pieceSqr]
+            }
+        }
+        
+        //tab-bar and navigation bar
+        //   self.tabBarController?.tabBar.hidden = true
+        // let nav = self.navigationController?.navigationBar
+        
+        //load marker
+        pieceMarked.image = UIImage(named: "pieceMarked.png")
+        self.view.addSubview(pieceMarked)
+        pieceMarked.hidden = true
         
         //chesspieces loading - REMEMBER TO ADD PIECES TO ARRAYS!! Right order as well!!
         
@@ -544,22 +560,7 @@ class Game: UIViewController {
         
         super.viewDidLoad()
         
-        for var i = 0 ; i < 8; i++ {
-            for var t = 0; t < 8; t++ {
-                let pieceSqr = UIImageView(frame: CGRectMake(xAxisArr[t] , yAxisArr[i] , pieceSize, pieceSize))
-                self.view.addSubview(pieceSqr)
-                piecePos += [pieceSqr]
-            }
-        }
-        
-        //tab-bar and navigation bar
-     //   self.tabBarController?.tabBar.hidden = true
-       // let nav = self.navigationController?.navigationBar
-        
-        //load marker
-        pieceMarked.image = UIImage(named: "pieceMarked.png")
-        self.view.addSubview(pieceMarked)
-        pieceMarked.hidden = true
+
         
         
         
