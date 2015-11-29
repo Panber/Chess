@@ -1651,9 +1651,9 @@ class Game: UIViewController {
                 chessNotationCheck = "+"
             }
             if castleLeft == true {
-                print("o-o-o")
+                print("0-0-0")
             } else if castleRight == true {
-                print("o-o")
+                print("0-0")
             } else {
             print(pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck)
             piecesNotationSeperator = "-"
@@ -1894,7 +1894,7 @@ class Game: UIViewController {
                                 }
                             }
                             chessNotationx = xAxisArrStr[t]
-                            chessNotationy = yAxisArrStr[t]
+                            chessNotationy = yAxisArrStr[g]
                         }
                     }
                 }
@@ -2251,14 +2251,7 @@ class Game: UIViewController {
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
-            
-            
-            
-            
-            
-            
-            
-            
+
         }
         else if darkMode == false {
             
@@ -2269,15 +2262,10 @@ class Game: UIViewController {
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
-            
-            
+       
             self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
-            
-            
-        }
-        
-        
-    }
 
-    
+        }
+
+    }
 }
