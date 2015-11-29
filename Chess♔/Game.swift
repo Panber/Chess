@@ -293,7 +293,7 @@ class Game: UIViewController {
         otherImage.clipsToBounds = true
         otherImage.layer.cornerRadius = otherImage.frame.size.width/2
         
-        let meImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 300, 60, 60))
+        let meImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) + (screenWidth/2), 60, 60))
         meImage.contentMode = .ScaleAspectFill
         meImage.clipsToBounds = true
         meImage.layer.cornerRadius = meImage.frame.size.width/2
