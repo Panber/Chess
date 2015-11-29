@@ -350,11 +350,11 @@ class Game: UIViewController {
         
         notations = r!["piecePosition"] as! Array<String>
         
-        
+        var moves: Array<String> = []
+
         for var i = 0; i < notations.count; i++ {
             
             print("\(i+1).")
-            let moves: Array<String> = []
             var putIntoMoves = ""
             for var o = 0; o < notations[i].characters.count; o++ {
             let output = notations[i][o]
@@ -371,7 +371,9 @@ class Game: UIViewController {
             }
         }
             print(putIntoMoves)
+            moves.append(putIntoMoves)
     }
+        print(moves)
         
         
         
