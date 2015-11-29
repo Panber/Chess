@@ -292,6 +292,14 @@ class Game: UIViewController {
         otherImage.contentMode = .ScaleAspectFill
         otherImage.clipsToBounds = true
         otherImage.layer.cornerRadius = otherImage.frame.size.width/2
+        
+        let meImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 300, 60, 60))
+        meImage.contentMode = .ScaleAspectFill
+        meImage.clipsToBounds = true
+        meImage.layer.cornerRadius = meImage.frame.size.width/2
+        
+        var images:Array<NSData> = []
+        
         print(screenHeight)
         if screenHeight == 667.0 {
             otherImage.frame.origin.y = 64 + 8
@@ -309,28 +317,53 @@ class Game: UIViewController {
         
             self.title = r!["blackPlayer"] as? String
             
+            let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
             
             let userQuery = PFQuery(className: "_User")
-            userQuery.whereKey("username", equalTo: r!["blackPlayer"]!)
-            let _user = userQuery.getFirstObject() as! PFUser
-            
-            let rating = _user["rating"] as? Int
-            
-            
-            let profilePictureObject = _user["profile_picture"] as? PFFile
-            
-            if(profilePictureObject != nil)
-            {
-                profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                    
-                    if(imageData != nil)
-                    {
-                        otherImage.image = UIImage(data: imageData!)
-                        self.view.addSubview(otherImage)
+            userQuery.whereKey("username", containedIn: un )
+            userQuery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
+                if error == nil {
+                    if let result = result as! [PFUser]! {
+                        for result in result {
+                            
+                            let rating = result["rating"] as? Int
+                            
+                            
+                            
+                            let profilePictureObject = result["profile_picture"] as? PFFile
+                            
+                            if(profilePictureObject != nil)
+                            {
+                                profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                                    
+                                    if(imageData != nil)
+                                    {
+                                        images.append(imageData!)
+                                        if (result["username"] as? String)! == r!["whitePlayer"]! as! String {
+                                            
+                                            meImage.image = UIImage(data: imageData!)
+                                            self.view.addSubview(meImage)
+
+                                        }
+                                        else {
+                                            otherImage.image = UIImage(data: imageData!)
+                                            self.view.addSubview(otherImage)
+                                        }
+                                    }
+                                    
+                                }
+                   
+
+                            }
+                        
+                        }
                     }
-                    
+
+
                 }
-            }
+            })
+            
+
             
             
             
