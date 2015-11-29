@@ -291,11 +291,13 @@ class Game: UIViewController {
         let otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
         otherImage.contentMode = .ScaleAspectFill
         otherImage.clipsToBounds = true
+        otherImage.alpha = 0
         otherImage.layer.cornerRadius = otherImage.frame.size.width/2
         
-        let meImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) + (screenWidth/2), 60, 60))
+        let meImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) + (screenWidth/2) + 30, 60, 60))
         meImage.contentMode = .ScaleAspectFill
         meImage.clipsToBounds = true
+        meImage.alpha = 0
         meImage.layer.cornerRadius = meImage.frame.size.width/2
         
         var images:Array<NSData> = []
@@ -303,9 +305,14 @@ class Game: UIViewController {
         print(screenHeight)
         if screenHeight == 667.0 {
             otherImage.frame.origin.y = 64 + 8
+            meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 22
+
+            
         }
         else if screenHeight == 736.0 {
             otherImage.frame.origin.y = 64 + 13
+            meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 30
+            
         }
         
         
@@ -343,11 +350,18 @@ class Game: UIViewController {
                                             
                                             meImage.image = UIImage(data: imageData!)
                                             self.view.addSubview(meImage)
+                                            
+                                            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                                meImage.alpha = 1
+                                            })
 
                                         }
                                         else {
                                             otherImage.image = UIImage(data: imageData!)
                                             self.view.addSubview(otherImage)
+                                            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                                otherImage.alpha = 1
+                                            })
                                         }
                                     }
                                     
@@ -371,29 +385,60 @@ class Game: UIViewController {
         else {
             self.title = r!["whitePlayer"] as? String
 
+            let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
             
             let userQuery = PFQuery(className: "_User")
-            userQuery.whereKey("username", equalTo: r!["whitePlayer"]!)
-            let _user = userQuery.getFirstObject() as! PFUser
-            
-            let rating = _user["rating"] as? Int
-
-            
-            let profilePictureObject = _user["profile_picture"] as? PFFile
-            
-            if(profilePictureObject != nil)
-            {
-                profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                    
-                    if(imageData != nil)
-                    {
-                        otherImage.image = UIImage(data: imageData!)
-                        self.view.addSubview(otherImage)
-
+            userQuery.whereKey("username", containedIn: un )
+            userQuery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
+                if error == nil {
+                    if let result = result as! [PFUser]! {
+                        for result in result {
+                            
+                            let rating = result["rating"] as? Int
+                            
+                            
+                            
+                            let profilePictureObject = result["profile_picture"] as? PFFile
+                            
+                            if(profilePictureObject != nil)
+                            {
+                                profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+                                    
+                                    if(imageData != nil)
+                                    {
+                                        images.append(imageData!)
+                                        if (result["username"] as? String)! == r!["blackPlayer"]! as! String {
+                                            
+                                            meImage.image = UIImage(data: imageData!)
+                                            self.view.addSubview(meImage)
+                                            
+                                            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                                meImage.alpha = 1
+                                            })
+                                            
+                                        }
+                                        else {
+                                            otherImage.image = UIImage(data: imageData!)
+                                            self.view.addSubview(otherImage)
+                                            
+                                            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                                otherImage.alpha = 1
+                                            })
+                                        }
+                                    }
+                                    
+                                }
+                                
+                                
+                            }
+                            
+                        }
                     }
                     
+                    
                 }
-            }
+            })
+
             
             
         }
