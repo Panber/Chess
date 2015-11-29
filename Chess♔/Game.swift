@@ -376,6 +376,44 @@ class Game: UIViewController {
         print(moves)
         
         
+        let xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
+        let yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
+        
+            for var o = 0; o < moves.count; o++ {
+                for var t = 0; t < xAxisArrStr2.count; t++ {
+                    if String(moves[o][0]) == xAxisArrStr2[t] {
+                        for var p = 0; p < yAxisArrStr2.count; p++ {
+                            if String(moves[o][1]) == yAxisArrStr2[p] {
+                                for var i = 0; i < pieces.count; i++ {
+                                    if pieces[i].frame.origin.x == xAxisArr[t] {
+                                        if pieces[i].frame.origin.y == yAxisArr[p] {
+                                            
+                                            print("this is complicated")
+                                            
+                                            
+                                            
+                                        }
+                                        
+                                    }
+                                }
+                            
+                            }
+                        
+                        }
+                    
+                    }
+                
+                }
+            
+            
+            }
+        
+        for var i = 0; i < pieces.count; i++ {
+
+        }
+        
+        
+        
         
         if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
         
