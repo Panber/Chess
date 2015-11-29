@@ -1943,7 +1943,7 @@ class Game: UIViewController {
                 }
             }
         }
-        }
+    }
         
         for var o = 0 ; o < pieceOptions.count ; o++ {
             
