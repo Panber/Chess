@@ -33,249 +33,500 @@ var game = PFObject(className: "Games")
 var notations: Array<String> = []
 
 
-//x-Axis coordinates
-let a:CGFloat = 0 * pieceSize
-let b =  pieceSize
-let c = 2 * pieceSize
-let d = 3 * pieceSize
-let e = 4 * pieceSize
-let f = 5 * pieceSize
-let g = 6 * pieceSize
-let h = 7 * pieceSize
 
-let xAxisArr = [a,b,c,d,e,f,g,h]
-
-let xAxisArrStr = ["a","b","c","d","e","f","g","h"]
-
-var canTake: Bool = true
-
-var size : CGFloat = pieceSize
-
-//y-Axis coordinates
-let _1 = screenHeight/2 + 3 * pieceSize
-let _2 = screenHeight/2 + 2 * pieceSize
-let _3 = screenHeight/2 + 1 * pieceSize
-let _4 = screenHeight/2
-let _5 = screenHeight/2 - 1 * pieceSize
-let _6 = screenHeight/2 - 2 * pieceSize
-let _7 = screenHeight/2 - 3 * pieceSize
-let _8 = screenHeight/2 - 4 * pieceSize
-
-let yAxisArr = [_1,_2,_3,_4,_5,_6,_7,_8]
-
-let yAxisArrStr = ["1","2","3","4","5","6","7","8"]
-var pieceString = ""
-let xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
-let yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
-var pieceStringPos = ""
-var piecesNotationSeperator = "-"
-var chessNotationCheck = ""
-var chessNotationx = ""
-var chessNotationy = ""
-
-
-//BOARDER
-let boarderBoard = UIImageView(frame: CGRectMake(-0.01*pieceSize, _1 - 7*pieceSize, 8*pieceSize, 8*pieceSize))
-
-//size-properties
-let pieceSize = sqrt(screenWidth * screenWidth / 64)
-//timers
-var timerNumber:Double = 0
-var movementTimer = NSTimer()
-
-//markers
-var pieceMarked = UIImageView(frame: CGRectMake(0, 0, pieceSize, pieceSize))
-var pieceOptions : Array<UIImageView> = []
-
-// Logic pieces caslte by white king
-var leftWhiteCastleLogic : Array<UIImageView> = []
-var rightWhiteCastleLogic : Array<UIImageView> = []
-
-// Logic pieces caslte by black king
-var leftBlackCastleLogic : Array<UIImageView> = []
-var rightBlackCastleLogic : Array<UIImageView> = []
-
-var whiteCastlingLeft : Array<UIImageView> = []
-var whiteCastlingRight : Array<UIImageView> = []
-
-var blackCastlingLeft : Array<UIImageView> = []
-var blackCastlingRight : Array<UIImageView> = []
-
-var castlePiece: UIImageView = whitePawn1
-
-// En Passant
-var blackPassant: Bool = false
-var canPassant: Bool = false
-
-var whitePassant: Bool = false
-
-var whitePassantPieces: UIImageView = whitePawn1
-var blackPassantPieces: UIImageView = whitePawn1
-
-// Logic options for all pieces
-var pieceWhiteLogicOptions: Array<UIImageView> = []
-var pieceBlackLogicOptions: Array<UIImageView> = []
-
-// Logic options to check if piece can move if king is in danger
-var pieceWhiteCanMove: Array<UIImageView> = []
-var pieceBlackCanMove: Array<UIImageView> = []
-
-// Logic options for Queen, Bishop and Rook
-var queenLogicOptions : Array<UIImageView> = []
-var bishopLogicOptions : Array<UIImageView> = []
-var rookLogicOptions : Array<UIImageView> = []
-var knightLogicOptions : Array<UIImageView> = []
-var pawnLogicOptions : Array<UIImageView> = []
-
-//
-var blackPieceLogic: Array<UIImageView> = []
-var whitePieceLogic: Array<UIImageView> = []
-
-// Decides who makes check
-var checkByWhite = false
-var checkByBlack = false
-
-var checkByQueen = false
-var checkByBishop = false
-var checkByRook = false
-var checkByPawn = false
-var checkByKnight = false
-
-// Used in check logic to see if pieces are vertically aligned
-var verticallyAlignedWhite = false
-var horizontallyAlignedWhite = false
-
-var verticallyAlignedBlack = false
-var horizontallyAlignedBlack = false
-
-// Castling White
-var hasWhiteRookMoved = false
-var hasWhiteRookMoved2 = false
-var hasWhiteKingMoved = false
-var whiteCastle = false
-var castleLeft = false
-var castleRight = false
-
-// Castling Black
-var hasBlackRookMoved = false
-var hasBlackRookMoved2 = false
-var hasBlackKingMoved = false
-var blackCastle = false
-
-var selectedPawn = 0
-var pieceOpt = whitePawn1
-
-// Check piece
-var checkByPiece : UIImageView = whitePawn1
-
-//chesspieces:
-var whitePawn1 = UIImageView(frame: CGRectMake(a, _2, pieceSize , pieceSize))
-var whitePawn2 = UIImageView(frame: CGRectMake(b, _2, pieceSize, pieceSize))
-var whitePawn3 = UIImageView(frame: CGRectMake(c, _2, pieceSize , pieceSize))
-var whitePawn4 = UIImageView(frame: CGRectMake(d, _2, pieceSize, pieceSize))
-var whitePawn5 = UIImageView(frame: CGRectMake(e, _2, pieceSize , pieceSize))
-var whitePawn6 = UIImageView(frame: CGRectMake(f, _2, pieceSize, pieceSize))
-var whitePawn7 = UIImageView(frame: CGRectMake(g, _2, pieceSize , pieceSize))
-var whitePawn8 = UIImageView(frame: CGRectMake(h, _2, pieceSize, pieceSize))
-
-
-var whiteKnight1 = UIImageView(frame: CGRectMake(b, _1, pieceSize, pieceSize))
-var whiteKnight2 = UIImageView(frame: CGRectMake(g, _1, pieceSize, pieceSize))
-
-var whiteBishop1 = UIImageView(frame: CGRectMake(c, _1, pieceSize, pieceSize))
-var whiteBishop2 = UIImageView(frame: CGRectMake(f, _1, pieceSize, pieceSize))
-
-
-var whiteRook1 = UIImageView(frame: CGRectMake(h, _1, pieceSize, pieceSize))
-var whiteRook2 = UIImageView(frame: CGRectMake(a, _1, pieceSize, pieceSize))
-
-
-var whiteQueen = UIImageView(frame: CGRectMake(d, _1, pieceSize, pieceSize))
-
-var whiteKing = UIImageView(frame: CGRectMake(e, _1, pieceSize, pieceSize))
-
-var blackPawn1 = UIImageView(frame: CGRectMake(a, _7, pieceSize, pieceSize))
-var blackPawn2 = UIImageView(frame: CGRectMake(b, _7, pieceSize, pieceSize))
-var blackPawn3 = UIImageView(frame: CGRectMake(c, _7, pieceSize, pieceSize))
-var blackPawn4 = UIImageView(frame: CGRectMake(d, _7, pieceSize, pieceSize))
-var blackPawn5 = UIImageView(frame: CGRectMake(e, _7, pieceSize, pieceSize))
-var blackPawn6 = UIImageView(frame: CGRectMake(f, _7, pieceSize, pieceSize))
-var blackPawn7 = UIImageView(frame: CGRectMake(g, _7, pieceSize, pieceSize))
-var blackPawn8 = UIImageView(frame: CGRectMake(h, _7, pieceSize, pieceSize))
-
-var blackKnight1 = UIImageView(frame: CGRectMake(b, _8, pieceSize, pieceSize))
-var blackKnight2 = UIImageView(frame: CGRectMake(g, _8, pieceSize, pieceSize))
-
-var blackBishop1 = UIImageView(frame: CGRectMake(c, _8, pieceSize, pieceSize))
-var blackBishop2 = UIImageView(frame: CGRectMake(f, _8, pieceSize, pieceSize))
-
-var blackRook1 = UIImageView(frame: CGRectMake(a, _8, pieceSize, pieceSize))
-var blackRook2 = UIImageView(frame: CGRectMake(h, _8, pieceSize, pieceSize))
-
-var blackQueen = UIImageView(frame: CGRectMake(d, _8, pieceSize, pieceSize))
-
-var blackKing = UIImageView(frame: CGRectMake(e, _8, pieceSize, pieceSize))
-
-
-var blackKnights = [blackKnight1, blackKnight2]
-var blackBishops = [blackBishop1, blackBishop2]
-var blackRooks = [blackRook1, blackRook2]
-var blackPawns = [blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8]
-var blackQueens = [blackQueen]
-var blackKings = [blackKing]
-
-var whitePawns  = [whitePawn1, whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8]
-var whiteKnights = [whiteKnight1, whiteKnight2]
-var whiteBishops = [whiteBishop1, whiteBishop2]
-var whiteRooks = [whiteRook1, whiteRook2]
-var whiteQueens = [whiteQueen]
-var whiteKings = [whiteKing]
-
-var blackPieces = [blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
-var blackPiecesString = ["blackPawn","blackPawn","blackPawn", "blackPawn", "blackPawn", "blackPawn",  "blackPawn", "blackPawn", "blackKnight", "blackKnight", "blackBishop",  "blackBishop", "blackRook", "blackRook", "blackQueen", "blackKing" ]
-var whitePieces = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2 ,whiteBishop1, whiteBishop2, whiteRook1, whiteRook2 , whiteQueen, whiteKing]
-var whitePiecesString = ["whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whiteKnight","whiteKnight","whiteBishop","whiteBishop","whiteRook", "whiteRook", "whiteQueen","whiteKing"]
-
-
-//Must be equal!
-var piecesArrs = [whiteQueens,whiteKings,whitePawns,blackPawns,whiteKnights,whiteBishops,whiteRooks, blackKnights, blackBishops, blackRooks, blackQueens, blackKings]
-var piecesString = ["whiteQueen","whiteKing","whitePawn","blackPawn","whiteKnight","whiteBishop","whiteRook", "blackKnight", "blackBishop", "blackRook", "blackQueen", "blackKing"]
-//
-
-var pieces = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen, whiteKing,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
-
-var piecesWhiteLogic = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, whiteKing]
-
-var piecesBlackLogic = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
-
-var moveByAmounty: CGFloat = 0.0
-var moveByAmountx: CGFloat = 0.0
-
-// Must be assigned to a UIImageView when created
-var selectedPiece: UIImageView = whitePawn1
-var eatenPieces = UIImageView(frame: CGRectMake(a, _2, pieceSize , pieceSize))
-var pieceCanTake : UIImageView = whitePawn1
-var pieceToTake : Array<UIImageView> = []
-
-var takenWhitePieces : Array<UIImageView> = []
-var takenBlackPieces : Array<UIImageView> = []
-
-
-var increasey : CGFloat = 1;
-var increasex : CGFloat = 1;
-var piecePos : Array<UIImageView> = []
-
-var isWhiteTurn = true
-
-// bishop = 1, knight = 2, rook = 3, queen = 4, king = 5
-var pieceID = 0
 
 class Game: UIViewController {
+    
+    //x-Axis coordinates
+    var a = CGFloat()
+    var b = CGFloat()
+    var c = CGFloat()
+    var d = CGFloat()
+    var e = CGFloat()
+    var f = CGFloat()
+    var g = CGFloat()
+    var h = CGFloat()
+    
+    var xAxisArr:Array<CGFloat> = []
+    
+    var xAxisArrStr:Array<String> = []
+    
+    var canTake = Bool()
+    
+    var size = CGFloat()
+    
+    //y-Axis coordinates
+    var _1 = CGFloat()
+    var _2 = CGFloat()
+    var _3 = CGFloat()
+    var _4 = CGFloat()
+    var _5 = CGFloat()
+    var _6 = CGFloat()
+    var _7 = CGFloat()
+    var _8 = CGFloat()
+    
+    var yAxisArr:Array<CGFloat> = []
+    
+    var yAxisArrStr:Array<String> = []
+    var pieceString = ""
+    var xAxisArrStr2:Array<String> = []
+    var yAxisArrStr2:Array<String> = []
+    var pieceStringPos = ""
+    var piecesNotationSeperator = ""
+    var chessNotationCheck = ""
+    var chessNotationx = ""
+    var chessNotationy = ""
+    
+    
+    //BOARDER
+    var boarderBoard = UIImageView()
+    
+    //size-properties
+    var pieceSize = CGFloat()
+    //timers
+    var timerNumber = Double()
+    var movementTimer = NSTimer()
+    
+    //markers
+    var pieceMarked = UIImageView()
+    var pieceOptions : Array<UIImageView> = []
+    
+    // Logic pieces caslte by white king
+    var leftWhiteCastleLogic : Array<UIImageView> = []
+    var rightWhiteCastleLogic : Array<UIImageView> = []
+    
+    // Logic pieces caslte by black king
+    var leftBlackCastleLogic : Array<UIImageView> = []
+    var rightBlackCastleLogic : Array<UIImageView> = []
+    
+    var whiteCastlingLeft : Array<UIImageView> = []
+    var whiteCastlingRight : Array<UIImageView> = []
+    
+    var blackCastlingLeft : Array<UIImageView> = []
+    var blackCastlingRight : Array<UIImageView> = []
+    
+    var castlePiece = UIImageView()
+    
+    // En Passant
+    var blackPassant = Bool()
+    var canPassant = Bool()
+    
+    var whitePassant = Bool()
+    
+    var whitePassantPieces = UIImageView()
+    var blackPassantPieces = UIImageView()
+    
+    // Logic options for all pieces
+    var pieceWhiteLogicOptions: Array<UIImageView> = []
+    var pieceBlackLogicOptions: Array<UIImageView> = []
+    
+    // Logic options to check if piece can move if king is in danger
+    var pieceWhiteCanMove: Array<UIImageView> = []
+    var pieceBlackCanMove: Array<UIImageView> = []
+    
+    // Logic options for Queen, Bishop and Rook
+    var queenLogicOptions : Array<UIImageView> = []
+    var bishopLogicOptions : Array<UIImageView> = []
+    var rookLogicOptions : Array<UIImageView> = []
+    var knightLogicOptions : Array<UIImageView> = []
+    var pawnLogicOptions : Array<UIImageView> = []
+    
+    //
+    var blackPieceLogic: Array<UIImageView> = []
+    var whitePieceLogic: Array<UIImageView> = []
+    
+    // Decides who makes check
+    var checkByWhite = Bool()
+    var checkByBlack = Bool()
+    
+    var checkByQueen = Bool()
+    var checkByBishop = Bool()
+    var checkByRook = Bool()
+    var checkByPawn = Bool()
+    var checkByKnight = Bool()
+    
+    // Used in check logic to see if pieces are vertically aligned
+    var verticallyAlignedWhite = Bool()
+    var horizontallyAlignedWhite = Bool()
+    
+    var verticallyAlignedBlack = Bool()
+    var horizontallyAlignedBlack = Bool()
+    
+    // Castling White
+    var hasWhiteRookMoved = Bool()
+    var hasWhiteRookMoved2 = Bool()
+    var hasWhiteKingMoved = Bool()
+    var whiteCastle = Bool()
+    var castleLeft = Bool()
+    var castleRight = Bool()
+    
+    // Castling Black
+    var hasBlackRookMoved = Bool()
+    var hasBlackRookMoved2 = Bool()
+    var hasBlackKingMoved = Bool()
+    var blackCastle = Bool()
+    
+    var selectedPawn = Int()
+    var pieceOpt = UIImageView()
+    
+    // Check piece
+    var checkByPiece = UIImageView()
+    
+    //chesspieces:
+    var whitePawn1 = UIImageView()
+    var whitePawn2 = UIImageView()
+    var whitePawn3 = UIImageView()
+    var whitePawn4 = UIImageView()
+    var whitePawn5 = UIImageView()
+    var whitePawn6 = UIImageView()
+    var whitePawn7 = UIImageView()
+    var whitePawn8 = UIImageView()
+    
+    
+    var whiteKnight1 = UIImageView()
+    var whiteKnight2 = UIImageView()
+    
+    var whiteBishop1 = UIImageView()
+    var whiteBishop2 = UIImageView()
+    
+    
+    var whiteRook1 = UIImageView()
+    var whiteRook2 = UIImageView()
+    
+    
+    var whiteQueen = UIImageView()
+    
+    var whiteKing = UIImageView()
+    
+    var blackPawn1 = UIImageView()
+    var blackPawn2 = UIImageView()
+    var blackPawn3 = UIImageView()
+    var blackPawn4 = UIImageView()
+    var blackPawn5 = UIImageView()
+    var blackPawn6 = UIImageView()
+    var blackPawn7 = UIImageView()
+    var blackPawn8 = UIImageView()
+    
+    var blackKnight1 = UIImageView()
+    var blackKnight2 = UIImageView()
+    
+    var blackBishop1 = UIImageView()
+    var blackBishop2 = UIImageView()
+    
+    var blackRook1 = UIImageView()
+    var blackRook2 = UIImageView()
+    
+    var blackQueen = UIImageView()
+    
+    var blackKing = UIImageView()
+    
+    
+    var blackKnights:Array<UIImageView> = []
+    var blackBishops:Array<UIImageView> = []
+    var blackRooks:Array<UIImageView> = []
+    var blackPawns:Array<UIImageView> = []
+    var blackQueens:Array<UIImageView> = []
+    var blackKings:Array<UIImageView> = []
+    
+    var whitePawns:Array<UIImageView> = []
+    var whiteKnights:Array<UIImageView> = []
+    var whiteBishops :Array<UIImageView> = []
+    var whiteRooks: Array<UIImageView> = []
+    var whiteQueens: Array<UIImageView> = []
+    var whiteKings: Array<UIImageView> = []
+    
+    var blackPieces:Array<UIImageView> = []
+    var blackPiecesString:Array<String> = []
+    var whitePieces:Array<UIImageView> = []
+    var whitePiecesString:Array<String> = []
+    
+    
+    //Must be equal!
+    var piecesArrs:Array<Array<UIImageView>> = []
+    var piecesString:Array<String> = []
+    //
+    
+    var pieces:Array<UIImageView> = []
+    
+    var piecesWhiteLogic:Array<UIImageView> = []
+    
+    var piecesBlackLogic:Array<UIImageView> = []
+    
+    var moveByAmounty = CGFloat()
+    var moveByAmountx = CGFloat()
+    
+    // Must be assigned to a UIImageView when created
+    var selectedPiece = UIImageView()
+    var eatenPieces = UIImageView()
+    var pieceCanTake = UIImageView()
+    var pieceToTake : Array<UIImageView> = []
+    
+    var takenWhitePieces : Array<UIImageView> = []
+    var takenBlackPieces : Array<UIImageView> = []
+    
+    
+    var increasey = CGFloat()
+    var increasex   = CGFloat()
+    var piecePos : Array<UIImageView> = []
+    
+    var isWhiteTurn = Bool()
+    
+    // bishop = 1, knight = 2, rook = 3, queen = 4, king = 5
+    var pieceID = Int()
+    
+    func loadVariablesAndConstants() {
+        //size-properties
+        let pieceSize = sqrt(screenWidth * screenWidth / 64)
+        
+        //x-Axis coordinates
+         a = 0 * pieceSize
+         b =  pieceSize
+         c = 2 * pieceSize
+         d = 3 * pieceSize
+         e = 4 * pieceSize
+         f = 5 * pieceSize
+         g = 6 * pieceSize
+         h = 7 * pieceSize
+        
+         xAxisArr = [a,b,c,d,e,f,g,h]
+        
+         xAxisArrStr = ["a","b","c","d","e","f","g","h"]
+        
+         canTake = true
+        
+         size = pieceSize
+        
+        //y-Axis coordinates
+         _1 = screenHeight/2 + 3 * pieceSize
+         _2 = screenHeight/2 + 2 * pieceSize
+         _3 = screenHeight/2 + 1 * pieceSize
+         _4 = screenHeight/2
+         _5 = screenHeight/2 - 1 * pieceSize
+         _6 = screenHeight/2 - 2 * pieceSize
+         _7 = screenHeight/2 - 3 * pieceSize
+         _8 = screenHeight/2 - 4 * pieceSize
+        
+         yAxisArr = [_1,_2,_3,_4,_5,_6,_7,_8]
+        
+         yAxisArrStr = ["1","2","3","4","5","6","7","8"]
+         pieceString = ""
+         xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
+         yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
+         pieceStringPos = ""
+         piecesNotationSeperator = "-"
+         chessNotationCheck = ""
+         chessNotationx = ""
+         chessNotationy = ""
+        
+        
+        //BOARDER
+         boarderBoard = UIImageView(frame: CGRectMake(-0.01*pieceSize, _1 - 7*pieceSize, 8*pieceSize, 8*pieceSize))
+        
+
+        //timers
+         timerNumber = 0
+         movementTimer = NSTimer()
+        
+        //markers
+         pieceMarked = UIImageView(frame: CGRectMake(0, 0, pieceSize, pieceSize))
+         pieceOptions  = []
+        
+        // Logic pieces caslte by white king
+         leftWhiteCastleLogic  = []
+         rightWhiteCastleLogic  = []
+        
+        // Logic pieces caslte by black king
+         leftBlackCastleLogic  = []
+         rightBlackCastleLogic  = []
+        
+         whiteCastlingLeft  = []
+         whiteCastlingRight  = []
+        
+         blackCastlingLeft  = []
+         blackCastlingRight  = []
+        
+        
+    
+        
+        // Logic options for all pieces
+         pieceWhiteLogicOptions = []
+         pieceBlackLogicOptions = []
+        
+        // Logic options to check if piece can move if king is in danger
+         pieceWhiteCanMove = []
+         pieceBlackCanMove = []
+        
+        // Logic options for Queen, Bishop and Rook
+         queenLogicOptions  = []
+         bishopLogicOptions  = []
+         rookLogicOptions = []
+         knightLogicOptions = []
+         pawnLogicOptions = []
+        
+        //
+         blackPieceLogic = []
+         whitePieceLogic = []
+        
+        // Decides who makes check
+         checkByWhite = false
+         checkByBlack = false
+        
+         checkByQueen = false
+         checkByBishop = false
+         checkByRook = false
+         checkByPawn = false
+         checkByKnight = false
+        
+        // Used in check logic to see if pieces are vertically aligned
+         verticallyAlignedWhite = false
+         horizontallyAlignedWhite = false
+        
+        verticallyAlignedBlack = false
+         horizontallyAlignedBlack = false
+        
+        // Castling White
+         hasWhiteRookMoved = false
+         hasWhiteRookMoved2 = false
+         hasWhiteKingMoved = false
+         whiteCastle = false
+         castleLeft = false
+         castleRight = false
+        
+        // Castling Black
+         hasBlackRookMoved = false
+         hasBlackRookMoved2 = false
+         hasBlackKingMoved = false
+         blackCastle = false
+        
+
+        
+        //chesspieces:
+         whitePawn1 = UIImageView(frame: CGRectMake(a, _2, pieceSize , pieceSize))
+         whitePawn2 = UIImageView(frame: CGRectMake(b, _2, pieceSize, pieceSize))
+         whitePawn3 = UIImageView(frame: CGRectMake(c, _2, pieceSize , pieceSize))
+         whitePawn4 = UIImageView(frame: CGRectMake(d, _2, pieceSize, pieceSize))
+         whitePawn5 = UIImageView(frame: CGRectMake(e, _2, pieceSize , pieceSize))
+         whitePawn6 = UIImageView(frame: CGRectMake(f, _2, pieceSize, pieceSize))
+         whitePawn7 = UIImageView(frame: CGRectMake(g, _2, pieceSize , pieceSize))
+         whitePawn8 = UIImageView(frame: CGRectMake(h, _2, pieceSize, pieceSize))
+        
+        
+         whiteKnight1 = UIImageView(frame: CGRectMake(b, _1, pieceSize, pieceSize))
+         whiteKnight2 = UIImageView(frame: CGRectMake(g, _1, pieceSize, pieceSize))
+        
+         whiteBishop1 = UIImageView(frame: CGRectMake(c, _1, pieceSize, pieceSize))
+         whiteBishop2 = UIImageView(frame: CGRectMake(f, _1, pieceSize, pieceSize))
+        
+        
+         whiteRook1 = UIImageView(frame: CGRectMake(h, _1, pieceSize, pieceSize))
+         whiteRook2 = UIImageView(frame: CGRectMake(a, _1, pieceSize, pieceSize))
+        
+        
+         whiteQueen = UIImageView(frame: CGRectMake(d, _1, pieceSize, pieceSize))
+        
+         whiteKing = UIImageView(frame: CGRectMake(e, _1, pieceSize, pieceSize))
+        
+         blackPawn1 = UIImageView(frame: CGRectMake(a, _7, pieceSize, pieceSize))
+         blackPawn2 = UIImageView(frame: CGRectMake(b, _7, pieceSize, pieceSize))
+         blackPawn3 = UIImageView(frame: CGRectMake(c, _7, pieceSize, pieceSize))
+         blackPawn4 = UIImageView(frame: CGRectMake(d, _7, pieceSize, pieceSize))
+         blackPawn5 = UIImageView(frame: CGRectMake(e, _7, pieceSize, pieceSize))
+         blackPawn6 = UIImageView(frame: CGRectMake(f, _7, pieceSize, pieceSize))
+         blackPawn7 = UIImageView(frame: CGRectMake(g, _7, pieceSize, pieceSize))
+         blackPawn8 = UIImageView(frame: CGRectMake(h, _7, pieceSize, pieceSize))
+        
+         blackKnight1 = UIImageView(frame: CGRectMake(b, _8, pieceSize, pieceSize))
+         blackKnight2 = UIImageView(frame: CGRectMake(g, _8, pieceSize, pieceSize))
+        
+         blackBishop1 = UIImageView(frame: CGRectMake(c, _8, pieceSize, pieceSize))
+         blackBishop2 = UIImageView(frame: CGRectMake(f, _8, pieceSize, pieceSize))
+        
+         blackRook1 = UIImageView(frame: CGRectMake(a, _8, pieceSize, pieceSize))
+         blackRook2 = UIImageView(frame: CGRectMake(h, _8, pieceSize, pieceSize))
+        
+         blackQueen = UIImageView(frame: CGRectMake(d, _8, pieceSize, pieceSize))
+        
+         blackKing = UIImageView(frame: CGRectMake(e, _8, pieceSize, pieceSize))
+        
+        
+         blackKnights = [blackKnight1, blackKnight2]
+         blackBishops = [blackBishop1, blackBishop2]
+         blackRooks = [blackRook1, blackRook2]
+         blackPawns = [blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8]
+         blackQueens = [blackQueen]
+         blackKings = [blackKing]
+        
+         whitePawns  = [whitePawn1, whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8]
+         whiteKnights = [whiteKnight1, whiteKnight2]
+         whiteBishops = [whiteBishop1, whiteBishop2]
+         whiteRooks = [whiteRook1, whiteRook2]
+         whiteQueens = [whiteQueen]
+         whiteKings = [whiteKing]
+        
+         blackPieces = [blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
+         blackPiecesString = ["blackPawn","blackPawn","blackPawn", "blackPawn", "blackPawn", "blackPawn",  "blackPawn", "blackPawn", "blackKnight", "blackKnight", "blackBishop",  "blackBishop", "blackRook", "blackRook", "blackQueen", "blackKing" ]
+         whitePieces = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2 ,whiteBishop1, whiteBishop2, whiteRook1, whiteRook2 , whiteQueen, whiteKing]
+         whitePiecesString = ["whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whiteKnight","whiteKnight","whiteBishop","whiteBishop","whiteRook", "whiteRook", "whiteQueen","whiteKing"]
+        
+        
+        //Must be equal!
+         piecesArrs = [whiteQueens,whiteKings,whitePawns,blackPawns,whiteKnights,whiteBishops,whiteRooks, blackKnights, blackBishops, blackRooks, blackQueens, blackKings]
+         piecesString = ["whiteQueen","whiteKing","whitePawn","blackPawn","whiteKnight","whiteBishop","whiteRook", "blackKnight", "blackBishop", "blackRook", "blackQueen", "blackKing"]
+        //
+        
+         pieces = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen, whiteKing,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
+        
+         piecesWhiteLogic = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, whiteKing]
+        
+         piecesBlackLogic = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
+        
+         moveByAmounty = 0.0
+         moveByAmountx = 0.0
+        
+        // Must be assigned to a UIImageView when created
+         selectedPiece = whitePawn1
+         eatenPieces = UIImageView(frame: CGRectMake(a, _2, pieceSize , pieceSize))
+         pieceCanTake = whitePawn1
+         pieceToTake = []
+        
+         takenWhitePieces  = []
+         takenBlackPieces  = []
+        
+        
+         increasey = 1
+         increasex  = 1
+         piecePos  = []
+        
+         isWhiteTurn = true
+        
+        castlePiece = whitePawn1
+        
+        // En Passant
+        blackPassant = false
+        canPassant = false
+        
+        whitePassant = false
+        
+        whitePassantPieces = whitePawn1
+        blackPassantPieces = whitePawn1
+
+        selectedPawn = 0
+        pieceOpt = whitePawn1
+        
+        // Check piece
+        checkByPiece = whitePawn1
+        
+        // bishop = 1, knight = 2, rook = 3, queen = 4, king = 5
+         pieceID = 0
+    
+    }
+    
     
     @IBOutlet weak var chessBoard: UIImageView!
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
+        loadVariablesAndConstants()
         
         for var i = 0 ; i < 8; i++ {
             for var t = 0; t < 8; t++ {
@@ -305,8 +556,7 @@ class Game: UIViewController {
                 piecesArrs[i][t].multipleTouchEnabled = true
             }
         }
-        
-        
+ 
         
         let otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
         otherImage.contentMode = .ScaleAspectFill
@@ -371,7 +621,8 @@ class Game: UIViewController {
         
         
         
-        //this is where the magic happens
+////////this is where the magic happens\\\\\\\\
+        
         for var o = 0; o < moves.count; o++ {
             for var t = 0; t < xAxisArrStr2.count; t++ {
                 if String(moves[o][0]) == xAxisArrStr2[t] {
@@ -552,8 +803,12 @@ class Game: UIViewController {
     
     override func viewDidDisappear(animated: Bool) {
         notations = []
-    
+        game = PFObject(className: "Games")
+        
+        
+        
     }
+    
     
     // MARK: - View did load! 😄
     override func viewDidLoad() {
@@ -2092,36 +2347,36 @@ class Game: UIViewController {
                     
                     let promoteToQueen = UIAlertAction(title: "Queen", style: .Default, handler: {
                         (alert: UIAlertAction!) -> Void in
-                        selectedPiece.image = UIImage(named:"whiteQueen")
-                        whitePawns.removeAtIndex(i-1)
-                        whiteQueens += [selectedPiece]
+                        self.selectedPiece.image = UIImage(named:"whiteQueen")
+                        self.whitePawns.removeAtIndex(i-1)
+                        self.whiteQueens += [self.selectedPiece]
                        // print(whitePawns.count)
-                        for var q = 0; q < whiteQueens.count; q++ {
-                            self.chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueens[q] , logicOptions: piecesBlackLogic)
+                        for var q = 0; q < self.whiteQueens.count; q++ {
+                            self.chessPieceMovementLogic(9, pieceid: 4, friend: self.whitePieces, enemy: self.blackPieces, piece: self.whiteQueens[q] , logicOptions: self.piecesBlackLogic)
                         }
                     })
                     let promoteToRook = UIAlertAction(title: "Rook", style: .Default, handler: {
                         (alert: UIAlertAction!) -> Void in
-                        selectedPiece.image = UIImage(named:"whiteRook")
-                        whiteRooks += [selectedPiece]
-                        for var w = 0; w < whiteRooks.count; w++ {
-                            self.chessPieceMovementLogic(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, piece: whiteRooks[w], logicOptions: piecesBlackLogic)
+                        self.selectedPiece.image = UIImage(named:"whiteRook")
+                        self.whiteRooks += [self.selectedPiece]
+                        for var w = 0; w < self.whiteRooks.count; w++ {
+                            self.chessPieceMovementLogic(9, pieceid: 3, friend: self.whitePieces, enemy: self.blackPieces, piece: self.whiteRooks[w], logicOptions: self.piecesBlackLogic)
                         }
                     })
                     let promoteToBishop = UIAlertAction(title: "Bishop", style: .Default, handler: {
                         (alert: UIAlertAction!) -> Void in
-                        selectedPiece.image = UIImage(named:"whiteBishop")
-                        whiteBishops += [selectedPiece]
-                        for var w = 0; w < whiteBishops.count; w++ {
-                            self.chessPieceMovementLogic(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, piece: whiteBishops[w], logicOptions: piecesBlackLogic)
+                        self.selectedPiece.image = UIImage(named:"whiteBishop")
+                        self.whiteBishops += [self.selectedPiece]
+                        for var w = 0; w < self.whiteBishops.count; w++ {
+                            self.chessPieceMovementLogic(9, pieceid: 1, friend: self.whitePieces, enemy: self.blackPieces, piece: self.whiteBishops[w], logicOptions: self.piecesBlackLogic)
                         }
                     })
                     let promoteToKnight = UIAlertAction(title: "Knight", style: .Default, handler: {
                         (alert: UIAlertAction!) -> Void in
-                        selectedPiece.image = UIImage(named:"whiteKnight")
-                        whiteKnights += [selectedPiece]
-                        for var w = 0; w < whiteKnights.count; w++ {
-                            self.chessPieceMovementLogic(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, piece: whiteKnights[w], logicOptions: piecesBlackLogic)
+                        self.selectedPiece.image = UIImage(named:"whiteKnight")
+                        self.whiteKnights += [self.selectedPiece]
+                        for var w = 0; w < self.whiteKnights.count; w++ {
+                            self.chessPieceMovementLogic(2, pieceid: 2, friend: self.whitePieces, enemy: self.blackPieces, piece: self.whiteKnights[w], logicOptions: self.piecesBlackLogic)
                         }
                     })
                     
@@ -2138,36 +2393,36 @@ class Game: UIViewController {
                         
                         let promoteToQueen = UIAlertAction(title: "Queen", style: .Default, handler: {
                             (alert: UIAlertAction!) -> Void in
-                            selectedPiece.image = UIImage(named:"blackQueen")
-                            blackPawns.removeAtIndex(i-1)
-                            blackQueens += [selectedPiece]
+                            self.selectedPiece.image = UIImage(named:"blackQueen")
+                            self.blackPawns.removeAtIndex(i-1)
+                            self.blackQueens += [self.selectedPiece]
                             //print(blackPawns.count)
-                            for var q = 0; q < blackQueens.count; q++ {
-                                self.chessPieceMovementLogic(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, piece: blackQueens[q], logicOptions: piecesWhiteLogic)
+                            for var q = 0; q < self.blackQueens.count; q++ {
+                                self.chessPieceMovementLogic(9, pieceid: 4, friend: self.blackPieces, enemy: self.whitePieces, piece: self.blackQueens[q], logicOptions: self.piecesWhiteLogic)
                             }
                         })
                         let promoteToRook = UIAlertAction(title: "Rook", style: .Default, handler: {
                             (alert: UIAlertAction!) -> Void in
-                            selectedPiece.image = UIImage(named:"blackRook")
-                            blackRooks += [selectedPiece]
-                            for var w = 0; w < blackRooks.count; w++ {
-                                self.chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRooks[w], logicOptions: piecesWhiteLogic)
+                            self.selectedPiece.image = UIImage(named:"blackRook")
+                            self.blackRooks += [self.selectedPiece]
+                            for var w = 0; w < self.blackRooks.count; w++ {
+                                self.chessPieceMovementLogic(9, pieceid: 3, friend: self.blackPieces, enemy: self.whitePieces, piece: self.blackRooks[w], logicOptions: self.piecesWhiteLogic)
                             }
                         })
                         let promoteToBishop = UIAlertAction(title: "Bishop", style: .Default, handler: {
                             (alert: UIAlertAction!) -> Void in
-                            selectedPiece.image = UIImage(named:"blackBishop")
-                            blackBishops += [selectedPiece]
-                            for var w = 0; w < blackBishops.count; w++ {
-                                self.chessPieceMovementLogic(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, piece: blackBishops[w], logicOptions: piecesWhiteLogic)
+                            self.selectedPiece.image = UIImage(named:"blackBishop")
+                            self.blackBishops += [self.selectedPiece]
+                            for var w = 0; w < self.blackBishops.count; w++ {
+                                self.chessPieceMovementLogic(9, pieceid: 1, friend: self.blackPieces, enemy: self.whitePieces, piece: self.blackBishops[w], logicOptions: self.piecesWhiteLogic)
                             }
                         })
                         let promoteToKnight = UIAlertAction(title: "Knight", style: .Default, handler: {
                             (alert: UIAlertAction!) -> Void in
-                            selectedPiece.image = UIImage(named:"blackKnight")
-                            blackKnights += [selectedPiece]
-                            for var w = 0; w < blackKnights.count; w++ {
-                                self.chessPieceMovementLogic(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, piece: blackKnights[w], logicOptions: piecesWhiteLogic)
+                            self.selectedPiece.image = UIImage(named:"blackKnight")
+                            self.blackKnights += [self.selectedPiece]
+                            for var w = 0; w < self.blackKnights.count; w++ {
+                                self.chessPieceMovementLogic(2, pieceid: 2, friend: self.blackPieces, enemy: self.whitePieces, piece: self.blackKnights[w], logicOptions: self.piecesWhiteLogic)
                             }
                         })
                         
