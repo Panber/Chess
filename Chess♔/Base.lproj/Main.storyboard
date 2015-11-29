@@ -604,7 +604,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIK-B4-3DB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3254" y="-361"/>
+            <point key="canvasLocation" x="3254" y="-389"/>
         </scene>
         <!--New Game Settings Page-->
         <scene sceneID="dny-OR-sFx">
@@ -1014,16 +1014,28 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="247" horizontalCompressionResistancePriority="746" verticalCompressionResistancePriority="744" reuseIdentifier="Move" id="edR-nb-TBv">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="247" horizontalCompressionResistancePriority="746" verticalCompressionResistancePriority="744" reuseIdentifier="Move" id="edR-nb-TBv" customClass="MoveCell" customModule="Chess_" customModuleProvider="target">
                                         <rect key="frame" x="4" y="0.0" width="104" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="104" height="26"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pa7-Cb-25F">
+                                                    <rect key="frame" x="0.0" y="2" width="104" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <animations/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <animations/>
+                                        <connections>
+                                            <outlet property="notation" destination="Pa7-Cb-25F" id="r1x-kd-7Pd"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -1043,7 +1055,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="chessBoard" destination="lJ5-we-mZL" id="fjD-dF-RNP"/>
-                        <outlet property="collectionView" destination="bg0-Fl-mtB" id="Hwd-sm-Iuc"/>
+                        <outlet property="collectionView" destination="bg0-Fl-mtB" id="20a-Gw-DJR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GlK-wH-heK" userLabel="First Responder" sceneMemberID="firstResponder"/>

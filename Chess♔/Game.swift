@@ -9,9 +9,6 @@
 import UIKit
 import SpriteKit
 
-
-
-
 extension String
 {
     subscript(integerIndex: Int) -> Character {
@@ -270,14 +267,19 @@ var isWhiteTurn = true
 // bishop = 1, knight = 2, rook = 3, queen = 4, king = 5
 var pieceID = 0
 
-class MoveCell: UICollectionViewCell {
-    @IBOutlet weak var captionLabel: UILabel!
 
+class MoveCell: UICollectionViewCell {
+    @IBOutlet weak var notation: UILabel!
+    func configureWithColor() {
+            backgroundColor = UIColor.whiteColor()
+            notation.textColor = UIColor.blackColor()
+    }
 }
 
 class Game: UIViewController, UICollectionViewDataSource {
     
     @IBOutlet weak var chessBoard: UIImageView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
@@ -683,13 +685,14 @@ class Game: UIViewController, UICollectionViewDataSource {
     // MARK: - Display chess notation
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Move", forIndexPath: indexPath)
-        cell.backgroundColor = UIColor.greenColor()
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Move", forIndexPath: indexPath) as! MoveCell
+        cell.configureWithColor()
+        cell.notation.text = notations.last
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return notations.count
     }
     
     
@@ -1785,8 +1788,10 @@ class Game: UIViewController, UICollectionViewDataSource {
                 LAN = pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck
             piecesNotationSeperator = "-"
             chessNotationCheck = ""
-                
-
+//            let newIndexPath = NSIndexPath(forItem: 0, inSection: 0)
+//            collectionView.insertItemsAtIndexPaths([newIndexPath])
+//                collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
+//                collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
 
                 
             }
