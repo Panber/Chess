@@ -9,6 +9,26 @@
 import UIKit
 import SpriteKit
 
+
+
+
+extension String
+{
+    subscript(integerIndex: Int) -> Character {
+        let index = startIndex.advancedBy(integerIndex)
+        return self[index]
+    }
+    
+    subscript(integerRange: Range<Int>) -> String {
+        let start = startIndex.advancedBy(integerRange.startIndex)
+        let end = startIndex.advancedBy(integerRange.endIndex)
+        let range = start..<end
+        return self[range]
+    }
+}
+
+
+
 var game = PFObject(className: "Games")
 var notations: Array<String> = []
 
@@ -334,6 +354,33 @@ class Game: UIViewController, UICollectionViewDataSource {
 
         
         notations = r!["piecePosition"] as! Array<String>
+        
+        var moves: Array<String> = []
+
+        for var i = 0; i < notations.count; i++ {
+            
+            print("\(i+1).")
+            var putIntoMoves = ""
+            for var o = 0; o < notations[i].characters.count; o++ {
+            let output = notations[i][o]
+            let letter = String(output)
+
+            if letter.lowercaseString == String(output){
+            
+                if output != "-" && output != "x" {
+                    //print(output)
+                    putIntoMoves.append(output)
+                    
+                }
+                
+            }
+        }
+            print(putIntoMoves)
+            moves.append(putIntoMoves)
+    }
+        print(moves)
+        
+        
         
         if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
         
