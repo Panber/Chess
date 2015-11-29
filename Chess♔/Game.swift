@@ -1976,7 +1976,7 @@ class Game: UIViewController {
                 }
             }
         }
-        }
+    }
         
         for var o = 0 ; o < pieceOptions.count ; o++ {
             
@@ -2000,7 +2000,7 @@ class Game: UIViewController {
                                 pieceString = ""
                             }
                             for var i = 0; i < pieces.count; i++ {
-                                if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y || canPassant == true  {
+                                if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y || whitePassant == true || blackPassant == true  {
                                     piecesNotationSeperator = "x"
                                 }
                             }
@@ -2260,7 +2260,7 @@ class Game: UIViewController {
             removeBlackCastlingLeft()
             removeBlackCastlingRight()
             chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 4, friend: blackPieces, enemy: whitePieces)
-        }
+            }
         }
         
         if touch.view == blackKing && isWhiteTurn == false {
