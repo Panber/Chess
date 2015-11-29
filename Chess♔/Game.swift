@@ -9,6 +9,10 @@
 import UIKit
 import SpriteKit
 
+var game = PFObject(className: "Games")
+var notations: Array<String> = []
+
+
 //x-Axis coordinates
 let a:CGFloat = 0 * pieceSize
 let b =  pieceSize
@@ -288,6 +292,8 @@ class Game: UIViewController {
             }
         }
         
+        
+
         let otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
         otherImage.contentMode = .ScaleAspectFill
         otherImage.clipsToBounds = true
@@ -319,7 +325,11 @@ class Game: UIViewController {
         let query = PFQuery(className: "Games")
         query.whereKey("objectId", equalTo: gameID)
         let r = query.getFirstObject()
+        game = r!
 
+        
+        notations = r!["piecePosition"] as! Array<String>
+        
         if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
         
             self.title = r!["blackPlayer"] as? String
@@ -1695,17 +1705,40 @@ class Game: UIViewController {
             if checkByQueen == true {
                 chessNotationCheck = "+"
             }
+            var LAN = ""
             if castleLeft == true {
                 print("0-0-0")
+                LAN = "0-0-0"
+                
+                
             } else if castleRight == true {
                 print("0-0")
+                
+                LAN = "0-0"
+                
+                
             } else {
             print(pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck)
+                LAN = pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck
             piecesNotationSeperator = "-"
             chessNotationCheck = ""
+                
+
+
+                
             }
+            notations.append(LAN)
+            game["piecePosition"] = notations
+            game.saveEventually()
+            
             castleLeft = false
             castleRight = false
+            
+            
+            
+            
+            
+            
         }
             
         else {
@@ -2292,7 +2325,7 @@ class Game: UIViewController {
             self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
             self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
             
-            self.view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
+            self.view.backgroundColor =  UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
