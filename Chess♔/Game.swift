@@ -798,17 +798,15 @@ class Game: UIViewController, UICollectionViewDataSource {
         moveByAmounty = _moveByAmounty
         movementTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: Selector("updateMovementTimer"), userInfo: nil, repeats: true)
         if isWhiteTurn == true {
-            
-            
-            
+
             isWhiteTurn = false
         }
         else if isWhiteTurn == false {
             isWhiteTurn = true
         }
-        let newIndexPath = NSIndexPath(forItem: allMoves.count - 1, inSection: 0)
-        collectionView.insertItemsAtIndexPaths([newIndexPath])
-        collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
+//        let newIndexPath = NSIndexPath(forItem: allMoves.count - 1, inSection: 0)
+//        collectionView.insertItemsAtIndexPaths([newIndexPath])
+//        collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
     }
     
     func showMarkedPiece() {
