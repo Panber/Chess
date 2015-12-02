@@ -694,9 +694,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                     }
                 }
             }
-            
 
-            
             print("I am white player!")
             self.title = r!["blackPlayer"] as? String
             
@@ -755,10 +753,7 @@ class Game: UIViewController, UICollectionViewDataSource {
             
         }
         else {
-            
-   
 
-            
             whiteQueen = UIImageView(frame: CGRectMake(e, _1, pieceSize, pieceSize))
             
             whiteKing = UIImageView(frame: CGRectMake(d, _1, pieceSize, pieceSize))
@@ -830,6 +825,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                                                             
                                                             pieces[i].frame.origin.x = xAxisArr[q]
                                                             pieces[i].frame.origin.y = yAxisArr[a]
+                                                            updateLogic()
                                                             
                                                         }
                                                     }
@@ -1559,6 +1555,46 @@ class Game: UIViewController, UICollectionViewDataSource {
         }
     }
     
+    func updateLogic() {
+        
+        if isWhiteTurn == true {
+        
+        // Starts logic for all pieces
+            for var q = 0; q < blackQueens.count; q++ {
+                chessPieceMovementLogic(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, piece: blackQueens[q], logicOptions: piecesWhiteLogic)
+            }
+            for var w = 0; w < blackBishops.count; w++ {
+                chessPieceMovementLogic(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, piece: blackBishops[w], logicOptions: piecesWhiteLogic)
+            }
+            for var w = 0; w < blackRooks.count; w++ {
+                chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRooks[w], logicOptions: piecesWhiteLogic)
+            }
+            for var w = 0; w < blackKnights.count; w++ {
+                chessPieceMovementLogic(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, piece: blackKnights[w], logicOptions: piecesWhiteLogic)
+            }
+            for var w = 0; w < blackPawns.count; w++ {
+                chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawns[w], logicOptions: piecesWhiteLogic)
+            }
+        } else if isWhiteTurn == false {
+            
+            for var q = 0; q < whiteQueens.count; q++ {
+                chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueens[q] , logicOptions: piecesBlackLogic)
+            }
+            for var w = 0; w < whiteBishops.count; w++ {
+                chessPieceMovementLogic(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, piece: whiteBishops[w], logicOptions: piecesBlackLogic)
+            }
+            for var w = 0; w < whiteRooks.count; w++ {
+                chessPieceMovementLogic(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, piece: whiteRooks[w], logicOptions: piecesBlackLogic)
+            }
+            for var w = 0; w < whiteKnights.count; w++ {
+                chessPieceMovementLogic(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, piece: whiteKnights[w], logicOptions: piecesBlackLogic)
+            }
+            for var w = 0; w < whitePawns.count; w++ {
+                chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawns[w], logicOptions: piecesBlackLogic)
+            }
+        }
+    }
+    
     func chessPieceMovementLogic(var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView], var piece: UIImageView, var logicOptions: [UIImageView])  {
         
         //print(pieceWhiteCanMove.count)
@@ -1645,7 +1681,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                     if foundKing == true {
                         
                         let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
-                        pieceOption.image = UIImage(named: "piecePossibilities.png")
+                        //pieceOption.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption)
                         
                         if  pieceid == 4  {
@@ -1671,7 +1707,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                         
                         if pieceid == 1 || pieceid == 3 || pieceid == 4 || pieceid == 2 || pieceid == 6 || pieceid == 7  {
                             let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
-                            pieceOption.image = UIImage(named: "piecePossibilities.png")
+                            //pieceOption.image = UIImage(named: "piecePossibilities.png")
                             self.view.addSubview(pieceOption)
                             
                             if  pieceid == 4  {
@@ -1720,7 +1756,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                             
                             if pieceid == 1 || pieceid == 3 || pieceid == 4 || pieceid == 2 || pieceid == 6 || pieceid == 7  {
                                 let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
-                                pieceOption.image = UIImage(named: "piecePossibilities.png")
+                                //pieceOption.image = UIImage(named: "piecePossibilities.png")
                                 self.view.addSubview(pieceOption)
                                 
                                 if  pieceid == 4  {
@@ -2246,11 +2282,7 @@ class Game: UIViewController, UICollectionViewDataSource {
             
             castleLeft = false
             castleRight = false
-            
-            
-            
-            
-            
+
             
         }
             
@@ -2433,19 +2465,6 @@ class Game: UIViewController, UICollectionViewDataSource {
                 selectedPiece.frame.origin.y = piecePos[o].frame.origin.y
                 
             }
-        }
-        
-        for var i = 0; i < whitePawns.count;i++ {
-            if touch.view == whitePawns[i] && isWhiteTurn == true {
-                selectedPiece = whitePawns[i]
-                removePieceOptions()
-                removeWhiteCastlingLeft()
-                removeWhiteCastlingRight()
-                whitePawnSelected(event!, _touch: touch)
-                selectedPawn = i
-                
-            }
-            
         }
         
         for var o = 0 ; o < pieceOptions.count ; o++ {
@@ -2668,12 +2687,26 @@ class Game: UIViewController, UICollectionViewDataSource {
             }
         }
         
+        for var i = 0; i < whitePawns.count;i++ {
+            if touch.view == whitePawns[i] && isWhiteTurn == true {
+                selectedPiece = whitePawns[i]
+                removePieceOptions()
+                removeWhiteCastlingLeft()
+                removeWhiteCastlingRight()
+                selectedPawn = i
+                //updateLogic()
+                whitePawnSelected(event!, _touch: touch)
+            }
+            
+        }
+        
         for var i = 0; i < whiteKnights.count;i++ {
             if touch.view == whiteKnights[i] && isWhiteTurn == true {
                 selectedPiece = whiteKnights[i]
                 removePieceOptions()
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 2, pieceid: 2, friend: whitePieces, enemy: blackPieces)
             }
         }
@@ -2684,6 +2717,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                 removePieceOptions()
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 1, friend: whitePieces, enemy: blackPieces)
             }
         }
@@ -2694,7 +2728,8 @@ class Game: UIViewController, UICollectionViewDataSource {
                 selectedPiece = whiteRooks[i]
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
-                chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 3, friend: whitePieces, enemy: blackPieces)
+                //updateLogic()
+                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 3, friend: whitePieces, enemy: blackPieces)
             }
         }
         
@@ -2704,6 +2739,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                 removePieceOptions()
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 4, friend: whitePieces, enemy: blackPieces)
             }
         }
@@ -2711,6 +2747,7 @@ class Game: UIViewController, UICollectionViewDataSource {
         if touch.view == whiteKing && isWhiteTurn == true {
             selectedPiece = whiteKing
             removePieceOptions()
+            //updateLogic()
             chessPieceSelected(event!, _touch: touch, movementNumber: 2, pieceid: 5, friend: whitePieces, enemy: blackPieces)
         }
         
@@ -2721,6 +2758,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                 removePieceOptions()
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
+                //updateLogic()
                 blackPawnSelected(event!, _touch: touch)
             }
         }
@@ -2731,6 +2769,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                 removePieceOptions()
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
+                //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 1, friend: blackPieces, enemy: whitePieces)
             }
         }
@@ -2741,6 +2780,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                 removePieceOptions()
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
+                updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 2, pieceid: 2, friend: blackPieces, enemy: whitePieces)
             }
         }
@@ -2751,7 +2791,8 @@ class Game: UIViewController, UICollectionViewDataSource {
                 removePieceOptions()
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
-                chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 3, friend: blackPieces, enemy: whitePieces)
+                //updateLogic()
+                chessPieceMovementLogic(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, piece: blackRooks[i], logicOptions: piecesWhiteLogic)
             }
         }
         
@@ -2761,6 +2802,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                 removePieceOptions()
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
+                //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 4, friend: blackPieces, enemy: whitePieces)
             }
         }
@@ -2770,7 +2812,9 @@ class Game: UIViewController, UICollectionViewDataSource {
             removePieceOptions()
             removeBlackCastlingLeft()
             removeBlackCastlingRight()
+            //updateLogic()
             chessPieceSelected(event!, _touch: touch, movementNumber: 2, pieceid: 5, friend: blackPieces, enemy: whitePieces)
+            
         }
         
         //check pieceOptions
