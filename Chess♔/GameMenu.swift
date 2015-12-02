@@ -307,9 +307,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if (locationFixAchieved == false) {
             locationFixAchieved = true
-            var locationArray = locations as NSArray
-            var locationObj = locationArray.lastObject as! CLLocation
-            var coord = locationObj.coordinate
+            let locationArray = locations as NSArray
+            let locationObj = locationArray.lastObject as! CLLocation
+            let coord = locationObj.coordinate
             
             print(coord.latitude)
             print(coord.longitude)
@@ -824,7 +824,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
+//        let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
         
         switch indexPath.section {
         case 0:
@@ -1059,6 +1059,12 @@ var loaded = false
         
          yourturnLeft = []
          theirturnLeft = []
+        
+         gameIDSYourTurn = []
+         gameIDSTheirTurn = []
+         gameIDSGameOver = []
+         gameID = ""
+        
         tableView.alpha = 0
         tableView.reloadData()
         

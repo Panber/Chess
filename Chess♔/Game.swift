@@ -47,7 +47,7 @@ let h = 7 * pieceSize
 
 let xAxisArr = [a,b,c,d,e,f,g,h]
 
-let xAxisArrStr = ["a","b","c","d","e","f","g","h"]
+
 
 
 //y-Axis coordinates
@@ -62,16 +62,20 @@ let _8 = screenHeight/2 - 4 * pieceSize
 
 let yAxisArr = [_1,_2,_3,_4,_5,_6,_7,_8]
 
-let yAxisArrStr = ["1","2","3","4","5","6","7","8"]
+
+var xAxisArrStr = ["a","b","c","d","e","f","g","h"]
+var yAxisArrStr = ["1","2","3","4","5","6","7","8"]
 var pieceString = ""
-let xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
-let yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
+var xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
+var yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
 var pieceStringPos = ""
 var piecesNotationSeperator = "-"
 var chessNotationCheck = ""
 var chessNotationx = ""
 var chessNotationy = ""
 
+let yAxisArrq = [_8,_7,_6,_5,_4,_3,_2,_1]
+let xAxisArrq = [h,g,f,e,d,c,b,a]
 
 class Game: UIViewController {
     
@@ -291,6 +295,11 @@ class Game: UIViewController {
         //size-properties
         let pieceSize = sqrt(screenWidth * screenWidth / 64)
         
+         xAxisArrStr = ["a","b","c","d","e","f","g","h"]
+         yAxisArrStr = ["1","2","3","4","5","6","7","8"]
+         pieceString = ""
+         xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
+         yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
 
         
         canTake = true
@@ -449,7 +458,6 @@ class Game: UIViewController {
         //Must be equal!
         piecesArrs = [whiteQueens,whiteKings,whitePawns,blackPawns,whiteKnights,whiteBishops,whiteRooks, blackKnights, blackBishops, blackRooks, blackQueens, blackKings]
         piecesString = ["whiteQueen","whiteKing","whitePawn","blackPawn","whiteKnight","whiteBishop","whiteRook", "blackKnight", "blackBishop", "blackRook", "blackQueen", "blackKing"]
-        //
         
         pieces = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen, whiteKing,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
         
@@ -523,17 +531,7 @@ class Game: UIViewController {
         self.view.addSubview(pieceMarked)
         pieceMarked.hidden = true
         
-        //chesspieces loading - REMEMBER TO ADD PIECES TO ARRAYS!! Right order as well!!
-        
-        for var i = 0; i < piecesArrs.count; i++ {
-            for var t = 0; t < piecesArrs[i].count; t++ {
-                piecesArrs[i][t].image = UIImage(named: piecesString[i])
-                self.view.addSubview(piecesArrs[i][t])
-                piecesArrs[i][t].contentMode = .ScaleAspectFit
-                piecesArrs[i][t].userInteractionEnabled = true
-                piecesArrs[i][t].multipleTouchEnabled = true
-            }
-        }
+
         
         
         let otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
@@ -598,31 +596,73 @@ class Game: UIViewController {
         print(moves)
         
         
+
         
-        ////////this is where the magic happens\\\\\\\\
+
         
-        for var o = 0; o < moves.count; o++ {
-            for var t = 0; t < xAxisArrStr2.count; t++ {
-                if String(moves[o][0]) == xAxisArrStr2[t] {
-                    for var p = 0; p < yAxisArrStr2.count; p++ {
-                        if String(moves[o][1]) == yAxisArrStr2[p] {
-                            for var i = 0; i < pieces.count; i++ {
-                                if pieces[i].frame.origin.x == xAxisArr[t] {
-                                    if pieces[i].frame.origin.y == yAxisArr[p] {
-                                        
-                                        print("this is complicated")
-                                        
-                                        for var q = 0; q < xAxisArrStr2.count; q++ {
-                                            if String(moves[o][2]) == xAxisArrStr2[q] {
-                                                for var a = 0; a < yAxisArrStr2.count; a++ {
-                                                    if String(moves[o][3]) == yAxisArrStr2[a] {
-                                                        
-                                                        
-                                                        pieces[i].frame.origin.x = xAxisArr[q]
-                                                        pieces[i].frame.origin.y = yAxisArr[a]
-                                                        
-                                                        
-                                                        
+        
+        
+        
+        
+        
+        if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
+            //chesspieces loading - REMEMBER TO ADD PIECES TO ARRAYS!! Right order as well!!
+            if r!["status_white"] as! String == "move" {
+                isWhiteTurn = true
+                
+                for var i = 0; i < piecesArrs.count; i++ {
+                    for var t = 0; t < piecesArrs[i].count; t++ {
+                        piecesArrs[i][t].image = UIImage(named: piecesString[i])
+                        self.view.addSubview(piecesArrs[i][t])
+                        piecesArrs[i][t].contentMode = .ScaleAspectFit
+                        piecesArrs[i][t].userInteractionEnabled = true
+                        piecesArrs[i][t].multipleTouchEnabled = true
+                    }
+                }
+            }
+            else {
+                isWhiteTurn = false
+                
+                for var i = 0; i < piecesArrs.count; i++ {
+                    for var t = 0; t < piecesArrs[i].count; t++ {
+                        piecesArrs[i][t].image = UIImage(named: piecesString[i])
+                        self.view.addSubview(piecesArrs[i][t])
+                        piecesArrs[i][t].contentMode = .ScaleAspectFit
+                        piecesArrs[i][t].userInteractionEnabled = false
+                        piecesArrs[i][t].multipleTouchEnabled = true
+                    }
+                }
+            }
+            
+            
+            ////////this is where the magic happens\\\\\\\\
+            
+            for var o = 0; o < moves.count; o++ {
+                
+                
+                
+                for var t = 0; t < xAxisArrStr2.count; t++ {
+                    if String(moves[o][0]) == xAxisArrStr2[t] {
+                        for var p = 0; p < yAxisArrStr2.count; p++ {
+                            if String(moves[o][1]) == yAxisArrStr2[p] {
+                                for var i = 0; i < pieces.count; i++ {
+                                    if pieces[i].frame.origin.x == xAxisArr[t] {
+                                        if pieces[i].frame.origin.y == yAxisArr[p] {
+                                            
+                                            print("this is complicated")
+                                            
+                                            for var q = 0; q < xAxisArrStr2.count; q++ {
+                                                if String(moves[o][2]) == xAxisArrStr2[q] {
+                                                    for var a = 0; a < yAxisArrStr2.count; a++ {
+                                                        if String(moves[o][3]) == yAxisArrStr2[a] {
+                                                            
+                                                            
+                                                            pieces[i].frame.origin.x = xAxisArr[q]
+                                                            pieces[i].frame.origin.y = yAxisArr[a]
+                                                            
+                                                            
+                                                            
+                                                        }
                                                     }
                                                 }
                                             }
@@ -632,17 +672,25 @@ class Game: UIViewController {
                             }
                         }
                     }
+                    else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" && String(moves[o][2])  == "0" {
+                        if  o % 2 == 0 {
+                                    whiteKing.frame.origin.x = c
+                                    whiteKing.frame.origin.y = _1
+                                    whiteRook1.frame.origin.x = d
+                                    whiteRook1.frame.origin.y = _1
+                        }
+                        
+                        else {
+                        
+                        }
+                    
+                    }
                 }
             }
-        }
-        
-        
-        
-        
-        
-        
-        if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
             
+
+            
+            print("I am white player!")
             self.title = r!["blackPlayer"] as? String
             
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
@@ -704,6 +752,135 @@ class Game: UIViewController {
             
         }
         else {
+            
+   
+
+            
+            whiteQueen = UIImageView(frame: CGRectMake(e, _1, pieceSize, pieceSize))
+            
+            whiteKing = UIImageView(frame: CGRectMake(d, _1, pieceSize, pieceSize))
+            
+         
+            
+            
+            blackQueen = UIImageView(frame: CGRectMake(e, _8, pieceSize, pieceSize))
+            
+            blackKing = UIImageView(frame: CGRectMake(d, _8, pieceSize, pieceSize))
+            
+            
+            blackKnights = [blackKnight1, blackKnight2]
+            blackBishops = [blackBishop1, blackBishop2]
+            blackRooks = [blackRook1, blackRook2]
+            blackPawns = [blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8]
+            blackQueens = [blackQueen]
+            blackKings = [blackKing]
+            
+            whitePawns  = [whitePawn1, whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8]
+            whiteKnights = [whiteKnight1, whiteKnight2]
+            whiteBishops = [whiteBishop1, whiteBishop2]
+            whiteRooks = [whiteRook1, whiteRook2]
+            whiteQueens = [whiteQueen]
+            whiteKings = [whiteKing]
+            
+            blackPieces = [blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
+            blackPiecesString = ["blackPawn","blackPawn","blackPawn", "blackPawn", "blackPawn", "blackPawn",  "blackPawn", "blackPawn", "blackKnight", "blackKnight", "blackBishop",  "blackBishop", "blackRook", "blackRook", "blackQueen", "blackKing" ]
+            whitePieces = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2 ,whiteBishop1, whiteBishop2, whiteRook1, whiteRook2 , whiteQueen, whiteKing]
+            whitePiecesString = ["whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whiteKnight","whiteKnight","whiteBishop","whiteBishop","whiteRook", "whiteRook", "whiteQueen","whiteKing"]
+            
+            
+            //Must be equal!
+            piecesArrs = [whiteQueens,whiteKings,whitePawns,blackPawns,whiteKnights,whiteBishops,whiteRooks, blackKnights, blackBishops, blackRooks, blackQueens, blackKings]
+            piecesString = ["blackQueen","blackKing","blackPawn","whitePawn","blackKnight","blackBishop","blackRook", "whiteKnight", "whiteBishop", "whiteRook", "whiteQueen", "whiteKing"]
+            //
+            
+            pieces = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen, whiteKing,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
+            
+            piecesWhiteLogic = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, whiteKing]
+            
+            piecesBlackLogic = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
+            
+            //Must be equal!
+      //      piecesArrs = [whiteQueens,whiteKings,whitePawns,blackPawns,whiteKnights,whiteBishops,whiteRooks, blackKnights, blackBishops, blackRooks, blackQueens, blackKings]
+         //   piecesString = ["whiteQueen","whiteKing","whitePawn","blackPawn","whiteKnight","whiteBishop","whiteRook", "blackKnight", "blackBishop", "blackRook", "blackQueen", "blackKing"]
+            xAxisArrStr2 = ["h","g","f","e","d","c","b","a"]
+            yAxisArrStr2 = ["8","7","6","5","4","3","2","1"]
+            
+            
+
+            
+            
+
+            
+            ////////this is where the magic happens\\\\\\\\
+            
+            for var o = 0; o < moves.count; o++ {
+                
+                
+                
+                for var t = 0; t < xAxisArrStr2.count; t++ {
+                    if String(moves[o][0]) == xAxisArrStr2[t] {
+                        for var p = 0; p < yAxisArrStr2.count; p++ {
+                            if String(moves[o][1]) == yAxisArrStr2[p] {
+                                for var i = 0; i < pieces.count; i++ {
+                                    if pieces[i].frame.origin.x == xAxisArr[t] {
+                                        if pieces[i].frame.origin.y == yAxisArr[p] {
+                                            
+                                            print("this is complicated")
+                                            
+                                            for var q = 0; q < xAxisArrStr2.count; q++ {
+                                                if String(moves[o][2]) == xAxisArrStr2[q] {
+                                                    for var a = 0; a < yAxisArrStr2.count; a++ {
+                                                        if String(moves[o][3]) == yAxisArrStr2[a] {
+                                                            
+                                                            
+                                                            pieces[i].frame.origin.x = xAxisArr[q]
+                                                            pieces[i].frame.origin.y = yAxisArr[a]
+                                                            
+                                                            
+                                                            
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+            if r!["status_black"] as! String == "move" {
+                isWhiteTurn = true
+                
+                for var i = 0; i < piecesArrs.count; i++ {
+                    for var t = 0; t < piecesArrs[i].count; t++ {
+                        piecesArrs[i][t].image = UIImage(named: piecesString[i])
+                        self.view.addSubview(piecesArrs[i][t])
+                        piecesArrs[i][t].contentMode = .ScaleAspectFit
+                        piecesArrs[i][t].userInteractionEnabled = true
+                        piecesArrs[i][t].multipleTouchEnabled = true
+                    }
+                }
+            }
+            else {
+                isWhiteTurn = false
+                
+                for var i = 0; i < piecesArrs.count; i++ {
+                    for var t = 0; t < piecesArrs[i].count; t++ {
+                        piecesArrs[i][t].image = UIImage(named: piecesString[i])
+                        self.view.addSubview(piecesArrs[i][t])
+                        piecesArrs[i][t].contentMode = .ScaleAspectFit
+                        piecesArrs[i][t].userInteractionEnabled = false
+                        piecesArrs[i][t].multipleTouchEnabled = true
+                    }
+                }
+            }
+            
+            print("I am black player!")
+
             self.title = r!["whitePlayer"] as? String
             
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
@@ -2051,6 +2228,9 @@ class Game: UIViewController {
                 
                 
             } else {
+                //Must be equal!
+
+                
                 print(pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck)
                 LAN = pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck
                 piecesNotationSeperator = "-"
@@ -2061,7 +2241,19 @@ class Game: UIViewController {
                 
             }
             notations.append(LAN)
-            game["piecePosition"] = notations
+            game.addObject(notations.last!, forKey: "piecePosition")
+            if game["whitePlayer"] as? String == PFUser.currentUser()?.username {
+                game["status_white"] = "notmove"
+                game["status_black"] = "move"
+
+            }
+            else {
+                game["status_white"] = "move"
+                game["status_black"] = "notmove"
+                
+            }
+            
+            
             game.saveEventually()
             
             castleLeft = false
@@ -2272,7 +2464,22 @@ class Game: UIViewController {
             for var t = 0; t < 8; t++ {
                 for var g = 0; g < 8; g++ {
                     if (selectedPiece.frame.origin.x == xAxisArr[t] && selectedPiece.frame.origin.y == yAxisArr[g]) {
-                        pieceStringPos = xAxisArrStr2[t] + yAxisArrStr2[g]
+                        
+
+                        if game["blackPlayer"]  as? String == PFUser.currentUser()?.username {
+                        //Must not be equal!
+                        piecesArrs = [whiteQueens,whiteKings,whitePawns,blackPawns,whiteKnights,whiteBishops,whiteRooks, blackKnights, blackBishops, blackRooks, blackQueens, blackKings]
+                        piecesString = ["whiteQueen","whiteKing","whitePawn","blackPawn","whiteKnight","whiteBishop","whiteRook", "blackKnight", "blackBishop", "blackRook", "blackQueen", "blackKing"]
+                         xAxisArrStr2 = ["h","g","f","e","d","c","b","a"]
+                         yAxisArrStr2 = ["8","7","6","5","4","3","2","1"]
+                            pieceStringPos = xAxisArrStr2[t] + yAxisArrStr2[g]
+
+                       }
+                        else {
+                            pieceStringPos = xAxisArrStr[t] + yAxisArrStr[g]
+
+                        }
+                        
                     }
                 }
             }
@@ -2304,8 +2511,15 @@ class Game: UIViewController {
                                     piecesNotationSeperator = "x"
                                 }
                             }
-                            chessNotationx = xAxisArrStr[t]
-                            chessNotationy = yAxisArrStr[g]
+                            
+                            if game["blackPlayer"] as? String == PFUser.currentUser()?.username {
+                            chessNotationx = xAxisArrStr2[t]
+                            chessNotationy = yAxisArrStr2[g]
+                            }
+                            else {
+                                chessNotationx = xAxisArrStr[t]
+                                chessNotationy = yAxisArrStr[g]
+                            }
                         }
                     }
                 }
