@@ -681,8 +681,30 @@ class Game: UIViewController {
                         }
                         
                         else {
+                            
+                            blackKing.frame.origin.x = c
+                            blackKing.frame.origin.y = _8
+                            blackRook1.frame.origin.x = d
+                            blackRook1.frame.origin.y = _8
                         
                         }
+                    }
+                        else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
+                            if  o % 2 == 0 {
+                                whiteKing.frame.origin.x = c
+                                whiteKing.frame.origin.y = _1
+                                whiteRook1.frame.origin.x = d
+                                whiteRook1.frame.origin.y = _1
+                            }
+                                
+                            else {
+                                
+                                blackKing.frame.origin.x = c
+                                blackKing.frame.origin.y = _8
+                                blackRook1.frame.origin.x = d
+                                blackRook1.frame.origin.y = _8
+                                
+                            }
                     
                     }
                 }
