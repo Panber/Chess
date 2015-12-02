@@ -60,7 +60,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
     @IBOutlet weak var tableView: UITableView!
 
-    
     @IBOutlet weak var invitesButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var newButtonOutlet: UIBarButtonItem!
     

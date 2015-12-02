@@ -10,8 +10,6 @@ import UIKit
 import SpriteKit
 
 
-
-
 extension String
 {
     subscript(integerIndex: Int) -> Character {
@@ -77,17 +75,26 @@ var chessNotationy = ""
 let yAxisArrq = [_8,_7,_6,_5,_4,_3,_2,_1]
 let xAxisArrq = [h,g,f,e,d,c,b,a]
 
-class Game: UIViewController {
+class MoveCell: UICollectionViewCell {
+    @IBOutlet weak var notation: UILabel!
+    
+    func configureWithColor() {
+    backgroundColor = UIColor.whiteColor()
+    notation.textColor = UIColor.blackColor()
+    }
+    
+}
+
+class Game: UIViewController, UICollectionViewDataSource {
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var game = PFObject(className: "Games")
     var notations: Array<String> = []
     
     var allMoves: Array<String> = []
     var LAN = ""
-    
-    
 
-    
     var canTake: Bool = true
     
     var size : CGFloat = pieceSize
@@ -96,7 +103,7 @@ class Game: UIViewController {
     //BOARDER
     let boarderBoard = UIImageView(frame: CGRectMake(-0.01*pieceSize, _1 - 7*pieceSize, 8*pieceSize, 8*pieceSize))
     
-
+    
     //timers
     var timerNumber:Double = 0
     var movementTimer = NSTimer()
@@ -119,7 +126,7 @@ class Game: UIViewController {
     var blackCastlingLeft : Array<UIImageView> = []
     var blackCastlingRight : Array<UIImageView> = []
     
-
+    
     // Logic options for all pieces
     var pieceWhiteLogicOptions: Array<UIImageView> = []
     var pieceBlackLogicOptions: Array<UIImageView> = []
@@ -170,7 +177,7 @@ class Game: UIViewController {
     var hasBlackKingMoved = false
     var blackCastle = false
     
-
+    
     
     //chesspieces:
     var whitePawn1 = UIImageView(frame: CGRectMake(a, _2, pieceSize , pieceSize))
@@ -295,20 +302,10 @@ class Game: UIViewController {
         //size-properties
         let pieceSize = sqrt(screenWidth * screenWidth / 64)
         
-         xAxisArrStr = ["a","b","c","d","e","f","g","h"]
-         yAxisArrStr = ["1","2","3","4","5","6","7","8"]
-         pieceString = ""
-         xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
-         yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
-
-        
         canTake = true
         
         size = pieceSize
-        
-        
-        
-        
+
         //timers
         timerNumber = 0
         movementTimer = NSTimer()
@@ -330,9 +327,6 @@ class Game: UIViewController {
         
         blackCastlingLeft  = []
         blackCastlingRight  = []
-        
-        
-        
         
         // Logic options for all pieces
         pieceWhiteLogicOptions = []
@@ -596,15 +590,6 @@ class Game: UIViewController {
         print(moves)
         
         
-
-        
-
-        
-        
-        
-        
-        
-        
         if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
             //chesspieces loading - REMEMBER TO ADD PIECES TO ARRAYS!! Right order as well!!
             if r!["status_white"] as! String == "move" {
@@ -771,10 +756,6 @@ class Game: UIViewController {
                 }
             })
             
-            
-            
-            
-            
         }
         else {
             
@@ -830,18 +811,10 @@ class Game: UIViewController {
             xAxisArrStr2 = ["h","g","f","e","d","c","b","a"]
             yAxisArrStr2 = ["8","7","6","5","4","3","2","1"]
             
-            
-
-            
-            
-
-            
             ////////this is where the magic happens\\\\\\\\
             
             for var o = 0; o < moves.count; o++ {
-                
-                
-                
+
                 for var t = 0; t < xAxisArrStr2.count; t++ {
                     if String(moves[o][0]) == xAxisArrStr2[t] {
                         for var p = 0; p < yAxisArrStr2.count; p++ {
@@ -861,8 +834,6 @@ class Game: UIViewController {
                                                             pieces[i].frame.origin.x = xAxisArr[q]
                                                             pieces[i].frame.origin.y = yAxisArr[a]
                                                             
-                                                            
-                                                            
                                                         }
                                                     }
                                                 }
@@ -875,8 +846,7 @@ class Game: UIViewController {
                     }
                 }
             }
-            
-            
+
             if r!["status_black"] as! String == "move" {
                 isWhiteTurn = true
                 
@@ -961,23 +931,15 @@ class Game: UIViewController {
                     
                 }
             })
-            
-            
-            
+
         }
-        
-        
-        
-        
-        
-        
+
     }
     
     override func viewDidDisappear(animated: Bool) {
         notations = []
         game = PFObject(className: "Games")
-        
-        
+
         
     }
     
@@ -986,17 +948,12 @@ class Game: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        
-        
-        
-        
+
         //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
-        
+    
     }
     
-    
-    
+
     // MARK: - Setup-functions 🔍
     //    override func prefersStatusBarHidden() -> Bool {
     //        return true
@@ -1014,14 +971,15 @@ class Game: UIViewController {
         moveByAmounty = _moveByAmounty
         movementTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: Selector("updateMovementTimer"), userInfo: nil, repeats: true)
         if isWhiteTurn == true {
-            
-            
-            
+
             isWhiteTurn = false
         }
         else if isWhiteTurn == false {
             isWhiteTurn = true
         }
+//        let newIndexPath = NSIndexPath(forItem: allMoves.count - 1, inSection: 0)
+//        collectionView.insertItemsAtIndexPaths([newIndexPath])
+//        collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
     }
     
     func showMarkedPiece() {
@@ -1163,7 +1121,17 @@ class Game: UIViewController {
         blackCastlingRight = []
     }
     
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Move", forIndexPath: indexPath) as! MoveCell
+        let move = allMoves[indexPath.item]
+        cell.configureWithColor()
+        cell.notation.text = move
+        return cell
+    }
     
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return allMoves.count
+    }
     
     // MARK: - Pieces selected! 👾
     
@@ -1680,7 +1648,7 @@ class Game: UIViewController {
                     if foundKing == true {
                         
                         let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
-                        //pieceOption.image = UIImage(named: "piecePossibilities.png")
+                        pieceOption.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption)
                         
                         if  pieceid == 4  {
@@ -1706,7 +1674,7 @@ class Game: UIViewController {
                         
                         if pieceid == 1 || pieceid == 3 || pieceid == 4 || pieceid == 2 || pieceid == 6 || pieceid == 7  {
                             let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
-                            //pieceOption.image = UIImage(named: "piecePossibilities.png")
+                            pieceOption.image = UIImage(named: "piecePossibilities.png")
                             self.view.addSubview(pieceOption)
                             
                             if  pieceid == 4  {
@@ -1755,7 +1723,7 @@ class Game: UIViewController {
                             
                             if pieceid == 1 || pieceid == 3 || pieceid == 4 || pieceid == 2 || pieceid == 6 || pieceid == 7  {
                                 let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
-                                //pieceOption.image = UIImage(named: "piecePossibilities.png")
+                                pieceOption.image = UIImage(named: "piecePossibilities.png")
                                 self.view.addSubview(pieceOption)
                                 
                                 if  pieceid == 4  {
@@ -2260,8 +2228,6 @@ class Game: UIViewController {
                 LAN = pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck
                 piecesNotationSeperator = "-"
                 chessNotationCheck = ""
-                
-                
                 
                 
             }
@@ -2829,6 +2795,7 @@ class Game: UIViewController {
             
             if touch.view == pieceOptions[o] {
                 movePiece(pieceOptions[o].frame.origin.x - selectedPiece.frame.origin.x, _moveByAmounty: pieceOptions[o].frame.origin.y - selectedPiece.frame.origin.y)
+                
             }
         }
         for var o = 0 ; o < whiteCastlingLeft.count; o++ {
