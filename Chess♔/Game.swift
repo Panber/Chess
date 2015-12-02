@@ -590,15 +590,6 @@ class Game: UIViewController, UICollectionViewDataSource {
         print(moves)
         
         
-
-        
-
-        
-        
-        
-        
-        
-        
         if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
             //chesspieces loading - REMEMBER TO ADD PIECES TO ARRAYS!! Right order as well!!
             if r!["status_white"] as! String == "move" {
