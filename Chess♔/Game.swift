@@ -672,7 +672,9 @@ class Game: UIViewController {
                             }
                         }
                     }
-                    else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" && String(moves[o][2])  == "0" {
+                    else if moves[0].characters.count == 3 {
+                        
+                        if String(moves[o][2])  == "0" {
                         if  o % 2 == 0 {
                                     whiteKing.frame.origin.x = c
                                     whiteKing.frame.origin.y = _1
@@ -689,20 +691,21 @@ class Game: UIViewController {
                         
                         }
                     }
+                    }
                         else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
                             if  o % 2 == 0 {
-                                whiteKing.frame.origin.x = c
+                                whiteKing.frame.origin.x = g
                                 whiteKing.frame.origin.y = _1
-                                whiteRook1.frame.origin.x = d
-                                whiteRook1.frame.origin.y = _1
+                                whiteRook2.frame.origin.x = f
+                                whiteRook2.frame.origin.y = _1
                             }
                                 
                             else {
                                 
-                                blackKing.frame.origin.x = c
+                                blackKing.frame.origin.x = g
                                 blackKing.frame.origin.y = _8
-                                blackRook1.frame.origin.x = d
-                                blackRook1.frame.origin.y = _8
+                                blackRook2.frame.origin.x = f
+                                blackRook2.frame.origin.y = _8
                                 
                             }
                     
