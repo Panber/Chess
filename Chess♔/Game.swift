@@ -795,18 +795,10 @@ class Game: UIViewController, UICollectionViewDataSource {
             xAxisArrStr2 = ["h","g","f","e","d","c","b","a"]
             yAxisArrStr2 = ["8","7","6","5","4","3","2","1"]
             
-            
-
-            
-            
-
-            
             ////////this is where the magic happens\\\\\\\\
             
             for var o = 0; o < moves.count; o++ {
-                
-                
-                
+
                 for var t = 0; t < xAxisArrStr2.count; t++ {
                     if String(moves[o][0]) == xAxisArrStr2[t] {
                         for var p = 0; p < yAxisArrStr2.count; p++ {
@@ -826,8 +818,6 @@ class Game: UIViewController, UICollectionViewDataSource {
                                                             pieces[i].frame.origin.x = xAxisArr[q]
                                                             pieces[i].frame.origin.y = yAxisArr[a]
                                                             
-                                                            
-                                                            
                                                         }
                                                     }
                                                 }
@@ -840,8 +830,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                     }
                 }
             }
-            
-            
+
             if r!["status_black"] as! String == "move" {
                 isWhiteTurn = true
                 
@@ -926,9 +915,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                     
                 }
             })
-            
-            
-            
+
         }
 
     }
@@ -936,8 +923,7 @@ class Game: UIViewController, UICollectionViewDataSource {
     override func viewDidDisappear(animated: Bool) {
         notations = []
         game = PFObject(className: "Games")
-        
-        
+
         
     }
     
@@ -951,8 +937,7 @@ class Game: UIViewController, UICollectionViewDataSource {
     
     }
     
-    
-    
+
     // MARK: - Setup-functions 🔍
     //    override func prefersStatusBarHidden() -> Bool {
     //        return true
@@ -1647,7 +1632,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                     if foundKing == true {
                         
                         let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
-                        //pieceOption.image = UIImage(named: "piecePossibilities.png")
+                        pieceOption.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption)
                         
                         if  pieceid == 4  {
@@ -1673,7 +1658,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                         
                         if pieceid == 1 || pieceid == 3 || pieceid == 4 || pieceid == 2 || pieceid == 6 || pieceid == 7  {
                             let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
-                            //pieceOption.image = UIImage(named: "piecePossibilities.png")
+                            pieceOption.image = UIImage(named: "piecePossibilities.png")
                             self.view.addSubview(pieceOption)
                             
                             if  pieceid == 4  {
@@ -1722,7 +1707,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                             
                             if pieceid == 1 || pieceid == 3 || pieceid == 4 || pieceid == 2 || pieceid == 6 || pieceid == 7  {
                                 let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
-                                //pieceOption.image = UIImage(named: "piecePossibilities.png")
+                                pieceOption.image = UIImage(named: "piecePossibilities.png")
                                 self.view.addSubview(pieceOption)
                                 
                                 if  pieceid == 4  {
