@@ -25,8 +25,6 @@ extension String
     }
 }
 
-
-
 var game = PFObject(className: "Games")
 var notations: Array<String> = []
 
@@ -44,8 +42,6 @@ let g = 6 * pieceSize
 let h = 7 * pieceSize
 
 let xAxisArr = [a,b,c,d,e,f,g,h]
-
-
 
 
 //y-Axis coordinates
@@ -79,13 +75,20 @@ class MoveCell: UICollectionViewCell {
     @IBOutlet weak var notation: UILabel!
     
     func configureWithColor() {
-    backgroundColor = UIColor.whiteColor()
-    notation.textColor = UIColor.blackColor()
+        
+        if darkMode == true {
+        
+        backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+        notation.textColor = UIColor.whiteColor()
+        } else if darkMode == false {
+            backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            notation.textColor = UIColor.blackColor()
+        }
     }
     
 }
 
-class Game: UIViewController, UICollectionViewDataSource {
+class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -94,7 +97,7 @@ class Game: UIViewController, UICollectionViewDataSource {
     
     var allMoves: Array<String> = []
     var LAN = ""
-
+    
     var canTake: Bool = true
     
     var size : CGFloat = pieceSize
@@ -305,7 +308,7 @@ class Game: UIViewController, UICollectionViewDataSource {
         canTake = true
         
         size = pieceSize
-
+        
         //timers
         timerNumber = 0
         movementTimer = NSTimer()
@@ -525,7 +528,7 @@ class Game: UIViewController, UICollectionViewDataSource {
         self.view.addSubview(pieceMarked)
         pieceMarked.hidden = true
         
-
+        
         
         
         let otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
@@ -646,8 +649,8 @@ class Game: UIViewController, UICollectionViewDataSource {
                                                             
                                                             if moves.last == moves[o] && am == moves.count{
                                                                 
-                                                               UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                                    
+                                                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                    
                                                                     self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                     self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                     self.updateLogic()
@@ -674,119 +677,119 @@ class Game: UIViewController, UICollectionViewDataSource {
                     else if moves[o].characters.count == 3 {
                         
                         if String(moves[o][2])  == "0" {
-                        if  o % 2 == 0 {
-             
-                            if moves.last == moves[o] && am == moves.count{
-                                
-                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                    
-                                    self.blackKing.frame.origin.x = c
-                                    self.blackKing.frame.origin.y = _8
-                                    self.blackRook1.frame.origin.x = d
-                                    self.blackRook1.frame.origin.y = _8
-                                    
-                                    
-                                    
-                                    }, completion: { finish in})
-                                
-                            }
-                            else {
-                                self.blackKing.frame.origin.x = c
-                                self.blackKing.frame.origin.y = _8
-                                self.blackRook1.frame.origin.x = d
-                                self.blackRook1.frame.origin.y = _8
-                            }
-                            
- 
-                        }
-                        
-                        else {
-                            
-                            if moves.last == moves[o] && am == moves.count{
-                                
-                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                    
-                                    self.whiteKing.frame.origin.x = c
-                                    self.whiteKing.frame.origin.y = _1
-                                    self.whiteRook1.frame.origin.x = d
-                                    self.whiteRook1.frame.origin.y = _1
-                                    
-                                    
-                                    
-                                    }, completion: { finish in})
-                                
-                            }
-                            else {
-                                self.whiteKing.frame.origin.x = c
-                                self.whiteKing.frame.origin.y = _1
-                                self.whiteRook1.frame.origin.x = d
-                                self.whiteRook1.frame.origin.y = _1
-                            }
-                            
-
-                        
-                        }
-                    }
-                    }
-                        else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
                             if  o % 2 == 0 {
                                 
                                 if moves.last == moves[o] && am == moves.count{
                                     
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                         
-                                        self.blackKing.frame.origin.x = g
+                                        self.blackKing.frame.origin.x = c
                                         self.blackKing.frame.origin.y = _8
-                                        self.blackRook2.frame.origin.x = f
-                                        self.blackRook2.frame.origin.y = _8
+                                        self.blackRook1.frame.origin.x = d
+                                        self.blackRook1.frame.origin.y = _8
                                         
                                         
                                         
                                         }, completion: { finish in})
-
                                     
                                 }
                                 else {
+                                    self.blackKing.frame.origin.x = c
+                                    self.blackKing.frame.origin.y = _8
+                                    self.blackRook1.frame.origin.x = d
+                                    self.blackRook1.frame.origin.y = _8
+                                }
+                                
+                                
+                            }
+                                
+                            else {
+                                
+                                if moves.last == moves[o] && am == moves.count{
+                                    
+                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                        
+                                        self.whiteKing.frame.origin.x = c
+                                        self.whiteKing.frame.origin.y = _1
+                                        self.whiteRook1.frame.origin.x = d
+                                        self.whiteRook1.frame.origin.y = _1
+                                        
+                                        
+                                        
+                                        }, completion: { finish in})
+                                    
+                                }
+                                else {
+                                    self.whiteKing.frame.origin.x = c
+                                    self.whiteKing.frame.origin.y = _1
+                                    self.whiteRook1.frame.origin.x = d
+                                    self.whiteRook1.frame.origin.y = _1
+                                }
+                                
+                                
+                                
+                            }
+                        }
+                    }
+                    else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
+                        if  o % 2 == 0 {
+                            
+                            if moves.last == moves[o] && am == moves.count{
+                                
+                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                     
                                     self.blackKing.frame.origin.x = g
                                     self.blackKing.frame.origin.y = _8
                                     self.blackRook2.frame.origin.x = f
                                     self.blackRook2.frame.origin.y = _8
-                                }
+                                    
+                                    
+                                    
+                                    }, completion: { finish in})
                                 
-
+                                
                             }
-                                
                             else {
-
-                                if moves.last == moves[o] && am == moves.count{
+                                
+                                self.blackKing.frame.origin.x = g
+                                self.blackKing.frame.origin.y = _8
+                                self.blackRook2.frame.origin.x = f
+                                self.blackRook2.frame.origin.y = _8
+                            }
+                            
+                            
+                        }
+                            
+                        else {
+                            
+                            if moves.last == moves[o] && am == moves.count{
+                                
+                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                     
-                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                        
-                                        self.whiteKing.frame.origin.x = g
-                                        self.whiteKing.frame.origin.y = _1
-                                        self.whiteRook2.frame.origin.x = f
-                                        self.whiteRook2.frame.origin.y = _1
-                                        
-                                        
-                                        
-                                        }, completion: { finish in})
-                                    
-                                }
-                                else {
                                     self.whiteKing.frame.origin.x = g
                                     self.whiteKing.frame.origin.y = _1
                                     self.whiteRook2.frame.origin.x = f
                                     self.whiteRook2.frame.origin.y = _1
-                                }
+                                    
+                                    
+                                    
+                                    }, completion: { finish in})
                                 
-
+                            }
+                            else {
+                                self.whiteKing.frame.origin.x = g
+                                self.whiteKing.frame.origin.y = _1
+                                self.whiteRook2.frame.origin.x = f
+                                self.whiteRook2.frame.origin.y = _1
+                            }
+                            
+                            
                             
                         }
                     }
                 }
             }
-
+            
             print("I am white player!")
             self.title = r!["blackPlayer"] as? String
             
@@ -845,14 +848,12 @@ class Game: UIViewController, UICollectionViewDataSource {
             
         }
         else {
-
+            
             whiteQueen = UIImageView(frame: CGRectMake(e, _1, pieceSize, pieceSize))
             
             whiteKing = UIImageView(frame: CGRectMake(d, _1, pieceSize, pieceSize))
             
-         
-            
-            
+
             blackQueen = UIImageView(frame: CGRectMake(e, _8, pieceSize, pieceSize))
             
             blackKing = UIImageView(frame: CGRectMake(d, _8, pieceSize, pieceSize))
@@ -890,8 +891,8 @@ class Game: UIViewController, UICollectionViewDataSource {
             piecesBlackLogic = [whitePawn1,whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8, whiteKnight1, whiteKnight2, whiteBishop1, whiteBishop2, whiteRook1, whiteRook2, whiteQueen,blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
             
             //Must be equal!
-      //      piecesArrs = [whiteQueens,whiteKings,whitePawns,blackPawns,whiteKnights,whiteBishops,whiteRooks, blackKnights, blackBishops, blackRooks, blackQueens, blackKings]
-         //   piecesString = ["whiteQueen","whiteKing","whitePawn","blackPawn","whiteKnight","whiteBishop","whiteRook", "blackKnight", "blackBishop", "blackRook", "blackQueen", "blackKing"]
+            //      piecesArrs = [whiteQueens,whiteKings,whitePawns,blackPawns,whiteKnights,whiteBishops,whiteRooks, blackKnights, blackBishops, blackRooks, blackQueens, blackKings]
+            //   piecesString = ["whiteQueen","whiteKing","whitePawn","blackPawn","whiteKnight","whiteBishop","whiteRook", "blackKnight", "blackBishop", "blackRook", "blackQueen", "blackKing"]
             xAxisArrStr2 = ["h","g","f","e","d","c","b","a"]
             yAxisArrStr2 = ["8","7","6","5","4","3","2","1"]
             
@@ -922,17 +923,17 @@ class Game: UIViewController, UICollectionViewDataSource {
                                                                     self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                     self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                     self.updateLogic()
-
+                                                                    
                                                                     
                                                                     
                                                                     }, completion: { finish in})
-
+                                                                
                                                             }
                                                             else {
                                                                 self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                 self.pieces[i].frame.origin.y = yAxisArr[a]
                                                             }
-
+                                                            
                                                             
                                                         }
                                                     }
@@ -972,9 +973,9 @@ class Game: UIViewController, UICollectionViewDataSource {
                                     whiteRook1.frame.origin.y = _1
                                 }
                                 
-
                                 
-
+                                
+                                
                             }
                                 
                             else {
@@ -1000,7 +1001,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                                     blackRook1.frame.origin.y = _8
                                 }
                                 
-
+                                
                                 
                             }
                         }
@@ -1029,7 +1030,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                                 whiteRook2.frame.origin.x = c
                                 whiteRook2.frame.origin.y = _1
                             }
-
+                            
                         }
                             
                         else {
@@ -1054,14 +1055,14 @@ class Game: UIViewController, UICollectionViewDataSource {
                                 blackRook2.frame.origin.x = c
                                 blackRook2.frame.origin.y = _8
                             }
-                    
- 
+                            
+                            
                             
                         }
                     }
                 }
             }
-
+            
             if r!["status_black"] as! String == "move" {
                 isWhiteTurn = true
                 
@@ -1090,7 +1091,7 @@ class Game: UIViewController, UICollectionViewDataSource {
             }
             
             print("I am black player!")
-
+            
             self.title = r!["whitePlayer"] as? String
             
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
@@ -1146,15 +1147,15 @@ class Game: UIViewController, UICollectionViewDataSource {
                     
                 }
             })
-
+            
         }
-
+        
     }
     
     override func viewDidDisappear(animated: Bool) {
         notations = []
         game = PFObject(className: "Games")
-
+        
         
     }
     
@@ -1162,13 +1163,21 @@ class Game: UIViewController, UICollectionViewDataSource {
     // MARK: - View did load! 😄
     override func viewDidLoad() {
         
+        collectionView.showsVerticalScrollIndicator = false
+        if darkMode == true {
+            
+            collectionView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+        } else if darkMode == false {
+            collectionView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+        }
+        
         super.viewDidLoad()
-
+        
         //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
-    
+        
     }
     
-
+    
     // MARK: - Setup-functions 🔍
     //    override func prefersStatusBarHidden() -> Bool {
     //        return true
@@ -1186,15 +1195,12 @@ class Game: UIViewController, UICollectionViewDataSource {
         moveByAmounty = _moveByAmounty
         movementTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: Selector("updateMovementTimer"), userInfo: nil, repeats: true)
         if isWhiteTurn == true {
-
+            
             isWhiteTurn = false
         }
         else if isWhiteTurn == false {
             isWhiteTurn = true
         }
-//        let newIndexPath = NSIndexPath(forItem: allMoves.count - 1, inSection: 0)
-//        collectionView.insertItemsAtIndexPaths([newIndexPath])
-//        collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
     }
     
     func showMarkedPiece() {
@@ -1338,14 +1344,15 @@ class Game: UIViewController, UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Move", forIndexPath: indexPath) as! MoveCell
-        let move = allMoves[indexPath.item]
+        let move = notations[indexPath.item]
         cell.configureWithColor()
         cell.notation.text = move
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allMoves.count
+ 
+        return notations.count
     }
     
     // MARK: - Pieces selected! 👾
@@ -1780,8 +1787,8 @@ class Game: UIViewController, UICollectionViewDataSource {
     func updateLogic() {
         
         if isWhiteTurn == true {
-        
-        // Starts logic for all pieces
+            
+            // Starts logic for all pieces
             for var q = 0; q < blackQueens.count; q++ {
                 chessPieceMovementLogic(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, piece: blackQueens[q], logicOptions: piecesWhiteLogic)
             }
@@ -2473,9 +2480,9 @@ class Game: UIViewController, UICollectionViewDataSource {
             else if castleLeft == true && game["blackPlayer"] as? String == "move"{
                 print("0-0")
                 LAN = "0-0"
-            
+                
             }
-             else if castleRight == true && game["whitePlayer"] as? String == "move" {
+            else if castleRight == true && game["whitePlayer"] as? String == "move" {
                 print("0-0")
                 
                 LAN = "0-0"
@@ -2488,7 +2495,7 @@ class Game: UIViewController, UICollectionViewDataSource {
             }
             else {
                 //Must be equal!
-
+                
                 
                 print(pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck)
                 LAN = pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck
@@ -2498,11 +2505,17 @@ class Game: UIViewController, UICollectionViewDataSource {
                 
             }
             notations.append(LAN)
+            allMoves.append(LAN)
+            print(collectionView.numberOfItemsInSection(0))
+            let newIndexPath = NSIndexPath(forItem: notations.count - 1, inSection: 0)
+            collectionView.insertItemsAtIndexPaths([newIndexPath])
+            collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
+
             game.addObject(notations.last!, forKey: "piecePosition")
             if game["whitePlayer"] as? String == PFUser.currentUser()?.username {
                 game["status_white"] = "notmove"
                 game["status_black"] = "move"
-
+                
             }
             else {
                 game["status_white"] = "move"
@@ -2515,7 +2528,7 @@ class Game: UIViewController, UICollectionViewDataSource {
             
             castleLeft = false
             castleRight = false
-
+            
             
         }
             
@@ -2705,19 +2718,19 @@ class Game: UIViewController, UICollectionViewDataSource {
                 for var g = 0; g < 8; g++ {
                     if (selectedPiece.frame.origin.x == xAxisArr[t] && selectedPiece.frame.origin.y == yAxisArr[g]) {
                         
-
+                        
                         if game["blackPlayer"]  as? String == PFUser.currentUser()?.username {
-                        //Must not be equal!
-                        piecesArrs = [whiteQueens,whiteKings,whitePawns,blackPawns,whiteKnights,whiteBishops,whiteRooks, blackKnights, blackBishops, blackRooks, blackQueens, blackKings]
-                        piecesString = ["whiteQueen","whiteKing","whitePawn","blackPawn","whiteKnight","whiteBishop","whiteRook", "blackKnight", "blackBishop", "blackRook", "blackQueen", "blackKing"]
-                         xAxisArrStr2 = ["h","g","f","e","d","c","b","a"]
-                         yAxisArrStr2 = ["8","7","6","5","4","3","2","1"]
+                            //Must not be equal!
+                            piecesArrs = [whiteQueens,whiteKings,whitePawns,blackPawns,whiteKnights,whiteBishops,whiteRooks, blackKnights, blackBishops, blackRooks, blackQueens, blackKings]
+                            piecesString = ["whiteQueen","whiteKing","whitePawn","blackPawn","whiteKnight","whiteBishop","whiteRook", "blackKnight", "blackBishop", "blackRook", "blackQueen", "blackKing"]
+                            xAxisArrStr2 = ["h","g","f","e","d","c","b","a"]
+                            yAxisArrStr2 = ["8","7","6","5","4","3","2","1"]
                             pieceStringPos = xAxisArrStr2[t] + yAxisArrStr2[g]
-
-                       }
+                            
+                        }
                         else {
                             pieceStringPos = xAxisArrStr[t] + yAxisArrStr[g]
-
+                            
                         }
                         
                     }
@@ -2753,8 +2766,8 @@ class Game: UIViewController, UICollectionViewDataSource {
                             }
                             
                             if game["blackPlayer"] as? String == PFUser.currentUser()?.username {
-                            chessNotationx = xAxisArrStr2[t]
-                            chessNotationy = yAxisArrStr2[g]
+                                chessNotationx = xAxisArrStr2[t]
+                                chessNotationy = yAxisArrStr2[g]
                             }
                             else {
                                 chessNotationx = xAxisArrStr[t]
@@ -2962,7 +2975,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
                 //updateLogic()
-                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 3, friend: whitePieces, enemy: blackPieces)
+                chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 3, friend: whitePieces, enemy: blackPieces)
             }
         }
         
