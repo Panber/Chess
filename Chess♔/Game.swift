@@ -641,9 +641,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                                                     for var a = 0; a < yAxisArrStr2.count; a++ {
                                                         if String(moves[o][3]) == yAxisArrStr2[a] {
                                                             
-                                                            
-                                                            
-                                                            
+
                                                             if moves.last == moves[o] && am == moves.count{
                                                                 
                                                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
@@ -711,9 +709,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                                     }, completion: { finish in})
                                 
                             }
-                            
 
-                        
                         }
                     }
                     }
@@ -1666,8 +1662,6 @@ class Game: UIViewController, UICollectionViewDataSource {
     
     func updateLogic() {
         
-        if isWhiteTurn == true {
-        
         // Starts logic for all pieces
             for var q = 0; q < blackQueens.count; q++ {
                 chessPieceMovementLogic(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, piece: blackQueens[q], logicOptions: piecesWhiteLogic)
@@ -1684,7 +1678,6 @@ class Game: UIViewController, UICollectionViewDataSource {
             for var w = 0; w < blackPawns.count; w++ {
                 chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawns[w], logicOptions: piecesWhiteLogic)
             }
-        } else if isWhiteTurn == false {
             
             for var q = 0; q < whiteQueens.count; q++ {
                 chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueens[q] , logicOptions: piecesBlackLogic)
@@ -1701,7 +1694,6 @@ class Game: UIViewController, UICollectionViewDataSource {
             for var w = 0; w < whitePawns.count; w++ {
                 chessPieceMovementLogic(2, pieceid: 6, friend: whitePieces, enemy: blackPieces, piece: whitePawns[w], logicOptions: piecesBlackLogic)
             }
-        }
     }
     
     func chessPieceMovementLogic(var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView], var piece: UIImageView, var logicOptions: [UIImageView])  {
