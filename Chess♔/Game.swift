@@ -657,7 +657,6 @@ class Game: UIViewController, UICollectionViewDataSource {
                                                             else {
                                                                 pieces[i].frame.origin.x = xAxisArr[q]
                                                                 pieces[i].frame.origin.y = yAxisArr[a]
-                                                                updateLogic()
                                                             }
                                                             
                                                             
@@ -932,7 +931,6 @@ class Game: UIViewController, UICollectionViewDataSource {
                                                             else {
                                                                 self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                 self.pieces[i].frame.origin.y = yAxisArr[a]
-                                                                self.updateLogic()
                                                             }
 
                                                             
