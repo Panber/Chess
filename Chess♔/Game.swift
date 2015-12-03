@@ -691,6 +691,12 @@ class Game: UIViewController, UICollectionViewDataSource {
                                     }, completion: { finish in})
                                 
                             }
+                            else {
+                                self.blackKing.frame.origin.x = c
+                                self.blackKing.frame.origin.y = _8
+                                self.blackRook1.frame.origin.x = d
+                                self.blackRook1.frame.origin.y = _8
+                            }
                             
  
                         }
@@ -710,6 +716,12 @@ class Game: UIViewController, UICollectionViewDataSource {
                                     
                                     }, completion: { finish in})
                                 
+                            }
+                            else {
+                                self.whiteKing.frame.origin.x = c
+                                self.whiteKing.frame.origin.y = _1
+                                self.whiteRook1.frame.origin.x = d
+                                self.whiteRook1.frame.origin.y = _1
                             }
                             
 
@@ -732,7 +744,15 @@ class Game: UIViewController, UICollectionViewDataSource {
                                         
                                         
                                         }, completion: { finish in})
+
                                     
+                                }
+                                else {
+                                    
+                                    self.blackKing.frame.origin.x = g
+                                    self.blackKing.frame.origin.y = _8
+                                    self.blackRook2.frame.origin.x = f
+                                    self.blackRook2.frame.origin.y = _8
                                 }
                                 
 
@@ -753,6 +773,12 @@ class Game: UIViewController, UICollectionViewDataSource {
                                         
                                         }, completion: { finish in})
                                     
+                                }
+                                else {
+                                    self.whiteKing.frame.origin.x = g
+                                    self.whiteKing.frame.origin.y = _1
+                                    self.whiteRook2.frame.origin.x = f
+                                    self.whiteRook2.frame.origin.y = _1
                                 }
                                 
 
@@ -890,9 +916,25 @@ class Game: UIViewController, UICollectionViewDataSource {
                                                         if String(moves[o][3]) == yAxisArrStr2[a] {
                                                             
                                                             
-                                                            pieces[i].frame.origin.x = xAxisArr[q]
-                                                            pieces[i].frame.origin.y = yAxisArr[a]
-                                                            updateLogic()
+                                                            if moves.last == moves[o] && am == moves.count{
+                                                                
+                                                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                    
+                                                                    self.pieces[i].frame.origin.x = xAxisArr[q]
+                                                                    self.pieces[i].frame.origin.y = yAxisArr[a]
+                                                                    self.updateLogic()
+
+                                                                    
+                                                                    
+                                                                    }, completion: { finish in})
+
+                                                            }
+                                                            else {
+                                                                self.pieces[i].frame.origin.x = xAxisArr[q]
+                                                                self.pieces[i].frame.origin.y = yAxisArr[a]
+                                                                self.updateLogic()
+                                                            }
+
                                                             
                                                         }
                                                     }
@@ -911,38 +953,111 @@ class Game: UIViewController, UICollectionViewDataSource {
                         if String(moves[o][2])  == "0" {
                             if  o % 2 == 0 {
                                 
-                                whiteKing.frame.origin.x = f
-                                whiteKing.frame.origin.y = _1
-                                whiteRook1.frame.origin.x = e
-                                whiteRook1.frame.origin.y = _1
+                                if moves.last == moves[o] && am == moves.count{
+                                    
+                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                        
+                                        self.whiteKing.frame.origin.x = f
+                                        self.whiteKing.frame.origin.y = _1
+                                        self.whiteRook1.frame.origin.x = e
+                                        self.whiteRook1.frame.origin.y = _1
+                                        
+                                        
+                                        
+                                        }, completion: { finish in})
+                                    
+                                }
+                                else {
+                                    whiteKing.frame.origin.x = f
+                                    whiteKing.frame.origin.y = _1
+                                    whiteRook1.frame.origin.x = e
+                                    whiteRook1.frame.origin.y = _1
+                                }
+                                
+
                                 
 
                             }
                                 
                             else {
                                 
-                                blackKing.frame.origin.x = f
-                                blackKing.frame.origin.y = _8
-                                blackRook1.frame.origin.x = e
-                                blackRook1.frame.origin.y = _8
+                                if moves.last == moves[o] && am == moves.count{
+                                    
+                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                        
+                                        self.blackKing.frame.origin.x = f
+                                        self.blackKing.frame.origin.y = _8
+                                        self.blackRook1.frame.origin.x = e
+                                        self.blackRook1.frame.origin.y = _8
+                                        
+                                        
+                                        
+                                        }, completion: { finish in})
+                                    
+                                }
+                                else {
+                                    blackKing.frame.origin.x = f
+                                    blackKing.frame.origin.y = _8
+                                    blackRook1.frame.origin.x = e
+                                    blackRook1.frame.origin.y = _8
+                                }
+                                
+
                                 
                             }
                         }
                     }
                     else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
                         if  o % 2 == 0 {
-                            whiteKing.frame.origin.x = b
-                            whiteKing.frame.origin.y = _1
-                            whiteRook2.frame.origin.x = c
-                            whiteRook2.frame.origin.y = _1
+                            
+                            if moves.last == moves[o] && am == moves.count{
+                                
+                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                    
+                                    self.whiteKing.frame.origin.x = b
+                                    self.whiteKing.frame.origin.y = _1
+                                    self.whiteRook2.frame.origin.x = c
+                                    self.whiteRook2.frame.origin.y = _1
+                                    
+                                    
+                                    
+                                    }, completion: { finish in})
+                                
+                            }
+                            else {
+                                
+                                whiteKing.frame.origin.x = b
+                                whiteKing.frame.origin.y = _1
+                                whiteRook2.frame.origin.x = c
+                                whiteRook2.frame.origin.y = _1
+                            }
+
                         }
                             
                         else {
-                            
-                            blackKing.frame.origin.x = b
-                            blackKing.frame.origin.y = _8
-                            blackRook2.frame.origin.x = c
-                            blackRook2.frame.origin.y = _8
+                            if moves.last == moves[o] && am == moves.count{
+                                
+                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                    
+                                    self.blackKing.frame.origin.x = b
+                                    self.blackKing.frame.origin.y = _8
+                                    self.blackRook2.frame.origin.x = c
+                                    self.blackRook2.frame.origin.y = _8
+                                    
+                                    
+                                    
+                                    }, completion: { finish in})
+                                
+                            }
+                            else {
+                                
+                                blackKing.frame.origin.x = b
+                                blackKing.frame.origin.y = _8
+                                blackRook2.frame.origin.x = c
+                                blackRook2.frame.origin.y = _8
+                            }
+                    
+ 
                             
                         }
                     }
