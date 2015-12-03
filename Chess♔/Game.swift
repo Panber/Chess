@@ -650,13 +650,14 @@ class Game: UIViewController, UICollectionViewDataSource {
                                                     
                                                                     self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                     self.pieces[i].frame.origin.y = yAxisArr[a]
-                                                                    
+                                                                    self.updateLogic()
                                                                     }, completion: { finish in})
                                                                 
                                                             }
                                                             else {
                                                                 pieces[i].frame.origin.x = xAxisArr[q]
                                                                 pieces[i].frame.origin.y = yAxisArr[a]
+                                                                updateLogic()
                                                             }
                                                             
                                                             
@@ -2899,7 +2900,7 @@ class Game: UIViewController, UICollectionViewDataSource {
                 removePieceOptions()
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
-                updateLogic()
+                //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 2, pieceid: 2, friend: blackPieces, enemy: whitePieces)
             }
         }
