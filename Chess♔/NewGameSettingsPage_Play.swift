@@ -209,6 +209,7 @@ class NewGameSettingsPage: UIViewController {
                 let push = PFPush()
                 push.setQuery(pushQuery) // Set our Installation query
                 push.setMessage("\(PFUser.currentUser()!.username!) has invited you to play Chess!")
+            //    push.setData(<#T##data: [NSObject : AnyObject]?##[NSObject : AnyObject]?#>)
                 push.sendPushInBackground()
                 
             }

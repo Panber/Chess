@@ -1023,8 +1023,17 @@ var loaded = false
     
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
+        
+        
+        gameIDSYourTurn = []
+        gameIDSTheirTurn = []
+        gameIDSGameOver = []
+        gameID = ""
+        
         findGames()
 
+        
+        
         invitesButtonOutlet.title = "Invites"
         invitesButtonOutlet.enabled = false
         self.invitesButtonOutlet.tintColor = UIColor.grayColor()
@@ -1059,10 +1068,7 @@ var loaded = false
          yourturnLeft = []
          theirturnLeft = []
         
-         gameIDSYourTurn = []
-         gameIDSTheirTurn = []
-         gameIDSGameOver = []
-         gameID = ""
+
         
         tableView.alpha = 0
         tableView.reloadData()
