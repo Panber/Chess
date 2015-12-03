@@ -44,8 +44,6 @@ let h = 7 * pieceSize
 let xAxisArr = [a,b,c,d,e,f,g,h]
 
 
-
-
 //y-Axis coordinates
 let _1 = screenHeight/2 + 3 * pieceSize
 let _2 = screenHeight/2 + 2 * pieceSize
@@ -77,13 +75,20 @@ class MoveCell: UICollectionViewCell {
     @IBOutlet weak var notation: UILabel!
     
     func configureWithColor() {
-        backgroundColor = UIColor.whiteColor()
-        notation.textColor = UIColor.blackColor()
+        
+        if darkMode == true {
+        
+        backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+        notation.textColor = UIColor.whiteColor()
+        } else if darkMode == false {
+            backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            notation.textColor = UIColor.blackColor()
+        }
     }
     
 }
 
-class Game: UIViewController, UICollectionViewDataSource {
+class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -848,9 +853,7 @@ class Game: UIViewController, UICollectionViewDataSource {
             
             whiteKing = UIImageView(frame: CGRectMake(d, _1, pieceSize, pieceSize))
             
-            
-            
-            
+
             blackQueen = UIImageView(frame: CGRectMake(e, _8, pieceSize, pieceSize))
             
             blackKing = UIImageView(frame: CGRectMake(d, _8, pieceSize, pieceSize))
@@ -1160,6 +1163,14 @@ class Game: UIViewController, UICollectionViewDataSource {
     // MARK: - View did load! 😄
     override func viewDidLoad() {
         
+        collectionView.showsVerticalScrollIndicator = false
+        if darkMode == true {
+            
+            collectionView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+        } else if darkMode == false {
+            collectionView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+        }
+        
         super.viewDidLoad()
         
         //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
@@ -1190,9 +1201,6 @@ class Game: UIViewController, UICollectionViewDataSource {
         else if isWhiteTurn == false {
             isWhiteTurn = true
         }
-        //        let newIndexPath = NSIndexPath(forItem: allMoves.count - 1, inSection: 0)
-        //        collectionView.insertItemsAtIndexPaths([newIndexPath])
-        //        collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
     }
     
     func showMarkedPiece() {
@@ -1336,14 +1344,15 @@ class Game: UIViewController, UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Move", forIndexPath: indexPath) as! MoveCell
-        let move = allMoves[indexPath.item]
+        let move = notations[indexPath.item]
         cell.configureWithColor()
         cell.notation.text = move
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allMoves.count
+ 
+        return notations.count
     }
     
     // MARK: - Pieces selected! 👾
@@ -2496,6 +2505,12 @@ class Game: UIViewController, UICollectionViewDataSource {
                 
             }
             notations.append(LAN)
+            allMoves.append(LAN)
+            print(collectionView.numberOfItemsInSection(0))
+            let newIndexPath = NSIndexPath(forItem: notations.count - 1, inSection: 0)
+            collectionView.insertItemsAtIndexPaths([newIndexPath])
+            collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
+
             game.addObject(notations.last!, forKey: "piecePosition")
             if game["whitePlayer"] as? String == PFUser.currentUser()?.username {
                 game["status_white"] = "notmove"
