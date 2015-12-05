@@ -28,7 +28,6 @@ extension String
 var game = PFObject(className: "Games")
 var notations: Array<String> = []
 
-
 let pieceSize = sqrt(screenWidth * screenWidth / 64)
 
 //x-Axis coordinates
@@ -95,7 +94,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var game = PFObject(className: "Games")
     var notations: Array<String> = []
     
-    var allMoves: Array<String> = []
+    var moveNum: Array<Int> = []
+    
     var LAN = ""
     
     var canTake: Bool = true
@@ -507,8 +507,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     @IBOutlet weak var chessBoard: UIImageView!
     
     override func viewWillAppear(animated: Bool) {
-        loadVariablesAndConstants()
         
+        loadVariablesAndConstants()
+
         lightOrDarkMode()
         
         for var i = 0 ; i < 8; i++ {
@@ -572,6 +573,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         for var i = 0; i < notations.count; i++ {
             
             print("\(i+1).")
+            var t = (i+1)
+             for var q = 0; q < 2; q++ {
+           moveNum.append(t)
+            }
             var putIntoMoves = ""
             for var o = 0; o < notations[i].characters.count; o++ {
                 let output = notations[i][o]
@@ -1151,6 +1156,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         
     }
+
     
     override func viewDidDisappear(animated: Bool) {
         notations = []
@@ -1159,6 +1165,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
     }
     
+    override func viewDidAppear(animated: Bool) {
+        var bottomOffset = CGPointMake(0, collectionView.contentSize.height - collectionView.bounds.size.height)
+        collectionView.setContentOffset(bottomOffset, animated: false)
+    }
     
     // MARK: - View did load! 😄
     override func viewDidLoad() {
@@ -1343,11 +1353,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Move", forIndexPath: indexPath) as! MoveCell
         let move = notations[indexPath.item]
+        let moveN =  moveNum[indexPath.item]
+        if indexPath.item % 2 == 0 {
+            cell.notation.text = String(moveN) + ". " + move
+        } else {
+            cell.notation.text = move
+        }
+        print(moveNum.count)
+        print(indexPath.item)
         cell.configureWithColor()
-        cell.notation.text = move
+        
         return cell
+        
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -2505,8 +2525,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
             }
             notations.append(LAN)
-            allMoves.append(LAN)
-            print(collectionView.numberOfItemsInSection(0))
+            moveNum = []
+            for var i = 0; i < notations.count; i++ {
+                var t = (i+1)
+                for var q = 0; q < 2; q++ {
+                    moveNum.append(t)
+                }
+        }
+        
+            print(notations.count)
             let newIndexPath = NSIndexPath(forItem: notations.count - 1, inSection: 0)
             collectionView.insertItemsAtIndexPaths([newIndexPath])
             collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
