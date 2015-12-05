@@ -93,6 +93,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             application.registerForRemoteNotificationTypes(types)
         }
         
+//        // Extract the notification data
+//        if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
+//            
+//            // Create a pointer to the Photo object
+//            let photoId = notificationPayload["p"] as? NSString
+//            let targetPhoto = PFObject(withoutDataWithClassName: "Photo", objectId: photoId)
+//            
+//            // Fetch photo object
+//            targetPhoto.fetchIfNeededInBackgroundWithBlock {
+//                (object: PFObject?, error:NSError?) -> Void in
+//                if error == nil {
+//                    // Show photo view controller
+//                    let viewController = PhotoVC(photo: object);
+//                    self.navController.pushViewController(viewController, animated: true);
+//                }
+//            }
+//        }
         
         return true
         
@@ -153,7 +170,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    
+//    func application(application: UIApplication,  didReceiveRemoteNotification userInfo: [NSObject : AnyObject],  fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+//        
+//        if let photoId: String = userInfo["p"] as? String {
+//            
+//            let targetPhoto = PFObject(withoutDataWithClassName: "Photo", objectId: photoId)
+//            targetPhoto.fetchIfNeededInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
+//                // Show photo view controller
+//                if error != nil {
+//                    completionHandler(UIBackgroundFetchResult.Failed)
+//                } else if PFUser.currentUser() != nil {
+//                    let viewController = PhotoVC(withPhoto: object)
+//                    self.navController.pushViewController(viewController, animated: true)
+//                    completionHandler(UIBackgroundFetchResult.NewData)
+//                } else {
+//                    completionHandler(UIBackgroundFetchResult.NoData)
+//                }
+//            }
+//        }
+//        handler(UIBackgroundFetchResult.NoData)
+//        
+//    }
     
     
 
