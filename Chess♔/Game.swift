@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import Firebase
 
 
 extension String
@@ -77,9 +78,9 @@ class MoveCell: UICollectionViewCell {
     func configureWithColor() {
         
         if darkMode == true {
-        
-        backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
-        notation.textColor = UIColor.whiteColor()
+            
+            backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            notation.textColor = UIColor.whiteColor()
         } else if darkMode == false {
             backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             notation.textColor = UIColor.blackColor()
@@ -507,6 +508,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     @IBOutlet weak var chessBoard: UIImageView!
     
     override func viewWillAppear(animated: Bool) {
+        
+        
+
+        
+        
+        
         loadVariablesAndConstants()
         
         lightOrDarkMode()
@@ -624,6 +631,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             
             ////////this is where the magic happens\\\\\\\\
+            func magic1() {
             var am = 0
             for var o = 0; o < moves.count; o++ {
                 
@@ -634,6 +642,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         for var p = 0; p < yAxisArrStr2.count; p++ {
                             if String(moves[o][1]) == yAxisArrStr2[p] {
                                 for var i = 0; i < pieces.count; i++ {
+                                    var remove = false
                                     if pieces[i].frame.origin.x == xAxisArr[t] {
                                         if pieces[i].frame.origin.y == yAxisArr[p] {
                                             
@@ -644,72 +653,79 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                     for var a = 0; a < yAxisArrStr2.count; a++ {
                                                         if String(moves[o][3]) == yAxisArrStr2[a] {
                                                             
-                                                          
+                                                            
                                                             let range = notations[o].rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
+                                                            
                                                             func checkIfTakenLast() {
-                                                            // range will be nil if no letters is found
-                                                            if  (range != nil) {
-                                                                print("letters  found")
-                                                                
-                                                                for var iy = 0; iy < pieces.count; iy++ {
-                                                                if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
-                                                                
-                                                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
-                                                                        self.pieces[iy].alpha = 0
-                                                                        }, completion: {finish in
+                                                                // range will be nil if no letters is found
+                                                                if  (range != nil) {
+                                                                    print("letters  found")
+                                                                    
+                                                                    for var iy = 0; iy < pieces.count; iy++ {
+                                                                        if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
                                                                             
-                                                                            
-                                                                            for var iy = 0; iy < self.pieces.count; iy++ {
-                                                                                if  self.pieces[iy].alpha == 0  {
+                                                                            UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
+                                                                                self.pieces[iy].alpha = 0
+                                                                                }, completion: {finish in
                                                                                     
                                                                                     
-                                                                                    
-                                                                                    for var t = 0; t < self.whitePieces.count; t++ {
-                                                                                        if self.whitePieces[t].alpha == 0 {
+                                                                                    if  self.pieces[iy].alpha == 0  {
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        for var ty = 0; ty < self.whitePieces.count; ty++ {
+                                                                                            if self.whitePieces[ty].alpha == 0 {
+                                                                                                
+                                                                                                self.whitePieces[ty].removeFromSuperview()
+                                                                                                self.whitePieces.removeAtIndex(ty)
+                                                                                                ty--
+                                                                                                
+                                                                                                
+                                                                                            }
                                                                                             
-                                                                                            // self.whitePieces[t].removeFromSuperview()
-                                                                                            self.whitePieces.removeAtIndex(t)
-                                                                                            t--
-                                                                                            
+                                                                                        }
+                                                                                        for var ty = 0; ty < self.blackPieces.count; ty++ {
+                                                                                            if self.blackPieces[ty].alpha == 0 {
+                                                                                                
+                                                                                                
+                                                                                                self.blackPieces[ty].removeFromSuperview()
+                                                                                                self.blackPieces.removeAtIndex(ty)
+                                                                                                ty--
+                                                                                                
+                                                                                            }
                                                                                             
                                                                                         }
                                                                                         
-                                                                                    }
-                                                                                    for var t = 0; t < self.blackPieces.count; t++ {
-                                                                                        if self.blackPieces[t].alpha == 0 {
-                                                                                            
-                                                                                            
-                                                                                            self.blackPieces[t].removeFromSuperview()
-                                                                                            self.blackPieces.removeAtIndex(t)
-                                                                                            t--
-                                                                                            
+                                                                                        if i > 0  {
+                                                                                            i--
+                                                                                        }
+                                                                                        if iy > 0 {
+                                                                                            iy--
                                                                                         }
                                                                                         
+                                                                                        self.pieces.removeAtIndex(iy)
+                                                                                        self.pieces[iy].removeFromSuperview()
+                                                                                        
+                                                                                        if iy == 0 {
+                                                                                            iy--
+                                                                                        }
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        
                                                                                     }
-                                                                                    // self.pieces[iy].removeFromSuperview()
                                                                                     
-                                                                                    self.pieces.removeAtIndex(iy)
-                                                                                    iy--
-                                                                                    i--
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                }
-                                                                                
-                                                                            }
-
-                                                                    })
-
+                                                                            })
+                                                                            
+                                                                        }
+                                                                    }
+                                                                    
+                                                                    
                                                                 }
+                                                                else {
+                                                                    print("letters not found")
                                                                 }
-                                                                
-
-                                                            }
-                                                            else {
-                                                                print("letters not found")
-                                                            }
                                                             }
                                                             func checkIfTaken() {
                                                                 // range will be nil if no letters is found
@@ -720,52 +736,59 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
                                                                             
                                                                             
-                                                                                self.pieces[iy].alpha = 0
+                                                                            self.pieces[iy].alpha = 0
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            if  self.pieces[iy].alpha == 0  {
                                                                                 
-                                                                                    
-                                                                                    
-                                                                                    for var iy = 0; iy < self.pieces.count; iy++ {
-                                                                                        if  self.pieces[iy].alpha == 0  {
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                            for var t = 0; t < self.whitePieces.count; t++ {
-                                                                                                if self.whitePieces[t].alpha == 0 {
-                                                                                                    
-                                                                                                    // self.whitePieces[t].removeFromSuperview()
-                                                                                                    self.whitePieces.removeAtIndex(t)
-                                                                                                    t--
-                                                                                                    
-                                                                                                    
-                                                                                                }
-                                                                                                
-                                                                                            }
-                                                                                            for var t = 0; t < self.blackPieces.count; t++ {
-                                                                                                if self.blackPieces[t].alpha == 0 {
-                                                                                                    
-                                                                                                    
-                                                                                                    self.blackPieces[t].removeFromSuperview()
-                                                                                                    self.blackPieces.removeAtIndex(t)
-                                                                                                    t--
-                                                                                                    
-                                                                                                }
-                                                                                                
-                                                                                            }
-                                                                                            // self.pieces[iy].removeFromSuperview()
-                                                                                            
-                                                                                            self.pieces.removeAtIndex(iy)
-                                                                                            iy--
-                                                                                            i--
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                        }
+                                                                                
+                                                                                
+                                                                                for var ty = 0; ty < self.whitePieces.count; ty++ {
+                                                                                    if self.whitePieces[ty].alpha == 0 {
+                                                                                        
+                                                                                        self.whitePieces[ty].removeFromSuperview()
+                                                                                        self.whitePieces.removeAtIndex(ty)
+                                                                                        ty--
+                                                                                        
                                                                                         
                                                                                     }
                                                                                     
-                                                                           
+                                                                                }
+                                                                                for var ty = 0; ty < self.blackPieces.count; ty++ {
+                                                                                    if self.blackPieces[ty].alpha == 0 {
+                                                                                        
+                                                                                        
+                                                                                        self.blackPieces[ty].removeFromSuperview()
+                                                                                        self.blackPieces.removeAtIndex(ty)
+                                                                                        ty--
+                                                                                        
+                                                                                    }
+                                                                                    
+                                                                                }
+                                                                                
+                                                                                if i > 0  {
+                                                                                    i--
+                                                                                }
+                                                                                if iy > 0 {
+                                                                                    iy--
+                                                                                }
+                                                                                
+                                                                                self.pieces.removeAtIndex(iy)
+                                                                                self.pieces[iy].removeFromSuperview()
+                                                                                
+                                                                                if iy == 0 {
+                                                                                    iy--
+                                                                                }
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                            }
+                                                                            
+                                                                            
                                                                             
                                                                         }
                                                                     }
@@ -780,24 +803,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                             
                                                             if moves.last == moves[o] && am == moves.count{
                                                                 checkIfTakenLast()
-
-
+                                                                
+                                                                
                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                                                     self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                     self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                     self.updateLogic()
-
+                                                                    
                                                                     }, completion: { finish in
-
+                                                                        
                                                                 })
                                                                 
                                                             }
                                                             else {
                                                                 checkIfTaken()
-
+                                                                
                                                                 pieces[i].frame.origin.x = xAxisArr[q]
                                                                 pieces[i].frame.origin.y = yAxisArr[a]
-
+                                                                
                                                                 
                                                                 
                                                                 
@@ -812,7 +835,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             }
                                         }
                                     }
-                                }
+                                    }
                             }
                         }
                     }
@@ -931,7 +954,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
             }
-            
+            }
+            magic1()
             print("I am white player!")
             self.title = r!["blackPlayer"] as? String
             
@@ -988,6 +1012,23 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
             })
             
+            //firebase
+            //check for any changes that may have accured at the destined game ≈_≈
+            let check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
+            check.observeEventType(.ChildChanged, withBlock: { snapshot in
+                print(snapshot.value)
+                
+                if self.game ["whitePlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "white" {
+                    
+                    
+                    
+                    magic1()
+                }
+                
+                }, withCancelBlock: { error in
+                    print(error.description)
+            })
+            //firebase - end
         }
         else {
             
@@ -995,7 +1036,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             whiteKing = UIImageView(frame: CGRectMake(d, _1, pieceSize, pieceSize))
             
-
+            
             blackQueen = UIImageView(frame: CGRectMake(e, _8, pieceSize, pieceSize))
             
             blackKing = UIImageView(frame: CGRectMake(d, _8, pieceSize, pieceSize))
@@ -1021,7 +1062,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             whitePiecesString = ["whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whiteKnight","whiteKnight","whiteBishop","whiteBishop","whiteRook", "whiteRook", "whiteQueen","whiteKing"]
             
             
-            //Must be equal!
+            //Must not be equal!
             piecesArrs = [whiteQueens,whiteKings,whitePawns,blackPawns,whiteKnights,whiteBishops,whiteRooks, blackKnights, blackBishops, blackRooks, blackQueens, blackKings]
             piecesString = ["blackQueen","blackKing","blackPawn","whitePawn","blackKnight","blackBishop","blackRook", "whiteKnight", "whiteBishop", "whiteRook", "whiteQueen", "whiteKing"]
             //
@@ -1039,6 +1080,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             yAxisArrStr2 = ["8","7","6","5","4","3","2","1"]
             
             ////////this is where the magic happens\\\\\\\\
+            func magic2() {
             var am = 0
             for var o = 0; o < moves.count; o++ {
                 am++
@@ -1047,6 +1089,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         for var p = 0; p < yAxisArrStr2.count; p++ {
                             if String(moves[o][1]) == yAxisArrStr2[p] {
                                 for var i = 0; i < pieces.count; i++ {
+                                    var remove = false
                                     if pieces[i].frame.origin.x == xAxisArr[t] {
                                         if pieces[i].frame.origin.y == yAxisArr[p] {
                                             
@@ -1070,45 +1113,50 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.pieces[iy].alpha = 0
                                                                                 }, completion: {finish in
                                                                                     
-                                                                                    
-                                                                                    for var iy = 0; iy < self.pieces.count; iy++ {
-                                                                                        if  self.pieces[iy].alpha == 0  {
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                            for var t = 0; t < self.whitePieces.count; t++ {
-                                                                                                if self.whitePieces[t].alpha == 0 {
-                                                                                                    
-                                                                                                    // self.whitePieces[t].removeFromSuperview()
-                                                                                                    self.whitePieces.removeAtIndex(t)
-                                                                                                    t--
-                                                                                                    
-                                                                                                    
-                                                                                                }
+                                                                                    if  self.pieces[iy].alpha == 0  {
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        for var ty = 0; ty < self.whitePieces.count; ty++ {
+                                                                                            if self.whitePieces[ty].alpha == 0 {
+                                                                                                
+                                                                                                self.whitePieces[ty].removeFromSuperview()
+                                                                                                self.whitePieces.removeAtIndex(ty)
+                                                                                                ty--
+                                                                                                
                                                                                                 
                                                                                             }
-                                                                                            for var t = 0; t < self.blackPieces.count; t++ {
-                                                                                                if self.blackPieces[t].alpha == 0 {
-                                                                                                    
-                                                                                                    
-                                                                                                    self.blackPieces[t].removeFromSuperview()
-                                                                                                    self.blackPieces.removeAtIndex(t)
-                                                                                                    t--
-                                                                                                    
-                                                                                                }
-                                                                                                
-                                                                                            }
-                                                                                            // self.pieces[iy].removeFromSuperview()
-                                                                                            
-                                                                                            self.pieces.removeAtIndex(iy)
-                                                                                            iy--
-                                                                                            i--
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                            
                                                                                             
                                                                                         }
+                                                                                        for var ty = 0; ty < self.blackPieces.count; ty++ {
+                                                                                            if self.blackPieces[ty].alpha == 0 {
+                                                                                                
+                                                                                                
+                                                                                                self.blackPieces[ty].removeFromSuperview()
+                                                                                                self.blackPieces.removeAtIndex(ty)
+                                                                                                ty--
+                                                                                                
+                                                                                            }
+                                                                                            
+                                                                                        }
+                                                                                        
+                                                                                        if i > 0  {
+                                                                                            i--
+                                                                                        }
+                                                                                        if iy > 0 {
+                                                                                            iy--
+                                                                                        }
+                                                                                        
+                                                                                        self.pieces.removeAtIndex(iy)
+                                                                                        self.pieces[iy].removeFromSuperview()
+                                                                                        
+                                                                                        if iy == 0 {
+                                                                                            iy--
+                                                                                        }
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        
                                                                                         
                                                                                     }
                                                                                     
@@ -1136,46 +1184,54 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             
                                                                             
                                                                             
-                                                                            for var iy = 0; iy < self.pieces.count; iy++ {
                                                                                 if  self.pieces[iy].alpha == 0  {
                                                                                     
                                                                                     
                                                                                     
-                                                                                    for var t = 0; t < self.whitePieces.count; t++ {
-                                                                                        if self.whitePieces[t].alpha == 0 {
+                                                                                    for var ty = 0; ty < self.whitePieces.count; ty++ {
+                                                                                        if self.whitePieces[ty].alpha == 0 {
                                                                                             
-                                                                                            // self.whitePieces[t].removeFromSuperview()
-                                                                                            self.whitePieces.removeAtIndex(t)
-                                                                                            t--
+                                                                                             self.whitePieces[ty].removeFromSuperview()
+                                                                                            self.whitePieces.removeAtIndex(ty)
+                                                                                            ty--
                                                                                             
                                                                                             
                                                                                         }
                                                                                         
                                                                                     }
-                                                                                    for var t = 0; t < self.blackPieces.count; t++ {
-                                                                                        if self.blackPieces[t].alpha == 0 {
+                                                                                    for var ty = 0; ty < self.blackPieces.count; ty++ {
+                                                                                        if self.blackPieces[ty].alpha == 0 {
                                                                                             
                                                                                             
-                                                                                            self.blackPieces[t].removeFromSuperview()
-                                                                                            self.blackPieces.removeAtIndex(t)
-                                                                                            t--
+                                                                                            self.blackPieces[ty].removeFromSuperview()
+                                                                                            self.blackPieces.removeAtIndex(ty)
+                                                                                            ty--
                                                                                             
                                                                                         }
                                                                                         
                                                                                     }
-                                                                                    // self.pieces[iy].removeFromSuperview()
+
+                                                                                    if i > 0  {
+                                                                                        i--
+                                                                                    }
+                                                                                    if iy > 0 {
+                                                                                    iy--
+                                                                                    }
                                                                                     
                                                                                     self.pieces.removeAtIndex(iy)
-                                                                                    iy--
-                                                                                    i--
+                                                                                    self.pieces[iy].removeFromSuperview()
                                                                                     
+                                                                                    if iy == 0 {
+                                                                                        iy--
+                                                                                    }
+
                                                                                     
                                                                                     
                                                                                     
                                                                                     
                                                                                 }
                                                                                 
-                                                                            }
+                                                                            
                                                                             
                                                                             
                                                                             
@@ -1204,10 +1260,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                             }
                                                             else {
                                                                 checkIfTaken()
+                                                                print(pieces[i+1])
+//                                                                if i < 0 {
+//                                                                i++}
                                                                 self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                 self.pieces[i].frame.origin.y = yAxisArr[a]
+
+                                                                
                                                             }
-                                                            
+  
                                                             
                                                         }
                                                     }
@@ -1215,7 +1276,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             }
                                         }
                                     }
-                                }
+                                    if remove {
+                                    }}
                             }
                         }
                         
@@ -1336,7 +1398,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
             }
-            
+            }
+            magic2()
             if r!["status_black"] as! String == "move" {
                 isWhiteTurn = true
                 
@@ -1422,12 +1485,29 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
             })
             
+            //firebase
+            //check for any changes that may have accured at the destined game ≈_≈
+            let check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
+            check.observeEventType(.ChildChanged, withBlock: { snapshot in
+                print(snapshot.value)
+                
+           
+                 if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black" {
+                    magic2()
+                }
+                
+                }, withCancelBlock: { error in
+                    print(error.description)
+            })
+            //firebase - end
         }
         
         
         
         
         
+        
+
         
     }
     
@@ -1630,7 +1710,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
- 
+        
         return notations.count
     }
     
@@ -2789,21 +2869,65 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             let newIndexPath = NSIndexPath(forItem: notations.count - 1, inSection: 0)
             collectionView.insertItemsAtIndexPaths([newIndexPath])
             collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
-
+            
             game.addObject(notations.last!, forKey: "piecePosition")
+            
+            var uuser = ""
             if game["whitePlayer"] as? String == PFUser.currentUser()?.username {
                 game["status_white"] = "notmove"
                 game["status_black"] = "move"
+                uuser = (game["blackPlayer"] as? String)!
                 
             }
             else {
                 game["status_white"] = "move"
                 game["status_black"] = "notmove"
-                
+                uuser = (game["whitePlayer"] as? String)!
             }
             
             
-            game.saveEventually()
+            
+            
+            
+            
+            game.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
+                if error == nil {
+                
+                    // Create our Installation query
+                    let pushQuery = PFInstallation.query()
+                    pushQuery!.whereKey("username", equalTo: uuser)
+                    
+                    // Send push notification to query
+                    let push = PFPush()
+                    push.setQuery(pushQuery) // Set our Installation query
+                    push.setMessage("\(PFUser.currentUser()!.username!) made a move!")
+                    //    push.setData(<#T##data: [NSObject : AnyObject]?##[NSObject : AnyObject]?#>)
+                    push.sendPushInBackground()
+                    
+                    //firebase
+                    //adding the game
+//                    let game = ["id": gameID]
+//                    let gamesRef = ref.childByAppendingPath("games")
+//                    gamesRef.setValue(game)
+                    
+                    //add who's turn it is
+                    let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                    var status = ["turn": "black"]
+                    if self.game ["whitePlayer"] as? String == PFUser.currentUser()?.username {
+                         status = ["turn": "black"]
+                    }
+                    else if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username {
+                         status = ["turn": "white"]
+                    }
+                    let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                    statusRef.setValue(status)
+                    //firebase - end
+                    
+
+                
+                
+                }
+            })
             
             castleLeft = false
             castleRight = false

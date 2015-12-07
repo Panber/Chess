@@ -191,8 +191,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 //        handler(UIBackgroundFetchResult.NoData)
 //        
 //    }
-    
-    
-
+//    
+//    
+//
 }
 

@@ -11,6 +11,7 @@ import Parse
 import Bolts
 import CoreLocation
 import SystemConfiguration
+import Firebase
 
 public class Reachability {
     class func isConnectedToNetwork() -> Bool {
@@ -1043,6 +1044,26 @@ var loaded = false
         lightOrDarkMode()
     }
     override func viewDidAppear(animated: Bool) {
+        
+//        //adding the game
+//        let game = ["id": "123456"]
+//        let gamesRef = ref.childByAppendingPath("games")
+//        gamesRef.setValue(game)
+//        
+//        //add who's turn it is
+//        let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+//        let status = ["turn": "white"]
+//        let statusRef = checkstatus.childByAppendingPath("123456")
+//        statusRef.setValue(status)
+//
+//        //check for any changes that may have accured at the destined game ≈_≈
+//        let check = Firebase(url:"https://chess-panber.firebaseio.com/games/123456")
+//        check.observeEventType(.Value, withBlock: { snapshot in
+//            print(snapshot.value)
+//            }, withCancelBlock: { error in
+//                print(error.description)
+//        })
+        
     }
     
     override func viewDidDisappear(animated: Bool) {

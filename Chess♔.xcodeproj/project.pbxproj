@@ -96,10 +96,6 @@
 		8F4A02A31B9A429B0084024A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A21B9A429B0084024A /* SystemConfiguration.framework */; };
 		8F4A02A51B9A42D40084024A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A41B9A42D40084024A /* Accounts.framework */; };
 		8F4A02A71B9A42DC0084024A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4A02A61B9A42DC0084024A /* Social.framework */; };
-		8F4CF7831BDD83E20037865C /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CF7821BDD83E20037865C /* ParseFacebookUtilsV4.framework */; };
-		8F4CF7871BDD84CE0037865C /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CF7841BDD84CE0037865C /* FBSDKCoreKit.framework */; };
-		8F4CF7881BDD84CE0037865C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CF7851BDD84CE0037865C /* FBSDKLoginKit.framework */; };
-		8F4CF7891BDD84CE0037865C /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CF7861BDD84CE0037865C /* FBSDKShareKit.framework */; };
 		8F5250C01BD01A67005D4682 /* LeaderBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5250BF1BD01A66005D4682 /* LeaderBoard.swift */; };
 		8F62C6801C00918700312A58 /* OtherUserProfilePage_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C67F1C00918700312A58 /* OtherUserProfilePage_Profile.swift */; };
 		8F62C6821C0091A600312A58 /* OtherUserProfilePage_Analyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6811C0091A600312A58 /* OtherUserProfilePage_Analyze.swift */; };
@@ -107,6 +103,14 @@
 		8F62C6861C00977A00312A58 /* NewGameSettingsPage_Analyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6851C00977A00312A58 /* NewGameSettingsPage_Analyze.swift */; };
 		8F62C6881C00979500312A58 /* NewGameSettingsPage_Explore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6871C00979500312A58 /* NewGameSettingsPage_Explore.swift */; };
 		8F62C68A1C0097BD00312A58 /* NewGameSettingsPage_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6891C0097BD00312A58 /* NewGameSettingsPage_Profile.swift */; };
+		8F6E35461C14F1DA0099EED3 /* Pods_Chess_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35431C14F1DA0099EED3 /* Pods_Chess_.framework */; };
+		8F6E35471C14F1DA0099EED3 /* Pods_Chess_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35441C14F1DA0099EED3 /* Pods_Chess_Tests.framework */; };
+		8F6E35481C14F1DA0099EED3 /* Pods_Chess_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35451C14F1DA0099EED3 /* Pods_Chess_UITests.framework */; };
+		8F6E354A1C14F4BE0099EED3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35491C14F4BE0099EED3 /* FBSDKCoreKit.framework */; };
+		8F6E354E1C14F6460099EED3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E354B1C14F6450099EED3 /* FBSDKCoreKit.framework */; };
+		8F6E354F1C14F6460099EED3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E354C1C14F6450099EED3 /* FBSDKLoginKit.framework */; };
+		8F6E35501C14F6460099EED3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E354D1C14F6450099EED3 /* FBSDKShareKit.framework */; };
+		8F6E35521C14F69E0099EED3 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35511C14F69E0099EED3 /* ParseFacebookUtilsV4.framework */; };
 		8F768D9B1BD6AC4F007A7BFC /* SignUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */; };
 		8F840BCC1BBDAE6600511F44 /* FriendRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F840BCB1BBDAE6600511F44 /* FriendRequests.swift */; };
 		8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */; };
@@ -146,6 +150,7 @@
 		8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5C8991B9A264F0097637E /* LaunchScreen.storyboard */; };
 		8FA5C8A61B9A264F0097637E /* Chess_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8A51B9A264F0097637E /* Chess_Tests.swift */; };
 		8FA5C8B11B9A264F0097637E /* Chess_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5C8B01B9A264F0097637E /* Chess_UITests.swift */; };
+		8FB7085D1C14DE3700E90DC5 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FB7085C1C14DE3700E90DC5 /* Firebase.framework */; };
 		8FB94F991BE62EA80029EF00 /* chatIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB94F981BE62EA80029EF00 /* chatIcon.png */; };
 		8FB94F9B1BE62F360029EF00 /* Data@3x_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */; };
 		8FBD3A371BB498A200212314 /* GameInterFace2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD3A361BB498A200212314 /* GameInterFace2.swift */; };
@@ -171,6 +176,7 @@
 		8FEF2AB71BFD17DB006E1359 /* grayBC.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2AB61BFD17DB006E1359 /* grayBC.png */; };
 		8FEF2ABD1BFD1AE7006E1359 /* dBlackBC.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2ABC1BFD1AE7006E1359 /* dBlackBC.png */; };
 		8FEF2ABF1BFE4CAA006E1359 /* NewGameNearby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEF2ABE1BFE4CAA006E1359 /* NewGameNearby.swift */; };
+		CEF2020CB78A7F85899B156E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EACA15DE07680AE61616A943 /* Pods.framework */; };
 		F12B6E001BFFE925009897FA /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12B6DFF1BFFE925009897FA /* Test.swift */; };
 		F134DDDE1BC1C417005BA54C /* UsersProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */; };
 		F1431A5E1BD281B600C5854A /* UsersFriendsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */; };
@@ -199,6 +205,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		522DEBB2073AFDCCB3F08A4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8F056AF51BAF533C00CD617B /* LightModePreview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightModePreview.png; sourceTree = "<group>"; };
 		8F056AF61BAF533C00CD617B /* DarkModePreview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DarkModePreview.png; sourceTree = "<group>"; };
 		8F14D1821B9C823500A58CCF /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
@@ -288,10 +295,6 @@
 		8F4A02A61B9A42DC0084024A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8F4CF77E1BDBAF1E0037865C /* NewGameFriends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameFriends.swift; sourceTree = "<group>"; };
 		8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage_Play.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Play.swift; sourceTree = "<group>"; };
-		8F4CF7821BDD83E20037865C /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
-		8F4CF7841BDD84CE0037865C /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		8F4CF7851BDD84CE0037865C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		8F4CF7861BDD84CE0037865C /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		8F5250BF1BD01A66005D4682 /* LeaderBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderBoard.swift; sourceTree = "<group>"; };
 		8F62C67F1C00918700312A58 /* OtherUserProfilePage_Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePage_Profile.swift; sourceTree = "<group>"; };
 		8F62C6811C0091A600312A58 /* OtherUserProfilePage_Analyze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePage_Analyze.swift; sourceTree = "<group>"; };
@@ -299,6 +302,14 @@
 		8F62C6851C00977A00312A58 /* NewGameSettingsPage_Analyze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Analyze.swift; sourceTree = "<group>"; };
 		8F62C6871C00979500312A58 /* NewGameSettingsPage_Explore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Explore.swift; sourceTree = "<group>"; };
 		8F62C6891C0097BD00312A58 /* NewGameSettingsPage_Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Profile.swift; sourceTree = "<group>"; };
+		8F6E35431C14F1DA0099EED3 /* Pods_Chess_.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Chess_.framework; path = "Pods/../build/Debug-iphoneos/Pods_Chess_.framework"; sourceTree = "<group>"; };
+		8F6E35441C14F1DA0099EED3 /* Pods_Chess_Tests.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Chess_Tests.framework; path = "Pods/../build/Debug-iphoneos/Pods_Chess_Tests.framework"; sourceTree = "<group>"; };
+		8F6E35451C14F1DA0099EED3 /* Pods_Chess_UITests.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Chess_UITests.framework; path = "Pods/../build/Debug-iphoneos/Pods_Chess_UITests.framework"; sourceTree = "<group>"; };
+		8F6E35491C14F4BE0099EED3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-20150813/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		8F6E354B1C14F6450099EED3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		8F6E354C1C14F6450099EED3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		8F6E354D1C14F6450099EED3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		8F6E35511C14F69E0099EED3 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpMenu.swift; sourceTree = "<group>"; };
 		8F840BCB1BBDAE6600511F44 /* FriendRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequests.swift; sourceTree = "<group>"; };
 		8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeMenu.swift; sourceTree = "<group>"; };
@@ -344,6 +355,7 @@
 		8FA5C8AC1B9A264F0097637E /* Chess♔.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chess♔.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8B01B9A264F0097637E /* Chess_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chess_UITests.swift; sourceTree = "<group>"; };
 		8FA5C8B21B9A264F0097637E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8FB7085C1C14DE3700E90DC5 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = "Chess♔/Firebase.framework"; sourceTree = "<group>"; };
 		8FB94F981BE62EA80029EF00 /* chatIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatIcon.png; sourceTree = "<group>"; };
 		8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Data@3x_blue.png"; sourceTree = "<group>"; };
 		8FBD3A361BB498A200212314 /* GameInterFace2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInterFace2.swift; sourceTree = "<group>"; };
@@ -370,6 +382,8 @@
 		8FEF2AB61BFD17DB006E1359 /* grayBC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayBC.png; sourceTree = "<group>"; };
 		8FEF2ABC1BFD1AE7006E1359 /* dBlackBC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dBlackBC.png; sourceTree = "<group>"; };
 		8FEF2ABE1BFE4CAA006E1359 /* NewGameNearby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewGameNearby.swift; path = ../NewGameNearby.swift; sourceTree = "<group>"; };
+		DEC0A4D6A8F0888440ED5221 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EACA15DE07680AE61616A943 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F12B6DFF1BFFE925009897FA /* Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersProfilePage.swift; sourceTree = "<group>"; };
 		F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersFriendsPage.swift; sourceTree = "<group>"; };
@@ -386,25 +400,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F6E354A1C14F4BE0099EED3 /* FBSDKCoreKit.framework in Frameworks */,
+				8F6E35461C14F1DA0099EED3 /* Pods_Chess_.framework in Frameworks */,
+				8F6E35471C14F1DA0099EED3 /* Pods_Chess_Tests.framework in Frameworks */,
+				8F6E35481C14F1DA0099EED3 /* Pods_Chess_UITests.framework in Frameworks */,
+				8FB7085D1C14DE3700E90DC5 /* Firebase.framework in Frameworks */,
+				8F6E35521C14F69E0099EED3 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				8F4A02991B9A42720084024A /* CoreLocation.framework in Frameworks */,
 				8F3AC3841B9AFAE700815CDC /* libsqlite3.dylib in Frameworks */,
-				8F4CF7831BDD83E20037865C /* ParseFacebookUtilsV4.framework in Frameworks */,
-				8F4CF7881BDD84CE0037865C /* FBSDKLoginKit.framework in Frameworks */,
-				8F4CF7871BDD84CE0037865C /* FBSDKCoreKit.framework in Frameworks */,
 				8F3AC3821B9AFADC00815CDC /* libz.dylib in Frameworks */,
 				8F4A02A71B9A42DC0084024A /* Social.framework in Frameworks */,
+				8F6E35501C14F6460099EED3 /* FBSDKShareKit.framework in Frameworks */,
 				8F4A02A51B9A42D40084024A /* Accounts.framework in Frameworks */,
 				8F4A02A31B9A429B0084024A /* SystemConfiguration.framework in Frameworks */,
+				8F6E354E1C14F6460099EED3 /* FBSDKCoreKit.framework in Frameworks */,
 				8F4A02A11B9A428E0084024A /* StoreKit.framework in Frameworks */,
+				8F6E354F1C14F6460099EED3 /* FBSDKLoginKit.framework in Frameworks */,
 				8F4A029F1B9A42890084024A /* Security.framework in Frameworks */,
 				8F4A029D1B9A42820084024A /* QuartzCore.framework in Frameworks */,
 				8F4A029B1B9A427B0084024A /* MobileCoreServices.framework in Frameworks */,
-				8F4CF7891BDD84CE0037865C /* FBSDKShareKit.framework in Frameworks */,
 				8F4A02971B9A42690084024A /* CoreGraphics.framework in Frameworks */,
 				8F4A02951B9A42610084024A /* CFNetwork.framework in Frameworks */,
 				8F4A02931B9A424F0084024A /* AudioToolbox.framework in Frameworks */,
 				8F4A02901B9A42180084024A /* Parse.framework in Frameworks */,
 				8F4A028F1B9A42180084024A /* Bolts.framework in Frameworks */,
+				CEF2020CB78A7F85899B156E /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +445,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B1C13F2F61D00565BF6E5C5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DEC0A4D6A8F0888440ED5221 /* Pods.debug.xcconfig */,
+				522DEBB2073AFDCCB3F08A4D /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8F14D18A1B9C917800A58CCF /* LoginImages */ = {
 			isa = PBXGroup;
 			children = (
@@ -600,10 +629,10 @@
 		8F4A02911B9A421D0084024A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8F4CF7841BDD84CE0037865C /* FBSDKCoreKit.framework */,
-				8F4CF7851BDD84CE0037865C /* FBSDKLoginKit.framework */,
-				8F4CF7861BDD84CE0037865C /* FBSDKShareKit.framework */,
-				8F4CF7821BDD83E20037865C /* ParseFacebookUtilsV4.framework */,
+				8F6E35511C14F69E0099EED3 /* ParseFacebookUtilsV4.framework */,
+				8F6E354B1C14F6450099EED3 /* FBSDKCoreKit.framework */,
+				8F6E354C1C14F6450099EED3 /* FBSDKLoginKit.framework */,
+				8F6E354D1C14F6450099EED3 /* FBSDKShareKit.framework */,
 				8F3AC3831B9AFAE700815CDC /* libsqlite3.dylib */,
 				8F3AC3811B9AFADC00815CDC /* libz.dylib */,
 				8F4A02A61B9A42DC0084024A /* Social.framework */,
@@ -649,6 +678,8 @@
 				8FA5C8A41B9A264F0097637E /* Chess♔Tests */,
 				8FA5C8AF1B9A264F0097637E /* Chess♔UITests */,
 				8FA5C88E1B9A264F0097637E /* Products */,
+				8B1C13F2F61D00565BF6E5C5 /* Pods */,
+				DCEE6EEE2E7F5ECB62B02265 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -707,6 +738,19 @@
 			name = Boards;
 			sourceTree = "<group>";
 		};
+		DCEE6EEE2E7F5ECB62B02265 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8F6E35491C14F4BE0099EED3 /* FBSDKCoreKit.framework */,
+				8F6E35431C14F1DA0099EED3 /* Pods_Chess_.framework */,
+				8F6E35441C14F1DA0099EED3 /* Pods_Chess_Tests.framework */,
+				8F6E35451C14F1DA0099EED3 /* Pods_Chess_UITests.framework */,
+				8FB7085C1C14DE3700E90DC5 /* Firebase.framework */,
+				EACA15DE07680AE61616A943 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F1431A5F1BD298E700C5854A /* LaunchImages */ = {
 			isa = PBXGroup;
 			children = (
@@ -722,9 +766,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8FA5C8B51B9A264F0097637E /* Build configuration list for PBXNativeTarget "Chess♔" */;
 			buildPhases = (
+				9283EDA466D26AB26FE70A10 /* Check Pods Manifest.lock */,
 				8FA5C8891B9A264F0097637E /* Sources */,
 				8FA5C88A1B9A264F0097637E /* Frameworks */,
 				8FA5C88B1B9A264F0097637E /* Resources */,
+				4FBE0FB9911D5C3FB0A1D597 /* Embed Pods Frameworks */,
+				EB44D773211A87A9018B2024 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -963,6 +1010,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4FBE0FB9911D5C3FB0A1D597 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9283EDA466D26AB26FE70A10 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EB44D773211A87A9018B2024 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8FA5C8891B9A264F0097637E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1142,6 +1237,7 @@
 		};
 		8FA5C8B61B9A264F0097637E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEC0A4D6A8F0888440ED5221 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1152,7 +1248,7 @@
 					"$(PROJECT_DIR)/Chess♔",
 				);
 				INFOPLIST_FILE = "Chess♔/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Panber.chess;
@@ -1165,6 +1261,7 @@
 		};
 		8FA5C8B71B9A264F0097637E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 522DEBB2073AFDCCB3F08A4D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1175,7 +1272,7 @@
 					"$(PROJECT_DIR)/Chess♔",
 				);
 				INFOPLIST_FILE = "Chess♔/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Panber.chess;

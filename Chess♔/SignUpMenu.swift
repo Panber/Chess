@@ -8,11 +8,14 @@
 
 import UIKit
 import Parse
+import Firebase
 
 let cornerRadius:CGFloat = 8
 let screenSize: CGRect = UIScreen.mainScreen().bounds
 let screenWidth = screenSize.width
 let screenHeight = screenSize.height
+var ref = Firebase(url: "https://chess-panber.firebaseio.com/")
+
 
 class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
 
