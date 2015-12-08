@@ -1258,6 +1258,33 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
 //                    var bottomOffset = CGPointMake(0, self.collectionView.contentSize.height - self.collectionView.bounds.size.height)
 //                    self.collectionView.setContentOffset(bottomOffset, animated: true)
                     self.isWhiteTurn = true
+                    
+                    if r!["status_white"] as! String == "move" {
+                        self.isWhiteTurn = true
+                        
+                        for var i = 0; i < self.piecesArrs.count; i++ {
+                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                self.piecesArrs[i][t].image = UIImage(named: self.piecesString[i])
+                                self.view.addSubview(self.piecesArrs[i][t])
+                                self.piecesArrs[i][t].contentMode = .ScaleAspectFit
+                           self.piecesArrs[i][t].userInteractionEnabled = true
+                           self.piecesArrs[i][t].multipleTouchEnabled = true
+                            }
+                        }
+                    }
+                    else {
+                        self.isWhiteTurn = false
+                        
+                        for var i = 0; i < self.piecesArrs.count; i++ {
+                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                self.piecesArrs[i][t].image = UIImage(named: self.piecesString[i])
+                                self.view.addSubview(self.piecesArrs[i][t])
+                           self.piecesArrs[i][t].contentMode = .ScaleAspectFit
+                                self.piecesArrs[i][t].userInteractionEnabled = false
+                                self.piecesArrs[i][t].multipleTouchEnabled = true
+                            }
+                        }
+                    }
 
                 }
                 
@@ -1641,11 +1668,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 for var i = 0; i < piecesArrs.count; i++ {
                     for var t = 0; t < piecesArrs[i].count; t++ {
-                        piecesArrs[i][t].image = UIImage(named: piecesString[i])
-                        self.view.addSubview(piecesArrs[i][t])
-                        piecesArrs[i][t].contentMode = .ScaleAspectFit
-                        piecesArrs[i][t].userInteractionEnabled = true
-                        piecesArrs[i][t].multipleTouchEnabled = true
+                        self.piecesArrs[i][t].image = UIImage(named: piecesString[i])
+                        self.view.addSubview(self.piecesArrs[i][t])
+                        self.piecesArrs[i][t].contentMode = .ScaleAspectFit
+                        self.piecesArrs[i][t].userInteractionEnabled = true
+                        self.piecesArrs[i][t].multipleTouchEnabled = true
                     }
                 }
             }
@@ -1737,7 +1764,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     var last = r!["piecePosition"] as! Array<String>
                     self.notations.append(last.last!)
                     loadMoves()
-                    
                     
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if String(moves.last![0]) == xAxisArrStr2[t] {
@@ -1956,6 +1982,32 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     //                    self.collectionView.setContentOffset(bottomOffset, animated: true)
                     self.isWhiteTurn = true
                     
+                    if r!["status_black"] as! String == "move" {
+                        self.isWhiteTurn = true
+                        
+                        for var i = 0; i < self.piecesArrs.count; i++ {
+                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                self.piecesArrs[i][t].image = UIImage(named: self.piecesString[i])
+                                self.view.addSubview(self.piecesArrs[i][t])
+                                self.piecesArrs[i][t].contentMode = .ScaleAspectFit
+                                self.piecesArrs[i][t].userInteractionEnabled = true
+                                self.piecesArrs[i][t].multipleTouchEnabled = true
+                            }
+                        }
+                    }
+                    else {
+                        self.isWhiteTurn = false
+                        
+                        for var i = 0; i < self.piecesArrs.count; i++ {
+                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                self.piecesArrs[i][t].image = UIImage(named: self.piecesString[i])
+                                self.view.addSubview(self.piecesArrs[i][t])
+                                self.piecesArrs[i][t].contentMode = .ScaleAspectFit
+                                self.piecesArrs[i][t].userInteractionEnabled = false
+                                self.piecesArrs[i][t].multipleTouchEnabled = true
+                            }
+                        }
+                    }
                 }
                 
                 }, withCancelBlock: { error in
