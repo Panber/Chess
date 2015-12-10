@@ -87,4 +87,22 @@ func updateScore() {
 func loadNewGame() {
     
 }
-    
+
+var arra: Array<String> = []
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
