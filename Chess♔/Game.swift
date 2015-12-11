@@ -74,7 +74,9 @@ let yAxisArrq = [_8,_7,_6,_5,_4,_3,_2,_1]
 let xAxisArrq = [h,g,f,e,d,c,b,a]
 
 class MoveCell: UICollectionViewCell {
-    @IBOutlet weak var notation: UILabel!
+    
+    var notation = UILabel()
+    
     
     func configureWithColor() {
         
@@ -82,17 +84,21 @@ class MoveCell: UICollectionViewCell {
             
             backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             notation.textColor = UIColor.whiteColor()
+            notation = UILabel(frame: CGRectMake(100, 100, 100, 100))
+            notation.font = UIFont(name: "Didot", size: 16)
+            
         } else if darkMode == false {
             backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             notation.textColor = UIColor.blackColor()
+            notation = UILabel(frame: CGRectMake(100, 100, 100, 100))
+            notation.font = UIFont(name: "Didot", size: 16)
         }
     }
-    
 }
 
 class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    var collectionView: UICollectionView!
     
     var game = PFObject(className: "Games")
     var notations: Array<String> = []
@@ -183,7 +189,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var hasBlackKingMoved = false
     var blackCastle = false
     
-    
+    let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     
     //chesspieces:
     var whitePawn1 = UIImageView(frame: CGRectMake(a, _2, pieceSize , pieceSize))
@@ -510,11 +516,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     @IBOutlet weak var chessBoard: UIImageView!
     
     override func viewWillAppear(animated: Bool) {
-        
-        
-
-        
-        
         
         loadVariablesAndConstants()
         
@@ -1255,8 +1256,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     self.collectionView.reloadData()
-//                    var bottomOffset = CGPointMake(0, self.collectionView.contentSize.height - self.collectionView.bounds.size.height)
-//                    self.collectionView.setContentOffset(bottomOffset, animated: true)
                     self.isWhiteTurn = true
                     
                     if r!["status_white"] as! String == "move" {
@@ -1978,8 +1977,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     self.collectionView.reloadData()
-                    //                    var bottomOffset = CGPointMake(0, self.collectionView.contentSize.height - self.collectionView.bounds.size.height)
-                    //                    self.collectionView.setContentOffset(bottomOffset, animated: true)
                     self.isWhiteTurn = true
                     
                     if r!["status_black"] as! String == "move" {
@@ -2041,10 +2038,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     // MARK: - View did load! 😄
     override func viewDidLoad() {
         
+        
+        //layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 109, height: 22)
+        
+        collectionView = UICollectionView(frame: CGRectMake(100, 100, 111, 56), collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.registerClass(MoveCell.self, forCellWithReuseIdentifier: "Move")
+        self.view.addSubview(collectionView)
+        
         collectionView.showsVerticalScrollIndicator = false
         if darkMode == true {
             
-            collectionView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            //collectionView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            collectionView.backgroundColor = UIColor.whiteColor()
         } else if darkMode == false {
             collectionView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         }
@@ -2225,15 +2233,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Move", forIndexPath: indexPath) as! MoveCell
         let move = notations[indexPath.item]
         let moveN =  moveNum[indexPath.item]
+        cell.notation.frame = cell.bounds
         if indexPath.item % 2 == 0 {
             cell.notation.text = String(moveN) + ". " + move
         } else {
             cell.notation.text = move
         }
-        print(moveNum.count)
-        print(indexPath.item)
         cell.configureWithColor()
-        
+        self.view.addSubview(cell.notation)
         return cell
         
     }
