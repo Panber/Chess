@@ -71,6 +71,8 @@ var chessNotationy = ""
 let yAxisArrq = [_8,_7,_6,_5,_4,_3,_2,_1]
 let xAxisArrq = [h,g,f,e,d,c,b,a]
 
+// move only one colour
+var canOnlyMoveWhite = true
 
 // Collection view
 class MoveCell: UICollectionViewCell {
@@ -306,7 +308,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     var whitePassantPieces = UIImageView()
     var blackPassantPieces = UIImageView()
-    
     
     func loadVariablesAndConstants() {
         //size-properties
@@ -689,6 +690,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     }
                                                                                     
                                                                                 }
+                                                                            
                                                                                 for var ty = 0; ty < self.blackPieces.count; ty++ {
                                                                                     if self.blackPieces[ty].alpha == 0 {
                                                                                         
@@ -738,7 +740,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             for var ty = 0; ty < self.whitePieces.count; ty++ {
                                                                                 if self.whitePieces[ty].alpha == 0{
                                                                                     
-                                                                                    
+                                                                                    print("took white piece")
                                                                                     self.pieceToTake += [self.whitePieces[ty]]
                                                                                     //    self.whitePieces[ty].removeFromSuperview()
                                                                                     self.whitePieces.removeAtIndex(ty)
@@ -750,7 +752,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             }
                                                                             for var ty = 0; ty < self.blackPieces.count; ty++ {
                                                                                 if self.blackPieces[ty].alpha == 0 {
-                                                                                    
+                                                                                    print("took black piece")
                                                                                     self.pieceToTake += [self.blackPieces[ty]]
                                                                                     //      self.blackPieces[ty].removeFromSuperview()
                                                                                     self.blackPieces.removeAtIndex(ty)
@@ -922,6 +924,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
             magic1()
             print("I am white player!")
+            canOnlyMoveWhite = true
             self.title = r!["blackPlayer"] as? String
             
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
@@ -1429,11 +1432,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
 //                                                                                    
 //                                                                                    
 //                                                                                }
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
+
                                                                         }
                                                                     }
                                                                     
@@ -1591,8 +1590,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 blackRook2.frame.origin.y = _8
                             }
                             
-                            
-                            
                         }
                     }
                 }
@@ -1627,7 +1624,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
             
             print("I am black player!")
-            
+            canOnlyMoveWhite = true
             self.title = r!["whitePlayer"] as? String
             
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
@@ -1640,9 +1637,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         for result in result {
                             
                             let rating = result["rating"] as? Int
-                            
-                            
-                            
+
                             let profilePictureObject = result["profile_picture"] as? PFFile
                             
                             if(profilePictureObject != nil)
@@ -3819,7 +3814,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         
         for var i = 0; i < whitePawns.count;i++ {
-            if touch.view == whitePawns[i] && isWhiteTurn == true {
+            if touch.view == whitePawns[i] && isWhiteTurn == true && canOnlyMoveWhite == true {
                 selectedPiece = whitePawns[i]
                 removePieceOptions()
                 removeWhiteCastlingLeft()
@@ -3832,7 +3827,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         
         for var i = 0; i < whiteKnights.count;i++ {
-            if touch.view == whiteKnights[i] && isWhiteTurn == true {
+            if touch.view == whiteKnights[i] && isWhiteTurn == true && canOnlyMoveWhite == true {
                 selectedPiece = whiteKnights[i]
                 removePieceOptions()
                 removeWhiteCastlingLeft()
@@ -3843,7 +3838,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         
         for var i = 0; i < whiteBishops.count; i++ {
-            if touch.view == whiteBishops[i] && isWhiteTurn == true {
+            if touch.view == whiteBishops[i] && isWhiteTurn == true && canOnlyMoveWhite == true {
                 selectedPiece = whiteBishops[i]
                 removePieceOptions()
                 removeWhiteCastlingLeft()
@@ -3854,7 +3849,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         
         for var i = 0; i < whiteRooks.count; i++ {
-            if touch.view == whiteRooks[i] && isWhiteTurn == true {
+            if touch.view == whiteRooks[i] && isWhiteTurn == true && canOnlyMoveWhite == true {
                 removePieceOptions()
                 selectedPiece = whiteRooks[i]
                 removeWhiteCastlingLeft()
@@ -3865,7 +3860,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         
         for var i = 0; i < whiteQueens.count; i++ {
-            if touch.view == whiteQueens[i] && isWhiteTurn == true {
+            if touch.view == whiteQueens[i] && isWhiteTurn == true && canOnlyMoveWhite == true {
                 selectedPiece = whiteQueens[i]
                 removePieceOptions()
                 removeWhiteCastlingLeft()
@@ -3875,7 +3870,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
         }
         
-        if touch.view == whiteKing && isWhiteTurn == true {
+        if touch.view == whiteKing && isWhiteTurn == true && canOnlyMoveWhite == true {
             selectedPiece = whiteKing
             removePieceOptions()
             //updateLogic()
@@ -3884,7 +3879,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         
         for var i = 0; i < blackPawns.count;i++ {
-            if touch.view == blackPawns[i] && isWhiteTurn == false {
+            if touch.view == blackPawns[i] && isWhiteTurn == false && canOnlyMoveWhite == false {
                 selectedPiece = blackPawns[i]
                 removePieceOptions()
                 removeBlackCastlingLeft()
@@ -3895,7 +3890,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         
         for var i = 0; i < blackBishops.count;i++ {
-            if touch.view == blackBishops[i] && isWhiteTurn == false {
+            if touch.view == blackBishops[i] && isWhiteTurn == false && canOnlyMoveWhite == false {
                 selectedPiece = blackBishops[i]
                 removePieceOptions()
                 removeBlackCastlingLeft()
@@ -3906,7 +3901,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         
         for var i = 0; i < blackKnights.count;i++ {
-            if touch.view == blackKnights[i] && isWhiteTurn == false {
+            if touch.view == blackKnights[i] && isWhiteTurn == false && canOnlyMoveWhite == false {
                 selectedPiece = blackKnights[i]
                 removePieceOptions()
                 removeBlackCastlingLeft()
@@ -3917,7 +3912,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         
         for var i = 0; i < blackRooks.count;i++ {
-            if touch.view == blackRooks[i] && isWhiteTurn == false {
+            if touch.view == blackRooks[i] && isWhiteTurn == false && canOnlyMoveWhite == false {
                 selectedPiece = blackRooks[i]
                 removePieceOptions()
                 removeBlackCastlingLeft()
@@ -3928,7 +3923,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         
         for var i = 0; i < blackQueens.count; i++ {
-            if touch.view == blackQueens[i] && isWhiteTurn == false {
+            if touch.view == blackQueens[i] && isWhiteTurn == false && canOnlyMoveWhite == false {
                 selectedPiece = blackQueens[i]
                 removePieceOptions()
                 removeBlackCastlingLeft()
@@ -3938,7 +3933,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
         }
         
-        if touch.view == blackKing && isWhiteTurn == false {
+        if touch.view == blackKing && isWhiteTurn == false && canOnlyMoveWhite == false {
             selectedPiece = blackKing
             removePieceOptions()
             removeBlackCastlingLeft()
