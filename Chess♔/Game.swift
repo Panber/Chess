@@ -73,10 +73,11 @@ var chessNotationy = ""
 let yAxisArrq = [_8,_7,_6,_5,_4,_3,_2,_1]
 let xAxisArrq = [h,g,f,e,d,c,b,a]
 
+
+// Collection view
 class MoveCell: UICollectionViewCell {
     
     var notation = UILabel()
-    
     
     func configureWithColor() {
         
@@ -84,19 +85,18 @@ class MoveCell: UICollectionViewCell {
             
             backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             notation.textColor = UIColor.whiteColor()
-            notation = UILabel(frame: CGRectMake(100, 100, 100, 100))
             notation.font = UIFont(name: "Didot", size: 16)
             
         } else if darkMode == false {
             backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             notation.textColor = UIColor.blackColor()
-            notation = UILabel(frame: CGRectMake(100, 100, 100, 100))
             notation.font = UIFont(name: "Didot", size: 16)
         }
+        self.addSubview(notation)
     }
 }
 
-class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var collectionView: UICollectionView!
     
@@ -190,8 +190,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var hasBlackRookMoved2 = false
     var hasBlackKingMoved = false
     var blackCastle = false
-    
-    let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     
     //chesspieces:
     var whitePawn1 = UIImageView(frame: CGRectMake(a, _2, pieceSize , pieceSize))
@@ -2009,11 +2007,18 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     // MARK: - View did load! 😄
     override func viewDidLoad() {
         
-        
-        //layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 109, height: 22)
         
-        collectionView = UICollectionView(frame: CGRectMake(100, 100, 111, 56), collectionViewLayout: layout)
+        if screenHeight == 736.0 {
+        collectionView = UICollectionView(frame: CGRectMake(screenWidth-125, 86, 111, 46), collectionViewLayout: layout)
+        } else if screenHeight == 667.0 {
+            collectionView = UICollectionView(frame: CGRectMake(screenWidth-108, 78, 111, 46), collectionViewLayout: layout)
+        } else if screenHeight == 568.0 {
+            collectionView = UICollectionView(frame: CGRectMake(screenWidth-92, 74, 101, 36), collectionViewLayout: layout)
+            layout.itemSize = CGSize(width: 99, height: 17)
+        }
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.registerClass(MoveCell.self, forCellWithReuseIdentifier: "Move")
@@ -2022,8 +2027,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         collectionView.showsVerticalScrollIndicator = false
         if darkMode == true {
             
-            //collectionView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
-            collectionView.backgroundColor = UIColor.whiteColor()
+            collectionView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
         } else if darkMode == false {
             collectionView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         }
@@ -2201,17 +2205,22 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Move", forIndexPath: indexPath) as! MoveCell
+        
+        for view in cell.subviews {
+            view.removeFromSuperview()
+        }
+        
         let move = notations[indexPath.item]
         let moveN =  moveNum[indexPath.item]
-        cell.notation.frame = cell.bounds
         if indexPath.item % 2 == 0 {
             cell.notation.text = String(moveN) + ". " + move
         } else {
             cell.notation.text = move
         }
         cell.configureWithColor()
-        self.view.addSubview(cell.notation)
+        cell.notation = UILabel(frame: CGRectMake(0, 0, cell.frame.width, cell.frame.height))
         return cell
         
     }
@@ -2219,6 +2228,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return notations.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 2
     }
     
     // MARK: - Pieces selected! 👾
