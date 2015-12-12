@@ -11,8 +11,6 @@ import SpriteKit
 import Firebase
 import AudioToolbox
 
-
-
 extension String
 {
     subscript(integerIndex: Int) -> Character {
@@ -679,8 +677,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
                                                                             
                                                                                 print("iy is \(iy)")
-                                                                                
-                                                                                
+
                                                                                 for var ty = 0; ty < self.whitePieces.count; ty++ {
                                                                                     if self.whitePieces[ty].alpha == 0{
                                                                                         
@@ -706,11 +703,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     }
                                                                                     
                                                                                 }
-                                                                                
                                                                                 self.piecesToDelete.append(self.pieces[iy])
-                                                                                
 
-                                                                            
                                                                             UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                               
                                                                                 self.pieces[iy].alpha = 0
@@ -771,10 +765,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             
                                                                             self.piecesToDelete.append(self.pieces[iy])
 
-
-                                                                            
-                                                                            
-                                                                            
                                                                         }
                                                                     }
                                                                     
@@ -808,12 +798,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 pieces[i].frame.origin.y = yAxisArr[a]
                                                                 
                                                                 
-                                                                
-                                                                
-                                                                
                                                             }
-                                                            
-                                                            
+
                                                             
                                                         }
                                                     }
@@ -821,7 +807,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             }
                                         }
                                     }
-                                    }
+                                }
                             }
                         }
                     }
@@ -893,9 +879,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     self.blackKing.frame.origin.y = _8
                                     self.blackRook2.frame.origin.x = f
                                     self.blackRook2.frame.origin.y = _8
-                                    
-                                    
-                                    
+
                                     }, completion: { finish in})
                                 
                                 
@@ -907,8 +891,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 self.blackRook2.frame.origin.x = f
                                 self.blackRook2.frame.origin.y = _8
                             }
-                            
-                            
+
                         }
                             
                         else {
@@ -933,9 +916,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 self.whiteRook2.frame.origin.x = f
                                 self.whiteRook2.frame.origin.y = _1
                             }
-                            
-                            
-                            
+
                         }
                     }
                 }
@@ -1015,9 +996,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     var last = r!["piecePosition"] as! Array<String>
                     self.notations.append(last.last!)
                     loadMoves()
-                    
-                    
-                    
                     
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if String(moves.last![0]) == xAxisArrStr2[t] {
@@ -1143,8 +1121,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             }, completion: { finish in})
                                         
                                     }
-          
-                                    
+
                                     
                                 }
                                     
@@ -1164,8 +1141,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             }, completion: { finish in})
                                         
                                     }
-                               
-                                    
+ 
                                     
                                 }
                             }
@@ -1181,16 +1157,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.blackKing.frame.origin.y = _8
                                         self.blackRook2.frame.origin.x = f
                                         self.blackRook2.frame.origin.y = _8
-                                        
-                                        
-                                        
+
                                         }, completion: { finish in})
                                     
                                     
                                 }
-           
-                                
-                                
+
                             }
                                 
                             else {
@@ -1203,16 +1175,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.whiteKing.frame.origin.y = _1
                                         self.whiteRook2.frame.origin.x = f
                                         self.whiteRook2.frame.origin.y = _1
-                                        
-                                        
+
                                         
                                         }, completion: { finish in})
                                     
                                 }
-                              
-                                
-                                
-                                
+
                             }
                         }
                     }
@@ -1868,14 +1836,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.blackRook1.frame.origin.x = d
                                             self.blackRook1.frame.origin.y = _8
                                             
-                                            
-                                            
                                             }, completion: { finish in})
                                         
                                     }
-                                    
-                                    
-                                    
+
                                 }
                                     
                                 else {
@@ -1911,16 +1875,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.blackKing.frame.origin.y = _8
                                         self.blackRook2.frame.origin.x = f
                                         self.blackRook2.frame.origin.y = _8
-                                        
-                                        
-                                        
+ 
                                         }, completion: { finish in})
                                     
-                                    
                                 }
-                                
-                                
-                                
+
                             }
                                 
                             else {
@@ -1939,9 +1898,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         }, completion: { finish in})
                                     
                                 }
-                                
-                                
-                                
+
                                 
                             }
                         }
@@ -3416,12 +3373,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 game["status_black"] = "notmove"
                 uuser = (game["whitePlayer"] as? String)!
             }
-            
-            
-            
-            
-            
-            
+
             game.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
                 if error == nil {
                 
