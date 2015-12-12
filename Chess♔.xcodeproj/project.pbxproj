@@ -103,14 +103,7 @@
 		8F62C6861C00977A00312A58 /* NewGameSettingsPage_Analyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6851C00977A00312A58 /* NewGameSettingsPage_Analyze.swift */; };
 		8F62C6881C00979500312A58 /* NewGameSettingsPage_Explore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6871C00979500312A58 /* NewGameSettingsPage_Explore.swift */; };
 		8F62C68A1C0097BD00312A58 /* NewGameSettingsPage_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6891C0097BD00312A58 /* NewGameSettingsPage_Profile.swift */; };
-		8F6E35461C14F1DA0099EED3 /* Pods_Chess_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35431C14F1DA0099EED3 /* Pods_Chess_.framework */; };
-		8F6E35471C14F1DA0099EED3 /* Pods_Chess_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35441C14F1DA0099EED3 /* Pods_Chess_Tests.framework */; };
-		8F6E35481C14F1DA0099EED3 /* Pods_Chess_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35451C14F1DA0099EED3 /* Pods_Chess_UITests.framework */; };
 		8F6E354A1C14F4BE0099EED3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35491C14F4BE0099EED3 /* FBSDKCoreKit.framework */; };
-		8F6E354E1C14F6460099EED3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E354B1C14F6450099EED3 /* FBSDKCoreKit.framework */; };
-		8F6E354F1C14F6460099EED3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E354C1C14F6450099EED3 /* FBSDKLoginKit.framework */; };
-		8F6E35501C14F6460099EED3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E354D1C14F6450099EED3 /* FBSDKShareKit.framework */; };
-		8F6E35521C14F69E0099EED3 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35511C14F69E0099EED3 /* ParseFacebookUtilsV4.framework */; };
 		8F768D9B1BD6AC4F007A7BFC /* SignUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */; };
 		8F840BCC1BBDAE6600511F44 /* FriendRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F840BCB1BBDAE6600511F44 /* FriendRequests.swift */; };
 		8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */; };
@@ -185,6 +178,10 @@
 		F1648B611BDC19CA00AE1BC3 /* GameInterFace3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1648B601BDC19CA00AE1BC3 /* GameInterFace3.swift */; };
 		F1B414601BC72E5D00FEE6A4 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B4145F1BC72E5D00FEE6A4 /* SettingsPage.swift */; };
 		F1DECCAE1BE3FEA8009C08B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1DECCAC1BE3FEA8009C08B4 /* Main.storyboard */; };
+		F1FF73F41C17969F00EAF62B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FF73F11C17969F00EAF62B /* FBSDKCoreKit.framework */; };
+		F1FF73F51C17969F00EAF62B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FF73F21C17969F00EAF62B /* FBSDKLoginKit.framework */; };
+		F1FF73F61C17969F00EAF62B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FF73F31C17969F00EAF62B /* FBSDKShareKit.framework */; };
+		F1FF73F81C1796B400EAF62B /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FF73F71C1796B400EAF62B /* ParseFacebookUtilsV4.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -302,14 +299,7 @@
 		8F62C6851C00977A00312A58 /* NewGameSettingsPage_Analyze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Analyze.swift; sourceTree = "<group>"; };
 		8F62C6871C00979500312A58 /* NewGameSettingsPage_Explore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Explore.swift; sourceTree = "<group>"; };
 		8F62C6891C0097BD00312A58 /* NewGameSettingsPage_Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Profile.swift; sourceTree = "<group>"; };
-		8F6E35431C14F1DA0099EED3 /* Pods_Chess_.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Chess_.framework; path = "Pods/../build/Debug-iphoneos/Pods_Chess_.framework"; sourceTree = "<group>"; };
-		8F6E35441C14F1DA0099EED3 /* Pods_Chess_Tests.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Chess_Tests.framework; path = "Pods/../build/Debug-iphoneos/Pods_Chess_Tests.framework"; sourceTree = "<group>"; };
-		8F6E35451C14F1DA0099EED3 /* Pods_Chess_UITests.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Chess_UITests.framework; path = "Pods/../build/Debug-iphoneos/Pods_Chess_UITests.framework"; sourceTree = "<group>"; };
 		8F6E35491C14F4BE0099EED3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-20150813/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
-		8F6E354B1C14F6450099EED3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		8F6E354C1C14F6450099EED3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		8F6E354D1C14F6450099EED3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		8F6E35511C14F69E0099EED3 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpMenu.swift; sourceTree = "<group>"; };
 		8F840BCB1BBDAE6600511F44 /* FriendRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequests.swift; sourceTree = "<group>"; };
 		8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeMenu.swift; sourceTree = "<group>"; };
@@ -393,6 +383,10 @@
 		F1648B601BDC19CA00AE1BC3 /* GameInterFace3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInterFace3.swift; sourceTree = "<group>"; };
 		F1B4145F1BC72E5D00FEE6A4 /* SettingsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		F1DECCAD1BE3FEA8009C08B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F1FF73F11C17969F00EAF62B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		F1FF73F21C17969F00EAF62B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		F1FF73F31C17969F00EAF62B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		F1FF73F71C1796B400EAF62B /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -401,21 +395,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F6E354A1C14F4BE0099EED3 /* FBSDKCoreKit.framework in Frameworks */,
-				8F6E35461C14F1DA0099EED3 /* Pods_Chess_.framework in Frameworks */,
-				8F6E35471C14F1DA0099EED3 /* Pods_Chess_Tests.framework in Frameworks */,
-				8F6E35481C14F1DA0099EED3 /* Pods_Chess_UITests.framework in Frameworks */,
+				F1FF73F81C1796B400EAF62B /* ParseFacebookUtilsV4.framework in Frameworks */,
+				F1FF73F41C17969F00EAF62B /* FBSDKCoreKit.framework in Frameworks */,
 				8FB7085D1C14DE3700E90DC5 /* Firebase.framework in Frameworks */,
-				8F6E35521C14F69E0099EED3 /* ParseFacebookUtilsV4.framework in Frameworks */,
+				F1FF73F51C17969F00EAF62B /* FBSDKLoginKit.framework in Frameworks */,
 				8F4A02991B9A42720084024A /* CoreLocation.framework in Frameworks */,
+				F1FF73F61C17969F00EAF62B /* FBSDKShareKit.framework in Frameworks */,
 				8F3AC3841B9AFAE700815CDC /* libsqlite3.dylib in Frameworks */,
 				8F3AC3821B9AFADC00815CDC /* libz.dylib in Frameworks */,
 				8F4A02A71B9A42DC0084024A /* Social.framework in Frameworks */,
-				8F6E35501C14F6460099EED3 /* FBSDKShareKit.framework in Frameworks */,
 				8F4A02A51B9A42D40084024A /* Accounts.framework in Frameworks */,
 				8F4A02A31B9A429B0084024A /* SystemConfiguration.framework in Frameworks */,
-				8F6E354E1C14F6460099EED3 /* FBSDKCoreKit.framework in Frameworks */,
 				8F4A02A11B9A428E0084024A /* StoreKit.framework in Frameworks */,
-				8F6E354F1C14F6460099EED3 /* FBSDKLoginKit.framework in Frameworks */,
 				8F4A029F1B9A42890084024A /* Security.framework in Frameworks */,
 				8F4A029D1B9A42820084024A /* QuartzCore.framework in Frameworks */,
 				8F4A029B1B9A427B0084024A /* MobileCoreServices.framework in Frameworks */,
@@ -629,10 +620,10 @@
 		8F4A02911B9A421D0084024A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8F6E35511C14F69E0099EED3 /* ParseFacebookUtilsV4.framework */,
-				8F6E354B1C14F6450099EED3 /* FBSDKCoreKit.framework */,
-				8F6E354C1C14F6450099EED3 /* FBSDKLoginKit.framework */,
-				8F6E354D1C14F6450099EED3 /* FBSDKShareKit.framework */,
+				F1FF73F71C1796B400EAF62B /* ParseFacebookUtilsV4.framework */,
+				F1FF73F11C17969F00EAF62B /* FBSDKCoreKit.framework */,
+				F1FF73F21C17969F00EAF62B /* FBSDKLoginKit.framework */,
+				F1FF73F31C17969F00EAF62B /* FBSDKShareKit.framework */,
 				8F3AC3831B9AFAE700815CDC /* libsqlite3.dylib */,
 				8F3AC3811B9AFADC00815CDC /* libz.dylib */,
 				8F4A02A61B9A42DC0084024A /* Social.framework */,
@@ -742,9 +733,6 @@
 			isa = PBXGroup;
 			children = (
 				8F6E35491C14F4BE0099EED3 /* FBSDKCoreKit.framework */,
-				8F6E35431C14F1DA0099EED3 /* Pods_Chess_.framework */,
-				8F6E35441C14F1DA0099EED3 /* Pods_Chess_Tests.framework */,
-				8F6E35451C14F1DA0099EED3 /* Pods_Chess_UITests.framework */,
 				8FB7085C1C14DE3700E90DC5 /* Firebase.framework */,
 				EACA15DE07680AE61616A943 /* Pods.framework */,
 			);
@@ -1241,7 +1229,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Panayotov (8JHAHM7T3P)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
