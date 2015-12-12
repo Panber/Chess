@@ -390,8 +390,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         hasBlackKingMoved = false
         blackCastle = false
         
-        
-        
         //chesspieces:
         whitePawn1 = UIImageView(frame: CGRectMake(a, _2, pieceSize , pieceSize))
         whitePawn2 = UIImageView(frame: CGRectMake(b, _2, pieceSize, pieceSize))
