@@ -541,17 +541,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         
         
-        let otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
-        otherImage.contentMode = .ScaleAspectFill
-        otherImage.clipsToBounds = true
-        otherImage.alpha = 0
-        otherImage.layer.cornerRadius = otherImage.frame.size.width/2
+        var otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
+
         
-        let meImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) + (screenWidth/2) + 30, 60, 60))
-        meImage.contentMode = .ScaleAspectFill
-        meImage.clipsToBounds = true
-        meImage.alpha = 0
-        meImage.layer.cornerRadius = meImage.frame.size.width/2
+        var meImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) + (screenWidth/2) + 30, 60, 60))
+
         
         var images:Array<NSData> = []
         
@@ -559,15 +553,36 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if screenHeight == 667.0 {
             otherImage.frame.origin.y = 64 + 8
             meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 22
-            
-            
+ 
         }
         else if screenHeight == 736.0 {
             otherImage.frame.origin.y = 64 + 13
             meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 30
             
         }
+        else if screenHeight == 568.0 {
+            meImage.frame.size.width -= 20
+            otherImage.frame.size.width -= 20
+            meImage.frame.size.height -= 20
+            otherImage.frame.size.height -= 20
+            
+            meImage.frame.origin.x += 10
+            otherImage.frame.origin.x += 10
+            
+            
+            otherImage.frame.origin.y = 64 + 7
+            meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 20
+            
+        }
+        otherImage.contentMode = .ScaleAspectFill
+        otherImage.clipsToBounds = true
+        otherImage.alpha = 0
+        otherImage.layer.cornerRadius = otherImage.frame.size.width/2
         
+        meImage.contentMode = .ScaleAspectFill
+        meImage.clipsToBounds = true
+        meImage.alpha = 0
+        meImage.layer.cornerRadius = meImage.frame.size.width/2
         
         let query = PFQuery(className: "Games")
         query.whereKey("objectId", equalTo: gameID)
@@ -744,7 +759,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     //    self.whitePieces[ty].removeFromSuperview()
                                                                                     self.whitePieces.removeAtIndex(ty)
                                                                                     self.whitePiecesString.removeAtIndex(ty)
-                                                                                    ty--
+                                                                                   ty--
                                                                                     
                                                                                 }
                                                                                 
@@ -779,9 +794,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 checkIfTakenLast()
                                                                 
                                                                 
-                                                                UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-//                                                                    self.pieces[i].frame.origin.x = xAxisArr[q]
-//                                                                    self.pieces[i].frame.origin.y = yAxisArr[a]
+                                                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                    self.pieces[i].frame.origin.x = xAxisArr[q]
+                                                                    self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                     
                                                                     }, completion: { finish in
                                                                         self.deletePiecesAfterLoad()
