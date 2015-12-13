@@ -309,6 +309,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var whitePassantPieces = UIImageView()
     var blackPassantPieces = UIImageView()
     
+    
+    @IBOutlet weak var infoButton: UIButton!
+    
+    
     func loadVariablesAndConstants() {
         //size-properties
         let pieceSize = sqrt(screenWidth * screenWidth / 64)
@@ -717,6 +721,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     }
                                                                                     
                                                                                 }
+                                                                                
+                                                                            }
                                                                                 self.piecesToDelete.append(self.pieces[iy])
                                                                                 
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
@@ -1963,6 +1969,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     
     // MARK: - Setup-functions 🔍
+    
+    
+    @IBAction func infoButtonPressed(sender: AnyObject) {
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            visualEffectView.alpha = 1
+            visualEffectView.userInteractionEnabled = true
+            }, completion: {finish in
+        
+        })
+        
+    }
+    
+    
+    
     //    override func prefersStatusBarHidden() -> Bool {
     //        return true
     //    }
