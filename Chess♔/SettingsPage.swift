@@ -114,7 +114,7 @@ self.title = "Settings"
         label1 = UILabel(frame: CGRectMake(20, 45, screenWidth, 45))
         label1.textAlignment = NSTextAlignment.Left
         label1.text = "Receive notifications"
-        label1.font = UIFont(name: "Didot", size: 16)
+        label1.font = UIFont(name: "Times", size: 16)
         if darkMode { label1.textColor = UIColor.whiteColor() }
         else { label1.textColor = UIColor.blackColor() }
         scrollView.addSubview(label1)
@@ -123,7 +123,7 @@ self.title = "Settings"
         friendsOnlyText = UILabel(frame: CGRectMake(20, 45 + 45, screenWidth, 45))
         friendsOnlyText.textAlignment = NSTextAlignment.Left
         friendsOnlyText.text = "Game Request From Everyone"
-        friendsOnlyText.font = UIFont(name: "Didot", size: 16)
+        friendsOnlyText.font = UIFont(name: "Times", size: 16)
         if darkMode { friendsOnlyText.textColor = UIColor.whiteColor() }
         else { friendsOnlyText.textColor = UIColor.blackColor() }
         scrollView.addSubview(friendsOnlyText)
@@ -138,7 +138,7 @@ self.title = "Settings"
         label3 = UILabel(frame: CGRectMake(20, 45, screenWidth, 45))
         label3.textAlignment = NSTextAlignment.Left
         label3.text = "Submit button"
-        label3.font = UIFont(name: "Didot", size: 16)
+        label3.font = UIFont(name: "Times", size: 16)
         if darkMode { label3.textColor = UIColor.whiteColor() }
         else { label3.textColor = UIColor.blackColor() }
         bc1.addSubview(label3)
@@ -149,7 +149,7 @@ self.title = "Settings"
         label2 = UILabel(frame: CGRectMake(20, 0, screenWidth, 45))
         label2.textAlignment = NSTextAlignment.Left
         label2.text = "Dark mode"
-        label2.font = UIFont(name: "Didot", size: 16)
+        label2.font = UIFont(name: "Times", size: 16)
         if darkMode { label2.textColor = UIColor.whiteColor() }
         else { label2.textColor = UIColor.blackColor() }
         bc1.addSubview(label2)
@@ -165,7 +165,7 @@ self.title = "Settings"
         
         //logOutButton
         logOutButton.setTitle("Log Out", forState: .Normal)
-        logOutButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        logOutButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         logOutButton.setTitleColor(red, forState: .Normal)
         logOutButton.layer.borderColor = blue.CGColor
         //logOutButton.frame.origin.x = 10
@@ -263,7 +263,7 @@ self.title = "Settings"
         comment1 = UILabel(frame: CGRectMake(10, 20, screenWidth, 25))
         comment1.textAlignment = NSTextAlignment.Left
         comment1.text = "General"
-        comment1.font = UIFont(name: "Didot-Italic", size: 16)
+        comment1.font = UIFont(name: "Times-Italic", size: 16)
         if darkMode { comment1.textColor = UIColor.lightTextColor() }
         else { comment1.textColor = UIColor.lightGrayColor() }
         scrollView.addSubview(comment1)
@@ -272,7 +272,7 @@ self.title = "Settings"
         comment2 = UILabel(frame: CGRectMake(10, bc1.frame.origin.y - 25, screenWidth, 25))
         comment2.textAlignment = NSTextAlignment.Left
         comment2.text = "User Interface"
-        comment2.font = UIFont(name: "Didot-Italic", size: 16)
+        comment2.font = UIFont(name: "Times-Italic", size: 16)
         if darkMode { comment2.textColor = UIColor.lightTextColor() }
         else { comment2.textColor = UIColor.lightGrayColor() }
         scrollView.addSubview(comment2)

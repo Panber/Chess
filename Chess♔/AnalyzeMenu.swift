@@ -107,7 +107,7 @@ class AnalyzeMenu: UIViewController {
         visualEffectView.addSubview(pImage)
         
         let name = UILabel(frame: CGRectMake(pImage.frame.origin.x + pImage.frame.size.width + 25,pImage.frame.origin.y + 10,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),27))
-        name.font = UIFont(name: "Didot", size: 22)
+        name.font = UIFont(name: "Times", size: 22)
         name.text = "mufcjb"
         name.textAlignment = .Left
         if darkMode {name.textColor = UIColor.whiteColor()}
@@ -115,7 +115,7 @@ class AnalyzeMenu: UIViewController {
         visualEffectView.addSubview(name)
         
       let  rating = UILabel(frame: CGRectMake(name.frame.origin.x,name.frame.origin.y + name.frame.size.height,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),21))
-        rating.font = UIFont(name: "Didot-Italic", size: 15)
+        rating.font = UIFont(name: "Times-Italic", size: 15)
         rating.textColor = UIColor.darkGrayColor()
         rating.text = "888"
         if darkMode {rating.textColor = UIColor.lightGrayColor()}

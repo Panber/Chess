@@ -156,8 +156,8 @@ class NewGameSettingsPage_Explore: UIViewController {
                 completeSignal.image = UIImage(named: "checkmark12.png")
                 
                 let completeText = UILabel(frame: CGRectMake((screenWidth/2) - 40,completeSignal.frame.size.height + completeSignal.frame.origin.y, 80, 40))
-                completeText.text = "SENT!"
-                completeText.font = UIFont(name: "Didot", size: 16)
+                completeText.text = "Sent!"
+                completeText.font = UIFont(name: "Times", size: 16)
                 completeText.textAlignment = .Center
                 completeText.textColor = UIColor.lightGrayColor()
                 
