@@ -3259,24 +3259,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 chessNotationCheck = "+"
             }
             var LAN = ""
-            if castleLeft == true && selectedPiece == whiteKing{
+            if castleLeft == true && selectedPiece == whiteKing && hasWhiteKingMoved == true {
                 print("0-0-0")
                 LAN = "0-0-0"
                 game.setObject(true, forKey: "can_Castle_white")
                 //game["status_white"] = "notmove"
             }
-            else if castleLeft == true && selectedPiece == blackKing{
+            else if castleLeft == true && selectedPiece == blackKing && hasBlackKingMoved == true{
                 print("0-0")
                 LAN = "0-0"
                 game.setObject(true, forKey: "can_Castle_black")
             }
-            else if castleRight == true && selectedPiece == whiteKing{
+            else if castleRight == true && selectedPiece == whiteKing && hasWhiteKingMoved == true {
                 print("0-0")
                 LAN = "0-0"
                 game.setObject(true, forKey: "can_Castle_white")
                 
             }
-            else if castleRight == true && selectedPiece == blackKing{
+            else if castleRight == true && selectedPiece == blackKing && hasBlackKingMoved == true{
                 print("0-0-0")
                 LAN = "0-0-0"
                 game.setObject(true, forKey: "can_Castle_black")
@@ -3305,7 +3305,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             let newIndexPath = NSIndexPath(forItem: notations.count - 1, inSection: 0)
             collectionView.insertItemsAtIndexPaths([newIndexPath])
             collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
-            
+            collectionView.reloadData()
             game.addObject(notations.last!, forKey: "piecePosition")
             
             var uuser = ""
