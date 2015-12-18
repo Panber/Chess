@@ -144,7 +144,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         featuredProfilePicView.contentMode = .ScaleAspectFill
         _scrollView.addSubview(featuredProfilePicView)
         
-        featuredUsername = UILabel(frame: CGRectMake(featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25,featuredProfilePicView.frame.origin.y + 16,screenWidth - (featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25),21))
+        featuredUsername = UILabel(frame: CGRectMake(featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25,featuredProfilePicView.frame.origin.y + 10,screenWidth - (featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25),27))
         featuredUsername.font = UIFont(name: "Didot", size: 22)
         featuredUsername.text = "mufcjb"
         featuredUsername.textAlignment = .Left

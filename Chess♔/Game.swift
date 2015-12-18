@@ -1974,6 +1974,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             visualEffectView.userInteractionEnabled = true
             }, completion: {finish in
         
+                
+                
         })
         
     }
@@ -4021,6 +4023,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
+            
             
         }
         else if darkMode == false {

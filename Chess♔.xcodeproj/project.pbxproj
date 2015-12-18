@@ -87,6 +87,7 @@
 		8F62C68A1C0097BD00312A58 /* NewGameSettingsPage_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6891C0097BD00312A58 /* NewGameSettingsPage_Profile.swift */; };
 		8F6E354A1C14F4BE0099EED3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35491C14F4BE0099EED3 /* FBSDKCoreKit.framework */; };
 		8F768D9B1BD6AC4F007A7BFC /* SignUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */; };
+		8F83940A1C20996D00C7F37E /* chessLaunch.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F8394091C20996D00C7F37E /* chessLaunch.png */; };
 		8F840BCC1BBDAE6600511F44 /* FriendRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F840BCB1BBDAE6600511F44 /* FriendRequests.swift */; };
 		8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */; };
 		8F86392D1B9B02780055608B /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86392C1B9B02780055608B /* ChatView.swift */; };
@@ -260,6 +261,7 @@
 		8F62C6891C0097BD00312A58 /* NewGameSettingsPage_Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Profile.swift; sourceTree = "<group>"; };
 		8F6E35491C14F4BE0099EED3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-20150813/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpMenu.swift; sourceTree = "<group>"; };
+		8F8394091C20996D00C7F37E /* chessLaunch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessLaunch.png; sourceTree = "<group>"; };
 		8F840BCB1BBDAE6600511F44 /* FriendRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequests.swift; sourceTree = "<group>"; };
 		8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeMenu.swift; sourceTree = "<group>"; };
 		8F86392C1B9B02780055608B /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 				8FA5690B1C02775C00AFC460 /* TwitterLogo_#55acee.png */,
 				8FA5690D1C02795100AFC460 /* new100.png */,
 				8FA5690E1C02795100AFC460 /* new100-2.png */,
+				8F8394091C20996D00C7F37E /* chessLaunch.png */,
 				8FA018D81B9B1FAE002B410E /* ChessIconAndTExt.png */,
 				8FA1F7CD1B9AFCA800A0C548 /* Pieces */,
 			);
@@ -845,6 +848,7 @@
 				8F87E8BC1BD6DBE600506F2F /* arrow483.png in Resources */,
 				8F4A02811B9A3F0B0084024A /* blackRook.png in Resources */,
 				8F4A02851B9A3F240084024A /* chessIcon.png in Resources */,
+				8F83940A1C20996D00C7F37E /* chessLaunch.png in Resources */,
 				F1431A611BD298F400C5854A /* panBeriPhone.jpg in Resources */,
 				8FA569091C011D0300AFC460 /* map158-2.png in Resources */,
 				8F4A02751B9A3EE80084024A /* whiteBishop.png in Resources */,
