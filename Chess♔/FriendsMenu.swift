@@ -145,14 +145,14 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         _scrollView.addSubview(featuredProfilePicView)
         
         featuredUsername = UILabel(frame: CGRectMake(featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25,featuredProfilePicView.frame.origin.y + 10,screenWidth - (featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25),27))
-        featuredUsername.font = UIFont(name: "Didot", size: 22)
+        featuredUsername.font = UIFont(name: "Times", size: 22)
         featuredUsername.text = "mufcjb"
         featuredUsername.textAlignment = .Left
         featuredUsername.alpha = 0
         _scrollView.addSubview(featuredUsername)
         
         featuredRating = UILabel(frame: CGRectMake(featuredUsername.frame.origin.x,featuredUsername.frame.origin.y + featuredUsername.frame.size.height,screenWidth - (featuredProfilePicView.frame.origin.x + featuredProfilePicView.frame.size.width + 25),21))
-        featuredRating.font = UIFont(name: "Didot-Italic", size: 15)
+        featuredRating.font = UIFont(name: "Times-Italic", size: 15)
         featuredRating.textColor = UIColor.darkGrayColor()
         featuredRating.alpha = 0
         _scrollView.addSubview(featuredRating)
@@ -244,7 +244,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         topText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
         topText.font = UIFont(name: "Didot", size: 22)
-        topText.text = "Top"
+        topText.text = "TOP"
         if darkMode {topText.textColor = UIColor.lightGrayColor()}
         else {topText.textColor = UIColor.darkGrayColor()}
         topText.textAlignment = .Center
@@ -258,9 +258,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         topView.addSubview(topWorldImage)
         
         let topWorldButton = UIButton(frame: CGRectMake(10,80,(screenWidth/2) - 20,120))
-        topWorldButton.setTitle("WORLD", forState: .Normal)
+        topWorldButton.setTitle("World", forState: .Normal)
         topWorldButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        topWorldButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        topWorldButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         topWorldButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         topWorldButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
         topWorldButton.layer.cornerRadius = cornerRadius
@@ -277,9 +277,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         topView.addSubview(topFriendsImage)
         
         let topFriendsButton = UIButton(frame: CGRectMake((screenWidth / 2) + 10,80,(screenWidth/2) - 20,120))
-        topFriendsButton.setTitle("FRIENDS", forState: .Normal)
+        topFriendsButton.setTitle("Friends", forState: .Normal)
         topFriendsButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        topFriendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        topFriendsButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         topFriendsButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         topFriendsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
         topFriendsButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
@@ -296,9 +296,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         topView.addSubview(topNearbyImage)
         
         let topNearbyButton = UIButton(frame: CGRectMake((screenWidth/2) - ((screenWidth/2) - 20)/2,190 + 30,(screenWidth/2) - 20,120))
-        topNearbyButton.setTitle("NEARBY", forState: .Normal)
+        topNearbyButton.setTitle("Nearby", forState: .Normal)
         topNearbyButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        topNearbyButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        topNearbyButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         topNearbyButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         topNearbyButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
         topNearbyButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
@@ -352,7 +352,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         contactText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
         contactText.font = UIFont(name: "Didot", size: 22)
-        contactText.text = "Contact us"
+        contactText.text = "CONTACT US"
         if darkMode {contactText.textColor = UIColor.lightGrayColor()}
         else {contactText.textColor = UIColor.darkGrayColor()}
         contactText.textAlignment = .Center
@@ -366,9 +366,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         contactView.addSubview(contactTwitterImage)
         
         let contactTwitterButton = UIButton(frame: CGRectMake(10,80,(screenWidth/2) - 20,120))
-        contactTwitterButton.setTitle("TWITTER", forState: .Normal)
+        contactTwitterButton.setTitle("Twitter", forState: .Normal)
         contactTwitterButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        contactTwitterButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        contactTwitterButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         contactTwitterButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         contactTwitterButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
         contactTwitterButton.layer.cornerRadius = cornerRadius
@@ -385,9 +385,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         contactView.addSubview(contactMailImage)
         
         let contactMailButton = UIButton(frame: CGRectMake((screenWidth / 2) + 10,80,(screenWidth/2) - 20,120))
-        contactMailButton.setTitle("MAIL", forState: .Normal)
+        contactMailButton.setTitle("Mail", forState: .Normal)
         contactMailButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        contactMailButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        contactMailButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         contactMailButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         contactMailButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
         contactMailButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
@@ -440,7 +440,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         
         let creatorButton = UIButton(frame: CGRectMake(0,10,screenWidth,50))
-        creatorButton.titleLabel!.font = UIFont(name: "Didot", size: 14)
+        creatorButton.titleLabel!.font = UIFont(name: "Times", size: 14)
         creatorButton.setTitle("A PANBER SOFTWARE PRODUCTION ©2015", forState: .Normal)
         creatorButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
         creatorButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
@@ -448,7 +448,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         creatorView.addSubview(creatorButton)
         
         let creatorLegalButton = UIButton(frame: CGRectMake(0,60,screenWidth,50))
-        creatorLegalButton.titleLabel!.font = UIFont(name: "Didot", size: 15)
+        creatorLegalButton.titleLabel!.font = UIFont(name: "Times", size: 15)
         creatorLegalButton.setTitle("Legal", forState: .Normal)
         creatorLegalButton.setTitleColor(blue, forState: .Normal)
         creatorLegalButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)

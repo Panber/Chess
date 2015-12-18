@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,18 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chessLaunch.png" translatesAutoresizingMaskIntoConstraints="NO" id="B3s-5v-fBy">
-                                <rect key="frame" x="-22" y="-23" width="645" height="646"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chessLaunch.png" translatesAutoresizingMaskIntoConstraints="NO" id="w4C-GD-p7f">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="B3s-5v-fBy" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="RbA-wG-zNi"/>
-                            <constraint firstItem="B3s-5v-fBy" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-42" id="suU-pO-3dD"/>
-                            <constraint firstItem="B3s-5v-fBy" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" constant="-23" id="yZ0-eZ-d9O"/>
-                            <constraint firstItem="B3s-5v-fBy" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="yd7-3v-4XP"/>
+                            <constraint firstItem="w4C-GD-p7f" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="7HM-Mn-XJS"/>
+                            <constraint firstAttribute="trailing" secondItem="w4C-GD-p7f" secondAttribute="trailing" id="E4h-vj-3cx"/>
+                            <constraint firstItem="w4C-GD-p7f" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="S90-Qn-qa9"/>
+                            <constraint firstItem="w4C-GD-p7f" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="mSW-e8-yON"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

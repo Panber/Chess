@@ -35,28 +35,28 @@ class AnalyzeMenu: UIViewController {
         turn.text = "Your Turn"
         if darkMode {turn.textColor = UIColor.whiteColor()}
         else {turn.textColor = UIColor.blackColor() }
-        turn.font = UIFont(name: "Didot", size: 19)
+        turn.font = UIFont(name: "Times", size: 19)
         visualEffectView.addSubview(turn)
         
         let color = UILabel(frame: CGRectMake(40,129,screenWidth, 29))
         color.text = "You are White"
         if darkMode {color.textColor = UIColor.whiteColor()}
         else {color.textColor = UIColor.blackColor() }
-        color.font = UIFont(name: "Didot", size: 19)
+        color.font = UIFont(name: "Times", size: 19)
         visualEffectView.addSubview(color)
         
         let speed = UILabel(frame: CGRectMake(40,158,screenWidth, 29))
         speed.text = "Fast Speedmode"
         if darkMode {speed.textColor = UIColor.whiteColor()}
         else {speed.textColor = UIColor.blackColor() }
-        speed.font = UIFont(name: "Didot", size: 19)
+        speed.font = UIFont(name: "Times", size: 19)
         visualEffectView.addSubview(speed)
         
         let rated = UILabel(frame: CGRectMake(40,187,screenWidth, 29))
         rated.text = "Rated"
         if darkMode {rated.textColor = UIColor.whiteColor()}
         else {rated.textColor = UIColor.blackColor() }
-        rated.font = UIFont(name: "Didot", size: 19)
+        rated.font = UIFont(name: "Times", size: 19)
         visualEffectView.addSubview(rated)
         
         let turnIndicator = UILabel(frame: CGRectMake(turn.frame.origin.x - 20, turn.frame.origin.y + 12, 11, 11))
@@ -80,18 +80,18 @@ class AnalyzeMenu: UIViewController {
         timeLeft.text = "Time Left To Move:"
         if darkMode {timeLeft.textColor = UIColor.lightGrayColor()}
         else {timeLeft.textColor = UIColor.darkGrayColor() }
-        timeLeft.font = UIFont(name: "Didot", size: 19)
+        timeLeft.font = UIFont(name: "Times", size: 19)
         visualEffectView.addSubview(timeLeft)
         
         let time = UILabel(frame: CGRectMake(208,216,screenWidth-208, 29))
         time.text = "1 day"
         if darkMode {time.textColor = UIColor.whiteColor()}
         else {time.textColor = UIColor.blackColor() }
-        time.font = UIFont(name: "Didot", size: 19)
+        time.font = UIFont(name: "Times", size: 19)
         visualEffectView.addSubview(time)
         
         let opponent = UILabel(frame: CGRectMake(0,300,screenWidth, 29))
-        opponent.text = "Opponent:"
+        opponent.text = "OPPONENT:"
         opponent.textAlignment = .Center
         if darkMode {opponent.textColor = UIColor.lightGrayColor()}
         else {opponent
