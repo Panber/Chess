@@ -17,10 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         
-        let customFont = UIFont(name: "Didot", size: 18.0)
+        let customFont = UIFont(name: "Times", size: 18.0)
+        
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
         
-        let customFont2 = UIFont(name: "Didot", size: 11.0)
+        let customFont2 = UIFont(name: "Times", size: 11.0)
         
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: customFont2!], forState: UIControlState.Normal)
         

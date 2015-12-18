@@ -123,7 +123,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         instructionsLabel = UILabel(frame: CGRectMake(20, 64 ,screenWidth - 40,100))
         let new = "-New-"
         instructionsLabel.text = "Please add a new game by pressing \(new)"
-        instructionsLabel.font = UIFont(name: "Didot", size: 20)
+        instructionsLabel.font = UIFont(name: "Times", size: 20)
         instructionsLabel.textColor = UIColor.darkGrayColor()
         instructionsLabel.numberOfLines = 0
         instructionsLabel.textAlignment = .Center
@@ -138,7 +138,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         installation.saveInBackground()
 
         
-        let customFont = UIFont(name: "Didot", size: 18.0)
+        let customFont = UIFont(name: "Times", size: 18.0)
         newButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
         invitesButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
         
@@ -241,7 +241,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 //        self.navigationItem.titleView = logoView
 //        
         
-        navigationController?.navigationBar.topItem?.title = "Chess♔"
+        navigationController?.navigationBar.topItem?.title = "Play"
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
     
 //      //setting scrollview
@@ -897,7 +897,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "Didot", size: 17)!
+        header.textLabel?.font = UIFont(name: "Didot", size: 19)!
         header.textLabel?.textColor = UIColor.lightGrayColor()
         header.backgroundColor = blue
         header.contentView.backgroundColor = UIColor.whiteColor()
@@ -1116,9 +1116,9 @@ var loaded = false
         visualEffectSub.addSubview(friendsImage)
         
         let friendsButton = UIButton(frame: CGRectMake((screenWidth / 2) - 120,80,120,120))
-        friendsButton.setTitle("FRIENDS", forState: .Normal)
+        friendsButton.setTitle("Friends", forState: .Normal)
         friendsButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        friendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        friendsButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         friendsButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         friendsButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
         friendsButton.layer.cornerRadius = cornerRadius
@@ -1138,9 +1138,9 @@ var loaded = false
         visualEffectSub.addSubview(randomImage)
         
         let randomButton = UIButton(frame: CGRectMake((screenWidth / 2),80,120,120))
-        randomButton.setTitle("RANDOM", forState: .Normal)
+        randomButton.setTitle("Random", forState: .Normal)
         randomButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        randomButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        randomButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         randomButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         randomButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
         randomButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
@@ -1159,9 +1159,9 @@ var loaded = false
         visualEffectSub.addSubview(usernameImage)
         
         let usernameButton = UIButton(frame: CGRectMake((screenWidth / 2) - 120,80 + 140,120,120))
-        usernameButton.setTitle("USERNAME", forState: .Normal)
+        usernameButton.setTitle("Username", forState: .Normal)
         usernameButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        usernameButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        usernameButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         usernameButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         usernameButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
         usernameButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
@@ -1179,9 +1179,9 @@ var loaded = false
         visualEffectSub.addSubview(ratingImage)
         
         let ratingButton = UIButton(frame: CGRectMake((screenWidth / 2),80 + 140,120,120))
-        ratingButton.setTitle("RATING", forState: .Normal)
+        ratingButton.setTitle("Rating", forState: .Normal)
         ratingButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        ratingButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        ratingButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         ratingButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         ratingButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
         ratingButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
@@ -1200,9 +1200,9 @@ var loaded = false
         visualEffectSub.addSubview(locationImage)
         
         let locationButton = UIButton(frame: CGRectMake((screenWidth / 2) - 60,80 + 140 + 140,120,120))
-        locationButton.setTitle("NEARBY", forState: .Normal)
+        locationButton.setTitle("Nearby", forState: .Normal)
         locationButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        locationButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        locationButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         locationButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
         locationButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
         locationButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)

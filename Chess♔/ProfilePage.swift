@@ -179,7 +179,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         let label = UILabel(frame: CGRectMake(profilePic.frame.origin.x + 95 , contentView.frame.size.height/8 + 13.5, 250, 30))
         label.textAlignment = NSTextAlignment.Left
         label.text = PFUser.currentUser()?.username
-        label.font = UIFont(name: "Didot-Bold", size: 22)
+        label.font = UIFont(name: "Times", size: 22)
         label.sizeToFit()
         if darkMode { label.textColor = UIColor.whiteColor() }
         else { label.textColor = UIColor.blackColor() }
@@ -187,11 +187,11 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         //adding rating label
-        label2 = UILabel(frame: CGRectMake(label.frame.origin.x , label.frame.origin.y + 30, 100, 16))
+        label2 = UILabel(frame: CGRectMake(label.frame.origin.x , label.frame.origin.y + 30 , 100, 16))
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
-        label2.font = UIFont(name: "Didot-Italic", size: 14)
+        label2.font = UIFont(name: "Times-Italic", size: 14)
         if darkMode { label2.textColor = UIColor.whiteColor() }
         else { label2.textColor = UIColor.darkGrayColor() }
         contentView.addSubview(label2)
@@ -202,7 +202,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + contentView.frame.origin.y + 25, 150, 25))
         label3.textAlignment = NSTextAlignment.Left
         label3.text = "Statistics"
-        label3.font = UIFont(name: "Didot-Italic", size: 16)
+        label3.font = UIFont(name: "Times-Italic", size: 16)
         scrollView.addSubview(label3)
         
         //adding white bc to stats
@@ -214,28 +214,28 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         label5 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25, screenWidth, 45))
         label5.textAlignment = NSTextAlignment.Left
         label5.text = "Won"
-        label5.font = UIFont(name: "Didot", size: 16)
+        label5.font = UIFont(name: "Times", size: 16)
         scrollView.addSubview(label5)
         
         //adding drawn: label
         label6 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45, screenWidth, 45))
         label6.textAlignment = NSTextAlignment.Left
         label6.text = "Drawn"
-        label6.font = UIFont(name: "Didot", size: 16)
+        label6.font = UIFont(name: "Times", size: 16)
         scrollView.addSubview(label6)
         
         //adding lost: label
         label7 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45, screenWidth, 45))
         label7.textAlignment = NSTextAlignment.Left
         label7.text = "Lost"
-        label7.font = UIFont(name: "Didot", size: 16)
+        label7.font = UIFont(name: "Times", size: 16)
         scrollView.addSubview(label7)
         
         //adding rating: label
         label8 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45, screenWidth, 45))
         label8.textAlignment = NSTextAlignment.Left
         label8.text = "Rating"
-        label8.font = UIFont(name: "Didot", size: 16)
+        label8.font = UIFont(name: "Times", size: 16)
         scrollView.addSubview(label8)
         
         //adding seperator: label
@@ -272,25 +272,25 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         //adding won from cloud: label
         label12 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25, screenWidth - 20, 45))
         label12.textAlignment = NSTextAlignment.Right
-        label12.font = UIFont(name: "Didot", size: 16)
+        label12.font = UIFont(name: "Times", size: 16)
         scrollView.addSubview(label12)
         
         //adding drawn from cloud: label
         label13 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45, screenWidth - 20, 45))
         label13.textAlignment = NSTextAlignment.Right
-        label13.font = UIFont(name: "Didot", size: 16)
+        label13.font = UIFont(name: "Times", size: 16)
         scrollView.addSubview(label13)
         
         //adding lost from cloud: label
         label14 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45, screenWidth - 20, 45))
         label14.textAlignment = NSTextAlignment.Right
-        label14.font = UIFont(name: "Didot", size: 16)
+        label14.font = UIFont(name: "Times", size: 16)
         scrollView.addSubview(label14)
         
         //adding rating from cloud: label
         label15 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45, screenWidth - 20, 45))
         label15.textAlignment = NSTextAlignment.Right
-        label15.font = UIFont(name: "Didot", size: 16)
+        label15.font = UIFont(name: "Times", size: 16)
         scrollView.addSubview(label15)
         
         
@@ -301,7 +301,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         
         //freidnsbutton
         friendsButton.setTitle("Friends", forState: .Normal)
-        friendsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        friendsButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         friendsButton.layer.borderColor = blue.CGColor
         friendsButton.frame.origin.x = 20
         friendsButton.frame.origin.y
@@ -334,7 +334,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         
         //friendRequestsbutton
         friendRequestsButton.setTitle("Friend Requests", forState: .Normal)
-        friendRequestsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        friendRequestsButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         friendRequestsButton.layer.borderColor = blue.CGColor
         friendRequestsButton.frame.origin.x = 20
         friendRequestsButton.frame.origin.y
@@ -367,7 +367,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         
         //settingsbutton
         settingsButton.setTitle("Settings", forState: .Normal)
-        settingsButton.titleLabel?.font = UIFont(name: "Didot", size: 16)
+        settingsButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         settingsButton.layer.borderColor = blue.CGColor
         settingsButton.frame.origin.x = 20
         settingsButton.frame.origin.y
@@ -387,8 +387,8 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         
         let label19 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 25 + 25 + 45 + 45 + 45 + 65 + 50 + 45 + 45, screenWidth, 50))
         label19.textAlignment = NSTextAlignment.Center
-        label19.text = "Chess♔"
-        label19.font = UIFont(name: "Didot", size: 13)
+        label19.text = "CHESS"
+        label19.font = UIFont(name: "Times", size: 13)
         if darkMode { label19.textColor = UIColor.lightTextColor() }
         else { label19.textColor = UIColor.grayColor() }
         scrollView.addSubview(label19)

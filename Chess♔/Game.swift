@@ -85,12 +85,12 @@ class MoveCell: UICollectionViewCell {
             
             backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             notation.textColor = UIColor.whiteColor()
-            notation.font = UIFont(name: "Didot", size: 16)
+            notation.font = UIFont(name: "Times", size: 16)
             
         } else if darkMode == false {
             backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             notation.textColor = UIColor.blackColor()
-            notation.font = UIFont(name: "Didot", size: 16)
+            notation.font = UIFont(name: "Times", size: 16)
         }
         self.addSubview(notation)
     }
@@ -1938,6 +1938,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             visualEffectView.alpha = 1
             visualEffectView.userInteractionEnabled = true
             }, completion: {finish in
+        
+                
                 
         })
         
@@ -4001,6 +4003,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
+            
             
         }
         else if darkMode == false {

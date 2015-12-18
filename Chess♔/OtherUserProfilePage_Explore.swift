@@ -224,7 +224,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         let label = UILabel(frame: CGRectMake(profilePic.frame.origin.x + 95 , contentView.frame.size.height/8, 250, 30))
         label.textAlignment = NSTextAlignment.Left
         label.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username")as? String
-        label.font = UIFont(name: "Didot-Bold", size: 22)
+        label.font = UIFont(name: "Times", size: 22)
         label.sizeToFit()
         if darkMode { label.textColor = UIColor.whiteColor() }
         else { label.textColor = UIColor.blackColor() }
@@ -232,11 +232,11 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         
         
         //adding rating label
-        label2 = UILabel(frame: CGRectMake(label.frame.origin.x , label.frame.origin.y + 30, 100, 16))
+        label2 = UILabel(frame: CGRectMake(label.frame.origin.x , label.frame.origin.y + 30 - 3, 100, 16))
         label2.textAlignment = NSTextAlignment.Left
         label2.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         label2.numberOfLines = 0
-        label2.font = UIFont(name: "Didot-Italic", size: 14)
+        label2.font = UIFont(name: "Times-Italic", size: 14)
         if darkMode { label2.textColor = UIColor.whiteColor() }
         else { label2.textColor = UIColor.darkGrayColor() }
         contentView.addSubview(label2)
@@ -246,7 +246,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         
         //invite to game btn
         inviteButton = UIButton(frame: CGRectMake(label.frame.origin.x, label2.frame.origin.y + 22,80, 25))
-        inviteButton.titleLabel?.font = UIFont(name: "Didot", size: 13)
+        inviteButton.titleLabel?.font = UIFont(name: "Times", size: 14)
         inviteButton.setTitle("New Game", forState: .Normal)
         inviteButton.layer.cornerRadius = cornerRadius - 3
         inviteButton.userInteractionEnabled = false
@@ -276,7 +276,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         //setting up frienStatusLabel
         friendStatusLabel = UILabel(frame: CGRectMake(label.frame.origin.x, contentView.frame.height + contentView.frame.origin.y, screenWidth - label.frame.origin.x, 45))
         friendStatusLabel.textAlignment = .Left
-        friendStatusLabel.font = UIFont(name: "Didot", size: 16)
+        friendStatusLabel.font = UIFont(name: "Times", size: 16)
         scrollView.addSubview(friendStatusLabel)
         
         //adding settingsbutton
@@ -295,7 +295,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
                 
                 //if not friend:
                 self.friendRequestButton.setTitle("Add as Friend", forState: .Normal)
-                self.friendRequestButton.titleLabel?.font = UIFont(name: "Didot-Bold", size: 18)
+                self.friendRequestButton.titleLabel?.font = UIFont(name: "Times-Bold", size: 18)
                 self.friendRequestButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
                 self.friendRequestButton.setTitleColor(blue, forState: .Normal)
                 self.friendRequestButton.layer.borderColor = blue.CGColor
@@ -484,7 +484,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         label3 = UILabel(frame: CGRectMake(10, contentView.frame.height + contentView.frame.origin.y + 65 + (45*t), 150, 25))
         label3.textAlignment = NSTextAlignment.Left
         label3.text = "Statistics"
-        label3.font = UIFont(name: "Didot-Italic", size: 16)
+        label3.font = UIFont(name: "Times-Italic", size: 16)
 
         
         //adding white bc to stats
@@ -497,7 +497,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         label5 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + (45*t), screenWidth, 45))
         label5.textAlignment = NSTextAlignment.Left
         label5.text = "Won"
-        label5.font = UIFont(name: "Didot", size: 16)
+        label5.font = UIFont(name: "Times", size: 16)
    
 
         
@@ -505,14 +505,14 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         label6 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + (45*t), screenWidth, 45))
         label6.textAlignment = NSTextAlignment.Left
         label6.text = "Drawn"
-        label6.font = UIFont(name: "Didot", size: 16)
+        label6.font = UIFont(name: "Times", size: 16)
   
         
         //adding lost: label
         label7 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + (45*t), screenWidth, 45))
         label7.textAlignment = NSTextAlignment.Left
         label7.text = "Lost"
-        label7.font = UIFont(name: "Didot", size: 16)
+        label7.font = UIFont(name: "Times", size: 16)
 
 
         
@@ -520,7 +520,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         label8 = UILabel(frame: CGRectMake(20, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + (45*t), screenWidth, 45))
         label8.textAlignment = NSTextAlignment.Left
         label8.text = "Rating"
-        label8.font = UIFont(name: "Didot", size: 16)
+        label8.font = UIFont(name: "Times", size: 16)
      
 
         //adding seperator: label
@@ -555,27 +555,27 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         //adding won from cloud: label
         label12 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + (45*t), screenWidth - 20, 45))
         label12.textAlignment = NSTextAlignment.Right
-        label12.font = UIFont(name: "Didot", size: 16)
+        label12.font = UIFont(name: "Times", size: 16)
 
 
         //adding drawn from cloud: label
         label13 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + (45*t), screenWidth - 20, 45))
         label13.textAlignment = NSTextAlignment.Right
-        label13.font = UIFont(name: "Didot", size: 16)
+        label13.font = UIFont(name: "Times", size: 16)
      
 
         
         //adding lost from cloud: label
         label14 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + (45*t), screenWidth - 20, 45))
         label14.textAlignment = NSTextAlignment.Right
-        label14.font = UIFont(name: "Didot", size: 16)
+        label14.font = UIFont(name: "Times", size: 16)
 
 
         
         //adding rating from cloud: label
         label15 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + (45*t), screenWidth - 20, 45))
         label15.textAlignment = NSTextAlignment.Right
-        label15.font = UIFont(name: "Didot", size: 16)
+        label15.font = UIFont(name: "Times", size: 16)
 
         
         //add later
@@ -610,8 +610,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         
         label17 = UILabel(frame: CGRectMake(0, contentView.frame.height + contentView.frame.origin.y + 65 + 25 + 45 + 45 + 45 + 50 + (45*t), screenWidth , 50))
         label17.textAlignment = NSTextAlignment.Center
-        label17.text = "Chess♔"
-        label17.font = UIFont(name: "Didot", size: 13)
+        label17.text = "CHESS"
+        label17.font = UIFont(name: "Times", size: 13)
 
 
         
@@ -745,7 +745,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         unfriendButton = UIButton(frame: CGRectMake(screenWidth + 120, 5, screenWidth - 10, 45))
         unfriendButton.setTitle("Unfriend", forState: .Normal)
         unfriendButton.setTitleColor(red, forState: .Normal)
-        unfriendButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
+        unfriendButton.titleLabel?.font = UIFont(name: "Times", size: 20)
         unfriendButton.layer.cornerRadius = cornerRadius
         unfriendButton.userInteractionEnabled = true
         if darkMode {unfriendButton.backgroundColor = UIColor(red: 0.10, green: 0.10 , blue: 0.10, alpha: 1)}
@@ -755,7 +755,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         dismissButton = UIButton(frame: CGRectMake(screenWidth + 60, 55, screenWidth - 10, 45))
         dismissButton.setTitle("Dismiss", forState: .Normal)
         dismissButton.setTitleColor(blue, forState: .Normal)
-        dismissButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
+        dismissButton.titleLabel?.font = UIFont(name: "Times", size: 20)
         dismissButton.layer.cornerRadius = cornerRadius
         dismissButton.alpha = 1
         dismissButton.userInteractionEnabled = true

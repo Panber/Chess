@@ -82,7 +82,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         loginButton.layer.cornerRadius = cornerRadius
         loginButton.backgroundColor = UIColor.lightGrayColor()
         loginButton.setTitle("Log In", forState: .Normal)
-        loginButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
+        loginButton.titleLabel?.font = UIFont(name: "Times", size: 20)
         loginButton.userInteractionEnabled = true
         loginButton.addTarget(self, action: "loginFromStartPressed:", forControlEvents: .TouchUpInside)
         self.scrollView.addSubview(loginButton)
@@ -91,7 +91,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         signupButton.layer.cornerRadius = cornerRadius
         signupButton.backgroundColor = UIColor.lightGrayColor()
         signupButton.setTitle("Sign Up", forState: .Normal)
-        signupButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
+        signupButton.titleLabel?.font = UIFont(name: "Times", size: 20)
         signupButton.userInteractionEnabled = true
         signupButton.addTarget(self, action: "signupFromStartPressed:", forControlEvents: .TouchUpInside)
         self.scrollView.addSubview(signupButton)
@@ -101,7 +101,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         forgotButton.backgroundColor = UIColor.clearColor()
         forgotButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         forgotButton.setTitle("Forgot Password?", forState: .Normal)
-        forgotButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
+        forgotButton.titleLabel?.font = UIFont(name: "Times", size: 20)
         scrollView.addSubview(forgotButton)
         
         visualEffectView.alpha = 0
@@ -150,7 +150,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
         let cancelButton = UIButton(frame: CGRectMake(loginView.frame.size.width - 60, 15, 30, 30))
         cancelButton.setTitle("", forState: .Normal)
-        cancelButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
+        cancelButton.titleLabel?.font = UIFont(name: "Times", size: 20)
         cancelButton.setTitleColor(blue, forState: .Normal)
         cancelButton.setBackgroundImage(UIImage(named: "arrow483.png"), forState: .Normal)
         cancelButton.titleLabel?.textAlignment = .Right
@@ -162,7 +162,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         usernameInputLogin.backgroundColor = UIColor.darkGrayColor()
         usernameInputLogin.alpha = 0.8
         usernameInputLogin.textColor = UIColor.whiteColor()
-        usernameInputLogin.font = UIFont(name: "Didot", size: 20)
+        usernameInputLogin.font = UIFont(name: "Times", size: 20)
         usernameInputLogin.keyboardType = UIKeyboardType.Default
         usernameInputLogin.keyboardAppearance = UIKeyboardAppearance.Dark
         usernameInputLogin.attributedPlaceholder = NSAttributedString(string:"Username",
@@ -181,7 +181,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         passwordInputLogin.backgroundColor = UIColor.darkGrayColor()
         passwordInputLogin.alpha = 0.8
         passwordInputLogin.textColor = UIColor.whiteColor()
-        passwordInputLogin.font = UIFont(name: "Didot", size: 20)
+        passwordInputLogin.font = UIFont(name: "Times", size: 20)
         passwordInputLogin.secureTextEntry = true
         passwordInputLogin.keyboardType = UIKeyboardType.Default
         passwordInputLogin.keyboardAppearance = UIKeyboardAppearance.Dark
@@ -199,13 +199,13 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         loginButton.layer.cornerRadius = cornerRadius
         loginButton.backgroundColor = UIColor(red:0.10, green:0.67, blue:0.18, alpha:1.0)
         loginButton.setTitle("Log In", forState: .Normal)
-        loginButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
+        loginButton.titleLabel?.font = UIFont(name: "Times", size: 20)
         loginButton.addTarget(self, action: "loginButtonPressed:", forControlEvents: .TouchUpInside)
         loginView.addSubview(loginButton)
         
         let loginWithFacebookLabel = UILabel(frame: CGRectMake(30, loginView.frame.size.height - 20 - 55 - 30, view.frame.size.width-60, 30))
         loginWithFacebookLabel.text = "Log in using"
-        loginWithFacebookLabel.font = UIFont(name: "Didot", size: 18)
+        loginWithFacebookLabel.font = UIFont(name: "Times", size: 18)
         loginWithFacebookLabel.textColor = UIColor.darkGrayColor()
         loginView.addSubview(loginWithFacebookLabel)
         
@@ -213,7 +213,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         facebookLoginButton.layer.cornerRadius = cornerRadius
         facebookLoginButton.backgroundColor = UIColor(red:0.23, green:0.35, blue:0.60, alpha:1.0)
         facebookLoginButton.setTitle("Facebook", forState: .Normal)
-        facebookLoginButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
+        facebookLoginButton.titleLabel?.font = UIFont(name: "Times", size: 20)
         loginView.addSubview(facebookLoginButton)
         
         let forgotPasswordButton = UIButton(frame: CGRectMake(30, view.frame.height - 10, 100, 30))
@@ -260,7 +260,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         addProfileButton = UIButton(frame: CGRectMake((signupView
             .frame.size.width/2) - 40, 10, 80, 80))
         addProfileButton.setTitle("ADD", forState: .Normal)
-        addProfileButton.titleLabel?.font = UIFont(name: "Didot", size: 18)
+        addProfileButton.titleLabel?.font = UIFont(name: "Times", size: 18)
         addProfileButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         addProfileButton.addTarget(self, action: "addProfilePicButtonPressed:", forControlEvents: .TouchUpInside)
         signupView.addSubview(addProfileButton)
@@ -270,7 +270,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         emailInput.backgroundColor = UIColor.darkGrayColor()
         emailInput.alpha = 0.8
         emailInput.textColor = UIColor.whiteColor()
-        emailInput.font = UIFont(name: "Didot", size: 20)
+        emailInput.font = UIFont(name: "Times", size: 20)
         emailInput.keyboardType = UIKeyboardType.EmailAddress
         emailInput.keyboardAppearance = UIKeyboardAppearance.Dark
         emailInput.attributedPlaceholder = NSAttributedString(string:"Email",
@@ -288,7 +288,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         usernameInputSignup.backgroundColor = UIColor.darkGrayColor()
         usernameInputSignup.alpha = 0.8
         usernameInputSignup.textColor = UIColor.whiteColor()
-        usernameInputSignup.font = UIFont(name: "Didot", size: 20)
+        usernameInputSignup.font = UIFont(name: "Times", size: 20)
         usernameInputSignup.keyboardType = UIKeyboardType.Default
         usernameInputSignup.keyboardAppearance = UIKeyboardAppearance.Dark
         usernameInputSignup.attributedPlaceholder = NSAttributedString(string:"Username",
@@ -307,7 +307,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         passwordInputSignup.backgroundColor = UIColor.darkGrayColor()
         passwordInputSignup.alpha = 0.8
         passwordInputSignup.textColor = UIColor.whiteColor()
-        passwordInputSignup.font = UIFont(name: "Didot", size: 20)
+        passwordInputSignup.font = UIFont(name: "Times", size: 20)
         passwordInputSignup.secureTextEntry = true
         passwordInputSignup.keyboardType = UIKeyboardType.Default
         passwordInputSignup.keyboardAppearance = UIKeyboardAppearance.Dark
@@ -325,13 +325,13 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         signupButton.layer.cornerRadius = cornerRadius
         signupButton.backgroundColor = UIColor(red:0.10, green:0.67, blue:0.18, alpha:1.0)
         signupButton.setTitle("Sign Up", forState: .Normal)
-        signupButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
+        signupButton.titleLabel?.font = UIFont(name: "Times", size: 20)
         signupButton.addTarget(self, action: "signupButtonPressed:", forControlEvents: .TouchUpInside)
         signupView.addSubview(signupButton)
         
         let loginWithFacebookLabel = UILabel(frame: CGRectMake(30, signupView.frame.size.height - 20 - 55 - 30, view.frame.size.width-60, 30))
         loginWithFacebookLabel.text = "Sign up using"
-        loginWithFacebookLabel.font = UIFont(name: "Didot", size: 18)
+        loginWithFacebookLabel.font = UIFont(name: "Times", size: 18)
         loginWithFacebookLabel.textColor = UIColor.darkGrayColor()
         signupView.addSubview(loginWithFacebookLabel)
         
@@ -339,7 +339,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         facebookSignupButton.layer.cornerRadius = cornerRadius
         facebookSignupButton.backgroundColor = UIColor(red:0.23, green:0.35, blue:0.60, alpha:1.0)
         facebookSignupButton.setTitle("Facebook", forState: .Normal)
-        facebookSignupButton.titleLabel?.font = UIFont(name: "Didot", size: 20)
+        facebookSignupButton.titleLabel?.font = UIFont(name: "Times", size: 20)
         facebookSignupButton.addTarget(self, action: "facebookSignUpButtonPressed:", forControlEvents: .TouchUpInside)
         signupView.addSubview(facebookSignupButton)
     

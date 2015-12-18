@@ -125,6 +125,7 @@
 		8FB94F991BE62EA80029EF00 /* chatIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB94F981BE62EA80029EF00 /* chatIcon.png */; };
 		8FB94F9B1BE62F360029EF00 /* Data@3x_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */; };
 		8FBED2FC1BB1F35700CDAACC /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */; };
+		8FE496791C247E7000E2E77D /* chessLaunch3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE496781C247E7000E2E77D /* chessLaunch3.png */; };
 		8FEF2A991BFA7C8A006E1359 /* aquaChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2A921BFA7C89006E1359 /* aquaChessBoard.png */; };
 		8FEF2A9A1BFA7C8A006E1359 /* blackChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2A931BFA7C89006E1359 /* blackChessBoard.png */; };
 		8FEF2A9B1BFA7C8A006E1359 /* blackSquareChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2A941BFA7C89006E1359 /* blackSquareChessBoard.png */; };
@@ -305,6 +306,7 @@
 		8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Data@3x_blue.png"; sourceTree = "<group>"; };
 		8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		8FE496781C247E7000E2E77D /* chessLaunch3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessLaunch3.png; sourceTree = "<group>"; };
 		8FEF2A921BFA7C89006E1359 /* aquaChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aquaChessBoard.png; sourceTree = "<group>"; };
 		8FEF2A931BFA7C89006E1359 /* blackChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackChessBoard.png; sourceTree = "<group>"; };
 		8FEF2A941BFA7C89006E1359 /* blackSquareChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackSquareChessBoard.png; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				8F8639321B9B09F90055608B /* BlackBC.jpg */,
 				8FA5690B1C02775C00AFC460 /* TwitterLogo_#55acee.png */,
 				8FA5690D1C02795100AFC460 /* new100.png */,
+				8FE496781C247E7000E2E77D /* chessLaunch3.png */,
 				8FA5690E1C02795100AFC460 /* new100-2.png */,
 				8FA018D81B9B1FAE002B410E /* ChessIconAndTExt.png */,
 				8FA1F7CD1B9AFCA800A0C548 /* Pieces */,
@@ -871,6 +874,7 @@
 				8FEF2AAA1BFCE136006E1359 /* map-pointer7-2.png in Resources */,
 				8F8BD2B61BC6C1C500B25CFE /* close38.png in Resources */,
 				8F2DD6E61B9AFFF80059CEFA /* piecePossibilities.png in Resources */,
+				8FE496791C247E7000E2E77D /* chessLaunch3.png in Resources */,
 				8F8BD2A91BC41ED700B25CFE /* arrow_black.png in Resources */,
 				8F2DD6E41B9AFFF80059CEFA /* moveOption.png in Resources */,
 				8F2392A91C09FBA900CC4B0F /* cm4.png in Resources */,
@@ -1137,7 +1141,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Johannes Berge (5KQ726977G)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Panayotov (8JHAHM7T3P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
