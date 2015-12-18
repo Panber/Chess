@@ -522,7 +522,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         
         loadVariablesAndConstants()
-
+        
         lightOrDarkMode()
         
         for var i = 0 ; i < 8; i++ {
@@ -546,10 +546,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         
         var otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
-
+        
         
         var meImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) + (screenWidth/2) + 30, 60, 60))
-
+        
         
         var images:Array<NSData> = []
         
@@ -557,7 +557,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if screenHeight == 667.0 {
             otherImage.frame.origin.y = 64 + 8
             meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 22
- 
+            
         }
         else if screenHeight == 736.0 {
             otherImage.frame.origin.y = 64 + 13
@@ -599,34 +599,34 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         var moves: Array<String> = []
         func loadMoves() {
-             moves = []
-
-        for var i = 0; i < notations.count; i++ {
+            moves = []
             
-            print("\(i+1).")
-            var t = (i+1)
-             for var q = 0; q < 2; q++ {
-           moveNum.append(t)
-            }
-            var putIntoMoves = ""
-            for var o = 0; o < notations[i].characters.count; o++ {
-                let output = notations[i][o]
-                let letter = String(output)
+            for var i = 0; i < notations.count; i++ {
                 
-                if letter.lowercaseString == String(output){
+                print("\(i+1).")
+                var t = (i+1)
+                for var q = 0; q < 2; q++ {
+                    moveNum.append(t)
+                }
+                var putIntoMoves = ""
+                for var o = 0; o < notations[i].characters.count; o++ {
+                    let output = notations[i][o]
+                    let letter = String(output)
                     
-                    if output != "-" && output != "x" {
-                        //print(output)
-                        putIntoMoves.append(output)
+                    if letter.lowercaseString == String(output){
+                        
+                        if output != "-" && output != "x" {
+                            //print(output)
+                            putIntoMoves.append(output)
+                            
+                        }
                         
                     }
-                    
                 }
+                print(putIntoMoves)
+                moves.append(putIntoMoves)
             }
-            print(putIntoMoves)
-            moves.append(putIntoMoves)
-        }
-        print(moves)
+            print(moves)
         }
         loadMoves()
         
@@ -662,163 +662,155 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             ////////this is where the magic happens\\\\\\\\
             func magic1() {
-            var am = 0
-            for var o = 0; o < moves.count; o++ {
-                
-                am++
-                
-                for var t = 0; t < xAxisArrStr2.count; t++ {
-                    if String(moves[o][0]) == xAxisArrStr2[t] {
-                        for var p = 0; p < yAxisArrStr2.count; p++ {
-                            if String(moves[o][1]) == yAxisArrStr2[p] {
-                                for var i = 0; i < pieces.count; i++ {
-                                    var remove = false
-                                    if pieces[i].frame.origin.x == xAxisArr[t] {
-                                        if pieces[i].frame.origin.y == yAxisArr[p] {
-                                            
-                                            print("this is complicated")
-                                            
-                                            for var q = 0; q < xAxisArrStr2.count; q++ {
-                                                if String(moves[o][2]) == xAxisArrStr2[q] {
-                                                    for var a = 0; a < yAxisArrStr2.count; a++ {
-                                                        if String(moves[o][3]) == yAxisArrStr2[a] {
-                                                            
-                                                            
-                                                            let range = notations[o].rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
-                                                            
-                                                            func checkIfTakenLast() {
-                                                                // range will be nil if no letters is found
-                                                                if  (range != nil) {
-                                                                    print("letters  found")
-                                                                    
-                                                                    for var iy = 0; iy < pieces.count - 1; iy++ {
-                                                                        if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
-                                                                            
+                var am = 0
+                for var o = 0; o < moves.count; o++ {
+                    am++
+                    
+                    for var t = 0; t < xAxisArrStr2.count; t++ {
+                        if String(moves[o][0]) == xAxisArrStr2[t] {
+                            for var p = 0; p < yAxisArrStr2.count; p++ {
+                                if String(moves[o][1]) == yAxisArrStr2[p] {
+                                    for var i = 0; i < pieces.count; i++ {
+                                        var remove = false
+                                        if pieces[i].frame.origin.x == xAxisArr[t] {
+                                            if pieces[i].frame.origin.y == yAxisArr[p] {
+                                                
+                                                print("this is complicated")
+                                                
+                                                for var q = 0; q < xAxisArrStr2.count; q++ {
+                                                    if String(moves[o][2]) == xAxisArrStr2[q] {
+                                                        for var a = 0; a < yAxisArrStr2.count; a++ {
+                                                            if String(moves[o][3]) == yAxisArrStr2[a] {
+                                                                
+                                                                
+                                                                let range = notations[o].rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
+                                                                
+                                                                func checkIfTakenLast() {
+                                                                    // range will be nil if no letters is found
+                                                                    if  (range != nil) {
+                                                                        print("letters  found")
+                                                                        
+                                                                        for var iy = 0; iy < pieces.count - 1; iy++ {
+                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
+                                                                                
                                                                                 print("iy is \(iy)")
-
-                                                                            for var ty = 0; ty < self.whitePieces.count; ty++ {
-                                                                                if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                    
-                                                                                    
-                                                                                    self.pieceToTake += [self.whitePieces[ty]]
-                                                                                    //    self.whitePieces[ty].removeFromSuperview()
-                                                                                    self.whitePieces.removeAtIndex(ty)
-                                                                                    self.whitePiecesString.removeAtIndex(ty)
-                                                                                    ty--
+                                                                                
+                                                                                for var ty = 0; ty < self.whitePieces.count; ty++ {
+                                                                                    if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+                                                                                        
+                                                                                        
+                                                                                        self.pieceToTake += [self.whitePieces[ty]]
+                                                                                        //    self.whitePieces[ty].removeFromSuperview()
+                                                                                        self.whitePieces.removeAtIndex(ty)
+                                                                                        self.whitePiecesString.removeAtIndex(ty)
+                                                                                        ty--
+                                                                                        
+                                                                                    }
                                                                                     
                                                                                 }
-                                                                                
-                                                                            }
-                                                                            for var ty = 0; ty < self.blackPieces.count; ty++ {
-                                                                                if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                    
-                                                                                    self.pieceToTake += [self.blackPieces[ty]]
-                                                                                    //      self.blackPieces[ty].removeFromSuperview()
-                                                                                    self.blackPieces.removeAtIndex(ty)
-                                                                                    self.blackPiecesString.removeAtIndex(ty)
-                                                                                    ty--
+                                                                                for var ty = 0; ty < self.blackPieces.count; ty++ {
+                                                                                    if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+                                                                                        
+                                                                                        self.pieceToTake += [self.blackPieces[ty]]
+                                                                                        //      self.blackPieces[ty].removeFromSuperview()
+                                                                                        self.blackPieces.removeAtIndex(ty)
+                                                                                        self.blackPiecesString.removeAtIndex(ty)
+                                                                                        ty--
+                                                                                        
+                                                                                    }
                                                                                     
                                                                                 }
                                                                                 
                                                                             }
                                                                                 self.piecesToDelete.append(self.pieces[iy])
+                                                                                
+                                                                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
+                                                                                    
+                                                                                    self.pieces[iy].alpha = 0
+                                                                                    
+                                                                                    }, completion: { finish in
+          
+                                                                                })
+                                                                                
+                                                                            }
+                                                                        } else {
+                                                                        print("letters not found")
+                                                                    }
+                                                                }
+                                                                func checkIfTaken() {
+                                                                    // range will be nil if no letters is found
+                                                                    if  (range != nil) {
+                                                                        print("letters  found")
+                                                                        
+                                                                        for var iy = 0; iy < pieces.count ; iy++ {
+                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
 
-                                                                            UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
-                                                                              
                                                                                 self.pieces[iy].alpha = 0
 
-                                                                                }, completion: { finish in
-                                                                                   
+                                                                                for var ty = 0; ty < self.whitePieces.count; ty++ {
+                                                                                    if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+                                                                                        
+                                                                                        
+                                                                                        self.pieceToTake += [self.whitePieces[ty]]
+                                                                                        //    self.whitePieces[ty].removeFromSuperview()
+                                                                                        self.whitePieces.removeAtIndex(ty)
+                                                                                        self.whitePiecesString.removeAtIndex(ty)
+                                                                                        ty--
+                                                                                        
+                                                                                    }
                                                                                     
-                                                                                    
-                                                                            })
-                                                                            
-                                                                        }
-                                                                    }
-                                                                    
-                                                                    
-                                                                }
-                                                                else {
-                                                                    print("letters not found")
-                                                                }
-                                                            }
-                                                            func checkIfTaken() {
-                                                                // range will be nil if no letters is found
-                                                                if  (range != nil) {
-                                                                    print("letters  found")
-                                                                    
-                                                                    for var iy = 0; iy < pieces.count ; iy++ {
-                                                                        if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
-                                                                            
-                                                                            
-                                                                            self.pieces[iy].alpha = 0
-                                                                            
-                                                                            
-                                                                            
-                                                                            for var ty = 0; ty < self.whitePieces.count; ty++ {
-                                                                                if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                    
-                                                                                    
-                                                                                    self.pieceToTake += [self.whitePieces[ty]]
-                                                                                    //    self.whitePieces[ty].removeFromSuperview()
-                                                                                    self.whitePieces.removeAtIndex(ty)
-                                                                                    self.whitePiecesString.removeAtIndex(ty)
-                                                                                   ty--
+                                                                                }
+                                                                                for var ty = 0; ty < self.blackPieces.count; ty++ {
+                                                                                    if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+                                                                                        
+                                                                                        self.pieceToTake += [self.blackPieces[ty]]
+                                                                                        //      self.blackPieces[ty].removeFromSuperview()
+                                                                                        self.blackPieces.removeAtIndex(ty)
+                                                                                        self.blackPiecesString.removeAtIndex(ty)
+                                                                                        ty--
+                                                                                        
+                                                                                    }
                                                                                     
                                                                                 }
                                                                                 
-                                                                            }
-                                                                            for var ty = 0; ty < self.blackPieces.count; ty++ {
-                                                                                if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                    
-                                                                                    self.pieceToTake += [self.blackPieces[ty]]
-                                                                                    //      self.blackPieces[ty].removeFromSuperview()
-                                                                                    self.blackPieces.removeAtIndex(ty)
-                                                                                    self.blackPiecesString.removeAtIndex(ty)
-                                                                                    ty--
-                                                                                    
-                                                                                }
+                                                                                self.piecesToDelete.append(self.pieces[iy])
                                                                                 
                                                                             }
-                                                                            
-                                                                            self.piecesToDelete.append(self.pieces[iy])
-
                                                                         }
-                                                                    }
-                                                                    
-                                                                    
-                                                                }
-                                                                else {
-                                                                    print("letters not found")
-                                                                }
-                                                            }
-                                                            
-                                                            
-                                                            if moves.last == moves[o] && am == moves.count{
-                                                                checkIfTakenLast()
-                                                                
-                                                                
-                                                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                                                    self.pieces[i].frame.origin.x = xAxisArr[q]
-                                                                    self.pieces[i].frame.origin.y = yAxisArr[a]
-                                                                    
-                                                                    }, completion: { finish in
-                                                                        self.deletePiecesAfterLoad()
-                                                                        self.updateLogic()
                                                                         
-                                                                })
-                                                                
-                                                            }
-                                                            else {
-                                                                checkIfTaken()
-                                                                
-                                                                pieces[i].frame.origin.x = xAxisArr[q]
-                                                                pieces[i].frame.origin.y = yAxisArr[a]
-                                                                
-                                                                
-                                                            }
+                                                                        
+                                                                    }
+                                                                    else {
+                                                                        print("letters not found")
+                                                                    }
+                                                                }
 
-                                                            
+                                                                if moves.last == moves[o] && am == moves.count{
+                                                                    checkIfTakenLast()
+                                                                    
+                                                                    
+                                                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                        self.pieces[i].frame.origin.x = xAxisArr[q]
+                                                                        self.pieces[i].frame.origin.y = yAxisArr[a]
+                                                                        
+                                                                        }, completion: { finish in
+                                                                            self.deletePiecesAfterLoad()
+                                                                            self.updateLogic()
+                                                                            
+                                                                    })
+                                                                    
+                                                                }
+                                                                else {
+                                                                    checkIfTaken()
+                                                                    
+                                                                    pieces[i].frame.origin.x = xAxisArr[q]
+                                                                    pieces[i].frame.origin.y = yAxisArr[a]
+                                                                    
+                                                                    
+                                                                }
+                                                                
+                                                                
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -828,117 +820,103 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 }
                             }
                         }
-                    }
-                    else if moves[o].characters.count == 3 {
-                        
-                        if String(moves[o][2])  == "0" {
-                            if  o % 2 == 0 {
-                                
-                                if moves.last == moves[o] && am == moves.count{
-                                    
-                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                        else if moves[o].characters.count == 3 {
+                            if String(moves[o][2])  == "0" {
+                                if  o % 2 == 0 {
+                                   print("Castling white long")
+                                    if moves.last == moves[o] && am == moves.count{
                                         
+                                        UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                            
+                                            self.whiteKing.frame.origin.x = c
+                                            self.whiteKing.frame.origin.y = _1
+                                            self.whiteRook2.frame.origin.x = d
+                                            self.whiteRook2.frame.origin.y = _1
+ 
+                                            }, completion: { finish in})
+                                        
+                                    }
+                                    else {
+                                        self.whiteKing.frame.origin.x = c
+                                        self.whiteKing.frame.origin.y = _1
+                                        self.whiteRook2.frame.origin.x = d
+                                        self.whiteRook2.frame.origin.y = _1
+                                    }
+                                }
+                                    
+                                else {
+                                    
+                                    if moves.last == moves[o] && am == moves.count{
+                                        print("Castling black long")
+                                        UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                            
+                                            self.blackKing.frame.origin.x = c
+                                            self.blackKing.frame.origin.y = _8
+                                            self.blackRook1.frame.origin.x = d
+                                            self.blackRook1.frame.origin.y = _8
+
+                                            
+                                            }, completion: { finish in})
+                                        
+                                    }
+                                    else {
                                         self.blackKing.frame.origin.x = c
                                         self.blackKing.frame.origin.y = _8
                                         self.blackRook1.frame.origin.x = d
                                         self.blackRook1.frame.origin.y = _8
-                                        
-                                        
-                                        
-                                        }, completion: { finish in})
-                                    
+                                    }
+
                                 }
-                                else {
-                                    self.blackKing.frame.origin.x = c
-                                    self.blackKing.frame.origin.y = _8
-                                    self.blackRook1.frame.origin.x = d
-                                    self.blackRook1.frame.origin.y = _8
-                                }
-                                
-                                
                             }
-                                
-                            else {
-                                
+                        }
+                        else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
+                            
+                            if  o % 2 == 0 {
+                               print("Castling white short")
                                 if moves.last == moves[o] && am == moves.count{
                                     
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                         
-                                        self.whiteKing.frame.origin.x = c
+                                        self.whiteKing.frame.origin.x = g
                                         self.whiteKing.frame.origin.y = _1
-                                        self.whiteRook1.frame.origin.x = d
+                                        self.whiteRook1.frame.origin.x = f
                                         self.whiteRook1.frame.origin.y = _1
                                         
-                                        
-                                        
+                                        }, completion: { finish in})
+                                    
+                                    
+                                }  else {
+                                    
+                                    self.whiteKing.frame.origin.x = g
+                                    self.whiteKing.frame.origin.y = _1
+                                    self.whiteRook1.frame.origin.x = f
+                                    self.whiteRook1.frame.origin.y = _1
+                                }
+                                
+                            } else {
+                                if moves.last == moves[o] && am == moves.count{
+                                    print("Castling black short")
+                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                        // white castling bottom-right
+                                        self.blackKing.frame.origin.x = g
+                                        self.blackKing.frame.origin.y = _8
+                                        self.blackRook2.frame.origin.x = f
+                                        self.blackRook2.frame.origin.y = _8
+         
                                         }, completion: { finish in})
                                     
                                 }
                                 else {
-                                    self.whiteKing.frame.origin.x = c
-                                    self.whiteKing.frame.origin.y = _1
-                                    self.whiteRook1.frame.origin.x = d
-                                    self.whiteRook1.frame.origin.y = _1
-                                }
-                                
-                                
-                                
-                            }
-                        }
-                    }
-                    else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
-                        if  o % 2 == 0 {
-                            
-                            if moves.last == moves[o] && am == moves.count{
-                                
-                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                    
                                     self.blackKing.frame.origin.x = g
                                     self.blackKing.frame.origin.y = _8
                                     self.blackRook2.frame.origin.x = f
                                     self.blackRook2.frame.origin.y = _8
-
-                                    }, completion: { finish in})
-                                
+                                }
                                 
                             }
-                            else {
-                                
-                                self.blackKing.frame.origin.x = g
-                                self.blackKing.frame.origin.y = _8
-                                self.blackRook2.frame.origin.x = f
-                                self.blackRook2.frame.origin.y = _8
-                            }
-
-                        }
-                            
-                        else {
-                            
-                            if moves.last == moves[o] && am == moves.count{
-                                
-                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                    
-                                    self.whiteKing.frame.origin.x = g
-                                    self.whiteKing.frame.origin.y = _1
-                                    self.whiteRook2.frame.origin.x = f
-                                    self.whiteRook2.frame.origin.y = _1
-                                    
-                                    
-                                    
-                                    }, completion: { finish in})
-                                
-                            }
-                            else {
-                                self.whiteKing.frame.origin.x = g
-                                self.whiteKing.frame.origin.y = _1
-                                self.whiteRook2.frame.origin.x = f
-                                self.whiteRook2.frame.origin.y = _1
-                            }
-
                         }
                     }
                 }
-            }
             }
             magic1()
             print("I am white player!")
@@ -956,8 +934,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             let rating = result["rating"] as? Int
                             
-                            
-                            
+
                             let profilePictureObject = result["profile_picture"] as? PFFile
                             
                             if(profilePictureObject != nil)
@@ -996,7 +973,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     
                 }
-
+                
             })
             
             //firebase
@@ -1007,7 +984,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 if self.game ["whitePlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "white" {
                     
-                 //   self.loadVariablesAndConstants()
+                    //   self.loadVariablesAndConstants()
                     let query = PFQuery(className: "Games")
                     query.whereKey("objectId", equalTo: gameID)
                     let r = query.getFirstObject()
@@ -1021,7 +998,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             for var p = 0; p < yAxisArrStr2.count; p++ {
                                 if String(moves.last![1]) == yAxisArrStr2[p] {
                                     for var i = 0; i < self.pieces.count; i++ {
-                                       if self.pieces[i].frame.origin.x == xAxisArr[t] {
+                                        if self.pieces[i].frame.origin.x == xAxisArr[t] {
                                             if self.pieces[i].frame.origin.y == yAxisArr[p] {
                                                 
                                                 print("this is complicated")
@@ -1035,7 +1012,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 let range = self.notations.last!.rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
                                                                 
                                                                 func checkIfTakenLast() {
-
+                                                                    
                                                                     if  (range != nil) {
                                                                         print("letters  found")
                                                                         
@@ -1070,13 +1047,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 
                                                                                 self.piecesToDelete.append(self.pieces[iy])
-
+                                                                                
                                                                                 
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     self.pieces[iy].alpha = 0
                                                                                     }, completion: {finish in
-                                        
-
+                                                                                        
+                                                                                        
                                                                                         
                                                                                 })
                                                                                 
@@ -1089,7 +1066,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters not found")
                                                                     }
                                                                 }
-                                                           
+                                                                
                                                                 
                                                                 
                                                                 if moves.last == moves.last {
@@ -1102,16 +1079,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
-
+                                                                            
                                                                             self.updateLogic()
                                                                             
-
+                                                                            
                                                                             
                                                                     })
                                                                     
                                                                 }
-                                                               
-
+                                                                
+                                                                
                                                             }
                                                         }
                                                     }
@@ -1131,45 +1108,40 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     if moves.last == moves.last{
                                         
                                         UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                            
                                             self.blackKing.frame.origin.x = c
                                             self.blackKing.frame.origin.y = _8
                                             self.blackRook1.frame.origin.x = d
                                             self.blackRook1.frame.origin.y = _8
                                             
-                                            
-                                            
                                             }, completion: { finish in})
                                         
                                     }
-
+                                    
                                     
                                 }
                                     
                                 else {
                                     
                                     if moves.last == moves.last{
-                                        
+                                        print("Castling black long")
                                         UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                             
-                                            self.whiteKing.frame.origin.x = c
-                                            self.whiteKing.frame.origin.y = _1
-                                            self.whiteRook1.frame.origin.x = d
-                                            self.whiteRook1.frame.origin.y = _1
-                                            
-                                            
-                                            
+                                            self.blackKing.frame.origin.x = c
+                                            self.blackKing.frame.origin.y = _8
+                                            self.blackRook1.frame.origin.x = d
+                                            self.blackRook1.frame.origin.y = _8
+
                                             }, completion: { finish in})
                                         
                                     }
- 
+                                    
                                     
                                 }
                             }
                         }
                         else if String(moves.last![0])  == "0" && String(moves.last![1])  == "0" {
+                            
                             if  moves.indexOf(moves.last!)!  % 2 == 0  {
-                                
                                 if moves.last == moves.last{
                                     
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
@@ -1178,30 +1150,28 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.blackKing.frame.origin.y = _8
                                         self.blackRook2.frame.origin.x = f
                                         self.blackRook2.frame.origin.y = _8
-
+                                        
                                         }, completion: { finish in})
-                                    
-                                    
                                 }
-
+                                
                             }
                                 
                             else {
                                 
                                 if moves.last == moves.last{
-                                    
+                                    print("Castling black short")
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                         
-                                        self.whiteKing.frame.origin.x = g
-                                        self.whiteKing.frame.origin.y = _1
-                                        self.whiteRook2.frame.origin.x = f
-                                        self.whiteRook2.frame.origin.y = _1
-
+                                        self.blackKing.frame.origin.x = g
+                                        self.blackKing.frame.origin.y = _8
+                                        self.blackRook2.frame.origin.x = f
+                                        self.blackRook2.frame.origin.y = _8
+                                        
                                         
                                         }, completion: { finish in})
                                     
                                 }
-
+                                
                             }
                         }
                     }
@@ -1231,18 +1201,18 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                     }
-
                     
-//                    var bottomOffset = CGPointMake(0, self.collectionView.contentSize.height - self.collectionView.bounds.size.height)
-//                    self.collectionView.setContentOffset(bottomOffset, animated: true)
+                    
+                    //                    var bottomOffset = CGPointMake(0, self.collectionView.contentSize.height - self.collectionView.bounds.size.height)
+                    //                    self.collectionView.setContentOffset(bottomOffset, animated: true)
                     
                     self.isWhiteTurn = true
                     
-
-                   // self.updateLogic()
+                    
+                    // self.updateLogic()
                     print(self.piecesToDelete)
                     
-
+                    
                 }
                 
                 }, withCancelBlock: { error in
@@ -1301,210 +1271,240 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             ////////this is where the magic happens\\\\\\\\
             func magic2() {
-            var am = 0
-            for var o = 0; o < moves.count; o++ {
-                am++
-                for var t = 0; t < xAxisArrStr2.count; t++ {
-                    if String(moves[o][0]) == xAxisArrStr2[t] {
-                        for var p = 0; p < yAxisArrStr2.count; p++ {
-                            if String(moves[o][1]) == yAxisArrStr2[p] {
-                                for var i = 0; i < pieces.count; i++ {
-                                    var remove = false
-                                    if pieces[i].frame.origin.x == xAxisArr[t] {
-                                        if pieces[i].frame.origin.y == yAxisArr[p] {
-                                            
-                                            print("this is complicated")
-                                            
-                                            for var q = 0; q < xAxisArrStr2.count; q++ {
-                                                if String(moves[o][2]) == xAxisArrStr2[q] {
-                                                    for var a = 0; a < yAxisArrStr2.count; a++ {
-                                                        if String(moves[o][3]) == yAxisArrStr2[a] {
-                                                            
-                                                            let range = notations[o].rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
-                                                            
-                                                            func checkIfTakenLast() {
-                                                                // range will be nil if no letters is found
-                                                                if  (range != nil) {
-                                                                    print("letters  found")
-                                                                    
-                                                                    for var iy = 0; iy < pieces.count; iy++ {
-                                                                        if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
-                                                                            
-                                                                            print("iy is \(iy)")
-                                                                            
-                                                                            for var ty = 0; ty < self.whitePieces.count; ty++ {
-                                                                                if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                    
-                                                                                    
-                                                                                    self.pieceToTake += [self.whitePieces[ty]]
-                                                                                    //    self.whitePieces[ty].removeFromSuperview()
-                                                                                    self.whitePieces.removeAtIndex(ty)
-                                                                                    self.whitePiecesString.removeAtIndex(ty)
-                                                                                    ty--
+                var am = 0
+                for var o = 0; o < moves.count; o++ {
+                    am++
+                    for var t = 0; t < xAxisArrStr2.count; t++ {
+                        if String(moves[o][0]) == xAxisArrStr2[t] {
+                            for var p = 0; p < yAxisArrStr2.count; p++ {
+                                if String(moves[o][1]) == yAxisArrStr2[p] {
+                                    for var i = 0; i < pieces.count; i++ {
+                                        var remove = false
+                                        if pieces[i].frame.origin.x == xAxisArr[t] {
+                                            if pieces[i].frame.origin.y == yAxisArr[p] {
+                                                
+                                                print("this is complicated")
+                                                
+                                                for var q = 0; q < xAxisArrStr2.count; q++ {
+                                                    if String(moves[o][2]) == xAxisArrStr2[q] {
+                                                        for var a = 0; a < yAxisArrStr2.count; a++ {
+                                                            if String(moves[o][3]) == yAxisArrStr2[a] {
+                                                                
+                                                                let range = notations[o].rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
+                                                                
+                                                                func checkIfTakenLast() {
+                                                                    // range will be nil if no letters is found
+                                                                    if  (range != nil) {
+                                                                        print("letters  found")
+                                                                        
+                                                                        for var iy = 0; iy < pieces.count; iy++ {
+                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
+                                                                                
+                                                                                print("iy is \(iy)")
+                                                                                
+                                                                                for var ty = 0; ty < self.whitePieces.count; ty++ {
+                                                                                    if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+                                                                                        
+                                                                                        
+                                                                                        self.pieceToTake += [self.whitePieces[ty]]
+                                                                                        //    self.whitePieces[ty].removeFromSuperview()
+                                                                                        self.whitePieces.removeAtIndex(ty)
+                                                                                        self.whitePiecesString.removeAtIndex(ty)
+                                                                                        ty--
+                                                                                        
+                                                                                    }
                                                                                     
                                                                                 }
-                                                                                
-                                                                            }
-                                                                            for var ty = 0; ty < self.blackPieces.count; ty++ {
-                                                                                if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                    
-                                                                                    self.pieceToTake += [self.blackPieces[ty]]
-                                                                                    //      self.blackPieces[ty].removeFromSuperview()
-                                                                                    self.blackPieces.removeAtIndex(ty)
-                                                                                    self.blackPiecesString.removeAtIndex(ty)
-                                                                                    ty--
+                                                                                for var ty = 0; ty < self.blackPieces.count; ty++ {
+                                                                                    if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+                                                                                        
+                                                                                        self.pieceToTake += [self.blackPieces[ty]]
+                                                                                        //      self.blackPieces[ty].removeFromSuperview()
+                                                                                        self.blackPieces.removeAtIndex(ty)
+                                                                                        self.blackPiecesString.removeAtIndex(ty)
+                                                                                        ty--
+                                                                                        
+                                                                                    }
                                                                                     
                                                                                 }
+                                                                                self.piecesToDelete.append(self.pieces[iy])
+                                                                                
+                                                                                
+                                                                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
+                                                                                    self.pieces[iy].alpha = 0
+                                                                                    }, completion: {finish in
+                                                                                        
+                                                                                        
+                                                                                })
                                                                                 
                                                                             }
-                                                                            self.piecesToDelete.append(self.pieces[iy])
-                                                                            
-                                                                            
-                                                                            UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
+                                                                        }
+                                                                        
+                                                                        
+                                                                    }
+                                                                    else {
+                                                                        print("letters not found")
+                                                                    }
+                                                                }
+                                                                func checkIfTaken() {
+                                                                    // range will be nil if no letters is found
+                                                                    if  (range != nil) {
+                                                                        print("letters  found")
+                                                                        
+                                                                        for var iy = 0; iy < pieces.count; iy++ {
+                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
+                                                                                
+                                                                                
                                                                                 self.pieces[iy].alpha = 0
-                                                                                }, completion: {finish in
+                                                                                
+                                                                                
+                                                                                
+                                                                                print("iy is \(iy)")
+                                                                                
+                                                                                for var ty = 0; ty < self.whitePieces.count; ty++ {
+                                                                                    if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+                                                                                        
+                                                                                        
+                                                                                        self.pieceToTake += [self.whitePieces[ty]]
+                                                                                        //    self.whitePieces[ty].removeFromSuperview()
+                                                                                        self.whitePieces.removeAtIndex(ty)
+                                                                                        self.whitePiecesString.removeAtIndex(ty)
+                                                                                        ty--
+                                                                                        
+                                                                                    }
                                                                                     
+                                                                                }
+                                                                                for var ty = 0; ty < self.blackPieces.count; ty++ {
+                                                                                    if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+                                                                                        
+                                                                                        self.pieceToTake += [self.blackPieces[ty]]
+                                                                                        //      self.blackPieces[ty].removeFromSuperview()
+                                                                                        self.blackPieces.removeAtIndex(ty)
+                                                                                        self.blackPiecesString.removeAtIndex(ty)
+                                                                                        ty--
+                                                                                        
+                                                                                    }
                                                                                     
-                                                                            })
-                                                                            
+                                                                                }
+                                                                                self.piecesToDelete.append(self.pieces[iy])
+                                                                            }
                                                                         }
+                                                                        
+                                                                        
                                                                     }
-                                                                    
+                                                                    else {
+                                                                        print("letters not found")
+                                                                    }
+                                                                }
+                                                                
+                                                                if moves.last == moves[o] && am == moves.count{
+                                                                    checkIfTakenLast()
+                                                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                        
+                                                                        self.pieces[i].frame.origin.x = xAxisArr[q]
+                                                                        self.pieces[i].frame.origin.y = yAxisArr[a]
+                                                                        
+                                                                        
+                                                                        
+                                                                        }, completion: { finish in})
+                                                                    self.deletePiecesAfterLoad()
+                                                                    self.updateLogic()
                                                                     
                                                                 }
                                                                 else {
-                                                                    print("letters not found")
-                                                                }
-                                                            }
-                                                            func checkIfTaken() {
-                                                                // range will be nil if no letters is found
-                                                                if  (range != nil) {
-                                                                    print("letters  found")
-                                                                    
-                                                                    for var iy = 0; iy < pieces.count; iy++ {
-                                                                        if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
-                                                                            
-                                                                            
-                                                                            self.pieces[iy].alpha = 0
-                                                                            
-                                                                            
-                                                                            
-                                                                            print("iy is \(iy)")
-                                                                            
-                                                                            for var ty = 0; ty < self.whitePieces.count; ty++ {
-                                                                                if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                    
-                                                                                    
-                                                                                    self.pieceToTake += [self.whitePieces[ty]]
-                                                                                    //    self.whitePieces[ty].removeFromSuperview()
-                                                                                    self.whitePieces.removeAtIndex(ty)
-                                                                                    self.whitePiecesString.removeAtIndex(ty)
-                                                                                    ty--
-                                                                                    
-                                                                                }
-                                                                                
-                                                                            }
-                                                                            for var ty = 0; ty < self.blackPieces.count; ty++ {
-                                                                                if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                    
-                                                                                    self.pieceToTake += [self.blackPieces[ty]]
-                                                                                    //      self.blackPieces[ty].removeFromSuperview()
-                                                                                    self.blackPieces.removeAtIndex(ty)
-                                                                                    self.blackPiecesString.removeAtIndex(ty)
-                                                                                    ty--
-                                                                                    
-                                                                                }
-                                                                                
-                                                                            }
-                                                                            self.piecesToDelete.append(self.pieces[iy])
-                                                                        }
-                                                                    }
-                                                                    
-                                                                    
-                                                                }
-                                                                else {
-                                                                    print("letters not found")
-                                                                }
-                                                            }
-                                                            
-                                                            if moves.last == moves[o] && am == moves.count{
-                                                                checkIfTakenLast()
-                                                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                    checkIfTaken()
+                                                                    print(pieces[i])
                                                                     
                                                                     self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                     self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                     
                                                                     
-                                                                    
-                                                                    }, completion: { finish in})
-                                                                self.deletePiecesAfterLoad()
-                                                                self.updateLogic()
+                                                                }
+                                                                
                                                                 
                                                             }
-                                                            else {
-                                                                checkIfTaken()
-                                                                print(pieces[i])
-
-                                                                self.pieces[i].frame.origin.x = xAxisArr[q]
-                                                                self.pieces[i].frame.origin.y = yAxisArr[a]
-
-                                                                
-                                                            }
-  
-                                                            
                                                         }
                                                     }
                                                 }
                                             }
                                         }
-                                    }
-                                    if remove {
-                                    }}
+                                        if remove {
+                                        }}
+                                }
                             }
+                            
+                            
                         }
-                        
-                        
-                    }
-                    else if moves[o].characters.count == 3 {
-                        
-                        if String(moves[o][2])  == "0" {
-                            if  o % 2 == 0 {
-                                
-                                if moves.last == moves[o] && am == moves.count{
+                        else if moves[o].characters.count == 3 {
+                            
+                            if String(moves.last![2])  == "0" {
+                                //can return false value??
+                                if  moves.indexOf(moves.last!)!  % 2 == 0 {
+                                    // test
+                                    if moves.last == moves.last{
                                     
-                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                    if moves.last == moves[o] && am == moves.count{
+                                        print("Castling white long")
+                                        UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                            
+                                            self.blackKing.frame.origin.x = f
+                                            self.blackKing.frame.origin.y = _8
+                                            self.blackRook2.frame.origin.x = e
+                                            self.blackRook2.frame.origin.y = _8
+                                            
+
+                                            }, completion: { finish in})
                                         
+                                    }
+                                    else {
+                                        self.blackKing.frame.origin.x = f
+                                        self.blackKing.frame.origin.y = _8
+                                        self.blackRook2.frame.origin.x = e
+                                        self.blackRook2.frame.origin.y = _8
+                                    }
+  
+                                    }
+                                }
+                                    
+                                else {
+                                   
+                                    if moves.last == moves[o] && am == moves.count{
+                                        
+                                        UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                            print("Castling black long")
+                                            self.whiteKing.frame.origin.x = f
+                                            self.whiteKing.frame.origin.y = _1
+                                            self.whiteRook1.frame.origin.x = e
+                                            self.whiteRook1.frame.origin.y = _1
+                                            
+                                            
+                                            
+                                            }, completion: { finish in})
+                                        
+                                    }
+                                    else {
                                         self.whiteKing.frame.origin.x = f
                                         self.whiteKing.frame.origin.y = _1
                                         self.whiteRook1.frame.origin.x = e
                                         self.whiteRook1.frame.origin.y = _1
-                                        
-                                        
-                                        
-                                        }, completion: { finish in})
+                                    }
+                                    
+                                    
                                     
                                 }
-                                else {
-                                    whiteKing.frame.origin.x = f
-                                    whiteKing.frame.origin.y = _1
-                                    whiteRook1.frame.origin.x = e
-                                    whiteRook1.frame.origin.y = _1
-                                }
-                                
-                                
-                                
-                                
                             }
-                                
-                            else {
-                                
+                        }
+                        else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
+                            
+                            if  o % 2 == 0 {
+                                print("Castling white short")
                                 if moves.last == moves[o] && am == moves.count{
-                                    
+                                   
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                         
-                                        self.blackKing.frame.origin.x = f
+                                        self.blackKing.frame.origin.x = b
                                         self.blackKing.frame.origin.y = _8
-                                        self.blackRook1.frame.origin.x = e
+                                        self.blackRook1.frame.origin.x = c
                                         self.blackRook1.frame.origin.y = _8
                                         
                                         
@@ -1513,71 +1513,40 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     
                                 }
                                 else {
-                                    blackKing.frame.origin.x = f
+                                    
+                                    blackKing.frame.origin.x = b
                                     blackKing.frame.origin.y = _8
-                                    blackRook1.frame.origin.x = e
+                                    blackRook1.frame.origin.x = c
                                     blackRook1.frame.origin.y = _8
                                 }
                                 
-                                
-                                
                             }
-                        }
-                    }
-                    else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
-                        if  o % 2 == 0 {
-                            
-                            if moves.last == moves[o] && am == moves.count{
                                 
-                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                            else {
+                                if moves.last == moves[o] && am == moves.count{
+                                    print("Castling black short")
+                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                        // Castling white top left
+                                        self.whiteKing.frame.origin.x = b
+                                        self.whiteKing.frame.origin.y = _1
+                                        self.whiteRook2.frame.origin.x = c
+                                        self.whiteRook2.frame.origin.y = _1
+                                        
+                                        }, completion: { finish in})
+                                    
+                                }
+                                else {
                                     
                                     self.whiteKing.frame.origin.x = b
                                     self.whiteKing.frame.origin.y = _1
                                     self.whiteRook2.frame.origin.x = c
                                     self.whiteRook2.frame.origin.y = _1
-                                    
-                                    
-                                    
-                                    }, completion: { finish in})
+                                }
                                 
                             }
-                            else {
-                                
-                                whiteKing.frame.origin.x = b
-                                whiteKing.frame.origin.y = _1
-                                whiteRook2.frame.origin.x = c
-                                whiteRook2.frame.origin.y = _1
-                            }
-                            
-                        }
-                            
-                        else {
-                            if moves.last == moves[o] && am == moves.count{
-                                
-                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                    
-                                    self.blackKing.frame.origin.x = b
-                                    self.blackKing.frame.origin.y = _8
-                                    self.blackRook2.frame.origin.x = c
-                                    self.blackRook2.frame.origin.y = _8
-                                    
-                                    
-                                    
-                                    }, completion: { finish in})
-                                
-                            }
-                            else {
-                                
-                                blackKing.frame.origin.x = b
-                                blackKing.frame.origin.y = _8
-                                blackRook2.frame.origin.x = c
-                                blackRook2.frame.origin.y = _8
-                            }
-                            
                         }
                     }
                 }
-            }
             }
             magic2()
             if r!["status_black"] as! String == "move" {
@@ -1621,7 +1590,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         for result in result {
                             
                             let rating = result["rating"] as? Int
-
+                            
                             let profilePictureObject = result["profile_picture"] as? PFFile
                             
                             if(profilePictureObject != nil)
@@ -1669,8 +1638,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             check.observeEventType(.ChildChanged, withBlock: { snapshot in
                 print(snapshot.value)
                 
-           
-                 if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black" {
+                
+                if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black" {
                     
                     let query = PFQuery(className: "Games")
                     query.whereKey("objectId", equalTo: gameID)
@@ -1740,7 +1709,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     self.pieces[iy].alpha = 0
                                                                                     }, completion: {finish in
                                                                                         
-    
+                                                                                        
                                                                                         
                                                                                 })
                                                                                 
@@ -1767,7 +1736,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
                                                                             self.updateLogic()
-
+                                                                            
                                                                             
                                                                     })
                                                                     
@@ -1789,20 +1758,20 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             if String(moves.last![2])  == "0" {
                                 //can return false value??
                                 if  moves.indexOf(moves.last!)!  % 2 == 0 {
-                                    
+                                    // test
                                     if moves.last == moves.last{
                                         
                                         UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                             
-                                            self.blackKing.frame.origin.x = c
+                                            self.blackKing.frame.origin.x = f
                                             self.blackKing.frame.origin.y = _8
-                                            self.blackRook1.frame.origin.x = d
-                                            self.blackRook1.frame.origin.y = _8
+                                            self.blackRook2.frame.origin.x = e
+                                            self.blackRook2.frame.origin.y = _8
                                             
                                             }, completion: { finish in})
                                         
                                     }
-
+                                    
                                 }
                                     
                                 else {
@@ -1810,13 +1779,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     if moves.last == moves.last{
                                         
                                         UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                            
-                                            self.whiteKing.frame.origin.x = c
-                                            self.whiteKing.frame.origin.y = _1
-                                            self.whiteRook1.frame.origin.x = d
-                                            self.whiteRook1.frame.origin.y = _1
-                                            
-                                            
+                                            // white castle top left
+                                            self.blackKing.frame.origin.x = f
+                                            self.blackKing.frame.origin.y = _8
+                                            self.blackRook2.frame.origin.x = e
+                                            self.blackRook2.frame.origin.y = _8
                                             
                                             }, completion: { finish in})
                                         
@@ -1829,20 +1796,20 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                         else if String(moves.last![0])  == "0" && String(moves.last![1])  == "0" {
                             if  moves.indexOf(moves.last!)!  % 2 == 0  {
-                                
+                                print("Castling white short")
                                 if moves.last == moves.last{
                                     
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                        
-                                        self.blackKing.frame.origin.x = g
+                                        // white castle top right
+                                        self.blackKing.frame.origin.x = b
                                         self.blackKing.frame.origin.y = _8
-                                        self.blackRook2.frame.origin.x = f
-                                        self.blackRook2.frame.origin.y = _8
- 
+                                        self.blackRook1.frame.origin.x = c
+                                        self.blackRook1.frame.origin.y = _8
+                                        
                                         }, completion: { finish in})
                                     
                                 }
-
+                                
                             }
                                 
                             else {
@@ -1851,17 +1818,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                         
-                                        self.whiteKing.frame.origin.x = g
-                                        self.whiteKing.frame.origin.y = _1
-                                        self.whiteRook2.frame.origin.x = f
-                                        self.whiteRook2.frame.origin.y = _1
+                                        self.blackKing.frame.origin.x = b
+                                        self.blackKing.frame.origin.y = _8
+                                        self.blackRook1.frame.origin.x = c
+                                        self.blackRook1.frame.origin.y = _8
                                         
                                         
                                         
                                         }, completion: { finish in})
                                     
                                 }
-
+                                
                                 
                             }
                         }
@@ -1875,7 +1842,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         for var i = 0; i < self.piecesArrs.count; i++ {
                             for var t = 0; t < self.piecesArrs[i].count; t++ {
-                                                             self.piecesArrs[i][t].userInteractionEnabled = true
+                                self.piecesArrs[i][t].userInteractionEnabled = true
                             }
                         }
                     }
@@ -1884,7 +1851,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         for var i = 0; i < self.piecesArrs.count; i++ {
                             for var t = 0; t < self.piecesArrs[i].count; t++ {
-                               
+                                
                                 self.piecesArrs[i][t].userInteractionEnabled = false
                             }
                         }
@@ -1895,23 +1862,23 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     print(error.description)
             })
             //firebase - end
-}
-    
+        }
+        
     }
     
-//last thing i did was to check ewther or noyou can take a peice that was jsut ttaken, remember to add peicetodelete at black
+    //last thing i did was to check ewther or noyou can take a peice that was jsut ttaken, remember to add peicetodelete at black
     func deletePiecesAfterLoad () {
         
         for var i = 0; i < piecesToDelete.count ; i++ {
             for var t = 0;  t < pieces.count; t++ {
                 if pieces[t].frame.origin.x == piecesToDelete[i].frame.origin.x &&  pieces[t].frame.origin.y == piecesToDelete[i].frame.origin.y  && pieces[t].alpha != 1{
-                pieceToTake += [pieces[t]]
-                pieces[t].removeFromSuperview()
-                pieces.removeAtIndex(t)
+                    pieceToTake += [pieces[t]]
+                    pieces[t].removeFromSuperview()
+                    pieces.removeAtIndex(t)
                 }
             }
         }
-   //     updateLogic()
+        //     updateLogic()
         piecesToDelete = []
     }
     
@@ -1926,7 +1893,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         var bottomOffset = CGPointMake(0, collectionView.contentSize.height - collectionView.bounds.size.height)
         collectionView.setContentOffset(bottomOffset, animated: false)
         
-
+        
     }
     
     // MARK: - View did load! 😄
@@ -1936,7 +1903,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         layout.itemSize = CGSize(width: 109, height: 22)
         
         if screenHeight == 736.0 {
-        collectionView = UICollectionView(frame: CGRectMake(screenWidth-125, 86, 111, 46), collectionViewLayout: layout)
+            collectionView = UICollectionView(frame: CGRectMake(screenWidth-125, 86, 111, 46), collectionViewLayout: layout)
         } else if screenHeight == 667.0 {
             collectionView = UICollectionView(frame: CGRectMake(screenWidth-108, 78, 111, 46), collectionViewLayout: layout)
         } else if screenHeight == 568.0 {
@@ -2408,6 +2375,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     for var q = 0; q < friend.count; q++ {
                         for var i = 1; i < 4; i++ {
                             if pieceid == 5 && hasWhiteKingMoved == false && hasWhiteRookMoved == false {
+                                print("Castlle white long")
                                 let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                 if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: leftWhiteCastleLogic) == false  {
@@ -2418,6 +2386,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                         for var i = 1; i < 3; i++ {
                             if pieceid == 5 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false {
+                                print("Castlle white short")
                                 let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                 if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: rightWhiteCastleLogic) == false  {
@@ -2428,21 +2397,23 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                     for var q = 0; q < friend.count; q++ {
-                        for var i = 1; i < 4; i++ {
+                        for var i = 1; i < 3; i++ {
                             if pieceid == 5 && hasBlackKingMoved == false && hasBlackRookMoved == false {
+                                print("Castlle black short")
                                 let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
-                                if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceWhiteLogicOptions) == false && canSaveKing(pieceOption2, array: leftBlackCastleLogic) == false  {
+                                if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: leftBlackCastleLogic) == false  {
                                     self.view.addSubview(pieceOption2)
                                     leftBlackCastleLogic += [pieceOption2]
                                 }
                             }
                         }
-                        for var i = 1; i < 3; i++ {
+                        for var i = 1; i < 4; i++ {
                             if pieceid == 5 && hasBlackKingMoved == false && hasBlackRookMoved2 == false {
+                                print("Castlle black long")
                                 let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
-                                if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceWhiteLogicOptions) == false && canSaveKing(pieceOption2, array: rightBlackCastleLogic) == false  {
+                                if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: rightBlackCastleLogic) == false  {
                                     self.view.addSubview(pieceOption2)
                                     rightBlackCastleLogic += [pieceOption2]
                                 }
@@ -2450,28 +2421,28 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                     
-                    if leftWhiteCastleLogic.count == 3 && hasWhiteKingMoved == false && hasWhiteRookMoved == false && pieceid == 5  {
+                    if leftWhiteCastleLogic.count == 3 && hasWhiteKingMoved == false && hasWhiteRookMoved == false && pieceid == 5 && self.whiteKing.frame.origin.x == e && self.whiteKing.frame.origin.y == _1 {
                         let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption3)
                         whiteCastlingLeft += [pieceOption3]
                         castlePiece = whiteRook2
                     }
-                    if rightWhiteCastleLogic.count == 2 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false && pieceid == 5  {
+                    if rightWhiteCastleLogic.count == 2 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false && pieceid == 5 && self.whiteKing.frame.origin.x == e && self.whiteKing.frame.origin.y == _1  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption3)
                         whiteCastlingRight += [pieceOption3]
                         castlePiece = whiteRook1
                     }
-                    if leftBlackCastleLogic.count == 3 && hasBlackKingMoved == false && hasBlackRookMoved == false && pieceid == 5  {
+                    if leftBlackCastleLogic.count == 2 && hasBlackKingMoved == false && hasBlackRookMoved == false && pieceid == 5 && self.whiteKing.frame.origin.x == d && self.whiteKing.frame.origin.y == _1  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption3)
                         blackCastlingLeft += [pieceOption3]
                         castlePiece = blackRook2
                     }
-                    if rightBlackCastleLogic.count == 2 && hasBlackKingMoved == false && hasBlackRookMoved2 == false && pieceid == 5  {
+                    if rightBlackCastleLogic.count == 3 && hasBlackKingMoved == false && hasBlackRookMoved2 == false && pieceid == 5 && pieceid == 5 && self.whiteKing.frame.origin.x == d && self.whiteKing.frame.origin.y == _1  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption3)
@@ -3292,25 +3263,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 chessNotationCheck = "+"
             }
             var LAN = ""
-            if castleLeft == true && game["whitePlayer"] as? String == "move"{
+            if castleLeft == true && selectedPiece == whiteKing{
                 print("0-0-0")
                 LAN = "0-0-0"
                 
-                
             }
-            else if castleLeft == true && game["blackPlayer"] as? String == "move"{
+            else if castleLeft == true && selectedPiece == blackKing{
                 print("0-0")
                 LAN = "0-0"
                 
             }
-            else if castleRight == true && game["whitePlayer"] as? String == "move" {
+            else if castleRight == true && selectedPiece == whiteKing{
                 print("0-0")
                 
                 LAN = "0-0"
                 
                 
             }
-            else if castleRight == true && game["blackPlayer"] as? String == "move" {
+            else if castleRight == true && selectedPiece == blackKing{
                 print("0-0-0")
                 LAN = "0-0-0"
             }
@@ -3332,8 +3302,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 for var q = 0; q < 2; q++ {
                     moveNum.append(t)
                 }
-        }
-        
+            }
+            
             print(notations.count)
             let newIndexPath = NSIndexPath(forItem: notations.count - 1, inSection: 0)
             collectionView.insertItemsAtIndexPaths([newIndexPath])
@@ -3353,10 +3323,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 game["status_black"] = "notmove"
                 uuser = (game["whitePlayer"] as? String)!
             }
-
+            
             game.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
                 if error == nil {
-                
+                    
                     // Create our Installation query
                     let pushQuery = PFInstallation.query()
                     pushQuery!.whereKey("username", equalTo: uuser)
@@ -3370,26 +3340,26 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     //firebase
                     //adding the game
-//                    let game = ["id": gameID]
-//                    let gamesRef = ref.childByAppendingPath("games")
-//                    gamesRef.setValue(game)
+                    //                    let game = ["id": gameID]
+                    //                    let gamesRef = ref.childByAppendingPath("games")
+                    //                    gamesRef.setValue(game)
                     
                     //add who's turn it is
                     let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
                     var status = ["turn": "black"]
                     if self.game ["whitePlayer"] as? String == PFUser.currentUser()?.username {
-                         status = ["turn": "black"]
+                        status = ["turn": "black"]
                     }
                     else if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username {
-                         status = ["turn": "white"]
+                        status = ["turn": "white"]
                     }
                     let statusRef = checkstatus.childByAppendingPath("\(gameID)")
                     statusRef.setValue(status)
                     //firebase - end
                     
-
-                
-                
+                    
+                    
+                    
                 }
             })
             
@@ -3419,10 +3389,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 var positionx = castlePiece.frame.origin.x
                 var positiony = castlePiece.frame.origin.y
                 positiony +=  moveByAmounty / 10
-                if castlePiece == blackRook2  {
+                if castlePiece == whiteRook2  {
+                    print("Black castle 1")
                     positionx -= (moveByAmountx) / 10
-                } else if castlePiece == blackRook1 {
-                    positionx -= (moveByAmountx - 1 * pieceSize) / 10
+                } else if castlePiece == whiteRook1 {
+                    positionx -= (moveByAmountx + 1 * pieceSize) / 10
+                    print("Black castle 2")
                 }
                 castlePiece.frame = CGRect(x: positionx, y: positiony, width: pieceSize, height: pieceSize)
             }
@@ -3806,6 +3778,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removePieceOptions()
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                removeBlackCastlingLeft()
+                removeBlackCastlingRight()
                 selectedPawn = i
                 //updateLogic()
                 whitePawnSelected(event!, _touch: touch)
@@ -3819,6 +3793,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removePieceOptions()
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                removeBlackCastlingLeft()
+                removeBlackCastlingRight()
                 //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 2, pieceid: 2, friend: whitePieces, enemy: blackPieces)
             }
@@ -3830,6 +3806,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removePieceOptions()
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                removeBlackCastlingLeft()
+                removeBlackCastlingRight()
                 //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 1, friend: whitePieces, enemy: blackPieces)
             }
@@ -3841,6 +3819,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 selectedPiece = whiteRooks[i]
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                removeBlackCastlingLeft()
+                removeBlackCastlingRight()
                 //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 3, friend: whitePieces, enemy: blackPieces)
             }
@@ -3852,6 +3832,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removePieceOptions()
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                removeBlackCastlingLeft()
+                removeBlackCastlingRight()
                 //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 4, friend: whitePieces, enemy: blackPieces)
             }
@@ -3984,14 +3966,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             blackCastlingLeft[o].userInteractionEnabled = true
             blackCastlingLeft[o].multipleTouchEnabled = true
             
-            
             if touch.view == blackCastlingLeft[o] {
-                castlePiece = blackRook1
+                castlePiece = whiteRook2
                 blackCastle = true
-                movePiece(blackCastlingLeft[o].frame.origin.x - blackKing.frame.origin.x, _moveByAmounty: blackCastlingLeft[o].frame.origin.y - blackKing.frame.origin.y)
+                movePiece(blackCastlingLeft[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: blackCastlingLeft[o].frame.origin.y - whiteKing.frame.origin.y)
                 hasBlackKingMoved = true
                 hasBlackRookMoved = true
-                castleLeft = true
+                castleRight = true
             }
         }
         for var o = 0 ; o < blackCastlingRight.count; o++ {
@@ -4000,12 +3981,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             
             if touch.view == blackCastlingRight[o] {
-                castlePiece = blackRook2
+                castlePiece = whiteRook1
                 blackCastle = true
-                movePiece(blackCastlingRight[o].frame.origin.x - blackKing.frame.origin.x, _moveByAmounty: blackCastlingRight[o].frame.origin.y - blackKing.frame.origin.y)
+                movePiece(blackCastlingRight[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: blackCastlingRight[o].frame.origin.y - whiteKing.frame.origin.y)
                 hasBlackKingMoved = true
                 hasBlackRookMoved2 = true
-                castleRight = true
+                castleLeft = true
             }
         }
     }
