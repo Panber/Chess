@@ -664,7 +664,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             func magic1() {
                 var am = 0
                 for var o = 0; o < moves.count; o++ {
-                    
                     am++
                     
                     for var t = 0; t < xAxisArrStr2.count; t++ {
@@ -730,17 +729,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     self.pieces[iy].alpha = 0
                                                                                     
                                                                                     }, completion: { finish in
-                                                                                        
-                                                                                        
-                                                                                        
+          
                                                                                 })
                                                                                 
                                                                             }
-                                                                        }
-                                                                        
-                                                                        
-                                                                    }
-                                                                    else {
+                                                                        } else {
                                                                         print("letters not found")
                                                                     }
                                                                 }
@@ -751,12 +744,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         
                                                                         for var iy = 0; iy < pieces.count ; iy++ {
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
-                                                                                
-                                                                                
+
                                                                                 self.pieces[iy].alpha = 0
-                                                                                
-                                                                                
-                                                                                
+
                                                                                 for var ty = 0; ty < self.whitePieces.count; ty++ {
                                                                                     if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
@@ -794,8 +784,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters not found")
                                                                     }
                                                                 }
-                                                                
-                                                                
+
                                                                 if moves.last == moves[o] && am == moves.count{
                                                                     checkIfTakenLast()
                                                                     
@@ -832,10 +821,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                         else if moves[o].characters.count == 3 {
-                            print("Castling")
                             if String(moves[o][2])  == "0" {
                                 if  o % 2 == 0 {
-                                    
+                                   print("Castling black long")
                                     if moves.last == moves[o] && am == moves.count{
                                         
                                         UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
@@ -844,8 +832,29 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.blackKing.frame.origin.y = _8
                                             self.blackRook1.frame.origin.x = d
                                             self.blackRook1.frame.origin.y = _8
+ 
+                                            }, completion: { finish in})
+                                        
+                                    }
+                                    else {
+                                        self.blackKing.frame.origin.x = c
+                                        self.blackKing.frame.origin.y = _8
+                                        self.blackRook1.frame.origin.x = d
+                                        self.blackRook1.frame.origin.y = _8
+                                    }
+                                }
+                                    
+                                else {
+                                    
+                                    if moves.last == moves[o] && am == moves.count{
+                                        print("Castling white long")
+                                        UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                             
-                                            
+                                            self.blackKing.frame.origin.x = c
+                                            self.blackKing.frame.origin.y = _8
+                                            self.blackRook1.frame.origin.x = d
+                                            self.blackRook1.frame.origin.y = _8
+
                                             
                                             }, completion: { finish in})
                                         
@@ -856,86 +865,52 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.blackRook1.frame.origin.x = d
                                         self.blackRook1.frame.origin.y = _8
                                     }
-                                    
-                                    
-                                }
-                                    
-                                else {
-                                    
-                                    if moves.last == moves[o] && am == moves.count{
-                                        
-                                        UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                            
-                                            self.whiteKing.frame.origin.x = c
-                                            self.whiteKing.frame.origin.y = _1
-                                            self.whiteRook1.frame.origin.x = d
-                                            self.whiteRook1.frame.origin.y = _1
-                                            
-                                            
-                                            
-                                            }, completion: { finish in})
-                                        
-                                    }
-                                    else {
-                                        self.whiteKing.frame.origin.x = c
-                                        self.whiteKing.frame.origin.y = _1
-                                        self.whiteRook1.frame.origin.x = d
-                                        self.whiteRook1.frame.origin.y = _1
-                                    }
-                                    
-                                    
-                                    
+
                                 }
                             }
                         }
                         else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
-                            print("Castling")
+                            
                             if  o % 2 == 0 {
-                                
+                               print("Castling white short")
                                 if moves.last == moves[o] && am == moves.count{
                                     
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                         
+                                        self.blackKing.frame.origin.x = e
+                                        self.blackKing.frame.origin.y = _8
+                                        self.blackRook1.frame.origin.x = e
+                                        self.blackRook1.frame.origin.y = _8
+                                        
+                                        }, completion: { finish in})
+                                    
+                                    
+                                }  else {
+                                    
+                                    self.blackKing.frame.origin.x = e
+                                    self.blackKing.frame.origin.y = _8
+                                    self.blackRook1.frame.origin.x = e
+                                    self.blackRook1.frame.origin.y = _8
+                                }
+                                
+                            } else {
+                                if moves.last == moves[o] && am == moves.count{
+                                    print("Castling black short")
+                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                        // white castling bottom-right
                                         self.blackKing.frame.origin.x = g
                                         self.blackKing.frame.origin.y = _8
                                         self.blackRook2.frame.origin.x = f
                                         self.blackRook2.frame.origin.y = _8
-                                        
+         
                                         }, completion: { finish in})
-                                    
                                     
                                 }
                                 else {
-                                    
                                     self.blackKing.frame.origin.x = g
                                     self.blackKing.frame.origin.y = _8
                                     self.blackRook2.frame.origin.x = f
                                     self.blackRook2.frame.origin.y = _8
-                                }
-                                
-                            }
-                                
-                            else {
-                                print("Castling")
-                                if moves.last == moves[o] && am == moves.count{
-                                    
-                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                        
-                                        self.whiteKing.frame.origin.x = g
-                                        self.whiteKing.frame.origin.y = _1
-                                        self.whiteRook2.frame.origin.x = f
-                                        self.whiteRook2.frame.origin.y = _1
-                                        
-                                        
-                                        
-                                        }, completion: { finish in})
-                                    
-                                }
-                                else {
-                                    self.whiteKing.frame.origin.x = g
-                                    self.whiteKing.frame.origin.y = _1
-                                    self.whiteRook2.frame.origin.x = f
-                                    self.whiteRook2.frame.origin.y = _1
                                 }
                                 
                             }
@@ -1125,7 +1100,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                         else if moves.last!.characters.count == 3 {
-                            print("Castling")
+                            
                             if String(moves.last![2])  == "0" {
                                 //can return false value??
                                 if  moves.indexOf(moves.last!)!  % 2 == 0 {
@@ -1133,13 +1108,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     if moves.last == moves.last{
                                         
                                         UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                            
                                             self.blackKing.frame.origin.x = c
                                             self.blackKing.frame.origin.y = _8
                                             self.blackRook1.frame.origin.x = d
                                             self.blackRook1.frame.origin.y = _8
-                                            
-                                            
                                             
                                             }, completion: { finish in})
                                         
@@ -1151,16 +1123,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 else {
                                     
                                     if moves.last == moves.last{
-                                        
+                                        print("Castling black long")
                                         UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                             
-                                            self.whiteKing.frame.origin.x = c
-                                            self.whiteKing.frame.origin.y = _1
-                                            self.whiteRook1.frame.origin.x = d
-                                            self.whiteRook1.frame.origin.y = _1
-                                            
-                                            
-                                            
+                                            self.blackKing.frame.origin.x = c
+                                            self.blackKing.frame.origin.y = _8
+                                            self.blackRook1.frame.origin.x = d
+                                            self.blackRook1.frame.origin.y = _8
+
                                             }, completion: { finish in})
                                         
                                     }
@@ -1170,9 +1140,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                         else if String(moves.last![0])  == "0" && String(moves.last![1])  == "0" {
-                            print("Castling")
+                            
                             if  moves.indexOf(moves.last!)!  % 2 == 0  {
-                                
                                 if moves.last == moves.last{
                                     
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
@@ -1183,8 +1152,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.blackRook2.frame.origin.y = _8
                                         
                                         }, completion: { finish in})
-                                    
-                                    
                                 }
                                 
                             }
@@ -1192,13 +1159,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             else {
                                 
                                 if moves.last == moves.last{
-                                    print("Castling")
+                                    print("Castling black short")
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                         
-                                        self.whiteKing.frame.origin.x = g
-                                        self.whiteKing.frame.origin.y = _1
-                                        self.whiteRook2.frame.origin.x = f
-                                        self.whiteRook2.frame.origin.y = _1
+                                        self.blackKing.frame.origin.x = g
+                                        self.blackKing.frame.origin.y = _8
+                                        self.blackRook2.frame.origin.x = f
+                                        self.blackRook2.frame.origin.y = _8
                                         
                                         
                                         }, completion: { finish in})
@@ -1469,14 +1436,42 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                         }
                         else if moves[o].characters.count == 3 {
-                            print("Castling")
-                            if String(moves[o][2])  == "0" {
-                                if  o % 2 == 0 {
+                            
+                            if String(moves.last![2])  == "0" {
+                                //can return false value??
+                                if  moves.indexOf(moves.last!)!  % 2 == 0 {
+                                    // test
+                                    if moves.last == moves.last{
                                     
+                                    if moves.last == moves[o] && am == moves.count{
+                                        print("Castling white long")
+                                        UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                            
+                                            self.whiteKing.frame.origin.x = f
+                                            self.whiteKing.frame.origin.y = _1
+                                            self.whiteRook1.frame.origin.x = e
+                                            self.whiteRook1.frame.origin.y = _1
+                                            
+
+                                            }, completion: { finish in})
+                                        
+                                    }
+                                    else {
+                                        self.whiteKing.frame.origin.x = f
+                                        self.whiteKing.frame.origin.y = _1
+                                        self.whiteRook1.frame.origin.x = e
+                                        self.whiteRook1.frame.origin.y = _1
+                                    }
+  
+                                    }
+                                }
+                                    
+                                else {
+                                   
                                     if moves.last == moves[o] && am == moves.count{
                                         
                                         UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                            
+                                            print("Castling black long")
                                             self.whiteKing.frame.origin.x = f
                                             self.whiteKing.frame.origin.y = _1
                                             self.whiteRook1.frame.origin.x = e
@@ -1488,38 +1483,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                     }
                                     else {
-                                        whiteKing.frame.origin.x = f
-                                        whiteKing.frame.origin.y = _1
-                                        whiteRook1.frame.origin.x = e
-                                        whiteRook1.frame.origin.y = _1
-                                    }
-                                    
-                                    
-                                    
-                                    
-                                }
-                                    
-                                else {
-                                    print("Castling")
-                                    if moves.last == moves[o] && am == moves.count{
-                                        
-                                        UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                            
-                                            self.blackKing.frame.origin.x = f
-                                            self.blackKing.frame.origin.y = _8
-                                            self.blackRook1.frame.origin.x = e
-                                            self.blackRook1.frame.origin.y = _8
-                                            
-                                            
-                                            
-                                            }, completion: { finish in})
-                                        
-                                    }
-                                    else {
-                                        blackKing.frame.origin.x = f
-                                        blackKing.frame.origin.y = _8
-                                        blackRook1.frame.origin.x = e
-                                        blackRook1.frame.origin.y = _8
+                                        self.whiteKing.frame.origin.x = f
+                                        self.whiteKing.frame.origin.y = _1
+                                        self.whiteRook1.frame.origin.x = e
+                                        self.whiteRook1.frame.origin.y = _1
                                     }
                                     
                                     
@@ -1528,36 +1495,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                         else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
-                            print("Castling")
+                            
                             if  o % 2 == 0 {
                                 
                                 if moves.last == moves[o] && am == moves.count{
-                                    
-                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                        
-                                        self.whiteKing.frame.origin.x = b
-                                        self.whiteKing.frame.origin.y = _1
-                                        self.whiteRook2.frame.origin.x = c
-                                        self.whiteRook2.frame.origin.y = _1
-                                        
-                                        
-                                        
-                                        }, completion: { finish in})
-                                    
-                                }
-                                else {
-                                    
-                                    whiteKing.frame.origin.x = b
-                                    whiteKing.frame.origin.y = _1
-                                    whiteRook2.frame.origin.x = c
-                                    whiteRook2.frame.origin.y = _1
-                                }
-                                
-                            }
-                                
-                            else {
-                                if moves.last == moves[o] && am == moves.count{
-                                    print("Castling")
+                                   
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                         
                                         self.blackKing.frame.origin.x = b
@@ -1576,6 +1518,29 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     blackKing.frame.origin.y = _8
                                     blackRook2.frame.origin.x = c
                                     blackRook2.frame.origin.y = _8
+                                }
+                                
+                            }
+                                
+                            else {
+                                if moves.last == moves[o] && am == moves.count{
+                                    print("Castling short long")
+                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                        // Castling white top left
+                                        self.whiteKing.frame.origin.x = b
+                                        self.whiteKing.frame.origin.y = _1
+                                        self.whiteRook2.frame.origin.x = c
+                                        self.whiteRook2.frame.origin.y = _1
+                                        
+                                        }, completion: { finish in})
+                                    
+                                }
+                                else {
+                                    
+                                    self.whiteKing.frame.origin.x = b
+                                    self.whiteKing.frame.origin.y = _1
+                                    self.whiteRook2.frame.origin.x = c
+                                    self.whiteRook2.frame.origin.y = _1
                                 }
                                 
                             }
@@ -1789,19 +1754,19 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                         else if moves.last!.characters.count == 3 {
-                            print("Castling")
+                            
                             if String(moves.last![2])  == "0" {
                                 //can return false value??
                                 if  moves.indexOf(moves.last!)!  % 2 == 0 {
-                                    
+                                    // test
                                     if moves.last == moves.last{
                                         
                                         UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                             
-                                            self.blackKing.frame.origin.x = c
+                                            self.blackKing.frame.origin.x = f
                                             self.blackKing.frame.origin.y = _8
-                                            self.blackRook1.frame.origin.x = d
-                                            self.blackRook1.frame.origin.y = _8
+                                            self.blackRook2.frame.origin.x = e
+                                            self.blackRook2.frame.origin.y = _8
                                             
                                             }, completion: { finish in})
                                         
@@ -1810,17 +1775,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 }
                                     
                                 else {
-                                    print("Castling")
+                                    
                                     if moves.last == moves.last{
                                         
                                         UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                            
-                                            self.whiteKing.frame.origin.x = c
-                                            self.whiteKing.frame.origin.y = _1
-                                            self.whiteRook1.frame.origin.x = d
-                                            self.whiteRook1.frame.origin.y = _1
-                                            
-                                            
+                                            // white castle top left
+                                            self.blackKing.frame.origin.x = f
+                                            self.blackKing.frame.origin.y = _8
+                                            self.blackRook2.frame.origin.x = e
+                                            self.blackRook2.frame.origin.y = _8
                                             
                                             }, completion: { finish in})
                                         
@@ -1833,15 +1796,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                         else if String(moves.last![0])  == "0" && String(moves.last![1])  == "0" {
                             if  moves.indexOf(moves.last!)!  % 2 == 0  {
-                                print("Castling")
+                                
                                 if moves.last == moves.last{
                                     
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                        
-                                        self.blackKing.frame.origin.x = g
-                                        self.blackKing.frame.origin.y = _8
-                                        self.blackRook2.frame.origin.x = f
-                                        self.blackRook2.frame.origin.y = _8
+                                        // white castle top right
+                                        self.blackKing.frame.origin.x = b
+                                        self.blackKing.frame.origin.y = _1
+                                        self.blackRook1.frame.origin.x = c
+                                        self.blackRook1.frame.origin.y = _8
                                         
                                         }, completion: { finish in})
                                     
@@ -1852,13 +1815,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             else {
                                 
                                 if moves.last == moves.last{
-                                    print("Castling")
+                                    
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                         
-                                        self.whiteKing.frame.origin.x = g
-                                        self.whiteKing.frame.origin.y = _1
-                                        self.whiteRook2.frame.origin.x = f
-                                        self.whiteRook2.frame.origin.y = _1
+                                        self.blackKing.frame.origin.x = b
+                                        self.blackKing.frame.origin.y = _8
+                                        self.blackRook1.frame.origin.x = c
+                                        self.blackRook1.frame.origin.y = _8
                                         
                                         
                                         
@@ -2410,6 +2373,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     for var q = 0; q < friend.count; q++ {
                         for var i = 1; i < 4; i++ {
                             if pieceid == 5 && hasWhiteKingMoved == false && hasWhiteRookMoved == false {
+                                print("Castlle white long")
                                 let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                 if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: leftWhiteCastleLogic) == false  {
@@ -2420,6 +2384,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                         for var i = 1; i < 3; i++ {
                             if pieceid == 5 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false {
+                                print("Castlle white short")
                                 let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                 if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: rightWhiteCastleLogic) == false  {
@@ -2430,21 +2395,23 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                     for var q = 0; q < friend.count; q++ {
-                        for var i = 1; i < 4; i++ {
+                        for var i = 1; i < 3; i++ {
                             if pieceid == 5 && hasBlackKingMoved == false && hasBlackRookMoved == false {
+                                print("Castlle black short")
                                 let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
-                                if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceWhiteLogicOptions) == false && canSaveKing(pieceOption2, array: leftBlackCastleLogic) == false  {
+                                if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: leftBlackCastleLogic) == false  {
                                     self.view.addSubview(pieceOption2)
                                     leftBlackCastleLogic += [pieceOption2]
                                 }
                             }
                         }
-                        for var i = 1; i < 3; i++ {
+                        for var i = 1; i < 4; i++ {
                             if pieceid == 5 && hasBlackKingMoved == false && hasBlackRookMoved2 == false {
+                                print("Castlle black long")
                                 let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
-                                if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceWhiteLogicOptions) == false && canSaveKing(pieceOption2, array: rightBlackCastleLogic) == false  {
+                                if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: rightBlackCastleLogic) == false  {
                                     self.view.addSubview(pieceOption2)
                                     rightBlackCastleLogic += [pieceOption2]
                                 }
@@ -2452,28 +2419,28 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                     
-                    if leftWhiteCastleLogic.count == 3 && hasWhiteKingMoved == false && hasWhiteRookMoved == false && pieceid == 5  {
+                    if leftWhiteCastleLogic.count == 3 && hasWhiteKingMoved == false && hasWhiteRookMoved == false && pieceid == 5 && self.whiteKing.frame.origin.x == e && self.whiteKing.frame.origin.y == _1 {
                         let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption3)
                         whiteCastlingLeft += [pieceOption3]
                         castlePiece = whiteRook2
                     }
-                    if rightWhiteCastleLogic.count == 2 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false && pieceid == 5  {
+                    if rightWhiteCastleLogic.count == 2 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false && pieceid == 5 && self.whiteKing.frame.origin.x == e && self.whiteKing.frame.origin.y == _1  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption3)
                         whiteCastlingRight += [pieceOption3]
                         castlePiece = whiteRook1
                     }
-                    if leftBlackCastleLogic.count == 3 && hasBlackKingMoved == false && hasBlackRookMoved == false && pieceid == 5  {
+                    if leftBlackCastleLogic.count == 2 && hasBlackKingMoved == false && hasBlackRookMoved == false && pieceid == 5 && self.whiteKing.frame.origin.x == d && self.whiteKing.frame.origin.y == _1  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption3)
                         blackCastlingLeft += [pieceOption3]
                         castlePiece = blackRook2
                     }
-                    if rightBlackCastleLogic.count == 2 && hasBlackKingMoved == false && hasBlackRookMoved2 == false && pieceid == 5  {
+                    if rightBlackCastleLogic.count == 3 && hasBlackKingMoved == false && hasBlackRookMoved2 == false && pieceid == 5 && pieceid == 5 && self.whiteKing.frame.origin.x == d && self.whiteKing.frame.origin.y == _1  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption3)
@@ -3420,10 +3387,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 var positionx = castlePiece.frame.origin.x
                 var positiony = castlePiece.frame.origin.y
                 positiony +=  moveByAmounty / 10
-                if castlePiece == blackRook2  {
+                if castlePiece == whiteRook2  {
+                    print("Black castle 1")
                     positionx -= (moveByAmountx) / 10
-                } else if castlePiece == blackRook1 {
-                    positionx -= (moveByAmountx - 1 * pieceSize) / 10
+                } else if castlePiece == whiteRook1 {
+                    positionx -= (moveByAmountx + 1 * pieceSize) / 10
+                    print("Black castle 2")
                 }
                 castlePiece.frame = CGRect(x: positionx, y: positiony, width: pieceSize, height: pieceSize)
             }
@@ -3807,6 +3776,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removePieceOptions()
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                removeBlackCastlingLeft()
+                removeBlackCastlingRight()
                 selectedPawn = i
                 //updateLogic()
                 whitePawnSelected(event!, _touch: touch)
@@ -3820,6 +3791,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removePieceOptions()
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                removeBlackCastlingLeft()
+                removeBlackCastlingRight()
                 //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 2, pieceid: 2, friend: whitePieces, enemy: blackPieces)
             }
@@ -3831,6 +3804,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removePieceOptions()
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                removeBlackCastlingLeft()
+                removeBlackCastlingRight()
                 //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 1, friend: whitePieces, enemy: blackPieces)
             }
@@ -3842,6 +3817,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 selectedPiece = whiteRooks[i]
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                removeBlackCastlingLeft()
+                removeBlackCastlingRight()
                 //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 3, friend: whitePieces, enemy: blackPieces)
             }
@@ -3853,6 +3830,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removePieceOptions()
                 removeWhiteCastlingLeft()
                 removeWhiteCastlingRight()
+                removeBlackCastlingLeft()
+                removeBlackCastlingRight()
                 //updateLogic()
                 chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 4, friend: whitePieces, enemy: blackPieces)
             }
@@ -3985,14 +3964,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             blackCastlingLeft[o].userInteractionEnabled = true
             blackCastlingLeft[o].multipleTouchEnabled = true
             
-            
             if touch.view == blackCastlingLeft[o] {
-                castlePiece = blackRook1
+                castlePiece = whiteRook2
                 blackCastle = true
-                movePiece(blackCastlingLeft[o].frame.origin.x - blackKing.frame.origin.x, _moveByAmounty: blackCastlingLeft[o].frame.origin.y - blackKing.frame.origin.y)
+                movePiece(blackCastlingLeft[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: blackCastlingLeft[o].frame.origin.y - whiteKing.frame.origin.y)
                 hasBlackKingMoved = true
                 hasBlackRookMoved = true
-                castleLeft = true
+                castleRight = true
             }
         }
         for var o = 0 ; o < blackCastlingRight.count; o++ {
@@ -4001,12 +3979,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             
             if touch.view == blackCastlingRight[o] {
-                castlePiece = blackRook2
+                castlePiece = whiteRook1
                 blackCastle = true
-                movePiece(blackCastlingRight[o].frame.origin.x - blackKing.frame.origin.x, _moveByAmounty: blackCastlingRight[o].frame.origin.y - blackKing.frame.origin.y)
+                movePiece(blackCastlingRight[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: blackCastlingRight[o].frame.origin.y - whiteKing.frame.origin.y)
                 hasBlackKingMoved = true
                 hasBlackRookMoved2 = true
-                castleRight = true
+                castleLeft = true
             }
         }
     }
