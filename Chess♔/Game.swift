@@ -3261,26 +3261,26 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 chessNotationCheck = "+"
             }
             var LAN = ""
-            if castleLeft == true && selectedPiece == whiteKing && hasWhiteKingMoved == true {
+            if castleLeft == true && selectedPiece == whiteKing && selectedPiece.image == UIImage(named:"whiteKing") {
                 print("0-0-0")
                 LAN = "0-0-0"
                 game.setObject(true, forKey: "can_Castle_white")
                 //game["status_white"] = "notmove"
             }
-            else if castleLeft == true && selectedPiece == blackKing && hasBlackKingMoved == true{
-                print("0-0")
-                LAN = "0-0"
+            else if castleLeft == true && selectedPiece == whiteKing && selectedPiece.image == UIImage(named:"blackKing"){
+                print("0-0-0")
+                LAN = "0-0-0"
                 game.setObject(true, forKey: "can_Castle_black")
             }
-            else if castleRight == true && selectedPiece == whiteKing && hasWhiteKingMoved == true {
+            else if castleRight == true && selectedPiece == whiteKing && selectedPiece.image == UIImage(named:"whiteKing") {
                 print("0-0")
                 LAN = "0-0"
                 game.setObject(true, forKey: "can_Castle_white")
                 
             }
-            else if castleRight == true && selectedPiece == blackKing && hasBlackKingMoved == true{
-                print("0-0-0")
-                LAN = "0-0-0"
+            else if castleRight == true && selectedPiece == whiteKing && selectedPiece.image == UIImage(named:"blackKing"){
+                print("0-0")
+                LAN = "0-0"
                 game.setObject(true, forKey: "can_Castle_black")
             }
             else {
