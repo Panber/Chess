@@ -932,8 +932,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         for result in result {
                             
                             let rating = result["rating"] as? Int
-                            
-                            
+
                             let profilePictureObject = result["profile_picture"] as? PFFile
                             
                             if(profilePictureObject != nil)
@@ -1074,6 +1073,18 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
+                                                                        self.removeLogicOptions()
+                                                                        self.removeBishopLogicOptions()
+                                                                        self.removeRookLogicOptions()
+                                                                        self.removeKnightLogicOptions()
+                                                                        self.removePawnLogicOptions()
+                                                                        self.removeWhiteCanMoveOptions()
+                                                                        self.removeBlackCanMoveOptions()
+                                                                        self.checkByQueen = false
+                                                                        self.checkByBishop = false
+                                                                        self.checkByRook = false
+                                                                        self.checkByKnight = false
+                                                                        self.checkByPawn = false
                                                                         
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
@@ -1730,6 +1741,18 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
+                                                                        self.removeLogicOptions()
+                                                                        self.removeBishopLogicOptions()
+                                                                        self.removeRookLogicOptions()
+                                                                        self.removeKnightLogicOptions()
+                                                                        self.removePawnLogicOptions()
+                                                                        self.removeWhiteCanMoveOptions()
+                                                                        self.removeBlackCanMoveOptions()
+                                                                        self.checkByQueen = false
+                                                                        self.checkByBishop = false
+                                                                        self.checkByRook = false
+                                                                        self.checkByKnight = false
+                                                                        self.checkByPawn = false
                                                                         
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
@@ -2331,7 +2354,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + byAmountx * pieceSize, selectedPiece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
                     self.view.addSubview(pieceOption)
-                    // Check if a pawn can move when king is in check
                     // Check if a pawn can move when king is in check
                     if checkByQueen == true && pieceid != 5 {
                         if canSaveKing(pieceOption, array: queenLogicOptions) == false {
