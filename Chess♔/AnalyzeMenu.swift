@@ -9,11 +9,27 @@
 import UIKit
 import Parse
 
-class AnalyzeMenu: UIViewController {
+
+class AnalyzeMenu: UIViewController,UIScrollViewDelegate {
 
     @IBOutlet weak var board: UIImageView!
     
-    
+    var movesField = UITextView()
+    var copyB = UIButton()
+    var cancelB = UIButton()
+    var turnL = UILabel()
+    var colorL = UILabel()
+    var speedL = UILabel()
+    var ratedL = UILabel()
+    var turnIndicator = UILabel()
+    var colorIndicator = UILabel()
+    var speedImage = UIImageView()
+    var timeL = UILabel()
+    var pImage = UIImageView()
+    var nameL = UILabel()
+    var  ratingL = UILabel()
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,110 +38,201 @@ class AnalyzeMenu: UIViewController {
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
         visualEffectView.alpha = 1
         
+
         
-        let info = UILabel(frame: CGRectMake(0,37,screenWidth, 32))
+        visualEffectSub.userInteractionEnabled = true
+        visualEffectView.userInteractionEnabled = true
+        
+        var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
+        scrollView1.delegate = self
+        scrollView1.userInteractionEnabled = true
+        scrollView1.scrollEnabled = true
+        scrollView1.pagingEnabled = false
+        scrollView1.contentSize = CGSizeMake(screenWidth, 738)
+        visualEffectSub.addSubview(scrollView1)
+        
+        
+        var info = UILabel(frame: CGRectMake(0,37,screenWidth, 32))
         info.text = "INFORMATION"
         info.textAlignment = .Center
         if darkMode {info.textColor = UIColor.lightGrayColor()}
         else {info.textColor = UIColor.darkGrayColor() }
         info.font = UIFont(name: "Didot", size: 22)
-        visualEffectView.addSubview(info)
+        scrollView1.addSubview(info)
         
-        let turn = UILabel(frame: CGRectMake(40,100,screenWidth, 29))
-        turn.text = "Your Turn"
-        if darkMode {turn.textColor = UIColor.whiteColor()}
-        else {turn.textColor = UIColor.blackColor() }
-        turn.font = UIFont(name: "Times", size: 19)
-        visualEffectView.addSubview(turn)
+        turnL = UILabel(frame: CGRectMake(40,100 - 10,screenWidth, 29))
+        turnL.text = "Your Turn"
+        if darkMode {turnL.textColor = UIColor.whiteColor()}
+        else {turnL.textColor = UIColor.blackColor() }
+        turnL.font = UIFont(name: "Times", size: 19)
+        scrollView1.addSubview(turnL)
         
-        let color = UILabel(frame: CGRectMake(40,129,screenWidth, 29))
-        color.text = "You are White"
-        if darkMode {color.textColor = UIColor.whiteColor()}
-        else {color.textColor = UIColor.blackColor() }
-        color.font = UIFont(name: "Times", size: 19)
-        visualEffectView.addSubview(color)
+        colorL = UILabel(frame: CGRectMake(40,129 - 10,screenWidth, 29))
+        colorL.text = "You are White"
+        if darkMode {colorL.textColor = UIColor.whiteColor()}
+        else {colorL.textColor = UIColor.blackColor() }
+        colorL.font = UIFont(name: "Times", size: 19)
+        scrollView1.addSubview(colorL)
         
-        let speed = UILabel(frame: CGRectMake(40,158,screenWidth, 29))
-        speed.text = "Fast Speedmode"
-        if darkMode {speed.textColor = UIColor.whiteColor()}
-        else {speed.textColor = UIColor.blackColor() }
-        speed.font = UIFont(name: "Times", size: 19)
-        visualEffectView.addSubview(speed)
+         speedL = UILabel(frame: CGRectMake(40,158 - 10,screenWidth, 29))
+        speedL.text = "Fast Speedmode"
+        if darkMode {speedL.textColor = UIColor.whiteColor()}
+        else {speedL.textColor = UIColor.blackColor() }
+        speedL.font = UIFont(name: "Times", size: 19)
+        scrollView1.addSubview(speedL)
         
-        let rated = UILabel(frame: CGRectMake(40,187,screenWidth, 29))
-        rated.text = "Rated"
-        if darkMode {rated.textColor = UIColor.whiteColor()}
-        else {rated.textColor = UIColor.blackColor() }
-        rated.font = UIFont(name: "Times", size: 19)
-        visualEffectView.addSubview(rated)
+        ratedL = UILabel(frame: CGRectMake(40,187 - 10,screenWidth, 29))
+        ratedL.text = "Rated"
+        if darkMode {ratedL.textColor = UIColor.whiteColor()}
+        else {ratedL.textColor = UIColor.blackColor() }
+        ratedL.font = UIFont(name: "Times", size: 19)
+        scrollView1.addSubview(ratedL)
         
-        let turnIndicator = UILabel(frame: CGRectMake(turn.frame.origin.x - 20, turn.frame.origin.y + 12, 11, 11))
+        turnIndicator = UILabel(frame: CGRectMake(turnL.frame.origin.x - 20, turnL.frame.origin.y + 12 , 11, 11))
         turnIndicator.layer.cornerRadius = (turnIndicator.frame.size.width)/2
         turnIndicator.clipsToBounds = true
         turnIndicator.backgroundColor = blue
-        visualEffectView.addSubview(turnIndicator)
+        scrollView1.addSubview(turnIndicator)
         
-        let colorIndicator = UILabel(frame: CGRectMake(color.frame.origin.x - 20, color.frame.origin.y + 12, 11, 11))
+        colorIndicator = UILabel(frame: CGRectMake(colorL.frame.origin.x - 20, colorL.frame.origin.y + 12 , 11, 11))
         colorIndicator.layer.borderColor = UIColor.blackColor().CGColor
         colorIndicator.layer.borderWidth = 1
         colorIndicator.backgroundColor = UIColor.whiteColor()
-        visualEffectView.addSubview(colorIndicator)
+        scrollView1.addSubview(colorIndicator)
         
-        let speedImage = UIImageView(frame: CGRectMake(speed.frame.origin.x - 20, speed.frame.origin.y, 11, 29))
+        speedImage = UIImageView(frame: CGRectMake(speedL.frame.origin.x - 20, speedL.frame.origin.y, 11, 29))
         speedImage.contentMode = .ScaleAspectFit
         speedImage.image = UIImage(named: "flash31.png")
-        visualEffectView.addSubview(speedImage)
+        scrollView1.addSubview(speedImage)
         
-        let timeLeft = UILabel(frame: CGRectMake(40,216,screenWidth, 29))
+        let timeLeft = UILabel(frame: CGRectMake(40,216 - 10,screenWidth, 29))
         timeLeft.text = "Time Left To Move:"
         if darkMode {timeLeft.textColor = UIColor.lightGrayColor()}
         else {timeLeft.textColor = UIColor.darkGrayColor() }
         timeLeft.font = UIFont(name: "Times", size: 19)
-        visualEffectView.addSubview(timeLeft)
+        scrollView1.addSubview(timeLeft)
         
-        let time = UILabel(frame: CGRectMake(208,216,screenWidth-208, 29))
-        time.text = "1 day"
-        if darkMode {time.textColor = UIColor.whiteColor()}
-        else {time.textColor = UIColor.blackColor() }
-        time.font = UIFont(name: "Times", size: 19)
-        visualEffectView.addSubview(time)
+        timeL = UILabel(frame: CGRectMake(199,216 - 10,screenWidth-208, 29))
+        timeL.text = "1 day"
+        if darkMode {timeL.textColor = UIColor.whiteColor()}
+        else {timeL.textColor = UIColor.blackColor() }
+        timeL.font = UIFont(name: "Times", size: 19)
+        scrollView1.addSubview(timeL)
         
-        let opponent = UILabel(frame: CGRectMake(0,300,screenWidth, 29))
-        opponent.text = "OPPONENT:"
+        let opponent = UILabel(frame: CGRectMake(0,280,screenWidth, 29))
+        opponent.text = "OPPONENT"
         opponent.textAlignment = .Center
         if darkMode {opponent.textColor = UIColor.lightGrayColor()}
         else {opponent
             .textColor = UIColor.darkGrayColor() }
         opponent.font = UIFont(name: "Didot", size: 19)
-        visualEffectView.addSubview(opponent)
+        scrollView1.addSubview(opponent)
         
-        let pImage = UIImageView(frame: CGRectMake(screenWidth/2 - 90, 340, 65, 65))
+        pImage = UIImageView(frame: CGRectMake(screenWidth/2 - 90, 330, 65, 65))
         pImage.layer.cornerRadius = pImage.frame.size.width/2
         pImage.clipsToBounds = true
         pImage.contentMode = .ScaleAspectFill
         pImage.image = UIImage(named: "JBpp.jpg")
-        visualEffectView.addSubview(pImage)
+        scrollView1.addSubview(pImage)
         
-        let name = UILabel(frame: CGRectMake(pImage.frame.origin.x + pImage.frame.size.width + 25,pImage.frame.origin.y + 10,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),27))
-        name.font = UIFont(name: "Times", size: 22)
-        name.text = "mufcjb"
-        name.textAlignment = .Left
-        if darkMode {name.textColor = UIColor.whiteColor()}
-        else {name.textColor = UIColor.blackColor() }
-        visualEffectView.addSubview(name)
+        nameL = UILabel(frame: CGRectMake(pImage.frame.origin.x + pImage.frame.size.width + 25,pImage.frame.origin.y + 10,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),27))
+        nameL.font = UIFont(name: "Times", size: 22)
+        nameL.text = "mufcjb"
+        nameL.textAlignment = .Left
+        if darkMode {nameL.textColor = UIColor.whiteColor()}
+        else {nameL.textColor = UIColor.blackColor() }
+        scrollView1.addSubview(nameL)
         
-      let  rating = UILabel(frame: CGRectMake(name.frame.origin.x,name.frame.origin.y + name.frame.size.height,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),21))
-        rating.font = UIFont(name: "Times-Italic", size: 15)
-        rating.textColor = UIColor.darkGrayColor()
-        rating.text = "888"
-        if darkMode {rating.textColor = UIColor.lightGrayColor()}
-        else {rating.textColor = UIColor.darkGrayColor() }
-        visualEffectView.addSubview(rating)
+        ratingL = UILabel(frame: CGRectMake(nameL.frame.origin.x,nameL.frame.origin.y + nameL.frame.size.height,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),21))
+        ratingL.font = UIFont(name: "Times-Italic", size: 15)
+        ratingL.textColor = UIColor.darkGrayColor()
+        ratingL.text = "888"
+        if darkMode {ratingL.textColor = UIColor.lightGrayColor()}
+        else {ratingL.textColor = UIColor.darkGrayColor() }
+        scrollView1.addSubview(ratingL)
         
+        let moves = UILabel(frame: CGRectMake(0,450,screenWidth, 29))
+        moves.text = "MOVES"
+        moves.textAlignment = .Center
+        if darkMode {moves.textColor = UIColor.lightGrayColor()}
+        else {moves
+            .textColor = UIColor.darkGrayColor() }
+        moves.font = UIFont(name: "Didot", size: 19)
+        scrollView1.addSubview(moves)
         
-        // Do any additional setup after loading the view.
+        movesField = UITextView(frame: CGRectMake(30,485,screenWidth-60,200))
+        movesField.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        movesField.font = UIFont(name: "Times", size: 19)
+        movesField.backgroundColor = UIColor.clearColor()
+        if darkMode {movesField.textColor = UIColor.whiteColor()}
+        else {movesField.textColor = UIColor.blackColor() }
+        movesField.userInteractionEnabled = true
+        movesField.editable = false
+        print(movesField.userActivity)
+        scrollView1.addSubview(movesField)
+
+        //invite to game btn
+        copyB = UIButton(frame: CGRectMake(screenWidth/2 + 75, 450,45,25))
+        copyB.titleLabel?.font = UIFont(name: "Times", size: 14)
+        copyB.setTitle("Copy", forState: .Normal)
+        copyB.layer.cornerRadius = cornerRadius - 3
+        copyB.userInteractionEnabled = true
+        copyB.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        copyB.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+        copyB.backgroundColor = blue
+        copyB.addTarget(self, action: "copyButtonPressed:", forControlEvents: .TouchUpInside)
+        scrollView1.addSubview(copyB)
+        
+        cancelB = UIButton(frame: CGRectMake(screenWidth - 40, 43,20 ,20))
+        cancelB.userInteractionEnabled = true
+        if darkMode {cancelB.setBackgroundImage(UIImage(named: "cross-mark1-3.png"), forState: .Normal)}
+        else {cancelB.setBackgroundImage(UIImage(named: "cross-mark1-2.png"), forState: .Normal) }
+        cancelB.addTarget(self, action: "cancelButtonPressed:", forControlEvents: .TouchUpInside)
+        scrollView1.addSubview(cancelB)
+        
     }
 
+    func copyButtonPressed(sender: UIButton!) {
+    
+        UIPasteboard.generalPasteboard().string = movesField.text
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.copyB.frame.size.width += 16
+            self.copyB.frame.origin.x -= 8
+            self.copyB.setTitle("Copied", forState: .Normal)
+            self.copyB.backgroundColor = UIColor.lightGrayColor()
+            self.copyB.userInteractionEnabled = false
+
+            }, completion: {finish in
+        
+        
+        })
+        
+        
+    }
+    func cancelButtonPressed(sender:UITapGestureRecognizer){
+        removeNewView()
+        
+    }
+    
+    func removeNewView() {
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            
+            visualEffectView.alpha = 0
+            
+            }, completion: {finish in
+                
+                for view in visualEffectSub.subviews {
+                    view.removeFromSuperview()
+                }
+                
+        })
+        
+        visualEffectView.userInteractionEnabled = false
+        visualEffectSub.userInteractionEnabled = false
+        
+    }
     
 
     /*

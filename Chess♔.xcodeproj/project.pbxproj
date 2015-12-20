@@ -125,6 +125,7 @@
 		8FB94F991BE62EA80029EF00 /* chatIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB94F981BE62EA80029EF00 /* chatIcon.png */; };
 		8FB94F9B1BE62F360029EF00 /* Data@3x_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */; };
 		8FBED2FC1BB1F35700CDAACC /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */; };
+		8FD804741C24CADB00902DB9 /* chessLaunchGold.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FD804731C24CADB00902DB9 /* chessLaunchGold.png */; };
 		8FE496791C247E7000E2E77D /* chessLaunch3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE496781C247E7000E2E77D /* chessLaunch3.png */; };
 		8FEF2A991BFA7C8A006E1359 /* aquaChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2A921BFA7C89006E1359 /* aquaChessBoard.png */; };
 		8FEF2A9A1BFA7C8A006E1359 /* blackChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF2A931BFA7C89006E1359 /* blackChessBoard.png */; };
@@ -306,6 +307,7 @@
 		8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Data@3x_blue.png"; sourceTree = "<group>"; };
 		8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		8FD804731C24CADB00902DB9 /* chessLaunchGold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessLaunchGold.png; sourceTree = "<group>"; };
 		8FE496781C247E7000E2E77D /* chessLaunch3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessLaunch3.png; sourceTree = "<group>"; };
 		8FEF2A921BFA7C89006E1359 /* aquaChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aquaChessBoard.png; sourceTree = "<group>"; };
 		8FEF2A931BFA7C89006E1359 /* blackChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackChessBoard.png; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				8FA5690B1C02775C00AFC460 /* TwitterLogo_#55acee.png */,
 				8FA5690D1C02795100AFC460 /* new100.png */,
 				8FE496781C247E7000E2E77D /* chessLaunch3.png */,
+				8FD804731C24CADB00902DB9 /* chessLaunchGold.png */,
 				8FA5690E1C02795100AFC460 /* new100-2.png */,
 				8FA018D81B9B1FAE002B410E /* ChessIconAndTExt.png */,
 				8FA1F7CD1B9AFCA800A0C548 /* Pieces */,
@@ -804,6 +807,7 @@
 				8F2DD6DF1B9AFFF80059CEFA /* ChessIconTab@3x.png in Resources */,
 				8F31DCF31BC9513B004544CC /* equalization2.png in Resources */,
 				8F1E8EC41BD78F9600C41D37 /* nasaearth.jpg in Resources */,
+				8FD804741C24CADB00902DB9 /* chessLaunchGold.png in Resources */,
 				8FA569121C02829700AFC460 /* PanBerLogo1.png in Resources */,
 				8FA5690C1C02775C00AFC460 /* TwitterLogo_#55acee.png in Resources */,
 				8FEF2A9A1BFA7C8A006E1359 /* blackChessBoard.png in Resources */,
