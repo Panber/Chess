@@ -115,6 +115,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     var size : CGFloat = pieceSize
     
+    var otherUserImage = UIImage()
+    var otherUserName = ""
+    var otherUserRating = ""
     
     //BOARDER
     let boarderBoard = UIImageView(frame: CGRectMake(-0.01*pieceSize, _1 - 7*pieceSize, 8*pieceSize, 8*pieceSize))
@@ -657,7 +660,20 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             print(moves)
             
             movesField.text = notationsWithNumber
-
+            
+            if copyB.frame.size.width > 45 {
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.copyB.frame.size.width -= 16
+                self.copyB.frame.origin.x += 8
+                self.copyB.setTitle("Copy", forState: .Normal)
+                self.copyB.backgroundColor = blue
+                self.copyB.userInteractionEnabled = true
+                
+                }, completion: {finish in
+                    
+                    
+            })
+            }
         }
         loadMoves()
         
@@ -987,6 +1003,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         else {
                                             otherImage.image = UIImage(data: imageData!)
                                             self.view.addSubview(otherImage)
+                               
+                                            
+                                            self.otherUserImage = UIImage(data: imageData!)!
+                                            self.otherUserRating = "\(result["rating"] as! Int!)"
+                                            self.otherUserName = (result["username"] as? String)!
+
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 otherImage.alpha = 1
                                             })
@@ -1655,6 +1677,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             otherImage.image = UIImage(data: imageData!)
                                             self.view.addSubview(otherImage)
                                             
+                                            self.otherUserImage = UIImage(data: imageData!)!
+                                            self.otherUserRating = "\(result["rating"] as! Int)"
+                                            self.otherUserName = (result["username"] as? String)!
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 otherImage.alpha = 1
                                             })
@@ -2093,23 +2118,23 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         pImage.layer.cornerRadius = pImage.frame.size.width/2
         pImage.clipsToBounds = true
         pImage.contentMode = .ScaleAspectFill
-        pImage.image = UIImage(named: "JBpp.jpg")
+        pImage.image = otherUserImage
         scrollView1.addSubview(pImage)
         
         nameL = UILabel(frame: CGRectMake(pImage.frame.origin.x + pImage.frame.size.width + 25,pImage.frame.origin.y + 10,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),27))
         nameL.font = UIFont(name: "Times", size: 22)
-        nameL.text = "mufcjb"
         nameL.textAlignment = .Left
         if darkMode {nameL.textColor = UIColor.whiteColor()}
         else {nameL.textColor = UIColor.blackColor() }
+        nameL.text = otherUserName
         scrollView1.addSubview(nameL)
         
         ratingL = UILabel(frame: CGRectMake(nameL.frame.origin.x,nameL.frame.origin.y + nameL.frame.size.height,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),21))
         ratingL.font = UIFont(name: "Times-Italic", size: 15)
         ratingL.textColor = UIColor.darkGrayColor()
-        ratingL.text = "888"
         if darkMode {ratingL.textColor = UIColor.lightGrayColor()}
         else {ratingL.textColor = UIColor.darkGrayColor() }
+        ratingL.text = otherUserRating
         scrollView1.addSubview(ratingL)
         
         let moves = UILabel(frame: CGRectMake(0,450,screenWidth, 29))
