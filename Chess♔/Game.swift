@@ -1731,9 +1731,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters not found")
                                                                     }
                                                                 }
-                                                                
-                                                                
-                                                                
+
                                                                 if moves.last == moves.last {
                                                                     checkIfTakenLast()
                                                                     
@@ -3940,13 +3938,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _4 && hasBeenTaken(selectedPiece, array: whitePieces) && selectedPiece.frame.origin.y == _2   {
                 canPassant = true
-                //print("can passant!")
+                print("can passant!")
                 whitePassantPieces = selectedPiece
             }
             
             if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _5 && hasBeenTaken(selectedPiece, array: blackPieces) && selectedPiece.frame.origin.y == _7   {
                 canPassant = true
-                //print("can passant white!")
+                print("can passant white!")
                 blackPassantPieces = selectedPiece
             }
             
