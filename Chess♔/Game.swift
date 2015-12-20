@@ -31,6 +31,8 @@ var notations: Array<String> = []
 
 let pieceSize = sqrt(screenWidth * screenWidth / 64)
 
+var notationsWithNumber = ""
+
 //x-Axis coordinates
 let a:CGFloat = 0 * pieceSize
 let b =  pieceSize
@@ -617,8 +619,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         var moves: Array<String> = []
         func loadMoves() {
             moves = []
-            
+            notationsWithNumber = ""
+            var t = 1
             for var i = 0; i < notations.count; i++ {
+                
+                
+                if i % 2 == 0{
+                  notationsWithNumber +=  "\(t). "
+                    t++
+                }
+                notationsWithNumber += "\(notations[i]) "
+                
                 
                 print("\(i+1).")
                 var t = (i+1)
@@ -644,6 +655,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 moves.append(putIntoMoves)
             }
             print(moves)
+            
+            movesField.text = notationsWithNumber
+
         }
         loadMoves()
         
@@ -1975,7 +1989,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     @IBAction func infoButtonPressed(sender: AnyObject) {
         
-        
+        infoButton.userInteractionEnabled = false
         
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             visualEffectView.alpha = 1
@@ -2109,6 +2123,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         movesField = UITextView(frame: CGRectMake(30,485,screenWidth-60,200))
         movesField.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        movesField.text = notationsWithNumber
         movesField.font = UIFont(name: "Times", size: 19)
         movesField.backgroundColor = UIColor.clearColor()
         if darkMode {movesField.textColor = UIColor.whiteColor()}
@@ -2173,6 +2188,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 for view in visualEffectSub.subviews {
                     view.removeFromSuperview()
                 }
+                self.infoButton.userInteractionEnabled = true
+
                 
         })
         
@@ -3545,18 +3562,31 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             collectionView.reloadData()
             game.addObject(notations.last!, forKey: "piecePosition")
             
+
+            
+            
+            
             var uuser = ""
             if game["whitePlayer"] as? String == PFUser.currentUser()?.username {
+                
+                notationsWithNumber +=  "\(notations.count / 2 + 1). "
+                
+                notationsWithNumber += "\(notations.last!) "
+                
                 game["status_white"] = "notmove"
                 game["status_black"] = "move"
                 uuser = (game["blackPlayer"] as? String)!
                 
             }
             else {
+                notationsWithNumber += "\(notations.last!) "
+
                 game["status_white"] = "move"
                 game["status_black"] = "notmove"
                 uuser = (game["whitePlayer"] as? String)!
             }
+            movesField.text = notationsWithNumber
+
             
             game.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
                 if error == nil {
@@ -3592,7 +3622,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     //firebase - end
                     
                     
-                    
+              
                     
                 }
             })
