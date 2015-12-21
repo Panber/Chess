@@ -922,15 +922,15 @@ var loaded = false
         
         let yPos = -tableView.contentOffset.y
         
-        if yPos > 150 {
+        if yPos > 200 {
     
             tableView.contentOffset.y = -150
         }
         
         if yPos > 64 {
             
-            self.loadingView.alpha = (((yPos/1000) * 10)) - 0.5
-            self.tableView.alpha = (2-((yPos/1000) * 15))
+            self.loadingView.alpha = (((yPos/1000) * 10)) - 1.1
+          //  self.tableView.alpha = (2-((yPos/1000) * 15))
 
         }
 //        else {
@@ -941,7 +941,7 @@ var loaded = false
 ////            })
 //        }
         
-        if yPos > 150 {
+        if yPos > 200 {
             
        
             if loaded == false {
