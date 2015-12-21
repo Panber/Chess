@@ -2301,6 +2301,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     //use this to checki fuser lost on time
     func updateTimer() {
+        
         timeLeft++
         var timeLeftC = timeLeft
         print(timeLeft)

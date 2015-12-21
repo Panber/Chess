@@ -83,8 +83,15 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var theirturnUpdateSince: Array<NSTimeInterval> = []
     var gameoverUpdateSince: Array<NSTimeInterval> = []
     
+
+    
     var yourturnLeft: Array<NSTimeInterval> = []
     var theirturnLeft: Array<NSTimeInterval> = []
+    var gameoverLeft: Array<NSTimeInterval> = []
+
+    var yourturnLeftPrint: Array<Int> = []
+    var theirturnLeftPrint: Array<Int> = []
+    var gameoverLeftPrint: Array<Int> = []
 
     var yourTurnColor: Array<String> = []
     var theirTurnColor: Array<String> = []
@@ -94,6 +101,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var theirTurnSpeed: Array<String> = []
     var gameoverTurnSpeed: Array<String> = []
     
+    var timer = NSTimer()
 
     var loadingAlphas: Array<CGFloat> = [0.1,0.2,0.3,0.4,0.5,0.4,0.3,0.2,0.1,0.2,0.3,0.4,0.5]
 
@@ -377,6 +385,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.yourturnUpdateSince.append(since)
                         
+                        
+                        //adding time left
+                        let left = games["timeLeftToMove"] as? NSDate
+                        let left2 = NSDate().timeIntervalSinceDate(left!)
+                        self.yourturnLeft.append(left2)
+                        print(self.yourturnLeft)
+                        
                         gameIDSYourTurn.append(games.objectId!)
                         self.yourTurnColor.append("white")
                         
@@ -393,6 +408,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         
                         self.theirturnUpdateSince.append(since)
+                        
+                        //adding time left
+                        let left = games["timeLeftToMove"] as? NSDate
+                        let left2 = NSDate().timeIntervalSinceDate(left!)
+                        self.theirturnLeft.append(left2)
                         
                         gameIDSTheirTurn.append(games.objectId!)
 
@@ -412,6 +432,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let lastupdate = games.updatedAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.gameoverUpdateSince.append(since)
+                        
+               
                         
                         gameIDSGameOver.append(games.objectId!)
 
@@ -435,6 +457,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.yourturnUpdateSince.append(since)
                         
+                        //adding left
+                        let left = games["timeLeftToMove"] as? NSDate
+                        let left2 = NSDate().timeIntervalSinceDate(left!)
+                        self.yourturnLeft.append(left2)
+                        
                         gameIDSYourTurn.append(games.objectId!)
 
                         self.yourTurnColor.append("black")
@@ -454,6 +481,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let lastupdate = games.updatedAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.theirturnUpdateSince.append(since)
+                        
+                        //adding left
+                        let left = games["timeLeftToMove"] as? NSDate
+                        let left2 = NSDate().timeIntervalSinceDate(left!)
+                        self.theirturnLeft.append(left2)
                         
                         gameIDSTheirTurn.append(games.objectId!)
 
@@ -658,7 +690,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
        // cell.rating.text = "601"
        // cell.updated.text = "Last Update: 1h 5min"
-        cell.timeleft.text = "Time Left: 2h 29min"
         
         switch indexPath.section {
         case 0:
@@ -711,6 +742,37 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     }
                     
                 }
+            
+                var timeLeftC = yourturnLeft[indexPath.row]
+                cell.timeleft.text = "Left To Move: Less than a minute"
+                cell.timeleft.textColor = red
+                
+                if timeLeftC <= -60 {
+                    timeLeftC = timeLeftC/60
+                    let sinceOutput = Int(timeLeftC) * -1
+                    cell.timeleft.text = "Left To Move: \(sinceOutput)min"
+                    print("time left in is \(sinceOutput)")
+                }
+
+                //making to hours
+                if timeLeftC <= -60 {
+                    timeLeftC = timeLeftC/60
+                    let sinceOutput = Int(timeLeftC) * -1
+                    cell.timeleft.text = "Left To Move: \(sinceOutput)h"
+                    cell.timeleft.textColor = UIColor.lightGrayColor()
+
+                    
+                    //making to days
+                    if timeLeftC <= -24 {
+                        timeLeftC = timeLeftC/24
+                        let sinceOutput = Int(timeLeftC) * -1
+                        cell.timeleft.text = "Left To Move: \(sinceOutput)d"
+                        
+                    }
+                    
+                }
+            
+   
 
 
             
@@ -762,6 +824,37 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 }
 
             
+            
+                var timeLeftC = theirturnLeft[indexPath.row]
+                cell.timeleft.text = "Left To Move: Less than a minute"
+                cell.timeleft.textColor = red
+                
+                if timeLeftC <= -60 {
+                    timeLeftC = timeLeftC/60
+                    let sinceOutput = Int(timeLeftC) * -1
+                    cell.timeleft.text = "Left To Move: \(sinceOutput)min"
+                    
+                }
+                
+                //making to hours
+                if timeLeftC <= -60 {
+                    timeLeftC = timeLeftC/60
+                    let sinceOutput = Int(timeLeftC) * -1
+                    cell.timeleft.text = "Left To Move: \(sinceOutput)h"
+                    cell.timeleft.textColor = UIColor.lightGrayColor()
+
+                    
+                    //making to days
+                    if timeLeftC <= -24 {
+                        timeLeftC = timeLeftC/24
+                        let sinceOutput = Int(timeLeftC) * -1
+                        cell.timeleft.text = "Left To Move: \(sinceOutput)d"
+                        
+                    }
+                    
+            }
+            
+            
         case 2:
             if typeofGameover[indexPath.row] == "lost" {
                 cell.colorIndicator.backgroundColor = UIColor.redColor()
@@ -811,6 +904,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     cell.updated.text = "Last Updated: \(sinceOutput)d ago"
                 }
             }
+            
+            cell.timeleft.text = "Game Over"
+            cell.timeleft.font = UIFont(name: "Times-Italic", size: 14)
+
 
             
         default:
@@ -974,6 +1071,7 @@ var loaded = false
                     
                     self.yourturnLeft = []
                     self.theirturnLeft = []
+                    self.gameoverLeft = []
                     
                     self.tableView.reloadData()
 
@@ -1019,7 +1117,88 @@ var loaded = false
     }
     
     
-
+//    func updateTimer() {
+//        
+//        
+//        for var i = 0; i < yourturnLeft.count; i++ {
+//            yourturnLeft[i]++
+//            yourturnLeftPrint.append(Int(yourturnLeft[i]))
+//
+//        }
+//        for var i = 0; i < theirturnLeft.count; i++ {
+//            theirturnLeft[i]++
+//            theirturnLeftPrint.append(Int(theirturnLeft[i]))
+//        }
+//        for var i = 0; i < yourturnLeft.count; i++ {
+//            gameoverLeft[i]++
+//            gameoverLeftPrint.append(Int(gameoverLeft[i]))
+//            
+//            //
+//            if gameoverLeftPrint[i] <= -60 {
+//                gameoverLeftPrint[i] = gameoverLeftPrint[i]/60
+//                let sinceOutput = gameoverLeftPrint[i] * -1
+//                timeL.text = "\(sinceOutput)min"
+//            }
+//            else {
+//                let sinceOutput = Int(timeLeftC) * -1
+//                timeL.text = "\(sinceOutput)s"
+//            }
+//            //making to hours
+//            if timeLeftC <= -60 {
+//                timeLeftC = timeLeftC/60
+//                let sinceOutput = Int(timeLeftC) * -1
+//                timeL.text = "\(sinceOutput)h"
+//                
+//                //making to days
+//                if timeLeftC <= -24 {
+//                    timeLeftC = timeLeftC/24
+//                    let sinceOutput = Int(timeLeftC) * -1
+//                    timeL.text = "\(sinceOutput)d"
+//                    
+//                }
+//                
+//            }
+//            
+//        }
+//        
+//
+//
+//        
+//        timeLeft++
+//        var timeLeftC = timeLeft
+//        print(timeLeft)
+//        if timeLeftC <= -60 {
+//            timeLeftC = timeLeftC/60
+//            let sinceOutput = Int(timeLeftC) * -1
+//            timeL.text = "\(sinceOutput)min"
+//        }
+//        else {
+//            let sinceOutput = Int(timeLeftC) * -1
+//            timeL.text = "\(sinceOutput)s"
+//        }
+//        //making to hours
+//        if timeLeftC <= -60 {
+//            timeLeftC = timeLeftC/60
+//            let sinceOutput = Int(timeLeftC) * -1
+//            timeL.text = "\(sinceOutput)h"
+//            
+//            //making to days
+//            if timeLeftC <= -24 {
+//                timeLeftC = timeLeftC/24
+//                let sinceOutput = Int(timeLeftC) * -1
+//                timeL.text = "\(sinceOutput)d"
+//                
+//            }
+//            
+//        }
+//        
+//        if timeLeftC >= 0 {
+//            timeL.text = "Game Finished"
+//            timeL.font = UIFont(name: "Times-Italic", size: 19)
+//        }
+//        
+//    
+//    }
 
     
     override func viewWillAppear(animated: Bool) {
@@ -1045,7 +1224,9 @@ var loaded = false
     }
     override func viewDidAppear(animated: Bool) {
         
-//        //adding the game
+        
+
+        //        //adding the game
 //        let game = ["id": "123456"]
 //        let gamesRef = ref.childByAppendingPath("games")
 //        gamesRef.setValue(game)
@@ -1088,7 +1269,7 @@ var loaded = false
         
          yourturnLeft = []
          theirturnLeft = []
-        
+        gameoverLeft = []
 
         
         tableView.alpha = 0
