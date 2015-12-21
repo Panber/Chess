@@ -190,6 +190,9 @@ class AnalyzeMenu: UIViewController,UIScrollViewDelegate {
         cancelB.addTarget(self, action: "cancelButtonPressed:", forControlEvents: .TouchUpInside)
         scrollView1.addSubview(cancelB)
         
+        
+
+        
     }
 
     func copyButtonPressed(sender: UIButton!) {

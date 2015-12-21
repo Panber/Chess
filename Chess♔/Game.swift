@@ -332,6 +332,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var nameL = UILabel()
     var  ratingL = UILabel()
     
+    var turnLturn = "test"
+    var colorLcolor = ""
+    var speedLspeed = ""
+    var ratedLrated = ""
+    var turnIndicatorturn = UIColor()
+    var colorIndicatorcolor = UIColor()
+    var speedImagespeed = UIImage()
+    
+    var timeLeft = NSTimeInterval()
+    var timer = NSTimer()
+    
     func loadVariablesAndConstants() {
         //size-properties
         let pieceSize = sqrt(screenWidth * screenWidth / 64)
@@ -619,6 +630,35 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
         hasBlackKingMoved = r!["can_Castle_black"] as! Bool
         
+        
+        if game["mode"] as? String == "Rated" {
+            ratedLrated = "Rated"
+        
+        }
+        else {
+            ratedLrated = "Not Rated"
+
+        }
+        if game["speed"] as? String == "Normal" {
+            speedLspeed = "Normal Speedmode"
+            speedImagespeed = UIImage(named: "normalIndicator.png")!
+
+        }
+        else if game["speed"] as? String == "Fast" {
+            speedLspeed = "Fast Speedmode"
+            speedImagespeed = UIImage(named: "flash31.png")!
+
+        }
+        else if game["speed"] as? String == "Slow" {
+            speedLspeed = "Slow Speedmode"
+            speedImagespeed = UIImage(named: "clock104.png")!
+        }
+        
+        let lastupdate = game["timeLeftToMove"] as? NSDate
+        timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
+
+        
         var moves: Array<String> = []
         func loadMoves() {
             moves = []
@@ -678,9 +718,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         loadMoves()
         
         if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
+            
+            colorLcolor = "You are White"
+            colorIndicatorcolor = UIColor.whiteColor()
+            
             //chesspieces loading - REMEMBER TO ADD PIECES TO ARRAYS!! Right order as well!!
             if r!["status_white"] as! String == "move" {
                 isWhiteTurn = true
+                
+                turnLturn = "Your Turn"
+                turnIndicatorturn = blue
                 
                 for var i = 0; i < piecesArrs.count; i++ {
                     for var t = 0; t < piecesArrs[i].count; t++ {
@@ -694,6 +741,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
             else {
                 isWhiteTurn = false
+                
+                turnLturn = "Their Turn"
+                turnIndicatorturn = UIColor.lightGrayColor()
                 
                 for var i = 0; i < piecesArrs.count; i++ {
                     for var t = 0; t < piecesArrs[i].count; t++ {
@@ -971,7 +1021,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.title = r!["blackPlayer"] as? String
             self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
-            
+            f
             let userQuery = PFQuery(className: "_User")
             userQuery.whereKey("username", containedIn: un )
             userQuery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
@@ -1247,6 +1297,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if r!["status_white"] as! String == "move" {
                         self.isWhiteTurn = true
                         
+                        self.turnLturn = "Your Turn"
+                        self.turnIndicatorturn = blue
+                        self.turnL.text = self.turnLturn
+                        self.turnIndicator.backgroundColor = blue
+                        
                         for var i = 0; i < self.piecesArrs.count; i++ {
                             for var t = 0; t < self.piecesArrs[i].count; t++ {
                                 
@@ -1256,6 +1311,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     else {
                         self.isWhiteTurn = false
+                       
+                        self.turnLturn = "Their Turn"
+                        self.turnIndicatorturn = UIColor.lightGrayColor()
                         
                         for var i = 0; i < self.piecesArrs.count; i++ {
                             for var t = 0; t < self.piecesArrs[i].count; t++ {
@@ -1284,6 +1342,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             //firebase - end
         }
         else {
+            
+            colorLcolor = "You are Black"
+            colorIndicatorcolor = UIColor.blackColor()
             
             whiteQueen = UIImageView(frame: CGRectMake(e, _1, pieceSize, pieceSize))
             
@@ -1615,6 +1676,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             if r!["status_black"] as! String == "move" {
                 isWhiteTurn = true
                 
+                turnLturn = "Your Turn"
+                turnIndicatorturn = blue
+                
                 for var i = 0; i < piecesArrs.count; i++ {
                     for var t = 0; t < piecesArrs[i].count; t++ {
                         self.piecesArrs[i][t].image = UIImage(named: piecesString[i])
@@ -1627,6 +1691,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
             else {
                 isWhiteTurn = false
+                
+                turnLturn = "Their Turn"
+                turnIndicatorturn = UIColor.lightGrayColor()
                 
                 for var i = 0; i < piecesArrs.count; i++ {
                     for var t = 0; t < piecesArrs[i].count; t++ {
@@ -1706,6 +1773,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 
                 if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black" {
+                    
+                    
                     
                     let query = PFQuery(className: "Games")
                     query.whereKey("objectId", equalTo: gameID)
@@ -1918,6 +1987,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if r!["status_black"] as! String == "move" {
                         self.isWhiteTurn = true
                         
+                        self.turnLturn = "Your Turn"
+                        self.turnIndicatorturn = blue
+                        self.turnL.text = self.turnLturn
+                        self.turnIndicator.backgroundColor = blue
+                        
                         for var i = 0; i < self.piecesArrs.count; i++ {
                             for var t = 0; t < self.piecesArrs[i].count; t++ {
                                 self.piecesArrs[i][t].userInteractionEnabled = true
@@ -1964,6 +2038,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         notations = []
         game = PFObject(className: "Games")
         
+        timer.invalidate()
+
         
     }
     
@@ -2047,28 +2123,29 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         scrollView1.addSubview(info)
         
         turnL = UILabel(frame: CGRectMake(40,100 - 10,screenWidth, 29))
-        turnL.text = "Your Turn"
+        print(turnLturn)
+        turnL.text = turnLturn
         if darkMode {turnL.textColor = UIColor.whiteColor()}
         else {turnL.textColor = UIColor.blackColor() }
         turnL.font = UIFont(name: "Times", size: 19)
         scrollView1.addSubview(turnL)
         
         colorL = UILabel(frame: CGRectMake(40,129 - 10,screenWidth, 29))
-        colorL.text = "You are White"
+        colorL.text = colorLcolor
         if darkMode {colorL.textColor = UIColor.whiteColor()}
         else {colorL.textColor = UIColor.blackColor() }
         colorL.font = UIFont(name: "Times", size: 19)
         scrollView1.addSubview(colorL)
         
         speedL = UILabel(frame: CGRectMake(40,158 - 10,screenWidth, 29))
-        speedL.text = "Fast Speedmode"
+        speedL.text = speedLspeed
         if darkMode {speedL.textColor = UIColor.whiteColor()}
         else {speedL.textColor = UIColor.blackColor() }
         speedL.font = UIFont(name: "Times", size: 19)
         scrollView1.addSubview(speedL)
         
         ratedL = UILabel(frame: CGRectMake(40,187 - 10,screenWidth, 29))
-        ratedL.text = "Rated"
+        ratedL.text = ratedLrated
         if darkMode {ratedL.textColor = UIColor.whiteColor()}
         else {ratedL.textColor = UIColor.blackColor() }
         ratedL.font = UIFont(name: "Times", size: 19)
@@ -2077,29 +2154,29 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         turnIndicator = UILabel(frame: CGRectMake(turnL.frame.origin.x - 20, turnL.frame.origin.y + 12 , 11, 11))
         turnIndicator.layer.cornerRadius = (turnIndicator.frame.size.width)/2
         turnIndicator.clipsToBounds = true
-        turnIndicator.backgroundColor = blue
+        turnIndicator.backgroundColor = turnIndicatorturn
         scrollView1.addSubview(turnIndicator)
         
         colorIndicator = UILabel(frame: CGRectMake(colorL.frame.origin.x - 20, colorL.frame.origin.y + 12 , 11, 11))
         colorIndicator.layer.borderColor = UIColor.blackColor().CGColor
         colorIndicator.layer.borderWidth = 1
-        colorIndicator.backgroundColor = UIColor.whiteColor()
+        colorIndicator.backgroundColor = colorIndicatorcolor
         scrollView1.addSubview(colorIndicator)
         
         speedImage = UIImageView(frame: CGRectMake(speedL.frame.origin.x - 20, speedL.frame.origin.y, 11, 29))
         speedImage.contentMode = .ScaleAspectFit
-        speedImage.image = UIImage(named: "flash31.png")
+        speedImage.image = speedImagespeed
         scrollView1.addSubview(speedImage)
         
-        let timeLeft = UILabel(frame: CGRectMake(40,216 - 10,screenWidth, 29))
-        timeLeft.text = "Time Left To Move:"
-        if darkMode {timeLeft.textColor = UIColor.lightGrayColor()}
-        else {timeLeft.textColor = UIColor.darkGrayColor() }
-        timeLeft.font = UIFont(name: "Times", size: 19)
-        scrollView1.addSubview(timeLeft)
+        let timeLeftL = UILabel(frame: CGRectMake(40,216 - 10,screenWidth, 29))
+        timeLeftL.text = "Time Left To Move:"
+        if darkMode {timeLeftL.textColor = UIColor.lightGrayColor()}
+        else {timeLeftL.textColor = UIColor.darkGrayColor() }
+        timeLeftL.font = UIFont(name: "Times", size: 19)
+        scrollView1.addSubview(timeLeftL)
         
         timeL = UILabel(frame: CGRectMake(199,216 - 10,screenWidth-208, 29))
-        timeL.text = "1 day"
+        timeL.text = ""
         if darkMode {timeL.textColor = UIColor.whiteColor()}
         else {timeL.textColor = UIColor.blackColor() }
         timeL.font = UIFont(name: "Times", size: 19)
@@ -2170,10 +2247,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         copyB.addTarget(self, action: "copyButtonPressed:", forControlEvents: .TouchUpInside)
         scrollView1.addSubview(copyB)
         
-        cancelB = UIButton(frame: CGRectMake(screenWidth - 40, 43,20 ,20))
+        cancelB = UIButton(frame: CGRectMake(screenWidth - 60, 43,50 ,50))
         cancelB.userInteractionEnabled = true
-        if darkMode {cancelB.setBackgroundImage(UIImage(named: "cross-mark1-3.png"), forState: .Normal)}
-        else {cancelB.setBackgroundImage(UIImage(named: "cross-mark1-2.png"), forState: .Normal) }
+        if darkMode {cancelB.setBackgroundImage(UIImage(named: "cross-mark1-3S.png"), forState: .Normal)}
+        else {cancelB.setBackgroundImage(UIImage(named: "cross-mark1-2S.png"), forState: .Normal) }
         cancelB.addTarget(self, action: "cancelButtonPressed:", forControlEvents: .TouchUpInside)
         scrollView1.addSubview(cancelB)
         
@@ -2220,6 +2297,45 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         visualEffectView.userInteractionEnabled = false
         visualEffectSub.userInteractionEnabled = false
+        
+    }
+    //use this to checki fuser lost on time
+    func updateTimer() {
+        timeLeft++
+        var timeLeftC = timeLeft
+        print(timeLeft)
+        if timeLeftC <= -60 {
+            timeLeftC = timeLeftC/60
+            let sinceOutput = Int(timeLeftC) * -1
+            timeL.text = "\(sinceOutput)min"
+        }
+        else {
+            let sinceOutput = Int(timeLeftC) * -1
+            timeL.text = "\(sinceOutput)s"
+        }
+        //making to hours
+        if timeLeftC <= -60 {
+            timeLeftC = timeLeftC/60
+            let sinceOutput = Int(timeLeftC) * -1
+            timeL.text = "\(sinceOutput)h"
+            
+            //making to days
+            if timeLeftC <= -24 {
+                timeLeftC = timeLeftC/24
+                let sinceOutput = Int(timeLeftC) * -1
+                timeL.text = "\(sinceOutput)d"
+                
+            }
+            
+        }
+        
+        if timeLeftC >= 0 {
+            timeL.text = "Game Finished"
+            timeL.font = UIFont(name: "Times-Italic", size: 19)
+
+        timer.invalidate()
+        }
+        
         
     }
     
@@ -3646,7 +3762,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     statusRef.setValue(status)
                     //firebase - end
                     
-                    
+                    self.turnLturn = "Their Turn"
+                    self.turnIndicatorturn = UIColor.lightGrayColor()
               
                     
                 }

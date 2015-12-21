@@ -86,6 +86,8 @@
 		8F62C6881C00979500312A58 /* NewGameSettingsPage_Explore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6871C00979500312A58 /* NewGameSettingsPage_Explore.swift */; };
 		8F62C68A1C0097BD00312A58 /* NewGameSettingsPage_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6891C0097BD00312A58 /* NewGameSettingsPage_Profile.swift */; };
 		8F6E354A1C14F4BE0099EED3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35491C14F4BE0099EED3 /* FBSDKCoreKit.framework */; };
+		8F6E64E31C283D190092471C /* cross-mark1-2S.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6E64E11C283D190092471C /* cross-mark1-2S.png */; };
+		8F6E64E41C283D190092471C /* cross-mark1-3S.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6E64E21C283D190092471C /* cross-mark1-3S.png */; };
 		8F768D9B1BD6AC4F007A7BFC /* SignUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */; };
 		8F840BCC1BBDAE6600511F44 /* FriendRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F840BCB1BBDAE6600511F44 /* FriendRequests.swift */; };
 		8F8639291B9B01BF0055608B /* AnalyzeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */; };
@@ -261,6 +263,8 @@
 		8F62C6871C00979500312A58 /* NewGameSettingsPage_Explore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Explore.swift; sourceTree = "<group>"; };
 		8F62C6891C0097BD00312A58 /* NewGameSettingsPage_Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameSettingsPage_Profile.swift; sourceTree = "<group>"; };
 		8F6E35491C14F4BE0099EED3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-20150813/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		8F6E64E11C283D190092471C /* cross-mark1-2S.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-mark1-2S.png"; sourceTree = "<group>"; };
+		8F6E64E21C283D190092471C /* cross-mark1-3S.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-mark1-3S.png"; sourceTree = "<group>"; };
 		8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpMenu.swift; sourceTree = "<group>"; };
 		8F840BCB1BBDAE6600511F44 /* FriendRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequests.swift; sourceTree = "<group>"; };
 		8F8639281B9B01BF0055608B /* AnalyzeMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeMenu.swift; sourceTree = "<group>"; };
@@ -506,6 +510,8 @@
 				8FE496781C247E7000E2E77D /* chessLaunch3.png */,
 				8FD804731C24CADB00902DB9 /* chessLaunchGold.png */,
 				8FA5690E1C02795100AFC460 /* new100-2.png */,
+				8F6E64E11C283D190092471C /* cross-mark1-2S.png */,
+				8F6E64E21C283D190092471C /* cross-mark1-3S.png */,
 				8FA018D81B9B1FAE002B410E /* ChessIconAndTExt.png */,
 				8FA1F7CD1B9AFCA800A0C548 /* Pieces */,
 			);
@@ -814,6 +820,7 @@
 				8F1E8ED01BD7F74500C41D37 /* profilePicPlaceholderDark.jpg in Resources */,
 				8F1E8ED41BD8362A00C41D37 /* PanBerLogoDark2.png in Resources */,
 				8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */,
+				8F6E64E31C283D190092471C /* cross-mark1-2S.png in Resources */,
 				8FEF2AAF1BFCE136006E1359 /* multimedia option23.png in Resources */,
 				8F8BD2B71BC6C1C500B25CFE /* checkmark11.png in Resources */,
 				8F8BD2A81BC41ED700B25CFE /* arrow_white.png in Resources */,
@@ -893,6 +900,7 @@
 				8F4A02871B9A3F240084024A /* chessIcon180.png in Resources */,
 				8FB94F991BE62EA80029EF00 /* chatIcon.png in Resources */,
 				8F4A027D1B9A3EE80084024A /* blackPawn.png in Resources */,
+				8F6E64E41C283D190092471C /* cross-mark1-3S.png in Resources */,
 				8F1BB5591BA22BAF0043E2B7 /* profileTabBarIcon@3x.png in Resources */,
 				8F4A027A1B9A3EE80084024A /* whiteRook.png in Resources */,
 				8F8BD2B51BC6C1C500B25CFE /* checkmark12.png in Resources */,
