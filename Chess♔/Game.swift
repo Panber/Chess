@@ -100,6 +100,17 @@ class MoveCell: UICollectionViewCell {
 
 class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    
+    var slider = UISlider()
+    var capsuleB = UIButton()
+    var capsuleL = UILabel()
+    
+    var forwardB = UIButton()
+    var backwardB = UIButton()
+    
+    var meImage = UIImageView()
+    var otherImage = UIImageView()
+    
     var collectionView: UICollectionView!
     
     var piecesToDelete: Array<UIImageView> = []
@@ -574,10 +585,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         self.view.addSubview(pieceMarked)
         pieceMarked.hidden = true
  
-        var otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
+         otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
         
         
-        var meImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) + (screenWidth/2) + 30, 60, 60))
+         meImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) + (screenWidth/2) + 30, 60, 60))
         
         
         var images:Array<NSData> = []
@@ -1041,17 +1052,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         images.append(imageData!)
                                         if (result["username"] as? String)! == r!["whitePlayer"]! as! String {
                                             
-                                            meImage.image = UIImage(data: imageData!)
-                                            self.view.addSubview(meImage)
+                                            self.meImage.image = UIImage(data: imageData!)
+                                            self.view.addSubview(self.meImage)
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                meImage.alpha = 1
+                                                self.meImage.alpha = 1
                                             })
                                             
                                         }
                                         else {
-                                            otherImage.image = UIImage(data: imageData!)
-                                            self.view.addSubview(otherImage)
+                                            self.otherImage.image = UIImage(data: imageData!)
+                                            self.view.addSubview(self.otherImage)
                                
                                             
                                             self.otherUserImage = UIImage(data: imageData!)!
@@ -1059,7 +1070,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.otherUserName = (result["username"] as? String)!
 
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                otherImage.alpha = 1
+                                                self.otherImage.alpha = 1
                                             })
                                         }
                                     }
@@ -1731,23 +1742,23 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         images.append(imageData!)
                                         if (result["username"] as? String)! == r!["blackPlayer"]! as! String {
                                             
-                                            meImage.image = UIImage(data: imageData!)
-                                            self.view.addSubview(meImage)
+                                            self.meImage.image = UIImage(data: imageData!)
+                                            self.view.addSubview(self.meImage)
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                meImage.alpha = 1
+                                                self.meImage.alpha = 1
                                             })
                                             
                                         }
                                         else {
-                                            otherImage.image = UIImage(data: imageData!)
-                                            self.view.addSubview(otherImage)
+                                            self.otherImage.image = UIImage(data: imageData!)
+                                            self.view.addSubview(self.otherImage)
                                             
                                             self.otherUserImage = UIImage(data: imageData!)!
                                             self.otherUserRating = "\(result["rating"] as! Int)"
                                             self.otherUserName = (result["username"] as? String)!
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                otherImage.alpha = 1
+                                                self.otherImage.alpha = 1
                                             })
                                         }
                                     }
@@ -2077,10 +2088,235 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         super.viewDidLoad()
         
+        
+        
+        
+        //slider stuff
+        //
+        slider = UISlider(frame:CGRectMake(20, screenHeight/2 + 150, screenWidth - 40, 20))
+        if screenHeight == 568 {slider.frame.origin.y = screenHeight/2 + 150 - 47}
+        slider.minimumValue = 0
+        slider.maximumValue = Float(notations.count)
+
+        slider.value = slider.maximumValue
+        slider.continuous = true
+        slider.tintColor = blue
+        slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
+        view.addSubview(slider)
+        view.sendSubviewToBack(slider)
+        //
+        
+        capsuleL = UILabel(frame: CGRectMake(0,screenHeight/2 - 150,screenWidth,60))
+        capsuleL.text = "TIME CAPSULE"
+        capsuleL.font = UIFont(name: "Didot", size: 22)
+        capsuleL.textAlignment = .Center
+        view.addSubview(capsuleL)
+        view.sendSubviewToBack(capsuleL)
+        
+        
+        
+        capsuleB = UIButton(frame: CGRectMake(screenWidth - 60,screenHeight/2 + 246,40,40))
+        if screenHeight == 667 { capsuleB.frame.origin.y = screenHeight/2 + 220}
+        else if screenHeight ==  568 {capsuleB.frame.origin.y = screenHeight/2 + 180}
+        capsuleB.setBackgroundImage(UIImage(named: "capsuleClock.png"), forState: .Normal)
+        capsuleB.addTarget(self, action: "capsuleButtonPressed:", forControlEvents: .TouchUpInside)
+        view.addSubview(capsuleB)
+        
+        backwardB = UIButton(frame: CGRectMake(screenWidth/2-70,screenHeight/2 + 150 - 47,40,40))
+        backwardB.setBackgroundImage(UIImage(named: "arrow_blueB.png"), forState: .Normal)
+        backwardB.addTarget(self, action: "backwardButtonPressed:", forControlEvents: .TouchUpInside)
+        view.addSubview(backwardB)
+        backwardB.enabled = false
+        view.sendSubviewToBack(backwardB)
+        
+        
+        forwardB = UIButton(frame: CGRectMake(screenWidth/2+30,screenHeight/2 + 150 - 47,40,40))
+        forwardB.setBackgroundImage(UIImage(named: "arrow_blueF.png"), forState: .Normal)
+        forwardB.addTarget(self, action: "forwardButtonPressed:", forControlEvents: .TouchUpInside)
+        forwardB.enabled = false
+        view.addSubview(forwardB)
+        view.sendSubviewToBack(forwardB)
+        print(screenHeight)
+        
+        if screenHeight == 480 {
+            self.tabBarController?.tabBar.hidden = true
+            slider.frame.origin.y = screenHeight/2 + 150 - 47
+            capsuleB.frame.origin.y = screenHeight/2 + 180
+        }
+
+        
         //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
         
     }
+    // MARK: -Time Capsule
+    func capsuleButtonPressed(sender: UIButton!) {
+        
+        slider.maximumValue = Float(notations.count)
+        
+        slider.value = slider.maximumValue
+        
+        forwardB.enabled = false
+        backwardB.enabled = true
+        
+        
+        UIView.animateWithDuration(0.8, animations: { () -> Void in
+            self.slider.frame.origin.y = 652
+            self.capsuleB.frame.origin.y += 200
+            self.capsuleL.frame.origin.y = 78
+            self.backwardB.frame.origin.y = 600
+            self.forwardB.frame.origin.y = 600
+            
+            self.collectionView.frame.origin.y  = -100
+            self.meImage.frame.origin.y = screenHeight + 50
+            self.otherImage.frame.origin.y = -100
+            
+            if screenHeight == 667 {
+                self.capsuleL.frame.origin.y = 72
+                self.slider.frame.origin.y = 587
+                self.backwardB.frame.origin.y = 540
+                self.forwardB.frame.origin.y = 540
+            }
+            else if screenHeight == 568 {
+                self.capsuleL.frame.origin.y = 62
+                self.slider.frame.origin.y = 493
+                self.backwardB.frame.origin.y = 455
+                self.forwardB.frame.origin.y = 455
+                
+            }
+                
+            else if screenHeight == 480 {
+                self.slider.frame.origin.y = 450
+                self.capsuleB.frame.origin.y = 600
+                self.backwardB.frame.origin.y = 409
+                self.forwardB.frame.origin.y = 409
+            }
+            
+            
+            
+            
+            }, completion: {finish in
+                
+        })
+        
+    }
     
+    func sliderValueDidChange(sender:UISlider!)
+    {
+        forwardB.enabled = true
+        if sender.value < 1 {
+            backwardB.enabled = false
+            
+        }
+        else {
+            backwardB.enabled = true
+        }
+        
+        print("value--\(sender.value)")
+        if sender.value == slider.maximumValue  {
+            forwardB.enabled = false
+            
+            
+            UIView.animateWithDuration(0.8, animations: { () -> Void in
+                self.slider.frame.origin.y = screenHeight/2 + 150
+                self.capsuleB.frame.origin.y = screenHeight/2 + 246
+                self.capsuleL.frame.origin.y = 200
+                
+                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                
+                self.collectionView.frame.origin.y  = 86
+                self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 30
+                self.otherImage.frame.origin.y = 64 + 13
+                
+                if screenHeight == 667 {
+                    self.capsuleB.frame.origin.y = screenHeight/2 + 220
+                    self.slider.frame.origin.y = screenHeight/2 + 150
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                    
+                }
+                    
+                else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.slider.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                }
+                    
+                else   if screenHeight == 480 {
+                    self.slider.frame.origin.y = screenHeight/2 + 150 - 47
+                    self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    
+                }
+                
+                }, completion: {finish in
+                    //sender.value = 50
+                    
+            })
+            
+        }
+        
+        
+    }
+    
+    func forwardButtonPressed(sender:UIButton!) {
+        slider.value++
+        backwardB.enabled = true
+        
+        
+        if slider.value == slider.maximumValue {
+            forwardB.enabled = false
+            
+            UIView.animateWithDuration(0.8, animations: { () -> Void in
+                self.slider.frame.origin.y = screenHeight/2 + 150
+                self.capsuleB.frame.origin.y = screenHeight/2 + 246
+                self.capsuleL.frame.origin.y = 200
+                
+                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                
+                self.collectionView.frame.origin.y  = 86
+                self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 30
+                self.otherImage.frame.origin.y = 64 + 13
+                
+                if screenHeight == 667 {
+                    self.capsuleB.frame.origin.y = screenHeight/2 + 220
+                    self.slider.frame.origin.y = screenHeight/2 + 150
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                    
+                }
+                else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.slider.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                }
+                else   if screenHeight == 480 {
+                    self.slider.frame.origin.y = screenHeight/2 + 150 - 47
+                    self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    
+                }
+                
+                }, completion: {finish in
+                    //sender.value = 50
+                    
+            })
+            
+        }
+    }
+    func backwardButtonPressed(sender:UIButton!) {
+        slider.value--
+        forwardB.enabled = true
+        
+        if slider.value == 0 {
+            backwardB.enabled = false
+            
+        }
+        
+    }
     
     // MARK: - Setup-functions 🔍
     
