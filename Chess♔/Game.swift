@@ -229,7 +229,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     var blackPawn1 = UIImageView(frame: CGRectMake(a, _7, pieceSize, pieceSize))
     var blackPawn2 = UIImageView(frame: CGRectMake(b, _7, pieceSize, pieceSize))
-    var blackPawn3 = UIImageView(frame: CGRectMake(c, _7, pieceSize, pieceSize))
+    var blackPawn3 = UIImageView(frame: CGRectMake(c ,_7, pieceSize, pieceSize))
     var blackPawn4 = UIImageView(frame: CGRectMake(d, _7, pieceSize, pieceSize))
     var blackPawn5 = UIImageView(frame: CGRectMake(e, _7, pieceSize, pieceSize))
     var blackPawn6 = UIImageView(frame: CGRectMake(f, _7, pieceSize, pieceSize))
@@ -314,6 +314,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var whitePassantPieces = UIImageView()
     var blackPassantPieces = UIImageView()
     
+    var passantPiece: Int = 0
+    
     
     @IBOutlet weak var infoButton: UIButton!
     
@@ -346,10 +348,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     func loadVariablesAndConstants() {
         //size-properties
         let pieceSize = sqrt(screenWidth * screenWidth / 64)
-        
-        
-        
-        
         
         piecesToDelete = []
         
@@ -788,7 +786,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters  found")
                                                                         
                                                                         for var iy = 0; iy < pieces.count - 1; iy++ {
-                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
+                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a]  {
                                                                                 
                                                                                 print("iy is \(iy)")
                                                                                 
@@ -817,18 +815,18 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     }
                                                                                     
                                                                                 }
+                                                                                self.piecesToDelete.append(self.pieces[iy])
+                                                                                
+                                                                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
+                                                                                    
+                                                                                    self.pieces[iy].alpha = 0
+                                                                                    
+                                                                                    }, completion: { finish in
+                                                                                        
+                                                                                })
                                                                                 
                                                                             }
-                                                                            self.piecesToDelete.append(self.pieces[iy])
-                                                                            
-                                                                            UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
-                                                                                
-                                                                                self.pieces[iy].alpha = 0
-                                                                                
-                                                                                }, completion: { finish in
-                                                                                    
-                                                                            })
-                                                                            
+
                                                                         }
                                                                     } else {
                                                                         print("letters not found")
@@ -1019,6 +1017,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             print("I am white player!")
             canOnlyMoveWhite = true
             self.title = r!["blackPlayer"] as? String
+            self.passantPiece = (r!["passantPiece"] as? Int)!
             self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
             f
@@ -1118,7 +1117,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters  found")
                                                                         
                                                                         for var iy = 0; iy < self.pieces.count - 1; iy++ {
-                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
+                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] {
                                                                                 
                                                                                 
                                                                                 for var ty = 0; ty < self.whitePieces.count; ty++ {
@@ -1422,7 +1421,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters  found")
                                                                         
                                                                         for var iy = 0; iy < pieces.count; iy++ {
-                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
+                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] {
                                                                                 
                                                                                 print("iy is \(iy)")
                                                                                 
@@ -1710,8 +1709,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             canOnlyMoveWhite = true
             self.title = r!["whitePlayer"] as? String
             self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
+            self.passantPiece = (r!["passantPiece"] as? Int)!
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
-            
             let userQuery = PFQuery(className: "_User")
             userQuery.whereKey("username", containedIn: un )
             userQuery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
@@ -1808,7 +1807,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters  found")
                                                                         
                                                                         for var iy = 0; iy < self.pieces.count; iy++ {
-                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
+                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] {
                                                                                 
                                                                                 print("iy is \(iy)")
                                                                                 
@@ -1857,9 +1856,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters not found")
                                                                     }
                                                                 }
-                                                                
-                                                                
-                                                                
+
                                                                 if moves.last == moves.last {
                                                                     checkIfTakenLast()
                                                                     
@@ -2669,11 +2666,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                     }
                 }
-                
-                if selectedPiece.frame.origin.y == screenHeight/2 - 1 * pieceSize && blackPassantPieces.frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && blackPassantPieces.frame.origin.y == selectedPiece.frame.origin.y && canPassant == true && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
+                if selectedPiece.frame.origin.y == screenHeight/2 - 1 * pieceSize && blackPieces[7-passantPiece].frame.origin.x == selectedPiece.frame.origin.x + byAmountx * pieceSize && blackPieces[7-passantPiece].frame.origin.y == selectedPiece.frame.origin.y && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
                     //print("Passant!")
                     whitePassant = true
-                    let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y - 1 * pieceSize, pieceSize, pieceSize))
+                    let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + byAmountx * pieceSize, selectedPiece.frame.origin.y - 1 * pieceSize, pieceSize, pieceSize))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
                     self.view.addSubview(pieceOption)
                     pieceOptions += [pieceOption]
@@ -3499,7 +3495,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             pieceOption.removeFromSuperview()
                         }
                     }
-                    
+                    for var q = 0; q < blackPieces.count; q++ {
+                        if blackPieces[q] == selectedPiece {
+                            game.setObject(q, forKey: "passantPiece")
+                        }
+                    }
+                    game.setObject(true, forKey: "passant")
                     pieceOptions += [pieceOption]
                 } else if canThePieceGofurther == true {
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + 1 * pieceSize, size, size))
@@ -3573,7 +3574,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
                 
-                if selectedPiece.frame.origin.y == screenHeight/2 && whitePassantPieces.frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && whitePassantPieces.frame.origin.y == selectedPiece.frame.origin.y && canPassant == true && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
+                if selectedPiece.frame.origin.y == screenHeight/2 && whitePieces[passantPiece].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && whitePieces[passantPiece].frame.origin.y == selectedPiece.frame.origin.y && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
                     //print("Passant!")
                     blackPassant = true
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y + 1 * pieceSize, pieceSize, pieceSize))
@@ -4150,7 +4151,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         blackPiecesString.removeAtIndex(t)
                         
                     }
-                    if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackPieces[t].frame.origin.x && pieceOptions[o].frame.origin.y == blackPieces[t].frame.origin.y - 1 * pieceSize && whitePassant == true && hasBeenTaken(selectedPiece, array: whitePieces) && canPassant == true  {
+                    if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackPieces[t].frame.origin.x && pieceOptions[o].frame.origin.y == blackPieces[t].frame.origin.y - 1 * pieceSize && whitePassant == true && hasBeenTaken(selectedPiece, array: whitePieces)  {
                         blackPieces[t].removeFromSuperview()
                         blackPieces.removeAtIndex(t)
                         
@@ -4198,6 +4199,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 selectedPawn = i
                 //updateLogic()
                 whitePawnSelected(event!, _touch: touch)
+                print(canPassant)
             }
             
         }
@@ -4332,16 +4334,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             pieceOptions[o].userInteractionEnabled = true
             pieceOptions[o].multipleTouchEnabled = true
             
-            if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _4 && hasBeenTaken(selectedPiece, array: whitePieces) && selectedPiece.frame.origin.y == _2   {
-                canPassant = true
-                //print("can passant!")
-                whitePassantPieces = selectedPiece
-            }
+//            if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _4 && hasBeenTaken(selectedPiece, array: whitePieces) && selectedPiece.frame.origin.y == _2   {
+//                canPassant = true
+//                print("can passant!")
+//                whitePassantPieces = selectedPiece
+//            }
             
-            if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _5 && hasBeenTaken(selectedPiece, array: blackPieces) && selectedPiece.frame.origin.y == _7   {
-                canPassant = true
-                //print("can passant white!")
-                blackPassantPieces = selectedPiece
+            if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _4 && hasBeenTaken(selectedPiece, array: whitePieces) && selectedPiece.frame.origin.y == _2 {
+                for var q = 0; q < whitePieces.count; q++ {
+                    if whitePieces[q] == selectedPiece {
+                        game.setObject(q, forKey: "passantPiece")
+                    }
+                }
+                game.setObject(true, forKey: "passant")
+            } else {
+                game.setObject(false, forKey: "passant")
             }
             
             if touch.view == pieceOptions[o] {
