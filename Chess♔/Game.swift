@@ -2302,6 +2302,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     //use this to checki fuser lost on time
     func updateTimer() {
         
+        let textC =  timeL.textColor
+        
         timeLeft++
         var timeLeftC = timeLeft
         print(timeLeft)
@@ -2309,16 +2311,22 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             timeLeftC = timeLeftC/60
             let sinceOutput = Int(timeLeftC) * -1
             timeL.text = "\(sinceOutput)min"
+            timeL.textColor = red
+
         }
         else {
             let sinceOutput = Int(timeLeftC) * -1
             timeL.text = "\(sinceOutput)s"
+            timeL.textColor = red
         }
         //making to hours
         if timeLeftC <= -60 {
             timeLeftC = timeLeftC/60
             let sinceOutput = Int(timeLeftC) * -1
             timeL.text = "\(sinceOutput)h"
+            timeL.textColor = textC
+
+
             
             //making to days
             if timeLeftC <= -24 {

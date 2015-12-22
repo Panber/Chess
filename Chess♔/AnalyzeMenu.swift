@@ -14,7 +14,12 @@ class AnalyzeMenu: UIViewController,UIScrollViewDelegate {
 
     @IBOutlet weak var board: UIImageView!
   
-
+    var slider = UISlider()
+    var capsuleB = UIButton()
+    var capsuleL = UILabel()
+    
+    var forwardB = UIButton()
+    var backwardB = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +28,211 @@ class AnalyzeMenu: UIViewController,UIScrollViewDelegate {
         navigationController?.navigationBar.topItem?.title = "Analyze"
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
 
+        //
+        slider = UISlider(frame:CGRectMake(20, screenHeight/2 + 150, screenWidth - 40, 20))
+         if screenHeight == 568 {slider.frame.origin.y = screenHeight/2 + 150 - 47}
+
+        slider.minimumValue = 0
+        slider.maximumValue = 100
+        slider.continuous = true
+        slider.tintColor = blue
+        slider.value = 100
+        slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
+        view.addSubview(slider)
+        view.sendSubviewToBack(slider)
+        //
+        
+        capsuleL = UILabel(frame: CGRectMake(0,screenHeight/2 - 150,screenWidth,60))
+        capsuleL.text = "TIME CAPSULE"
+        capsuleL.font = UIFont(name: "Didot", size: 22)
+        capsuleL.textAlignment = .Center
+        view.addSubview(capsuleL)
+        view.sendSubviewToBack(capsuleL)
+        
+        
+        
+        capsuleB = UIButton(frame: CGRectMake(screenWidth - 60,screenHeight/2 + 246,40,40))
+        if screenHeight == 667 { capsuleB.frame.origin.y = screenHeight/2 + 220}
+        else if screenHeight ==  568 {capsuleB.frame.origin.y = screenHeight/2 + 180}
+        capsuleB.setBackgroundImage(UIImage(named: "capsuleClock.png"), forState: .Normal)
+        capsuleB.addTarget(self, action: "capsuleButtonPressed:", forControlEvents: .TouchUpInside)
+        view.addSubview(capsuleB)
+        
+        backwardB = UIButton(frame: CGRectMake(screenWidth/2-70,screenHeight/2 + 150 - 47,40,40))
+        backwardB.setBackgroundImage(UIImage(named: "arrow_blueB.png"), forState: .Normal)
+        backwardB.addTarget(self, action: "backwardButtonPressed:", forControlEvents: .TouchUpInside)
+        view.addSubview(backwardB)
+        backwardB.enabled = false
+        view.sendSubviewToBack(backwardB)
 
         
+        forwardB = UIButton(frame: CGRectMake(screenWidth/2+30,screenHeight/2 + 150 - 47,40,40))
+        forwardB.setBackgroundImage(UIImage(named: "arrow_blueF.png"), forState: .Normal)
+        forwardB.addTarget(self, action: "forwardButtonPressed:", forControlEvents: .TouchUpInside)
+        forwardB.enabled = false
+        view.addSubview(forwardB)
+        view.sendSubviewToBack(forwardB)
+        print(screenHeight)
+
+        if screenHeight == 480 {
+            self.tabBarController?.tabBar.hidden = true
+            slider.frame.origin.y = screenHeight/2 + 150 - 47
+            capsuleB.frame.origin.y = screenHeight/2 + 180
+        }
     }
 
+    func capsuleButtonPressed(sender: UIButton!) {
+    
+        forwardB.enabled = false
+        backwardB.enabled = true
+
+        
+        UIView.animateWithDuration(0.8, animations: { () -> Void in
+            self.slider.frame.origin.y = 652
+            self.capsuleB.frame.origin.y += 200
+            self.capsuleL.frame.origin.y = 78
+            self.backwardB.frame.origin.y = 600
+            self.forwardB.frame.origin.y = 600
+            
+            if screenHeight == 667 {
+                self.capsuleL.frame.origin.y = 72
+                self.slider.frame.origin.y = 587
+                self.backwardB.frame.origin.y = 540
+                self.forwardB.frame.origin.y = 540
+            }
+            else if screenHeight == 568 {
+                self.capsuleL.frame.origin.y = 62
+                self.slider.frame.origin.y = 493
+                self.backwardB.frame.origin.y = 455
+                self.forwardB.frame.origin.y = 455
+            
+            }
+
+            else if screenHeight == 480 {
+                self.slider.frame.origin.y = 450
+                self.capsuleB.frame.origin.y = 600
+                self.backwardB.frame.origin.y = 409
+                self.forwardB.frame.origin.y = 409
+            }
+
+            
+       
+            
+            }, completion: {finish in
+        
+        })
+        
+    }
+    
+    func sliderValueDidChange(sender:UISlider!)
+    {
+        forwardB.enabled = true
+        if sender.value < 1 {
+            backwardB.enabled = false
+            
+        }
+        else {
+            backwardB.enabled = true
+        }
+        
+        print("value--\(sender.value)")
+        if sender.value > 99 {
+            forwardB.enabled = false
+
+            
+            UIView.animateWithDuration(0.8, animations: { () -> Void in
+                self.slider.frame.origin.y = screenHeight/2 + 150
+                self.capsuleB.frame.origin.y = screenHeight/2 + 246
+                self.capsuleL.frame.origin.y = 200
+                
+                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+
+                if screenHeight == 667 {
+                    self.capsuleB.frame.origin.y = screenHeight/2 + 220
+                    self.slider.frame.origin.y = screenHeight/2 + 150
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                    
+                }
+                    
+                else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.slider.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                }
+                
+             else   if screenHeight == 480 {
+                    self.slider.frame.origin.y = screenHeight/2 + 150 - 47
+                    self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+
+                }
+                
+                }, completion: {finish in
+                    //sender.value = 50
+
+            })
+        
+        }
+        
+    
+    }
+    
+    func forwardButtonPressed(sender:UIButton!) {
+        slider.value++
+        backwardB.enabled = true
+
+        
+        if slider.value > 99 {
+            forwardB.enabled = false
+            
+            UIView.animateWithDuration(0.8, animations: { () -> Void in
+                self.slider.frame.origin.y = screenHeight/2 + 150
+                self.capsuleB.frame.origin.y = screenHeight/2 + 246
+                self.capsuleL.frame.origin.y = 200
+                
+                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                
+                if screenHeight == 667 {
+                    self.capsuleB.frame.origin.y = screenHeight/2 + 220
+                    self.slider.frame.origin.y = screenHeight/2 + 150
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                    
+                }
+                else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.slider.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                }
+                else   if screenHeight == 480 {
+                    self.slider.frame.origin.y = screenHeight/2 + 150 - 47
+                    self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    
+                }
+                
+                }, completion: {finish in
+                    //sender.value = 50
+                    
+            })
+
+        }
+    }
+    func backwardButtonPressed(sender:UIButton!) {
+        slider.value--
+        forwardB.enabled = true
+        
+        if slider.value == 0 {
+            backwardB.enabled = false
+            
+        }
+        
+    }
 
     func cancelButtonPressed(sender:UITapGestureRecognizer){
         removeNewView()
@@ -65,7 +271,12 @@ class AnalyzeMenu: UIViewController,UIScrollViewDelegate {
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
 
+        
+
+        
         board.alpha = 0
+        
+        
         
         
         UIView.animateWithDuration(0.3) { () -> Void in
@@ -82,12 +293,12 @@ class AnalyzeMenu: UIViewController,UIScrollViewDelegate {
                 self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
                 self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
                 self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
-                
                 self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
                 self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
                 self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
                 self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-                
+            
+            capsuleL.textColor = UIColor.whiteColor()
                 
             
         }
@@ -99,7 +310,8 @@ class AnalyzeMenu: UIViewController,UIScrollViewDelegate {
                 self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
                 self.tabBarController?.tabBar.tintColor = blue
                 self.navigationController?.navigationBar.tintColor = blue
-                
+            
+            capsuleL.textColor = UIColor.blackColor()
             
         }
         
