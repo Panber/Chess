@@ -31,7 +31,6 @@ class AnalyzeMenu: UIViewController,UIScrollViewDelegate {
         //
         slider = UISlider(frame:CGRectMake(20, screenHeight/2 + 150, screenWidth - 40, 20))
          if screenHeight == 568 {slider.frame.origin.y = screenHeight/2 + 150 - 47}
-
         slider.minimumValue = 0
         slider.maximumValue = 100
         slider.continuous = true
