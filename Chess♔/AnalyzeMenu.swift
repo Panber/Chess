@@ -19,7 +19,7 @@ class AnalyzeMenu: UIViewController,UIScrollViewDelegate {
     var capsuleL = UILabel()
     
     var forwardB = UIButton()
-    var backwardB = UIButton()
+    var backwardB = UIButton() 
 
     override func viewDidLoad() {
         super.viewDidLoad()
