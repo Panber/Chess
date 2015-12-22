@@ -815,18 +815,18 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     }
                                                                                     
                                                                                 }
+                                                                                self.piecesToDelete.append(self.pieces[iy])
+                                                                                
+                                                                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
+                                                                                    
+                                                                                    self.pieces[iy].alpha = 0
+                                                                                    
+                                                                                    }, completion: { finish in
+                                                                                        
+                                                                                })
                                                                                 
                                                                             }
-                                                                            self.piecesToDelete.append(self.pieces[iy])
-                                                                            
-                                                                            UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
-                                                                                
-                                                                                self.pieces[iy].alpha = 0
-                                                                                
-                                                                                }, completion: { finish in
-                                                                                    
-                                                                            })
-                                                                            
+
                                                                         }
                                                                     } else {
                                                                         print("letters not found")
