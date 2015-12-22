@@ -1537,8 +1537,8 @@ var loaded = false
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
             self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
             self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
-            
-            self.view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
+            //this is to gamemenu black
+            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
@@ -1564,7 +1564,8 @@ var loaded = false
                 self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
                 self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
                 self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-                self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            //this is to gamemenu white
+                self.view.backgroundColor = UIColor.whiteColor()
                 self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
                 self.tabBarController?.tabBar.tintColor = blue
                 self.navigationController?.navigationBar.tintColor = blue
