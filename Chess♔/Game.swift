@@ -1105,6 +1105,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     var last = r!["piecePosition"] as! Array<String>
                     self.notations.append(last.last!)
                     loadMoves()
+                    self.passantPiece = (r!["passantPiece"] as? Int)!
                     self.canPassant = r!["passant"] as! Bool
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if String(moves.last![0]) == xAxisArrStr2[t] {
@@ -1796,6 +1797,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     var last = r!["piecePosition"] as! Array<String>
                     self.notations.append(last.last!)
                     loadMoves()
+                    self.passantPiece = (r!["passantPiece"] as? Int)!
                     self.canPassant = r!["passant"] as! Bool
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if String(moves.last![0]) == xAxisArrStr2[t] {
@@ -2905,10 +2907,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                     }
                 }
-                if selectedPiece.frame.origin.y == screenHeight/2 - 1 * pieceSize && blackPieces[7-passantPiece].frame.origin.x == selectedPiece.frame.origin.x + byAmountx * pieceSize && blackPieces[7-passantPiece].frame.origin.y == selectedPiece.frame.origin.y && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false && canPassant == true  {
-                    //print("Passant!")
+                var count = whitePawns.count - 1
+                if selectedPiece.frame.origin.y == screenHeight/2 - 1 * pieceSize && blackPieces[count-passantPiece].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && blackPieces[count-passantPiece].frame.origin.y == selectedPiece.frame.origin.y && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false && canPassant == true  {
+                    print("Passant!")
                     whitePassant = true
-                    let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + byAmountx * pieceSize, selectedPiece.frame.origin.y - 1 * pieceSize, pieceSize, pieceSize))
+                    let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y - 1 * pieceSize, pieceSize, pieceSize))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
                     self.view.addSubview(pieceOption)
                     pieceOptions += [pieceOption]
@@ -3734,12 +3737,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             pieceOption.removeFromSuperview()
                         }
                     }
-                    for var q = 0; q < blackPieces.count; q++ {
-                        if blackPieces[q] == selectedPiece {
-                            game.setObject(q, forKey: "passantPiece")
-                        }
-                    }
-                    game.setObject(true, forKey: "passant")
+//                    for var q = 0; q < blackPieces.count; q++ {
+//                        if blackPieces[q] == selectedPiece {
+//                            game.setObject(q, forKey: "passantPiece")
+//                        }
+//                    }
+//                    game.setObject(true, forKey: "passant")
                     pieceOptions += [pieceOption]
                 } else if canThePieceGofurther == true {
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + 1 * pieceSize, size, size))
