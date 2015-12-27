@@ -101,6 +101,12 @@ class MoveCell: UICollectionViewCell {
 class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     
+    var takenPiecesToReload: Array<UIImageView> = []
+    var takenPiecesToReloadAtIndex: Array<Int> = []
+
+    
+    var movesCap: Array<String> = []
+    
     var slider = UISlider()
     var capsuleB = UIButton()
     var capsuleL = UILabel()
@@ -707,6 +713,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 moves.append(putIntoMoves)
             }
             print(moves)
+            movesCap = moves
             
             movesField.text = notationsWithNumber
             
@@ -788,7 +795,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                         for var a = 0; a < yAxisArrStr2.count; a++ {
                                                             if String(moves[o][3]) == yAxisArrStr2[a] {
                                                                 
-                                                                
                                                                 let range = notations[o].rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
                                                                 
                                                                 func checkIfTakenLast() {
@@ -803,6 +809,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 
                                                                                 for var ty = 0; ty < self.whitePieces.count; ty++ {
                                                                                     if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+                                                                                        
+                                                                                        
                                                                                         
                                                                                         
                                                                                         self.pieceToTake += [self.whitePieces[ty]]
@@ -827,6 +835,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     
                                                                                 }
                                                                                 self.piecesToDelete.append(self.pieces[iy])
+                                                                                
+                                                                                self.takenPiecesToReload.append(self.pieces[iy])
+                                                                                self.takenPiecesToReloadAtIndex.append(iy)
                                                                                 
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     
@@ -880,6 +891,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 
                                                                                 self.piecesToDelete.append(self.pieces[iy])
+                                                                                
+                                                                                
+                                                                                self.takenPiecesToReload.append(self.pieces[iy])
+                                                                                self.takenPiecesToReloadAtIndex.append(iy)
                                                                                 
                                                                             }
                                                                         }
@@ -2098,7 +2113,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         slider.minimumValue = 0
         slider.maximumValue = Float(notations.count)
 
-        slider.value = slider.maximumValue
+        slider.value = Float(notations.count)
         slider.continuous = true
         slider.tintColor = blue
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
@@ -2151,10 +2166,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     // MARK: -Time Capsule
     func capsuleButtonPressed(sender: UIButton!) {
         
-        slider.maximumValue = Float(notations.count)
+        slider.maximumValue = Float(notations.count) - 1
         
         slider.value = slider.maximumValue
         
+        magic3()
+
         forwardB.enabled = false
         backwardB.enabled = true
         
@@ -2257,6 +2274,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
         }
         
+        magic3()
+        
+        
         
     }
     
@@ -2306,6 +2326,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             })
             
         }
+        
     }
     func backwardButtonPressed(sender:UIButton!) {
         slider.value--
@@ -2315,9 +2336,77 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             backwardB.enabled = false
             
         }
-        
+        magic3()
     }
     
+    
+    
+     //mGIC3
+    func magic3() {
+        var am = 0
+        
+        for var o = movesCap.count; o > 0; o-- {
+        
+        }
+        var o = Int(slider.value)
+        //for var o = movesCap.count-1; o > 1; o-- {
+            am++
+            
+            for var t = 0; t < xAxisArrStr2.count; t++ {
+                if String(movesCap[o][2]) == xAxisArrStr2[t] {
+                    
+                    for var p = 0; p < yAxisArrStr2.count; p++ {
+                        if String(movesCap[o][3]) == yAxisArrStr2[p] {
+                            
+                            for var i = 0; i < pieces.count; i++ {
+                                if pieces[i].frame.origin.x == xAxisArr[t] {
+                                    if pieces[i].frame.origin.y == yAxisArr[p] {
+                                        
+                                        print("this is complicated")
+                                        
+                                        for var q = 0; q < xAxisArrStr2.count; q++ {
+                                            if String(movesCap[o][0]) == xAxisArrStr2[q] {
+                                                for var a = 0; a < yAxisArrStr2.count; a++ {
+                                                    if String(movesCap[o][1]) == yAxisArrStr2[a] {
+                                                    
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        let range = notations[o].rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
+                                                        
+                                                        func checkIfTakenLast() {
+                                                            // range will be nil if no letters is found
+                                                            if  (range != nil) {
+                                                                print("letters  found")
+                                                                
+                                                                view.addSubview(takenPiecesToReload[0])
+                                                                takenPiecesToReload[0].alpha = 0
+
+                                                            } else {
+                                                                print("letters not found")
+                                                            }
+                                                        }
+                                                       
+                                                        checkIfTakenLast()
+                                                      
+                                                        UIView.animateWithDuration(0.8, delay: 0, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                            self.pieces[i].frame.origin.x = xAxisArr[q]
+                                                            self.pieces[i].frame.origin.y = yAxisArr[a]
+                                                            if self.takenPiecesToReload.count != 0 {
+                                                            self.takenPiecesToReload[0].alpha = 1
+                                                            }
+                                                            }, completion: { finish in
+                                                                //self.deletePiecesAfterLoad()
+                                                                self.updateLogic()
+
+                                                        })
+                                                        
+                                                        
+                                                    
+                                                    }}}}}}}}}}}
+    
+    }
     // MARK: - Setup-functions 🔍
     
     
