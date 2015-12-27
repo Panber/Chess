@@ -247,7 +247,8 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         cancelButton.addTarget(self, action: "cancelSignupButtonPressed:", forControlEvents: .TouchUpInside)
         signupView.addSubview(cancelButton)
         
-        profilePicImageView = UIImageView(frame: CGRectMake((signupView.frame.size.width/2) - 40, 10, 80, 80))
+        profilePicImageView = UIImageView(frame: CGRectMake((signupView
+            .frame.size.width/2) - 40, 10, 80, 80))
         profilePicImageView.layer.borderColor = UIColor.whiteColor().CGColor
         profilePicImageView.layer.borderWidth = 3
         profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width/2
