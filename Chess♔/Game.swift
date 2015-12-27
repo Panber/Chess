@@ -1554,7 +1554,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             }
                                                                         }
                                                                         
-                                                                        
                                                                     }
                                                                     else {
                                                                         print("letters not found")
