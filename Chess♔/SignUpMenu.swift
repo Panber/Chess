@@ -257,8 +257,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         profilePicImageView.image = UIImage(named: "profilePicPlaceholderDark.jpg")
         signupView.addSubview(profilePicImageView)
         
-        addProfileButton = UIButton(frame: CGRectMake((signupView
-            .frame.size.width/2) - 40, 10, 80, 80))
+        addProfileButton = UIButton(frame: CGRectMake((signupView.frame.size.width/2) - 40, 10, 80, 80))
         addProfileButton.setTitle("ADD", forState: .Normal)
         addProfileButton.titleLabel?.font = UIFont(name: "Times", size: 18)
         addProfileButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)

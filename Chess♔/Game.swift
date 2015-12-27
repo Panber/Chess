@@ -101,6 +101,12 @@ class MoveCell: UICollectionViewCell {
 class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     
+    var takenPiecesToReload: Array<UIImageView> = []
+    var takenPiecesToReloadAtIndex: Array<Int> = []
+
+    
+    var movesCap: Array<String> = []
+    
     var slider = UISlider()
     var capsuleB = UIButton()
     var capsuleL = UILabel()
@@ -709,6 +715,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 moves.append(putIntoMoves)
             }
             print(moves)
+            movesCap = moves
             
             movesField.text = notationsWithNumber
             
@@ -790,7 +797,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                         for var a = 0; a < yAxisArrStr2.count; a++ {
                                                             if String(moves[o][3]) == yAxisArrStr2[a] {
                                                                 
-                                                                
                                                                 let range = notations[o].rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
                                                                 
                                                                 func checkIfTakenLast() {
@@ -806,6 +812,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 
                                                                                 for var ty = 0; ty < self.whitePieces.count; ty++ {
                                                                                     if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+                                                                                        
+                                                                                        
                                                                                         
                                                                                         
                                                                                         self.pieceToTake += [self.whitePieces[ty]]
@@ -848,6 +856,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     
                                                                                 }
                                                                                 self.piecesToDelete.append(self.pieces[iy])
+                                                                                
+                                                                                self.takenPiecesToReload.append(self.pieces[iy])
+                                                                                self.takenPiecesToReloadAtIndex.append(iy)
                                                                                 
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     
@@ -920,6 +931,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 
                                                                                 self.piecesToDelete.append(self.pieces[iy])
                                                                                 
+                                                                                
+                                                                                self.takenPiecesToReload.append(self.pieces[iy])
+                                                                                self.takenPiecesToReloadAtIndex.append(iy)
+                                                                                
                                                                             }
                                                                         }
                                                                         
@@ -928,6 +943,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     else {
                                                                         print("letters not found")
                                                                     }
+                                                                
+                                                                
                                                                 }
                                                                 
                                                                 if moves.last == moves[o] && am == moves.count{
@@ -1110,7 +1127,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.otherUserName = (result["username"] as? String)!
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                self.otherImage.alpha = 1
+                                            self.otherImage.alpha = 1
                                             })
                                         }
                                     }
@@ -1543,6 +1560,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 self.piecesToDelete.append(self.pieces[iy])
                                                                                 
+                                                                                self.takenPiecesToReload.append(self.pieces[iy])
+                                                                                self.takenPiecesToReloadAtIndex.append(iy)
                                                                                 
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     self.pieces[iy].alpha = 0
@@ -1618,6 +1637,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     
                                                                                 }
                                                                                 self.piecesToDelete.append(self.pieces[iy])
+                                                                                
+                                                                                self.takenPiecesToReload.append(self.pieces[iy])
+                                                                                self.takenPiecesToReloadAtIndex.append(iy)
                                                                             }
                                                                         }
                                                                         
@@ -1857,7 +1879,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.otherUserRating = "\(result["rating"] as! Int)"
                                             self.otherUserName = (result["username"] as? String)!
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                self.otherImage.alpha = 1
+                                            self.otherImage.alpha = 1
                                             })
                                         }
                                     }
@@ -2213,17 +2235,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         //slider stuff
         //
-        slider = UISlider(frame:CGRectMake(20, screenHeight/2 + 150, screenWidth - 40, 20))
+        slider = UISlider(frame:CGRectMake(00, screenHeight/2 + 150, screenWidth - 0, 20))
         if screenHeight == 568 {slider.frame.origin.y = screenHeight/2 + 150 - 47}
         slider.minimumValue = 0
         slider.maximumValue = Float(notations.count)
         
         slider.value = slider.maximumValue
         slider.continuous = true
-        slider.tintColor = blue
+        slider.tintColor = red
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
-        view.addSubview(slider)
-        view.sendSubviewToBack(slider)
+        //view.addSubview(slider)
+        //view.sendSubviewToBack(slider)
         //
         
         capsuleL = UILabel(frame: CGRectMake(0,screenHeight/2 - 150,screenWidth,60))
@@ -2249,6 +2271,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         backwardB.enabled = false
         view.sendSubviewToBack(backwardB)
         
+//        let sliderOverlay = UILabel(frame: CGRectMake(0,screenHeight/2 + screenWidth/2 + 12,screenWidth,25))
+//        sliderOverlay.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+//        view.addSubview(sliderOverlay)
+       // var uu: CGFloat = screenWidth/CGFloat(notations.count)
+        
         
         forwardB = UIButton(frame: CGRectMake(screenWidth/2+30,screenHeight/2 + 150 - 47,40,40))
         forwardB.setBackgroundImage(UIImage(named: "arrow_blueF.png"), forState: .Normal)
@@ -2268,23 +2295,37 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
         
     }
+    
+    var sliderPointer = UILabel()
     // MARK: -Time Capsule
     func capsuleButtonPressed(sender: UIButton!) {
         
-        slider.maximumValue = Float(notations.count)
+        
+        var uu: CGFloat = screenWidth/CGFloat(notations.count) - screenWidth/CGFloat(notations.count)/CGFloat(notations.count)
+        print("uu is \(uu)")
+        sliderPointer = UILabel(frame: CGRectMake(screenWidth - uu,screenHeight/2 + screenWidth/2 + 10,uu,7))
+        if sliderPointer.frame.size.width < 15 { sliderPointer.frame.size.width = 15; sliderPointer.frame.origin.x = screenWidth - 15}
+        sliderPointer.backgroundColor = blue
+        sliderPointer.alpha = 0.75
+        view.addSubview(sliderPointer)
+        
+        slider.maximumValue = Float(notations.count) - 0
         
         slider.value = slider.maximumValue
         
+        //magic3()
+
         forwardB.enabled = false
         backwardB.enabled = true
         
         
         UIView.animateWithDuration(0.8, animations: { () -> Void in
-            self.slider.frame.origin.y = 652
+            //self.slider.frame.origin.y = 652
+            self.slider.frame.origin.y = screenHeight/2 + screenWidth/2 + 1
             self.capsuleB.frame.origin.y += 200
             self.capsuleL.frame.origin.y = 78
-            self.backwardB.frame.origin.y = 600
-            self.forwardB.frame.origin.y = 600
+            self.backwardB.frame.origin.y = 600 + 16
+            self.forwardB.frame.origin.y = 600 + 16
             
             self.collectionView.frame.origin.y  = -100
             self.meImage.frame.origin.y = screenHeight + 50
@@ -2377,8 +2418,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
         }
         
+        magic3()
+        
+        
         
     }
+    
+    var canPressBackwardButton = true
     
     func forwardButtonPressed(sender:UIButton!) {
         slider.value++
@@ -2426,18 +2472,103 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             })
             
         }
+        
     }
     func backwardButtonPressed(sender:UIButton!) {
+        if canPressBackwardButton == true {
         slider.value--
+        
+        sliderPointer.frame.origin.x -= CGFloat(Int(screenWidth/CGFloat(notations.count))) - CGFloat(Int(screenWidth/CGFloat(notations.count)/CGFloat(notations.count)))
+        
         forwardB.enabled = true
         
         if slider.value == 0 {
             backwardB.enabled = false
             
         }
-        
+        canPressBackwardButton = false
+        magic3()
+        }
     }
     
+    var d2 = 0
+     //mGIC3
+    func magic3() {
+        var am = 0
+        
+        var didIncrease_d2 = false
+
+        
+ 
+        var o = Int(slider.value)
+        //for var o = movesCap.count-1; o > 1; o-- {
+            am++
+            
+            for var t = 0; t < xAxisArrStr2.count; t++ {
+                if String(movesCap[o][2]) == xAxisArrStr2[t] {
+                    
+                    for var p = 0; p < yAxisArrStr2.count; p++ {
+                        if String(movesCap[o][3]) == yAxisArrStr2[p] {
+                            
+                            for var i = 0; i < pieces.count; i++ {
+                                if pieces[i].frame.origin.x == xAxisArr[t] {
+                                    if pieces[i].frame.origin.y == yAxisArr[p] {
+                                        
+                                        print("this is complicated")
+                                        
+                                        for var q = 0; q < xAxisArrStr2.count; q++ {
+                                            if String(movesCap[o][0]) == xAxisArrStr2[q] {
+                                                for var a = 0; a < yAxisArrStr2.count; a++ {
+                                                    if String(movesCap[o][1]) == yAxisArrStr2[a] {
+                                                    
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        let range = notations[o].rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
+                                                        
+                                                        func checkIfTakenLast() {
+                                                            // range will be nil if no letters is found
+                                                            if  (range != nil) {
+                                                                print("letters  found")
+                                                                
+                                                                view.addSubview(takenPiecesToReload[takenPiecesToReload.count - 1 - d2])
+                                                                takenPiecesToReload[takenPiecesToReload.count - 1 - d2].alpha = 0
+                                                                //pieces.append(takenPiecesToReload[takenPiecesToReload.count - 1 - d2])
+                                                                
+                                                                didIncrease_d2 = true
+
+                                                            } else {
+                                                                print("letters not found")
+                                                            }
+                                                        }
+                                                       
+                                                        checkIfTakenLast()
+                                                      
+                                                        UIView.animateWithDuration(0.15, delay: 0, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                            self.pieces[i].frame.origin.x = xAxisArr[q]
+                                                            self.pieces[i].frame.origin.y = yAxisArr[a]
+                                                            if  didIncrease_d2 == true {
+                                                            self.takenPiecesToReload[self.takenPiecesToReload.count - 1 - self.d2].alpha = 1
+                                                            }
+                                                            }, completion: { finish in
+                                                                //self.deletePiecesAfterLoad()
+                                                                self.updateLogic()
+                                                                self.canPressBackwardButton = true
+                                                                
+                                                                if didIncrease_d2 == true {
+                                                                    self.pieces.append(self.takenPiecesToReload[self.takenPiecesToReload.count - 1 - self.d2])
+
+                                                                    self.d2++
+                                                                    
+                                                                }
+                                                        })
+                                                        
+                                                        
+                                                    
+                                                    }}}}}}}}}}}
+    
+    }
     // MARK: - Setup-functions 🔍
     
     
@@ -2905,7 +3036,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat) {
             var canThePieceGofurther: Bool = true
             
-            for byAmounty; byAmounty <= 2; byAmountx += increaserx, byAmounty += increasery {
+            for var d = byAmounty; byAmounty <= 2; byAmountx += increaserx, byAmounty += increasery {
                 
                 for var q = 0; q < whitePieces.count; q++ {
                     if whitePieces[q].frame.origin.x == selectedPiece.frame.origin.x && whitePieces[q].frame.origin.y == selectedPiece.frame.origin.y - 1 * pieceSize {
@@ -3065,7 +3196,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             var startLogicCheckingWhite: Bool = false
             var foundImportantPiece: Bool = false
             
-            for byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
+            for var d = byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
                 
                 if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  friend)  == 2 && enemy == whitePieces {
                     startLogicChecking = true
@@ -3387,7 +3518,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 var canGoFurtherWhite: Bool = true
                 var canGoFurtherBlack: Bool = true
                 
-                for byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
+                for var d = byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
                     
                     for var q = 0; q < friend.count; q++ {
                         if friend[q].frame.origin.x == piece.frame.origin.x + byAmountx * pieceSize && friend[q].frame.origin.y == piece.frame.origin.y - byAmounty * pieceSize && canThePieceGofurther == true {
@@ -3808,7 +3939,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat) {
             var canThePieceGofurther: Bool = true
             
-            for byAmounty;  byAmounty <= 2 ; byAmountx += increaserx, byAmounty += increasery {
+            for var d = byAmounty;  byAmounty <= 2 ; byAmountx += increaserx, byAmounty += increasery {
                 
                 for var q = 0; q < blackPieces.count; q++ {
                     if blackPieces[q].frame.origin.x == selectedPiece.frame.origin.x && blackPieces[q].frame.origin.y == selectedPiece.frame.origin.y + 1 * pieceSize{
