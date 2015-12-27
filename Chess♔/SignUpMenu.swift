@@ -247,8 +247,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         cancelButton.addTarget(self, action: "cancelSignupButtonPressed:", forControlEvents: .TouchUpInside)
         signupView.addSubview(cancelButton)
         
-        profilePicImageView = UIImageView(frame: CGRectMake((signupView
-            .frame.size.width/2) - 40, 10, 80, 80))
+        profilePicImageView = UIImageView(frame: CGRectMake((signupView.frame.size.width/2) - 40, 10, 80, 80))
         profilePicImageView.layer.borderColor = UIColor.whiteColor().CGColor
         profilePicImageView.layer.borderWidth = 3
         profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width/2
@@ -257,8 +256,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         profilePicImageView.image = UIImage(named: "profilePicPlaceholderDark.jpg")
         signupView.addSubview(profilePicImageView)
         
-        addProfileButton = UIButton(frame: CGRectMake((signupView
-            .frame.size.width/2) - 40, 10, 80, 80))
+        addProfileButton = UIButton(frame: CGRectMake((signupView.frame.size.width/2) - 40, 10, 80, 80))
         addProfileButton.setTitle("ADD", forState: .Normal)
         addProfileButton.titleLabel?.font = UIFont(name: "Times", size: 18)
         addProfileButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
