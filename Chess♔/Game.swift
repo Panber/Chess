@@ -797,8 +797,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     // range will be nil if no letters is found
                                                                     if  (range != nil) {
                                                                         print("letters  found")
-                                                                        //                                                                        self.canPassant = r!["passant"] as! Bool
-                                                                        //                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
+                                                                        self.canPassant = r!["passant"] as! Bool
+                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
                                                                         for var iy = 0; iy < pieces.count; iy++ {
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) && self.canPassant == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassantBlack == true {
                                                                                 
@@ -1063,8 +1063,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
             }
-            self.canPassant = r!["passant"] as! Bool
-            self.canPassantBlack = r!["passantBlack"] as! Bool
             magic1()
             print("I am white player!")
             canOnlyMoveWhite = true
@@ -1072,6 +1070,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
             self.passantPiece = (r!["passantPiece"] as? Int)!
+//            self.canPassant = r!["passant"] as! Bool
+//            self.canPassantBlack = r!["passantBlack"] as! Bool
             let userQuery = PFQuery(className: "_User")
             userQuery.whereKey("username", containedIn: un )
             userQuery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
@@ -1143,10 +1143,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.game = r!
                     var last = r!["piecePosition"] as! Array<String>
                     self.notations.append(last.last!)
-                    loadMoves()
                     self.passantPiece = (r!["passantPiece"] as? Int)!
                     self.canPassant = r!["passant"] as! Bool
                     self.canPassantBlack = r!["passantBlack"] as! Bool
+                    loadMoves()
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if String(moves.last![0]) == xAxisArrStr2[t] {
                             for var p = 0; p < yAxisArrStr2.count; p++ {
@@ -1169,8 +1169,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     
                                                                     if  (range != nil) {
                                                                         print("letters  found")
-                                                                        //                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
-                                                                        //                                                                        self.canPassant = r!["passant"] as! Bool
+
                                                                         for var iy = 0; iy < self.pieces.count - 1; iy++ {
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.blackPawns) && self.canPassant == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassantBlack == true {
                                                                                 
@@ -1491,8 +1490,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     // range will be nil if no letters is found
                                                                     if  (range != nil) {
                                                                         print("letters  found")
-                                                                        //                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
-                                                                        //                                                                        self.canPassant = r!["passant"] as! Bool
+                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
+                                                                        self.canPassant = r!["passant"] as! Bool
                                                                         for var iy = 0; iy < pieces.count; iy++ {
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) && self.canPassantBlack == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassant == true {
                                                                                 
@@ -1780,8 +1779,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
             }
-            self.canPassantBlack = r!["passantBlack"] as! Bool
-            self.canPassant = r!["passant"] as! Bool
             magic2()
             if r!["status_black"] as! String == "move" {
                 isWhiteTurn = true
@@ -1821,8 +1818,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.title = r!["whitePlayer"] as? String
             self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
-            let userQuery = PFQuery(className: "_User")
             self.passantPiece = (r!["passantPiece"] as? Int)!
+            let userQuery = PFQuery(className: "_User")
             userQuery.whereKey("username", containedIn: un )
             userQuery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
                 if error == nil {
@@ -1918,8 +1915,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     // range will be nil if no letters is found
                                                                     if  (range != nil) {
                                                                         print("letters  found")
-                                                                        //                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
-                                                                        //                                                                        self.canPassant = r!["passant"] as! Bool
                                                                         for var iy = 0; iy < self.pieces.count; iy++ {
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.blackPawns) && self.canPassantBlack == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassant == true {
                                                                                 
