@@ -2906,7 +2906,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat) {
             var canThePieceGofurther: Bool = true
             
-            for byAmounty; byAmounty <= 2; byAmountx += increaserx, byAmounty += increasery {
+            for var d = byAmounty; byAmounty <= 2; byAmountx += increaserx, byAmounty += increasery {
                 
                 for var q = 0; q < whitePieces.count; q++ {
                     if whitePieces[q].frame.origin.x == selectedPiece.frame.origin.x && whitePieces[q].frame.origin.y == selectedPiece.frame.origin.y - 1 * pieceSize {
@@ -3065,7 +3065,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             var startLogicCheckingWhite: Bool = false
             var foundImportantPiece: Bool = false
             
-            for byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
+            for var d = byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
                 
                 if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  friend)  == 2 && enemy == whitePieces {
                     startLogicChecking = true
@@ -3387,7 +3387,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 var canGoFurtherWhite: Bool = true
                 var canGoFurtherBlack: Bool = true
                 
-                for byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
+                for var d = byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
                     
                     for var q = 0; q < friend.count; q++ {
                         if friend[q].frame.origin.x == piece.frame.origin.x + byAmountx * pieceSize && friend[q].frame.origin.y == piece.frame.origin.y - byAmounty * pieceSize && canThePieceGofurther == true {
@@ -3808,7 +3808,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat) {
             var canThePieceGofurther: Bool = true
             
-            for byAmounty;  byAmounty <= 2 ; byAmountx += increaserx, byAmounty += increasery {
+            for var d = byAmounty;  byAmounty <= 2 ; byAmountx += increaserx, byAmounty += increasery {
                 
                 for var q = 0; q < blackPieces.count; q++ {
                     if blackPieces[q].frame.origin.x == selectedPiece.frame.origin.x && blackPieces[q].frame.origin.y == selectedPiece.frame.origin.y + 1 * pieceSize{

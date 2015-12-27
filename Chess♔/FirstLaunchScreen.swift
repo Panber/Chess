@@ -121,15 +121,15 @@ class FirstLaunchScreen: UIViewController {
                 self.darkModeCellLabel.backgroundColor = UIColor.darkGrayColor()
                 
                 var i = 0
-                for i; i < uiLabels.count; i++ {
+                for var d = i; i < uiLabels.count; i++ {
                     uiLabels[i].textColor = UIColor.whiteColor()
                 }
                 var o = 0
-                for o; i < uiButtons.count; o++ {
+                for var d = o; i < uiButtons.count; o++ {
                     uiButtons[o].tintColor = UIColor.whiteColor()
                 }
                 var p = 0
-                for p; i < uiTableViews.count; p++ {
+                for var d = o; i < uiTableViews.count; p++ {
                     uiTableViews[i].backgroundColor = UIColor.blackColor()
                 }
                 
@@ -159,15 +159,15 @@ class FirstLaunchScreen: UIViewController {
                 self.darkPreviewWindow.alpha = 0
                 
                 var i = 0
-                for i; i < uiLabels.count; i++ {
+                for var d = i; i < uiLabels.count; i++ {
                     uiLabels[i].textColor = UIColor.blackColor()
                 }
                 var o = 0
-                for o; i < uiButtons.count; o++ {
+                for var d = o; i < uiButtons.count; o++ {
                     uiButtons[o].tintColor = blue
                 }
                 var p = 0
-                for p; i < uiTableViews.count; p++ {
+                for var d = p; i < uiTableViews.count; p++ {
                     uiTableViews[i].backgroundColor = UIColor.whiteColor()
                 }
 
