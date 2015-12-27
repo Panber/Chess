@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,18 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PanBerLogoDark2.png" translatesAutoresizingMaskIntoConstraints="NO" id="B3s-5v-fBy">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chessLaunch3.png" translatesAutoresizingMaskIntoConstraints="NO" id="w4C-GD-p7f">
+                                <rect key="frame" x="-30" y="-29" width="661" height="658"/>
                                 <animations/>
                             </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="B3s-5v-fBy" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="3ey-eU-v6g"/>
-                            <constraint firstItem="B3s-5v-fBy" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="AL4-Lz-Cvv"/>
-                            <constraint firstAttribute="trailing" secondItem="B3s-5v-fBy" secondAttribute="trailing" id="Rzp-0k-bd8"/>
-                            <constraint firstItem="B3s-5v-fBy" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="u7s-B4-nSf"/>
+                            <constraint firstItem="w4C-GD-p7f" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="CPF-FS-hBB"/>
+                            <constraint firstItem="w4C-GD-p7f" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="I4Z-pI-aRU"/>
+                            <constraint firstItem="w4C-GD-p7f" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" constant="-29" id="Rrd-ly-sbj"/>
+                            <constraint firstItem="w4C-GD-p7f" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-50" id="cz5-9W-IGj"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -41,6 +43,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="PanBerLogoDark2.png" width="4000" height="4000"/>
+        <image name="chessLaunch3.png" width="2000" height="2000"/>
     </resources>
 </document>

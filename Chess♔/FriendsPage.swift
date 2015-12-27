@@ -25,6 +25,12 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let tblView =  UIView(frame: CGRectZero)
+        tableView.tableFooterView = tblView
+        tableView.tableFooterView!.hidden = true
+        tableView.backgroundColor = UIColor.clearColor()
+        
+        self.navigationItem.title = "Friends"
         
         getFriends()
     }
@@ -77,11 +83,31 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
         
         let cell:UserTableViewCell3 = self.tableView.dequeueReusableCellWithIdentifier("cell3", forIndexPath: indexPath) as! UserTableViewCell3
         
+        
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        
+        if darkMode {
+            cell.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            cell.rating.textColor = UIColor.lightTextColor()
+            cell.username.textColor =  UIColor.whiteColor()
+            
+        }
+        else {
+            
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.rating.textColor = UIColor.darkGrayColor()
+            cell.username.textColor =  UIColor.blackColor()
+        }
+        
         cell.username.text = friendsArray[indexPath.row] as! String
         
         let userQuery = PFQuery(className: "_User")
         userQuery.whereKey("username", equalTo: friendsArray[indexPath.row])
         let _user = userQuery.getFirstObject() as! PFUser
+        
+        let rating = _user["rating"] as? Int
+        cell.rating.text = "\(rating!)"
         
         let profilePictureObject = _user["profile_picture"] as? PFFile
         
@@ -100,21 +126,88 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
             }
         }
         
+        if cell.username.text == friendsArray.last {
+            cell.separatorInset = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell:UserTableViewCell3 = self.tableView.dequeueReusableCellWithIdentifier("cell3", forIndexPath: indexPath) as! UserTableViewCell3
-        NSUserDefaults.standardUserDefaults().setObject(friendsArray[indexPath.row], forKey: "other_username_from_friends")
-        cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_from_friends") as! String
+        
+        
+        
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        
+        if darkMode {
+            cell.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            cell.rating.textColor = UIColor.lightTextColor()
+            cell.username.textColor =  UIColor.whiteColor()
+            
+        }
+        else {
+            
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.rating.textColor = UIColor.darkGrayColor()
+            cell.username.textColor =  UIColor.blackColor()
+        }
+        
+        
+        
+        NSUserDefaults.standardUserDefaults().setObject(friendsArray[indexPath.row], forKey: "other_username_profile")
+        cell.username.text = NSUserDefaults.standardUserDefaults().objectForKey("other_username_profile") as! String
         
         var p = imageDataArray[indexPath.row]
-        NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friends")
+        NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_profile")
         cell.userProfileImage.image = UIImage(data: p)
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        lightOrDarkMode()
+    }
     
+    func lightOrDarkMode() {
+        if darkMode == true {
+            
+            
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
+            
+            self.view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
+            self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.navigationController?.navigationBar.tintColor = blue
+            
+            self.tableView.backgroundColor = UIColor(red: 0.20, green: 0.20 , blue: 0.20, alpha: 1)
+            
+            
+            
+            
+        }
+        else if darkMode == false {
+            
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
+            self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+            self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
+            self.tabBarController?.tabBar.tintColor = blue
+            self.navigationController?.navigationBar.tintColor = blue
+            self.tableView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+
+            
+        }
+        
+        
+    }
+
     
     
     
