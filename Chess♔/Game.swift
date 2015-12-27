@@ -586,11 +586,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         pieceMarked.image = UIImage(named: "pieceMarked.png")
         self.view.addSubview(pieceMarked)
         pieceMarked.hidden = true
- 
-         otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
+        
+        otherImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, 0, 60, 60))
         
         
-         meImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) + (screenWidth/2) + 30, 60, 60))
+        meImage = UIImageView(frame: CGRectMake((screenWidth/2) - 30, (screenHeight/2) + (screenWidth/2) + 30, 60, 60))
         
         
         var images:Array<NSData> = []
@@ -644,21 +644,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         if game["mode"] as? String == "Rated" {
             ratedLrated = "Rated"
-        
+            
         }
         else {
             ratedLrated = "Not Rated"
-
+            
         }
         if game["speed"] as? String == "Normal" {
             speedLspeed = "Normal Speedmode"
             speedImagespeed = UIImage(named: "normalIndicator.png")!
-
+            
         }
         else if game["speed"] as? String == "Fast" {
             speedLspeed = "Fast Speedmode"
             speedImagespeed = UIImage(named: "flash31.png")!
-
+            
         }
         else if game["speed"] as? String == "Slow" {
             speedLspeed = "Slow Speedmode"
@@ -668,7 +668,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         let lastupdate = game["timeLeftToMove"] as? NSDate
         timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
-
+        
         
         var moves: Array<String> = []
         func loadMoves() {
@@ -679,7 +679,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 
                 if i % 2 == 0{
-                  notationsWithNumber +=  "\(t). "
+                    notationsWithNumber +=  "\(t). "
                     t++
                 }
                 notationsWithNumber += "\(notations[i]) "
@@ -713,17 +713,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             movesField.text = notationsWithNumber
             
             if copyB.frame.size.width > 45 {
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.copyB.frame.size.width -= 16
-                self.copyB.frame.origin.x += 8
-                self.copyB.setTitle("Copy", forState: .Normal)
-                self.copyB.backgroundColor = blue
-                self.copyB.userInteractionEnabled = true
-                
-                }, completion: {finish in
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.copyB.frame.size.width -= 16
+                    self.copyB.frame.origin.x += 8
+                    self.copyB.setTitle("Copy", forState: .Normal)
+                    self.copyB.backgroundColor = blue
+                    self.copyB.userInteractionEnabled = true
                     
-                    
-            })
+                    }, completion: {finish in
+                        
+                        
+                })
             }
         }
         loadMoves()
@@ -797,8 +797,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     // range will be nil if no letters is found
                                                                     if  (range != nil) {
                                                                         print("letters  found")
-//                                                                        self.canPassant = r!["passant"] as! Bool
-//                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
+                                                                        self.canPassant = r!["passant"] as! Bool
+                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
                                                                         for var iy = 0; iy < pieces.count; iy++ {
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) && self.canPassant == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassantBlack == true {
                                                                                 
@@ -831,7 +831,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 for var ty = 0; ty < self.whitePawns.count; ty++ {
                                                                                     if self.whitePawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-
+                                                                                        
                                                                                         self.whitePawns.removeAtIndex(ty)
                                                                                         ty--
                                                                                         print("TAKEN")
@@ -858,7 +858,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 })
                                                                                 
                                                                             }
-
+                                                                            
                                                                         }
                                                                     } else {
                                                                         print("letters not found")
@@ -1063,8 +1063,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
             }
-            self.canPassant = r!["passant"] as! Bool
-            self.canPassantBlack = r!["passantBlack"] as! Bool
             magic1()
             print("I am white player!")
             canOnlyMoveWhite = true
@@ -1072,6 +1070,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
             self.passantPiece = (r!["passantPiece"] as? Int)!
+            self.canPassant = r!["passant"] as! Bool
+            self.canPassantBlack = r!["passantBlack"] as! Bool
             let userQuery = PFQuery(className: "_User")
             userQuery.whereKey("username", containedIn: un )
             userQuery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
@@ -1080,7 +1080,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         for result in result {
                             
                             let rating = result["rating"] as? Int
-
+                            
                             let profilePictureObject = result["profile_picture"] as? PFFile
                             
                             if(profilePictureObject != nil)
@@ -1103,12 +1103,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         else {
                                             self.otherImage.image = UIImage(data: imageData!)
                                             self.view.addSubview(self.otherImage)
-                               
+                                            
                                             
                                             self.otherUserImage = UIImage(data: imageData!)!
                                             self.otherUserRating = "\(result["rating"] as! Int!)"
                                             self.otherUserName = (result["username"] as? String)!
-
+                                            
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 self.otherImage.alpha = 1
                                             })
@@ -1169,8 +1169,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     
                                                                     if  (range != nil) {
                                                                         print("letters  found")
-//                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
-//                                                                        self.canPassant = r!["passant"] as! Bool
+                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
+                                                                        self.canPassant = r!["passant"] as! Bool
                                                                         for var iy = 0; iy < self.pieces.count - 1; iy++ {
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.blackPawns) && self.canPassant == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassantBlack == true {
                                                                                 
@@ -1382,7 +1382,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     else {
                         self.isWhiteTurn = false
-                       
+                        
                         self.turnLturn = "Their Turn"
                         self.turnIndicatorturn = UIColor.lightGrayColor()
                         
@@ -1491,8 +1491,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     // range will be nil if no letters is found
                                                                     if  (range != nil) {
                                                                         print("letters  found")
-//                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
-//                                                                        self.canPassant = r!["passant"] as! Bool
+                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
+                                                                        self.canPassant = r!["passant"] as! Bool
                                                                         for var iy = 0; iy < pieces.count; iy++ {
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) && self.canPassantBlack == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassant == true {
                                                                                 
@@ -1507,7 +1507,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         self.whitePieces.removeAtIndex(ty)
                                                                                         self.whitePiecesString.removeAtIndex(ty)
                                                                                         ty--
-                                                                                         print("TAKEN")
+                                                                                        
                                                                                     }
                                                                                     
                                                                                 }
@@ -1519,7 +1519,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         self.blackPieces.removeAtIndex(ty)
                                                                                         self.blackPiecesString.removeAtIndex(ty)
                                                                                         ty--
-                                                                                         print("TAKEN")
+                                                                                        
                                                                                     }
                                                                                     
                                                                                 }
@@ -1584,7 +1584,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         self.whitePieces.removeAtIndex(ty)
                                                                                         self.whitePiecesString.removeAtIndex(ty)
                                                                                         ty--
-                                                                                         print("TAKEN")
+                                                                                        
                                                                                     }
                                                                                     
                                                                                 }
@@ -1596,7 +1596,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         self.blackPieces.removeAtIndex(ty)
                                                                                         self.blackPiecesString.removeAtIndex(ty)
                                                                                         ty--
-                                                                                         print("TAKEN")
+                                                                                        
                                                                                     }
                                                                                     
                                                                                 }
@@ -1780,8 +1780,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
             }
-            self.canPassantBlack = r!["passantBlack"] as! Bool
-            self.canPassant = r!["passant"] as! Bool
             magic2()
             if r!["status_black"] as! String == "move" {
                 isWhiteTurn = true
@@ -1823,6 +1821,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
             let userQuery = PFQuery(className: "_User")
             self.passantPiece = (r!["passantPiece"] as? Int)!
+            self.canPassantBlack = r!["passantBlack"] as! Bool
+            self.canPassant = r!["passant"] as! Bool
             userQuery.whereKey("username", containedIn: un )
             userQuery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
                 if error == nil {
@@ -1918,8 +1918,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     // range will be nil if no letters is found
                                                                     if  (range != nil) {
                                                                         print("letters  found")
-//                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
-//                                                                        self.canPassant = r!["passant"] as! Bool
+                                                                        self.canPassantBlack = r!["passantBlack"] as! Bool
+                                                                        self.canPassant = r!["passant"] as! Bool
                                                                         for var iy = 0; iy < self.pieces.count; iy++ {
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.blackPawns) && self.canPassantBlack == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassant == true {
                                                                                 
@@ -1934,7 +1934,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         self.whitePieces.removeAtIndex(ty)
                                                                                         self.whitePiecesString.removeAtIndex(ty)
                                                                                         ty--
-                                                                                         print("TAKEN")
+                                                                                        
                                                                                     }
                                                                                     
                                                                                 }
@@ -1946,7 +1946,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         self.blackPieces.removeAtIndex(ty)
                                                                                         self.blackPiecesString.removeAtIndex(ty)
                                                                                         ty--
-                                                                                         print("TAKEN")
+                                                                                        
                                                                                     }
                                                                                     
                                                                                 }
@@ -1988,7 +1988,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters not found")
                                                                     }
                                                                 }
-
+                                                                
                                                                 if moves.last == moves.last {
                                                                     checkIfTakenLast()
                                                                     
@@ -2168,7 +2168,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         game = PFObject(className: "Games")
         
         timer.invalidate()
-
+        
         
     }
     
@@ -2218,7 +2218,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if screenHeight == 568 {slider.frame.origin.y = screenHeight/2 + 150 - 47}
         slider.minimumValue = 0
         slider.maximumValue = Float(notations.count)
-
+        
         slider.value = slider.maximumValue
         slider.continuous = true
         slider.tintColor = blue
@@ -2264,7 +2264,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             slider.frame.origin.y = screenHeight/2 + 150 - 47
             capsuleB.frame.origin.y = screenHeight/2 + 180
         }
-
+        
         
         //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
         
@@ -2449,9 +2449,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             visualEffectView.alpha = 1
             }, completion: {finish in
-        
+                
                 visualEffectView.userInteractionEnabled = true
-
+                
                 
                 
         })
@@ -2645,7 +2645,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     view.removeFromSuperview()
                 }
                 self.infoButton.userInteractionEnabled = true
-
+                
                 
         })
         
@@ -2666,7 +2666,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             let sinceOutput = Int(timeLeftC) * -1
             timeL.text = "\(sinceOutput)min"
             timeL.textColor = red
-
+            
         }
         else {
             let sinceOutput = Int(timeLeftC) * -1
@@ -2679,8 +2679,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             let sinceOutput = Int(timeLeftC) * -1
             timeL.text = "\(sinceOutput)h"
             timeL.textColor = textC
-
-
+            
+            
             
             //making to days
             if timeLeftC <= -24 {
@@ -2695,8 +2695,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if timeLeftC >= 0 {
             timeL.text = "Game Finished"
             timeL.font = UIFont(name: "Times-Italic", size: 19)
-
-        timer.invalidate()
+            
+            timer.invalidate()
         }
         
         
@@ -3024,6 +3024,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
                 var count = blackPawns.count - 1
+                print(whitePawns.count - 1)
                 if selectedPiece.frame.origin.y == screenHeight/2 - 1 * pieceSize &&  blackPawns[count-passantPiece].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && blackPawns[count-passantPiece].frame.origin.y == selectedPiece.frame.origin.y && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false && canPassant == true || selectedPiece.frame.origin.y == screenHeight/2 - 1 * pieceSize &&  blackPawns[count-passantPiece].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && blackPawns[count-passantPiece].frame.origin.y == selectedPiece.frame.origin.y && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false && canPassantBlack == true   {
                     print("Passant!")
                     whitePassant = true
@@ -3853,12 +3854,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             pieceOption.removeFromSuperview()
                         }
                     }
-//                    for var q = 0; q < blackPieces.count; q++ {
-//                        if blackPieces[q] == selectedPiece {
-//                            game.setObject(q, forKey: "passantPiece")
-//                        }
-//                    }
-//                    game.setObject(true, forKey: "passant")
+                    //                    for var q = 0; q < blackPieces.count; q++ {
+                    //                        if blackPieces[q] == selectedPiece {
+                    //                            game.setObject(q, forKey: "passantPiece")
+                    //                        }
+                    //                    }
+                    //                    game.setObject(true, forKey: "passant")
                     pieceOptions += [pieceOption]
                 } else if canThePieceGofurther == true {
                     let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + 1 * pieceSize, size, size))
@@ -4071,7 +4072,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             collectionView.reloadData()
             game.addObject(notations.last!, forKey: "piecePosition")
             
-
+            
             
             
             
@@ -4089,13 +4090,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
             else {
                 notationsWithNumber += "\(notations.last!) "
-
+                
                 game["status_white"] = "move"
                 game["status_black"] = "notmove"
                 uuser = (game["whitePlayer"] as? String)!
             }
             movesField.text = notationsWithNumber
-
+            
             
             game.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
                 if error == nil {
@@ -4132,7 +4133,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     self.turnLturn = "Their Turn"
                     self.turnIndicatorturn = UIColor.lightGrayColor()
-              
+                    
                     
                 }
             })
@@ -4514,7 +4515,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         blackPieces.removeAtIndex(t)
                         
                         whitePassant = false
-                       //game.setObject(false, forKey: "passant")
+                        //game.setObject(false, forKey: "passant")
                     }
                 }
             }
@@ -4689,9 +4690,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             pieceOptions[o].multipleTouchEnabled = true
             
             
-            if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _4 && hasBeenTaken(selectedPiece, array: whitePawns) && selectedPiece.frame.origin.y == _2 {
-                for var q = 0; q < whitePawns.count; q++ {
-                    if whitePawns[q] == selectedPiece {
+            if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.y == _4 && hasBeenTaken(selectedPiece, array: whitePieces) && selectedPiece.frame.origin.y == _2 {
+                for var q = 0; q < whitePieces.count; q++ {
+                    if whitePieces[q] == selectedPiece {
                         game.setObject(q, forKey: "passantPiece")
                     }
                 }
