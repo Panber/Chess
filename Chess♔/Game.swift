@@ -780,7 +780,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 var am = 0
                 for var o = 0; o < moves.count; o++ {
                     am++
-                    
+                    print("am variable is \(am)")
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if String(moves[o][0]) == xAxisArrStr2[t] {
                             for var p = 0; p < yAxisArrStr2.count; p++ {
@@ -804,6 +804,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     if  (range != nil) {
                                                                         print("letters  found")
                                                                         self.canPassant = r!["passant"] as! Bool
+                                                                      
                                                                         self.canPassantBlack = r!["passantBlack"] as! Bool
                                                                         for var iy = 0; iy < pieces.count; iy++ {
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) && self.canPassant == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassantBlack == true {
@@ -876,9 +877,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     }
                                                                 }
                                                                 func checkIfTaken() {
-                                                                    // range will be nil if no letters is found
+                                                                    // range will be nil if no x is found
                                                                     if  (range != nil) {
-                                                                        print("letters  found")
+                                                                        print("x  found")
                                                                         
                                                                         for var iy = 0; iy < pieces.count ; iy++ {
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
@@ -941,7 +942,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         
                                                                     }
                                                                     else {
-                                                                        print("letters not found")
+                                                                        print("x not found")
                                                                     }
                                                                 
                                                                 
@@ -950,10 +951,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 if moves.last == moves[o] && am == moves.count{
                                                                     checkIfTakenLast()
                                                                     
-                                                                    
+                                                                    print("moves.count in magic1() is \(moves.count)")
+
                                                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
+                                                                        
+                                                                        print("last pieces[i] is \(self.pieces[i])  ")
                                                                         
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
@@ -965,9 +969,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 else {
                                                                     checkIfTaken()
                                                                     
+                                                                    print("pieces[i] is \(pieces[i]) with")
+
+                                                                    
                                                                     pieces[i].frame.origin.x = xAxisArr[q]
                                                                     pieces[i].frame.origin.y = yAxisArr[a]
-                                                                    
+                                                                    self.deletePiecesAfterLoad()
+
                                                                     
                                                                 }
                                                                 
@@ -1485,6 +1493,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 var am = 0
                 for var o = 0; o < moves.count; o++ {
                     am++
+                    
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if String(moves[o][0]) == xAxisArrStr2[t] {
                             for var p = 0; p < yAxisArrStr2.count; p++ {
@@ -1668,7 +1677,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                     self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                     
-                                                                    
+                                                                    self.deletePiecesAfterLoad()
+
                                                                 }
                                                                 
                                                                 
@@ -2486,7 +2496,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
         }
             //change to false later
-        canPressBackwardButton = true
+        canPressBackwardButton = false
         magic3()
         }
     }
