@@ -807,6 +807,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters  found")
                                                                         print(range)
                                                                         self.canPassant = r!["passant"] as! Bool
+                                                                      
                                                                         self.canPassantBlack = r!["passantBlack"] as! Bool
                                                                         for var iy = 0; iy < pieces.count; iy++ {
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
@@ -938,6 +939,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                         
+                                                                        print("last pieces[i] is \(self.pieces[i])  ")
+                                                                        
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
                                                                             self.updateLogic()
@@ -949,7 +952,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     checkIfTaken()
                                                                     pieces[i].frame.origin.x = xAxisArr[q]
                                                                     pieces[i].frame.origin.y = yAxisArr[a]
-                                                                    
+                                                                    self.deletePiecesAfterLoad()
+
                                                                     
                                                                 }
                                                                 
@@ -1467,6 +1471,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 var am = 0
                 for var o = 0; o < moves.count; o++ {
                     am++
+                    
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if String(moves[o][0]) == xAxisArrStr2[t] {
                             for var p = 0; p < yAxisArrStr2.count; p++ {
@@ -1652,7 +1657,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                     self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                     
-                                                                    
+                                                                    self.deletePiecesAfterLoad()
+
                                                                 }
                                                                 
                                                                 
@@ -2281,9 +2287,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     func capsuleButtonPressed(sender: UIButton!) {
         
         
-        var uu: CGFloat = screenWidth/CGFloat(notations.count) - screenWidth/CGFloat(notations.count)/CGFloat(notations.count)
+        var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(notations.count + 1) - screenWidth/CGFloat(notations.count+1)/CGFloat(notations.count + 1)))
         print("uu is \(uu)")
-        sliderPointer = UILabel(frame: CGRectMake(screenWidth - uu,screenHeight/2 + screenWidth/2 + 10,uu,7))
+        sliderPointer = UILabel(frame: CGRectMake(screenWidth - uu - CGFloat(((screenWidth/CGFloat(notations.count + 1))/CGFloat(notations.count + 1))),screenHeight/2 + screenWidth/2 + 10,uu + CGFloat(((screenWidth/CGFloat(notations.count+1))/CGFloat(notations.count+1))),7))
         if sliderPointer.frame.size.width < 15 { sliderPointer.frame.size.width = 15; sliderPointer.frame.origin.x = screenWidth - 15}
         sliderPointer.backgroundColor = blue
         sliderPointer.alpha = 0.75
@@ -4885,7 +4891,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
-            
+            self.capsuleL.textColor = UIColor.whiteColor()
+
             
         }
         else if darkMode == false {
@@ -4900,6 +4907,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
             
+            self.capsuleL.textColor = UIColor.blackColor()
         }
         
     }
