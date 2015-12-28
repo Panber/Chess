@@ -2302,9 +2302,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     func capsuleButtonPressed(sender: UIButton!) {
         
         
-        var uu: CGFloat = screenWidth/CGFloat(notations.count) - screenWidth/CGFloat(notations.count)/CGFloat(notations.count)
+        var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(notations.count + 1) - screenWidth/CGFloat(notations.count+1)/CGFloat(notations.count + 1)))
         print("uu is \(uu)")
-        sliderPointer = UILabel(frame: CGRectMake(screenWidth - uu,screenHeight/2 + screenWidth/2 + 10,uu,7))
+        sliderPointer = UILabel(frame: CGRectMake(screenWidth - uu - CGFloat(((screenWidth/CGFloat(notations.count + 1))/CGFloat(notations.count + 1))),screenHeight/2 + screenWidth/2 + 10,uu + CGFloat(((screenWidth/CGFloat(notations.count+1))/CGFloat(notations.count+1))),7))
         if sliderPointer.frame.size.width < 15 { sliderPointer.frame.size.width = 15; sliderPointer.frame.origin.x = screenWidth - 15}
         sliderPointer.backgroundColor = blue
         sliderPointer.alpha = 0.75
@@ -2478,16 +2478,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     func backwardButtonPressed(sender:UIButton!) {
         if canPressBackwardButton == true {
         slider.value--
-        
-        sliderPointer.frame.origin.x -= CGFloat(Int(screenWidth/CGFloat(notations.count))) - CGFloat(Int(screenWidth/CGFloat(notations.count)/CGFloat(notations.count)))
-        
+        print(slider.value)
+        sliderPointer.frame.origin.x -= CGFloat((screenWidth/CGFloat(notations.count+1)))
+       // sliderPointer.frame.origin.x += CGFloat(((screenWidth/CGFloat(notations.count+1))/CGFloat(notations.count+)))
+            
+            if Int(slider.value) == 0 {
+            sliderPointer.frame.origin.x = 0
+            }
         forwardB.enabled = true
         
         if slider.value == 0 {
             backwardB.enabled = false
             
         }
-        canPressBackwardButton = false
+            //change to false later
+        canPressBackwardButton = true
         magic3()
         }
     }
@@ -4904,7 +4909,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
-            
+            self.capsuleL.textColor = UIColor.whiteColor()
+
             
         }
         else if darkMode == false {
@@ -4919,6 +4925,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
             
+            self.capsuleL.textColor = UIColor.blackColor()
         }
         
     }
