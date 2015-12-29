@@ -1166,6 +1166,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.game = r!
                     var last = r!["piecePosition"] as! Array<String>
                     self.notations.append(last.last!)
+                    let newIndexPath = NSIndexPath(forItem: self.notations.count - 1, inSection: 0)
+                    self.collectionView.insertItemsAtIndexPaths([newIndexPath])
+                    self.collectionView.layoutIfNeeded()
+                    self.collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.collectionView.reloadData()
+                    }
                     print("notations.count is \(self.notations.count)")
                     self.passantPiece = (r!["passantPiece"] as? Int)!
                     self.canPassant = r!["passant"] as! Bool
@@ -2282,6 +2289,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         view.sendSubviewToBack(backwardB)
 
         
+        //        let sliderOverlay = UILabel(frame: CGRectMake(0,screenHeight/2 + screenWidth/2 + 12,screenWidth,25))
+        //        sliderOverlay.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+        //        view.addSubview(sliderOverlay)
+        // var uu: CGFloat = screenWidth/CGFloat(notations.count)
         
         forwardB = UIButton(frame: CGRectMake(screenWidth/2+20,screenHeight/2 + 150 - 47,40,40))
         forwardB.setBackgroundImage(UIImage(named: "arrow_blueF.png"), forState: .Normal)
@@ -5113,6 +5124,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.notationsL.textColor = UIColor.whiteColor()
 
 
+            
             
         }
         else if darkMode == false {
