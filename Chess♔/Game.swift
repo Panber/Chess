@@ -2218,6 +2218,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         } else if screenHeight == 568.0 {
             collectionView = UICollectionView(frame: CGRectMake(screenWidth-92, 74, 101, 36), collectionViewLayout: layout)
             layout.itemSize = CGSize(width: 99, height: 17)
+        } else if screenHeight == 480.0 {
+            collectionView = UICollectionView(frame: CGRectMake(screenWidth-92, 74, 101, 36), collectionViewLayout: layout)
+            layout.itemSize = CGSize(width: 99, height: 17)
         }
         
         collectionView.dataSource = self
