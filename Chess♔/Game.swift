@@ -1292,6 +1292,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.checkByRook = false
                                                                         self.checkByKnight = false
                                                                         self.checkByPawn = false
+                                                                        self.pieceWhiteLogicOptions = []
+                                                                        self.pieceBlackLogicOptions = []
                                                                         self.game.setObject(false, forKey: "passantBlack")
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
@@ -2048,6 +2050,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.checkByRook = false
                                                                         self.checkByKnight = false
                                                                         self.checkByPawn = false
+                                                                        self.pieceWhiteLogicOptions = []
+                                                                        self.pieceBlackLogicOptions = []
                                                                         self.game.setObject(false, forKey: "passant")
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
