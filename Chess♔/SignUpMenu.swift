@@ -16,7 +16,6 @@ let screenWidth = screenSize.width
 let screenHeight = screenSize.height
 var ref = Firebase(url: "https://chess-panber.firebaseio.com/")
 
-
 class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
