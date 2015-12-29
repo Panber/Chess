@@ -1173,6 +1173,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     dispatch_async(dispatch_get_main_queue()) {
                         self.collectionView.reloadData()
                     }
+                    print("notations.count is \(self.notations.count)")
                     self.passantPiece = (r!["passantPiece"] as? Int)!
                     self.canPassant = r!["passant"] as! Bool
                     self.canPassantBlack = r!["passantBlack"] as! Bool
@@ -1249,6 +1250,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 
                                                                                 self.piecesToDelete.append(self.pieces[iy])
                                                                                 
+                                                                                self.takenPiecesToReload.append(self.pieces[iy])
+                                                                                self.takenPiecesToReloadAtIndex.append(iy)
                                                                                 
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     self.pieces[iy].alpha = 0
@@ -1921,6 +1924,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.game = r!
                     var last = r!["piecePosition"] as! Array<String>
                     self.notations.append(last.last!)
+                    print("notations.count is \(self.notations.count)")
                     loadMoves()
                     self.passantPiece = (r!["passantPiece"] as? Int)!
                     self.canPassantBlack = r!["passantBlack"] as! Bool
@@ -1997,6 +2001,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 self.piecesToDelete.append(self.pieces[iy])
                                                                                 
+                                                                                self.takenPiecesToReload.append(self.pieces[iy])
+                                                                                self.takenPiecesToReloadAtIndex.append(iy)
                                                                                 
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     self.pieces[iy].alpha = 0
@@ -2263,6 +2269,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         view.addSubview(capsuleL)
         view.sendSubviewToBack(capsuleL)
         
+        notationsL = UILabel(frame: CGRectMake(0,screenHeight/2 + 150 - 47,screenWidth/2 - 60,30))
+        notationsL.text = ""
+        notationsL.font = UIFont(name: "Times", size: 20)
+        notationsL.textAlignment = .Center
+        view.addSubview(notationsL)
+        view.sendSubviewToBack(notationsL)
         
         
         capsuleB = UIButton(frame: CGRectMake(screenWidth - 60,screenHeight/2 + 246,40,40))
@@ -2272,26 +2284,47 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         capsuleB.addTarget(self, action: "capsuleButtonPressed:", forControlEvents: .TouchUpInside)
         view.addSubview(capsuleB)
         
-        backwardB = UIButton(frame: CGRectMake(screenWidth/2-70,screenHeight/2 + 150 - 47,40,40))
+        backwardB = UIButton(frame: CGRectMake(screenWidth/2-60,screenHeight/2 + 150 - 47,40,40))
         backwardB.setBackgroundImage(UIImage(named: "arrow_blueB.png"), forState: .Normal)
         backwardB.addTarget(self, action: "backwardButtonPressed:", forControlEvents: .TouchUpInside)
         view.addSubview(backwardB)
         backwardB.enabled = false
         view.sendSubviewToBack(backwardB)
+
         
         //        let sliderOverlay = UILabel(frame: CGRectMake(0,screenHeight/2 + screenWidth/2 + 12,screenWidth,25))
         //        sliderOverlay.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         //        view.addSubview(sliderOverlay)
         // var uu: CGFloat = screenWidth/CGFloat(notations.count)
         
-        
-        forwardB = UIButton(frame: CGRectMake(screenWidth/2+30,screenHeight/2 + 150 - 47,40,40))
+        forwardB = UIButton(frame: CGRectMake(screenWidth/2+20,screenHeight/2 + 150 - 47,40,40))
         forwardB.setBackgroundImage(UIImage(named: "arrow_blueF.png"), forState: .Normal)
         forwardB.addTarget(self, action: "forwardButtonPressed:", forControlEvents: .TouchUpInside)
         forwardB.enabled = false
         view.addSubview(forwardB)
         view.sendSubviewToBack(forwardB)
         print(screenHeight)
+        
+        
+        exitTimeCapsuleB = UIButton(frame: CGRectMake(screenWidth/2 + 60,screenHeight/2 + 150 - 47,screenWidth/2 - 60,40))
+        exitTimeCapsuleB.titleLabel?.font = UIFont(name: "Times", size: 20)
+        exitTimeCapsuleB.setTitle("Exit", forState: .Normal)
+        exitTimeCapsuleB.setTitleColor(red, forState: .Normal)
+        exitTimeCapsuleB.addTarget(self, action: "exitTimeCapsuleBPressed:", forControlEvents: .TouchUpInside)
+        exitTimeCapsuleB.titleLabel?.textAlignment = NSTextAlignment.Center
+        view.addSubview(exitTimeCapsuleB)
+        view.sendSubviewToBack(exitTimeCapsuleB)
+  
+        
+        var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(notations.count + 1) - screenWidth/CGFloat(notations.count+1)/CGFloat(notations.count + 1)))
+        print("uu is \(uu)")
+        sliderPointer = UILabel(frame: CGRectMake(screenWidth - uu - CGFloat(((screenWidth/CGFloat(notations.count + 1))/CGFloat(notations.count + 1))),screenHeight/2 + screenWidth/2 ,uu + CGFloat(((screenWidth/CGFloat(notations.count+1))/CGFloat(notations.count+1))),7))
+        if sliderPointer.frame.size.width < 15 { sliderPointer.frame.size.width = 15; sliderPointer.frame.origin.x = screenWidth - 15}
+        sliderPointer.backgroundColor = blue
+        sliderPointer.alpha = 0.75
+        view.addSubview(sliderPointer)
+        view.sendSubviewToBack(sliderPointer)
+
         
         if screenHeight == 480 {
             self.tabBarController?.tabBar.hidden = true
@@ -2304,18 +2337,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
     }
     
+    var exitTimeCapsuleB = UIButton()
     var sliderPointer = UILabel()
+    var notationsL = UILabel()
+    var fNum = Double()
+
+    
     // MARK: -Time Capsule
     func capsuleButtonPressed(sender: UIButton!) {
         
         
+        
+        
         var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(notations.count + 1) - screenWidth/CGFloat(notations.count+1)/CGFloat(notations.count + 1)))
-        print("uu is \(uu)")
-        sliderPointer = UILabel(frame: CGRectMake(screenWidth - uu - CGFloat(((screenWidth/CGFloat(notations.count + 1))/CGFloat(notations.count + 1))),screenHeight/2 + screenWidth/2 + 10,uu + CGFloat(((screenWidth/CGFloat(notations.count+1))/CGFloat(notations.count+1))),7))
-        if sliderPointer.frame.size.width < 15 { sliderPointer.frame.size.width = 15; sliderPointer.frame.origin.x = screenWidth - 15}
-        sliderPointer.backgroundColor = blue
-        sliderPointer.alpha = 0.75
-        view.addSubview(sliderPointer)
+
+        
+        sliderPointer.frame.origin.x = screenWidth - uu - CGFloat(((screenWidth/CGFloat(notations.count + 1))/CGFloat(notations.count + 1)))
+        sliderPointer.frame.size.width = uu + CGFloat(((screenWidth/CGFloat(notations.count+1))/CGFloat(notations.count+1)))
+   
         
         slider.maximumValue = Float(notations.count) - 0
         
@@ -2326,6 +2365,23 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         forwardB.enabled = false
         backwardB.enabled = true
         
+         fNum = Double(notations.count/2) + 1
+        
+        
+        if floor(fNum) == fNum {
+            if Int(slider.value-1) >= 0 {
+                notationsL.text = "\(Int(fNum)). \(notations[Int(slider.value)-1])"
+            }
+        }
+        else {
+            if Int(slider.value-1) >= 0 {
+                notationsL.text = "\(Int(fNum-0.5)). \(notations[Int(slider.value)-1])"
+            }
+            else {
+                notationsL.text = ""
+                
+            }
+        }
         
         UIView.animateWithDuration(0.8, animations: { () -> Void in
             //self.slider.frame.origin.y = 652
@@ -2339,18 +2395,33 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.meImage.frame.origin.y = screenHeight + 50
             self.otherImage.frame.origin.y = -100
             
+            self.notationsL.frame.origin.y = 600 + 19
+
+            self.exitTimeCapsuleB.frame.origin.y = 600 + 16
+            
+            self.sliderPointer.frame.origin.y = screenHeight/2 + screenWidth/2 + 10
+            if self.sliderPointer.frame.size.width < 15 { self.sliderPointer.frame.size.width = 15; self.sliderPointer.frame.origin.x = screenWidth - 15}
+            
             if screenHeight == 667 {
                 self.capsuleL.frame.origin.y = 72
                 self.slider.frame.origin.y = 587
-                self.backwardB.frame.origin.y = 540
-                self.forwardB.frame.origin.y = 540
+                self.backwardB.frame.origin.y = 552
+                self.forwardB.frame.origin.y = 552
+                
+                self.sliderPointer.frame.origin.y = screenHeight/2 + screenWidth/2 + 8
+                self.notationsL.frame.origin.y = 554
+                self.exitTimeCapsuleB.frame.origin.y = 552
+                
             }
             else if screenHeight == 568 {
                 self.capsuleL.frame.origin.y = 62
                 self.slider.frame.origin.y = 493
-                self.backwardB.frame.origin.y = 455
-                self.forwardB.frame.origin.y = 455
-                
+                self.backwardB.frame.origin.y = 465
+                self.forwardB.frame.origin.y = 465
+              
+                self.sliderPointer.frame.origin.y = screenHeight/2 + screenWidth/2 + 6
+                self.notationsL.frame.origin.y = 468
+                self.exitTimeCapsuleB.frame.origin.y = 465
             }
                 
             else if screenHeight == 480 {
@@ -2396,6 +2467,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 self.collectionView.frame.origin.y  = 86
                 self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 30
                 self.otherImage.frame.origin.y = 64 + 13
+                
+                self.sliderPointer.frame.origin.y = screenHeight/2 + screenWidth/2
+                self.notationsL.frame.origin.y = screenHeight/2 + 150 - 47
+                self.exitTimeCapsuleB.frame.origin.y = screenHeight/2 + 150 - 47
                 
                 if screenHeight == 667 {
                     self.capsuleB.frame.origin.y = screenHeight/2 + 220
@@ -2454,6 +2529,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 30
                 self.otherImage.frame.origin.y = 64 + 13
                 
+                
+                self.sliderPointer.frame.origin.y = screenHeight/2 + screenWidth/2
+                self.notationsL.frame.origin.y = screenHeight/2 + 150 - 47
+                self.exitTimeCapsuleB.frame.origin.y = screenHeight/2 + 150 - 47
+                
                 if screenHeight == 667 {
                     self.capsuleB.frame.origin.y = screenHeight/2 + 220
                     self.slider.frame.origin.y = screenHeight/2 + 150
@@ -2489,6 +2569,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             sliderPointer.frame.origin.x -= CGFloat((screenWidth/CGFloat(notations.count+1)))
             // sliderPointer.frame.origin.x += CGFloat(((screenWidth/CGFloat(notations.count+1))/CGFloat(notations.count+)))
             
+            fNum -= 0.5
+            
+            if floor(fNum) == fNum {
+                if Int(slider.value-1) >= 0 {
+                    notationsL.text = "\(Int(fNum)). \(notations[Int(slider.value)-1])"
+                }
+            }
+            else {
+                if Int(slider.value-1) >= 0 {
+                    notationsL.text = "\(Int(fNum-0.5)). \(notations[Int(slider.value)-1])"
+                }
+                else {
+                    notationsL.text = ""
+                    
+                }
+            }
+            
+            
             if Int(slider.value) == 0 {
                 sliderPointer.frame.origin.x = 0
             }
@@ -2502,6 +2600,61 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             canPressBackwardButton = false
             magic3()
         }
+    }
+    
+    
+    
+    func exitTimeCapsuleBPressed(sender: UIButton!) {
+        
+        slider.value = slider.maximumValue
+        
+        if slider.value == slider.maximumValue {
+            forwardB.enabled = false
+            
+            UIView.animateWithDuration(0.8, animations: { () -> Void in
+                self.slider.frame.origin.y = screenHeight/2 + 150
+                self.capsuleB.frame.origin.y = screenHeight/2 + 246
+                self.capsuleL.frame.origin.y = 200
+                
+                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                
+                self.collectionView.frame.origin.y  = 86
+                self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 30
+                self.otherImage.frame.origin.y = 64 + 13
+                
+                
+                self.sliderPointer.frame.origin.y = screenHeight/2 + screenWidth/2
+                self.notationsL.frame.origin.y = screenHeight/2 + 150 - 47
+                self.exitTimeCapsuleB.frame.origin.y = screenHeight/2 + 150 - 47
+                
+                if screenHeight == 667 {
+                    self.capsuleB.frame.origin.y = screenHeight/2 + 220
+                    self.slider.frame.origin.y = screenHeight/2 + 150
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                    
+                }
+                else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.slider.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                }
+                else   if screenHeight == 480 {
+                    self.slider.frame.origin.y = screenHeight/2 + 150 - 47
+                    self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    
+                }
+                
+                }, completion: {finish in
+                    //sender.value = 50
+                    
+            })
+            
+        }
+    
     }
     
     var d2 = 0
@@ -4246,6 +4399,48 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
             movesField.text = notationsWithNumber
             
+            var moves: Array<String> = []
+            func loadMoves() {
+                moves = []
+                notationsWithNumber = ""
+                var t = 1
+                for var i = 0; i < notations.count; i++ {
+                    
+                    
+                    if i % 2 == 0{
+                        notationsWithNumber +=  "\(t). "
+                        t++
+                    }
+                    notationsWithNumber += "\(notations[i]) "
+                    
+                    
+                    print("\(i+1).")
+                    var t = (i+1)
+                    for var q = 0; q < 2; q++ {
+                        moveNum.append(t)
+                    }
+                    var putIntoMoves = ""
+                    for var o = 0; o < notations[i].characters.count; o++ {
+                        let output = notations[i][o]
+                        let letter = String(output)
+                        
+                        if letter.lowercaseString == String(output){
+                            
+                            if output != "-" && output != "x" {
+                                //print(output)
+                                putIntoMoves.append(output)
+                                
+                            }
+                            
+                        }
+                    }
+                    print(putIntoMoves)
+                    moves.append(putIntoMoves)
+                }
+                print(moves)
+                movesCap.append(moves.last!)
+            }
+            loadMoves()
             
             game.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
                 if error == nil {
@@ -4644,9 +4839,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 for var i = 0; i < pieces.count; i++ {
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y  {
+                        takenPiecesToReload.append(pieces[i])
+                        takenPiecesToReloadAtIndex.append(i)
+                        
                         pieceToTake += [pieces[i]]
                         pieces[i].removeFromSuperview()
                         pieces.removeAtIndex(i)
+                        
+                       
                     }
                 }
                 
@@ -4924,6 +5124,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
             self.capsuleL.textColor = UIColor.whiteColor()
+            self.notationsL.textColor = UIColor.whiteColor()
+
+
             
             
         }
@@ -4940,6 +5143,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
             
             self.capsuleL.textColor = UIColor.blackColor()
+            self.notationsL.textColor = UIColor.blackColor()
+
         }
         
     }
