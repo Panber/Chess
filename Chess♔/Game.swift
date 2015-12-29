@@ -1924,6 +1924,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.game = r!
                     var last = r!["piecePosition"] as! Array<String>
                     self.notations.append(last.last!)
+                    let newIndexPath = NSIndexPath(forItem: self.notations.count - 1, inSection: 0)
+                    self.collectionView.insertItemsAtIndexPaths([newIndexPath])
+                    self.collectionView.layoutIfNeeded()
+                    self.collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.collectionView.reloadData()
+                    }
                     print("notations.count is \(self.notations.count)")
                     loadMoves()
                     self.passantPiece = (r!["passantPiece"] as? Int)!
@@ -3633,6 +3640,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if isWhiteTurn == true {
             
             // Starts logic for all pieces
+            
+            chessPieceMovementLogic(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, piece: blackKing, logicOptions: piecesWhiteLogic)
+            
             for var q = 0; q < blackQueens.count; q++ {
                 chessPieceMovementLogic(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, piece: blackQueens[q], logicOptions: piecesWhiteLogic)
             }
@@ -3649,6 +3659,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawns[w], logicOptions: piecesWhiteLogic)
             }
         } else if isWhiteTurn == false {
+            
+            chessPieceMovementLogic(2, pieceid: 5, friend: whitePieces, enemy: blackPieces, piece: whiteKing , logicOptions: piecesBlackLogic)
             
             for var q = 0; q < whiteQueens.count; q++ {
                 chessPieceMovementLogic(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, piece: whiteQueens[q] , logicOptions: piecesBlackLogic)
