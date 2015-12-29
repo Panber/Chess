@@ -2344,7 +2344,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     func capsuleButtonPressed(sender: UIButton!) {
         
         
-        
+        boarderBoard.userInteractionEnabled = true
         
         var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(notations.count + 1) - screenWidth/CGFloat(notations.count+1)/CGFloat(notations.count + 1)))
 
@@ -2362,12 +2362,28 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         forwardB.enabled = false
         backwardB.enabled = true
         
-         fNum = Double(notations.count/2) + 1
+        let n = notations.count
+        let m = Double(n)
         
+        fNum = Double(m/2) - 0.5
+        print(fNum)
+
+        if floor(fNum) == fNum {
+         fNum = Double(notations.count/2) + 1
+        print(fNum)
+        }
+        else {
+        fNum = Double(notations.count/2) + 0.5
+        print(fNum)
+        }
         
         if floor(fNum) == fNum {
             if Int(slider.value-1) >= 0 {
                 notationsL.text = "\(Int(fNum)). \(notations[Int(slider.value)-1])"
+            }
+            else {
+                notationsL.text = ""
+                
             }
         }
         else {
