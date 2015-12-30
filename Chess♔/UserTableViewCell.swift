@@ -184,9 +184,23 @@ class GameMenuTableViewCell: UITableViewCell {
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
+        let color = self.colorIndicator.backgroundColor
+        let color2 = self.pieceIndicator.backgroundColor
+        
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state /
+        self.colorIndicator.backgroundColor = color
+        self.pieceIndicator.backgroundColor = color2
+    }
+    
+    override func setHighlighted(highlighted: Bool, animated: Bool) {
+        let color = self.colorIndicator.backgroundColor
+        let color2 = self.pieceIndicator.backgroundColor
+        
+        super.setHighlighted(highlighted, animated: animated)
+        
+        self.colorIndicator.backgroundColor = color
+        self.pieceIndicator.backgroundColor = color2
     }
     
 }
@@ -283,11 +297,7 @@ class GameInvitesTableViewCell: UITableViewCell {
     }
     
     
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state /
-    }
+
     
 }
 ///////Fornøyd???
