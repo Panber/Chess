@@ -782,7 +782,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
             }
             
-            
             ////////this is where the magic happens\\\\\\\\
             func magic1() {
                 xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
