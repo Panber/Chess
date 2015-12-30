@@ -640,8 +640,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         let r = query.getFirstObject()
         game = r!
         
-        
         notations = r!["piecePosition"] as! Array<String>
+        
+        // Important to not get error
+        if notations.count == 0 {
+            game.setObject(false, forKey: "can_Castle_white")
+            game.setObject(false, forKey: "can_Castle_black")
+            game.setObject(false, forKey: "passant")
+            game.setObject(false, forKey: "passantBlack")
+            game.setObject(0, forKey: "passantPiece")
+            
+        }
         
         hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
         hasBlackKingMoved = r!["can_Castle_black"] as! Bool
@@ -1297,6 +1306,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.checkByRook = false
                                                                         self.checkByKnight = false
                                                                         self.checkByPawn = false
+                                                                        self.pieceWhiteLogicOptions = []
+                                                                        self.pieceBlackLogicOptions = []
                                                                         self.game.setObject(false, forKey: "passantBlack")
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
@@ -2053,6 +2064,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.checkByRook = false
                                                                         self.checkByKnight = false
                                                                         self.checkByPawn = false
+                                                                        self.pieceWhiteLogicOptions = []
+                                                                        self.pieceBlackLogicOptions = []
                                                                         self.game.setObject(false, forKey: "passant")
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
@@ -2343,7 +2356,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             slider.frame.origin.y = screenHeight/2 + 150 - 47
             capsuleB.frame.origin.y = screenHeight/2 + 180
         }
-        
         
         //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
         
