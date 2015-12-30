@@ -776,6 +776,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             ////////this is where the magic happens\\\\\\\\
             func magic1() {
+                xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
+                yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
                 var am = 0
                 for var o = 0; o < moves.count; o++ {
                     am++
