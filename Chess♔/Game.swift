@@ -889,7 +889,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("x  found")
                                                                         
                                                                         for var iy = 0; iy < pieces.count ; iy++ {
-                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
+                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns) {
                                                                                 
                                                                                 self.pieces[iy].alpha = 0
                                                                                 
@@ -1605,7 +1605,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters  found")
                                                                         
                                                                         for var iy = 0; iy < pieces.count; iy++ {
-                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
+                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns) {
                                                                                 
                                                                                 
                                                                                 self.pieces[iy].alpha = 0
@@ -2310,7 +2310,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         view.addSubview(backwardB)
         backwardB.enabled = false
         view.sendSubviewToBack(backwardB)
-
+        
         
         //        let sliderOverlay = UILabel(frame: CGRectMake(0,screenHeight/2 + screenWidth/2 + 12,screenWidth,25))
         //        sliderOverlay.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
@@ -2334,7 +2334,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         exitTimeCapsuleB.titleLabel?.textAlignment = NSTextAlignment.Center
         view.addSubview(exitTimeCapsuleB)
         view.sendSubviewToBack(exitTimeCapsuleB)
-  
+        
         
         var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(notations.count + 1) - screenWidth/CGFloat(notations.count+1)/CGFloat(notations.count + 1)))
         print("uu is \(uu)")
@@ -2344,7 +2344,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         sliderPointer.alpha = 0.75
         view.addSubview(sliderPointer)
         view.sendSubviewToBack(sliderPointer)
-
+        
         
         if screenHeight == 480 {
             self.tabBarController?.tabBar.hidden = true
@@ -2360,7 +2360,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var sliderPointer = UILabel()
     var notationsL = UILabel()
     var fNum = Double()
-
+    
     
     // MARK: -Time Capsule
     func capsuleButtonPressed(sender: UIButton!) {
@@ -2369,11 +2369,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         boarderBoard.userInteractionEnabled = true
         
         var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(notations.count + 1) - screenWidth/CGFloat(notations.count+1)/CGFloat(notations.count + 1)))
-
+        
         
         sliderPointer.frame.origin.x = screenWidth - uu - CGFloat(((screenWidth/CGFloat(notations.count + 1))/CGFloat(notations.count + 1)))
         sliderPointer.frame.size.width = uu + CGFloat(((screenWidth/CGFloat(notations.count+1))/CGFloat(notations.count+1)))
-   
+        
         
         slider.maximumValue = Float(notations.count) - 0
         
@@ -2389,14 +2389,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         fNum = Double(m/2) - 0.5
         print(fNum)
-
+        
         if floor(fNum) == fNum {
-         fNum = Double(notations.count/2) + 1
-        print(fNum)
+            fNum = Double(notations.count/2) + 1
+            print(fNum)
         }
         else {
-        fNum = Double(notations.count/2) + 0.5
-        print(fNum)
+            fNum = Double(notations.count/2) + 0.5
+            print(fNum)
         }
         
         if floor(fNum) == fNum {
@@ -2431,7 +2431,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.otherImage.frame.origin.y = -100
             
             self.notationsL.frame.origin.y = 600 + 19
-
+            
             self.exitTimeCapsuleB.frame.origin.y = 600 + 16
             
             self.sliderPointer.frame.origin.y = screenHeight/2 + screenWidth/2 + 10
@@ -2453,7 +2453,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 self.slider.frame.origin.y = 493
                 self.backwardB.frame.origin.y = 465
                 self.forwardB.frame.origin.y = 465
-              
+                
                 self.sliderPointer.frame.origin.y = screenHeight/2 + screenWidth/2 + 6
                 self.notationsL.frame.origin.y = 468
                 self.exitTimeCapsuleB.frame.origin.y = 465
@@ -2689,7 +2689,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             })
             
         }
-    
+        
     }
     
     var d2 = 0
@@ -3216,7 +3216,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         cell.configureWithColor()
         cell.notation.frame = CGRectMake(0, 0, cell.frame.width, cell.frame.height)
-
+        
         return cell
         
     }
@@ -4410,7 +4410,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             collectionView.layoutIfNeeded()
             collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
             dispatch_async(dispatch_get_main_queue()) {
-            self.collectionView.reloadData()
+                self.collectionView.reloadData()
             }
             game.addObject(notations.last!, forKey: "piecePosition")
             
@@ -4886,7 +4886,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         pieces[i].removeFromSuperview()
                         pieces.removeAtIndex(i)
                         
-                       
+                        
                     }
                 }
                 
@@ -5165,8 +5165,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.navigationController?.navigationBar.tintColor = blue
             self.capsuleL.textColor = UIColor.whiteColor()
             self.notationsL.textColor = UIColor.whiteColor()
-
-
+            
+            
             
             
         }
@@ -5184,7 +5184,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             self.capsuleL.textColor = UIColor.blackColor()
             self.notationsL.textColor = UIColor.blackColor()
-
+            
         }
         
     }
