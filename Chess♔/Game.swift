@@ -3366,6 +3366,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     // MARK: - Setup-functions 🔍
     
+    var resignB = UIButton()
+    var drawB = UIButton()
+
     
     @IBAction func infoButtonPressed(sender: AnyObject) {
         
@@ -3392,16 +3395,48 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         scrollView1.contentSize = CGSizeMake(screenWidth, 738)
         visualEffectSub.addSubview(scrollView1)
         
+        var plusNum: CGFloat = 130
         
-        var info = UILabel(frame: CGRectMake(0,37,screenWidth, 32))
+        var actions = UILabel(frame: CGRectMake(0,37,screenWidth, 32))
+        actions.text = "ACTIONS"
+        actions.textAlignment = .Center
+        if darkMode {actions.textColor = UIColor.lightGrayColor()}
+        else {actions.textColor = UIColor.darkGrayColor() }
+        actions.font = UIFont(name: "Didot", size: 19)
+        scrollView1.addSubview(actions)
+        
+        
+        resignB = UIButton(frame: CGRectMake(screenWidth/2 + 18, 100,55,25))
+        resignB.titleLabel?.font = UIFont(name: "Times", size: 14)
+        resignB.setTitle("Resign", forState: .Normal)
+        resignB.layer.cornerRadius = cornerRadius - 3
+        resignB.userInteractionEnabled = true
+        resignB.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        resignB.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+        resignB.backgroundColor = red
+        resignB.addTarget(self, action: "resignButtonPressed:", forControlEvents: .TouchUpInside)
+        scrollView1.addSubview(resignB)
+        
+        drawB = UIButton(frame: CGRectMake(screenWidth/2 - 100, 100,82,25))
+        drawB.titleLabel?.font = UIFont(name: "Times", size: 14)
+        drawB.setTitle("Offer Draw", forState: .Normal)
+        drawB.layer.cornerRadius = cornerRadius - 3
+        drawB.userInteractionEnabled = true
+        drawB.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        drawB.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
+        drawB.backgroundColor = blue
+        drawB.addTarget(self, action: "drawButtonPressed:", forControlEvents: .TouchUpInside)
+        scrollView1.addSubview(drawB)
+        
+        var info = UILabel(frame: CGRectMake(0,37 + plusNum,screenWidth, 32))
         info.text = "INFORMATION"
         info.textAlignment = .Center
         if darkMode {info.textColor = UIColor.lightGrayColor()}
         else {info.textColor = UIColor.darkGrayColor() }
-        info.font = UIFont(name: "Didot", size: 22)
+        info.font = UIFont(name: "Didot", size: 19)
         scrollView1.addSubview(info)
         
-        turnL = UILabel(frame: CGRectMake(40,100 - 10,screenWidth, 29))
+        turnL = UILabel(frame: CGRectMake(40,100 - 10 + plusNum,screenWidth, 29))
         print(turnLturn)
         turnL.text = turnLturn
         if darkMode {turnL.textColor = UIColor.whiteColor()}
@@ -3409,21 +3444,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         turnL.font = UIFont(name: "Times", size: 19)
         scrollView1.addSubview(turnL)
         
-        colorL = UILabel(frame: CGRectMake(40,129 - 10,screenWidth, 29))
+        colorL = UILabel(frame: CGRectMake(40,129 - 10 + plusNum,screenWidth, 29))
         colorL.text = colorLcolor
         if darkMode {colorL.textColor = UIColor.whiteColor()}
         else {colorL.textColor = UIColor.blackColor() }
         colorL.font = UIFont(name: "Times", size: 19)
         scrollView1.addSubview(colorL)
         
-        speedL = UILabel(frame: CGRectMake(40,158 - 10,screenWidth, 29))
+        speedL = UILabel(frame: CGRectMake(40,158 - 10 + plusNum,screenWidth, 29))
         speedL.text = speedLspeed
         if darkMode {speedL.textColor = UIColor.whiteColor()}
         else {speedL.textColor = UIColor.blackColor() }
         speedL.font = UIFont(name: "Times", size: 19)
         scrollView1.addSubview(speedL)
         
-        ratedL = UILabel(frame: CGRectMake(40,187 - 10,screenWidth, 29))
+        ratedL = UILabel(frame: CGRectMake(40,187 - 10 + plusNum,screenWidth, 29))
         ratedL.text = ratedLrated
         if darkMode {ratedL.textColor = UIColor.whiteColor()}
         else {ratedL.textColor = UIColor.blackColor() }
@@ -3447,21 +3482,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         speedImage.image = speedImagespeed
         scrollView1.addSubview(speedImage)
         
-        let timeLeftL = UILabel(frame: CGRectMake(40,216 - 10,screenWidth, 29))
+        let timeLeftL = UILabel(frame: CGRectMake(40,216 - 10 + plusNum,screenWidth, 29))
         timeLeftL.text = "Time Left To Move:"
         if darkMode {timeLeftL.textColor = UIColor.lightGrayColor()}
         else {timeLeftL.textColor = UIColor.darkGrayColor() }
         timeLeftL.font = UIFont(name: "Times", size: 19)
         scrollView1.addSubview(timeLeftL)
         
-        timeL = UILabel(frame: CGRectMake(199,216 - 10,screenWidth-208, 29))
+        timeL = UILabel(frame: CGRectMake(199,216 - 10 + plusNum,screenWidth-208, 29))
         timeL.text = ""
         if darkMode {timeL.textColor = UIColor.whiteColor()}
         else {timeL.textColor = UIColor.blackColor() }
         timeL.font = UIFont(name: "Times", size: 19)
         scrollView1.addSubview(timeL)
         
-        let opponent = UILabel(frame: CGRectMake(0,280,screenWidth, 29))
+        let opponent = UILabel(frame: CGRectMake(0,280 + plusNum,screenWidth, 29))
         opponent.text = "OPPONENT"
         opponent.textAlignment = .Center
         if darkMode {opponent.textColor = UIColor.lightGrayColor()}
@@ -3470,7 +3505,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         opponent.font = UIFont(name: "Didot", size: 19)
         scrollView1.addSubview(opponent)
         
-        pImage = UIImageView(frame: CGRectMake(screenWidth/2 - 90, 330, 65, 65))
+        pImage = UIImageView(frame: CGRectMake(screenWidth/2 - 90, 330 + plusNum, 65, 65))
         pImage.layer.cornerRadius = pImage.frame.size.width/2
         pImage.clipsToBounds = true
         pImage.contentMode = .ScaleAspectFill
@@ -3493,7 +3528,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         ratingL.text = otherUserRating
         scrollView1.addSubview(ratingL)
         
-        let moves = UILabel(frame: CGRectMake(0,450,screenWidth, 29))
+        let moves = UILabel(frame: CGRectMake(0,450 + plusNum,screenWidth, 29))
         moves.text = "MOVES"
         moves.textAlignment = .Center
         if darkMode {moves.textColor = UIColor.lightGrayColor()}
@@ -3502,7 +3537,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         moves.font = UIFont(name: "Didot", size: 19)
         scrollView1.addSubview(moves)
         
-        movesField = UITextView(frame: CGRectMake(30,485,screenWidth-60,200))
+        movesField = UITextView(frame: CGRectMake(30,485 + plusNum,screenWidth-60,200))
         movesField.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         movesField.text = notationsWithNumber
         movesField.font = UIFont(name: "Times", size: 19)
@@ -3515,7 +3550,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         scrollView1.addSubview(movesField)
         
         //invite to game btn
-        copyB = UIButton(frame: CGRectMake(screenWidth/2 + 75, 450,45,25))
+        copyB = UIButton(frame: CGRectMake(screenWidth/2 + 75, 450 + plusNum,45,25))
         copyB.titleLabel?.font = UIFont(name: "Times", size: 14)
         copyB.setTitle("Copy", forState: .Normal)
         copyB.layer.cornerRadius = cornerRadius - 3
@@ -3533,6 +3568,92 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         cancelB.addTarget(self, action: "cancelButtonPressed:", forControlEvents: .TouchUpInside)
         scrollView1.addSubview(cancelB)
         
+    }
+    
+    func resignButtonPressed(sender:UIButton) {
+        
+        let resignAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        resignAlert.addAction(UIAlertAction(title: "Resign", style: .Destructive, handler: { action in
+            switch action.style{
+                
+            case .Cancel:
+                print("cancel")
+                
+            case .Destructive:
+                print("destructive")
+                
+            case .Default:
+                    print("default")
+
+            }
+        }))
+        resignAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+            switch action.style{
+                
+            case .Cancel:
+                print("cancel")
+                
+            case .Destructive:
+                print("destructive")
+                
+            case .Default:
+                print("default")
+                
+            }
+        }))
+        
+
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.removeNewView()
+            } , completion: {finish in
+                self.presentViewController(resignAlert, animated: true, completion: nil)
+
+        })
+
+
+    }
+    
+    func drawButtonPressed(sender:UIButton) {
+        
+        let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to offer a draw?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        drawAlert.addAction(UIAlertAction(title: "Draw", style: .Default, handler: { action in
+            switch action.style{
+                
+            case .Cancel:
+                print("cancel")
+                
+            case .Destructive:
+                print("destructive")
+                
+            case .Default:
+                print("default")
+                
+            }
+        }))
+        drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+            switch action.style{
+                
+            case .Cancel:
+                print("cancel")
+                
+            case .Destructive:
+                print("destructive")
+                
+            case .Default:
+                print("default")
+                
+            }
+        }))
+        
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.removeNewView()
+            } , completion: {finish in
+                self.presentViewController(drawAlert, animated: true, completion: nil)
+                
+        })
     }
     
     func copyButtonPressed(sender: UIButton!) {

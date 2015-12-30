@@ -1017,10 +1017,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="MJf-zF-viF">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="kkq-Ja-mR7">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="GB6-vN-xaE">
-                                <rect key="frame" x="372" y="11" width="22" height="22"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GB6-vN-xaE">
+                                <rect key="frame" x="353" y="11" width="41" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="18"/>
+                                <state key="normal" title="More"/>
                                 <connections>
                                     <action selector="infoButtonPressed:" destination="fQ8-pX-Vlb" eventType="touchUpInside" id="PF3-2w-OxS"/>
                                 </connections>
