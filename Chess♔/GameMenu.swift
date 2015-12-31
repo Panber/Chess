@@ -57,7 +57,7 @@ var location = PFGeoPoint()
 var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
 var visualEffectSub = UIView()
 
-class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, UITableViewDelegate, UITabBarControllerDelegate, UITabBarDelegate, CLLocationManagerDelegate {
+class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, UITableViewDelegate, UITabBarControllerDelegate, UITabBarDelegate, CLLocationManagerDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -1007,6 +1007,165 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         
         header.textLabel?.text? = (header.textLabel?.text?.uppercaseString)!
+        
+    }
+    
+    
+    func tableView(tableView:UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    
+    
+    }
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?
+    {
+        
+        switch indexPath.section {
+        case 0:
+            var shareAction = UITableViewRowAction(style: .Destructive, title: "Resign") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+                
+                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                drawAlert.addAction(UIAlertAction(title: "Resign", style: .Destructive, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                
+                
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.removeNewView()
+                    } , completion: {finish in
+                        self.presentViewController(drawAlert, animated: true, completion: nil)
+                        
+                })
+                
+            }
+            shareAction.backgroundColor = red
+            return [shareAction]
+
+        case 1:
+            var shareAction = UITableViewRowAction(style: .Destructive, title: "Resign") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+                
+                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                drawAlert.addAction(UIAlertAction(title: "Resign", style: .Destructive, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                
+                
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.removeNewView()
+                    } , completion: {finish in
+                        self.presentViewController(drawAlert, animated: true, completion: nil)
+                        
+                })
+                
+            }
+            shareAction.backgroundColor = red
+            return [shareAction]
+
+        case 2:
+            var shareAction = UITableViewRowAction(style: .Destructive, title: "Delete") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+                
+                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to delete this game?", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                drawAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                
+                
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.removeNewView()
+                    } , completion: {finish in
+                        self.presentViewController(drawAlert, animated: true, completion: nil)
+                        
+                })
+                
+            }
+            shareAction.backgroundColor = red
+            return [shareAction]
+
+        default :
+            ""
+            
+        }
+        
+
+        
+        
+        return nil
         
     }
     
