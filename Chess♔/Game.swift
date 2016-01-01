@@ -2417,6 +2417,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     override func viewDidDisappear(animated: Bool) {
         notations = []
+        whitePromotionType = []
+        blackPromotionType = []
+        whitePromotionPiece = []
+        blackPromotionPiece = []
         game = PFObject(className: "Games")
         
         timer.invalidate()
