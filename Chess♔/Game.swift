@@ -661,7 +661,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         whitePromotionPiece = r!["whitePromotionPiece"] as! Array<Int>
         blackPromotionPiece = r!["blackPromotionPiece"] as! Array<Int>
         
-        
         // Important to not get error
         if notations.count == 0 {
             game.setObject(false, forKey: "can_Castle_white")
