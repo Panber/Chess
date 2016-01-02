@@ -365,6 +365,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var colorIndicatorcolor = UIColor()
     var speedImagespeed = UIImage()
     
+    var multiplySpeedWith = Double()
+    
     var timeLeft = NSTimeInterval()
     var timer = NSTimer()
     
@@ -694,16 +696,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if game["speed"] as? String == "Normal" {
             speedLspeed = "Normal Speedmode"
             speedImagespeed = UIImage(named: "normalIndicator.png")!
+            multiplySpeedWith = 1.0
             
         }
         else if game["speed"] as? String == "Fast" {
             speedLspeed = "Fast Speedmode"
             speedImagespeed = UIImage(named: "flash31.png")!
+            multiplySpeedWith = 0.25
+
             
         }
         else if game["speed"] as? String == "Slow" {
             speedLspeed = "Slow Speedmode"
             speedImagespeed = UIImage(named: "clock104.png")!
+            multiplySpeedWith = 3
+
         }
         
         let lastupdate = game["timeLeftToMove"] as? NSDate
@@ -1551,6 +1558,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.isWhiteTurn = true
                     
                     //self.updateLogic()
+                    let lastupdate = self.game["timeLeftToMove"] as? NSDate
+                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+                    
                     
                     if r!["status_white"] as! String == "move" {
                         self.isWhiteTurn = true
@@ -2448,6 +2458,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     self.isWhiteTurn = true
+                    
+                    let lastupdate = self.game["timeLeftToMove"] as? NSDate
+                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
                     
                     if r!["status_black"] as! String == "move" {
                         self.isWhiteTurn = true
@@ -3804,7 +3817,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
 
     
     @IBAction func infoButtonPressed(sender: AnyObject) {
-          addMyTurnAndTime()
         infoButton.userInteractionEnabled = false
         
         UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -5643,6 +5655,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
             loadMoves()
             
+            
+            var now = NSDate()
+            let newDate = NSDate().dateByAddingTimeInterval(60*60*24*multiplySpeedWith)
+            
+            game["timeLeftToMove"] = newDate
+            
             game.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
                 if error == nil {
                     
@@ -5680,6 +5698,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.turnIndicatorturn = UIColor.lightGrayColor()
                     
                   
+                    
+                    
                     
                     UIView.animateWithDuration(0.8, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
                         
