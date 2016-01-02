@@ -1172,6 +1172,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             print("I am white player!")
             canOnlyMoveWhite = true
             self.title = r!["blackPlayer"] as? String
+            self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
             self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
             self.passantPiece = (r!["passantPiece"] as? Int)!
@@ -1257,6 +1258,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if lastPromotionType.count > 0 {
                         self.blackPromotionType.append(lastPromotionType.last!)
                     }
+                    self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
+                    self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
                     self.promotionBlack = r!["promotionBlack"] as! Bool
                     let newIndexPath = NSIndexPath(forItem: self.notations.count - 1, inSection: 0)
                     self.collectionView.insertItemsAtIndexPaths([newIndexPath])
@@ -1823,9 +1826,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             
                             
-                        }
-                        else if moves[o].characters.count == 3 {
-                            
+                        } else if moves[o].characters.count == 3 {
+                            print("Checking castling")
                             if String(moves.last![2])  == "0" {
                                 //can return false value??
                                 if  moves.indexOf(moves.last!)!  % 2 == 0 {
@@ -1881,14 +1883,34 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     
                                     
                                 }
+                            } else if String(moves[o][2])  == "0" {
+                                //can return false value??
+                                if  moves.indexOf(moves[o])!  % 2 == 0 {
+                                    // test
+                                    
+                                    self.blackKing.frame.origin.x = f
+                                    self.blackKing.frame.origin.y = _8
+                                    self.blackRook2.frame.origin.x = e
+                                    self.blackRook2.frame.origin.y = _8
+                                    
+                                }
+                                    
+                                else {
+                                    
+                                    self.whiteKing.frame.origin.x = f
+                                    self.whiteKing.frame.origin.y = _1
+                                    self.whiteRook1.frame.origin.x = e
+                                    self.whiteRook1.frame.origin.y = _1
+                                    
+                                }
                             }
                         }
                         else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
                             
                             if  o % 2 == 0 {
-                                print("Castling white short")
+                               
                                 if moves.last == moves[o] && am == moves.count{
-                                    
+                                     print("Castling white short")
                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                         
                                         self.blackKing.frame.origin.x = b
@@ -1933,7 +1955,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 }
                                 
                             }
-                        }
+                        } 
                     }
                 }
             }
@@ -2024,6 +2046,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             canOnlyMoveWhite = true
             self.title = r!["whitePlayer"] as? String
             self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
+             self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
             self.passantPiece = (r!["passantPiece"] as? Int)!
             self.canPassant = r!["passant"] as! Bool
@@ -2107,6 +2130,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if lastPromotionType.count > 0 {
                     self.whitePromotionType.append(lastPromotionType.last!)
                     }
+                    self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
+                    self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
                     self.promotion = r!["promotion"] as! Bool
                     let newIndexPath = NSIndexPath(forItem: self.notations.count - 1, inSection: 0)
                     self.collectionView.insertItemsAtIndexPaths([newIndexPath])
@@ -4437,14 +4462,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         whiteCastlingRight += [pieceOption3]
                         castlePiece = whiteRook1
                     }
-                    if leftBlackCastleLogic.count == 2 && hasBlackKingMoved == false && hasBlackRookMoved == false && pieceid == 5 && self.whiteKing.frame.origin.x == d && self.whiteKing.frame.origin.y == _1 && selectedPiece.image == UIImage(named:"blackKing")  {
+                    if leftBlackCastleLogic.count == 2 && hasBlackKingMoved == false && hasBlackRookMoved == false && pieceid == 5 && selectedPiece.image == UIImage(named:"blackKing")  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption3)
                         blackCastlingLeft += [pieceOption3]
                         castlePiece = blackRook2
                     }
-                    if rightBlackCastleLogic.count == 3 && hasBlackKingMoved == false && hasBlackRookMoved2 == false && pieceid == 5 && pieceid == 5 && self.whiteKing.frame.origin.x == d && self.whiteKing.frame.origin.y == _1 && selectedPiece.image == UIImage(named:"blackKing")  {
+                    if rightBlackCastleLogic.count == 3 && hasBlackKingMoved == false && hasBlackRookMoved2 == false && pieceid == 5 && pieceid == 5 && selectedPiece.image == UIImage(named:"blackKing")  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption3)
@@ -5503,24 +5528,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
         }
         
-        if selectedPiece == whiteKing {
-            hasWhiteKingMoved = true
-        }
-        if selectedPiece == whiteRook1 {
-            hasWhiteRookMoved2 = true
-        }
-        if selectedPiece == whiteRook2 {
-            hasWhiteRookMoved = true
-        }
-        if selectedPiece == blackKing {
-            hasBlackKingMoved = true
-        }
-        if selectedPiece == blackRook1 {
-            hasBlackRookMoved = true
-        }
-        if selectedPiece == blackRook2 {
-            hasBlackRookMoved2 = true
-        }
+//        if selectedPiece == whiteKing {
+//            hasWhiteKingMoved = true
+//        }
+//        if selectedPiece == whiteRook1 {
+//            hasWhiteRookMoved2 = true
+//        }
+//        if selectedPiece == whiteRook2 {
+//            hasWhiteRookMoved = true
+//        }
+//        if selectedPiece == blackKing {
+//            hasBlackKingMoved = true
+//        }
+//        if selectedPiece == blackRook1 {
+//            hasBlackRookMoved = true
+//        }
+//        if selectedPiece == blackRook2 {
+//            hasBlackRookMoved2 = true
+//        }
     }
     
     func hasBeenTaken(var image: UIImageView, var array: Array<UIImageView>) -> Bool {
