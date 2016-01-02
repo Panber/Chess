@@ -5646,7 +5646,6 @@ didloadTurnGL = false
             else {
                 //Must be equal!
                 
-                
                 print(pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck)
                 LAN = pieceString + pieceStringPos + piecesNotationSeperator + chessNotationx + chessNotationy + chessNotationCheck
                 piecesNotationSeperator = "-"
