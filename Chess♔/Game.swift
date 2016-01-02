@@ -3757,7 +3757,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
         })
         
-        UIView.animateWithDuration(0.8, delay: 1.5, options: .CurveEaseInOut, animations: { () -> Void in
+        UIView.animateWithDuration(0.3, delay: 1.5, options: .CurveEaseInOut, animations: { () -> Void in
             self.turnGL.alpha = 1
 
             self.timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 80
@@ -3793,7 +3793,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 view.addSubview(turnIndicatorG)
             }
 
-            UIView.animateWithDuration(0.8, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
+            UIView.animateWithDuration(0.3, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
                 
                 self.turnIndicatorG.alpha = 1
 
@@ -5768,7 +5768,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     
                     
-                    UIView.animateWithDuration(0.8, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
+                    UIView.animateWithDuration(0.3, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
                         
                         self.turnIndicatorG.backgroundColor = UIColor.lightGrayColor()
                         self.turnIndicatorG.frame.origin.x = screenWidth/2 - self.turnIndicatorG.frame.size.width/2
