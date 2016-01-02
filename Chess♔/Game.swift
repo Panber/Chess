@@ -789,6 +789,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 turnLturn = "Your Turn"
                 turnIndicatorturn = blue
                 
+                myTurnAtlaunch = true
+
                 addMyTurnAndTime()
 
                 
@@ -1571,6 +1573,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnIndicator.backgroundColor = blue
                         self.turnIndicatorG.backgroundColor = blue
                         
+                        self.myTurnAtlaunch = true
+
                         self.addMyTurnAndTime()
 
                         
@@ -2016,6 +2020,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 turnLturn = "Your Turn"
                 turnIndicatorturn = blue
                 
+                self.myTurnAtlaunch = true
+
                 self.addMyTurnAndTime()
 
                 
@@ -2470,6 +2476,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnL.text = self.turnLturn
                         self.turnIndicator.backgroundColor = blue
                         self.turnIndicatorG.backgroundColor = blue
+
+                        self.myTurnAtlaunch = true
 
                         self.addMyTurnAndTime()
 
@@ -3702,6 +3710,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var myTurnAtlaunch = true
     var alreadyloadedTime = false
     
+    var didloadTurnGL = true
+
+    
     func addMyTurnAndTime() {
 
         if myTurnAtlaunch == true {
@@ -3732,6 +3743,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         view.sendSubviewToBack(timeGL)
         }
         
+            if didloadTurnGL == true {
+
         turnIndicatorG = UILabel(frame: CGRectMake(turnGL.frame.origin.x - 10, turnGL.frame.origin.y + 10 , 11, 11))
         turnIndicatorG.layer.cornerRadius = (turnIndicatorG.frame.size.width)/2
         turnIndicatorG.clipsToBounds = true
@@ -3741,7 +3754,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         turnIndicatorG.alpha = 0
         view.addSubview(turnIndicatorG)
         }
-        }
+                didloadTurnGL = false
+            }
+            }
         
         alreadyloadedTime = true
         UIView.animateWithDuration(0.3, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
@@ -3780,6 +3795,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         else {
         
+            if didloadTurnGL == true {
             turnGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 80,80,30))
             
             turnIndicatorG = UILabel(frame: CGRectMake(turnGL.frame.origin.x - 10, turnGL.frame.origin.y + 10 , 11, 11))
@@ -3787,7 +3803,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             turnIndicatorG.clipsToBounds = true
             turnIndicatorG.backgroundColor = turnIndicatorturn
             turnIndicatorG.frame.origin.x = screenWidth/2 - turnIndicatorG.frame.size.width/2
-
+didloadTurnGL = false
+            }
+            
             if alreadyloadedTime == false {
                 turnIndicatorG.alpha = 0
                 view.addSubview(turnIndicatorG)
