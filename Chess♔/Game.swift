@@ -789,6 +789,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 turnLturn = "Your Turn"
                 turnIndicatorturn = blue
                 
+                myTurnAtlaunch = true
+
                 addMyTurnAndTime()
 
                 
@@ -1571,6 +1573,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnIndicator.backgroundColor = blue
                         self.turnIndicatorG.backgroundColor = blue
                         
+                        self.myTurnAtlaunch = true
+
                         self.addMyTurnAndTime()
 
                         
@@ -2016,6 +2020,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 turnLturn = "Your Turn"
                 turnIndicatorturn = blue
                 
+                self.myTurnAtlaunch = true
+
                 self.addMyTurnAndTime()
 
                 
@@ -2469,6 +2475,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnL.text = self.turnLturn
                         self.turnIndicator.backgroundColor = blue
                         self.turnIndicatorG.backgroundColor = blue
+
+                        self.myTurnAtlaunch = true
 
                         self.addMyTurnAndTime()
 
@@ -3701,6 +3709,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var myTurnAtlaunch = true
     var alreadyloadedTime = false
     
+    var didloadTurnGL = true
+
+    
     func addMyTurnAndTime() {
 
         if myTurnAtlaunch == true {
@@ -3731,7 +3742,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         view.sendSubviewToBack(timeGL)
         }
         
-        turnIndicatorG = UILabel(frame: CGRectMake(turnGL.frame.origin.x + 5, turnGL.frame.origin.y + 10 , 11, 11))
+            if didloadTurnGL == true {
+
+        turnIndicatorG = UILabel(frame: CGRectMake(turnGL.frame.origin.x - 10, turnGL.frame.origin.y + 10 , 11, 11))
         turnIndicatorG.layer.cornerRadius = (turnIndicatorG.frame.size.width)/2
         turnIndicatorG.clipsToBounds = true
         turnIndicatorG.backgroundColor = turnIndicatorturn
@@ -3740,7 +3753,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         turnIndicatorG.alpha = 0
         view.addSubview(turnIndicatorG)
         }
-        }
+                didloadTurnGL = false
+            }
+            }
         
         alreadyloadedTime = true
         UIView.animateWithDuration(0.3, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
@@ -3756,12 +3771,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
         })
         
-        UIView.animateWithDuration(0.8, delay: 1.5, options: .CurveEaseInOut, animations: { () -> Void in
+        UIView.animateWithDuration(0.3, delay: 1.5, options: .CurveEaseInOut, animations: { () -> Void in
             self.turnGL.alpha = 1
 
             self.timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 80
             self.turnGL.frame.origin.y += 100
-            self.turnIndicatorG.frame.origin.x = self.turnGL.frame.origin.x + 5
+            self.turnIndicatorG.frame.origin.x = self.turnGL.frame.origin.x - 10
             }, completion: {finish in
                 
                 UIView.animateWithDuration(0.3, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
@@ -3779,20 +3794,23 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         else {
         
+            if didloadTurnGL == true {
             turnGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 80,80,30))
             
-            turnIndicatorG = UILabel(frame: CGRectMake(turnGL.frame.origin.x + 5, turnGL.frame.origin.y + 10 , 11, 11))
+            turnIndicatorG = UILabel(frame: CGRectMake(turnGL.frame.origin.x - 10, turnGL.frame.origin.y + 10 , 11, 11))
             turnIndicatorG.layer.cornerRadius = (turnIndicatorG.frame.size.width)/2
             turnIndicatorG.clipsToBounds = true
             turnIndicatorG.backgroundColor = turnIndicatorturn
             turnIndicatorG.frame.origin.x = screenWidth/2 - turnIndicatorG.frame.size.width/2
-
+didloadTurnGL = false
+            }
+            
             if alreadyloadedTime == false {
                 turnIndicatorG.alpha = 0
                 view.addSubview(turnIndicatorG)
             }
 
-            UIView.animateWithDuration(0.8, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
+            UIView.animateWithDuration(0.3, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
                 
                 self.turnIndicatorG.alpha = 1
 
@@ -4146,64 +4164,131 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     //use this to checki fuser lost on time
     func updateTimer() {
         
-        let textC =  timeL.textColor
+//        let textC =  timeL.textColor
+//        
+//        var timeLeftC = timeLeft
+//        print(timeLeft)
+//        if timeLeftC <= -60 {
+//            timeLeftC = timeLeftC/60
+//            let sinceOutput = Int(timeLeftC) * -1
+//            timeL.text = "\(sinceOutput)min"
+//            timeL.textColor = red
+//            
+//            timeGL.text = "\(sinceOutput)min"
+//            timeGL.textColor = red
+//            
+//        }
+//        else {
+//            let sinceOutput = Int(timeLeftC) * -1
+//            timeL.text = "\(sinceOutput)s"
+//            timeL.textColor = red
+//            
+//            timeGL.text = "\(sinceOutput)s"
+//            timeGL.textColor = red
+//        }
+//        //making to hours
+//        if timeLeftC <= -60 {
+//            timeLeftC = timeLeftC/60
+//            let sinceOutput = Int(timeLeftC) * -1
+//            timeL.text = "\(sinceOutput)h"
+//            timeL.textColor = textC
+//            
+//            timeGL.text = "\(sinceOutput)h"
+//            
+//            if darkMode {
+//                timeGL.textColor = UIColor.whiteColor() }
+//            else { timeGL.textColor = UIColor.blackColor()}
+//            if darkMode {
+//                turnGL.textColor = UIColor.whiteColor() }
+//            else { turnGL.textColor = UIColor.blackColor()}
+//            
+//            
+//            //making to days
+//            if timeLeftC <= -24 {
+//                timeLeftC = timeLeftC/24
+//                let sinceOutput = Int(timeLeftC) * -1
+//                timeL.text = "\(sinceOutput)d"
+//                timeGL.text = "\(sinceOutput)d"
+//
+//                
+//            }
+//            
+//        }
+//        
+//        if timeLeftC >= 0 {
+//            timeL.text = "Game Finished"
+//            timeL.font = UIFont(name: "Times-Italic", size: 19)
+//            timeGL.text = "---"
+//
+//            //timer.invalidate()
+//        }
+        
         
         timeLeft++
-        var timeLeftC = timeLeft
-        print(timeLeft)
-        if timeLeftC <= -60 {
-            timeLeftC = timeLeftC/60
-            let sinceOutput = Int(timeLeftC) * -1
-            timeL.text = "\(sinceOutput)min"
-            timeL.textColor = red
-            
-            timeGL.text = "\(sinceOutput)min"
-            timeGL.textColor = red
-            
-        }
-        else {
-            let sinceOutput = Int(timeLeftC) * -1
-            timeL.text = "\(sinceOutput)s"
-            timeL.textColor = red
-            
-            timeGL.text = "\(sinceOutput)s"
-            timeGL.textColor = red
-        }
-        //making to hours
-        if timeLeftC <= -60 {
-            timeLeftC = timeLeftC/60
-            let sinceOutput = Int(timeLeftC) * -1
-            timeL.text = "\(sinceOutput)h"
-            timeL.textColor = textC
-            
-            timeGL.text = "\(sinceOutput)h"
-            
-            if darkMode {
-                timeGL.textColor = UIColor.whiteColor() }
-            else { timeGL.textColor = UIColor.blackColor()}
-            if darkMode {
-                turnGL.textColor = UIColor.whiteColor() }
-            else { turnGL.textColor = UIColor.blackColor()}
-            
-            
-            //making to days
-            if timeLeftC <= -24 {
-                timeLeftC = timeLeftC/24
-                let sinceOutput = Int(timeLeftC) * -1
-                timeL.text = "\(sinceOutput)d"
-                timeGL.text = "\(sinceOutput)d"
 
-                
-            }
-            
+        var timeLeftT = timeLeft * -1
+        
+        func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+            return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
         }
         
-        if timeLeftC >= 0 {
+        func printSecondsToHoursMinutesSeconds(seconds:Int) -> () {
+            let (h, m, s) = secondsToHoursMinutesSeconds(seconds)
+            
+            var hS = "\(h):"
+            var mS = "\(m):"
+            var sS = "\(s)"
+            if h < 10 {
+                hS = "0\(h):"
+            }
+            if m < 10 {
+                mS = "0\(m):"
+            }
+            if s < 10 {
+                sS = "0\(s)"
+            }
+            
+            
+            if h >= 24 {
+            
+                var timeLeftC = h/24
+                let sinceOutput = Int(timeLeftC)
+                
+                if sinceOutput > 1 {
+                timeL.text = "\(sinceOutput) days"
+                timeGL.text = "\(sinceOutput) days"
+                }
+                else {
+                    timeL.text = "\(sinceOutput) day"
+                    timeGL.text = "\(sinceOutput) day"
+                }
+                
+            } else {
+            timeGL.text = hS + mS + sS
+            timeL.text = hS + mS + sS
+            }
+        }
+        
+        printSecondsToHoursMinutesSeconds(Int(timeLeftT))
+
+        if darkMode {
+            timeGL.textColor = UIColor.whiteColor() }
+        else { timeGL.textColor = UIColor.blackColor()}
+        if darkMode {
+            timeGL.textColor = UIColor.whiteColor() }
+        else { timeGL.textColor = UIColor.blackColor()}
+        
+        if timeLeftT < 3600 {
+        timeGL.textColor = red
+        timeL.textColor = red
+        }
+        
+        if timeLeftT <= 0 {
             timeL.text = "Game Finished"
             timeL.font = UIFont(name: "Times-Italic", size: 19)
-            timeGL.text = "---"
-
-            //timer.invalidate()
+            timeGL.text = "😒"
+        
+                    timer.invalidate()
         }
         
         
@@ -5711,7 +5796,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     
                     
-                    UIView.animateWithDuration(0.8, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
+                    UIView.animateWithDuration(0.3, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
                         
                         self.turnIndicatorG.backgroundColor = UIColor.lightGrayColor()
                         self.turnIndicatorG.frame.origin.x = screenWidth/2 - self.turnIndicatorG.frame.size.width/2
