@@ -621,7 +621,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         else if screenHeight == 736.0 {
             otherImage.frame.origin.y = 64 + 13
-            meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 30
+            meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 20
             
         }
         else if screenHeight == 568.0 {
@@ -637,6 +637,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             otherImage.frame.origin.y = 64 + 7
             meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 20
             
+        }
+        else if screenHeight == 480.0 {
+            otherImage.alpha = 0
+            meImage.alpha = 0
+        
         }
         otherImage.contentMode = .ScaleAspectFill
         otherImage.clipsToBounds = true
@@ -777,6 +782,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 turnLturn = "Your Turn"
                 turnIndicatorturn = blue
                 
+                addMyTurnAndTime()
+
+                
                 for var i = 0; i < piecesArrs.count; i++ {
                     for var t = 0; t < piecesArrs[i].count; t++ {
                         piecesArrs[i][t].image = UIImage(named: piecesString[i])
@@ -792,6 +800,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 turnLturn = "Their Turn"
                 turnIndicatorturn = UIColor.lightGrayColor()
+                
+                myTurnAtlaunch = false
+                addMyTurnAndTime()
+                
+                self.myTurnAtlaunch = false
+                self.addMyTurnAndTime()
+                
+                self.myTurnAtlaunch = false
+                self.addMyTurnAndTime()
+
                 
                 for var i = 0; i < piecesArrs.count; i++ {
                     for var t = 0; t < piecesArrs[i].count; t++ {
@@ -1203,7 +1221,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 self.meImage.alpha = 1
-                                            })
+
+                                                
+                                                 if screenHeight == 480.0 {
+                                                    self.meImage.alpha = 0
+                                                    
+                                                }
+                                                },completion: {finish in
+                                                    //self.addMyTurnAndTime()
+
+                                                })
                                             
                                         }
                                         else {
@@ -1217,6 +1244,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 self.otherImage.alpha = 1
+                                                 if screenHeight == 480.0 {
+                                                    self.otherImage.alpha = 0
+                                                    
+                                                }
                                             })
                                         }
                                     }
@@ -1525,6 +1556,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnIndicatorturn = blue
                         self.turnL.text = self.turnLturn
                         self.turnIndicator.backgroundColor = blue
+                        self.turnIndicatorG.backgroundColor = blue
+                        
+                        self.addMyTurnAndTime()
+
                         
                         for var i = 0; i < self.piecesArrs.count; i++ {
                             for var t = 0; t < self.piecesArrs[i].count; t++ {
@@ -1538,6 +1573,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         self.turnLturn = "Their Turn"
                         self.turnIndicatorturn = UIColor.lightGrayColor()
+                        
+                        self.myTurnAtlaunch = false
+                        self.addMyTurnAndTime()
+                        
+                        self.myTurnAtlaunch = false
+                        self.addMyTurnAndTime()
                         
                         for var i = 0; i < self.piecesArrs.count; i++ {
                             for var t = 0; t < self.piecesArrs[i].count; t++ {
@@ -1943,6 +1984,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 turnLturn = "Your Turn"
                 turnIndicatorturn = blue
                 
+                self.addMyTurnAndTime()
+
+                
                 for var i = 0; i < piecesArrs.count; i++ {
                     for var t = 0; t < piecesArrs[i].count; t++ {
                         self.piecesArrs[i][t].image = UIImage(named: piecesString[i])
@@ -1958,6 +2002,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 turnLturn = "Their Turn"
                 turnIndicatorturn = UIColor.lightGrayColor()
+                
+                myTurnAtlaunch = false
+                addMyTurnAndTime()
                 
                 for var i = 0; i < piecesArrs.count; i++ {
                     for var t = 0; t < piecesArrs[i].count; t++ {
@@ -2054,6 +2101,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 self.meImage.alpha = 1
+
+                                                if screenHeight == 480.0 {
+                                                    self.meImage.alpha = 0
+                                                    
+                                                }
+                                                },completion: { finish in
+                                                   // self.addMyTurnAndTime()
+
                                             })
                                             
                                         }
@@ -2066,6 +2121,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.otherUserName = (result["username"] as? String)!
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 self.otherImage.alpha = 1
+                                                if screenHeight == 480.0 {
+                                                    self.otherImage.alpha = 0
+                                                    
+                                                }
                                             })
                                         }
                                     }
@@ -2372,6 +2431,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnIndicatorturn = blue
                         self.turnL.text = self.turnLturn
                         self.turnIndicator.backgroundColor = blue
+                        self.turnIndicatorG.backgroundColor = blue
+
+                        self.addMyTurnAndTime()
+
                         
                         for var i = 0; i < self.piecesArrs.count; i++ {
                             for var t = 0; t < self.piecesArrs[i].count; t++ {
@@ -2447,6 +2510,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         } else if screenHeight == 480.0 {
             collectionView = UICollectionView(frame: CGRectMake(screenWidth-92, 74, 101, 36), collectionViewLayout: layout)
             layout.itemSize = CGSize(width: 99, height: 17)
+            collectionView.alpha = 0
+            collectionView.userInteractionEnabled = false
+            
+
         }
         
         collectionView.dataSource = self
@@ -2553,7 +2620,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         
         //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
-        
+      
     }
     
     var exitTimeCapsuleB = UIButton()
@@ -2804,18 +2871,31 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.slider.frame.origin.y = screenHeight/2 + 150
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
                     self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                    self.collectionView.frame.origin.y = 78
+                    
+                    self.otherImage.frame.origin.y = 64 + 8
+                    self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 22
+                    
                     
                 }
                 else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
                     self.slider.frame.origin.y = screenHeight/2 + 150 - 50
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
                     self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.collectionView.frame.origin.y = 74
+                    
+                    self.otherImage.frame.origin.y = 64 + 7
+                    self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 20
+                    
+                    
                 }
                 else   if screenHeight == 480 {
                     self.slider.frame.origin.y = screenHeight/2 + 150 - 47
                     self.capsuleB.frame.origin.y = screenHeight/2 + 180
                     self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.collectionView.frame.origin.y = 74
+                    
                     
                 }
                 
@@ -2912,18 +2992,31 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.slider.frame.origin.y = screenHeight/2 + 150
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
                     self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                    self.collectionView.frame.origin.y = 78
+                    
+                    self.otherImage.frame.origin.y = 64 + 8
+                    self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 22
+                    
                     
                 }
                 else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
                     self.slider.frame.origin.y = screenHeight/2 + 150 - 50
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
                     self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.collectionView.frame.origin.y = 74
+                    
+                    self.otherImage.frame.origin.y = 64 + 7
+                    self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 20
+                    
+
                 }
                 else   if screenHeight == 480 {
                     self.slider.frame.origin.y = screenHeight/2 + 150 - 47
                     self.capsuleB.frame.origin.y = screenHeight/2 + 180
                     self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                    self.collectionView.frame.origin.y = 74
+
                     
                 }
                 
@@ -3558,7 +3651,122 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
     
     }
+    // MARK: - whos turn is it?
     
+    var turnGL = UILabel()
+    var timeGL = UILabel()
+    var turnIndicatorG = UILabel()
+
+    var myTurnAtlaunch = true
+    var alreadyloadedTime = false
+    
+    func addMyTurnAndTime() {
+
+        if myTurnAtlaunch == true {
+            
+        
+        if alreadyloadedTime == false {
+        
+        turnGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 80,80,30))
+        turnGL.text = "Your Turn"
+        turnGL.alpha = 0
+        turnGL.font = UIFont(name: "Times", size: 16)
+        turnGL.textAlignment = .Center
+        if darkMode {
+            turnGL.textColor = UIColor.whiteColor() }
+        else { turnGL.textColor = UIColor.blackColor()}
+        
+        if alreadyloadedTime == false {
+        view.addSubview(turnGL)
+        view.sendSubviewToBack(turnGL)
+        }
+        
+        timeGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 30,80,30))
+        timeGL.text = "0:56"
+        timeGL.font = UIFont(name: "Times", size: 16)
+        timeGL.textAlignment = .Center
+        if alreadyloadedTime == false {
+        view.addSubview(timeGL)
+        view.sendSubviewToBack(timeGL)
+        }
+        
+        turnIndicatorG = UILabel(frame: CGRectMake(turnGL.frame.origin.x + 5, turnGL.frame.origin.y + 10 , 11, 11))
+        turnIndicatorG.layer.cornerRadius = (turnIndicatorG.frame.size.width)/2
+        turnIndicatorG.clipsToBounds = true
+        turnIndicatorG.backgroundColor = turnIndicatorturn
+        
+        if alreadyloadedTime == false {
+        turnIndicatorG.alpha = 0
+        view.addSubview(turnIndicatorG)
+        }
+        }
+        
+        alreadyloadedTime = true
+        UIView.animateWithDuration(0.3, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
+            self.turnGL.text = "Your Turn"
+
+            self.turnGL.alpha = 1
+            self.turnIndicatorG.frame.origin.x = self.turnGL.frame.origin.x - 10
+
+            
+            }, completion: {finish in
+                
+                
+                
+        })
+        
+        UIView.animateWithDuration(0.8, delay: 1.5, options: .CurveEaseInOut, animations: { () -> Void in
+            self.turnGL.alpha = 1
+
+            self.timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 80
+            self.turnGL.frame.origin.y += 100
+            self.turnIndicatorG.frame.origin.x = self.turnGL.frame.origin.x + 5
+            }, completion: {finish in
+                
+                UIView.animateWithDuration(0.3, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
+
+                    self.turnIndicatorG.alpha = 1
+                    
+                    
+                    }, completion: {finish in
+                        
+                        
+                        
+                })
+                
+        })
+        }
+        else {
+        
+            turnGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 80,80,30))
+            
+            turnIndicatorG = UILabel(frame: CGRectMake(turnGL.frame.origin.x + 5, turnGL.frame.origin.y + 10 , 11, 11))
+            turnIndicatorG.layer.cornerRadius = (turnIndicatorG.frame.size.width)/2
+            turnIndicatorG.clipsToBounds = true
+            turnIndicatorG.backgroundColor = turnIndicatorturn
+            turnIndicatorG.frame.origin.x = screenWidth/2 - turnIndicatorG.frame.size.width/2
+
+            if alreadyloadedTime == false {
+                turnIndicatorG.alpha = 0
+                view.addSubview(turnIndicatorG)
+            }
+
+            UIView.animateWithDuration(0.8, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
+                
+                self.turnIndicatorG.alpha = 1
+
+                
+                }, completion: {finish in
+                    
+                    
+                    
+            })
+            
+            
+        }
+
+        
+    }
     
     // MARK: - Setup-functions 🔍
     
@@ -3567,7 +3775,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
 
     
     @IBAction func infoButtonPressed(sender: AnyObject) {
-        
+          addMyTurnAndTime()
         infoButton.userInteractionEnabled = false
         
         UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -3909,11 +4117,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             timeL.text = "\(sinceOutput)min"
             timeL.textColor = red
             
+            timeGL.text = "\(sinceOutput)min"
+            timeGL.textColor = red
+            
         }
         else {
             let sinceOutput = Int(timeLeftC) * -1
             timeL.text = "\(sinceOutput)s"
             timeL.textColor = red
+            
+            timeGL.text = "\(sinceOutput)s"
+            timeGL.textColor = red
         }
         //making to hours
         if timeLeftC <= -60 {
@@ -3922,6 +4136,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             timeL.text = "\(sinceOutput)h"
             timeL.textColor = textC
             
+            timeGL.text = "\(sinceOutput)h"
+            
+            if darkMode {
+                timeGL.textColor = UIColor.whiteColor() }
+            else { timeGL.textColor = UIColor.blackColor()}
+            if darkMode {
+                turnGL.textColor = UIColor.whiteColor() }
+            else { turnGL.textColor = UIColor.blackColor()}
             
             
             //making to days
@@ -3929,6 +4151,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 timeLeftC = timeLeftC/24
                 let sinceOutput = Int(timeLeftC) * -1
                 timeL.text = "\(sinceOutput)d"
+                timeGL.text = "\(sinceOutput)d"
+
                 
             }
             
@@ -3937,8 +4161,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if timeLeftC >= 0 {
             timeL.text = "Game Finished"
             timeL.font = UIFont(name: "Times-Italic", size: 19)
-            
-            timer.invalidate()
+            timeGL.text = "---"
+
+            //timer.invalidate()
         }
         
         
@@ -5425,6 +5650,25 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.turnLturn = "Their Turn"
                     self.turnIndicatorturn = UIColor.lightGrayColor()
                     
+                  
+                    
+                    UIView.animateWithDuration(0.8, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
+                        
+                        self.turnIndicatorG.backgroundColor = UIColor.lightGrayColor()
+                        self.turnIndicatorG.frame.origin.x = screenWidth/2 - self.turnIndicatorG.frame.size.width/2
+                        self.turnGL.text = ""
+
+                        self.timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 30
+                        self.turnGL.frame.origin.y -= 100
+                        
+                        }, completion: {finish in
+                            
+                            self.timeGL.text = ""
+
+                            
+                    })
+
+                    
                     
                 }
             })
@@ -6097,6 +6341,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.navigationController?.navigationBar.tintColor = blue
             self.capsuleL.textColor = UIColor.whiteColor()
             self.notationsL.textColor = UIColor.whiteColor()
+            self.timeGL.textColor = UIColor.whiteColor()
+            self.turnGL.textColor = UIColor.whiteColor()
+
+
+
 
         }
         else if darkMode == false {
@@ -6113,7 +6362,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             self.capsuleL.textColor = UIColor.blackColor()
             self.notationsL.textColor = UIColor.blackColor()
-            
+            self.timeGL.textColor = UIColor.blackColor()
+            self.turnGL.textColor = UIColor.blackColor()
+
+
+
         }
         
     }
