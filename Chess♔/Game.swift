@@ -446,16 +446,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         horizontallyAlignedBlack = false
         
         // Castling White
-        hasWhiteRookMoved = false
-        hasWhiteRookMoved2 = false
+//        hasWhiteRookMoved = false
+//        hasWhiteRookMoved2 = false
         hasWhiteKingMoved = false
         whiteCastle = false
         castleLeft = false
         castleRight = false
         
         // Castling Black
-        hasBlackRookMoved = false
-        hasBlackRookMoved2 = false
+//        hasBlackRookMoved = false
+//        hasBlackRookMoved2 = false
         hasBlackKingMoved = false
         blackCastle = false
         
@@ -677,10 +677,20 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             game.setObject(0, forKey: "passantPiece")
             game.setObject(false, forKey: "promotion")
             game.setObject(false, forKey: "promotionBlack")
+            game.setObject(false, forKey: "hasWhiteRookMoved")
+            game.setObject(false, forKey: "hasWhiteRookMoved2")
+            game.setObject(false, forKey: "hasBlackRookMoved")
+            game.setObject(false, forKey: "hasBlackRookMoved2")
         }
         
         hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
         hasBlackKingMoved = r!["can_Castle_black"] as! Bool
+        
+        hasWhiteRookMoved = r!["hasWhiteRookMoved"] as! Bool
+        hasWhiteRookMoved2 = r!["hasWhiteRookMoved2"] as! Bool
+        
+        hasBlackRookMoved = r!["hasBlackRookMoved"] as! Bool
+        hasBlackRookMoved2 = r!["hasBlackRookMoved2"] as! Bool
         
         promotion = r!["promotion"] as! Bool
         promotionBlack = r!["promotionBlack"] as! Bool
@@ -1271,7 +1281,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                         }
                     }
-                     
+                    
                 }
                 
             })
@@ -1299,6 +1309,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if lastPromotionType.count > 0 {
                         self.blackPromotionType.append(lastPromotionType.last!)
                     }
+                    self.hasWhiteRookMoved = r!["hasWhiteRookMoved"] as! Bool
+                    self.hasWhiteRookMoved2 = r!["hasWhiteRookMoved2"] as! Bool
                     self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
                     self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
                     self.promotionBlack = r!["promotionBlack"] as! Bool
@@ -2109,6 +2121,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             print("I am black player!")
             canOnlyMoveWhite = true
             self.title = r!["whitePlayer"] as? String
+            self.hasBlackRookMoved = r!["hasBlackRookMoved"] as! Bool
+            self.hasBlackRookMoved2 = r!["hasBlackRookMoved2"] as! Bool
             self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
              self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
             let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
@@ -6494,6 +6508,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 } else if selectedPiece.image == UIImage(named:"blackKing") {
                     game.setObject(true, forKey: "can_Castle_black")
                 }
+                if selectedPiece == whiteRook1 && selectedPiece.image == UIImage(named:"whiteRook") {
+                    game.setObject(true, forKey: "hasWhiteRookMoved2")
+                } else if selectedPiece == whiteRook2 && selectedPiece.image == UIImage(named:"whiteRook") {
+                    game.setObject(true, forKey: "hasWhiteRookMoved")
+                }
+                if selectedPiece == whiteRook1 && selectedPiece.image == UIImage(named:"blackRook") {
+                    game.setObject(true, forKey: "hasBlackRookMoved")
+                } else if selectedPiece == whiteRook2 && selectedPiece.image == UIImage(named:"blackRook") {
+                    game.setObject(true, forKey: "hasBlackRookMoved2")
+                }
             }
         }
         for var o = 0 ; o < whiteCastlingLeft.count; o++ {
@@ -6506,7 +6530,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 whiteCastle = true
                 movePiece(whiteCastlingLeft[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: whiteCastlingLeft[o].frame.origin.y - whiteKing.frame.origin.y)
                 hasWhiteKingMoved = true
-                hasWhiteRookMoved = true
+                game.setObject(true, forKey: "hasWhiteRookMoved")
                 castleLeft = true
             }
         }
@@ -6520,7 +6544,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 whiteCastle = true
                 movePiece(whiteCastlingRight[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: whiteCastlingRight[o].frame.origin.y - whiteKing.frame.origin.y)
                 hasWhiteKingMoved = true
-                hasWhiteRookMoved2 = true
+                 game.setObject(true, forKey: "hasWhiteRookMoved2")
                 castleRight = true
             }
         }
@@ -6533,7 +6557,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 blackCastle = true
                 movePiece(blackCastlingLeft[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: blackCastlingLeft[o].frame.origin.y - whiteKing.frame.origin.y)
                 hasBlackKingMoved = true
-                hasBlackRookMoved = true
+                 game.setObject(true, forKey: "hasBlackRookMoved")
                 castleRight = true
             }
         }
@@ -6547,7 +6571,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 blackCastle = true
                 movePiece(blackCastlingRight[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: blackCastlingRight[o].frame.origin.y - whiteKing.frame.origin.y)
                 hasBlackKingMoved = true
-                hasBlackRookMoved2 = true
+                 game.setObject(true, forKey: "hasBlackRookMoved2")
                 castleLeft = true
             }
         }
