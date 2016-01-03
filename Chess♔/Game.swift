@@ -1020,7 +1020,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
                                                                             self.updateLogic()
-                                                                            
+                                                                            //return
                                                                     })
                                                                     
                                                                 }
@@ -2540,6 +2540,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         var bottomOffset = CGPointMake(0, collectionView.contentSize.height - collectionView.bounds.size.height)
         collectionView.setContentOffset(bottomOffset, animated: false)
         
+        forwardB.userInteractionEnabled = false
+        backwardB.userInteractionEnabled = false
+        exitTimeCapsuleB.userInteractionEnabled = false
         
     }
     
@@ -3720,6 +3723,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if alreadyloadedTime == false {
         
         turnGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 80,80,30))
+            if screenHeight == 667 {
+            turnGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 67
+                meImage.frame.origin.y -= 7
+            }
+            
         turnGL.text = "Your Turn"
         turnGL.alpha = 0
         turnGL.font = UIFont(name: "Times", size: 16)
@@ -3734,7 +3742,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         
         timeGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 30,80,30))
-        timeGL.text = "0:56"
         timeGL.font = UIFont(name: "Times", size: 16)
         timeGL.textAlignment = .Center
         if alreadyloadedTime == false {
