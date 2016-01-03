@@ -740,8 +740,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             notationsWithNumber = ""
             var t = 1
             for var i = 0; i < notations.count; i++ {
-                
-                
+                  
                 if i % 2 == 0{
                     notationsWithNumber +=  "\(t). "
                     t++
@@ -6479,9 +6478,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     game.setObject(true, forKey: "hasWhiteRookMoved")
                 }
                 if selectedPiece == whiteRook1 && selectedPiece.image == UIImage(named:"blackRook") {
-                    game.setObject(true, forKey: "hasBlackRookMoved")
-                } else if selectedPiece == whiteRook2 && selectedPiece.image == UIImage(named:"blackRook") {
                     game.setObject(true, forKey: "hasBlackRookMoved2")
+                } else if selectedPiece == whiteRook2 && selectedPiece.image == UIImage(named:"blackRook") {
+                    game.setObject(true, forKey: "hasBlackRookMoved")
                 }
             }
         }
