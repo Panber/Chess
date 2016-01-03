@@ -740,8 +740,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             notationsWithNumber = ""
             var t = 1
             for var i = 0; i < notations.count; i++ {
-                
-                
+                  
                 if i % 2 == 0{
                     notationsWithNumber +=  "\(t). "
                     t++
