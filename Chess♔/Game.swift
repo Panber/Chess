@@ -2908,6 +2908,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             backwardB.userInteractionEnabled = false
             exitTimeCapsuleB.userInteractionEnabled = false
             
+            
+            self.timeGL.frame.origin.y -= 100
+            self.turnGL.frame.origin.y -= 100
+            self.turnIndicatorG.frame.origin.y -= 100
+            
             UIView.animateWithDuration(0.8, animations: { () -> Void in
                 self.slider.frame.origin.y = screenHeight/2 + 150
                 self.capsuleB.frame.origin.y = screenHeight/2 + 246
@@ -3045,6 +3050,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 self.sliderPointer.frame.origin.y = screenHeight/2 + screenWidth/2
                 self.notationsL.frame.origin.y = screenHeight/2 + 150 - 47
                 self.exitTimeCapsuleB.frame.origin.y = screenHeight/2 + 150 - 47
+                
+                
+                
+                self.timeGL.frame.origin.y -= 100
+                self.turnGL.frame.origin.y -= 100
+                self.turnIndicatorG.frame.origin.y -= 100
                 
                 if screenHeight == 667 {
                     self.capsuleB.frame.origin.y = screenHeight/2 + 220
