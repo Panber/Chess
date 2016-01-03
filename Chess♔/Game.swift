@@ -618,7 +618,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         print(screenHeight)
         if screenHeight == 667.0 {
             otherImage.frame.origin.y = 64 + 8
-            meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 22
+            meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 13
             
         }
         else if screenHeight == 736.0 {
@@ -637,7 +637,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             
             otherImage.frame.origin.y = 64 + 7
-            meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 20
+            meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 11
             
         }
         else if screenHeight == 480.0 {
@@ -2742,6 +2742,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         UIView.animateWithDuration(0.8, animations: { () -> Void in
             //self.slider.frame.origin.y = 652
+            
+            self.timeGL.frame.origin.y += 100
+            self.turnGL.frame.origin.y += 100
+            self.turnIndicatorG.frame.origin.y += 100
+
+
+            
             self.slider.frame.origin.y = screenHeight/2 + screenWidth/2 + 1
             self.capsuleB.frame.origin.y += 200
             self.capsuleL.frame.origin.y = 78
@@ -2910,7 +2917,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
                 
                 self.collectionView.frame.origin.y  = 86
-                self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 30
+                self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 20
                 self.otherImage.frame.origin.y = 64 + 13
                 
                 
@@ -2926,7 +2933,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.collectionView.frame.origin.y = 78
                     
                     self.otherImage.frame.origin.y = 64 + 8
-                    self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 22
+                    self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 13
                     
                     
                 }
@@ -2937,7 +2944,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.collectionView.frame.origin.y = 74
                     
                     self.otherImage.frame.origin.y = 64 + 7
-                    self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 20
+                    self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 9
                     
                     
                 }
@@ -3031,7 +3038,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
                 
                 self.collectionView.frame.origin.y  = 86
-                self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 30
+                self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 20
                 self.otherImage.frame.origin.y = 64 + 13
                 
                 
@@ -3047,7 +3054,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.collectionView.frame.origin.y = 78
                     
                     self.otherImage.frame.origin.y = 64 + 8
-                    self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 22
+                    self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 13
                     
                     
                 }
@@ -3058,7 +3065,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.collectionView.frame.origin.y = 74
                     
                     self.otherImage.frame.origin.y = 64 + 7
-                    self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 20
+                    self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 9
                     
 
                 }
@@ -3723,10 +3730,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if alreadyloadedTime == false {
         
         turnGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 80,80,30))
-            if screenHeight == 667 {
-            turnGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 67
-                meImage.frame.origin.y -= 7
-            }
+           
             
         turnGL.text = "Your Turn"
         turnGL.alpha = 0
@@ -3760,8 +3764,29 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         turnIndicatorG.alpha = 0
         view.addSubview(turnIndicatorG)
         }
+                
+                
+                
                 didloadTurnGL = false
             }
+            
+            if screenHeight == 667 {
+                turnGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 69
+                turnIndicatorG.frame.origin.y = turnGL.frame.origin.y + 10
+   
+            }
+            else if screenHeight == 568 {
+                turnGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 47
+                timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 70
+                turnIndicatorG.frame.origin.y = turnGL.frame.origin.y + 10
+            }
+            else if screenHeight == 480 {
+                turnGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 27
+                timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 80
+                meImage.frame.origin.y += 900
+                turnIndicatorG.frame.origin.y = turnGL.frame.origin.y + 10
+            }
+            
             }
         
         alreadyloadedTime = true
@@ -3784,6 +3809,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 80
             self.turnGL.frame.origin.y += 100
             self.turnIndicatorG.frame.origin.x = self.turnGL.frame.origin.x - 10
+            
+            if screenHeight == 667 {
+                self.timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 69
+            }
+            else if screenHeight == 568 {
+                self.timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 47
+            }
+            else if screenHeight == 480 {
+                self.timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 27
+            }
+            
             }, completion: {finish in
                 
                 UIView.animateWithDuration(0.3, delay:0, options: .CurveEaseInOut, animations: { () -> Void in
@@ -3809,7 +3845,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             turnIndicatorG.clipsToBounds = true
             turnIndicatorG.backgroundColor = turnIndicatorturn
             turnIndicatorG.frame.origin.x = screenWidth/2 - turnIndicatorG.frame.size.width/2
-didloadTurnGL = false
+                
+                if screenHeight == 667 {turnIndicatorG.frame.origin.y = screenHeight/2 + screenWidth/2 + 79}
+                else if screenHeight == 568 { turnIndicatorG.frame.origin.y = screenHeight/2 + screenWidth/2 + 57}
+                else if screenHeight == 480 { turnIndicatorG.frame.origin.y = screenHeight/2 + screenWidth/2 + 37 }
+
+
+    
+                
+                didloadTurnGL = false
             }
             
             if alreadyloadedTime == false {
@@ -5813,6 +5857,14 @@ didloadTurnGL = false
 
                         self.timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 30
                         self.turnGL.frame.origin.y -= 100
+                        
+                        
+                         if screenHeight == 568 {
+                            self.timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 70
+                        }
+                       else if screenHeight == 480 {
+                            self.timeGL.frame.origin.y = screenHeight/2 + screenWidth/2 + 80
+                        }
                         
                         }, completion: {finish in
                             
