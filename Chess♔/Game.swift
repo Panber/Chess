@@ -366,6 +366,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var speedImagespeed = UIImage()
     
     var multiplySpeedWith = Double()
+    var multiplySpeedWithIfNew = Double()
+
     
     var timeLeft = NSTimeInterval()
     var timer = NSTimer()
@@ -706,20 +708,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if game["speed"] as? String == "Normal" {
             speedLspeed = "Normal Speedmode"
             speedImagespeed = UIImage(named: "normalIndicator.png")!
-            multiplySpeedWith = 1.0
+            multiplySpeedWithIfNew = 0.25
+            multiplySpeedWith = 0.00005788
+
             
         }
         else if game["speed"] as? String == "Fast" {
             speedLspeed = "Fast Speedmode"
             speedImagespeed = UIImage(named: "flash31.png")!
-            multiplySpeedWith = 0.25
+            multiplySpeedWithIfNew = 0.00695
+            multiplySpeedWith = 0.00005788
 
             
         }
         else if game["speed"] as? String == "Slow" {
             speedLspeed = "Slow Speedmode"
             speedImagespeed = UIImage(named: "clock104.png")!
-            multiplySpeedWith = 3
+            multiplySpeedWithIfNew = 3
+            multiplySpeedWith = 0.00005788
 
         }
         
@@ -4241,67 +4247,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     //use this to checki fuser lost on time
     func updateTimer() {
         
-//        let textC =  timeL.textColor
-//        
-//        var timeLeftC = timeLeft
-//        print(timeLeft)
-//        if timeLeftC <= -60 {
-//            timeLeftC = timeLeftC/60
-//            let sinceOutput = Int(timeLeftC) * -1
-//            timeL.text = "\(sinceOutput)min"
-//            timeL.textColor = red
-//            
-//            timeGL.text = "\(sinceOutput)min"
-//            timeGL.textColor = red
-//            
-//        }
-//        else {
-//            let sinceOutput = Int(timeLeftC) * -1
-//            timeL.text = "\(sinceOutput)s"
-//            timeL.textColor = red
-//            
-//            timeGL.text = "\(sinceOutput)s"
-//            timeGL.textColor = red
-//        }
-//        //making to hours
-//        if timeLeftC <= -60 {
-//            timeLeftC = timeLeftC/60
-//            let sinceOutput = Int(timeLeftC) * -1
-//            timeL.text = "\(sinceOutput)h"
-//            timeL.textColor = textC
-//            
-//            timeGL.text = "\(sinceOutput)h"
-//            
-//            if darkMode {
-//                timeGL.textColor = UIColor.whiteColor() }
-//            else { timeGL.textColor = UIColor.blackColor()}
-//            if darkMode {
-//                turnGL.textColor = UIColor.whiteColor() }
-//            else { turnGL.textColor = UIColor.blackColor()}
-//            
-//            
-//            //making to days
-//            if timeLeftC <= -24 {
-//                timeLeftC = timeLeftC/24
-//                let sinceOutput = Int(timeLeftC) * -1
-//                timeL.text = "\(sinceOutput)d"
-//                timeGL.text = "\(sinceOutput)d"
-//
-//                
-//            }
-//            
-//        }
-//        
-//        if timeLeftC >= 0 {
-//            timeL.text = "Game Finished"
-//            timeL.font = UIFont(name: "Times-Italic", size: 19)
-//            timeGL.text = "---"
-//
-//            //timer.invalidate()
-//        }
+        if notations.count <= 1 {
+            
+             
+        }else {
+            timeLeft++
+
+        }
         
-        
-        timeLeft++
 
         var timeLeftT = timeLeft * -1
         
@@ -4367,6 +4320,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
                     timer.invalidate()
         }
+        
+    
         
         
     }
@@ -5818,8 +5773,18 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             loadMoves()
             
             
-            var now = NSDate()
-            let newDate = NSDate().dateByAddingTimeInterval(60*60*24*multiplySpeedWith)
+            var now = game["timeLeftToMove"] as? NSDate
+            var newDate = now!.dateByAddingTimeInterval(60*60*24*multiplySpeedWith)
+            
+            
+            if notations.count <= 1 {
+                print(notations.count)
+            newDate = NSDate().dateByAddingTimeInterval(60*60*24*(multiplySpeedWithIfNew + multiplySpeedWith))
+            }
+            
+            print(notations.count)
+
+            
             
             game["timeLeftToMove"] = newDate
             
