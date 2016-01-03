@@ -6514,9 +6514,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     game.setObject(true, forKey: "hasWhiteRookMoved")
                 }
                 if selectedPiece == whiteRook1 && selectedPiece.image == UIImage(named:"blackRook") {
-                    game.setObject(true, forKey: "hasBlackRookMoved")
-                } else if selectedPiece == whiteRook2 && selectedPiece.image == UIImage(named:"blackRook") {
                     game.setObject(true, forKey: "hasBlackRookMoved2")
+                } else if selectedPiece == whiteRook2 && selectedPiece.image == UIImage(named:"blackRook") {
+                    game.setObject(true, forKey: "hasBlackRookMoved")
                 }
             }
         }
