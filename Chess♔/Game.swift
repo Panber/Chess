@@ -1147,7 +1147,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
             }
             
-            magic1()
             
             for var i = 0; i < whitePromotionType.count; i++ {
                 if whitePromotionType[i] == "Queen" {
@@ -1196,6 +1195,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
                 
             }
+            
+            magic1()
+            
             print("I am white player!")
             canOnlyMoveWhite = true
             self.title = r!["blackPlayer"] as? String
@@ -2054,12 +2056,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
             }
-            
-            magic2()
-            
             for var i = 0; i < blackPromotionType.count; i++ {
                 if blackPromotionType[i] == "Queen" {
                     print("Black promotion to queen")
+                    
                     whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackQueen")
                     self.whiteQueens += [whitePawns[blackPromotionPiece[i]]]
                     self.whitePawns.removeAtIndex(blackPromotionPiece[i])
@@ -2105,6 +2105,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
             }
             
+            magic2()
+ 
             print("I am black player!")
             canOnlyMoveWhite = true
             self.title = r!["whitePlayer"] as? String
