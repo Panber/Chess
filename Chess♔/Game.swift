@@ -366,6 +366,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var speedImagespeed = UIImage()
     
     var multiplySpeedWith = Double()
+    var multiplySpeedWithIfNew = Double()
+
     
     var timeLeft = NSTimeInterval()
     var timer = NSTimer()
@@ -696,20 +698,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if game["speed"] as? String == "Normal" {
             speedLspeed = "Normal Speedmode"
             speedImagespeed = UIImage(named: "normalIndicator.png")!
-            multiplySpeedWith = 1.0
+            multiplySpeedWithIfNew = 0.25
+            multiplySpeedWith = 0.00005788
+
             
         }
         else if game["speed"] as? String == "Fast" {
             speedLspeed = "Fast Speedmode"
             speedImagespeed = UIImage(named: "flash31.png")!
-            multiplySpeedWith = 0.25
+            multiplySpeedWithIfNew = 0.00695
+            multiplySpeedWith = 0.00005788
 
             
         }
         else if game["speed"] as? String == "Slow" {
             speedLspeed = "Slow Speedmode"
             speedImagespeed = UIImage(named: "clock104.png")!
-            multiplySpeedWith = 3
+            multiplySpeedWithIfNew = 3
+            multiplySpeedWith = 0.00005788
 
         }
         
@@ -5804,8 +5810,18 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             loadMoves()
             
             
-            var now = NSDate()
-            let newDate = NSDate().dateByAddingTimeInterval(60*60*24*multiplySpeedWith)
+            var now = game["timeLeftToMove"] as? NSDate
+            var newDate = now!.dateByAddingTimeInterval(60*60*24*multiplySpeedWith)
+            
+            
+            if notations.count <= 1 {
+                print(notations.count)
+            newDate = NSDate().dateByAddingTimeInterval(60*60*24*(multiplySpeedWithIfNew + multiplySpeedWith))
+            }
+            
+            print(notations.count)
+
+            
             
             game["timeLeftToMove"] = newDate
             
