@@ -4249,7 +4249,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         if notations.count <= 1 {
             
-            
+             
         }else {
             timeLeft++
 
