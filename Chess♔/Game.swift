@@ -4616,6 +4616,7 @@ didloadTurnGL = false
                         
                     }
                 }
+                if blackPawns.count - 1 > passantPiece  {
                 var count = blackPawns.count - 1
                 //print(blackPawns.count)
                 if selectedPiece.frame.origin.y == screenHeight/2 - 1 * pieceSize &&  blackPawns[count-passantPiece].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && blackPawns[count-passantPiece].frame.origin.y == selectedPiece.frame.origin.y && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false && canPassant == true || selectedPiece.frame.origin.y == screenHeight/2 - 1 * pieceSize &&  blackPawns[count-passantPiece].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && blackPawns[count-passantPiece].frame.origin.y == selectedPiece.frame.origin.y && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false && canPassantBlack == true  {
@@ -4625,6 +4626,7 @@ didloadTurnGL = false
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
                     self.view.addSubview(pieceOption)
                     pieceOptions += [pieceOption]
+                }
                 }
                 
                 for var o = 0 ; o < pieceOptions.count; o++ {
