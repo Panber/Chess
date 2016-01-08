@@ -709,7 +709,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             speedLspeed = "Normal Speedmode"
             speedImagespeed = UIImage(named: "normalIndicator.png")!
             multiplySpeedWithIfNew = 0.25
-            multiplySpeedWith = 0.00005788
+            multiplySpeedWith = 0.00003
 
             
         }
@@ -717,7 +717,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             speedLspeed = "Fast Speedmode"
             speedImagespeed = UIImage(named: "flash31.png")!
             multiplySpeedWithIfNew = 0.00695
-            multiplySpeedWith = 0.00005788
+            multiplySpeedWith = 0.00003
 
             
         }
@@ -725,7 +725,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             speedLspeed = "Slow Speedmode"
             speedImagespeed = UIImage(named: "clock104.png")!
             multiplySpeedWithIfNew = 3
-            multiplySpeedWith = 0.00005788
+            multiplySpeedWith = 0.00003
 
         }
         
