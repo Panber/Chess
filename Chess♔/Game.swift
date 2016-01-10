@@ -1317,8 +1317,31 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
             }
+ 
+            magic1()
             
-
+            for var i = 0; i < whitePromotionType.count; i++ {
+                if whitePromotionType[i] == "Queen" {
+                    print("White promotion to queen")
+                    whitePawns[whitePromotionPiece[i]].image = UIImage(named:"whiteQueen")
+                    self.whiteQueens += [whitePawns[whitePromotionPiece[i]]]
+                    self.whitePawns.removeAtIndex(whitePromotionPiece[i])
+                } else if whitePromotionType[i] == "Rook" {
+                    whitePawns[whitePromotionPiece[i]].image = UIImage(named:"whiteRook")
+                    self.whiteRooks += [whitePawns[whitePromotionPiece[i]]]
+                    self.whitePawns.removeAtIndex(whitePromotionPiece[i])
+                } else if whitePromotionType[i] == "Bishop" {
+                    whitePawns[whitePromotionPiece[i]].image = UIImage(named:"whiteBishop")
+                    self.whiteBishops += [whitePawns[whitePromotionPiece[i]]]
+                    self.whitePawns.removeAtIndex(whitePromotionPiece[i])
+                } else if whitePromotionType[i] == "Knight" {
+                    whitePawns[whitePromotionPiece[i]].image = UIImage(named:"whiteKnight")
+                    self.whiteKnights += [whitePawns[whitePromotionPiece[i]]]
+                    self.whitePawns.removeAtIndex(whitePromotionPiece[i])
+                }
+                
+            }
+            
             for var i = 0; i < blackPromotionType.count; i++ {
                 if blackPromotionType[i] == "Queen" {
                     var count = blackPawns.count - 1
@@ -1344,31 +1367,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
                 
             }
-            
-            magic1()
-            
-            for var i = 0; i < whitePromotionType.count; i++ {
-                if whitePromotionType[i] == "Queen" {
-                    print("White promotion to queen")
-                    whitePawns[whitePromotionPiece[i]].image = UIImage(named:"whiteQueen")
-                    self.whiteQueens += [whitePawns[whitePromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(whitePromotionPiece[i])
-                } else if whitePromotionType[i] == "Rook" {
-                    whitePawns[whitePromotionPiece[i]].image = UIImage(named:"whiteRook")
-                    self.whiteRooks += [whitePawns[whitePromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(whitePromotionPiece[i])
-                } else if whitePromotionType[i] == "Bishop" {
-                    whitePawns[whitePromotionPiece[i]].image = UIImage(named:"whiteBishop")
-                    self.whiteBishops += [whitePawns[whitePromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(whitePromotionPiece[i])
-                } else if whitePromotionType[i] == "Knight" {
-                    whitePawns[whitePromotionPiece[i]].image = UIImage(named:"whiteKnight")
-                    self.whiteKnights += [whitePawns[whitePromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(whitePromotionPiece[i])
-                }
-                
-            }
-            
+
             print("I am white player!")
             canOnlyMoveWhite = true
             self.title = r!["blackPlayer"] as? String
@@ -2336,6 +2335,31 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
             }
+
+            magic2()
+            
+            for var i = 0; i < blackPromotionType.count; i++ {
+                if blackPromotionType[i] == "Queen" {
+                    print("Black promotion to queen")
+                    
+                    whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackQueen")
+                    self.whiteQueens += [whitePawns[blackPromotionPiece[i]]]
+                    self.whitePawns.removeAtIndex(blackPromotionPiece[i])
+                } else if blackPromotionType[i] == "Rook" {
+                    whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackRook")
+                    self.whiteRooks += [whitePawns[blackPromotionPiece[i]]]
+                    self.whitePawns.removeAtIndex(blackPromotionPiece[i])
+                } else if blackPromotionType[i] == "Bishop" {
+                    whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackBishop")
+                    self.whiteBishops += [whitePawns[blackPromotionPiece[i]]]
+                    self.whitePawns.removeAtIndex(blackPromotionPiece[i])
+                } else if blackPromotionType[i] == "Knight" {
+                    whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackKnight")
+                    self.whiteKnights += [whitePawns[blackPromotionPiece[i]]]
+                    self.whitePawns.removeAtIndex(blackPromotionPiece[i])
+                }
+                
+            }
             
             for var i = 0; i < whitePromotionType.count; i++ {
                 if whitePromotionType[i] == "Queen" {
@@ -2361,31 +2385,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.blackPawns[count - self.whitePromotionPiece[i]].image = UIImage(named:"whiteKnight")
                     self.blackKnights += [self.blackPawns[count - self.whitePromotionPiece[i]]]
                     self.blackPawns.removeAtIndex(count - self.whitePromotionPiece[i] - 1)
-                }
-                
-            }
-            
-            magic2()
-            
-            for var i = 0; i < blackPromotionType.count; i++ {
-                if blackPromotionType[i] == "Queen" {
-                    print("Black promotion to queen")
-                    
-                    whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackQueen")
-                    self.whiteQueens += [whitePawns[blackPromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(blackPromotionPiece[i])
-                } else if blackPromotionType[i] == "Rook" {
-                    whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackRook")
-                    self.whiteRooks += [whitePawns[blackPromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(blackPromotionPiece[i])
-                } else if blackPromotionType[i] == "Bishop" {
-                    whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackBishop")
-                    self.whiteBishops += [whitePawns[blackPromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(blackPromotionPiece[i])
-                } else if blackPromotionType[i] == "Knight" {
-                    whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackKnight")
-                    self.whiteKnights += [whitePawns[blackPromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(blackPromotionPiece[i])
                 }
                 
             }
