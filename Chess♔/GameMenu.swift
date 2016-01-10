@@ -186,11 +186,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             self.initLocationManager()
 
         //query for friends, find out if the user already has friends, if not add friends
-        let friends = PFObject(className: "Friends")
-        friends["user"] = PFUser.currentUser()
-        friends["username"] = PFUser.currentUser()?.username
-        friends["friends"] = []
-        friends.saveInBackground()
+//        let friends = PFObject(className: "Friends")
+//        friends["user"] = PFUser.currentUser()
+//        friends["username"] = PFUser.currentUser()?.username
+//        friends["friends"] = []
+//        friends.saveInBackground()
 //
 //        }
         
