@@ -1488,7 +1488,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     loadMoves()
                     
                     
-                    
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if String(moves.last![0]) == xAxisArrStr2[t] {
                             for var p = 0; p < yAxisArrStr2.count; p++ {
