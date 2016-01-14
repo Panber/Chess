@@ -1,243 +1,281 @@
 //
 //  AnalyzeMenu.swift
-//  Chess♔
+//  
 //
-//  Created by Johannes Berge on 05/09/15.
-//  Copyright © 2015 Panber. All rights reserved.
+//  Created by Johannes Berge on 12/01/16.
+//
 //
 
 import UIKit
 import Parse
 
-
-class AnalyzeMenu: UIViewController,UIScrollViewDelegate {
-
-    @IBOutlet weak var board: UIImageView!
-  
-    var slider = UISlider()
-    var capsuleB = UIButton()
-    var capsuleL = UILabel()
+class AnalyzeMenu: UIViewController,UITableViewDelegate {
     
-    var forwardB = UIButton()
-    var backwardB = UIButton()
+    var analyzeIDS:Array<String> = []
+    var analyzeID = ""
+    
+    var usernameArray: Array<String> = []
+    var ratingArray: Array<Int> = []
+    var updatedArray: Array<String> = []
+    var profilePicArray: Array<UIImage> = []
+    var imageDataArray: Array<NSData> = []
+    
+    var yourturnArray: Array<String> = []
+    var yourturnUpdateSince: Array<NSTimeInterval> = []
+    var yourTurnColor: Array<String> = []
 
+    
+    var instructionsLabel = UILabel()
+
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         navigationController?.navigationBar.topItem?.title = "Analyze"
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
-
-        //
-        slider = UISlider(frame:CGRectMake(20, screenHeight/2 + 150, screenWidth - 40, 20))
-         if screenHeight == 568 {slider.frame.origin.y = screenHeight/2 + 150 - 47}
-        slider.minimumValue = 0
-        slider.maximumValue = 100
-        slider.continuous = true
-        slider.tintColor = blue
-        slider.value = 100
-        slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
-        view.addSubview(slider)
-        view.sendSubviewToBack(slider)
-        //
-        
-        capsuleL = UILabel(frame: CGRectMake(0,screenHeight/2 - 150,screenWidth,60))
-        capsuleL.text = "TIME CAPSULE"
-        capsuleL.font = UIFont(name: "Didot", size: 22)
-        capsuleL.textAlignment = .Center
-        view.addSubview(capsuleL)
-        view.sendSubviewToBack(capsuleL)
         
         
-        
-        capsuleB = UIButton(frame: CGRectMake(screenWidth - 60,screenHeight/2 + 246,40,40))
-        if screenHeight == 667 { capsuleB.frame.origin.y = screenHeight/2 + 220}
-        else if screenHeight ==  568 {capsuleB.frame.origin.y = screenHeight/2 + 180}
-        capsuleB.setBackgroundImage(UIImage(named: "capsuleClock.png"), forState: .Normal)
-        capsuleB.addTarget(self, action: "capsuleButtonPressed:", forControlEvents: .TouchUpInside)
-        view.addSubview(capsuleB)
-        
-        backwardB = UIButton(frame: CGRectMake(screenWidth/2-70,screenHeight/2 + 150 - 47,40,40))
-        backwardB.setBackgroundImage(UIImage(named: "arrow_blueB.png"), forState: .Normal)
-        backwardB.addTarget(self, action: "backwardButtonPressed:", forControlEvents: .TouchUpInside)
-        view.addSubview(backwardB)
-        backwardB.enabled = false
-        view.sendSubviewToBack(backwardB)
+    }
+    
+    /*
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
+    }
+    */
+    override func viewWillAppear(animated: Bool) {
+        lightOrDarkMode()
 
         
-        forwardB = UIButton(frame: CGRectMake(screenWidth/2+30,screenHeight/2 + 150 - 47,40,40))
-        forwardB.setBackgroundImage(UIImage(named: "arrow_blueF.png"), forState: .Normal)
-        forwardB.addTarget(self, action: "forwardButtonPressed:", forControlEvents: .TouchUpInside)
-        forwardB.enabled = false
-        view.addSubview(forwardB)
-        view.sendSubviewToBack(forwardB)
-        print(screenHeight)
-
-        if screenHeight == 480 {
-            self.tabBarController?.tabBar.hidden = true
-            slider.frame.origin.y = screenHeight/2 + 150 - 47
-            capsuleB.frame.origin.y = screenHeight/2 + 180
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 130
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        
+        
+        let cell:AnalyzeMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("analyzeCell",forIndexPath: indexPath) as! AnalyzeMenuTableViewCell
+        
+        
+        if darkMode {cell.backgroundColor = UIColor.clearColor() //(red:0.22, green:0.22, blue:0.22, alpha:1.0)
+            
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            
+            cell.rating.textColor = UIColor.lightTextColor()
+            
+            
+            cell.username.textColor = UIColor.whiteColor()
+            
         }
+        else {cell.backgroundColor = UIColor.whiteColor()
+            
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            cell.rating.textColor = UIColor.darkGrayColor()
+            cell.username.textColor = UIColor.blackColor()
+            
+            
+        }
+        // cell.userProfileImage.image = nil
+        cell.username.text = ""
+        
+        
+        func find(name:String) {
+            
+            cell.username.text = name
+            cell.userProfileImage.image = nil
+            
+            
+            
+            let query = PFQuery(className: "_User")
+            
+            query.whereKey("username", equalTo: name)
+            query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+                if (error == nil) {
+                    
+                    if let userArray = objects as? [PFUser] {
+                        for user in userArray {
+                            
+                            cell.rating.text = String(user["rating"] as! Int)
+                            
+                            if let userPicture = user["profile_picture"] as? PFFile {
+                                
+                                userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                    if (error == nil) {
+                                        cell.userProfileImage.alpha = 0
+                                        cell.userProfileImage.image = UIImage(data: imageData!)
+                                        self.imageDataArray.append(imageData!)
+                                        
+                                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                            cell.userProfileImage.alpha = 1
+                                            
+                                            
+                                        })
+                                        
+                                    } else {
+                                    }
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                } else {
+                    // Log details of the failure
+                    print("query error: \(error) \(error!.userInfo)")
+                }
+                
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        // cell.rating.text = "601"
+        // cell.updated.text = "Last Update: 1h 5min"
+        
+            find(yourturnArray[indexPath.row])
+            
+            if yourTurnColor[indexPath.row] == "white" {
+                cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
+            }
+            else {
+                cell.pieceIndicator.backgroundColor = UIColor.blackColor()
+            }
+            
+
+            
+            var since = yourturnUpdateSince[indexPath.row]
+            //making to minutes
+            cell.updated.text = "Last Updated: Now"
+            
+            if since >= 60 {
+                since = since/60
+                let sinceOutput = Int(since)
+                cell.updated.text = "Last Updated: \(sinceOutput)min ago"
+            }
+            //making to hours
+            if since >= 60 {
+                since = since/60
+                let sinceOutput = Int(since)
+                cell.updated.text = "Last Updated: \(sinceOutput)h ago"
+                
+                //making to days
+                if since >= 24 {
+                    since = since/24
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                    
+                }
+                
+            }
+
+        return cell
     }
-
-    func capsuleButtonPressed(sender: UIButton!) {
     
-        forwardB.enabled = false
-        backwardB.enabled = true
-
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        UIView.animateWithDuration(0.8, animations: { () -> Void in
-            self.slider.frame.origin.y = 652
-            self.capsuleB.frame.origin.y += 200
-            self.capsuleL.frame.origin.y = 78
-            self.backwardB.frame.origin.y = 600
-            self.forwardB.frame.origin.y = 600
-            
-            if screenHeight == 667 {
-                self.capsuleL.frame.origin.y = 72
-                self.slider.frame.origin.y = 587
-                self.backwardB.frame.origin.y = 540
-                self.forwardB.frame.origin.y = 540
-            }
-            else if screenHeight == 568 {
-                self.capsuleL.frame.origin.y = 62
-                self.slider.frame.origin.y = 493
-                self.backwardB.frame.origin.y = 455
-                self.forwardB.frame.origin.y = 455
-            
-            }
+        //        let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
 
-            else if screenHeight == 480 {
-                self.slider.frame.origin.y = 450
-                self.capsuleB.frame.origin.y = 600
-                self.backwardB.frame.origin.y = 409
-                self.forwardB.frame.origin.y = 409
-            }
-
+            gameID = analyzeIDS[indexPath.row]
+ 
             
-       
-            
-            }, completion: {finish in
         
-        })
+        print("this is \(gameID)")
         
     }
     
-    func sliderValueDidChange(sender:UISlider!)
-    {
-        forwardB.enabled = true
-        if sender.value < 1 {
-            backwardB.enabled = false
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if yourturnArray.count == 0 {
             
+            tableView.hidden = true
+
         }
         else {
-            backwardB.enabled = true
-        }
-        
-        print("value--\(sender.value)")
-        if sender.value > 99 {
-            forwardB.enabled = false
-
             
-            UIView.animateWithDuration(0.8, animations: { () -> Void in
-                self.slider.frame.origin.y = screenHeight/2 + 150
-                self.capsuleB.frame.origin.y = screenHeight/2 + 246
-                self.capsuleL.frame.origin.y = 200
-                
-                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
-                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
-
-                if screenHeight == 667 {
-                    self.capsuleB.frame.origin.y = screenHeight/2 + 220
-                    self.slider.frame.origin.y = screenHeight/2 + 150
-                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
-                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
-                    
-                }
-                    
-                else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
-                    self.slider.frame.origin.y = screenHeight/2 + 150 - 50
-                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
-                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
-                }
-                
-             else   if screenHeight == 480 {
-                    self.slider.frame.origin.y = screenHeight/2 + 150 - 47
-                    self.capsuleB.frame.origin.y = screenHeight/2 + 180
-                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
-                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
-
-                }
-                
-                }, completion: {finish in
-                    //sender.value = 50
-
-            })
-        
-        }
-        
-    
-    }
-    
-    func forwardButtonPressed(sender:UIButton!) {
-        slider.value++
-        backwardB.enabled = true
-
-        
-        if slider.value > 99 {
-            forwardB.enabled = false
+            instructionsLabel.hidden = true
+            tableView.hidden = false
             
-            UIView.animateWithDuration(0.8, animations: { () -> Void in
-                self.slider.frame.origin.y = screenHeight/2 + 150
-                self.capsuleB.frame.origin.y = screenHeight/2 + 246
-                self.capsuleL.frame.origin.y = 200
-                
-                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
-                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
-                
-                if screenHeight == 667 {
-                    self.capsuleB.frame.origin.y = screenHeight/2 + 220
-                    self.slider.frame.origin.y = screenHeight/2 + 150
-                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
-                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
-                    
-                }
-                else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
-                    self.slider.frame.origin.y = screenHeight/2 + 150 - 50
-                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
-                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
-                }
-                else   if screenHeight == 480 {
-                    self.slider.frame.origin.y = screenHeight/2 + 150 - 47
-                    self.capsuleB.frame.origin.y = screenHeight/2 + 180
-                    self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
-                    self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
-                    
-                }
-                
-                }, completion: {finish in
-                    //sender.value = 50
-                    
-            })
-
-        }
-    }
-    func backwardButtonPressed(sender:UIButton!) {
-        slider.value--
-        forwardB.enabled = true
-        
-        if slider.value == 0 {
-            backwardB.enabled = false
             
         }
         
-    }
+  
+            return yourturnArray.count
 
-    func cancelButtonPressed(sender:UITapGestureRecognizer){
-        removeNewView()
         
     }
     
+    
+    
+    func tableView(tableView:UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+    }
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?
+    {
+        
+ 
+            var shareAction = UITableViewRowAction(style: .Destructive, title: "Resign") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+                
+                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                drawAlert.addAction(UIAlertAction(title: "Resign", style: .Destructive, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                
+                
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.removeNewView()
+                    } , completion: {finish in
+                        self.presentViewController(drawAlert, animated: true, completion: nil)
+                        
+                })
+                
+            }
+            shareAction.backgroundColor = red
+            return [shareAction]
+            
+        
+    }
+
     func removeNewView() {
         
         UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -257,65 +295,36 @@ class AnalyzeMenu: UIViewController,UIScrollViewDelegate {
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    override func viewWillAppear(animated: Bool) {
-        lightOrDarkMode()
-
-        
-
-        
-        board.alpha = 0
-        
-        
-        
-        
-        UIView.animateWithDuration(0.3) { () -> Void in
-            self.board.alpha = 1
-        }
-        
-    }
-    
     //func to check if dark or light mode should be enabled, keep this at the bottom
     func lightOrDarkMode() {
         if darkMode == true {
             
             
-                self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-                self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-                self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
-                self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
-                self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
-                self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-                self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
+            self.tabBarController?.tabBar.tintColor = blue
+            self.navigationController?.navigationBar.tintColor = blue
             
-            capsuleL.textColor = UIColor.whiteColor()
-                
+            
             
         }
         else if darkMode == false {
             
-                self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
-                self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-                self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
-                self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
-                self.tabBarController?.tabBar.tintColor = blue
-                self.navigationController?.navigationBar.tintColor = blue
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
+            self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+            self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
+            self.tabBarController?.tabBar.tintColor = blue
+            self.navigationController?.navigationBar.tintColor = blue
             
-            capsuleL.textColor = UIColor.blackColor()
             
         }
         
         
     }
-
+    
     
 }
