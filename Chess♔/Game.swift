@@ -77,6 +77,9 @@ let xAxisArrq = [h,g,f,e,d,c,b,a]
 var takenWhitePieces : Array<UIImageView> = []
 var takenBlackPieces : Array<UIImageView> = []
 
+var takenWhitePiecesForInfo : Array<UIImageView> = []
+var takenBlackPiecesForInfo : Array<UIImageView> = []
+
 var blackPawnCount = 0
 var blackBishopCount = 0
 var blackKnightCount = 0
@@ -467,6 +470,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         takenBlackPieces = []
         takenWhitePieces = []
+        takenBlackPiecesForInfo = []
+        takenWhitePiecesForInfo = []
         takenBlackPiecesShow = []
         takenWhitePiecesShow = []
         blackPawnCount = 0
@@ -1004,7 +1009,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenWhitePieces += [self.pieces[iy]]
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
-                                                                                        
+                                                                                        takenWhitePiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenWhitePiecesLbl.count; t++ {
                                                                                             if (self.pieces[iy].image == UIImage(named: whitePiecesTypes[t])) {
                                                                                                 whiteCount[t] += 1
@@ -1038,7 +1043,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenBlackPieces += [pieces[iy]]
                                                                                             view.addSubview(takenPiece)
                                                                                         }
-                                                                                        
+                                                                                        takenBlackPiecesForInfo += [self.pieces[iy]]
                                                                                         
                                                                                         for var t = 0; t < takenBlackPiecesLbl.count; t++ {
                                                                                             print(blackCount[t])
@@ -1180,7 +1185,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenWhitePieces += [self.pieces[iy]]
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
-                                                                                        
+                                                                                        takenWhitePiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenWhitePiecesLbl.count; t++ {
                                                                                             if (self.pieces[iy].image == UIImage(named: whitePiecesTypes[t])) {
                                                                                                 whiteCount[t] += 1
@@ -1214,7 +1219,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenBlackPieces += [pieces[iy]]
                                                                                             view.addSubview(takenPiece)
                                                                                         }
-                                                                                        
+                                                                                        takenBlackPiecesForInfo += [self.pieces[iy]]
                                                                                         
                                                                                         for var t = 0; t < takenBlackPiecesLbl.count; t++ {
                                                                                             print(blackCount[t])
@@ -1597,7 +1602,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenWhitePieces += [self.pieces[iy]]
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
-                                                                                        
+                                                                                        takenWhitePiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenWhitePiecesLbl.count; t++ {
                                                                                             if (self.pieces[iy].image == UIImage(named: whitePiecesTypes[t])) {
                                                                                                 whiteCount[t] += 1
@@ -2017,7 +2022,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenBlackPieces += [self.pieces[iy]]
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
-                                                                                        
+                                                                                        takenBlackPiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenBlackPiecesLbl.count; t++ {
                                                                                             if (self.pieces[iy].image == UIImage(named: blackPiecesTypes[t])) {
                                                                                                 blackCount[t] += 1
@@ -2051,7 +2056,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenWhitePieces += [self.pieces[iy]]
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
-                                                                                        
+                                                                                        takenWhitePiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenWhitePiecesLbl.count; t++ {
                                                                                             if (self.pieces[iy].image == UIImage(named: whitePiecesTypes[t])) {
                                                                                                 whiteCount[t] += 1
@@ -2197,7 +2202,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenBlackPieces += [self.pieces[iy]]
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
-                                                                                        
+                                                                                        takenBlackPiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenBlackPiecesLbl.count; t++ {
                                                                                             if (self.pieces[iy].image == UIImage(named: blackPiecesTypes[t])) {
                                                                                                 blackCount[t] += 1
@@ -2231,7 +2236,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenWhitePieces += [self.pieces[iy]]
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
-                                                                                        
+                                                                                        takenWhitePiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenWhitePiecesLbl.count; t++ {
                                                                                             if (self.pieces[iy].image == UIImage(named: whitePiecesTypes[t])) {
                                                                                                 whiteCount[t] += 1
@@ -2590,7 +2595,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black" {
                     
-
+                    
                     let query = PFQuery(className: "Games")
                     query.whereKey("objectId", equalTo: gameID)
                     let r = query.getFirstObject()
@@ -2676,7 +2681,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenBlackPieces += [self.pieces[iy]]
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
-                                                                                        
+                                                                                        takenBlackPiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenBlackPiecesLbl.count; t++ {
                                                                                             if (self.pieces[iy].image == UIImage(named: blackPiecesTypes[t])) {
                                                                                                 blackCount[t] += 1
@@ -4319,6 +4324,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     @IBAction func infoButtonPressed(sender: AnyObject) {
         infoButton.userInteractionEnabled = false
+
         
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             visualEffectView.alpha = 1
@@ -4442,7 +4448,80 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         timeL.font = UIFont(name: "Times", size: 19)
         scrollView1.addSubview(timeL)
         
-        let opponent = UILabel(frame: CGRectMake(0,280 + plusNum,screenWidth, 29))
+        var addSpace: CGFloat = 150
+        
+        let capturedPieces = UILabel(frame: CGRectMake(0,250 + plusNum,screenWidth, 29))
+        capturedPieces.text = "Captured Pieces:"
+        capturedPieces.textAlignment = .Center
+        if darkMode {capturedPieces.textColor = UIColor.lightGrayColor()}
+        else {capturedPieces
+            .textColor = UIColor.darkGrayColor() }
+        capturedPieces.font = UIFont(name: "Didot", size: 19)
+        scrollView1.addSubview(capturedPieces)
+        
+        var capturedWhitePawns: Array<UIImageView> = []
+        var capturedWhiteQueens: Array<UIImageView> = []
+        var capturedWhiteBishops: Array<UIImageView> = []
+        var capturedWhiteRooks: Array<UIImageView> = []
+         var capturedWhiteKnights: Array<UIImageView> = []
+        for var i = 0; i < takenWhitePiecesForInfo.count; i++ {
+            if takenWhitePiecesForInfo[i].image == UIImage(named:"whitePawn") {
+                capturedWhitePawns += [takenWhitePiecesForInfo[i]]
+            } else if takenWhitePiecesForInfo[i].image == UIImage(named:"whiteQueen") {
+                capturedWhiteQueens += [takenWhitePiecesForInfo[i]]
+            } else if takenWhitePiecesForInfo[i].image == UIImage(named:"whiteBishop") {
+                capturedWhiteBishops += [takenWhitePiecesForInfo[i]]
+            } else if takenWhitePiecesForInfo[i].image == UIImage(named:"whiteRook") {
+                capturedWhiteRooks += [takenWhitePiecesForInfo[i]]
+            } else if takenWhitePiecesForInfo[i].image == UIImage(named:"whiteKnight") {
+                capturedWhiteKnights += [takenWhitePiecesForInfo[i]]
+            }
+        }
+        var offset1: CGFloat = 0
+        if capturedWhitePawns.count  > 0 {
+        for var i = 0; i < capturedWhitePawns.count; i++ {
+            let capturedPiece = UIImageView(frame: CGRectMake(35 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+            capturedPiece.image = capturedWhitePawns[i].image
+            scrollView1.addSubview(capturedPiece)
+            offset1 = CGFloat(i * 25)
+        }
+        }
+        if capturedWhiteBishops.count  > 0 {
+        for var i = 0; i < capturedWhiteBishops.count; i++ {
+            let capturedPiece = UIImageView(frame: CGRectMake(35 + offset1 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+            capturedPiece.image = capturedWhiteBishops[i].image
+            scrollView1.addSubview(capturedPiece)
+            offset1 = CGFloat(i * 25)
+        }
+        }
+        if capturedWhiteKnights.count  > 0 {
+            for var i = 0; i < capturedWhiteBishops.count; i++ {
+                let capturedPiece = UIImageView(frame: CGRectMake(35 + offset1 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                capturedPiece.image = capturedWhiteKnights[i].image
+                scrollView1.addSubview(capturedPiece)
+                 offset1 = CGFloat(i * 25)
+            }
+        }
+        if capturedWhiteRooks.count  > 0 {
+            for var i = 0; i < capturedWhiteBishops.count; i++ {
+                let capturedPiece = UIImageView(frame: CGRectMake(35 + offset1 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                capturedPiece.image = capturedWhiteRooks[i].image
+                scrollView1.addSubview(capturedPiece)
+                 offset1 = CGFloat(i * 25)
+            }
+        }
+        if capturedWhiteQueens.count  > 0 {
+            for var i = 0; i < capturedWhiteBishops.count; i++ {
+                let capturedPiece = UIImageView(frame: CGRectMake(35 + offset1 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                capturedPiece.image = capturedWhiteQueens[i].image
+                scrollView1.addSubview(capturedPiece)
+                 offset1 = CGFloat(i * 25)
+            }
+        }
+        
+       
+        
+        let opponent = UILabel(frame: CGRectMake(0,280 + plusNum + addSpace,screenWidth, 29))
         opponent.text = "OPPONENT"
         opponent.textAlignment = .Center
         if darkMode {opponent.textColor = UIColor.lightGrayColor()}
@@ -4451,14 +4530,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         opponent.font = UIFont(name: "Didot", size: 19)
         scrollView1.addSubview(opponent)
         
-        pImage = UIImageView(frame: CGRectMake(screenWidth/2 - 90, 330 + plusNum, 65, 65))
+        pImage = UIImageView(frame: CGRectMake(screenWidth/2 - 90, 330 + plusNum + addSpace, 65, 65))
         pImage.layer.cornerRadius = pImage.frame.size.width/2
         pImage.clipsToBounds = true
         pImage.contentMode = .ScaleAspectFill
         pImage.image = otherUserImage
         scrollView1.addSubview(pImage)
         
-        nameL = UILabel(frame: CGRectMake(pImage.frame.origin.x + pImage.frame.size.width + 25,pImage.frame.origin.y + 10,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),27))
+        nameL = UILabel(frame: CGRectMake(pImage.frame.origin.x + pImage.frame.size.width + 25,pImage.frame.origin.y + 10 + addSpace,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),27))
         nameL.font = UIFont(name: "Times", size: 22)
         nameL.textAlignment = .Left
         if darkMode {nameL.textColor = UIColor.whiteColor()}
@@ -4466,7 +4545,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         nameL.text = otherUserName
         scrollView1.addSubview(nameL)
         
-        ratingL = UILabel(frame: CGRectMake(nameL.frame.origin.x,nameL.frame.origin.y + nameL.frame.size.height,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),21))
+        ratingL = UILabel(frame: CGRectMake(nameL.frame.origin.x,nameL.frame.origin.y + nameL.frame.size.height + addSpace,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),21))
         ratingL.font = UIFont(name: "Times-Italic", size: 15)
         ratingL.textColor = UIColor.darkGrayColor()
         if darkMode {ratingL.textColor = UIColor.lightGrayColor()}
@@ -4474,7 +4553,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         ratingL.text = otherUserRating
         scrollView1.addSubview(ratingL)
         
-        let moves = UILabel(frame: CGRectMake(0,450 + plusNum,screenWidth, 29))
+        let moves = UILabel(frame: CGRectMake(0,450 + plusNum + addSpace,screenWidth, 29))
         moves.text = "MOVES"
         moves.textAlignment = .Center
         if darkMode {moves.textColor = UIColor.lightGrayColor()}
@@ -4483,7 +4562,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         moves.font = UIFont(name: "Didot", size: 19)
         scrollView1.addSubview(moves)
         
-        movesField = UITextView(frame: CGRectMake(30,485 + plusNum,screenWidth-60,200))
+        movesField = UITextView(frame: CGRectMake(30,485 + plusNum + addSpace,screenWidth-60,200))
         movesField.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         movesField.text = notationsWithNumber
         movesField.font = UIFont(name: "Times", size: 19)
@@ -4496,7 +4575,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         scrollView1.addSubview(movesField)
         
         //invite to game btn
-        copyB = UIButton(frame: CGRectMake(screenWidth/2 + 75, 450 + plusNum,45,25))
+        copyB = UIButton(frame: CGRectMake(screenWidth/2 + 75, 450 + plusNum + addSpace,45,25))
         copyB.titleLabel?.font = UIFont(name: "Times", size: 14)
         copyB.setTitle("Copy", forState: .Normal)
         copyB.layer.cornerRadius = cornerRadius - 3
