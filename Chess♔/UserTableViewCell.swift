@@ -316,10 +316,12 @@ class AnalyzeMenuTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         // self.content.layer.cornerRadius = cornerRadius
-        //        self.contentView.layer.shadowColor = UIColor.blackColor().CGColor
-        //                self.contentView.layer.shadowOpacity = 0.05
-        //                //self.contentView.layer.shadowRadius = cornerRadius
-        //               self.contentView.layer.shadowOffset = CGSizeZero
+//                self.lineChartView.layer.shadowColor = UIColor.blackColor().CGColor
+//                        self.lineChartView.layer.shadowOpacity = 0.3
+//                        self.lineChartView.layer.shadowRadius = 7
+//                       self.lineChartView.layer.shadowOffset = CGSizeZero
+
+
         //
         self.content.clipsToBounds = true
         

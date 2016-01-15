@@ -60,7 +60,7 @@ class LineChartTests: FBSnapshotTestCase
     
     func testIsCubic()
     {
-        dataSet.drawCubicEnabled = true
+        dataSet.drawCubicEnabled = false
         FBSnapshotVerifyView(chart)
     }
     

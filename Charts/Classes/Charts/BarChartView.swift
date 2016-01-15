@@ -24,7 +24,7 @@ public class BarChartView: BarLineChartViewBase, BarChartDataProvider
     private var _drawValueAboveBarEnabled = true
 
     /// if set to true, a grey area is darawn behind each bar that indicates the maximum value
-    private var _drawBarShadowEnabled = false
+    private var _drawBarShadowEnabled = true
     
     internal override func initialize()
     {

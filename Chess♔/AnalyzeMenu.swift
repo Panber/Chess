@@ -177,21 +177,21 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
             cell.lineChartView.xAxis.labelPosition = .Bottom
             cell.lineChartView.legend.enabled = false
             
-            chartDataSet.colors = ChartColorTemplates.colorful()
+            chartDataSet.colors = ChartColorTemplates.liberty()
+            chartDataSet.colors = [blue]
 
         
             cell.lineChartView.animate(xAxisDuration: 0.5, yAxisDuration: 0.5,easingOption: .EaseInOutCubic)
             cell.lineChartView.backgroundColor = UIColor.clearColor()
-            
-
             let ll = ChartLimitLine(limit: 0.0, label: "")
-            ll.lineColor = blue
+            ll.lineColor = red
+    
             cell.lineChartView.rightAxis.addLimitLine(ll)
             
         }
         
         months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        let unitsSold = [0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 0.0, 1.0, 2.0, 1.0]
+        let unitsSold = [0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 2.0, 1.0, 0.0, 0.0]
         
         setChart(months, values: unitsSold)
         

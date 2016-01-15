@@ -47,8 +47,8 @@ public class ChartAnimator: NSObject
     private var _endTimeY: NSTimeInterval = 0.0
     private var _endTime: NSTimeInterval = 0.0
     
-    private var _enabledX: Bool = false
-    private var _enabledY: Bool = false
+    private var _enabledX: Bool = true
+    private var _enabledY: Bool = true
     
     private var _easingX: ChartEasingFunctionBlock?
     private var _easingY: ChartEasingFunctionBlock?
@@ -70,8 +70,8 @@ public class ChartAnimator: NSObject
             _displayLink.removeFromRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
             _displayLink = nil
             
-            _enabledX = false
-            _enabledY = false
+            _enabledX = true
+            _enabledY = true
             
             // If we stopped an animation in the middle, we do not want to leave it like this
             if phaseX != 1.0 || phaseY != 1.0

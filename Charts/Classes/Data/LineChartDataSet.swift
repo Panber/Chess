@@ -17,9 +17,9 @@ import UIKit
 
 public class LineChartDataSet: LineRadarChartDataSet
 {
-    public var circleColors = [UIColor]()
+    public var circleColors = [blue]
     public var circleHoleColor = UIColor.whiteColor()
-    public var circleRadius = CGFloat(8.0)
+    public var circleRadius = CGFloat(2.0)
     
     private var _cubicIntensity = CGFloat(0.2)
     
@@ -30,23 +30,23 @@ public class LineChartDataSet: LineRadarChartDataSet
     private var _fillFormatter: ChartFillFormatter = BarLineChartFillFormatter()
     
     /// if true, drawing circles is enabled
-    public var drawCirclesEnabled = false
+    public var drawCirclesEnabled = true
     
     /// if true, cubic lines are drawn instead of linear
     public var drawCubicEnabled = true
     
-    public var drawCircleHoleEnabled = true
+    public var drawCircleHoleEnabled = false
     
     public required init()
     {
         super.init()
-        circleColors.append(UIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
+        circleColors.append(blue)
     }
     
     public override init(yVals: [ChartDataEntry]?, label: String?)
     {
         super.init(yVals: yVals, label: label)
-        circleColors.append(UIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0))
+        circleColors.append(blue)
     }
 
     /// intensity for cubic lines (min = 0.05, max = 1)
