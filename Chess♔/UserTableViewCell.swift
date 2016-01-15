@@ -301,55 +301,45 @@ class GameInvitesTableViewCell: UITableViewCell {
     
 }
 
+import Charts
 
 class AnalyzeMenuTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var rating: UILabel!
     @IBOutlet weak var updated: UILabel!
     @IBOutlet weak var content: UIView!
-    @IBOutlet weak var pieceIndicator: UILabel!
     
+    @IBOutlet weak var lineChartView: LineChartView!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         // self.content.layer.cornerRadius = cornerRadius
-        //        self.contentView.layer.shadowColor = UIColor.blackColor().CGColor
-        //                self.contentView.layer.shadowOpacity = 0.05
-        //                //self.contentView.layer.shadowRadius = cornerRadius
-        //               self.contentView.layer.shadowOffset = CGSizeZero
+//                self.lineChartView.layer.shadowColor = UIColor.blackColor().CGColor
+//                        self.lineChartView.layer.shadowOpacity = 0.3
+//                        self.lineChartView.layer.shadowRadius = 7
+//                       self.lineChartView.layer.shadowOffset = CGSizeZero
+
+
         //
         self.content.clipsToBounds = true
         
-        //changing profileImage
-        self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
-        self.userProfileImage.clipsToBounds = true
         
-        
-        self.pieceIndicator.layer.borderColor = UIColor.blackColor().CGColor
-        self.pieceIndicator.layer.borderWidth = 1
-        self.pieceIndicator.backgroundColor = UIColor.whiteColor()
         
 
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
-        let color2 = self.pieceIndicator.backgroundColor
         
         super.setSelected(selected, animated: animated)
         
-        self.pieceIndicator.backgroundColor = color2
     }
     
     override func setHighlighted(highlighted: Bool, animated: Bool) {
-        let color2 = self.pieceIndicator.backgroundColor
         
         super.setHighlighted(highlighted, animated: animated)
         
-        self.pieceIndicator.backgroundColor = color2
     }
     
 }
