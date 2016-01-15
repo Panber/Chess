@@ -167,11 +167,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     var whitePromotionType: Array<String> = []
     var blackPromotionType: Array<String> = []
-    
-    var whitePromotionPiece: Array<Int> = []
-    var blackPromotionPiece: Array<Int> = []
-    
-    
+
     var moveNum: Array<Int> = []
     
     var LAN = ""
@@ -727,9 +723,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         whitePromotionType = r!["whitePromotionType"] as! Array<String>
         blackPromotionType = r!["blackPromotionType"] as! Array<String>
         
-        whitePromotionPiece = r!["whitePromotionPiece"] as! Array<Int>
-        blackPromotionPiece = r!["blackPromotionPiece"] as! Array<Int>
-        
         // Important to not get error
         if notations.count == 0 {
             game.setObject(false, forKey: "can_Castle_white")
@@ -912,6 +905,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
                 yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
                 var am = 0
+                var count = 0
+                var countBlack = 0
                 for var o = 0; o < moves.count; o++ {
                     am++
                     print("am variable is \(am)")
@@ -935,7 +930,60 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 
                                                                 func checkIfTakenLast() {
 
-
+                                                                    for var w = 0; w < whitePawns.count; w++ {
+                                                                    if String(moves[o][1])  == "7" && String(moves[o][3]) == "8" && pieces[i].image == UIImage(named:"whitePawn") && pieces[i] == whitePawns[w]   {
+                                                                        print("Notation promotion")
+                                                                            if whitePromotionType[count] == "Queen" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteQueen")
+                                                                                self.whiteQueens += [pieces[i]]
+                                                                                self.whitePawns.removeAtIndex(w)
+                                                                                count++
+                                                                            } else if whitePromotionType[count] == "Rook" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteRook")
+                                                                                self.whiteRooks += [pieces[i]]
+                                                                                self.whitePawns.removeAtIndex(w)
+                                                                                count++
+                                                                            } else  if whitePromotionType[count] == "Bishop" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteBishop")
+                                                                                self.whiteBishops += [pieces[i]]
+                                                                                self.whitePawns.removeAtIndex(w)
+                                                                                count++
+                                                                            } else  if whitePromotionType[count] == "Knight" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteknight")
+                                                                                self.whiteKnights += [pieces[i]]
+                                                                                self.whitePawns.removeAtIndex(w)
+                                                                                count++
+                                                                            }
+                                                                    }
+                                                                    }
+                                                                    
+                                                                    for var w = 0; w < blackPawns.count; w++ {
+                                                                    if String(moves[o][1])  == "2" && String(moves[o][3]) == "1"  && pieces[i].image == UIImage(named:"blackPawn") && pieces[i] == blackPawns[w] {
+                                                                        print("Notation promotion")
+                                                                            if blackPromotionType[countBlack] == "Queen" {
+                                                                                self.pieces[i].image = UIImage(named:"blackQueen")
+                                                                                self.blackQueens += [pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                                countBlack++
+                                                                            } else if blackPromotionType[countBlack] == "Rook" {
+                                                                                self.pieces[i].image = UIImage(named:"blackRook")
+                                                                                self.blackRooks += [pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                                countBlack++
+                                                                            } else if blackPromotionType[countBlack] == "Bishop" {
+                                                                                self.pieces[i].image = UIImage(named:"blackBishop")
+                                                                                self.blackBishops += [pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                                countBlack++
+                                                                            } else if blackPromotionType[countBlack] == "Knight" {
+                                                                                self.pieces[i].image = UIImage(named:"blackknight")
+                                                                                self.blackKnights += [pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                                countBlack++
+                                                                            }
+                                                                    }
+                                                                    }
+                                                                    
                                                                     // range will be nil if no letters is found
                                                                     if  (range != nil) {
                                                                         print("letters  found")
@@ -1057,6 +1105,60 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     }
                                                                 }
                                                                 func checkIfTaken() {
+                                                                    
+                                                                    for var w = 0; w < whitePawns.count; w++ {
+                                                                        if String(moves[o][1])  == "7" && String(moves[o][3]) == "8" && pieces[i].image == UIImage(named:"whitePawn") && pieces[i] == whitePawns[w]   {
+                                                                            print("Notation promotion")
+                                                                            if whitePromotionType[count] == "Queen" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteQueen")
+                                                                                self.whiteQueens += [pieces[i]]
+                                                                                self.whitePawns.removeAtIndex(w)
+                                                                                count++
+                                                                            } else if whitePromotionType[count] == "Rook" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteRook")
+                                                                                self.whiteRooks += [pieces[i]]
+                                                                                self.whitePawns.removeAtIndex(w)
+                                                                                count++
+                                                                            } else  if whitePromotionType[count] == "Bishop" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteBishop")
+                                                                                self.whiteBishops += [pieces[i]]
+                                                                                self.whitePawns.removeAtIndex(w)
+                                                                                count++
+                                                                            } else  if whitePromotionType[count] == "Knight" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteknight")
+                                                                                self.whiteKnights += [pieces[i]]
+                                                                                self.whitePawns.removeAtIndex(w)
+                                                                                count++
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    
+                                                                    for var w = 0; w < blackPawns.count; w++ {
+                                                                        if String(moves[o][1])  == "2" && String(moves[o][3]) == "1"  && pieces[i].image == UIImage(named:"blackPawn") && pieces[i] == blackPawns[w] {
+                                                                            print("Notation promotion")
+                                                                            if blackPromotionType[countBlack] == "Queen" {
+                                                                                self.pieces[i].image = UIImage(named:"blackQueen")
+                                                                                self.blackQueens += [pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                                countBlack++
+                                                                            } else if blackPromotionType[countBlack] == "Rook" {
+                                                                                self.pieces[i].image = UIImage(named:"blackRook")
+                                                                                self.blackRooks += [pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                                countBlack++
+                                                                            } else if blackPromotionType[countBlack] == "Bishop" {
+                                                                                self.pieces[i].image = UIImage(named:"blackBishop")
+                                                                                self.blackBishops += [pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                                countBlack++
+                                                                            } else if blackPromotionType[countBlack] == "Knight" {
+                                                                                self.pieces[i].image = UIImage(named:"blackknight")
+                                                                                self.blackKnights += [pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                                countBlack++
+                                                                            }
+                                                                        }
+                                                                    }
                                                                     
                                                                     print("checkIfTaken")
                                                                     // range will be nil if no x is found
@@ -1317,56 +1419,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
             }
-            
 
-            for var i = 0; i < blackPromotionType.count; i++ {
-                if blackPromotionType[i] == "Queen" {
-                    var count = blackPawns.count - 1
-                    self.blackPawns[count - self.blackPromotionPiece[i]].image = UIImage(named:"blackQueen")
-                    self.blackQueens += [self.blackPawns[count - self.blackPromotionPiece[i]]]
-                    self.blackPawns.removeAtIndex(count - self.blackPromotionPiece[i])
-                    print(count)
-                } else if blackPromotionType[i] == "Rook" {
-                    var count = blackPawns.count - 1
-                    self.blackPawns[count - self.blackPromotionPiece[i]].image = UIImage(named:"blackRook")
-                    self.blackRooks += [self.blackPawns[count - self.blackPromotionPiece[i]]]
-                    self.blackPawns.removeAtIndex(count - self.blackPromotionPiece[i])
-                } else if blackPromotionType[i] == "Bishop" {
-                    var count = blackPawns.count - 1
-                    self.blackPawns[count - self.blackPromotionPiece[i]].image = UIImage(named:"blackBishop")
-                    self.blackBishops += [self.blackPawns[count - self.blackPromotionPiece[i]]]
-                    self.blackPawns.removeAtIndex(count - self.blackPromotionPiece[i] - 1)
-                } else if blackPromotionType[i] == "Knight" {
-                    var count = blackPawns.count - 1
-                    self.blackPawns[count - self.blackPromotionPiece[i]].image = UIImage(named:"blackKnight")
-                    self.blackKnights += [self.blackPawns[count - self.blackPromotionPiece[i]]]
-                    self.blackPawns.removeAtIndex(count - self.blackPromotionPiece[i] - 1)
-                }
-                
-            }
-            
-            for var i = 0; i < whitePromotionType.count; i++ {
-                if whitePromotionType[i] == "Queen" {
-                    print("White promotion to queen")
-                    whitePawns[whitePromotionPiece[i]].image = UIImage(named:"whiteQueen")
-                    self.whiteQueens += [whitePawns[whitePromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(whitePromotionPiece[i])
-                } else if whitePromotionType[i] == "Rook" {
-                    whitePawns[whitePromotionPiece[i]].image = UIImage(named:"whiteRook")
-                    self.whiteRooks += [whitePawns[whitePromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(whitePromotionPiece[i])
-                } else if whitePromotionType[i] == "Bishop" {
-                    whitePawns[whitePromotionPiece[i]].image = UIImage(named:"whiteBishop")
-                    self.whiteBishops += [whitePawns[whitePromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(whitePromotionPiece[i])
-                } else if whitePromotionType[i] == "Knight" {
-                    whitePawns[whitePromotionPiece[i]].image = UIImage(named:"whiteKnight")
-                    self.whiteKnights += [whitePawns[whitePromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(whitePromotionPiece[i])
-                }
-                
-            }
-            
             magic1()
 
             print("I am white player!")
@@ -1462,10 +1515,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.game = r!
                     var last = r!["piecePosition"] as! Array<String>
                     self.notations.append(last.last!)
-                    var lastPromotionPiece = r!["blackPromotionPiece"] as! Array<Int>
-                    if lastPromotionPiece.count > 0 {
-                        self.blackPromotionPiece.append(lastPromotionPiece.last!)
-                    }
                     var lastPromotionType = r!["blackPromotionType"] as! Array<String>
                     if lastPromotionType.count > 0 {
                         self.blackPromotionType.append(lastPromotionType.last!)
@@ -1509,7 +1558,30 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 let range = self.notations.last!.rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
                                                                 
                                                                 func checkIfTakenLast() {
-                                                                    var bool = true
+                                                                    
+                                                                    for var w = 0; w < self.blackPawns.count; w++ {
+                                                                    if String(moves.last![1])  == "2" && String(moves.last![3]) == "1"  && self.pieces[i].image == UIImage(named:"blackPawn") && self.pieces[i] == self.blackPawns[w]  {
+                                                                        print("Notation promotion")
+                                                                            if self.blackPromotionType.last! == "Queen" {
+                                                                                self.pieces[i].image = UIImage(named:"blackQueen")
+                                                                                self.blackQueens += [self.pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                            } else if self.blackPromotionType.last! == "Rook" {
+                                                                                self.pieces[i].image = UIImage(named:"blackRook")
+                                                                                self.blackRooks += [self.pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                            } else if self.blackPromotionType.last! == "Bishop" {
+                                                                                self.pieces[i].image = UIImage(named:"blackBishop")
+                                                                                self.blackBishops += [self.pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                            } else if self.blackPromotionType.last! == "Knight" {
+                                                                                self.pieces[i].image = UIImage(named:"blackknight")
+                                                                                self.blackKnights += [self.pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                            }
+                                                                    }
+                                                                    }
+                                                                    
                                                                     if  (range != nil) {
                                                                         print("letters  found")
                                                                         
@@ -1631,36 +1703,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.pieceBlackLogicOptions = []
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
-                                                                            
-                                                                            if self.promotionBlack == true  {
-                                                                                if self.blackPromotionType.last == "Queen" {
-                                                                                    var count = self.blackPawns.count - 1
-                                                                                    self.blackPawns[count - self.blackPromotionPiece.last!].image = UIImage(named:"blackQueen")
-                                                                                    self.blackQueens += [self.blackPawns[count - self.blackPromotionPiece.last!]]
-                                                                                    self.blackPawns.removeAtIndex(count - self.blackPromotionPiece.last!)
-                                                                                } else if self.blackPromotionType.last == "Rook" {
-                                                                                    var count = self.blackPawns.count - 1
-                                                                                    self.blackPawns[count - self.blackPromotionPiece.last!].image = UIImage(named:"blackRook")
-                                                                                    self.blackRooks += [self.blackPawns[count - self.blackPromotionPiece.last!]]
-                                                                                    self.blackPawns.removeAtIndex(count - self.blackPromotionPiece.last!)
-                                                                                } else if self.blackPromotionType.last == "Bishop" {
-                                                                                    var count = self.blackPawns.count - 1
-                                                                                    self.blackPawns[count - self.blackPromotionPiece.last!].image = UIImage(named:"blackBishop")
-                                                                                    self.blackBishops += [self.blackPawns[count - self.blackPromotionPiece.last!]]
-                                                                                    self.blackPawns.removeAtIndex(count - self.blackPromotionPiece.last!)
-                                                                                } else if self.blackPromotionType.last == "Knight" {
-                                                                                    var count = self.blackPawns.count - 1
-                                                                                    self.blackPawns[count - self.blackPromotionPiece.last!].image = UIImage(named:"blackKnight")
-                                                                                    self.blackKnights += [self.blackPawns[count - self.blackPromotionPiece.last!]]
-                                                                                    self.blackPawns.removeAtIndex(count - self.blackPromotionPiece.last!)
-                                                                                }
-                                                                            }
-                                                                        
-                                                                            
+
                                                                             self.updateLogic()
-                                                                            
-                                                                            
-                                                                            
+
                                                                     })
                                                                     
                                                                 }
@@ -1870,6 +1915,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             ////////this is where the magic happens\\\\\\\\
             func magic2() {
                 var am = 0
+                var count = 0
+                var countBlack = 0
                 for var o = 0; o < moves.count; o++ {
                     am++
                     
@@ -1892,6 +1939,65 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 let range = notations[o].rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
                                                                 
                                                                 func checkIfTakenLast() {
+                                                                    
+                                                                    for var w = 0; w < whitePawns.count; w++ {
+                                                                        if String(moves[o][1])  == "2" && String(moves[o][3]) == "1" && pieces[i].image == UIImage(named:"blackPawn") && pieces[i] == whitePawns[w]  {
+                                                                            print("Notation promotion")
+                                                                            if blackPromotionType[countBlack] == "Queen"{
+                                                                                self.pieces[i].image = UIImage(named:"blackQueen")
+                                                                                self.whiteQueens += [pieces[i]]
+                                                                                self.whitePawns.removeAtIndex(w)
+                                                                                countBlack++
+                                                                            } else if blackPromotionType[countBlack] == "Rook" {
+                                                                                self.pieces[i].image = UIImage(named:"blackRook")
+                                                                                self.whiteRooks += [pieces[i]]
+                                                                                self.whitePawns.removeAtIndex(w)
+                                                                                countBlack++
+                                                                            } else  if blackPromotionType[countBlack] == "Bishop" {
+                                                                                self.pieces[i].image = UIImage(named:"blackBishop")
+                                                                                self.whiteBishops += [pieces[i]]
+                                                                                self.whitePawns.removeAtIndex(w)
+                                                                                countBlack++
+                                                                            } else  if blackPromotionType[countBlack] == "Knight" {
+                                                                                self.pieces[i].image = UIImage(named:"blackknight")
+                                                                                self.whiteKnights += [pieces[i]]
+                                                                                self.whitePawns.removeAtIndex(w)
+                                                                                countBlack++
+                                                                            }
+                                                                        }
+                                                                        
+                                                                    }
+                                                                    
+                                                                    for var w = 0; w < blackPawns.count; w++ {
+                                                                        if String(moves[o][1])  == "7" && String(moves[o][3]) == "8"  && pieces[i].image == UIImage(named:"whitePawn") && pieces[i] == blackPawns[w] {
+                                                                            print("Notation promotion white")
+                                                                            print(blackPawns.count)
+                                                                            print(w)
+                                                                            if whitePromotionType[count] == "Queen" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteQueen")
+                                                                                self.blackQueens += [pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                                count++
+                                                                            } else if whitePromotionType[count] == "Rook" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteRook")
+                                                                                self.blackRooks += [pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                                count++
+                                                                            } else if whitePromotionType[count] == "Bishop" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteBishop")
+                                                                                self.blackBishops += [pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                                count++
+                                                                            } else if whitePromotionType[count] == "Knight" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteKnight")
+                                                                                self.blackKnights += [pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                                count++
+                                                                            }
+                                                                            
+                                                                        }
+                                                                    }
+                                                                    
                                                                     // range will be nil if no letters is found
                                                                     if  (range != nil) {
                                                                         print("letters  found")
@@ -2009,6 +2115,65 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     }
                                                                 }
                                                                 func checkIfTaken() {
+                                                                    
+                                                                    for var w = 0; w < whitePawns.count; w++ {
+                                                                        if String(moves[o][1])  == "2" && String(moves[o][3]) == "1" && pieces[i].image == UIImage(named:"blackPawn") && pieces[i] == whitePawns[w]  {
+                                                                            print("Notation promotion")
+                                                                                if blackPromotionType[countBlack] == "Queen"{
+                                                                                    self.pieces[i].image = UIImage(named:"blackQueen")
+                                                                                    self.whiteQueens += [pieces[i]]
+                                                                                    self.whitePawns.removeAtIndex(w)
+                                                                                    countBlack++
+                                                                                } else if blackPromotionType[countBlack] == "Rook" {
+                                                                                    self.pieces[i].image = UIImage(named:"blackRook")
+                                                                                    self.whiteRooks += [pieces[i]]
+                                                                                    self.whitePawns.removeAtIndex(w)
+                                                                                    countBlack++
+                                                                                } else  if blackPromotionType[countBlack] == "Bishop" {
+                                                                                    self.pieces[i].image = UIImage(named:"blackBishop")
+                                                                                    self.whiteBishops += [pieces[i]]
+                                                                                    self.whitePawns.removeAtIndex(w)
+                                                                                    countBlack++
+                                                                                } else  if blackPromotionType[countBlack] == "Knight" {
+                                                                                    self.pieces[i].image = UIImage(named:"blackknight")
+                                                                                    self.whiteKnights += [pieces[i]]
+                                                                                    self.whitePawns.removeAtIndex(w)
+                                                                                    countBlack++
+                                                                                }
+                                                                        }
+                                                                        
+                                                                    }
+                                                                    
+                                                                    for var w = 0; w < blackPawns.count; w++ {
+                                                                        if String(moves[o][1])  == "7" && String(moves[o][3]) == "8"  && pieces[i].image == UIImage(named:"whitePawn") && pieces[i] == blackPawns[w] {
+                                                                            print("Notation promotion white")
+                                                                            print(blackPawns.count)
+                                                                            print(w)
+                                                                                if whitePromotionType[count] == "Queen" {
+                                                                                    self.pieces[i].image = UIImage(named:"whiteQueen")
+                                                                                    self.blackQueens += [pieces[i]]
+                                                                                    self.blackPawns.removeAtIndex(w)
+                                                                                     count++
+                                                                                } else if whitePromotionType[count] == "Rook" {
+                                                                                    self.pieces[i].image = UIImage(named:"whiteRook")
+                                                                                    self.blackRooks += [pieces[i]]
+                                                                                    self.blackPawns.removeAtIndex(w)
+                                                                                     count++
+                                                                                } else if whitePromotionType[count] == "Bishop" {
+                                                                                    self.pieces[i].image = UIImage(named:"whiteBishop")
+                                                                                    self.blackBishops += [pieces[i]]
+                                                                                    self.blackPawns.removeAtIndex(w)
+                                                                                     count++
+                                                                                } else if whitePromotionType[count] == "Knight" {
+                                                                                    self.pieces[i].image = UIImage(named:"whiteKnight")
+                                                                                    self.blackKnights += [pieces[i]]
+                                                                                    self.blackPawns.removeAtIndex(w)
+                                                                                     count++
+                                                                                }
+                                                                            
+                                                                        }
+                                                                    }
+                                                                    
                                                                     // range will be nil if no letters is found
                                                                     if  (range != nil) {
                                                                         print("letters  found")
@@ -2336,53 +2501,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
             }
-            
-            for var i = 0; i < whitePromotionType.count; i++ {
-                if whitePromotionType[i] == "Queen" {
-                    var count = blackPawns.count - 1
-                    self.blackPawns[count - self.whitePromotionPiece[i]].image = UIImage(named:"whiteQueen")
-                    self.blackQueens += [self.blackPawns[count - self.whitePromotionPiece[i]]]
-                    self.blackPawns.removeAtIndex(count - self.whitePromotionPiece[i])
-                } else if whitePromotionType[i] == "Rook" {
-                    var count = blackPawns.count - 1
-                    self.blackPawns[count - self.whitePromotionPiece[i]].image = UIImage(named:"whiteRook")
-                    self.blackRooks += [self.blackPawns[count - self.whitePromotionPiece[i]]]
-                    self.blackPawns.removeAtIndex(count - self.whitePromotionPiece[i])
-                } else if whitePromotionType[i] == "Bishop" {
-                    var count = blackPawns.count - 1
-                    self.blackPawns[count - self.whitePromotionPiece[i]].image = UIImage(named:"whiteBishop")
-                    self.blackBishops += [self.blackPawns[count - self.whitePromotionPiece[i]]]
-                    self.blackPawns.removeAtIndex(count - self.whitePromotionPiece[i] - 1)
-                } else if whitePromotionType[i] == "Knight" {
-                    var count = blackPawns.count - 1
-                    self.blackPawns[count - self.whitePromotionPiece[i]].image = UIImage(named:"whiteKnight")
-                    self.blackKnights += [self.blackPawns[count - self.whitePromotionPiece[i]]]
-                    self.blackPawns.removeAtIndex(count - self.whitePromotionPiece[i] - 1)
-                }
-                
-            }
-            
-            for var i = 0; i < blackPromotionType.count; i++ {
-                if blackPromotionType[i] == "Queen" {
-                    whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackQueen")
-                    self.whiteQueens += [whitePawns[blackPromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(blackPromotionPiece[i])
-                } else if blackPromotionType[i] == "Rook" {
-                    whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackRook")
-                    self.whiteRooks += [whitePawns[blackPromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(blackPromotionPiece[i])
-                } else if blackPromotionType[i] == "Bishop" {
-                    whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackBishop")
-                    self.whiteBishops += [whitePawns[blackPromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(blackPromotionPiece[i])
-                } else if blackPromotionType[i] == "Knight" {
-                    whitePawns[blackPromotionPiece[i]].image = UIImage(named:"blackKnight")
-                    self.whiteKnights += [whitePawns[blackPromotionPiece[i]]]
-                    self.whitePawns.removeAtIndex(blackPromotionPiece[i])
-                }
-                
-            }
-            
+
             magic2()
 
             print("I am black player!")
@@ -2471,18 +2590,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black" {
                     
-                    
-                    
+
                     let query = PFQuery(className: "Games")
                     query.whereKey("objectId", equalTo: gameID)
                     let r = query.getFirstObject()
                     self.game = r!
                     var last = r!["piecePosition"] as! Array<String>
                     self.notations.append(last.last!)
-                    var lastPromotionPiece = r!["whitePromotionPiece"] as! Array<Int>
-                    if lastPromotionPiece.count > 0 {
-                    self.whitePromotionPiece.append(lastPromotionPiece.last!)
-                    }
                     var lastPromotionType = r!["whitePromotionType"] as! Array<String>
                     if lastPromotionType.count > 0 {
                     self.whitePromotionType.append(lastPromotionType.last!)
@@ -2521,6 +2635,30 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 let range = self.notations.last!.rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
                                                                 
                                                                 func checkIfTakenLast() {
+                                                                    
+                                                                    for var w = 0; w < self.blackPawns.count; w++ {
+                                                                    if String(moves.last![1])  == "7" && String(moves.last![3]) == "8"  && self.pieces[i].image == UIImage(named:"whitePawn") && self.pieces[i] == self.blackPawns[w] {
+                                                                            if self.whitePromotionType.last! == "Queen" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteQueen")
+                                                                                self.blackQueens += [self.pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                            } else if self.whitePromotionType.last! == "Rook" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteRook")
+                                                                                self.blackRooks += [self.pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                            } else if self.whitePromotionType.last! == "Bishop" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteBishop")
+                                                                                self.blackBishops += [self.pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                            } else if self.whitePromotionType.last! == "Knight" {
+                                                                                self.pieces[i].image = UIImage(named:"whiteKnight")
+                                                                                self.blackKnights += [self.pieces[i]]
+                                                                                self.blackPawns.removeAtIndex(w)
+                                                                            }
+                                                                    }
+                                                                        
+                                                                    }
+                                                                    
                                                                     // range will be nil if no letters is found
                                                                     if  (range != nil) {
                                                                         print("letters  found")
@@ -2641,34 +2779,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         }, completion: { finish in
                                                                             
                                                                              self.deletePiecesAfterLoad()
-
-                                                                            if self.promotion == true {
-                                                                                if self.whitePromotionType.last == "Queen" {
-                                                                                    var count = self.blackPawns.count - 1
-                                                                                    self.blackPawns[count - self.whitePromotionPiece.last!].image = UIImage(named:"whiteQueen")
-                                                                                    self.blackQueens += [self.blackPawns[count - self.whitePromotionPiece.last!]]
-                                                                                    self.blackPawns.removeAtIndex(count - self.whitePromotionPiece.last!)
-                                                                                } else if self.whitePromotionType.last == "Rook" {
-                                                                                    var count = self.blackPawns.count - 1
-                                                                                    self.blackPawns[count - self.whitePromotionPiece.last!].image = UIImage(named:"whiteRook")
-                                                                                    self.blackRooks += [self.blackPawns[count - self.whitePromotionPiece.last!]]
-                                                                                    self.blackPawns.removeAtIndex(count - self.whitePromotionPiece.last!)
-                                                                                } else if self.whitePromotionType.last == "Bishop" {
-                                                                                    var count = self.blackPawns.count - 1
-                                                                                    self.blackPawns[count - self.whitePromotionPiece.last!].image = UIImage(named:"whiteBishop")
-                                                                                    self.blackBishops += [self.blackPawns[count - self.whitePromotionPiece.last!]]
-                                                                                    self.blackPawns.removeAtIndex(count - self.whitePromotionPiece.last!)
-                                                                                } else if self.whitePromotionType.last == "Knight" {
-                                                                                    var count = self.blackPawns.count - 1
-                                                                                    self.blackPawns[count - self.whitePromotionPiece.last!].image = UIImage(named:"whiteKnight")
-                                                                                    self.blackKnights += [self.blackPawns[count - self.whitePromotionPiece.last!]]
-                                                                                    self.blackPawns.removeAtIndex(count - self.whitePromotionPiece.last!)
-                                                                                }
-                                                                            }
                                                                             
                                                                             self.updateLogic()
-                                                                            
-                                                                            
+   
                                                                     })
                                                                     
                                                                 }
@@ -2830,8 +2943,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         notations = []
         whitePromotionType = []
         blackPromotionType = []
-        whitePromotionPiece = []
-        blackPromotionPiece = []
         game = PFObject(className: "Games")
         
         timer.invalidate()
@@ -6441,13 +6552,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 for var i = 0; i < whitePawns.count; i++ {
                     if selectedPiece == whitePawns[i] && selectedPiece.frame.origin.y == _7 {
                         let promotionPiece = i
-                        if colorLcolor == "You are White" {
-                        self.game.addObject(i, forKey: "whitePromotionPiece")
-                        self.game.setObject(true, forKey: "promotion")
-                        } else if colorLcolor == "You are Black" {
-                            self.game.addObject(i, forKey: "blackPromotionPiece")
-                        self.game.setObject(true, forKey: "promotionBlack")
-                        }
                         self.promoted = true
                         
                         let actionSheet = UIAlertController(title: nil, message: "Promote pawn to:", preferredStyle: UIAlertControllerStyle.ActionSheet)

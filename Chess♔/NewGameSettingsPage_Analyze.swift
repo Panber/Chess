@@ -125,9 +125,7 @@ class NewGameSettingsPage_Analyze: UIViewController {
         game["inviteTo"] = pushto
         game["inviteFrom"] = PFUser.currentUser()?.username
         game["whitePromotionType"] = NSMutableArray()
-        game["whitePromotionPiece"] = NSMutableArray()
         game["blackPromotionType"] = NSMutableArray()
-        game["blackPromotionPiece"] = NSMutableArray()
         
         game["timeLeftToMove"] = NSDate()
         
