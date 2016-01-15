@@ -1268,11 +1268,58 @@ var loaded = false
                 
                 self.newButtonOutlet.title = "New"
                 self.invitesButtonOutlet.title = "Invites"
-                self.navigationItem.title = "Chess♔"
+                self.navigationItem.title = "CHESS"
                 self.tabBarController?.selectedIndex = 1
                 self.tableView.frame.origin.x = 0
         }
         
+        
+        
+
+
+        
+        struct GAME {
+            
+            var objectID: String
+            var whitePlayer: String
+            var blackPlayer: String
+            var timeLeftToMove: NSDate
+            var timePerMove: Float
+            var mode: String
+            var inviteTo: String
+            var speed: String
+            var position: String
+            var updatedAt: NSDate
+            var status_white: String
+            var status_black: String
+            var players: Array<String>
+            var inviteFrom: String
+            var piecePosition: Array<String>
+            var createdAt: NSDate
+            var confirmed: Bool
+            var promotion: Bool
+            var can_Castle_black: Bool
+            var passantBlack: Bool
+            var blackPromotionPiece: Array<Int>
+            var can_Castle_white: Bool
+            
+            var whitePromotionPiece: Array<Int>
+            var whitePromotionType: Array<String>
+            var passant: Bool
+            var passantPiece: Int
+            var promotionBlack: Bool
+            var hasWhiteRookMoved: Bool
+            var hasWhiteRookMoved2: Bool
+            var hasBlackRookMoved: Bool
+            var hasBlackRookMoved2: Bool
+
+            
+        
+        }
+        var gameToAnalyze = GAME(objectID: "", whitePlayer: "", blackPlayer: "", timeLeftToMove: NSDate(), timePerMove: Float(), mode: "", inviteTo: "", speed: "", position: "", updatedAt: NSDate(), status_white: "", status_black: "", players: [], inviteFrom: "", piecePosition: [], createdAt: NSDate(), confirmed: Bool(), promotion: Bool(), can_Castle_black: Bool(), passantBlack: Bool(), blackPromotionPiece: [], can_Castle_white: Bool(), whitePromotionPiece: [], whitePromotionType: [], passant: Bool(), passantPiece: Int(), promotionBlack: Bool(), hasWhiteRookMoved: Bool(), hasWhiteRookMoved2: Bool(), hasBlackRookMoved: Bool(), hasBlackRookMoved2: Bool())
+
+       // NSUserDefaults.standardUserDefaults().setObject(gameToAnalyze, forKey: gameToAnalyze.objectID)
+      //  let tabledata = NSUserDefaults.standardUserDefaults().arrayForKey("testArray")
         
     }
     

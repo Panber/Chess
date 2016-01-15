@@ -48,6 +48,8 @@
 		8F38EF6A1BB8399D00668B3B /* JBpp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F38EF691BB8399D00668B3B /* JBpp.jpg */; };
 		8F3AC3821B9AFADC00815CDC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3AC3811B9AFADC00815CDC /* libz.dylib */; };
 		8F3AC3841B9AFAE700815CDC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3AC3831B9AFAE700815CDC /* libsqlite3.dylib */; };
+		8F45D2E71C496B8C00D7934B /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F45D2E21C496B5700D7934B /* Charts.framework */; };
+		8F45D2E81C496B8C00D7934B /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8F45D2E21C496B5700D7934B /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8F4A02691B9A3E890084024A /* PANBERlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02681B9A3E890084024A /* PANBERlogo.png */; };
 		8F4A02851B9A3F240084024A /* chessIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02821B9A3F240084024A /* chessIcon.png */; };
 		8F4A02861B9A3F240084024A /* chessIcon1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F4A02831B9A3F240084024A /* chessIcon1024.png */; };
@@ -170,6 +172,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8F45D2E11C496B5700D7934B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F45D2DB1C496B5700D7934B /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
+			remoteInfo = "Charts-iOS";
+		};
+		8F45D2E31C496B5700D7934B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F45D2DB1C496B5700D7934B /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A52C5C371BAC5CA400594CDD;
+			remoteInfo = "Charts-TV";
+		};
+		8F45D2E51C496B5700D7934B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F45D2DB1C496B5700D7934B /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06AEE7A21BDC3F8B009875AE;
+			remoteInfo = ChartsTests;
+		};
+		8F45D2E91C496B8C00D7934B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F45D2DB1C496B5700D7934B /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
+			remoteInfo = "Charts-iOS";
+		};
 		8FA5C8A21B9A264F0097637E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8FA5C8851B9A264F0097637E /* Project object */;
@@ -185,6 +215,20 @@
 			remoteInfo = "Chess♔";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8F45D2EB1C496B8C00D7934B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8F45D2E81C496B8C00D7934B /* Charts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		522DEBB2073AFDCCB3F08A4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -227,6 +271,7 @@
 		8F38EF691BB8399D00668B3B /* JBpp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JBpp.jpg; sourceTree = "<group>"; };
 		8F3AC3811B9AFADC00815CDC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		8F3AC3831B9AFAE700815CDC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		8F45D2DB1C496B5700D7934B /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		8F4A02681B9A3E890084024A /* PANBERlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PANBERlogo.png; sourceTree = "<group>"; };
 		8F4A02821B9A3F240084024A /* chessIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessIcon.png; sourceTree = "<group>"; };
 		8F4A02831B9A3F240084024A /* chessIcon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessIcon1024.png; sourceTree = "<group>"; };
@@ -376,6 +421,7 @@
 				8F4A02A31B9A429B0084024A /* SystemConfiguration.framework in Frameworks */,
 				F155FC8A1C304AFD00376AC1 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				8F4A02A11B9A428E0084024A /* StoreKit.framework in Frameworks */,
+				8F45D2E71C496B8C00D7934B /* Charts.framework in Frameworks */,
 				F155FC871C304AF000376AC1 /* FBSDKLoginKit.framework in Frameworks */,
 				8F4A029F1B9A42890084024A /* Security.framework in Frameworks */,
 				8F4A029D1B9A42820084024A /* QuartzCore.framework in Frameworks */,
@@ -420,6 +466,16 @@
 			children = (
 			);
 			name = LoginImages;
+			sourceTree = "<group>";
+		};
+		8F45D2DC1C496B5700D7934B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8F45D2E21C496B5700D7934B /* Charts.framework */,
+				8F45D2E41C496B5700D7934B /* Charts.framework */,
+				8F45D2E61C496B5700D7934B /* ChartsTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		8F4A02651B9A3E590084024A /* Assets */ = {
@@ -621,6 +677,7 @@
 		8FA5C8841B9A264F0097637E = {
 			isa = PBXGroup;
 			children = (
+				8F45D2DB1C496B5700D7934B /* Charts.xcodeproj */,
 				8FA5C88F1B9A264F0097637E /* Chess♔ */,
 				8FA5C8A41B9A264F0097637E /* Chess♔Tests */,
 				8FA5C8AF1B9A264F0097637E /* Chess♔UITests */,
@@ -723,10 +780,12 @@
 				8FA5C88B1B9A264F0097637E /* Resources */,
 				4FBE0FB9911D5C3FB0A1D597 /* Embed Pods Frameworks */,
 				EB44D773211A87A9018B2024 /* Copy Pods Resources */,
+				8F45D2EB1C496B8C00D7934B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8F45D2EA1C496B8C00D7934B /* PBXTargetDependency */,
 			);
 			name = "Chess♔";
 			productName = "Chess♔";
@@ -812,6 +871,12 @@
 			mainGroup = 8FA5C8841B9A264F0097637E;
 			productRefGroup = 8FA5C88E1B9A264F0097637E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8F45D2DC1C496B5700D7934B /* Products */;
+					ProjectRef = 8F45D2DB1C496B5700D7934B /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8FA5C88C1B9A264F0097637E /* Chess♔ */,
@@ -820,6 +885,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		8F45D2E21C496B5700D7934B /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 8F45D2E11C496B5700D7934B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8F45D2E41C496B5700D7934B /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 8F45D2E31C496B5700D7934B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8F45D2E61C496B5700D7934B /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = 8F45D2E51C496B5700D7934B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8FA5C88B1B9A264F0097637E /* Resources */ = {
@@ -1056,6 +1145,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8F45D2EA1C496B8C00D7934B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Charts-iOS";
+			targetProxy = 8F45D2E91C496B8C00D7934B /* PBXContainerItemProxy */;
+		};
 		8FA5C8A31B9A264F0097637E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8FA5C88C1B9A264F0097637E /* Chess♔ */;
@@ -1178,6 +1272,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1202,6 +1297,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

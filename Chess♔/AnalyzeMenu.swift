@@ -8,21 +8,19 @@
 
 import UIKit
 import Parse
+import Charts
 
-class AnalyzeMenu: UIViewController,UITableViewDelegate {
+
+class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
     
     var analyzeIDS:Array<String> = []
     var analyzeID = ""
     
     var usernameArray: Array<String> = []
-    var ratingArray: Array<Int> = []
     var updatedArray: Array<String> = []
-    var profilePicArray: Array<UIImage> = []
-    var imageDataArray: Array<NSData> = []
     
-    var yourturnArray: Array<String> = []
-    var yourturnUpdateSince: Array<NSTimeInterval> = []
-    var yourTurnColor: Array<String> = []
+    var turnArray: Array<String> = []
+    var turnUpdateSince: Array<NSTimeInterval> = []
 
     
     var instructionsLabel = UILabel()
@@ -40,6 +38,80 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate {
         
     }
     
+    func findGames() {
+        
+        //tableView.hidden = true
+        let gamesQuery = PFQuery(className: "Analyze")
+        //fix this
+        gamesQuery.orderByDescending("updatedAt")
+        gamesQuery.whereKey("players", equalTo: PFUser.currentUser()!.username!)
+        gamesQuery.findObjectsInBackgroundWithBlock { (games:[AnyObject]?, error:NSError?) -> Void in
+            if error == nil {
+                if let games = games as! [PFObject]! {
+                    for games in games {
+                        
+                        
+                        
+                        
+                        if games["confirmed"] as? Bool == true {
+                            if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
+                                
+                                
+                                
+                                    self.turnArray.append((games["blackPlayer"] as? String)!)
+                                    
+                                    //adding updated since
+                                    let lastupdate = games.updatedAt!
+                                    let since = NSDate().timeIntervalSinceDate(lastupdate)
+                                    self.turnUpdateSince.append(since)
+                                    
+                                    
+                                    //adding time left
+                                    
+                                    self.analyzeIDS.append(games.objectId!)
+                                    
+
+                                
+                            }
+                        
+                        }
+               
+                        
+                        
+                    //has to do with laodinngng
+                 //       self.loaded = false
+                        
+                        
+                        
+                        //self.ratingArray.append(games["blackPlayer"] as! Int)
+                        //  updatedArrayppend(games["blackPlayer"] as! String)
+                        //  timeleftArrayppend(games["blackPlayer"] as! String)
+                        
+                    }
+                }
+                
+                self.tableView.reloadData()
+                self.tableView.hidden = false
+                
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.tableView.alpha = 1
+                    }, completion: { (finished) -> Void in
+                        if finished {
+                            
+                            
+                            
+                        }
+                })
+                
+                
+                
+                
+            }
+            
+        }
+        
+    }
+    
     /*
     // MARK: - Navigation
     
@@ -50,13 +122,25 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate {
     }
     */
     override func viewWillAppear(animated: Bool) {
+        
+        analyzeIDS = []
+        analyzeID = ""
+        
+        findGames()
+        
         lightOrDarkMode()
 
         
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 130
+        return 100
+    }
+    
+    
+
+    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        print("\(entry.value) in \(entry.xIndex)")
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -65,12 +149,57 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate {
         
         let cell:AnalyzeMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("analyzeCell",forIndexPath: indexPath) as! AnalyzeMenuTableViewCell
         
+        cell.lineChartView.delegate = self
+
+        cell.lineChartView.noDataText = "NO DATA YET"
+        
+        var months: [String]!
+        
+        
+
+        func setChart(dataPoints: [String], values: [Double]) {
+            
+            
+            
+            cell.lineChartView.noDataText = "NO DATA YET"
+            
+            var dataEntries: [ChartDataEntry] = []
+            
+            for i in 0..<dataPoints.count {
+                let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
+                dataEntries.append(dataEntry)
+            }
+            
+            let chartDataSet = LineChartDataSet(yVals: dataEntries, label: "Units Sold")
+            let chartData = LineChartData(xVals: months, dataSet: chartDataSet)
+            cell.lineChartView.descriptionText = ""
+            cell.lineChartView.data = chartData
+            cell.lineChartView.xAxis.labelPosition = .Bottom
+            cell.lineChartView.legend.enabled = false
+            
+            chartDataSet.colors = ChartColorTemplates.colorful()
+
+        
+            cell.lineChartView.animate(xAxisDuration: 0.5, yAxisDuration: 0.5,easingOption: .EaseInOutCubic)
+            cell.lineChartView.backgroundColor = UIColor.clearColor()
+            
+
+            let ll = ChartLimitLine(limit: 0.0, label: "")
+            ll.lineColor = blue
+            cell.lineChartView.rightAxis.addLimitLine(ll)
+            
+        }
+        
+        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        let unitsSold = [0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 0.0, 1.0, 2.0, 1.0]
+        
+        setChart(months, values: unitsSold)
+        
         
         if darkMode {cell.backgroundColor = UIColor.clearColor() //(red:0.22, green:0.22, blue:0.22, alpha:1.0)
             
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
             
-            cell.rating.textColor = UIColor.lightTextColor()
             
             
             cell.username.textColor = UIColor.whiteColor()
@@ -79,7 +208,6 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate {
         else {cell.backgroundColor = UIColor.whiteColor()
             
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-            cell.rating.textColor = UIColor.darkGrayColor()
             cell.username.textColor = UIColor.blackColor()
             
             
@@ -91,49 +219,7 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate {
         func find(name:String) {
             
             cell.username.text = name
-            cell.userProfileImage.image = nil
-            
-            
-            
-            let query = PFQuery(className: "_User")
-            
-            query.whereKey("username", equalTo: name)
-            query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
-                if (error == nil) {
-                    
-                    if let userArray = objects as? [PFUser] {
-                        for user in userArray {
-                            
-                            cell.rating.text = String(user["rating"] as! Int)
-                            
-                            if let userPicture = user["profile_picture"] as? PFFile {
-                                
-                                userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                                    if (error == nil) {
-                                        cell.userProfileImage.alpha = 0
-                                        cell.userProfileImage.image = UIImage(data: imageData!)
-                                        self.imageDataArray.append(imageData!)
-                                        
-                                        UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                            cell.userProfileImage.alpha = 1
-                                            
-                                            
-                                        })
-                                        
-                                    } else {
-                                    }
-                                }
-                                
-                            }
-                        }
-                        
-                    }
-                } else {
-                    // Log details of the failure
-                    print("query error: \(error) \(error!.userInfo)")
-                }
-                
-            }
+
         }
         
         
@@ -145,18 +231,13 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate {
         // cell.rating.text = "601"
         // cell.updated.text = "Last Update: 1h 5min"
         
-            find(yourturnArray[indexPath.row])
-            
-            if yourTurnColor[indexPath.row] == "white" {
-                cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
-            }
-            else {
-                cell.pieceIndicator.backgroundColor = UIColor.blackColor()
-            }
+            find(turnArray[indexPath.row])
             
 
             
-            var since = yourturnUpdateSince[indexPath.row]
+
+            
+            var since = turnUpdateSince[indexPath.row]
             //making to minutes
             cell.updated.text = "Last Updated: Now"
             
@@ -188,18 +269,18 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate {
         
         //        let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
 
-            gameID = analyzeIDS[indexPath.row]
+            analyzeID = analyzeIDS[indexPath.row]
  
             
         
-        print("this is \(gameID)")
+        print("this is \(analyzeID)")
         
     }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if yourturnArray.count == 0 {
+        if turnArray.count == 0 {
             
             tableView.hidden = true
 
@@ -213,7 +294,7 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate {
         }
         
   
-            return yourturnArray.count
+            return turnArray.count
 
         
     }
@@ -301,12 +382,25 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate {
             
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-            self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
+            //this is to gamemenu black
             self.view.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
             self.tabBarController?.tabBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
+            visualEffectView.effect = UIBlurEffect(style: .Dark)
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            tableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
             
             
@@ -314,11 +408,24 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate {
         else if darkMode == false {
             
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
+            self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
             self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-            self.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            //this is to gamemenu white
+            self.view.backgroundColor = UIColor.whiteColor()
             self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
+            
+            
+            visualEffectView.effect = UIBlurEffect(style: .Light)
+            
+            tableView.backgroundColor = UIColor.whiteColor()
+            
+            
+            
+            
+            
             
             
         }
