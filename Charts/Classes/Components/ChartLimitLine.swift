@@ -31,7 +31,7 @@ public class ChartLimitLine: ChartComponentBase
     /// limit / maximum (the y-value or xIndex)
     public var limit = Double(0.0)
     
-    private var _lineWidth = CGFloat(2.0)
+    private var _lineWidth = CGFloat(1.0)
     public var lineColor = UIColor(red: 237.0/255.0, green: 91.0/255.0, blue: 91.0/255.0, alpha: 1.0)
     public var lineDashPhase = CGFloat(0.0)
     public var lineDashLengths: [CGFloat]?

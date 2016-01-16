@@ -21,6 +21,8 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
     
     var turnArray: Array<String> = []
     var turnUpdateSince: Array<NSTimeInterval> = []
+    
+    var notationsArray:Array<Array<String>> = []
 
     
     var instructionsLabel = UILabel()
@@ -56,7 +58,7 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
                         if games["confirmed"] as? Bool == true {
                             if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
                                 
-                                
+                                    self.notationsArray.append( (games["piecePosition"] as? Array)!)
                                 
                                     self.turnArray.append((games["blackPlayer"] as? String)!)
                                     
@@ -149,11 +151,107 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
         
         let cell:AnalyzeMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("analyzeCell",forIndexPath: indexPath) as! AnalyzeMenuTableViewCell
         
+        
+        
+        
+        var moves: Array<String> = []
+        
+        func loadMoves() {
+            
+            var lastNotationsWithNumber: Array<String> = []
+            moves = []
+            notationsWithNumber = ""
+            var t = 1
+            for var i = 0; i < notationsArray[indexPath.row].count; i++ {
+                
+                if i % 2 == 0{
+                    lastNotationsWithNumber.append("\(t). ")
+                    notationsWithNumber +=  "\(t). "
+                    t++
+                }
+                notationsWithNumber += "\(notationsArray[indexPath.row][i]) "
+                lastNotationsWithNumber.append("\(notationsArray[indexPath.row][i]) ")
+                
+                print("\(i+1).")
+                var t = (i+1)
+                for var q = 0; q < 2; q++ {
+           //         moveNum.append(t)
+                }
+                var putIntoMoves = ""
+                for var o = 0; o < notationsArray[indexPath.row][i].characters.count; o++ {
+                    let output = notationsArray[indexPath.row][i][o]
+                    let letter = String(output)
+                    
+                    if letter.lowercaseString == String(output){
+                        
+                        if output != "-" && output != "x" {
+                            //print(output)
+                            putIntoMoves.append(output)
+                            
+                        }
+                        
+                    }
+                }
+                print(putIntoMoves)
+                moves.append(putIntoMoves)
+            }
+            print(moves)
+          //  movesCap = moves
+            var cc = lastNotationsWithNumber.count
+            
+            if cc == 0 {}
+            else if cc == 2 {
+
+                let ss3 =  lastNotationsWithNumber[cc-2]
+                let ss4 = lastNotationsWithNumber[cc-1]
+                
+                cell.notations.text = ss3 + ss4
+            }
+            else if cc == 3 {
+
+                let ss2 = lastNotationsWithNumber[cc-3]
+                let ss3 =  lastNotationsWithNumber[cc-2]
+                let ss4 = lastNotationsWithNumber[cc-1]
+
+                cell.notations.text = ss2 + ss3 + ss4
+
+            }
+            else {
+                let ss1 = lastNotationsWithNumber[cc-4]
+                let ss2 = lastNotationsWithNumber[cc-3]
+                let ss3 =  lastNotationsWithNumber[cc-2]
+                let ss4 = lastNotationsWithNumber[cc-1]
+                
+                cell.notations.text = "..." + ss1 + ss2 + ss3 + ss4
+            
+            }
+            
+            cell.notations.textAlignment = .Left
+            
+            
+        }
+        loadMoves()
+        
+        
+
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
         cell.lineChartView.delegate = self
 
         cell.lineChartView.noDataText = "NO DATA YET"
         
-        var months: [String]!
+ 
+        
+        var numberOfMovesMaterial: Array<String> = []
         
         
 
@@ -171,7 +269,7 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
             }
             
             let chartDataSet = LineChartDataSet(yVals: dataEntries, label: "Units Sold")
-            let chartData = LineChartData(xVals: months, dataSet: chartDataSet)
+            let chartData = LineChartData(xVals: numberOfMovesMaterial, dataSet: chartDataSet)
             cell.lineChartView.descriptionText = ""
             cell.lineChartView.data = chartData
             cell.lineChartView.xAxis.labelPosition = .Bottom
@@ -180,7 +278,6 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
             chartDataSet.colors = ChartColorTemplates.liberty()
             chartDataSet.colors = [blue]
 
-        
             cell.lineChartView.animate(xAxisDuration: 0.5, yAxisDuration: 0.5,easingOption: .EaseInOutCubic)
             cell.lineChartView.backgroundColor = UIColor.clearColor()
             let ll = ChartLimitLine(limit: 0.0, label: "")
@@ -190,12 +287,18 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
             
         }
         
-        months = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
-        var unitsSold = [0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 2.0, 1.0, 0.0, 0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 2.0, 1.0, 0.0, 0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 2.0, 1.0, 0.0, 0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 2.0, 1.0, 0.0, 0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 2.0, 1.0, 0.0, 0.0]
         
-
+        //change ID!!!! to analyzeID
         
-        setChart(months, values: unitsSold)
+        let materialPoints = NSUserDefaults.standardUserDefaults().arrayForKey("material"+"DeQVtaRZEN") as! Array<Double>
+        print(materialPoints)
+        
+        for var xVC = 0; xVC < materialPoints.count; xVC++ {
+            numberOfMovesMaterial.append("\(xVC)")
+        }
+        
+        
+        setChart(numberOfMovesMaterial, values: materialPoints)
         
         
         if darkMode {cell.backgroundColor = UIColor.clearColor() //(red:0.22, green:0.22, blue:0.22, alpha:1.0)
@@ -263,8 +366,9 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
                 }
                 
             }
-
+        
         return cell
+        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

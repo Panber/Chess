@@ -145,6 +145,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var takenPiecesToReload: Array<UIImageView> = []
     var takenPiecesToReloadAtIndex: Array<Int> = []
     
+    var pointsStorage: Array<Double> = []
+    var points = Double()
     
     var movesCap: Array<String> = []
     
@@ -318,12 +320,25 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var blackQueens: Array<UIImageView> = []
     var blackKings: Array<UIImageView> = []
     
+    var blackKnightsM: Array<UIImageView> = []
+    var blackBishopsM: Array<UIImageView> = []
+    var blackRooksM: Array<UIImageView> = []
+    var blackPawnsM: Array<UIImageView> = []
+    var blackQueensM: Array<UIImageView> = []
+    
     var whitePawns: Array<UIImageView> = []
     var whiteKnights: Array<UIImageView> = []
     var whiteBishops: Array<UIImageView> = []
     var whiteRooks: Array<UIImageView> = []
     var whiteQueens: Array<UIImageView> = []
     var whiteKings: Array<UIImageView> = []
+    
+    
+    var whitePawnsM: Array<UIImageView> = []
+    var whiteKnightsM: Array<UIImageView> = []
+    var whiteBishopsM: Array<UIImageView> = []
+    var whiteRooksM: Array<UIImageView> = []
+    var whiteQueensM: Array<UIImageView> = []
     
     var blackPieces: Array<UIImageView> = []
     var blackPiecesString: Array<String> = []
@@ -417,6 +432,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         print("View did load!")
         //size-properties
         let pieceSize = sqrt(screenWidth * screenWidth / 64)
+        
+        
+         pointsStorage = []
+        
+        
+        
+         points = Double()
+        
         
         piecesToDelete = []
         
@@ -576,12 +599,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         blackQueens = [blackQueen]
         blackKings = [blackKing]
         
+        blackKnightsM = [blackKnight1, blackKnight2]
+        blackBishopsM = [blackBishop1, blackBishop2]
+        blackRooksM = [blackRook1, blackRook2]
+        blackPawnsM = [blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8]
+        blackQueensM = [blackQueen]
+        
         whitePawns  = [whitePawn1, whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8]
         whiteKnights = [whiteKnight1, whiteKnight2]
         whiteBishops = [whiteBishop1, whiteBishop2]
         whiteRooks = [whiteRook1, whiteRook2]
         whiteQueens = [whiteQueen]
         whiteKings = [whiteKing]
+        
+        whitePawnsM  = [whitePawn1, whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8]
+        whiteKnightsM = [whiteKnight1, whiteKnight2]
+        whiteBishopsM = [whiteBishop1, whiteBishop2]
+        whiteRooksM = [whiteRook1, whiteRook2]
+        whiteQueensM = [whiteQueen]
         
         blackPieces = [blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
         blackPiecesString = ["blackPawn","blackPawn","blackPawn", "blackPawn", "blackPawn", "blackPawn",  "blackPawn", "blackPawn", "blackKnight", "blackKnight", "blackBishop",  "blackBishop", "blackRook", "blackRook", "blackQueen", "blackKing" ]
@@ -1068,7 +1103,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 for var ty = 0; ty < self.whitePawns.count; ty++ {
                                                                                     if self.whitePawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                        
+                                                                                        points -= 100
                                                                                         self.whitePawns.removeAtIndex(ty)
                                                                                         ty--
                                                                                         print("TAKEN")
@@ -1077,7 +1112,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 for var ty = 0; ty < self.blackPawns.count; ty++ {
                                                                                     if self.blackPawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                        
+                                                                                        points += 100
+
                                                                                         self.blackPawns.removeAtIndex(ty)
                                                                                         ty--
                                                                                         print("TAKEN")
@@ -1089,6 +1125,53 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.takenPiecesToReload.append(self.pieces[iy])
                                                                                 self.takenPiecesToReloadAtIndex.append(iy)
                                                                                 
+                                                                                
+                                                                                func chartData() {
+                                                                                    for var gr = 0; gr < whiteRooks.count; gr++ {
+                                                                                        if self.pieces[iy] == whiteRooks[gr]  {
+                                                                                            points -= 500
+                                                                                        }
+                                                                                    }
+                                                                                    
+                                                                                    for var gr = 0; gr < blackRooks.count; gr++ {
+                                                                                        if self.pieces[iy] == blackRooks[gr]  {
+                                                                                            points += 500
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < whiteKnights.count; gr++ {
+                                                                                        if self.pieces[iy] == whiteKnights[gr]  {
+                                                                                            points -= 300
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < blackKnights.count; gr++ {
+                                                                                        if self.pieces[iy] == blackKnights[gr]  {
+                                                                                            points += 300
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < whiteBishops.count; gr++ {
+                                                                                        if self.pieces[iy] == whiteBishops[gr]  {
+                                                                                            points -= 300
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < blackBishops.count; gr++ {
+                                                                                        if self.pieces[iy] == blackBishops[gr]  {
+                                                                                            points += 300
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < whiteQueens.count; gr++ {
+                                                                                        if self.pieces[iy] == whiteQueens[gr]  {
+                                                                                            points -= 900
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < blackQueens.count; gr++ {
+                                                                                        if self.pieces[iy] == blackQueens[gr]  {
+                                                                                            points += 900
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                                chartData()
+                                                                                
+                                                                                
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     
                                                                                     self.pieces[iy].alpha = 0
@@ -1096,7 +1179,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     }, completion: { finish in
                                                                                         
                                                                                 })
-                                                                                
+
                                                                             }
                                                                             
                                                                         }
@@ -1245,6 +1328,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 for var ty = 0; ty < self.whitePawns.count; ty++ {
                                                                                     if self.whitePawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
+                                                                                        //chrta
+                                                                                        points -= 100
+                                                                                        
                                                                                         self.whitePawns.removeAtIndex(ty)
                                                                                         ty--
                                                                                         print("TAKEN")
@@ -1253,6 +1339,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 for var ty = 0; ty < self.blackPawns.count; ty++ {
                                                                                     if self.blackPawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+                                                                                        
+                                                                                        //chrta
+                                                                                        points += 100
                                                                                         
                                                                                         self.blackPawns.removeAtIndex(ty)
                                                                                         ty--
@@ -1263,10 +1352,72 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 
                                                                                 self.piecesToDelete.append(self.pieces[iy])
                                                                                 
-                                                                                
+
+                                                                            
                                                                                 self.takenPiecesToReload.append(self.pieces[iy])
                                                                                 self.takenPiecesToReloadAtIndex.append(iy)
                                                                                 
+                                                                                
+                                                                                //setting material points to game
+                                           
+                                                                                    
+                                                                                
+                                                                                    
+//                                                                                    for var gr = 0; gr < whitePawnsM.count; gr++ {
+//                                                                                        if takenPiecesToReload[ttpr] == whitePawnsM[gr]  {
+//                                                                                            points -= 100
+//                                                                                        }
+//                                                                                    }
+//                                                                                    for var gr = 0; gr < blackPawnsM.count; gr++ {
+//                                                                                        if takenPiecesToReload[ttpr] == blackPawnsM[gr]  {
+//                                                                                            points += 100
+//                                                                                        }
+//                                                                                    }
+                                                                                
+                                                                                func chartData() {
+                                                                                for var gr = 0; gr < whiteRooks.count; gr++ {
+                                                                                    if self.pieces[iy] == whiteRooks[gr]  {
+                                                                                        points -= 500
+                                                                                    }
+                                                                                }
+                                                                                
+                                                                                for var gr = 0; gr < blackRooks.count; gr++ {
+                                                                                    if self.pieces[iy] == blackRooks[gr]  {
+                                                                                        points += 500
+                                                                                    }
+                                                                                }
+                                                                                for var gr = 0; gr < whiteKnights.count; gr++ {
+                                                                                    if self.pieces[iy] == whiteKnights[gr]  {
+                                                                                        points -= 300
+                                                                                    }
+                                                                                }
+                                                                                for var gr = 0; gr < blackKnights.count; gr++ {
+                                                                                    if self.pieces[iy] == blackKnights[gr]  {
+                                                                                        points += 300
+                                                                                    }
+                                                                                }
+                                                                                for var gr = 0; gr < whiteBishops.count; gr++ {
+                                                                                    if self.pieces[iy] == whiteBishops[gr]  {
+                                                                                        points -= 300
+                                                                                    }
+                                                                                }
+                                                                                for var gr = 0; gr < blackBishops.count; gr++ {
+                                                                                    if self.pieces[iy] == blackBishops[gr]  {
+                                                                                        points += 300
+                                                                                    }
+                                                                                }
+                                                                                for var gr = 0; gr < whiteQueens.count; gr++ {
+                                                                                    if self.pieces[iy] == whiteQueens[gr]  {
+                                                                                        points -= 900
+                                                                                    }
+                                                                                }
+                                                                                for var gr = 0; gr < blackQueens.count; gr++ {
+                                                                                    if self.pieces[iy] == blackQueens[gr]  {
+                                                                                        points += 900
+                                                                                    }
+                                                                                }
+                                                                                }
+                                                                                chartData()
                                                                             }
                                                                         }
                                                                         
@@ -1280,7 +1431,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 }
                                                                 
                                                                 if moves.last == moves[o] && am == moves.count{
+                                                                    
+                                                                    
+                                                                    
                                                                     checkIfTakenLast()
+                                                                    
+                                                                    //chart
+                                                                    pointsStorage.append(points)
+                                                                    
+                                                                    NSUserDefaults.standardUserDefaults().setObject(pointsStorage, forKey: "material"+gameID)
+                                                                    
                                                                     
                                                                     print("moves.count in magic1() is \(moves.count)")
                                                                     
@@ -1299,6 +1459,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 }
                                                                 else {
                                                                     checkIfTaken()
+                                                                    
+                                                                    
+                                                                    //chart
+                                                                    pointsStorage.append(points)
+                                                                    
+                                                                    
                                                                     
                                                                     print("pieces[i] is \(pieces[i]) with")
                                                                     
@@ -1420,8 +1586,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
             }
 
+            
+            
+            
+            
             magic1()
 
+
+            
             print("I am white player!")
             canOnlyMoveWhite = true
             self.title = r!["blackPlayer"] as? String
@@ -1881,12 +2053,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             blackQueens = [blackQueen]
             blackKings = [blackKing]
             
+            blackKnightsM = [blackKnight1, blackKnight2]
+            blackBishopsM = [blackBishop1, blackBishop2]
+            blackRooksM = [blackRook1, blackRook2]
+            blackPawnsM = [blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8]
+            blackQueensM = [blackQueen]
+            
             whitePawns  = [whitePawn1, whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8]
             whiteKnights = [whiteKnight1, whiteKnight2]
             whiteBishops = [whiteBishop1, whiteBishop2]
             whiteRooks = [whiteRook1, whiteRook2]
             whiteQueens = [whiteQueen]
             whiteKings = [whiteKing]
+            
+            whitePawnsM  = [whitePawn1, whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8]
+            whiteKnightsM = [whiteKnight1, whiteKnight2]
+            whiteBishopsM = [whiteBishop1, whiteBishop2]
+            whiteRooksM = [whiteRook1, whiteRook2]
+            whiteQueensM = [whiteQueen]
             
             blackPieces = [blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8, blackKnight1, blackKnight2, blackBishop1, blackBishop2, blackRook1, blackRook2, blackQueen, blackKing]
             blackPiecesString = ["blackPawn","blackPawn","blackPawn", "blackPawn", "blackPawn", "blackPawn",  "blackPawn", "blackPawn", "blackKnight", "blackKnight", "blackBishop",  "blackBishop", "blackRook", "blackRook", "blackQueen", "blackKing" ]

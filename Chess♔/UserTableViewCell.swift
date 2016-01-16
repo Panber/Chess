@@ -309,6 +309,7 @@ class AnalyzeMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var updated: UILabel!
     @IBOutlet weak var content: UIView!
     
+    @IBOutlet weak var notations: UILabel!
     @IBOutlet weak var lineChartView: LineChartView!
     
     
