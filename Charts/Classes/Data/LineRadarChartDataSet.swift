@@ -14,7 +14,7 @@
 import Foundation
 import CoreGraphics
 import UIKit
-
+ 
 var blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
 var red = UIColor(red:0.89, green:0.36, blue:0.36, alpha:1.0)
 
