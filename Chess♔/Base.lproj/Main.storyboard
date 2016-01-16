@@ -1182,7 +1182,13 @@
                             <constraint firstItem="KYr-hH-vVQ" firstAttribute="leading" secondItem="Zlx-z4-9hR" secondAttribute="leading" id="sw9-t1-E95"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Analyze" id="ugG-nR-Luv"/>
+                    <navigationItem key="navigationItem" title="Analyze" id="ugG-nR-Luv">
+                        <barButtonItem key="rightBarButtonItem" title="New" id="edY-Br-PAR">
+                            <connections>
+                                <action selector="newPressed:" destination="u7t-gr-bde" id="McU-gC-J5w"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="KYr-hH-vVQ" id="lDr-wj-MBY"/>
                     </connections>

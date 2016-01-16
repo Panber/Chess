@@ -190,8 +190,10 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
             
         }
         
-        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        let unitsSold = [0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 2.0, 1.0, 0.0, 0.0]
+        months = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
+        var unitsSold = [0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 2.0, 1.0, 0.0, 0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 2.0, 1.0, 0.0, 0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 2.0, 1.0, 0.0, 0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 2.0, 1.0, 0.0, 0.0, -1.0, -2.0, -1.0, -2.0, -2.0, -2.0, -1.0, 2.0, 1.0, 0.0, 0.0]
+        
+
         
         setChart(months, values: unitsSold)
         
@@ -373,6 +375,128 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
         
         visualEffectView.userInteractionEnabled = false
         visualEffectSub.userInteractionEnabled = false
+        
+    }
+    
+    
+    @IBAction func newPressed(sender: AnyObject) {
+        
+        
+        UIView.animateWithDuration(0.3) { () -> Void in
+            visualEffectView.alpha = 1
+        }
+        
+        visualEffectView.userInteractionEnabled = true
+        visualEffectSub.userInteractionEnabled = true
+        
+        //friends
+        let friendsImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 85,100,50,50))
+        if darkMode {friendsImage.image = UIImage(named:"group4.png")}
+        else {friendsImage.image = UIImage(named:"group4-2.png")}
+        friendsImage.contentMode = .ScaleAspectFill
+        friendsImage.alpha = 0.7
+        visualEffectSub.addSubview(friendsImage)
+        
+        let friendsButton = UIButton(frame: CGRectMake((screenWidth / 2) - 120,80,120,120))
+        friendsButton.setTitle("Friends", forState: .Normal)
+        friendsButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        friendsButton.titleLabel?.font = UIFont(name: "Times", size: 16)
+        friendsButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        friendsButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        friendsButton.layer.cornerRadius = cornerRadius
+        friendsButton.clipsToBounds = true
+        friendsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        friendsButton.addTarget(self, action: "friendsButtonPressed:", forControlEvents: .TouchUpInside)
+        visualEffectSub.addSubview(friendsButton)
+        //-----friends end
+        
+        
+        //random
+        let randomImage = UIImageView(frame: CGRectMake((screenWidth / 2) + 35,100,50,50))
+        if darkMode {randomImage.image = UIImage(named:"multimedia option23-2.png")}
+        else {randomImage.image = UIImage(named:"multimedia option23.png")}
+        randomImage.contentMode = .ScaleAspectFill
+        randomImage.alpha = 0.7
+        visualEffectSub.addSubview(randomImage)
+        
+        let randomButton = UIButton(frame: CGRectMake((screenWidth / 2),80,120,120))
+        randomButton.setTitle("Random", forState: .Normal)
+        randomButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        randomButton.titleLabel?.font = UIFont(name: "Times", size: 16)
+        randomButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        randomButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        randomButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        randomButton.layer.cornerRadius = cornerRadius
+        randomButton.clipsToBounds = true
+        randomButton.addTarget(self, action: "randomButtonPressed:", forControlEvents: .TouchUpInside)
+        visualEffectSub.addSubview(randomButton)
+        //------random end
+        
+        //username
+        let usernameImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 85,100 + 140,50,50))
+        if darkMode {usernameImage.image = UIImage(named:"search74.png")}
+        else {usernameImage.image = UIImage(named:"search74-2.png")}
+        usernameImage.contentMode = .ScaleAspectFill
+        usernameImage.alpha = 0.7
+        visualEffectSub.addSubview(usernameImage)
+        
+        let usernameButton = UIButton(frame: CGRectMake((screenWidth / 2) - 120,80 + 140,120,120))
+        usernameButton.setTitle("Username", forState: .Normal)
+        usernameButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        usernameButton.titleLabel?.font = UIFont(name: "Times", size: 16)
+        usernameButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        usernameButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        usernameButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        usernameButton.layer.cornerRadius = cornerRadius
+        usernameButton.clipsToBounds = true
+        visualEffectSub.addSubview(usernameButton)
+        //------username end
+        
+        //rating
+        let ratingImage = UIImageView(frame: CGRectMake((screenWidth / 2) + 35,100 + 140,50,50))
+        if darkMode {ratingImage.image = UIImage(named:"search74.png")}
+        else {ratingImage.image = UIImage(named:"search74-2.png")}
+        ratingImage.contentMode = .ScaleAspectFill
+        ratingImage.alpha = 0.7
+        visualEffectSub.addSubview(ratingImage)
+        
+        let ratingButton = UIButton(frame: CGRectMake((screenWidth / 2),80 + 140,120,120))
+        ratingButton.setTitle("Rating", forState: .Normal)
+        ratingButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        ratingButton.titleLabel?.font = UIFont(name: "Times", size: 16)
+        ratingButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        ratingButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        ratingButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        ratingButton.layer.cornerRadius = cornerRadius
+        ratingButton.clipsToBounds = true
+        visualEffectSub.addSubview(ratingButton)
+        //------rating end
+        
+        
+        //location
+        let locationImage = UIImageView(frame: CGRectMake((screenWidth / 2) - 25,100 + 140 + 140,50,50))
+        if darkMode {locationImage.image = UIImage(named:"map-pointer7-2.png")}
+        else{locationImage.image = UIImage(named:"map-pointer7.png")}
+        locationImage.contentMode = .ScaleAspectFill
+        locationImage.alpha = 0.7
+        visualEffectSub.addSubview(locationImage)
+        
+        let locationButton = UIButton(frame: CGRectMake((screenWidth / 2) - 60,80 + 140 + 140,120,120))
+        locationButton.setTitle("Nearby", forState: .Normal)
+        locationButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        locationButton.titleLabel?.font = UIFont(name: "Times", size: 16)
+        locationButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Bottom
+        locationButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0)
+        locationButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
+        locationButton.layer.cornerRadius = cornerRadius
+        locationButton.clipsToBounds = true
+        locationButton.addTarget(self, action: "nearbyButtonPressed:", forControlEvents: .TouchUpInside)
+        visualEffectSub.addSubview(locationButton)
+        //------location end
+        
+        let gesture3 = UITapGestureRecognizer(target: self, action: "effectSubPressed:")
+        visualEffectSub.userInteractionEnabled = true
+        visualEffectSub.addGestureRecognizer(gesture3)
         
     }
     

@@ -19,7 +19,7 @@ public class LineChartDataSet: LineRadarChartDataSet
 {
     public var circleColors = [blue]
     public var circleHoleColor = UIColor.whiteColor()
-    public var circleRadius = CGFloat(2.0)
+    public var circleRadius = CGFloat(1.5)
     
     private var _cubicIntensity = CGFloat(0.2)
     
@@ -30,7 +30,7 @@ public class LineChartDataSet: LineRadarChartDataSet
     private var _fillFormatter: ChartFillFormatter = BarLineChartFillFormatter()
     
     /// if true, drawing circles is enabled
-    public var drawCirclesEnabled = true
+    public var drawCirclesEnabled = false
     
     /// if true, cubic lines are drawn instead of linear
     public var drawCubicEnabled = true
