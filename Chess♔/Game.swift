@@ -4528,7 +4528,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         scrollView1.userInteractionEnabled = true
         scrollView1.scrollEnabled = true
         scrollView1.pagingEnabled = false
-        scrollView1.contentSize = CGSizeMake(screenWidth, 738)
+        scrollView1.contentSize = CGSizeMake(screenWidth, 958)
         visualEffectSub.addSubview(scrollView1)
         
         var plusNum: CGFloat = 130
@@ -4634,8 +4634,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         var addSpace: CGFloat = 120
         
-        let capturedPieces = UILabel(frame: CGRectMake(0,250 + plusNum,screenWidth, 29))
-        capturedPieces.text = "Captured Pieces:"
+        let capturedPieces = UILabel(frame: CGRectMake(0,270 + plusNum,screenWidth, 29))
+        capturedPieces.text = "CAPTURED PIECES"
         capturedPieces.textAlignment = .Center
         if darkMode {capturedPieces.textColor = UIColor.lightGrayColor()}
         else {capturedPieces
@@ -4684,7 +4684,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             if takenWhitePieces[i].image == UIImage(named:"whitePawn") {
                 var i = 0
                 for i = 0; i < capturedWhitePawns.count; i++ {
-                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 320 + plusNum, 35, 35))
                     capturedPiece.image = capturedWhitePawns[i].image
                     scrollView1.addSubview(capturedPiece)
                 }
@@ -4692,7 +4692,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             } else  if takenWhitePieces[i].image == UIImage(named:"whiteQueen") {
                 var i = 0
                 for i = 0; i < capturedWhiteQueens.count; i++ {
-                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 320 + plusNum, 35, 35))
                     capturedPiece.image = capturedWhiteQueens[i].image
                     scrollView1.addSubview(capturedPiece)
                 }
@@ -4700,7 +4700,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             } else  if takenWhitePieces[i].image == UIImage(named:"whiteBishop") {
                 var i = 0
                 for i = 0; i < capturedWhiteBishops.count; i++ {
-                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 320 + plusNum, 35, 35))
                     capturedPiece.image = capturedWhiteBishops[i].image
                     scrollView1.addSubview(capturedPiece)
                     
@@ -4709,7 +4709,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             } else  if takenWhitePieces[i].image == UIImage(named:"whiteRook") {
                 var i = 0
                 for i = 0; i < capturedWhiteRooks.count; i++ {
-                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 320 + plusNum, 35, 35))
                     capturedPiece.image = capturedWhiteRooks[i].image
                     scrollView1.addSubview(capturedPiece)
                     
@@ -4718,7 +4718,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             } else  if takenWhitePieces[i].image == UIImage(named:"whiteKnight") {
                 var i = 0
                 for i = 0; i < capturedWhiteKnights.count; i++ {
-                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 320 + plusNum, 35, 35))
                     capturedPiece.image = capturedWhiteKnights[i].image
                     scrollView1.addSubview(capturedPiece)
                     
@@ -4731,7 +4731,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             if takenBlackPieces[i].image == UIImage(named:"blackPawn") {
                 var i = 0
                 for i = 0; i < capturedBlackPawns.count; i++ {
-                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 340 + plusNum, 35, 35))
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 360 + plusNum, 35, 35))
                     capturedPiece.image = capturedBlackPawns[i].image
                     scrollView1.addSubview(capturedPiece)
                 }
@@ -4739,7 +4739,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             } else  if takenBlackPieces[i].image == UIImage(named:"blackQueen") {
                 var i = 0
                 for i = 0; i < capturedBlackQueens.count; i++ {
-                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 340 + plusNum, 35, 35))
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 360 + plusNum, 35, 35))
                     capturedPiece.image = capturedBlackQueens[i].image
                     scrollView1.addSubview(capturedPiece)
                 }
@@ -4747,7 +4747,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             } else  if takenBlackPieces[i].image == UIImage(named:"blackBishop") {
                 var i = 0
                 for i = 0; i < capturedBlackBishops.count; i++ {
-                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 340 + plusNum, 35, 35))
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 360 + plusNum, 35, 35))
                     capturedPiece.image = capturedBlackBishops[i].image
                     scrollView1.addSubview(capturedPiece)
                     
@@ -4756,7 +4756,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             } else  if takenBlackPieces[i].image == UIImage(named:"blackRook") {
                 var i = 0
                 for i = 0; i < capturedBlackRooks.count; i++ {
-                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 340 + plusNum, 35, 35))
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 360 + plusNum, 35, 35))
                     capturedPiece.image = capturedBlackRooks[i].image
                     scrollView1.addSubview(capturedPiece)
                     
@@ -4765,7 +4765,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             } else  if takenBlackPieces[i].image == UIImage(named:"blackKnight") {
                 var i = 0
                 for i = 0; i < capturedBlackKnights.count; i++ {
-                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 340 + plusNum, 35, 35))
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 360 + plusNum, 35, 35))
                     capturedPiece.image = capturedBlackKnights[i].image
                     scrollView1.addSubview(capturedPiece)
                     
@@ -4773,7 +4773,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 offset2 = offset2 + CGFloat(i * 25)
             }
         }
- 
+ addSpace += 35
         let opponent = UILabel(frame: CGRectMake(0,280 + plusNum + addSpace,screenWidth, 29))
         opponent.text = "OPPONENT"
         opponent.textAlignment = .Center
