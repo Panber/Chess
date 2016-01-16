@@ -104,10 +104,11 @@ class NewAnalyzeRegular: UIViewController,UITextFieldDelegate {
         game["players"] = [white,black]
         game["confirmed"] = true
         game["piecePosition"] = NSMutableArray()
-        game["status_white"] = "request"
-        game["status_black"] = "request"
+        game["status_white"] = "analyze"
+        game["status_black"] = "analyze"
         game["whitePromotionType"] = NSMutableArray()
         game["blackPromotionType"] = NSMutableArray()
+        game["board"] = "regular"
         
         game["name"] = nameInput.text
         
