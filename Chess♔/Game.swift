@@ -4606,7 +4606,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         pImage.image = otherUserImage
         scrollView1.addSubview(pImage)
         
-        nameL = UILabel(frame: CGRectMake(pImage.frame.origin.x + pImage.frame.size.width + 25,pImage.frame.origin.y + 10 + addSpace,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),27))
+        nameL = UILabel(frame: CGRectMake(pImage.frame.origin.x + pImage.frame.size.width + 25,pImage.frame.origin.y + 10,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),27))
         nameL.font = UIFont(name: "Times", size: 22)
         nameL.textAlignment = .Left
         if darkMode {nameL.textColor = UIColor.whiteColor()}
