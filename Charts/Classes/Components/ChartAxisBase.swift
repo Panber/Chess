@@ -25,7 +25,7 @@ public class ChartAxisBase: ChartComponentBase
     public var axisLineDashPhase = CGFloat(0.0)
     public var axisLineDashLengths: [CGFloat]!
     
-    public var gridColor = UIColor.clearColor()
+    public var gridColor = blue
     public var gridLineWidth = CGFloat(0.5)
     public var gridLineDashPhase = CGFloat(0.0)
     public var gridLineDashLengths: [CGFloat]!

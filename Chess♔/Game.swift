@@ -4798,7 +4798,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         nameL.text = otherUserName
         scrollView1.addSubview(nameL)
         
-        ratingL = UILabel(frame: CGRectMake(nameL.frame.origin.x,nameL.frame.origin.y + nameL.frame.size.height + addSpace,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),21))
+        ratingL = UILabel(frame: CGRectMake(nameL.frame.origin.x,nameL.frame.origin.y + nameL.frame.size.height,screenWidth - (pImage.frame.origin.x + pImage.frame.size.width + 25),21))
         ratingL.font = UIFont(name: "Times-Italic", size: 15)
         ratingL.textColor = UIColor.darkGrayColor()
         if darkMode {ratingL.textColor = UIColor.lightGrayColor()}
