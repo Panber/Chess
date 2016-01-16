@@ -1052,9 +1052,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
-                                                                                                takenWhitePiecesLbl[t].text = "x" + whiteCount[t].description
+                                                                                                takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
                                                                                                 takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                                takenWhitePiecesLbl[t].font = UIFont(name: "Baskerville", size: 18)
+                                                                                                takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenWhitePiecesLbl[t])
                                                                                             }
@@ -1089,9 +1089,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
-                                                                                                takenBlackPiecesLbl[t].text = "x" + blackCount[t].description
+                                                                                                takenBlackPiecesLbl[t].text = "" + blackCount[t].description
                                                                                                 takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                                takenBlackPiecesLbl[t].font = UIFont(name: "Baskerville", size: 18)
+                                                                                                takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 view.addSubview(takenBlackPiecesLbl[t])
                                                                                             }
@@ -1276,9 +1276,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
-                                                                                                takenWhitePiecesLbl[t].text = "x" + whiteCount[t].description
+                                                                                                takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
                                                                                                 takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                                takenWhitePiecesLbl[t].font = UIFont(name: "Baskerville", size: 18)
+                                                                                                takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenWhitePiecesLbl[t])
                                                                                             }
@@ -1313,9 +1313,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
-                                                                                                takenBlackPiecesLbl[t].text = "x" + blackCount[t].description
+                                                                                                takenBlackPiecesLbl[t].text = "" + blackCount[t].description
                                                                                                 takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                                takenBlackPiecesLbl[t].font = UIFont(name: "Baskerville", size: 18)
+                                                                                                takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 view.addSubview(takenBlackPiecesLbl[t])
                                                                                             }
@@ -1782,9 +1782,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
-                                                                                                takenWhitePiecesLbl[t].text = "x" + whiteCount[t].description
+                                                                                                takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
                                                                                                 takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                                takenWhitePiecesLbl[t].font = UIFont(name: "Baskerville", size: 18)
+                                                                                                takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenWhitePiecesLbl[t])
                                                                                             }
@@ -2214,9 +2214,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
-                                                                                                takenBlackPiecesLbl[t].text = "x" + blackCount[t].description
+                                                                                                takenBlackPiecesLbl[t].text = "" + blackCount[t].description
                                                                                                 takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                                takenBlackPiecesLbl[t].font = UIFont(name: "Baskerville", size: 18)
+                                                                                                takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenBlackPiecesLbl[t])
                                                                                             }
@@ -2248,9 +2248,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
-                                                                                                takenWhitePiecesLbl[t].text = "x" + whiteCount[t].description
+                                                                                                takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
                                                                                                 takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                                takenWhitePiecesLbl[t].font = UIFont(name: "Baskerville", size: 18)
+                                                                                                takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenWhitePiecesLbl[t])
                                                                                             }
@@ -2394,9 +2394,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
-                                                                                                takenBlackPiecesLbl[t].text = "x" + blackCount[t].description
+                                                                                                takenBlackPiecesLbl[t].text = "" + blackCount[t].description
                                                                                                 takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                                takenBlackPiecesLbl[t].font = UIFont(name: "Baskerville", size: 18)
+                                                                                                takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenBlackPiecesLbl[t])
                                                                                             }
@@ -2428,9 +2428,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
-                                                                                                takenWhitePiecesLbl[t].text = "x" + whiteCount[t].description
+                                                                                                takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
                                                                                                 takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                                takenWhitePiecesLbl[t].font = UIFont(name: "Baskerville", size: 18)
+                                                                                                takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenWhitePiecesLbl[t])
                                                                                             }
@@ -2873,9 +2873,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
-                                                                                                takenBlackPiecesLbl[t].text = "x" + blackCount[t].description
+                                                                                                takenBlackPiecesLbl[t].text = "" + blackCount[t].description
                                                                                                 takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                                takenBlackPiecesLbl[t].font = UIFont(name: "Baskerville", size: 18)
+                                                                                                takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenBlackPiecesLbl[t])
                                                                                             }
@@ -3751,6 +3751,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                         if  (range != nil) {
                                                             print("letters  found")
                                                             
+                                                            
+                                                            
+                                                            
                                                             view.addSubview(takenPiecesToReload[takenPiecesToReload.count - 1 - d2])
                                                             takenPiecesToReload[takenPiecesToReload.count - 1 - d2].alpha = 0
                                                             //pieces.append(takenPiecesToReload[takenPiecesToReload.count - 1 - d2])
@@ -3767,9 +3770,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                     UIView.animateWithDuration(0.15, delay: 0, options: .CurveEaseInOut, animations:{ () -> Void in
                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
+                                                        
                                                         if  didIncrease_d2 == true {
                                                             self.takenPiecesToReload[self.takenPiecesToReload.count - 1 - self.d2].alpha = 1
                                                         }
+                                                        
                                                         }, completion: { finish in
                                                             //self.deletePiecesAfterLoad()
                                                             self.updateLogic()
@@ -7016,9 +7021,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                         takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                     }
-                                    takenBlackPiecesLbl[t].text = "x" + blackCount[t].description
+                                    takenBlackPiecesLbl[t].text = "" + blackCount[t].description
                                     takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
-                                    takenBlackPiecesLbl[t].font = UIFont(name: "Baskerville", size: 18)
+                                    takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                     takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
                                     view.addSubview(takenBlackPiecesLbl[t])
                                 }
@@ -7038,9 +7043,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                         takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                     }
-                                    takenWhitePiecesLbl[t].text = "x" + whiteCount[t].description
+                                    takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
                                     takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
-                                    takenWhitePiecesLbl[t].font = UIFont(name: "Baskerville", size: 18)
+                                    takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                     takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
                                     view.addSubview(takenWhitePiecesLbl[t])
                                 }
@@ -7084,9 +7089,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         takenBlackPiecesLbl[b].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                         takenBlackPiecesShow += [takenBlackPiecesLbl[b]]
                                     }
-                                    takenBlackPiecesLbl[b].text = "x" + blackCount[b].description
+                                    takenBlackPiecesLbl[b].text = "" + blackCount[b].description
                                     takenBlackPiecesLbl[b].textColor = UIColor.whiteColor()
-                                    takenBlackPiecesLbl[b].font = UIFont(name: "Baskerville", size: 18)
+                                    takenBlackPiecesLbl[b].font = UIFont(name: "Times", size: 18)
                                     takenBlackPiecesLbl[b].textAlignment = NSTextAlignment.Center
                                     view.addSubview(takenBlackPiecesLbl[b])
                                 }
@@ -7106,9 +7111,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         takenWhitePiecesLbl[b].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
                                         takenWhitePiecesShow += [takenWhitePiecesLbl[b]]
                                     }
-                                    takenWhitePiecesLbl[b].text = "x" + whiteCount[b].description
+                                    takenWhitePiecesLbl[b].text = "" + whiteCount[b].description
                                     takenWhitePiecesLbl[b].textColor = UIColor.whiteColor()
-                                    takenWhitePiecesLbl[b].font = UIFont(name: "Baskerville", size: 18)
+                                    takenWhitePiecesLbl[b].font = UIFont(name: "Times", size: 18)
                                     takenWhitePiecesLbl[b].textAlignment = NSTextAlignment.Center
                                     view.addSubview(takenWhitePiecesLbl[b])
                                 }

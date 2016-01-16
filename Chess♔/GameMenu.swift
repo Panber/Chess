@@ -470,7 +470,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
 
                         
-                        
+                    
                         
                     }
                     else if games["status_black"] as? String == "notmove" {
@@ -1255,23 +1255,63 @@ var loaded = false
 
     @IBAction func analyze(sender: AnyObject) {
         
+        
+        
+        let alert = UIAlertController(title: "ALERT", message: "Are you sure that you want to analyze this game?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        
+        alert.addAction(UIAlertAction(title: "Yes!", style: .Default, handler: { action in
+            switch action.style{
+            case .Default:
+                print("default")
 
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            
-            self.tableView.frame.origin.x = -screenWidth
-            
-            self.newButtonOutlet.title = ""
-            self.invitesButtonOutlet.title = ""
-            self.navigationItem.title = "Analyze"
-            
-            }) { Finish in
+                UIView.animateWithDuration(0.5, animations: { () -> Void in
+                    
+                    self.tableView.frame.origin.x = -screenWidth
+                    
+                    self.newButtonOutlet.title = ""
+                    self.invitesButtonOutlet.title = ""
+                    self.navigationItem.title = "Analyze"
+                    
+                    }) { Finish in
+                        
+                        self.newButtonOutlet.title = "New"
+                        self.invitesButtonOutlet.title = "Invites"
+                        self.navigationItem.title = "CHESS"
+                        self.tabBarController?.selectedIndex = 1
+                        self.tableView.frame.origin.x = 0
+                }
                 
-                self.newButtonOutlet.title = "New"
-                self.invitesButtonOutlet.title = "Invites"
-                self.navigationItem.title = "CHESS"
-                self.tabBarController?.selectedIndex = 1
-                self.tableView.frame.origin.x = 0
-        }
+            case .Cancel:
+                print("cancel")
+                
+            case .Destructive:
+                print("destructive")
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+            switch action.style{
+            case .Default:
+                print("default")
+                
+                
+            case .Cancel:
+                print("cancel")
+                
+            case .Destructive:
+                print("destructive")
+            }
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+        
+
+
+        
+        
+        
         
         
         
