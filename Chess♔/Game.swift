@@ -4590,7 +4590,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
         }
  
-        
         let opponent = UILabel(frame: CGRectMake(0,280 + plusNum + addSpace,screenWidth, 29))
         opponent.text = "OPPONENT"
         opponent.textAlignment = .Center
