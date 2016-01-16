@@ -561,7 +561,32 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
         self.showViewController(vc as! UIViewController, sender: vc)
     }
 
-    func emptyButtonPressed(sender: UIButton!) {}
+    func emptyButtonPressed(sender: UIButton!) {
+        
+        removeNewView()
+
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("analyzeEmpty")
+        self.showViewController(vc as! UIViewController, sender: vc)
+    }
+    
+    
+    override func viewDidDisappear(animated: Bool) {
+        usernameArray = []
+        turnArray = []
+
+        
+        usernameArray = []
+        updatedArray = []
+
+        turnUpdateSince = []
+
+        
+        
+        tableView.alpha = 0
+        tableView.reloadData()
+        
+    }
+
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
     func lightOrDarkMode() {
