@@ -4448,7 +4448,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         timeL.font = UIFont(name: "Times", size: 19)
         scrollView1.addSubview(timeL)
         
-        var addSpace: CGFloat = 150
+        var addSpace: CGFloat = 120
         
         let capturedPieces = UILabel(frame: CGRectMake(0,250 + plusNum,screenWidth, 29))
         capturedPieces.text = "Captured Pieces:"
@@ -4477,49 +4477,119 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 capturedWhiteKnights += [takenWhitePiecesForInfo[i]]
             }
         }
-        var offset1: CGFloat = 0
-        if capturedWhitePawns.count  > 0 {
-        for var i = 0; i < capturedWhitePawns.count; i++ {
-            let capturedPiece = UIImageView(frame: CGRectMake(35 + CGFloat(i * 25), 300 + plusNum, 35, 35))
-            capturedPiece.image = capturedWhitePawns[i].image
-            scrollView1.addSubview(capturedPiece)
-            offset1 = CGFloat(i * 25)
-        }
-        }
-        if capturedWhiteBishops.count  > 0 {
-        for var i = 0; i < capturedWhiteBishops.count; i++ {
-            let capturedPiece = UIImageView(frame: CGRectMake(35 + offset1 + CGFloat(i * 25), 300 + plusNum, 35, 35))
-            capturedPiece.image = capturedWhiteBishops[i].image
-            scrollView1.addSubview(capturedPiece)
-            offset1 = CGFloat(i * 25)
-        }
-        }
-        if capturedWhiteKnights.count  > 0 {
-            for var i = 0; i < capturedWhiteBishops.count; i++ {
-                let capturedPiece = UIImageView(frame: CGRectMake(35 + offset1 + CGFloat(i * 25), 300 + plusNum, 35, 35))
-                capturedPiece.image = capturedWhiteKnights[i].image
-                scrollView1.addSubview(capturedPiece)
-                 offset1 = CGFloat(i * 25)
+        var capturedBlackPawns: Array<UIImageView> = []
+        var capturedBlackQueens: Array<UIImageView> = []
+        var capturedBlackBishops: Array<UIImageView> = []
+        var capturedBlackRooks: Array<UIImageView> = []
+        var capturedBlackKnights: Array<UIImageView> = []
+        for var i = 0; i < takenBlackPiecesForInfo.count; i++ {
+            if takenBlackPiecesForInfo[i].image == UIImage(named:"blackPawn") {
+                capturedBlackPawns += [takenBlackPiecesForInfo[i]]
+            } else if takenBlackPiecesForInfo[i].image == UIImage(named:"blackQueen") {
+                capturedBlackQueens += [takenBlackPiecesForInfo[i]]
+            } else if takenBlackPiecesForInfo[i].image == UIImage(named:"blackBishop") {
+                capturedBlackBishops += [takenBlackPiecesForInfo[i]]
+            } else if takenBlackPiecesForInfo[i].image == UIImage(named:"blackRook") {
+                capturedBlackRooks += [takenBlackPiecesForInfo[i]]
+            } else if takenBlackPiecesForInfo[i].image == UIImage(named:"blackKnight") {
+                capturedBlackKnights += [takenBlackPiecesForInfo[i]]
             }
         }
-        if capturedWhiteRooks.count  > 0 {
-            for var i = 0; i < capturedWhiteBishops.count; i++ {
-                let capturedPiece = UIImageView(frame: CGRectMake(35 + offset1 + CGFloat(i * 25), 300 + plusNum, 35, 35))
-                capturedPiece.image = capturedWhiteRooks[i].image
-                scrollView1.addSubview(capturedPiece)
-                 offset1 = CGFloat(i * 25)
+        var offset: CGFloat = 0
+        for var i = 0; i < takenWhitePieces.count; i++ {
+            if takenWhitePieces[i].image == UIImage(named:"whitePawn") {
+                var i = 0
+                for i = 0; i < capturedWhitePawns.count; i++ {
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                    capturedPiece.image = capturedWhitePawns[i].image
+                    scrollView1.addSubview(capturedPiece)
+                }
+                offset = offset + CGFloat(i * 25)
+            } else  if takenWhitePieces[i].image == UIImage(named:"whiteQueen") {
+                var i = 0
+                for i = 0; i < capturedWhiteQueens.count; i++ {
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                    capturedPiece.image = capturedWhiteQueens[i].image
+                    scrollView1.addSubview(capturedPiece)
+                }
+                 offset = offset + CGFloat(i * 25)
+            } else  if takenWhitePieces[i].image == UIImage(named:"whiteBishop") {
+                var i = 0
+                for i = 0; i < capturedWhiteBishops.count; i++ {
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                    capturedPiece.image = capturedWhiteBishops[i].image
+                    scrollView1.addSubview(capturedPiece)
+                    
+                }
+                offset = offset + CGFloat(i * 25)
+            } else  if takenWhitePieces[i].image == UIImage(named:"whiteRook") {
+                var i = 0
+                for i = 0; i < capturedWhiteRooks.count; i++ {
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                    capturedPiece.image = capturedWhiteRooks[i].image
+                    scrollView1.addSubview(capturedPiece)
+                    
+                }
+                offset = offset + CGFloat(i * 25)
+            } else  if takenWhitePieces[i].image == UIImage(named:"whiteKnight") {
+                var i = 0
+                for i = 0; i < capturedWhiteKnights.count; i++ {
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset + 15 + CGFloat(i * 25), 300 + plusNum, 35, 35))
+                    capturedPiece.image = capturedWhiteKnights[i].image
+                    scrollView1.addSubview(capturedPiece)
+                    
+                }
+                offset = offset + CGFloat(i * 25)
             }
         }
-        if capturedWhiteQueens.count  > 0 {
-            for var i = 0; i < capturedWhiteBishops.count; i++ {
-                let capturedPiece = UIImageView(frame: CGRectMake(35 + offset1 + CGFloat(i * 25), 300 + plusNum, 35, 35))
-                capturedPiece.image = capturedWhiteQueens[i].image
-                scrollView1.addSubview(capturedPiece)
-                 offset1 = CGFloat(i * 25)
+        var offset2: CGFloat = 0
+        for var i = 0; i < takenBlackPieces.count; i++ {
+            if takenBlackPieces[i].image == UIImage(named:"blackPawn") {
+                var i = 0
+                for i = 0; i < capturedBlackPawns.count; i++ {
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 340 + plusNum, 35, 35))
+                    capturedPiece.image = capturedBlackPawns[i].image
+                    scrollView1.addSubview(capturedPiece)
+                }
+                offset2 = offset2 + CGFloat(i * 25)
+            } else  if takenBlackPieces[i].image == UIImage(named:"blackQueen") {
+                var i = 0
+                for i = 0; i < capturedBlackQueens.count; i++ {
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 340 + plusNum, 35, 35))
+                    capturedPiece.image = capturedBlackQueens[i].image
+                    scrollView1.addSubview(capturedPiece)
+                }
+                offset2 = offset2 + CGFloat(i * 25)
+            } else  if takenBlackPieces[i].image == UIImage(named:"blackBishop") {
+                var i = 0
+                for i = 0; i < capturedBlackBishops.count; i++ {
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 340 + plusNum, 35, 35))
+                    capturedPiece.image = capturedBlackBishops[i].image
+                    scrollView1.addSubview(capturedPiece)
+                    
+                }
+                offset2 = offset2 + CGFloat(i * 25)
+            } else  if takenBlackPieces[i].image == UIImage(named:"blackRook") {
+                var i = 0
+                for i = 0; i < capturedBlackRooks.count; i++ {
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 340 + plusNum, 35, 35))
+                    capturedPiece.image = capturedBlackRooks[i].image
+                    scrollView1.addSubview(capturedPiece)
+                    
+                }
+                offset2 = offset2 + CGFloat(i * 25)
+            } else  if takenBlackPieces[i].image == UIImage(named:"blackKnight") {
+                var i = 0
+                for i = 0; i < capturedBlackKnights.count; i++ {
+                    let capturedPiece = UIImageView(frame: CGRectMake(offset2 + 15 + CGFloat(i * 25), 340 + plusNum, 35, 35))
+                    capturedPiece.image = capturedBlackKnights[i].image
+                    scrollView1.addSubview(capturedPiece)
+                    
+                }
+                offset2 = offset2 + CGFloat(i * 25)
             }
         }
-        
-       
+ 
         
         let opponent = UILabel(frame: CGRectMake(0,280 + plusNum + addSpace,screenWidth, 29))
         opponent.text = "OPPONENT"
