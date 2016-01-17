@@ -2521,7 +2521,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             
                             
-                        } else if moves[o].characters.count == 3 {
+                        }
+                        else if moves[o].characters.count == 3 {
                             print("Checking castling")
                             if String(moves.last![2])  == "0" {
                                 //can return false value??
@@ -4194,11 +4195,18 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                                 UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                                     
+                                    if self.iamWhite {
                                     self.whiteKing.frame.origin.x = c
                                     self.whiteKing.frame.origin.y = _1
                                     self.whiteRook2.frame.origin.x = d
                                     self.whiteRook2.frame.origin.y = _1
-                                    
+                                    }
+                                    else {
+                                        self.blackKing.frame.origin.x = f
+                                        self.blackKing.frame.origin.y = _8
+                                        self.blackRook2.frame.origin.x = e
+                                        self.blackRook2.frame.origin.y = _8
+                                    }
                                     }, completion: { finish in
                                 })
                                 
@@ -4211,11 +4219,18 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 print("Castling black long")
                                 UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                                     
+                                    if self.iamWhite {
                                     self.blackKing.frame.origin.x = c
                                     self.blackKing.frame.origin.y = _8
                                     self.blackRook1.frame.origin.x = d
                                     self.blackRook1.frame.origin.y = _8
-                                    
+                                    }
+                                    esle {
+                                        self.whiteKing.frame.origin.x = f
+                                        self.whiteKing.frame.origin.y = _1
+                                        self.whiteRook1.frame.origin.x = e
+                                        self.whiteRook1.frame.origin.y = _1
+                                    }
                                     
                                     }, completion: { finish in})
                                 
@@ -4232,11 +4247,19 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                             UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                                 
+                                if self.iamWhite {
                                 self.whiteKing.frame.origin.x = g
                                 self.whiteKing.frame.origin.y = _1
                                 self.whiteRook1.frame.origin.x = f
                                 self.whiteRook1.frame.origin.y = _1
+                                }
+                                else {
+                                    self.blackKing.frame.origin.x = b
+                                    self.blackKing.frame.origin.y = _8
+                                    self.blackRook1.frame.origin.x = c
+                                    self.blackRook1.frame.origin.y = _8
                                 
+                                }
                                 }, completion: { finish in})
                             
                             
@@ -4246,11 +4269,19 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             print("Castling black short")
                             UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                                 // white castling bottom-right
+                                
+                                if self.iamWhite {
                                 self.blackKing.frame.origin.x = g
                                 self.blackKing.frame.origin.y = _8
                                 self.blackRook2.frame.origin.x = f
                                 self.blackRook2.frame.origin.y = _8
-                                
+                                }
+                                else {
+                                    self.whiteKing.frame.origin.x = b
+                                    self.whiteKing.frame.origin.y = _1
+                                    self.whiteRook2.frame.origin.x = c
+                                    self.whiteRook2.frame.origin.y = _1
+                                }
                                 }, completion: { finish in})
                             
               
