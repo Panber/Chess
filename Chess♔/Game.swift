@@ -4231,7 +4231,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 }
                                 
                                 }, completion: { finish in})
-
+                            
                         }
                     }
                 }
@@ -5562,8 +5562,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             if canSaveKing(pieceOption, array: knightLogicOptions) == false {
                                 pieceOption.removeFromSuperview()
                             }
-                        }
+                        } else {
                         pieceOptions += [pieceOption]
+                        }
                         canThePieceGofurther = false
                         
                     }
@@ -5606,7 +5607,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     func chessPieceSelected(var _event:UIEvent, var _touch:UITouch, var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView]) {
         showMarkedPiece()
         pieceID = pieceid
-        
+        print("chessPieceSelected")
         func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat, var byAmountz:CGFloat, increaserz:CGFloat ) {
             var canThePieceGofurther: Bool = true
             var startLogicChecking: Bool = false
@@ -5803,13 +5804,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 if pieceid == 5 && selectedPiece == whiteKing {
                     for var p = 0 ; p < pieceOptions.count; p++ {
                         if canSaveKing(pieceOptions[p], array: pieceBlackLogicOptions) == true {
-                            pieceOptions[p].hidden = true
+                            [pieceOptions[p] .removeFromSuperview()]
+                            pieceOptions.removeAtIndex(p)
                         }
                     }
                 } else if pieceid == 5 && selectedPiece == blackKing {
                     for var p = 0 ; p < pieceOptions.count; p++ {
                         if canSaveKing(pieceOptions[p], array: pieceWhiteLogicOptions) == true {
-                            pieceOptions[p].hidden = true
+                            [pieceOptions[p] .removeFromSuperview()]
+                            pieceOptions.removeAtIndex(p)
                         }
                     }
                 }
@@ -5822,7 +5825,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
                 for var o = 0 ; o < pieceOptions.count; o++ {
                     if CGRectContainsPoint(pieceOptions[o].frame, blackKing.center){
-                        pieceOptions[o].hidden == true
+                        [pieceOptions[o] .removeFromSuperview()]
+                        pieceOptions.removeAtIndex(o)
                     }
                 }
             }
@@ -5875,6 +5879,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             letThemAppear(1,byAmounty: -1,increaserx: 1,increasery: -1, byAmountz: 1, increaserz: 1)
             letThemAppear(-1,byAmounty: 1,increaserx: -1,increasery: 1, byAmountz: 1, increaserz: 1)
             letThemAppear(-1,byAmounty: -1,increaserx: -1,increasery: -1, byAmountz: 1, increaserz: 1)
+            
+             print(pieceOptions.count)
         }
     }
     
