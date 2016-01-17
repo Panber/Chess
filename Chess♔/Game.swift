@@ -4209,9 +4209,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 }
                                 }, completion: { finish in
                             })
-                            
-                            
-                            
+
                         }
                             
                         else {
@@ -4233,10 +4231,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 }
                                 
                                 }, completion: { finish in})
-                            
-                            
-                            
-                            
+
                         }
                     }
                 }
