@@ -4225,7 +4225,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     self.blackRook1.frame.origin.x = d
                                     self.blackRook1.frame.origin.y = _8
                                     }
-                                    esle {
+                                    else {
                                         self.whiteKing.frame.origin.x = f
                                         self.whiteKing.frame.origin.y = _1
                                         self.whiteRook1.frame.origin.x = e
