@@ -4187,13 +4187,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             }, completion: { finish in
                                                                                 
                                                                         })
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                          
+
                                                                     }
                                                                 }
                                                                 
