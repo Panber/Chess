@@ -1588,7 +1588,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 }
                             }
                         }
-
+                        
                     }
                 }
             }
@@ -1720,7 +1720,82 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     
                     for var t = 0; t < xAxisArrStr2.count; t++ {
-                        if String(moves.last![0]) == xAxisArrStr2[t] {
+                        if moves.last!.characters.count == 3 {
+                            
+                            if String(moves.last![2])  == "0" {
+                                //can return false value??
+                                if  moves.indexOf(moves.last!)!  % 2 == 0 {
+                                    
+                                    if moves.last == moves.last{
+                                        
+                                        UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                            self.blackKing.frame.origin.x = c
+                                            self.blackKing.frame.origin.y = _8
+                                            self.blackRook1.frame.origin.x = d
+                                            self.blackRook1.frame.origin.y = _8
+                                            
+                                            }, completion: { finish in})
+                                        
+                                    }
+                                    
+                                    
+                                }
+                                    
+                                else {
+                                    
+                                    if moves.last == moves.last{
+                                        print("Castling black long")
+                                        UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                            
+                                            self.blackKing.frame.origin.x = c
+                                            self.blackKing.frame.origin.y = _8
+                                            self.blackRook1.frame.origin.x = d
+                                            self.blackRook1.frame.origin.y = _8
+                                            
+                                            }, completion: { finish in})
+                                        
+                                    }
+                                    
+                                    
+                                }
+                            }
+                        }
+                        else if String(moves.last![0])  == "0" && String(moves.last![1])  == "0" {
+                            
+                            if  moves.indexOf(moves.last!)!  % 2 == 0  {
+                                if moves.last == moves.last{
+                                    
+                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                        
+                                        self.blackKing.frame.origin.x = g
+                                        self.blackKing.frame.origin.y = _8
+                                        self.blackRook2.frame.origin.x = f
+                                        self.blackRook2.frame.origin.y = _8
+                                        
+                                        }, completion: { finish in})
+                                }
+                                
+                            }
+                                
+                            else {
+                                
+                                if moves.last == moves.last{
+                                    print("Castling black short")
+                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                        
+                                        self.blackKing.frame.origin.x = g
+                                        self.blackKing.frame.origin.y = _8
+                                        self.blackRook2.frame.origin.x = f
+                                        self.blackRook2.frame.origin.y = _8
+                                        
+                                        
+                                        }, completion: { finish in})
+                                    
+                                }
+                                
+                            }
+                        }
+                        else if String(moves.last![0]) == xAxisArrStr2[t] {
                             for var p = 0; p < yAxisArrStr2.count; p++ {
                                 if String(moves.last![1]) == yAxisArrStr2[p] {
                                     for var i = 0; i < self.pieces.count; i++ {
@@ -1903,7 +1978,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 }
                             }
                         }
-
+                        
                     }
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     self.isWhiteTurn = true
@@ -2580,136 +2655,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             
                         }
-                        else if moves[o].characters.count == 3 {
-                            print("Checking castling")
-                            if String(moves.last![2])  == "0" {
-                                //can return false value??
-                                if  moves.indexOf(moves.last!)!  % 2 == 0 {
-                                    // test
-                                    if moves.last == moves.last{
-                                        
-                                        if moves.last == moves[o] && am == moves.count{
-                                            print("Castling white long")
-                                            UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                                
-                                                self.blackKing.frame.origin.x = f
-                                                self.blackKing.frame.origin.y = _8
-                                                self.blackRook2.frame.origin.x = e
-                                                self.blackRook2.frame.origin.y = _8
-                                                
-                                                
-                                                }, completion: { finish in})
-                                            
-                                        }
-                                        else {
-                                            self.blackKing.frame.origin.x = f
-                                            self.blackKing.frame.origin.y = _8
-                                            self.blackRook2.frame.origin.x = e
-                                            self.blackRook2.frame.origin.y = _8
-                                        }
-                                        
-                                    }
-                                }
-                                    
-                                else {
-                                    
-                                    if moves.last == moves[o] && am == moves.count{
-                                        
-                                        UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                            print("Castling black long")
-                                            self.whiteKing.frame.origin.x = f
-                                            self.whiteKing.frame.origin.y = _1
-                                            self.whiteRook1.frame.origin.x = e
-                                            self.whiteRook1.frame.origin.y = _1
-                                            
-                                            
-                                            
-                                            }, completion: { finish in})
-                                        
-                                    }
-                                    else {
-                                        self.whiteKing.frame.origin.x = f
-                                        self.whiteKing.frame.origin.y = _1
-                                        self.whiteRook1.frame.origin.x = e
-                                        self.whiteRook1.frame.origin.y = _1
-                                    }
-                                    
-                                    
-                                    
-                                }
-                            } else if String(moves[o][2])  == "0" {
-                                //can return false value??
-                                if  moves.indexOf(moves[o])!  % 2 == 0 {
-                                    // test
-                                    
-                                    self.blackKing.frame.origin.x = f
-                                    self.blackKing.frame.origin.y = _8
-                                    self.blackRook2.frame.origin.x = e
-                                    self.blackRook2.frame.origin.y = _8
-                                    
-                                }
-                                    
-                                else {
-                                    
-                                    self.whiteKing.frame.origin.x = f
-                                    self.whiteKing.frame.origin.y = _1
-                                    self.whiteRook1.frame.origin.x = e
-                                    self.whiteRook1.frame.origin.y = _1
-                                    
-                                }
-                            }
-                        }
-                        else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
-                            
-                            if  o % 2 == 0 {
-                                
-                                if moves.last == moves[o] && am == moves.count{
-                                    print("Castling white short")
-                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                        
-                                        self.blackKing.frame.origin.x = b
-                                        self.blackKing.frame.origin.y = _8
-                                        self.blackRook1.frame.origin.x = c
-                                        self.blackRook1.frame.origin.y = _8
-                                        
-                                        
-                                        
-                                        }, completion: { finish in})
-                                    
-                                }
-                                else {
-                                    
-                                    blackKing.frame.origin.x = b
-                                    blackKing.frame.origin.y = _8
-                                    blackRook1.frame.origin.x = c
-                                    blackRook1.frame.origin.y = _8
-                                }
-                                
-                            }
-                                
-                            else {
-                                if moves.last == moves[o] && am == moves.count{
-                                    print("Castling black short")
-                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
-                                        // Castling white top left
-                                        self.whiteKing.frame.origin.x = b
-                                        self.whiteKing.frame.origin.y = _1
-                                        self.whiteRook2.frame.origin.x = c
-                                        self.whiteRook2.frame.origin.y = _1
-                                        
-                                        }, completion: { finish in})
-                                    
-                                }
-                                else {
-                                    
-                                    self.whiteKing.frame.origin.x = b
-                                    self.whiteKing.frame.origin.y = _1
-                                    self.whiteRook2.frame.origin.x = c
-                                    self.whiteRook2.frame.origin.y = _1
-                                }
-                                
-                            }
-                        }
+                        
                     }
                 }
             }
@@ -2854,7 +2800,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.notations.append(last.last!)
                     var lastPromotionType = r!["whitePromotionType"] as! Array<String>
                     if lastPromotionType.count > 0 {
-                    self.whitePromotionType.append(lastPromotionType.last!)
+                        self.whitePromotionType.append(lastPromotionType.last!)
                     }
                     self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
                     self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
@@ -2951,49 +2897,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 
                             }
                         }
-                    }
-                    
-                    
-                }
-            })
-            
-            //firebase
-            //check for any changes that may have accured at the destined game ≈_≈
-            let check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
-            check.observeEventType(.ChildChanged, withBlock: { snapshot in
-                print(snapshot.value)
-                
-                
-                if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black" {
-                    
-                    
-                    let query = PFQuery(className: "Games")
-                    query.whereKey("objectId", equalTo: gameID)
-                    let r = query.getFirstObject()
-                    self.game = r!
-                    var last = r!["piecePosition"] as! Array<String>
-                    self.notations.append(last.last!)
-                    var lastPromotionType = r!["whitePromotionType"] as! Array<String>
-                    if lastPromotionType.count > 0 {
-                        self.whitePromotionType.append(lastPromotionType.last!)
-                    }
-                    self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
-                    self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
-                    self.promotion = r!["promotion"] as! Bool
-                    let newIndexPath = NSIndexPath(forItem: self.notations.count - 1, inSection: 0)
-                    self.collectionView.insertItemsAtIndexPaths([newIndexPath])
-                    self.collectionView.layoutIfNeeded()
-                    self.collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.collectionView.reloadData()
-                    }
-                    print("notations.count is \(self.notations.count)")
-                    loadMoves()
-                    self.passantPiece = (r!["passantPiece"] as? Int)!
-                    self.canPassantBlack = r!["passantBlack"] as! Bool
-                    self.canPassant = r!["passant"] as! Bool
-                    for var t = 0; t < xAxisArrStr2.count; t++ {
-                        if String(moves.last![0]) == xAxisArrStr2[t] {
+                        else if String(moves.last![0]) == xAxisArrStr2[t] {
                             for var p = 0; p < yAxisArrStr2.count; p++ {
                                 if String(moves.last![1]) == yAxisArrStr2[p] {
                                     for var i = 0; i < self.pieces.count; i++ {
@@ -3173,7 +3077,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 }
                             }
                         }
-
+                        
                     }
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     self.isWhiteTurn = true
@@ -3837,119 +3741,119 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             if movesCap[o].characters.count == 3 {
                 if String(movesCap[o][2])  == "0" {
                     if  o % 2 == 0 {
-                            print("Castling white long")
-
-                            UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-                                
-                                if self.iamWhite == true {
+                        print("Castling white long")
+                        
+                        UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
+                            
+                            if self.iamWhite == true {
                                 self.whiteKing.frame.origin.x = e
                                 self.whiteKing.frame.origin.y = _1
                                 self.whiteRook2.frame.origin.x = a
                                 self.whiteRook2.frame.origin.y = _1
-                                }
-                                else {
-                                    self.blackKing.frame.origin.x = d
-                                    self.blackKing.frame.origin.y = _8
-                                    self.blackRook2.frame.origin.x = h
-                                    self.blackRook2.frame.origin.y = _8
-                                }
-                                
-                                
-                                
-                                
-                                }, completion: { finish in
-                                    self.updateLogic()
-                                    self.canPressBackwardButton = true
-                            })
+                            }
+                            else {
+                                self.blackKing.frame.origin.x = d
+                                self.blackKing.frame.origin.y = _8
+                                self.blackRook2.frame.origin.x = h
+                                self.blackRook2.frame.origin.y = _8
+                            }
+                            
+                            
+                            
+                            
+                            }, completion: { finish in
+                                self.updateLogic()
+                                self.canPressBackwardButton = true
+                        })
                         
                         
-
+                        
                     }
                         
                     else {
                         
-                            print("Castling black long")
-                            UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-                                
-                                if self.iamWhite == true {
+                        print("Castling black long")
+                        UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
+                            
+                            if self.iamWhite == true {
                                 self.blackKing.frame.origin.x = e
                                 self.blackKing.frame.origin.y = _8
                                 self.blackRook1.frame.origin.x = a
                                 self.blackRook1.frame.origin.y = _8
-                                } else  {
-                                    self.whiteKing.frame.origin.x = d
-                                    self.whiteKing.frame.origin.y = _1
-                                    self.whiteRook1.frame.origin.x = h
-                                    self.whiteRook1.frame.origin.y = _1
+                            } else  {
+                                self.whiteKing.frame.origin.x = d
+                                self.whiteKing.frame.origin.y = _1
+                                self.whiteRook1.frame.origin.x = h
+                                self.whiteRook1.frame.origin.y = _1
                                 
-                                }
-                                
-                                }, completion: { finish in
-                                    self.updateLogic()
-                                    self.canPressBackwardButton = true
-                            })
+                            }
                             
+                            }, completion: { finish in
+                                self.updateLogic()
+                                self.canPressBackwardButton = true
+                        })
                         
-
+                        
+                        
                         
                     }
                 }
             }
-                            
+                
             else if String(movesCap[o][0])  == "0" && String(movesCap[o][1])  == "0" {
                 
                 if  o % 2 == 0 {
                     print("Castling white short")
                     
-                        UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-                            
-                            if self.iamWhite == true {
+                    UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
+                        
+                        if self.iamWhite == true {
                             self.whiteKing.frame.origin.x = e
                             self.whiteKing.frame.origin.y = _1
                             self.whiteRook1.frame.origin.x = h
                             self.whiteRook1.frame.origin.y = _1
-                            }
-                            else {
-                                self.blackKing.frame.origin.x = d
-                                self.blackKing.frame.origin.y = _8
-                                self.blackRook1.frame.origin.x = a
-                                self.blackRook1.frame.origin.y = _8
-                            }
-                            
-                            
-                            }, completion: { finish in
-                                self.updateLogic()
-                                self.canPressBackwardButton = true
-                        })
+                        }
+                        else {
+                            self.blackKing.frame.origin.x = d
+                            self.blackKing.frame.origin.y = _8
+                            self.blackRook1.frame.origin.x = a
+                            self.blackRook1.frame.origin.y = _8
+                        }
+                        
+                        
+                        }, completion: { finish in
+                            self.updateLogic()
+                            self.canPressBackwardButton = true
+                    })
                     
-
+                    
                 }
                 else {
-                        print("Castling black short")
-                        UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-                            // white castling bottom-right
-                            if self.iamWhite == true {
+                    print("Castling black short")
+                    UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
+                        // white castling bottom-right
+                        if self.iamWhite == true {
                             self.blackKing.frame.origin.x = e
                             self.blackKing.frame.origin.y = _8
                             self.blackRook2.frame.origin.x = h
                             self.blackRook2.frame.origin.y = _8
-                            }
-                            else {
-                                self.whiteKing.frame.origin.x = d
-                                self.whiteKing.frame.origin.y = _1
-                                self.whiteRook2.frame.origin.x = a
-                                self.whiteRook2.frame.origin.y = _1
-                            }
-                            }, completion: { finish in
-                                self.updateLogic()
-                                self.canPressBackwardButton = true
-                        })
+                        }
+                        else {
+                            self.whiteKing.frame.origin.x = d
+                            self.whiteKing.frame.origin.y = _1
+                            self.whiteRook2.frame.origin.x = a
+                            self.whiteRook2.frame.origin.y = _1
+                        }
+                        }, completion: { finish in
+                            self.updateLogic()
+                            self.canPressBackwardButton = true
+                    })
                     
-                
+                    
                     
                 }
             }
-                            
+                
             else if String(movesCap[o][2]) == xAxisArrStr2[t] {
                 
                 for var p = 0; p < yAxisArrStr2.count; p++ {
@@ -4039,117 +3943,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                     
                                                     
                                                 }}}}}}}}}}
-                
-            else if movesCap[o].characters.count == 3 {
-                if String(movesCap[o][2])  == "0" {
-                    if  o % 2 == 0 {
-                        print("Castling white long")
-                        
-                        UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-                            
-                            if self.iamWhite == true {
-                                self.whiteKing.frame.origin.x = e
-                                self.whiteKing.frame.origin.y = _1
-                                self.whiteRook2.frame.origin.x = a
-                                self.whiteRook2.frame.origin.y = _1
-                            }
-                            else {
-                                self.blackKing.frame.origin.x = d
-                                self.blackKing.frame.origin.y = _8
-                                self.blackRook2.frame.origin.x = h
-                                self.blackRook2.frame.origin.y = _8
-                            }
-                            
-                            
-                            
-                            
-                            }, completion: { finish in
-                                self.updateLogic()
-                                self.canPressBackwardButton = true
-                        })
-                        
-                        
-                        
-                    }
-                        
-                    else {
-                        
-                        print("Castling black long")
-                        UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-                            
-                            if self.iamWhite == true {
-                                self.blackKing.frame.origin.x = e
-                                self.blackKing.frame.origin.y = _8
-                                self.blackRook1.frame.origin.x = a
-                                self.blackRook1.frame.origin.y = _8
-                            } else  {
-                                self.whiteKing.frame.origin.x = d
-                                self.whiteKing.frame.origin.y = _1
-                                self.whiteRook1.frame.origin.x = h
-                                self.whiteRook1.frame.origin.y = _1
-                                
-                            }
-                            
-                            }, completion: { finish in
-                                self.updateLogic()
-                                self.canPressBackwardButton = true
-                        })
-                        
-                        
-                        
-                        
-                    }
-                }
-                else if String(movesCap[o][0])  == "0" && String(movesCap[o][1])  == "0" {
-                    
-                    UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-                        
-                        if self.iamWhite == true {
-                            self.whiteKing.frame.origin.x = e
-                            self.whiteKing.frame.origin.y = _1
-                            self.whiteRook1.frame.origin.x = h
-                            self.whiteRook1.frame.origin.y = _1
-                        }
-                        else {
-                            self.blackKing.frame.origin.x = d
-                            self.blackKing.frame.origin.y = _8
-                            self.blackRook1.frame.origin.x = a
-                            self.blackRook1.frame.origin.y = _8
-                        }
-                        
-                        
-                        }, completion: { finish in
-                            self.updateLogic()
-                            self.canPressBackwardButton = true
-                    })
-                    
-                    
-                }
-                else {
-                    print("Castling black short")
-                    UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-                        // white castling bottom-right
-                        if self.iamWhite == true {
-                            self.blackKing.frame.origin.x = e
-                            self.blackKing.frame.origin.y = _8
-                            self.blackRook2.frame.origin.x = h
-                            self.blackRook2.frame.origin.y = _8
-                        }
-                        else {
-                            self.whiteKing.frame.origin.x = d
-                            self.whiteKing.frame.origin.y = _1
-                            self.whiteRook2.frame.origin.x = a
-                            self.whiteRook2.frame.origin.y = _1
-                        }
-                        }, completion: { finish in
-                            self.updateLogic()
-                            self.canPressBackwardButton = true
-                    })
-                    
-                    
-                    
-                }
-            }
+            
+            
             
             
             
@@ -4167,7 +3962,108 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             am++
             print("am variable is \(am)")
             for var t = 0; t < xAxisArrStr2.count; t++ {
-                if String(movesCap[o][0]) == xAxisArrStr2[t] {
+                
+                if movesCap[o].characters.count == 3 {
+                    if String(movesCap[o][2])  == "0" {
+                        if  o % 2 == 0 {
+                            print("Castling white long")
+                            
+                            UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
+                                
+                                if self.iamWhite {
+                                    self.whiteKing.frame.origin.x = c
+                                    self.whiteKing.frame.origin.y = _1
+                                    self.whiteRook2.frame.origin.x = d
+                                    self.whiteRook2.frame.origin.y = _1
+                                }
+                                else {
+                                    self.blackKing.frame.origin.x = f
+                                    self.blackKing.frame.origin.y = _8
+                                    self.blackRook2.frame.origin.x = e
+                                    self.blackRook2.frame.origin.y = _8
+                                }
+                                }, completion: { finish in
+                            })
+                            
+                            
+                            
+                        }
+                            
+                        else {
+                            
+                            print("Castling black long")
+                            UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
+                                
+                                if self.iamWhite {
+                                    self.blackKing.frame.origin.x = c
+                                    self.blackKing.frame.origin.y = _8
+                                    self.blackRook1.frame.origin.x = d
+                                    self.blackRook1.frame.origin.y = _8
+                                }
+                                else {
+                                    self.whiteKing.frame.origin.x = f
+                                    self.whiteKing.frame.origin.y = _1
+                                    self.whiteRook1.frame.origin.x = e
+                                    self.whiteRook1.frame.origin.y = _1
+                                }
+                                
+                                }, completion: { finish in})
+                            
+                            
+                            
+                            
+                        }
+                    }
+                }
+                else if String(movesCap[o][0])  == "0" && String(movesCap[o][1])  == "0" {
+                    
+                    if  o % 2 == 0 {
+                        print("Castling white short")
+                        
+                        UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
+                            
+                            if self.iamWhite {
+                                self.whiteKing.frame.origin.x = g
+                                self.whiteKing.frame.origin.y = _1
+                                self.whiteRook1.frame.origin.x = f
+                                self.whiteRook1.frame.origin.y = _1
+                            }
+                            else {
+                                self.blackKing.frame.origin.x = b
+                                self.blackKing.frame.origin.y = _8
+                                self.blackRook1.frame.origin.x = c
+                                self.blackRook1.frame.origin.y = _8
+                                
+                            }
+                            }, completion: { finish in})
+                        
+                        
+                        
+                        
+                    } else {
+                        print("Castling black short")
+                        UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
+                            // white castling bottom-right
+                            
+                            if self.iamWhite {
+                                self.blackKing.frame.origin.x = g
+                                self.blackKing.frame.origin.y = _8
+                                self.blackRook2.frame.origin.x = f
+                                self.blackRook2.frame.origin.y = _8
+                            }
+                            else {
+                                self.whiteKing.frame.origin.x = b
+                                self.whiteKing.frame.origin.y = _1
+                                self.whiteRook2.frame.origin.x = c
+                                self.whiteRook2.frame.origin.y = _1
+                            }
+                            }, completion: { finish in})
+                        
+                        
+                        
+                    }
+                }
+                else if String(movesCap[o][0]) == xAxisArrStr2[t] {
                     for var p = 0; p < yAxisArrStr2.count; p++ {
                         if String(movesCap[o][1]) == yAxisArrStr2[p] {
                             for var i = 0; i < pieces.count; i++ {
@@ -4402,101 +4298,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                 }
-                else if movesCap[o].characters.count == 3 {
-                    if String(movesCap[o][2])  == "0" {
-                        if  o % 2 == 0 {
-                            print("Castling white long")
-                            
-                            UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-                                
-                                if self.iamWhite {
-                                    self.whiteKing.frame.origin.x = c
-                                    self.whiteKing.frame.origin.y = _1
-                                    self.whiteRook2.frame.origin.x = d
-                                    self.whiteRook2.frame.origin.y = _1
-                                }
-                                else {
-                                    self.blackKing.frame.origin.x = f
-                                    self.blackKing.frame.origin.y = _8
-                                    self.blackRook2.frame.origin.x = e
-                                    self.blackRook2.frame.origin.y = _8
-                                }
-                                }, completion: { finish in
-                            })
-
-                        }
-                            
-                        else {
-                            
-                            print("Castling black long")
-                            UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-                                
-                                if self.iamWhite {
-                                    self.blackKing.frame.origin.x = c
-                                    self.blackKing.frame.origin.y = _8
-                                    self.blackRook1.frame.origin.x = d
-                                    self.blackRook1.frame.origin.y = _8
-                                }
-                                else {
-                                    self.whiteKing.frame.origin.x = f
-                                    self.whiteKing.frame.origin.y = _1
-                                    self.whiteRook1.frame.origin.x = e
-                                    self.whiteRook1.frame.origin.y = _1
-                                }
-                                
-                                }, completion: { finish in})
-                            
-                        }
-                    }
-                }
-                else if String(movesCap[o][0])  == "0" && String(movesCap[o][1])  == "0" {
-                    
-                    if  o % 2 == 0 {
-                        print("Castling white short")
-                        
-                        UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-                            
-                            if self.iamWhite {
-                                self.whiteKing.frame.origin.x = g
-                                self.whiteKing.frame.origin.y = _1
-                                self.whiteRook1.frame.origin.x = f
-                                self.whiteRook1.frame.origin.y = _1
-                            }
-                            else {
-                                self.blackKing.frame.origin.x = b
-                                self.blackKing.frame.origin.y = _8
-                                self.blackRook1.frame.origin.x = c
-                                self.blackRook1.frame.origin.y = _8
-                                
-                            }
-                            }, completion: { finish in})
-                        
-                        
-                        
-                        
-                    } else {
-                        print("Castling black short")
-                        UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
-                            // white castling bottom-right
-                            
-                            if self.iamWhite {
-                                self.blackKing.frame.origin.x = g
-                                self.blackKing.frame.origin.y = _8
-                                self.blackRook2.frame.origin.x = f
-                                self.blackRook2.frame.origin.y = _8
-                            }
-                            else {
-                                self.whiteKing.frame.origin.x = b
-                                self.whiteKing.frame.origin.y = _1
-                                self.whiteRook2.frame.origin.x = c
-                                self.whiteRook2.frame.origin.y = _1
-                            }
-                            }, completion: { finish in})
-                        
-                        
-                        
-                    }
-                }
+                
+                
             }
         }
     }
@@ -5776,9 +5579,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             if canSaveKing(pieceOption, array: knightLogicOptions) == false {
                                 pieceOption.removeFromSuperview()
                             }
-                        } else {
-                        pieceOptions += [pieceOption]
                         }
+                        pieceOptions += [pieceOption]
                         canThePieceGofurther = false
                         
                     }
@@ -5821,7 +5623,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     func chessPieceSelected(var _event:UIEvent, var _touch:UITouch, var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView]) {
         showMarkedPiece()
         pieceID = pieceid
-        print("chessPieceSelected")
+        
         func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat, var byAmountz:CGFloat, increaserz:CGFloat ) {
             var canThePieceGofurther: Bool = true
             var startLogicChecking: Bool = false
@@ -6018,15 +5820,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 if pieceid == 5 && selectedPiece == whiteKing {
                     for var p = 0 ; p < pieceOptions.count; p++ {
                         if canSaveKing(pieceOptions[p], array: pieceBlackLogicOptions) == true {
-                            [pieceOptions[p] .removeFromSuperview()]
-                            pieceOptions.removeAtIndex(p)
+                            pieceOptions[p].hidden = true
                         }
                     }
                 } else if pieceid == 5 && selectedPiece == blackKing {
                     for var p = 0 ; p < pieceOptions.count; p++ {
                         if canSaveKing(pieceOptions[p], array: pieceWhiteLogicOptions) == true {
-                            [pieceOptions[p] .removeFromSuperview()]
-                            pieceOptions.removeAtIndex(p)
+                            pieceOptions[p].hidden = true
                         }
                     }
                 }
@@ -6039,8 +5839,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
                 for var o = 0 ; o < pieceOptions.count; o++ {
                     if CGRectContainsPoint(pieceOptions[o].frame, blackKing.center){
-                        [pieceOptions[o] .removeFromSuperview()]
-                        pieceOptions.removeAtIndex(o)
+                        pieceOptions[o].hidden == true
                     }
                 }
             }
@@ -6093,8 +5892,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             letThemAppear(1,byAmounty: -1,increaserx: 1,increasery: -1, byAmountz: 1, increaserz: 1)
             letThemAppear(-1,byAmounty: 1,increaserx: -1,increasery: 1, byAmountz: 1, increaserz: 1)
             letThemAppear(-1,byAmounty: -1,increaserx: -1,increasery: -1, byAmountz: 1, increaserz: 1)
-            
-             print(pieceOptions.count)
         }
     }
     
@@ -7810,9 +7607,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.notationsL.textColor = UIColor.whiteColor()
             self.timeGL.textColor = UIColor.whiteColor()
             self.turnGL.textColor = UIColor.whiteColor()
-            
-            
-            
+
             
         }
         else if darkMode == false {
