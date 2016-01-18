@@ -952,6 +952,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     am++
                     print("am variable is \(am)")
                     for var t = 0; t < xAxisArrStr2.count; t++ {
+                        
                         if moves[o].characters.count == 3 {
                             if String(moves[o][2])  == "0" {
                                 if  o % 2 == 0 {
@@ -2119,11 +2120,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         if moves[o].characters.count == 3 {
                             print("Checking castling")
-                            if String(moves.last![2])  == "0" {
+                            if String(moves[o][2])  == "0" {
                                 //can return false value??
-                                if  moves.indexOf(moves.last!)!  % 2 == 0 {
+                                if  moves.indexOf(moves[o])!  % 2 == 0 {
                                     // test
-                                    if moves.last == moves.last{
+                                    if moves[o] == moves.last{
                                         
                                         if moves.last == moves[o] && am == moves.count{
                                             print("Castling white long")
@@ -3279,9 +3280,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         view.sendSubviewToBack(exitTimeCapsuleB)
         
         
-        var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(notations.count + 1) - screenWidth/CGFloat(notations.count+1)/CGFloat(notations.count + 1)))
+        var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(movesCap.count + 1) - screenWidth/CGFloat(movesCap.count+1)/CGFloat(movesCap.count + 1)))
         print("uu is \(uu)")
-        sliderPointer = UILabel(frame: CGRectMake(screenWidth - uu - CGFloat(((screenWidth/CGFloat(notations.count + 1))/CGFloat(notations.count + 1))),screenHeight/2 + screenWidth/2 ,uu + CGFloat(((screenWidth/CGFloat(notations.count+1))/CGFloat(notations.count+1))),7))
+        sliderPointer = UILabel(frame: CGRectMake(screenWidth - uu - CGFloat(((screenWidth/CGFloat(movesCap.count + 1))/CGFloat(movesCap.count + 1))),screenHeight/2 + screenWidth/2 ,uu + CGFloat(((screenWidth/CGFloat(movesCap.count+1))/CGFloat(movesCap.count+1))),7))
         if sliderPointer.frame.size.width < 15 { sliderPointer.frame.size.width = 15; sliderPointer.frame.origin.x = screenWidth - 15}
         sliderPointer.backgroundColor = blue
         sliderPointer.alpha = 0.75
@@ -3314,14 +3315,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         exitTimeCapsuleB.userInteractionEnabled = true
         
         
-        var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(notations.count + 1) - screenWidth/CGFloat(notations.count+1)/CGFloat(notations.count + 1)))
+        var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(movesCap.count + 1) - screenWidth/CGFloat(movesCap.count+1)/CGFloat(movesCap.count + 1)))
         
         
-        sliderPointer.frame.origin.x = screenWidth - uu - CGFloat(((screenWidth/CGFloat(notations.count + 1))/CGFloat(notations.count + 1)))
-        sliderPointer.frame.size.width = uu + CGFloat(((screenWidth/CGFloat(notations.count+1))/CGFloat(notations.count+1)))
+        sliderPointer.frame.origin.x = screenWidth - uu - CGFloat(((screenWidth/CGFloat(movesCap.count + 1))/CGFloat(movesCap.count + 1)))
+        sliderPointer.frame.size.width = uu + CGFloat(((screenWidth/CGFloat(movesCap.count+1))/CGFloat(movesCap.count+1)))
         
         
-        slider.maximumValue = Float(notations.count) - 0
+        slider.maximumValue = Float(movesCap.count) - 0
         
         slider.value = slider.maximumValue
         
@@ -3330,18 +3331,18 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         forwardB.enabled = false
         backwardB.enabled = true
         
-        let n = notations.count
+        let n = movesCap.count
         let m = Double(n)
         
         fNum = Double(m/2) - 0.5
         print(fNum)
         
         if floor(fNum) == fNum {
-            fNum = Double(notations.count/2) + 1
+            fNum = Double(movesCap.count/2) + 1
             print(fNum)
         }
         else {
-            fNum = Double(notations.count/2) + 0.5
+            fNum = Double(movesCap.count/2) + 0.5
             print(fNum)
         }
         
@@ -3603,7 +3604,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if canPressBackwardButton == true {
             slider.value--
             print(slider.value)
-            sliderPointer.frame.origin.x -= CGFloat((screenWidth/CGFloat(notations.count+1)))
+            sliderPointer.frame.origin.x -= CGFloat((screenWidth/CGFloat(movesCap.count+1)))
             // sliderPointer.frame.origin.x += CGFloat(((screenWidth/CGFloat(notations.count+1))/CGFloat(notations.count+)))
             
             fNum -= 0.5
