@@ -715,7 +715,6 @@
 		8FA5C8841B9A264F0097637E = {
 			isa = PBXGroup;
 			children = (
-				F176C8081C5047A200518A81 /* PopUpView */,
 				8F45D2DB1C496B5700D7934B /* Charts.xcodeproj */,
 				8FA5C88F1B9A264F0097637E /* Chess♔ */,
 				8FA5C8A41B9A264F0097637E /* Chess♔Tests */,
@@ -739,6 +738,7 @@
 		8FA5C88F1B9A264F0097637E /* Chess♔ */ = {
 			isa = PBXGroup;
 			children = (
+				F176C8081C5047A200518A81 /* PopUpView */,
 				8F4A02911B9A421D0084024A /* Frameworks */,
 				8F4A02651B9A3E590084024A /* Assets */,
 				8F4A02881B9A3F730084024A /* Swift */,
@@ -816,6 +816,7 @@
 				F176C7F61C50466100518A81 /* PopUpViewControllerSwift.swift */,
 			);
 			name = PopUpView;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
