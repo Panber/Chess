@@ -144,6 +144,10 @@ class MoveCell: UICollectionViewCell {
 
 class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    
+    var promotionAtIndex: Array<Int> = []
+
+    
     var iamWhite = Bool()
     
     var takenPiecesToReload: Array<UIImageView> = []
@@ -436,6 +440,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         print("View did load!")
         //size-properties
         let pieceSize = sqrt(screenWidth * screenWidth / 64)
+        
+        promotionAtIndex = []
         
         
         pointsStorage = []
@@ -1086,7 +1092,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.whitePawns.removeAtIndex(w)
                                                                                 count++
                                                                             } else  if whitePromotionType[count] == "Knight" {
-                                                                                self.pieces[i].image = UIImage(named:"whiteknight")
+                                                                                self.pieces[i].image = UIImage(named:"whiteKnight")
                                                                                 self.whiteKnights += [pieces[i]]
                                                                                 self.whitePawns.removeAtIndex(w)
                                                                                 count++
@@ -1113,7 +1119,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.blackPawns.removeAtIndex(w)
                                                                                 countBlack++
                                                                             } else if blackPromotionType[countBlack] == "Knight" {
-                                                                                self.pieces[i].image = UIImage(named:"blackknight")
+                                                                                self.pieces[i].image = UIImage(named:"blackKnight")
                                                                                 self.blackKnights += [pieces[i]]
                                                                                 self.blackPawns.removeAtIndex(w)
                                                                                 countBlack++
@@ -1310,11 +1316,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.whitePawns.removeAtIndex(w)
                                                                                 count++
                                                                             } else  if whitePromotionType[count] == "Knight" {
-                                                                                self.pieces[i].image = UIImage(named:"whiteknight")
+                                                                                self.pieces[i].image = UIImage(named:"whiteKnight")
                                                                                 self.whiteKnights += [pieces[i]]
                                                                                 self.whitePawns.removeAtIndex(w)
                                                                                 count++
                                                                             }
+                                                                            promotionAtIndex.append(o)
+
                                                                         }
                                                                     }
                                                                     
@@ -1337,11 +1345,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.blackPawns.removeAtIndex(w)
                                                                                 countBlack++
                                                                             } else if blackPromotionType[countBlack] == "Knight" {
-                                                                                self.pieces[i].image = UIImage(named:"blackknight")
+                                                                                self.pieces[i].image = UIImage(named:"blackKnight")
                                                                                 self.blackKnights += [pieces[i]]
                                                                                 self.blackPawns.removeAtIndex(w)
                                                                                 countBlack++
                                                                             }
+                                                                            promotionAtIndex.append(o)
+
                                                                         }
                                                                     }
                                                                     
@@ -1833,7 +1843,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.blackBishops += [self.pieces[i]]
                                                                                 self.blackPawns.removeAtIndex(w)
                                                                             } else if self.blackPromotionType.last! == "Knight" {
-                                                                                self.pieces[i].image = UIImage(named:"blackknight")
+                                                                                self.pieces[i].image = UIImage(named:"blackKnight")
                                                                                 self.blackKnights += [self.pieces[i]]
                                                                                 self.blackPawns.removeAtIndex(w)
                                                                             }
@@ -2287,11 +2297,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.whitePawns.removeAtIndex(w)
                                                                                 countBlack++
                                                                             } else  if blackPromotionType[countBlack] == "Knight" {
-                                                                                self.pieces[i].image = UIImage(named:"blackknight")
+                                                                                self.pieces[i].image = UIImage(named:"blackKnight")
                                                                                 self.whiteKnights += [pieces[i]]
                                                                                 self.whitePawns.removeAtIndex(w)
                                                                                 countBlack++
                                                                             }
+                                                                            promotionAtIndex.append(o)
+
                                                                         }
                                                                         
                                                                     }
@@ -2322,7 +2334,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.blackPawns.removeAtIndex(w)
                                                                                 count++
                                                                             }
-                                                                            
+                                                                            promotionAtIndex.append(o)
+
                                                                         }
                                                                     }
                                                                     
@@ -3872,7 +3885,193 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             for var a = 0; a < yAxisArrStr2.count; a++ {
                                                 if String(movesCap[o][1]) == yAxisArrStr2[a] {
                                                     
-                                                    
+                                                    for var pat = 0; pat < promotionAtIndex.count; pat++ {
+                                                        //for var elon = 0; elon < pieces.count; elon++ {
+                                                        print(promotionAtIndex)
+                                                        if promotionAtIndex[pat] == o {
+                                                            
+                                                            if iamWhite {
+                                                                
+                                                                if o % 2 == 0 {
+                                                            if pieces[i].image == UIImage(named:"whiteQueen") {
+                                                                for var ram = 0; ram < whiteQueens.count; ram++ {
+                                                                    if whiteQueens[ram]  == pieces[i] {
+                                                                        whiteQueens.removeAtIndex(ram)
+                                                                        ram--
+                                                                        }
+                                                                    }
+                                                                }
+                                                                
+                                                            else if pieces[i].image == UIImage(named:"whiteRook") {
+                                                                for var ram = 0; ram < whiteRooks.count; ram++ {
+                                                                    if whiteRooks[ram]  == pieces[i] {
+                                                                        whiteRooks.removeAtIndex(ram)
+                                                                        ram--
+                                                                    }
+                                                                }
+                                                            }
+                                                            
+                                                            else if pieces[i].image == UIImage(named:"whiteKnight") {
+                                                                for var ram = 0; ram < whiteKnights.count; ram++ {
+                                                                    if whiteKnights[ram]  == pieces[i] {
+                                                                        whiteKnights.removeAtIndex(ram)
+                                                                        ram--
+                                                                    }
+                                                                }
+                                                            }
+                                                            
+                                                            else if pieces[i].image == UIImage(named:"whiteBishop") {
+                                                                for var ram = 0; ram < whiteBishops.count; ram++ {
+                                                                    if whiteBishops[ram]  == pieces[i] {
+                                                                        whiteBishops.removeAtIndex(ram)
+                                                                        ram--
+                                                                    }
+                                                                }
+                                                            }
+                                                                
+                                                                whitePawns += [pieces[i]]
+                                                                print("pat is \(promotionAtIndex[pat])")
+                                                                pieces[i].image = UIImage(named:"whitePawn")
+                                                                
+                                                            }
+                                                                    
+                                                                else {
+                                                                    if pieces[i].image == UIImage(named:"blackQueen") {
+                                                                        for var ram = 0; ram < blackQueens.count; ram++ {
+                                                                            if blackQueens[ram]  == pieces[i] {
+                                                                                blackQueens.removeAtIndex(ram)
+                                                                                ram--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                        
+                                                                    else if pieces[i].image == UIImage(named:"blackRook") {
+                                                                        for var ram = 0; ram < blackRooks.count; ram++ {
+                                                                            if blackRooks[ram]  == pieces[i] {
+                                                                                blackRooks.removeAtIndex(ram)
+                                                                                ram--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                        
+                                                                    else if pieces[i].image == UIImage(named:"blackKnight") {
+                                                                        for var ram = 0; ram < blackKnights.count; ram++ {
+                                                                            if blackKnights[ram]  == pieces[i] {
+                                                                                blackKnights.removeAtIndex(ram)
+                                                                                ram--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                        
+                                                                    else if pieces[i].image == UIImage(named:"blackBishop") {
+                                                                        for var ram = 0; ram < blackBishops.count; ram++ {
+                                                                            if blackBishops[ram]  == pieces[i] {
+                                                                                blackBishops.removeAtIndex(ram)
+                                                                                ram--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    
+                                                                    
+                                                                    blackPawns += [pieces[i]]
+                                                                    print("pat is \(promotionAtIndex[pat])")
+                                                                    pieces[i].image = UIImage(named:"blackPawn")
+                                                                }
+                                                            }
+                                                            else {
+                                                                if o % 2 == 0 {
+                                                                    if pieces[i].image == UIImage(named:"whiteQueen") {
+                                                                        for var ram = 0; ram < whiteQueens.count; ram++ {
+                                                                            if whiteQueens[ram]  == pieces[i] {
+                                                                                whiteQueens.removeAtIndex(ram)
+                                                                                ram--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                        
+                                                                    else if pieces[i].image == UIImage(named:"whiteRook") {
+                                                                        for var ram = 0; ram < whiteRooks.count; ram++ {
+                                                                            if whiteRooks[ram]  == pieces[i] {
+                                                                                whiteRooks.removeAtIndex(ram)
+                                                                                ram--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                        
+                                                                    else if pieces[i].image == UIImage(named:"whiteKnight") {
+                                                                        for var ram = 0; ram < whiteKnights.count; ram++ {
+                                                                            if whiteKnights[ram]  == pieces[i] {
+                                                                                whiteKnights.removeAtIndex(ram)
+                                                                                ram--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                        
+                                                                    else if pieces[i].image == UIImage(named:"whiteBishop") {
+                                                                        for var ram = 0; ram < whiteBishops.count; ram++ {
+                                                                            if whiteBishops[ram]  == pieces[i] {
+                                                                                whiteBishops.removeAtIndex(ram)
+                                                                                ram--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    
+                                                                    whitePawns += [pieces[i]]
+                                                                    print("pat is \(promotionAtIndex[pat])")
+                                                                    pieces[i].image = UIImage(named:"whitePawn")
+                                                                    
+                                                                }
+                                                                    
+                                                                else {
+                                                                    if pieces[i].image == UIImage(named:"blackQueen") {
+                                                                        for var ram = 0; ram < blackQueens.count; ram++ {
+                                                                            if blackQueens[ram]  == pieces[i] {
+                                                                                blackQueens.removeAtIndex(ram)
+                                                                                ram--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                        
+                                                                    else if pieces[i].image == UIImage(named:"blackRook") {
+                                                                        for var ram = 0; ram < blackRooks.count; ram++ {
+                                                                            if blackRooks[ram]  == pieces[i] {
+                                                                                blackRooks.removeAtIndex(ram)
+                                                                                ram--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                        
+                                                                    else if pieces[i].image == UIImage(named:"blackKnight") {
+                                                                        for var ram = 0; ram < blackKnights.count; ram++ {
+                                                                            if blackKnights[ram]  == pieces[i] {
+                                                                                blackKnights.removeAtIndex(ram)
+                                                                                ram--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                        
+                                                                    else if pieces[i].image == UIImage(named:"blackBishop") {
+                                                                        for var ram = 0; ram < blackBishops.count; ram++ {
+                                                                            if blackBishops[ram]  == pieces[i] {
+                                                                                blackBishops.removeAtIndex(ram)
+                                                                                ram--
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    
+                                                                    
+                                                                    blackPawns += [pieces[i]]
+                                                                    print("pat is \(promotionAtIndex[pat])")
+                                                                    pieces[i].image = UIImage(named:"blackPawn")
+                                                                }
+
+                                                            }
+
+                                              
+
+                                                          //  }
+                                                        }
+                                                    }
                                                     
                                                     
                                                     
@@ -3969,7 +4168,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if String(movesCap[o][2])  == "0" {
                         if  o % 2 == 0 {
                             print("Castling white long")
-                            
                             UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                                 
                                 if self.iamWhite {
@@ -4103,7 +4301,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.whitePawns.removeAtIndex(w)
                                                                         count++
                                                                     } else  if whitePromotionType[count] == "Knight" {
-                                                                        self.pieces[i].image = UIImage(named:"whiteknight")
+                                                                        self.pieces[i].image = UIImage(named:"whiteKnight")
                                                                         self.whiteKnights += [pieces[i]]
                                                                         self.whitePawns.removeAtIndex(w)
                                                                         count++
@@ -4130,7 +4328,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.blackPawns.removeAtIndex(w)
                                                                         countBlack++
                                                                     } else if blackPromotionType[countBlack] == "Knight" {
-                                                                        self.pieces[i].image = UIImage(named:"blackknight")
+                                                                        self.pieces[i].image = UIImage(named:"blackKnight")
                                                                         self.blackKnights += [pieces[i]]
                                                                         self.blackPawns.removeAtIndex(w)
                                                                         countBlack++
