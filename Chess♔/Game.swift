@@ -6269,8 +6269,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                     }
-                    if foundKing == true {
-                        
+                    if foundKing == true { 
                         
                         var checkMate1 = false
                         var checkMate2 = false
