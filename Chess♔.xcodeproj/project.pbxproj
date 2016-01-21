@@ -174,6 +174,21 @@
 		F155FC881C304AF000376AC1 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F155FC851C304AF000376AC1 /* FBSDKShareKit.framework */; };
 		F155FC8A1C304AFD00376AC1 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F155FC891C304AFD00376AC1 /* ParseFacebookUtilsV4.framework */; };
 		F1648B611BDC19CA00AE1BC3 /* GameInterFace3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1648B601BDC19CA00AE1BC3 /* GameInterFace3.swift */; };
+		F176C7F71C50466100518A81 /* PopUpViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F176C7F21C50466100518A81 /* PopUpViewController_iPad.xib */; };
+		F176C7F81C50466100518A81 /* PopUpViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F176C7F21C50466100518A81 /* PopUpViewController_iPad.xib */; };
+		F176C7F91C50466100518A81 /* PopUpViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F176C7F21C50466100518A81 /* PopUpViewController_iPad.xib */; };
+		F176C7FA1C50466100518A81 /* PopUpViewController_iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = F176C7F31C50466100518A81 /* PopUpViewController_iPhone6.xib */; };
+		F176C7FB1C50466100518A81 /* PopUpViewController_iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = F176C7F31C50466100518A81 /* PopUpViewController_iPhone6.xib */; };
+		F176C7FC1C50466100518A81 /* PopUpViewController_iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = F176C7F31C50466100518A81 /* PopUpViewController_iPhone6.xib */; };
+		F176C7FD1C50466100518A81 /* PopUpViewController_iPhone6Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = F176C7F41C50466100518A81 /* PopUpViewController_iPhone6Plus.xib */; };
+		F176C7FE1C50466100518A81 /* PopUpViewController_iPhone6Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = F176C7F41C50466100518A81 /* PopUpViewController_iPhone6Plus.xib */; };
+		F176C7FF1C50466100518A81 /* PopUpViewController_iPhone6Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = F176C7F41C50466100518A81 /* PopUpViewController_iPhone6Plus.xib */; };
+		F176C8001C50466100518A81 /* PopUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F176C7F51C50466100518A81 /* PopUpViewController.xib */; };
+		F176C8011C50466100518A81 /* PopUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F176C7F51C50466100518A81 /* PopUpViewController.xib */; };
+		F176C8021C50466100518A81 /* PopUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F176C7F51C50466100518A81 /* PopUpViewController.xib */; };
+		F176C8031C50466100518A81 /* PopUpViewControllerSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176C7F61C50466100518A81 /* PopUpViewControllerSwift.swift */; };
+		F176C8041C50466100518A81 /* PopUpViewControllerSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176C7F61C50466100518A81 /* PopUpViewControllerSwift.swift */; };
+		F176C8051C50466100518A81 /* PopUpViewControllerSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176C7F61C50466100518A81 /* PopUpViewControllerSwift.swift */; };
 		F1B414601BC72E5D00FEE6A4 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B4145F1BC72E5D00FEE6A4 /* SettingsPage.swift */; };
 /* End PBXBuildFile section */
 
@@ -412,6 +427,11 @@
 		F155FC851C304AF000376AC1 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		F155FC891C304AFD00376AC1 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		F1648B601BDC19CA00AE1BC3 /* GameInterFace3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInterFace3.swift; sourceTree = "<group>"; };
+		F176C7F21C50466100518A81 /* PopUpViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpViewController_iPad.xib; sourceTree = "<group>"; };
+		F176C7F31C50466100518A81 /* PopUpViewController_iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpViewController_iPhone6.xib; sourceTree = "<group>"; };
+		F176C7F41C50466100518A81 /* PopUpViewController_iPhone6Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpViewController_iPhone6Plus.xib; sourceTree = "<group>"; };
+		F176C7F51C50466100518A81 /* PopUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpViewController.xib; sourceTree = "<group>"; };
+		F176C7F61C50466100518A81 /* PopUpViewControllerSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewControllerSwift.swift; sourceTree = "<group>"; };
 		F1B4145F1BC72E5D00FEE6A4 /* SettingsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		F1DECCAD1BE3FEA8009C08B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -695,6 +715,7 @@
 		8FA5C8841B9A264F0097637E = {
 			isa = PBXGroup;
 			children = (
+				F176C8081C5047A200518A81 /* PopUpView */,
 				8F45D2DB1C496B5700D7934B /* Charts.xcodeproj */,
 				8FA5C88F1B9A264F0097637E /* Chess♔ */,
 				8FA5C8A41B9A264F0097637E /* Chess♔Tests */,
@@ -783,6 +804,18 @@
 				F1431A601BD298F400C5854A /* panBeriPhone.jpg */,
 			);
 			name = LaunchImages;
+			sourceTree = "<group>";
+		};
+		F176C8081C5047A200518A81 /* PopUpView */ = {
+			isa = PBXGroup;
+			children = (
+				F176C7F21C50466100518A81 /* PopUpViewController_iPad.xib */,
+				F176C7F31C50466100518A81 /* PopUpViewController_iPhone6.xib */,
+				F176C7F41C50466100518A81 /* PopUpViewController_iPhone6Plus.xib */,
+				F176C7F51C50466100518A81 /* PopUpViewController.xib */,
+				F176C7F61C50466100518A81 /* PopUpViewControllerSwift.swift */,
+			);
+			name = PopUpView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -942,7 +975,10 @@
 				8F1E8EC41BD78F9600C41D37 /* nasaearth.jpg in Resources */,
 				8FD804741C24CADB00902DB9 /* chessLaunchGold.png in Resources */,
 				8FE58AAC1C3B32E9007888F4 /* whiteBishop.png in Resources */,
+				F176C7F71C50466100518A81 /* PopUpViewController_iPad.xib in Resources */,
 				8FA569121C02829700AFC460 /* PanBerLogo1.png in Resources */,
+				F176C8001C50466100518A81 /* PopUpViewController.xib in Resources */,
+				F176C7FA1C50466100518A81 /* PopUpViewController_iPhone6.xib in Resources */,
 				8FA5690C1C02775C00AFC460 /* TwitterLogo_#55acee.png in Resources */,
 				8FEF2A9A1BFA7C8A006E1359 /* blackChessBoard.png in Resources */,
 				8F1E8ED01BD7F74500C41D37 /* profilePicPlaceholderDark.jpg in Resources */,
@@ -950,6 +986,7 @@
 				8FE58A9E1C3B1F26007888F4 /* whiteKing.png in Resources */,
 				8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */,
 				8F6E64E31C283D190092471C /* cross-mark1-2S.png in Resources */,
+				F176C7FD1C50466100518A81 /* PopUpViewController_iPhone6Plus.xib in Resources */,
 				8FEF2AAF1BFCE136006E1359 /* multimedia option23.png in Resources */,
 				8F8BD2B71BC6C1C500B25CFE /* checkmark11.png in Resources */,
 				8F8BD2A81BC41ED700B25CFE /* arrow_white.png in Resources */,
@@ -1048,6 +1085,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F176C7F81C50466100518A81 /* PopUpViewController_iPad.xib in Resources */,
+				F176C7FE1C50466100518A81 /* PopUpViewController_iPhone6Plus.xib in Resources */,
+				F176C7FB1C50466100518A81 /* PopUpViewController_iPhone6.xib in Resources */,
+				F176C8011C50466100518A81 /* PopUpViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1055,6 +1096,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F176C7F91C50466100518A81 /* PopUpViewController_iPad.xib in Resources */,
+				F176C7FF1C50466100518A81 /* PopUpViewController_iPhone6Plus.xib in Resources */,
+				F176C7FC1C50466100518A81 /* PopUpViewController_iPhone6.xib in Resources */,
+				F176C8021C50466100518A81 /* PopUpViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1130,6 +1175,7 @@
 				8F86392F1B9B044F0055608B /* FriendsMenu.swift in Sources */,
 				F12B6E001BFFE925009897FA /* Test.swift in Sources */,
 				8F8BD2A51BC28E1100B25CFE /* OtherUserProfilePage_Explore.swift in Sources */,
+				F176C8031C50466100518A81 /* PopUpViewControllerSwift.swift in Sources */,
 				8F86392D1B9B02780055608B /* ChatView.swift in Sources */,
 				8FA5C8911B9A264F0097637E /* AppDelegate.swift in Sources */,
 				8FDB6F021C4AA6DC00F50324 /* NewAnalyzeEmpty.swift in Sources */,
@@ -1155,6 +1201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FA5C8A61B9A264F0097637E /* Chess_Tests.swift in Sources */,
+				F176C8041C50466100518A81 /* PopUpViewControllerSwift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1163,6 +1210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FA5C8B11B9A264F0097637E /* Chess_UITests.swift in Sources */,
+				F176C8051C50466100518A81 /* PopUpViewControllerSwift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

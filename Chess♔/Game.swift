@@ -1981,6 +1981,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                         
                     }
+
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     self.isWhiteTurn = true
                     
@@ -5297,7 +5298,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     func removePieceOptions() {
         for var p = 0 ; p < pieceOptions.count; p++ {
-            pieceOptions[p].hidden = true
             pieceMarked.hidden = true
             pieceOptions[p].removeFromSuperview()
         }
@@ -5621,10 +5621,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         letThemAppear(-1, byAmounty: 1, increaserx: 0, increasery: 1)
     }
     
-    func chessPieceSelected(var _event:UIEvent, var _touch:UITouch, var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView]) {
+    func chessPieceSelected(var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView], var hidden: Bool, var chosenPiece: UIImageView) -> Int {
+        if hidden == false {
         showMarkedPiece()
+        }
         pieceID = pieceid
-        
+        print("chessPieceSelected")
         func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat, var byAmountz:CGFloat, increaserz:CGFloat ) {
             var canThePieceGofurther: Bool = true
             var startLogicChecking: Bool = false
@@ -5633,16 +5635,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             for var d = byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
                 
-                if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  friend)  == 2 && enemy == whitePieces {
+                if canSaveKing(chosenPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  friend)  == 2 && enemy == whitePieces {
                     startLogicChecking = true
-                } else if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove, friends:  friend)  == 2 && enemy == blackPieces {
+                } else if canSaveKing(chosenPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove, friends:  friend)  == 2 && enemy == blackPieces {
                     startLogicCheckingWhite = true
                 }
                 
                 for var q = 0; q < friend.count; q++ {
-                    if friend[q].frame.origin.x == selectedPiece.frame.origin.x + byAmountx * pieceSize && friend[q].frame.origin.y == selectedPiece.frame.origin.y - byAmounty * pieceSize  {
+                    if friend[q].frame.origin.x == chosenPiece.frame.origin.x + byAmountx * pieceSize && friend[q].frame.origin.y == chosenPiece.frame.origin.y - byAmounty * pieceSize  {
                         canThePieceGofurther = false
-                        if startLogicChecking == true && blackKing.frame.origin.x == selectedPiece.frame.origin.x + byAmountx * pieceSize && blackKing.frame.origin.y == selectedPiece.frame.origin.y - byAmounty * pieceSize {
+                        if startLogicChecking == true && blackKing.frame.origin.x == chosenPiece.frame.origin.x + byAmountx * pieceSize && blackKing.frame.origin.y == chosenPiece.frame.origin.y - byAmounty * pieceSize {
                             canThePieceGofurther = true
                             
                         }
@@ -5651,52 +5653,71 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 if canThePieceGofurther == true {
                     
-                    let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + byAmountx * pieceSize, selectedPiece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
+                    var logicBool = true
+                    
+                    let pieceOption = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x + byAmountx * pieceSize, chosenPiece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
                     pieceOption.image = UIImage(named: "piecePossibilities.png")
+                    if hidden == true {
+                        pieceOption.hidden = true
+                    }
                     self.view.addSubview(pieceOption)
                     // Check if a pawn can move when king is in check
                     if checkByQueen == true && pieceid != 5 {
                         if canSaveKing(pieceOption, array: queenLogicOptions) == false {
+                            print("queenLogicOptions")
                             pieceOption.removeFromSuperview()
+                            logicBool = false
                         }
                     } else if checkByBishop == true && pieceid != 5 {
                         if canSaveKing(pieceOption, array: bishopLogicOptions) == false {
+                            print("bishopLogicOptions")
                             pieceOption.removeFromSuperview()
+                            logicBool = false
                         }
                     } else if checkByRook == true && pieceid != 5 {
                         if canSaveKing(pieceOption, array: rookLogicOptions) == false {
+                            print("rookLogicOptions")
                             pieceOption.removeFromSuperview()
+                            logicBool = false
                         }
                     } else if checkByPawn == true && pieceid != 5 {
                         if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
+                            print("pawnLogicOptions")
                             pieceOption.removeFromSuperview()
+                            logicBool = false
                         }
                     } else if checkByKnight == true && pieceid != 5 {
                         if canSaveKing(pieceOption, array: knightLogicOptions) == false {
+                            print("knightLogicOptions")
                             pieceOption.removeFromSuperview()
+                            logicBool = false
                         }
                     }
                     if startLogicChecking == true && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false && pieceid != 5 && canSaveKing(pieceOption, array: whitePieceLogic) == false {
+                        print("knightLogicOptions")
                         pieceOption.removeFromSuperview()
-                    } else {
-                        pieceOptions += [pieceOption]
+                        logicBool = false
                     }
                     if startLogicCheckingWhite == true && canSaveKing(pieceOption, array: pieceBlackCanMove) == false && pieceid != 5 && canSaveKing(pieceOption, array: blackPieceLogic) == false  {
+                        print("pieceBlackCanMove")
                         pieceOption.removeFromSuperview()
-                    } else {
-                        pieceOptions += [pieceOption]
+                        logicBool = false
                     }
                     if CGRectContainsPoint(pieceOption.frame, blackKing.center) || CGRectContainsPoint(pieceOption.frame, whiteKing.center) {
+                        print("blackKing||whiteKing")
                         pieceOption.removeFromSuperview()
+                        logicBool = false
                     }
+                    if logicBool == true {
                     pieceOptions += [pieceOption]
+                    }
                     
                     // This is for left castling white king
                     for var q = 0; q < friend.count; q++ {
                         for var i = 1; i < 4; i++ {
                             if pieceid == 5 && hasWhiteKingMoved == false && hasWhiteRookMoved == false {
                                 print("Castlle white long")
-                                let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
+                                let pieceOption2 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x - CGFloat(i) * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                 if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: leftWhiteCastleLogic) == false  {
                                     self.view.addSubview(pieceOption2)
@@ -5707,7 +5728,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         for var i = 1; i < 3; i++ {
                             if pieceid == 5 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false {
                                 print("Castlle white short")
-                                let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
+                                let pieceOption2 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x + CGFloat(i) * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                 if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: rightWhiteCastleLogic) == false  {
                                     self.view.addSubview(pieceOption2)
@@ -5720,7 +5741,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         for var i = 1; i < 3; i++ {
                             if pieceid == 5 && hasBlackKingMoved == false && hasBlackRookMoved == false {
                                 print("Castlle black short")
-                                let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
+                                let pieceOption2 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x - CGFloat(i) * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                 if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: leftBlackCastleLogic) == false  {
                                     self.view.addSubview(pieceOption2)
@@ -5731,7 +5752,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         for var i = 1; i < 4; i++ {
                             if pieceid == 5 && hasBlackKingMoved == false && hasBlackRookMoved2 == false {
                                 print("Castlle black long")
-                                let pieceOption2 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + CGFloat(i) * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
+                                let pieceOption2 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x + CGFloat(i) * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
                                 if canSaveKing(pieceOption2, array: friend) == false && canSaveKing(pieceOption2, array: pieceBlackLogicOptions) == false && canSaveKing(pieceOption2, array: rightBlackCastleLogic) == false  {
                                     self.view.addSubview(pieceOption2)
@@ -5742,29 +5763,41 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     
                     if leftWhiteCastleLogic.count == 3 && hasWhiteKingMoved == false && hasWhiteRookMoved == false && pieceid == 5 && self.whiteKing.frame.origin.x == e && self.whiteKing.frame.origin.y == _1 {
-                        let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
+                        let pieceOption3 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x - 2 * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
+                        if hidden == true {
+                            pieceOption3.hidden = true
+                        }
                         self.view.addSubview(pieceOption3)
                         whiteCastlingLeft += [pieceOption3]
                         castlePiece = whiteRook2
                     }
                     if rightWhiteCastleLogic.count == 2 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false && pieceid == 5 && self.whiteKing.frame.origin.x == e && self.whiteKing.frame.origin.y == _1  {
-                        let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
+                        let pieceOption3 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x + 2 * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
+                        if hidden == true {
+                            pieceOption3.hidden = true
+                        }
                         self.view.addSubview(pieceOption3)
                         whiteCastlingRight += [pieceOption3]
                         castlePiece = whiteRook1
                     }
-                    if leftBlackCastleLogic.count == 2 && hasBlackKingMoved == false && hasBlackRookMoved == false && pieceid == 5 && selectedPiece.image == UIImage(named:"blackKing")  {
-                        let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
+                    if leftBlackCastleLogic.count == 2 && hasBlackKingMoved == false && hasBlackRookMoved == false && pieceid == 5 && chosenPiece.image == UIImage(named:"blackKing")  {
+                        let pieceOption3 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x - 2 * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
+                        if hidden == true {
+                            pieceOption3.hidden = true
+                        }
                         self.view.addSubview(pieceOption3)
                         blackCastlingLeft += [pieceOption3]
                         castlePiece = blackRook2
                     }
-                    if rightBlackCastleLogic.count == 3 && hasBlackKingMoved == false && hasBlackRookMoved2 == false && pieceid == 5 && selectedPiece.image == UIImage(named:"blackKing")  {
-                        let pieceOption3 = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + 2 * pieceSize, selectedPiece.frame.origin.y, pieceSize, pieceSize))
+                    if rightBlackCastleLogic.count == 3 && hasBlackKingMoved == false && hasBlackRookMoved2 == false && pieceid == 5 && chosenPiece.image == UIImage(named:"blackKing")  {
+                        let pieceOption3 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x + 2 * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
+                        if hidden == true {
+                            pieceOption3.hidden = true
+                        }
                         self.view.addSubview(pieceOption3)
                         blackCastlingRight += [pieceOption3]
                         castlePiece = blackRook1
@@ -5772,62 +5805,73 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
                 
                 for var r = 0; r < enemy.count; r++ {
-                    if enemy[r].frame.origin.x == selectedPiece.frame.origin.x + byAmountx * pieceSize && enemy[r].frame.origin.y == selectedPiece.frame.origin.y - byAmounty * pieceSize && canThePieceGofurther == true {
+                    if enemy[r].frame.origin.x == chosenPiece.frame.origin.x + byAmountx * pieceSize && enemy[r].frame.origin.y == chosenPiece.frame.origin.y - byAmounty * pieceSize && canThePieceGofurther == true {
                         
-                        let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x + byAmountx * pieceSize, selectedPiece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
+                        var logicBool = true
+                        
+                        let pieceOption = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x + byAmountx * pieceSize, chosenPiece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
                         pieceOption.image = UIImage(named: "piecePossibilities.png")
+                        if hidden == true {
+                            pieceOption.hidden = true
+                        }
                         self.view.addSubview(pieceOption)
                         // Check if a pawn can move when king is in check
                         if checkByQueen == true && pieceid != 5 {
                             if canSaveKing(pieceOption, array: queenLogicOptions) == false {
                                 pieceOption.removeFromSuperview()
+                                logicBool = false
                             }
                         } else if checkByBishop == true && pieceid != 5 {
                             if canSaveKing(pieceOption, array: bishopLogicOptions) == false {
                                 pieceOption.removeFromSuperview()
+                                logicBool = false
                             }
                         } else if checkByRook == true && pieceid != 5 {
                             if canSaveKing(pieceOption, array: rookLogicOptions) == false {
                                 pieceOption.removeFromSuperview()
+                                logicBool = false
                             }
                         } else if checkByPawn == true && pieceid != 5 {
                             if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
                                 pieceOption.removeFromSuperview()
+                                logicBool = false
                             }
                         } else if checkByKnight == true && pieceid != 5 {
                             if canSaveKing(pieceOption, array: knightLogicOptions) == false {
                                 pieceOption.removeFromSuperview()
+                                logicBool = false
                             }
                         }
                         if startLogicChecking == true && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false && canSaveKing(pieceOption, array: whitePieceLogic) == false {
                             pieceOption.removeFromSuperview()
-                        } else {
-                            pieceOptions += [pieceOption]
+                            logicBool = false
                         }
                         if startLogicCheckingWhite == true && canSaveKing(pieceOption, array: pieceBlackCanMove) == false && canSaveKing(pieceOption, array: blackPieceLogic) == false {
                             pieceOption.removeFromSuperview()
-                        } else {
-                            pieceOptions += [pieceOption]
+                            logicBool = false
                         }
+                        if logicBool == true {
                         pieceOptions += [pieceOption]
+                        }
                         pieceCanTake = pieceOption
-                        //pieceToTake = blackPieces[r]
                         canThePieceGofurther = false
                         
                     }
                 }
                 
                 //                                                              // Decides which squares the King can go to
-                if pieceid == 5 && selectedPiece == whiteKing {
+                if pieceid == 5 && chosenPiece == whiteKing {
                     for var p = 0 ; p < pieceOptions.count; p++ {
                         if canSaveKing(pieceOptions[p], array: pieceBlackLogicOptions) == true {
-                            pieceOptions[p].hidden = true
+                            [pieceOptions[p] .removeFromSuperview()]
+                            pieceOptions.removeAtIndex(p)
                         }
                     }
-                } else if pieceid == 5 && selectedPiece == blackKing {
+                } else if pieceid == 5 && chosenPiece == blackKing {
                     for var p = 0 ; p < pieceOptions.count; p++ {
                         if canSaveKing(pieceOptions[p], array: pieceWhiteLogicOptions) == true {
-                            pieceOptions[p].hidden = true
+                            [pieceOptions[p] .removeFromSuperview()]
+                            pieceOptions.removeAtIndex(p)
                         }
                     }
                 }
@@ -5840,7 +5884,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
                 for var o = 0 ; o < pieceOptions.count; o++ {
                     if CGRectContainsPoint(pieceOptions[o].frame, blackKing.center){
-                        pieceOptions[o].hidden == true
+                        [pieceOptions[o] .removeFromSuperview()]
+                        pieceOptions.removeAtIndex(o)
                     }
                 }
             }
@@ -5894,6 +5939,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             letThemAppear(-1,byAmounty: 1,increaserx: -1,increasery: 1, byAmountz: 1, increaserz: 1)
             letThemAppear(-1,byAmounty: -1,increaserx: -1,increasery: -1, byAmountz: 1, increaserz: 1)
         }
+        print(pieceOptions.count)
+        return pieceOptions.count
     }
     
     func updateLogic() {
@@ -6025,6 +6072,79 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                     if foundKing == true {
+                        
+                        
+                        var checkMate1 = false
+                        var checkMate2 = false
+                        var checkMate3 = false
+                        var checkMate4 = false
+                        var checkMate5 = false
+                            
+                        for var i = 0; i < whiteKnights.count;i++ {
+                        if chessPieceSelected(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteKnights[i]) == 0 {
+                            checkMate1 = true
+                        }
+                        }
+                        for var i = 0; i < whiteBishops.count;i++ {
+                            if chessPieceSelected(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteBishops[i]) == 0 {
+                                checkMate2 = true
+                            }
+                        }
+                        for var i = 0; i < whiteRooks.count;i++ {
+                            if chessPieceSelected(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteRooks[i]) == 0 {
+                                checkMate3 = true
+                            }
+                        }
+                        for var i = 0; i < whiteQueens.count;i++ {
+                            if chessPieceSelected(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteQueens[i]) == 0 {
+                                checkMate4 = true
+                            }
+                        }
+                        if chessPieceSelected(2, pieceid: 5, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteKing) == 0 {
+                            checkMate5 = true
+                        }
+                            if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
+                                var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+                                popViewController.title = "This is a popup view"
+                                popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+                        }
+                
+//                            var checkMate1Black = false
+//                            var checkMate2Black = false
+//                            var checkMate3Black = false
+//                            var checkMate4Black = false
+//                            var checkMate5Black = false
+//                            
+//                            for var i = 0; i < blackKnights.count;i++ {
+//                                if chessPieceSelected(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKnights[i]) == 0 {
+//                                    checkMate1Black = true
+//                                }
+//                            }
+//                            for var i = 0; i < blackBishops.count;i++ {
+//                                if chessPieceSelected(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackBishops[i]) == 0 {
+//                                    checkMate2Black = true
+//                                }
+//                            }
+//                            for var i = 0; i < blackRooks.count;i++ {
+//                                if chessPieceSelected(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackRooks[i]) == 0 {
+//                                    checkMate3Black = true
+//                                }
+//                            }
+//                            for var i = 0; i < blackQueens.count;i++ {
+//                                if chessPieceSelected(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackQueens[i]) == 0 {
+//                                    checkMate4Black = true
+//                                }
+//                            }
+//                            if chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKing) == 0 {
+//                                checkMate5Black = true
+//                            }
+//                            if checkMate1Black == true && checkMate2Black == true && checkMate3Black == true && checkMate4Black == true && checkMate5Black == true {
+//                                var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+//                                popViewController.title = "This is a popup view"
+//                                popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+//                                print("Check mate!")
+//                            }
+                        
                         
                         let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
                         //pieceOption.image = UIImage(named: "piecePossibilities.png")
@@ -7374,7 +7494,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
                 //updateLogic()
-                chessPieceSelected(event!, _touch: touch, movementNumber: 2, pieceid: 2, friend: whitePieces, enemy: blackPieces)
+                chessPieceSelected(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, hidden: false, chosenPiece: selectedPiece)
             }
         }
         
@@ -7387,7 +7507,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
                 //updateLogic()
-                chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 1, friend: whitePieces, enemy: blackPieces)
+                chessPieceSelected(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, hidden: false, chosenPiece: selectedPiece)
             }
         }
         
@@ -7400,7 +7520,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
                 //updateLogic()
-                chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 3, friend: whitePieces, enemy: blackPieces)
+                chessPieceSelected(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, hidden: false, chosenPiece: selectedPiece)
             }
         }
         
@@ -7413,7 +7533,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
                 //updateLogic()
-                chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 4, friend: whitePieces, enemy: blackPieces)
+                chessPieceSelected(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, hidden: false, chosenPiece: selectedPiece)
             }
         }
         
@@ -7421,7 +7541,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             selectedPiece = whiteKing
             removePieceOptions()
             //updateLogic()
-            chessPieceSelected(event!, _touch: touch, movementNumber: 2, pieceid: 5, friend: whitePieces, enemy: blackPieces)
+            chessPieceSelected(2, pieceid: 5, friend: whitePieces, enemy: blackPieces, hidden: false, chosenPiece: selectedPiece)
         }
         
         
@@ -7443,7 +7563,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
                 //updateLogic()
-                chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 1, friend: blackPieces, enemy: whitePieces)
+                chessPieceSelected(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, hidden: false, chosenPiece: selectedPiece)
             }
         }
         
@@ -7454,7 +7574,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
                 //updateLogic()
-                chessPieceSelected(event!, _touch: touch, movementNumber: 2, pieceid: 2, friend: blackPieces, enemy: whitePieces)
+                chessPieceSelected(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, hidden: false, chosenPiece: selectedPiece)
             }
         }
         
@@ -7476,7 +7596,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 removeBlackCastlingLeft()
                 removeBlackCastlingRight()
                 //updateLogic()
-                chessPieceSelected(event!, _touch: touch, movementNumber: 9, pieceid: 4, friend: blackPieces, enemy: whitePieces)
+                chessPieceSelected(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, hidden: false, chosenPiece: selectedPiece)
             }
         }
         
@@ -7486,7 +7606,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             removeBlackCastlingLeft()
             removeBlackCastlingRight()
             //updateLogic()
-            chessPieceSelected(event!, _touch: touch, movementNumber: 2, pieceid: 5, friend: blackPieces, enemy: whitePieces)
+            chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: false, chosenPiece: selectedPiece)
             
         }
         
