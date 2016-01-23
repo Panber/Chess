@@ -5217,7 +5217,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         scrollView1.userInteractionEnabled = true
         scrollView1.scrollEnabled = true
         scrollView1.pagingEnabled = false
-        scrollView1.contentSize = CGSizeMake(screenWidth, 958)
+        scrollView1.contentSize = CGSizeMake(screenWidth, screenHeight)
         visualEffectSub.addSubview(scrollView1)
         
         
@@ -5411,6 +5411,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     }
     
+    func shareFacebookButtonPressed(sender: UIButton!) {
+    
+    }
+    func shareTwitterButtonPressed(sender: UIButton!) {
+        
+    }
     // MARK: - Setup-functions 🔍
     
     var resignB = UIButton()
@@ -5427,7 +5433,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 visualEffectView.userInteractionEnabled = true
         })
         
-        gameFinishedScreen("")
+        //gameFinishedScreen("")
         
         var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
         scrollView1.delegate = self
