@@ -189,11 +189,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var otherUserImage = UIImage()
     var otherUserName = ""
     var otherUserRating = ""
+    var otherUserRatingInt = Int()
+
     
     var meUserImage = UIImage()
 
     var meUserName = ""
     var meUserRating = ""
+    var meUserRatingInt = Int()
+
+    
     
     //BOARDER
     let boarderBoard = UIImageView(frame: CGRectMake(-0.01*pieceSize, _1 - 7*pieceSize, 8*pieceSize, 8*pieceSize))
@@ -1669,7 +1674,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             self.meUserImage = UIImage(data: imageData!)!
                                             self.meUserName = (result["username"] as? String)!
-                                            self.meUserRating = "\(result["rating"] as? Int)"
+                                            self.meUserRatingInt = result["rating"] as! Int!
+                                            self.meUserRating = "\(result["rating"] as! Int)"
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 self.meImage.alpha = 1
@@ -1692,6 +1698,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             self.otherUserImage = UIImage(data: imageData!)!
                                             self.otherUserRating = "\(result["rating"] as! Int!)"
+                                            self.otherUserRatingInt = result["rating"] as! Int!
                                             self.otherUserName = (result["username"] as? String)!
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -2942,7 +2949,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             self.meUserImage = UIImage(data: imageData!)!
                                             self.meUserName = (result["username"] as? String)!
-                                            self.meUserRating = "\(result["rating"] as? Int)"
+                                            self.meUserRating = "\(result["rating"] as! Int)"
+                                            self.meUserRatingInt = result["rating"] as! Int!
+
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 self.meImage.alpha = 1
@@ -2963,6 +2972,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             self.otherUserImage = UIImage(data: imageData!)!
                                             self.otherUserRating = "\(result["rating"] as! Int)"
+                                            self.otherUserRatingInt = result["rating"] as! Int!
+
                                             self.otherUserName = (result["username"] as? String)!
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 self.otherImage.alpha = 1
@@ -5192,6 +5203,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     func gameFinishedScreen(var statusWhite:String) {
     
+        
+        
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             visualEffectView.alpha = 1
             }, completion: {finish in
@@ -5208,7 +5221,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         visualEffectSub.addSubview(scrollView1)
         
         
-        let oppoImage = UIImageView()
         oppoImage.image = otherUserImage
         oppoImage.frame.size.width = 65
         oppoImage.frame.size.height = 65
@@ -5219,7 +5231,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         oppoImage.layer.cornerRadius = oppoImage.frame.size.width/2
         scrollView1.addSubview(oppoImage)
         
-        let iImage = UIImageView()
+         iImage = UIImageView()
         iImage.image = meUserImage
         iImage.frame.size.width = 65
         iImage.frame.size.height = 65
@@ -5230,17 +5242,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         iImage.layer.cornerRadius = iImage.frame.size.width/2
         scrollView1.addSubview(iImage)
         
-        var wonLabel = UILabel(frame: CGRectMake(20,screenHeight/2-56 - screenHeight/8,screenWidth-40, 102))
+        var wonLabel = UILabel(frame: CGRectMake(20,screenHeight/2-56 - screenHeight/8 - 30 - 10,screenWidth-40, 102))
         wonLabel.text = "You won against arnold by checkmate!"
         wonLabel.textAlignment = .Center
         if darkMode {wonLabel.textColor = UIColor.whiteColor()}
         else {wonLabel.textColor = UIColor.blackColor() }
         wonLabel.alpha = 0
         wonLabel.numberOfLines = 0
-        wonLabel.font = UIFont(name: "Times", size: 28)
+        wonLabel.font = UIFont(name: "Times", size: 25)
         scrollView1.addSubview(wonLabel)
         
-        var nameOppo = UILabel(frame: CGRectMake(oppoImage.frame.origin.x + oppoImage.frame.size.width + 25,oppoImage.frame.origin.y + 10,screenWidth - (oppoImage.frame.origin.x + oppoImage.frame.size.width + 25),27))
+         nameOppo = UILabel(frame: CGRectMake(oppoImage.frame.origin.x + oppoImage.frame.size.width + 25,oppoImage.frame.origin.y + 10,screenWidth - (oppoImage.frame.origin.x + oppoImage.frame.size.width + 25),27))
         nameOppo.font = UIFont(name: "Times", size: 22)
         nameOppo.textAlignment = .Left
         if darkMode {nameOppo.textColor = UIColor.whiteColor()}
@@ -5248,15 +5260,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         nameOppo.text = otherUserName
         scrollView1.addSubview(nameOppo)
         
-        var ratingOppo = UILabel(frame: CGRectMake(nameOppo.frame.origin.x,nameOppo.frame.origin.y + nameOppo.frame.size.height,screenWidth - (oppoImage.frame.origin.x + oppoImage.frame.size.width + 25),21))
+        ratingOppo = UILabel(frame: CGRectMake(nameOppo.frame.origin.x,nameOppo.frame.origin.y + nameOppo.frame.size.height,screenWidth - (oppoImage.frame.origin.x + oppoImage.frame.size.width + 25),21))
         ratingOppo.font = UIFont(name: "Times-Italic", size: 15)
         ratingOppo.textColor = UIColor.darkGrayColor()
-        if darkMode {ratingOppo.textColor = UIColor.lightGrayColor()}
-        else {ratingL.textColor = UIColor.darkGrayColor() }
+        if darkMode {ratingOppo.textColor = UIColor.whiteColor()}
+        else {ratingL.textColor = UIColor.blackColor() }
         ratingOppo.text = otherUserRating
         scrollView1.addSubview(ratingOppo)
         
-        var nameI = UILabel(frame: CGRectMake(iImage.frame.origin.x + iImage.frame.size.width + 25,iImage.frame.origin.y + 10,screenWidth - (iImage.frame.origin.x + iImage.frame.size.width + 25),27))
+         nameI = UILabel(frame: CGRectMake(iImage.frame.origin.x + iImage.frame.size.width + 25,iImage.frame.origin.y + 10,screenWidth - (iImage.frame.origin.x + iImage.frame.size.width + 25),27))
         nameI.font = UIFont(name: "Times", size: 22)
         nameI.textAlignment = .Left
         if darkMode {nameI.textColor = UIColor.whiteColor()}
@@ -5264,12 +5276,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         nameI.text = meUserName
         scrollView1.addSubview(nameI)
         
-        var ratingI = UILabel(frame: CGRectMake(nameI.frame.origin.x,nameI.frame.origin.y + nameI.frame.size.height,screenWidth - (iImage.frame.origin.x + iImage.frame.size.width + 25),21))
-        ratingI.font = UIFont(name: "Times-Italic", size: 15)
+         ratingI = UILabel(frame: CGRectMake(screenWidth/2,nameI.frame.origin.y + nameI.frame.size.height,200,40))
+        ratingI.font = UIFont(name: "Times-Italic", size: 25)
+        ratingI.textAlignment = .Left
         ratingI.textColor = UIColor.darkGrayColor()
-        if darkMode {ratingI.textColor = UIColor.lightGrayColor()}
-        else {ratingI.textColor = UIColor.darkGrayColor() }
-        ratingI.text = otherUserRating
+        if darkMode {self.ratingI.textColor = UIColor.whiteColor()}
+        else {self.ratingI.textColor = UIColor.blackColor() }
+
         scrollView1.addSubview(ratingI)
         
         var shareTwitterButton = UIButton(frame: CGRectMake(screenWidth/2 - 50,screenHeight + 200,30,30))
@@ -5282,29 +5295,121 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         shareFacebookButton.addTarget(self, action: "shareFacebookButtonPressed:", forControlEvents: .TouchUpInside)
         scrollView1.addSubview(shareFacebookButton)
         
+        cancelB = UIButton(frame: CGRectMake(screenWidth - 60, 43,50 ,50))
+        cancelB.userInteractionEnabled = true
+        if darkMode {cancelB.setBackgroundImage(UIImage(named: "cross-mark1-3S.png"), forState: .Normal)}
+        else {cancelB.setBackgroundImage(UIImage(named: "cross-mark1-2S.png"), forState: .Normal) }
+        cancelB.addTarget(self, action: "cancelButtonPressed:", forControlEvents: .TouchUpInside)
+        scrollView1.addSubview(cancelB)
+        
         UIView.animateWithDuration(0.8, delay: 0.5, usingSpringWithDamping: 1.3, initialSpringVelocity: 5.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
             
-            iImage.frame.origin.y = screenHeight/2 + screenHeight/4 - (65) - 20 - screenHeight/8
-            nameI.frame.origin.y = iImage.frame.origin.y + 10
-            ratingI.frame.origin.y = nameI.frame.origin.y + nameI.frame.size.height
+            self.oppoImage.frame.origin.y = screenHeight/2 - screenHeight/4 + 20 - screenHeight/8 - 25 - 10
+            self.nameOppo.frame.origin.y = self.oppoImage.frame.origin.y + 10
+            self.ratingOppo.frame.origin.y = self.nameOppo.frame.origin.y + self.nameOppo.frame.size.height
             
-            oppoImage.frame.origin.y = screenHeight/2 - screenHeight/4 + 20 - screenHeight/8
-            nameOppo.frame.origin.y = oppoImage.frame.origin.y + 10
-            ratingOppo.frame.origin.y = nameOppo.frame.origin.y + nameOppo.frame.size.height
+            self.iImage.frame.origin.y = screenHeight/2 + screenHeight/4 - (65) - 20 - screenHeight/8 - 25 - 20
+            self.nameI.frame.origin.y = self.iImage.frame.origin.y + 10
+            
+            self.ratingI.frame.origin.y = screenHeight/2 + screenHeight/7
+
+            self.ratingI.frame.origin.y = self.nameI.frame.origin.y + self.nameI.frame.size.height
+            self.ratingI.frame.origin.x = self.nameI.frame.origin.x
+            self.ratingI.frame.size.width = screenWidth - (self.iImage.frame.origin.x + self.iImage.frame.size.width + 25)
+            self.ratingI.frame.size.height = 21
+            self.ratingI.font = UIFont(name: "Times-Italic", size: 15)
+
             
             shareTwitterButton.frame.origin.y = screenHeight - 60
             shareFacebookButton.frame.origin.y = screenHeight - 60
             
+            let mR = Int(self.meUserRatingInt)
+            let oR = Int(self.otherUserRatingInt)
             
             wonLabel.alpha = 1
-            
-            
-        }), completion: nil)
+            self.ratingI.text = "\(mR)" + "+45"
+            self.ratingOppo.text = "\(oR)" + "-45"
 
-    
+
+            
+        }), completion:  { finish in
+
+                             self.waitTimerRating = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateWaitNum"), userInfo: nil, repeats: true)
+
+            }
+        )
+
+       
+
     
     }
     
+    var nameI = UILabel()
+    var iImage = UIImageView()
+   var movementTimerRating = NSTimer()
+    var waitTimerRating = NSTimer()
+
+    var meRating = Int()
+    var ratingI = UILabel()
+    
+    var oppoRating = Int()
+    var ratingOppo = UILabel()
+    var nameOppo = UILabel()
+    var oppoImage = UIImageView()
+
+    
+    var waitNum = Int()
+    
+    func updateWaitNum() {
+        if waitNum >= 5 {
+                             self.movementTimerRating = NSTimer.scheduledTimerWithTimeInterval(0.03, target: self, selector: Selector("updateCountTimer"), userInfo: nil, repeats: true)
+            waitTimerRating.invalidate()
+        
+    }
+    else {
+    waitNum++
+    
+    }
+    }
+    
+    func updateCountTimer() {
+    
+
+        
+        
+        if meRating >= 45 {
+        
+            UIView.animateWithDuration(0.8, delay: 0.0, usingSpringWithDamping: 1.3, initialSpringVelocity: 5.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
+                
+
+                if darkMode {self.ratingI.textColor = UIColor.lightGrayColor()}
+                else {self.ratingI.textColor = UIColor.darkGrayColor() }
+                
+
+                
+            }), completion:
+                {finish in
+                    
+            //self.movementTimerRating.invalidate()
+            })
+
+        
+        }
+        else  {
+            meRating++
+            ratingI.text = "\(meRating)"
+        }
+        
+        if oppoRating <= -45 {
+            if darkMode {self.ratingOppo.textColor = UIColor.lightGrayColor()}
+            else {self.ratingOppo.textColor = UIColor.darkGrayColor() }
+        }
+        else {
+            oppoRating--
+            ratingOppo.text = "\(oppoRating)"
+        }
+    
+    }
     
     // MARK: - Setup-functions 🔍
     
