@@ -5371,6 +5371,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
         }
     }
+    }
     
     func updateCountTimer() {
         
