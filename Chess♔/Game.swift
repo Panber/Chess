@@ -1238,6 +1238,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     for var gr = 0; gr < whiteRooks.count; gr++ {
                                                                                         if self.pieces[iy] == whiteRooks[gr]  {
                                                                                             points -= 500
+                                                                                            whiteRooks.removeAtIndex(gr)
                                                                                         }
                                                                                     }
                                                                                     
@@ -1249,6 +1250,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     for var gr = 0; gr < whiteKnights.count; gr++ {
                                                                                         if self.pieces[iy] == whiteKnights[gr]  {
                                                                                             points -= 300
+                                                                                            whiteKnights.removeAtIndex(gr)
                                                                                         }
                                                                                     }
                                                                                     for var gr = 0; gr < blackKnights.count; gr++ {
@@ -1259,6 +1261,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     for var gr = 0; gr < whiteBishops.count; gr++ {
                                                                                         if self.pieces[iy] == whiteBishops[gr]  {
                                                                                             points -= 300
+                                                                                            whiteBishops.removeAtIndex(gr)
                                                                                         }
                                                                                     }
                                                                                     for var gr = 0; gr < blackBishops.count; gr++ {
@@ -1269,6 +1272,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     for var gr = 0; gr < whiteQueens.count; gr++ {
                                                                                         if self.pieces[iy] == whiteQueens[gr]  {
                                                                                             points -= 900
+                                                                                            whiteQueens.removeAtIndex(gr)
                                                                                         }
                                                                                     }
                                                                                     for var gr = 0; gr < blackQueens.count; gr++ {
@@ -1368,7 +1372,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 
                                                                                 for var ty = 0; ty < self.whitePieces.count; ty++ {
                                                                                     if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                        
+                                                                                        print("whitePieces take")
                                                                                         if (!self.contains(takenWhitePieces, _image: self.pieces[iy])) {
                                                                                             var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                                                                             takenPiece.image = self.pieces[iy].image
@@ -1402,7 +1406,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 for var ty = 0; ty < self.blackPieces.count; ty++ {
                                                                                     if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                        
+                                                                                        print("blackPieces take")
                                                                                         if (!self.contains(takenBlackPieces, _image: pieces[iy])) {
                                                                                             var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                                                                             takenPiece.image = pieces[iy].image
@@ -1490,6 +1494,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     for var gr = 0; gr < whiteRooks.count; gr++ {
                                                                                         if self.pieces[iy] == whiteRooks[gr]  {
                                                                                             points -= 500
+                                                                                            whiteRooks.removeAtIndex(gr)
                                                                                         }
                                                                                     }
                                                                                     
@@ -1501,6 +1506,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     for var gr = 0; gr < whiteKnights.count; gr++ {
                                                                                         if self.pieces[iy] == whiteKnights[gr]  {
                                                                                             points -= 300
+                                                                                            whiteKnights.removeAtIndex(gr)
                                                                                         }
                                                                                     }
                                                                                     for var gr = 0; gr < blackKnights.count; gr++ {
@@ -1511,6 +1517,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     for var gr = 0; gr < whiteBishops.count; gr++ {
                                                                                         if self.pieces[iy] == whiteBishops[gr]  {
                                                                                             points -= 300
+                                                                                            whiteBishops.removeAtIndex(gr)
                                                                                         }
                                                                                     }
                                                                                     for var gr = 0; gr < blackBishops.count; gr++ {
@@ -1521,6 +1528,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     for var gr = 0; gr < whiteQueens.count; gr++ {
                                                                                         if self.pieces[iy] == whiteQueens[gr]  {
                                                                                             points -= 900
+                                                                                            whiteQueens.removeAtIndex(gr)
                                                                                         }
                                                                                     }
                                                                                     for var gr = 0; gr < blackQueens.count; gr++ {
@@ -1955,6 +1963,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
+
+                                                                        
                                                                         self.removeLogicOptions()
                                                                         self.removeBishopLogicOptions()
                                                                         self.removeRookLogicOptions()
@@ -1974,6 +1984,42 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             
                                                                             self.updateLogic()
                                                                             
+                                                                            if self.checkByQueen == true || self.checkByBishop == true || self.checkByRook == true || self.checkByKnight == true || self.checkByPawn == true {
+                                                                                                        var checkMate1 = false
+                                                                                                        var checkMate2 = false
+                                                                                                        var checkMate3 = false
+                                                                                                        var checkMate4 = false
+                                                                                                        var checkMate5 = false
+                                                                                
+                                                                                                        for var i = 0; i < self.whiteKnights.count;i++ {
+                                                                                                        if self.chessPieceSelected(2, pieceid: 2, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKnights[i]) == 0 {
+                                                                                                            checkMate1 = true
+                                                                                                        }
+                                                                                                        }
+                                                                                                        for var i = 0; i < self.whiteBishops.count;i++ {
+                                                                                                            if self.chessPieceSelected(9, pieceid: 1, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteBishops[i]) == 0 {
+                                                                                                                checkMate2 = true
+                                                                                                            }
+                                                                                                        }
+                                                                                                        for var i = 0; i < self.whiteRooks.count;i++ {
+                                                                                                            if self.chessPieceSelected(9, pieceid: 3, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteRooks[i]) == 0 {
+                                                                                                                checkMate3 = true
+                                                                                                            }
+                                                                                                        }
+                                                                                                        for var i = 0; i < self.whiteQueens.count;i++ {
+                                                                                                            if self.chessPieceSelected(9, pieceid: 4, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteQueens[i]) == 0 {
+                                                                                                                checkMate4 = true
+                                                                                                            }
+                                                                                                        }
+                                                                                                        if self.chessPieceSelected(2, pieceid: 5, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKing) == 0 {
+                                                                                                            checkMate5 = true
+                                                                                                        }
+                                                                                                            if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
+                                                                                                                var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+                                                                                                                popViewController.title = "This is a popup view"
+                                                                                                                popViewController.showInView(self.view, withImage: self.otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+                                                                                                        }
+                                                                            }
                                                                     })
                                                                     
                                                                 }
@@ -2615,6 +2661,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     }
                                                                                     
                                                                                 }
+                                                                                
                                                                                 self.piecesToDelete.append(self.pieces[iy])
                                                                                 
                                                                                 self.takenPiecesToReload.append(self.pieces[iy])
@@ -3076,7 +3123,90 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             self.deletePiecesAfterLoad()
                                                                             
                                                                             self.updateLogic()
+
+                                                                            if self.checkByQueen == true || self.checkByBishop == true || self.checkByRook == true || self.checkByKnight == true || self.checkByPawn == true {
+                                                                                var checkMate1 = false
+                                                                                var checkMate2 = false
+                                                                                var checkMate3 = false
+                                                                                var checkMate4 = false
+                                                                                var checkMate5 = false
+                                                                                
+                                                                                for var i = 0; i < self.whiteKnights.count;i++ {
+                                                                                    if self.chessPieceSelected(2, pieceid: 2, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKnights[i]) == 0 {
+                                                                                        checkMate1 = true
+                                                                                    }
+                                                                                }
+                                                                                for var i = 0; i < self.whiteBishops.count;i++ {
+                                                                                    if self.chessPieceSelected(9, pieceid: 1, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteBishops[i]) == 0 {
+                                                                                        checkMate2 = true
+                                                                                    }
+                                                                                }
+                                                                                for var i = 0; i < self.whiteRooks.count;i++ {
+                                                                                    if self.chessPieceSelected(9, pieceid: 3, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteRooks[i]) == 0 {
+                                                                                        checkMate3 = true
+                                                                                    }
+                                                                                }
+                                                                                for var i = 0; i < self.whiteQueens.count;i++ {
+                                                                                    if self.chessPieceSelected(9, pieceid: 4, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteQueens[i]) == 0 {
+                                                                                        checkMate4 = true
+                                                                                    }
+                                                                                }
+                                                                                if self.chessPieceSelected(2, pieceid: 5, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKing) == 0 {
+                                                                                    checkMate5 = true
+                                                                                }
+                                                                                if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
+                                                                                    var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+                                                                                    popViewController.title = "This is a popup view"
+                                                                                    popViewController.showInView(self.view, withImage: self.otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+                                                                                }
+                                                                            }
                                                                             
+                                                                            // Stalemate
+                                                                            var staleMate1 = false
+                                                                            var staleMate2 = false
+                                                                            var staleMate3 = false
+                                                                            var staleMate4 = false
+                                                                            var staleMate5 = false
+                                                                            
+                                                                            for var i = 0; i < self.whiteKnights.count;i++ {
+                                                                                if self.chessPieceSelected(2, pieceid: 2, friend: self.whitePieces, enemy: self.blackPieces, hidden: false, chosenPiece: self.whiteKnights[i]) == 0 {
+                                                                                    staleMate1 = true
+                                                                                    print(staleMate1)
+                                                                                }
+                                                                            }
+                                                                            self.removePieceOptions()
+                                                                            for var i = 0; i < self.whiteBishops.count;i++ {
+                                                                                if self.chessPieceSelected(9, pieceid: 1, friend: self.whitePieces, enemy: self.blackPieces, hidden: false, chosenPiece: self.whiteBishops[i]) == 0 {
+                                                                                    staleMate2 = true
+                                                                                    print(staleMate2)
+                                                                                }
+                                                                            }
+                                                                             self.removePieceOptions()
+                                                                            for var i = 0; i < self.whiteRooks.count;i++ {
+                                                                                if self.chessPieceSelected(9, pieceid: 3, friend: self.whitePieces, enemy: self.blackPieces, hidden: false, chosenPiece: self.whiteRooks[i]) == 0 {
+                                                                                    staleMate3 = true
+                                                                                    print(staleMate3)
+                                                                                }
+                                                                            }
+                                                                             self.removePieceOptions()
+                                                                            for var i = 0; i < self.whiteQueens.count;i++ {
+                                                                                if self.chessPieceSelected(9, pieceid: 4, friend: self.whitePieces, enemy: self.blackPieces, hidden: false, chosenPiece: self.whiteQueens[i]) == 0 {
+                                                                                    staleMate4 = true
+                                                                                    print(staleMate4)
+                                                                                }
+                                                                            }
+                                                                            self.removePieceOptions()
+                                                                            if self.chessPieceSelected(2, pieceid: 5, friend: self.whitePieces, enemy: self.blackPieces, hidden: false, chosenPiece: self.whiteKing) == 0 {
+                                                                                staleMate5 = true
+                                                                                print(staleMate5)
+                                                                            }
+                                                                            if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true {
+                                                                                var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+                                                                                popViewController.title = "This is a popup view"
+                                                                                popViewController.showInView(self.view, withImage: nil, withMessage: "Draw by Stalemate", animated: true)
+                                                                                print("Stalemate")
+                                                                            }
+
                                                                     })
                                                                     
                                                                 }
@@ -3094,6 +3224,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                         
                     }
+
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     self.isWhiteTurn = true
                     
@@ -5824,7 +5955,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         showMarkedPiece()
         }
         pieceID = pieceid
-        print("chessPieceSelected")
+
         func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat, var byAmountz:CGFloat, increaserz:CGFloat ) {
             var canThePieceGofurther: Bool = true
             var startLogicChecking: Bool = false
@@ -5836,7 +5967,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 if canSaveKing(chosenPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  friend)  == 2 && enemy == whitePieces {
                     startLogicChecking = true
                 } else if canSaveKing(chosenPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove, friends:  friend)  == 2 && enemy == blackPieces {
-                    startLogicCheckingWhite = true
+                    //startLogicCheckingWhite = true
                 }
                 
                 for var q = 0; q < friend.count; q++ {
@@ -5862,47 +5993,43 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     // Check if a pawn can move when king is in check
                     if checkByQueen == true && pieceid != 5 {
                         if canSaveKing(pieceOption, array: queenLogicOptions) == false {
-                            print("queenLogicOptions")
+
                             pieceOption.removeFromSuperview()
                             logicBool = false
                         }
                     } else if checkByBishop == true && pieceid != 5 {
                         if canSaveKing(pieceOption, array: bishopLogicOptions) == false {
-                            print("bishopLogicOptions")
+
                             pieceOption.removeFromSuperview()
                             logicBool = false
                         }
                     } else if checkByRook == true && pieceid != 5 {
                         if canSaveKing(pieceOption, array: rookLogicOptions) == false {
-                            print("rookLogicOptions")
+
                             pieceOption.removeFromSuperview()
                             logicBool = false
                         }
                     } else if checkByPawn == true && pieceid != 5 {
                         if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
-                            print("pawnLogicOptions")
+
                             pieceOption.removeFromSuperview()
                             logicBool = false
                         }
                     } else if checkByKnight == true && pieceid != 5 {
                         if canSaveKing(pieceOption, array: knightLogicOptions) == false {
-                            print("knightLogicOptions")
                             pieceOption.removeFromSuperview()
                             logicBool = false
                         }
                     }
                     if startLogicChecking == true && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false && pieceid != 5 && canSaveKing(pieceOption, array: whitePieceLogic) == false {
-                        print("knightLogicOptions")
                         pieceOption.removeFromSuperview()
                         logicBool = false
                     }
                     if startLogicCheckingWhite == true && canSaveKing(pieceOption, array: pieceBlackCanMove) == false && pieceid != 5 && canSaveKing(pieceOption, array: blackPieceLogic) == false  {
-                        print("pieceBlackCanMove")
                         pieceOption.removeFromSuperview()
                         logicBool = false
                     }
                     if CGRectContainsPoint(pieceOption.frame, blackKing.center) || CGRectContainsPoint(pieceOption.frame, whiteKing.center) {
-                        print("blackKing||whiteKing")
                         pieceOption.removeFromSuperview()
                         logicBool = false
                     }
@@ -6269,42 +6396,42 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                     }
-                    if foundKing == true { 
+                    if foundKing == true {
                         
-                        var checkMate1 = false
-                        var checkMate2 = false
-                        var checkMate3 = false
-                        var checkMate4 = false
-                        var checkMate5 = false
-                            
-                        for var i = 0; i < whiteKnights.count;i++ {
-                        if chessPieceSelected(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteKnights[i]) == 0 {
-                            checkMate1 = true
-                        }
-                        }
-                        for var i = 0; i < whiteBishops.count;i++ {
-                            if chessPieceSelected(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteBishops[i]) == 0 {
-                                checkMate2 = true
-                            }
-                        }
-                        for var i = 0; i < whiteRooks.count;i++ {
-                            if chessPieceSelected(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteRooks[i]) == 0 {
-                                checkMate3 = true
-                            }
-                        }
-                        for var i = 0; i < whiteQueens.count;i++ {
-                            if chessPieceSelected(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteQueens[i]) == 0 {
-                                checkMate4 = true
-                            }
-                        }
-                        if chessPieceSelected(2, pieceid: 5, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteKing) == 0 {
-                            checkMate5 = true
-                        }
-                            if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
-                                var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
-                                popViewController.title = "This is a popup view"
-                                popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
-                        }
+//                        var checkMate1 = false
+//                        var checkMate2 = false
+//                        var checkMate3 = false
+//                        var checkMate4 = false
+//                        var checkMate5 = false
+//                            
+//                        for var i = 0; i < whiteKnights.count;i++ {
+//                        if chessPieceSelected(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteKnights[i]) == 0 {
+//                            checkMate1 = true
+//                        }
+//                        }
+//                        for var i = 0; i < whiteBishops.count;i++ {
+//                            if chessPieceSelected(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteBishops[i]) == 0 {
+//                                checkMate2 = true
+//                            }
+//                        }
+//                        for var i = 0; i < whiteRooks.count;i++ {
+//                            if chessPieceSelected(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteRooks[i]) == 0 {
+//                                checkMate3 = true
+//                            }
+//                        }
+//                        for var i = 0; i < whiteQueens.count;i++ {
+//                            if chessPieceSelected(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteQueens[i]) == 0 {
+//                                checkMate4 = true
+//                            }
+//                        }
+//                        if chessPieceSelected(2, pieceid: 5, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteKing) == 0 {
+//                            checkMate5 = true
+//                        }
+//                            if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
+//                                var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+//                                popViewController.title = "This is a popup view"
+//                                popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+//                        }
                 
 //                            var checkMate1Black = false
 //                            var checkMate2Black = false
@@ -6871,7 +6998,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
             }
-            
+      
             chessPieceMovementLogic(2, pieceid: 5, friend: whitePieces, enemy: blackPieces, piece: whiteKing , logicOptions: piecesBlackLogic)
             chessPieceMovementLogic(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, piece: blackKing, logicOptions: piecesWhiteLogic)
             
@@ -6906,6 +7033,125 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             for var w = 0; w < blackPawns.count; w++ {
                 chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawns[w], logicOptions: piecesWhiteLogic)
             }
+            
+            // Checks if check mate
+            if self.colorLcolor == "You are Black" {
+            if self.checkByQueen == true || self.checkByBishop == true || self.checkByRook == true || self.checkByKnight == true || self.checkByPawn == true {
+                var checkMate1 = false
+                var checkMate2 = false
+                var checkMate3 = false
+                var checkMate4 = false
+                var checkMate5 = false
+                
+                for var i = 0; i < blackKnights.count;i++ {
+                    if chessPieceSelected(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKnights[i]) == 0 {
+                        checkMate1 = true
+                    }
+                }
+                for var i = 0; i < blackBishops.count;i++ {
+                    if chessPieceSelected(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackBishops[i]) == 0 {
+                        checkMate2 = true
+                    }
+                }
+                for var i = 0; i < blackRooks.count;i++ {
+                    if chessPieceSelected(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackRooks[i]) == 0 {
+                        checkMate3 = true
+                    }
+                }
+                for var i = 0; i < blackQueens.count;i++ {
+                    if chessPieceSelected(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackQueens[i]) == 0 {
+                        checkMate4 = true
+                    }
+                }
+                if chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKing) == 0 {
+                    checkMate5 = true
+                }
+                if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
+                    var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+                    popViewController.title = "This is a popup view"
+                    popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+                    print("Check mate!")
+                }
+            }
+            }
+            
+            if self.colorLcolor == "You are White" {
+                
+             if self.checkByQueen == true || self.checkByBishop == true || self.checkByRook == true || self.checkByKnight == true || self.checkByPawn == true {
+                var checkMate1 = false
+                var checkMate2 = false
+                var checkMate3 = false
+                var checkMate4 = false
+                var checkMate5 = false
+                
+                for var i = 0; i < blackKnights.count;i++ {
+                    if chessPieceSelected(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKnights[i]) == 0 {
+                        checkMate1 = true
+                    }
+                }
+                for var i = 0; i < blackBishops.count;i++ {
+                    if chessPieceSelected(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackBishops[i]) == 0 {
+                        checkMate2 = true
+                    }
+                }
+                for var i = 0; i < blackRooks.count;i++ {
+                    if chessPieceSelected(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackRooks[i]) == 0 {
+                        checkMate3 = true
+                    }
+                }
+                for var i = 0; i < blackQueens.count;i++ {
+                    if chessPieceSelected(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackQueens[i]) == 0 {
+                        checkMate4 = true
+                    }
+                }
+                if chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKing) == 0 {
+                    checkMate5 = true
+                }
+                if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
+                    var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+                    popViewController.title = "This is a popup view"
+                    popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+                    print("Check mate!")
+                }
+                }
+                
+                var staleMate1 = false
+                var staleMate2 = false
+                var staleMate3 = false
+                var staleMate4 = false
+                var staleMate5 = false
+                
+                for var i = 0; i < blackKnights.count;i++ {
+                    if chessPieceSelected(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, hidden: false, chosenPiece: blackKnights[i]) == 0 {
+                        staleMate1 = true
+                    }
+                }
+                for var i = 0; i < blackBishops.count;i++ {
+                    if chessPieceSelected(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, hidden: false, chosenPiece: blackBishops[i]) == 0 {
+                        staleMate2 = true
+                    }
+                }
+                for var i = 0; i < blackRooks.count;i++ {
+                    if chessPieceSelected(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, hidden: false, chosenPiece: blackRooks[i]) == 0 {
+                        staleMate3 = true
+                    }
+                }
+                for var i = 0; i < blackQueens.count;i++ {
+                    if chessPieceSelected(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, hidden: false, chosenPiece: blackQueens[i]) == 0 {
+                        staleMate4 = true
+                    }
+                }
+                if chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: false, chosenPiece: blackKing) == 0 {
+                    staleMate5 = true
+                }
+                if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true {
+                    var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+                    popViewController.title = "This is a popup view"
+                    popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "draw by Stalemate", animated: true)
+                    print("Stalemate!")
+                }
+            }
+            
             if checkByQueen == true {
                 chessNotationCheck = "+"
             }
@@ -7520,6 +7766,34 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
                 
+                for var i = 0; i < blackQueens.count; i++ {
+                    if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackQueens[i].frame.origin.x && pieceOptions[o].frame.origin.y == blackQueens[i].frame.origin.y  {
+                        blackQueens.removeAtIndex(i)
+                        print("QUEEN TAKEN")
+                    }
+                }
+                
+                for var i = 0; i < blackBishops.count; i++ {
+                    if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackBishops[i].frame.origin.x && pieceOptions[o].frame.origin.y == blackBishops[i].frame.origin.y  {
+                        blackBishops.removeAtIndex(i)
+                        print("BISHOP TAKEN")
+                    }
+                }
+                
+                for var i = 0; i < blackRooks.count; i++ {
+                    if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackRooks[i].frame.origin.x && pieceOptions[o].frame.origin.y == blackRooks[i].frame.origin.y  {
+                        blackRooks.removeAtIndex(i)
+                        print("BISHOP TAKEN")
+                    }
+                }
+                
+                for var i = 0; i < blackKnights.count; i++ {
+                    if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackKnights[i].frame.origin.x && pieceOptions[o].frame.origin.y == blackKnights[i].frame.origin.y  {
+                        blackKnights.removeAtIndex(i)
+                        print("KNIGHT TAKEN")
+                    }
+                }
+                
                 for var i = 0; i < pieces.count; i++ {
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y  {
                         
@@ -7739,6 +8013,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             removePieceOptions()
             //updateLogic()
             chessPieceSelected(2, pieceid: 5, friend: whitePieces, enemy: blackPieces, hidden: false, chosenPiece: selectedPiece)
+            print("whiteKing selected")
         }
         
         
@@ -7804,7 +8079,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             removeBlackCastlingRight()
             //updateLogic()
             chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: false, chosenPiece: selectedPiece)
-            
+            print("blackKing selected")
         }
         
         //check pieceOptions

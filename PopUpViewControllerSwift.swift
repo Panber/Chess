@@ -53,7 +53,7 @@ import QuartzCore
         self.view.transform = CGAffineTransformMakeScale(1.3, 1.3)
         self.view.alpha = 0.0;
         UIView.animateWithDuration(0.25, animations: {
-            self.view.alpha = 0.6
+            self.view.alpha = 1
             self.view.transform = CGAffineTransformMakeScale(1.0, 1.0)
         });
     }
