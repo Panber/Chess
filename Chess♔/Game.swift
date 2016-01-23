@@ -4837,6 +4837,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     self.blackRook2.frame.origin.y = _8
                                 }
                                 }, completion: { finish in
+                                    self.canPressForwardButton = true
+                                    
+                                    if didIncrease_d3 == true {
+                                        
+                                        self.d3++
+                                    }
                             })
                             
                             
@@ -4861,7 +4867,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     self.whiteRook1.frame.origin.y = _1
                                 }
                                 
-                                }, completion: { finish in})
+                                }, completion: { finish in
+                                self.canPressForwardButton = true
+                                
+                                if didIncrease_d3 == true {
+                                
+                                self.d3++
+                                }
+                                })
                             
                             
                             
@@ -4889,7 +4902,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 self.blackRook1.frame.origin.y = _8
                                 
                             }
-                            }, completion: { finish in})
+                            }, completion: { finish in
+                                self.canPressForwardButton = true
+                                
+                                if didIncrease_d3 == true {
+                                
+                                self.d3++
+                                }})
                         
                         
                         
@@ -4911,7 +4930,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 self.whiteRook2.frame.origin.x = c
                                 self.whiteRook2.frame.origin.y = _1
                             }
-                            }, completion: { finish in})
+                            }, completion: { finish in
+                                self.canPressForwardButton = true
+                                
+                                if didIncrease_d3 == true {
+                                
+                                self.d3++
+                                }})
                         
                         
                         
@@ -5509,7 +5534,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
         }
     }
-    }
+    
+
     
     func updateCountTimer() {
         
