@@ -10,6 +10,8 @@ import UIKit
 import SpriteKit
 import Firebase
 import AudioToolbox
+import Social
+
 
 extension String
 {
@@ -2262,8 +2264,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 //can return false value??
                                 if  moves.indexOf(moves[o])!  % 2 == 0 {
                                     // test
-                                    if moves[o] == moves.last{
-                                        
+                                    
                                         if moves.last == moves[o] && am == moves.count{
                                             print("Castling white long")
                                             UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
@@ -2284,7 +2285,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.blackRook2.frame.origin.y = _8
                                         }
                                         
-                                    }
+                                    
                                 }
                                     
                                 else {
@@ -5622,10 +5623,20 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func shareFacebookButtonPressed(sender: UIButton!) {
+        removeNewView()
+
+        let vc = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        vc.setInitialText("I won against hans at CHESS")
+        vc.addURL(NSURL(string: "http://www.nasa.gov"))
+        presentViewController(vc, animated: true, completion: nil)
         
     }
     func shareTwitterButtonPressed(sender: UIButton!) {
-        
+        removeNewView()
+        let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+        vc.setInitialText("I won against hans at CHESS")
+        vc.addURL(NSURL(string: "http://www.nasa.gov"))
+        presentViewController(vc, animated: true, completion: nil)
     }
     // MARK: - Setup-functions 🔍
     
