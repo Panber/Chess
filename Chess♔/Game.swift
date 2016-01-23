@@ -6561,7 +6561,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                     }
                 }
-                
                 //                                                              // Decides which squares the King can go to
                 if pieceid == 5 && chosenPiece == whiteKing {
                     for var p = 0 ; p < pieceOptions.count; p++ {
