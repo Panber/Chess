@@ -2045,36 +2045,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                                         visualEffectView.userInteractionEnabled = true
                                                                                                                 })
                                                                                                                 
-                                                                                                                var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
-                                                                                                                scrollView1.delegate = self
-                                                                                                                scrollView1.userInteractionEnabled = true
-                                                                                                                scrollView1.scrollEnabled = true
-                                                                                                                scrollView1.pagingEnabled = false
-                                                                                                                scrollView1.contentSize = CGSizeMake(screenWidth, 958)
-                                                                                                                visualEffectSub.addSubview(scrollView1)
-                                                                                                                
-                                                                                                                
-                                                                                                                let oppoImage = self.otherImage
-                                                                                                                oppoImage.frame.size.width = 65
-                                                                                                                oppoImage.frame.size.height = 65
-                                                                                                                oppoImage.frame.origin.x = screenWidth/2 - (65/2)
-                                                                                                                oppoImage.frame.origin.y = -100
-                                                                                                                scrollView1.addSubview(oppoImage)
-                                                                                                                
-                                                                                                                let iImage = self.meImage
-                                                                                                                iImage.frame.size.width = 65
-                                                                                                                iImage.frame.size.height = 65
-                                                                                                                iImage.frame.origin.x = screenWidth/2 - (65/2)
-                                                                                                                iImage.frame.origin.y = screenHeight+100
-                                                                                                                scrollView1.addSubview(iImage)
-                                                                                                                
-                                                                                                                UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
-                                                                                                                
-                                                                                                                    iImage.frame.origin.y = screenHeight/2 + screenHeight/4 - (65/2)
-                                                                                                                    oppoImage.frame.origin.y = screenHeight/2 - screenHeight/4 - (65/2)
-
-                                                                                                                    
-                                                                                                                }), completion: nil)
+                                                                                             self.gameFinishedScreen("")
                                                                                                                 
                                                                                                         }
                                                                             }
@@ -3338,13 +3309,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             visualEffectView.userInteractionEnabled = true
                                                                                     })
                                                                                     
-                                                                                    var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
-                                                                                    scrollView1.delegate = self
-                                                                                    scrollView1.userInteractionEnabled = true
-                                                                                    scrollView1.scrollEnabled = true
-                                                                                    scrollView1.pagingEnabled = false
-                                                                                    scrollView1.contentSize = CGSizeMake(screenWidth, 958)
-                                                                                    visualEffectSub.addSubview(scrollView1)
+                                                                                    self.gameFinishedScreen("")
                                                                                 }
                                                                             }
                                                                             
@@ -5224,16 +5189,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
     }
     
-    // MARK: - Setup-functions 🔍
     
-    var resignB = UIButton()
-    var drawB = UIButton()
+    func gameFinishedScreen(var statusWhite:String) {
     
-    
-    @IBAction func infoButtonPressed(sender: AnyObject) {
-        infoButton.userInteractionEnabled = false
-        
-        
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             visualEffectView.alpha = 1
             }, completion: {finish in
@@ -5314,8 +5272,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         ratingI.text = otherUserRating
         scrollView1.addSubview(ratingI)
         
-        var shareTwitterButton = UIButton(frame: CGRectMake(screenWidth/2 - 100,screenHeight + 200,30,30))
-        shareTwitterButton.setBackgroundImage(UIImage(name))
+        var shareTwitterButton = UIButton(frame: CGRectMake(screenWidth/2 - 50,screenHeight + 200,30,30))
+        shareTwitterButton.setBackgroundImage(UIImage(named:"TwitterLogo_#55acee"), forState: .Normal)
+        shareTwitterButton.addTarget(self, action: "shareTwitterButtonPressed:", forControlEvents: .TouchUpInside)
+        scrollView1.addSubview(shareTwitterButton)
+        
+        var shareFacebookButton = UIButton(frame: CGRectMake(screenWidth/2 + 20,screenHeight + 200,30,30))
+        shareFacebookButton.setBackgroundImage(UIImage(named:"facebook_logo"), forState: .Normal)
+        shareFacebookButton.addTarget(self, action: "shareFacebookButtonPressed:", forControlEvents: .TouchUpInside)
+        scrollView1.addSubview(shareFacebookButton)
+        
         UIView.animateWithDuration(0.8, delay: 0.5, usingSpringWithDamping: 1.3, initialSpringVelocity: 5.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
             
             iImage.frame.origin.y = screenHeight/2 + screenHeight/4 - (65) - 20 - screenHeight/8
@@ -5325,13 +5291,47 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             oppoImage.frame.origin.y = screenHeight/2 - screenHeight/4 + 20 - screenHeight/8
             nameOppo.frame.origin.y = oppoImage.frame.origin.y + 10
             ratingOppo.frame.origin.y = nameOppo.frame.origin.y + nameOppo.frame.size.height
-
+            
+            shareTwitterButton.frame.origin.y = screenHeight - 60
+            shareFacebookButton.frame.origin.y = screenHeight - 60
+            
             
             wonLabel.alpha = 1
-
+            
             
         }), completion: nil)
+
+    
+    
+    }
+    
+    
+    // MARK: - Setup-functions 🔍
+    
+    var resignB = UIButton()
+    var drawB = UIButton()
+    
+    
+    @IBAction func infoButtonPressed(sender: AnyObject) {
+        infoButton.userInteractionEnabled = false
         
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            visualEffectView.alpha = 1
+            }, completion: {finish in
+                visualEffectSub.userInteractionEnabled = true
+                visualEffectView.userInteractionEnabled = true
+        })
+        
+        gameFinishedScreen("")
+        
+        var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
+        scrollView1.delegate = self
+        scrollView1.userInteractionEnabled = true
+        scrollView1.scrollEnabled = true
+        scrollView1.pagingEnabled = false
+        scrollView1.contentSize = CGSizeMake(screenWidth, 958)
+        visualEffectSub.addSubview(scrollView1)
+    
         var plusNum: CGFloat = 130
         
         var actions = UILabel(frame: CGRectMake(0,37,screenWidth, 32))
@@ -7344,15 +7344,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             visualEffectView.userInteractionEnabled = true
                     })
                     
-                    var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
-                    scrollView1.delegate = self
-                    scrollView1.userInteractionEnabled = true
-                    scrollView1.scrollEnabled = true
-                    scrollView1.pagingEnabled = false
-                    scrollView1.contentSize = CGSizeMake(screenWidth, 958)
-                    visualEffectSub.addSubview(scrollView1)
+                    gameFinishedScreen("")
                     
                     print("Check mate!")
+                    
                 }
             }
             }
@@ -7401,13 +7396,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             visualEffectView.userInteractionEnabled = true
                     })
                     
-                    var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
-                    scrollView1.delegate = self
-                    scrollView1.userInteractionEnabled = true
-                    scrollView1.scrollEnabled = true
-                    scrollView1.pagingEnabled = false
-                    scrollView1.contentSize = CGSizeMake(screenWidth, 958)
-                    visualEffectSub.addSubview(scrollView1)
+gameFinishedScreen("")
                     
                     print("Check mate!")
                 }
