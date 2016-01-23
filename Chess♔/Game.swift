@@ -190,6 +190,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var otherUserName = ""
     var otherUserRating = ""
     
+    var meUserImage = UIImage()
+
+    var meUserName = ""
+    var meUserRating = ""
+    
     //BOARDER
     let boarderBoard = UIImageView(frame: CGRectMake(-0.01*pieceSize, _1 - 7*pieceSize, 8*pieceSize, 8*pieceSize))
     
@@ -1658,6 +1663,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.meImage.image = UIImage(data: imageData!)
                                             self.view.addSubview(self.meImage)
                                             
+                                            self.meUserImage = UIImage(data: imageData!)!
+                                            self.meUserName = (result["username"] as? String)!
+                                            self.meUserRating = "\(result["rating"] as? Int)"
+                                            
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 self.meImage.alpha = 1
                                                 
@@ -2020,9 +2029,48 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                             checkMate5 = true
                                                                                                         }
                                                                                                             if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
-                                                                                                                var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
-                                                                                                                popViewController.title = "This is a popup view"
-                                                                                                                popViewController.showInView(self.view, withImage: self.otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+//                                                                                                                var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+//                                                                                                                popViewController.title = "This is a popup view"
+//                                                                                                                popViewController.showInView(self.view, withImage: self.otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+                                                                                                                
+                                                                                                                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                                                                                                    visualEffectView.alpha = 1
+                                                                                                                    }, completion: {finish in
+                                                                                                                        visualEffectSub.userInteractionEnabled = true
+                                                                                                                        visualEffectView.userInteractionEnabled = true
+                                                                                                                })
+                                                                                                                
+                                                                                                                var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
+                                                                                                                scrollView1.delegate = self
+                                                                                                                scrollView1.userInteractionEnabled = true
+                                                                                                                scrollView1.scrollEnabled = true
+                                                                                                                scrollView1.pagingEnabled = false
+                                                                                                                scrollView1.contentSize = CGSizeMake(screenWidth, 958)
+                                                                                                                visualEffectSub.addSubview(scrollView1)
+                                                                                                                
+                                                                                                                
+                                                                                                                let oppoImage = self.otherImage
+                                                                                                                oppoImage.frame.size.width = 65
+                                                                                                                oppoImage.frame.size.height = 65
+                                                                                                                oppoImage.frame.origin.x = screenWidth/2 - (65/2)
+                                                                                                                oppoImage.frame.origin.y = -100
+                                                                                                                scrollView1.addSubview(oppoImage)
+                                                                                                                
+                                                                                                                let iImage = self.meImage
+                                                                                                                iImage.frame.size.width = 65
+                                                                                                                iImage.frame.size.height = 65
+                                                                                                                iImage.frame.origin.x = screenWidth/2 - (65/2)
+                                                                                                                iImage.frame.origin.y = screenHeight+100
+                                                                                                                scrollView1.addSubview(iImage)
+                                                                                                                
+                                                                                                                UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
+                                                                                                                
+                                                                                                                    iImage.frame.origin.y = screenHeight/2 + screenHeight/4 - (65/2)
+                                                                                                                    oppoImage.frame.origin.y = screenHeight/2 - screenHeight/4 - (65/2)
+
+                                                                                                                    
+                                                                                                                }), completion: nil)
+                                                                                                                
                                                                                                         }
                                                                             }
                                                                     })
@@ -2810,6 +2858,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.meImage.image = UIImage(data: imageData!)
                                             self.view.addSubview(self.meImage)
                                             
+                                            self.meUserImage = UIImage(data: imageData!)!
+                                            self.meUserName = (result["username"] as? String)!
+                                            self.meUserRating = "\(result["rating"] as? Int)"
+                                            
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                                 self.meImage.alpha = 1
                                                 
@@ -3165,9 +3217,23 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     checkMate5 = true
                                                                                 }
                                                                                 if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
-                                                                                    var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
-                                                                                    popViewController.title = "This is a popup view"
-                                                                                    popViewController.showInView(self.view, withImage: self.otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+//                                                                                    var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+//                                                                                    popViewController.title = "This is a popup view"
+//                                                                                    popViewController.showInView(self.view, withImage: self.otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+                                                                                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                                                                        visualEffectView.alpha = 1
+                                                                                        }, completion: {finish in
+                                                                                            visualEffectSub.userInteractionEnabled = true
+                                                                                            visualEffectView.userInteractionEnabled = true
+                                                                                    })
+                                                                                    
+                                                                                    var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
+                                                                                    scrollView1.delegate = self
+                                                                                    scrollView1.userInteractionEnabled = true
+                                                                                    scrollView1.scrollEnabled = true
+                                                                                    scrollView1.pagingEnabled = false
+                                                                                    scrollView1.contentSize = CGSizeMake(screenWidth, 958)
+                                                                                    visualEffectSub.addSubview(scrollView1)
                                                                                 }
                                                                             }
                                                                             
@@ -5059,15 +5125,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             visualEffectView.alpha = 1
             }, completion: {finish in
-                
+                visualEffectSub.userInteractionEnabled = true
                 visualEffectView.userInteractionEnabled = true
-                
-                
-                
         })
-        
-        visualEffectSub.userInteractionEnabled = true
-        visualEffectView.userInteractionEnabled = true
         
         var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
         scrollView1.delegate = self
@@ -5076,6 +5136,89 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         scrollView1.pagingEnabled = false
         scrollView1.contentSize = CGSizeMake(screenWidth, 958)
         visualEffectSub.addSubview(scrollView1)
+        
+        
+        let oppoImage = UIImageView()
+        oppoImage.image = otherUserImage
+        oppoImage.frame.size.width = 65
+        oppoImage.frame.size.height = 65
+        oppoImage.frame.origin.x = screenWidth/2 - 90
+        oppoImage.frame.origin.y = -100
+        oppoImage.clipsToBounds = true
+        oppoImage.contentMode = .ScaleAspectFill
+        oppoImage.layer.cornerRadius = oppoImage.frame.size.width/2
+        scrollView1.addSubview(oppoImage)
+        
+        let iImage = UIImageView()
+        iImage.image = meUserImage
+        iImage.frame.size.width = 65
+        iImage.frame.size.height = 65
+        iImage.frame.origin.x = screenWidth/2 - 90
+        iImage.frame.origin.y = screenHeight+100
+        iImage.clipsToBounds = true
+        iImage.contentMode = .ScaleAspectFill
+        iImage.layer.cornerRadius = iImage.frame.size.width/2
+        scrollView1.addSubview(iImage)
+        
+        var wonLabel = UILabel(frame: CGRectMake(20,screenHeight/2-56 - screenHeight/8,screenWidth-40, 102))
+        wonLabel.text = "You won against arnold by checkmate!"
+        wonLabel.textAlignment = .Center
+        if darkMode {wonLabel.textColor = UIColor.whiteColor()}
+        else {wonLabel.textColor = UIColor.blackColor() }
+        wonLabel.alpha = 0
+        wonLabel.numberOfLines = 0
+        wonLabel.font = UIFont(name: "Times", size: 28)
+        scrollView1.addSubview(wonLabel)
+        
+        var nameOppo = UILabel(frame: CGRectMake(oppoImage.frame.origin.x + oppoImage.frame.size.width + 25,oppoImage.frame.origin.y + 10,screenWidth - (oppoImage.frame.origin.x + oppoImage.frame.size.width + 25),27))
+        nameOppo.font = UIFont(name: "Times", size: 22)
+        nameOppo.textAlignment = .Left
+        if darkMode {nameOppo.textColor = UIColor.whiteColor()}
+        else {nameOppo.textColor = UIColor.blackColor() }
+        nameOppo.text = otherUserName
+        scrollView1.addSubview(nameOppo)
+        
+        var ratingOppo = UILabel(frame: CGRectMake(nameOppo.frame.origin.x,nameOppo.frame.origin.y + nameOppo.frame.size.height,screenWidth - (oppoImage.frame.origin.x + oppoImage.frame.size.width + 25),21))
+        ratingOppo.font = UIFont(name: "Times-Italic", size: 15)
+        ratingOppo.textColor = UIColor.darkGrayColor()
+        if darkMode {ratingOppo.textColor = UIColor.lightGrayColor()}
+        else {ratingL.textColor = UIColor.darkGrayColor() }
+        ratingOppo.text = otherUserRating
+        scrollView1.addSubview(ratingOppo)
+        
+        var nameI = UILabel(frame: CGRectMake(iImage.frame.origin.x + iImage.frame.size.width + 25,iImage.frame.origin.y + 10,screenWidth - (iImage.frame.origin.x + iImage.frame.size.width + 25),27))
+        nameI.font = UIFont(name: "Times", size: 22)
+        nameI.textAlignment = .Left
+        if darkMode {nameI.textColor = UIColor.whiteColor()}
+        else {nameI.textColor = UIColor.blackColor() }
+        nameI.text = meUserName
+        scrollView1.addSubview(nameI)
+        
+        var ratingI = UILabel(frame: CGRectMake(nameI.frame.origin.x,nameI.frame.origin.y + nameI.frame.size.height,screenWidth - (iImage.frame.origin.x + iImage.frame.size.width + 25),21))
+        ratingI.font = UIFont(name: "Times-Italic", size: 15)
+        ratingI.textColor = UIColor.darkGrayColor()
+        if darkMode {ratingI.textColor = UIColor.lightGrayColor()}
+        else {ratingI.textColor = UIColor.darkGrayColor() }
+        ratingI.text = otherUserRating
+        scrollView1.addSubview(ratingI)
+        
+        var shareTwitterButton = UIButton(frame: CGRectMake(screenWidth/2 - 100,screenHeight + 200,30,30))
+        shareTwitterButton.setBackgroundImage(UIImage(name))
+        UIView.animateWithDuration(0.8, delay: 0.5, usingSpringWithDamping: 1.3, initialSpringVelocity: 5.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
+            
+            iImage.frame.origin.y = screenHeight/2 + screenHeight/4 - (65) - 20 - screenHeight/8
+            nameI.frame.origin.y = iImage.frame.origin.y + 10
+            ratingI.frame.origin.y = nameI.frame.origin.y + nameI.frame.size.height
+            
+            oppoImage.frame.origin.y = screenHeight/2 - screenHeight/4 + 20 - screenHeight/8
+            nameOppo.frame.origin.y = oppoImage.frame.origin.y + 10
+            ratingOppo.frame.origin.y = nameOppo.frame.origin.y + nameOppo.frame.size.height
+
+            
+            wonLabel.alpha = 1
+
+            
+        }), completion: nil)
         
         var plusNum: CGFloat = 130
         
@@ -7078,9 +7221,25 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     checkMate5 = true
                 }
                 if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
-                    var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
-                    popViewController.title = "This is a popup view"
-                    popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+//                    var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+//                    popViewController.title = "This is a popup view"
+//                    popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+                    
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        visualEffectView.alpha = 1
+                        }, completion: {finish in
+                            visualEffectSub.userInteractionEnabled = true
+                            visualEffectView.userInteractionEnabled = true
+                    })
+                    
+                    var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
+                    scrollView1.delegate = self
+                    scrollView1.userInteractionEnabled = true
+                    scrollView1.scrollEnabled = true
+                    scrollView1.pagingEnabled = false
+                    scrollView1.contentSize = CGSizeMake(screenWidth, 958)
+                    visualEffectSub.addSubview(scrollView1)
+                    
                     print("Check mate!")
                 }
             }
@@ -7119,9 +7278,25 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     checkMate5 = true
                 }
                 if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
-                    var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
-                    popViewController.title = "This is a popup view"
-                    popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+//                    var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
+//                    popViewController.title = "This is a popup view"
+//                    popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
+                    
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        visualEffectView.alpha = 1
+                        }, completion: {finish in
+                            visualEffectSub.userInteractionEnabled = true
+                            visualEffectView.userInteractionEnabled = true
+                    })
+                    
+                    var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
+                    scrollView1.delegate = self
+                    scrollView1.userInteractionEnabled = true
+                    scrollView1.scrollEnabled = true
+                    scrollView1.pagingEnabled = false
+                    scrollView1.contentSize = CGSizeMake(screenWidth, 958)
+                    visualEffectSub.addSubview(scrollView1)
+                    
                     print("Check mate!")
                 }
                 }
