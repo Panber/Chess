@@ -3283,8 +3283,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     self.pieces[iy].alpha = 0
                                                                                     }, completion: {finish in
                                                                                         
-                                                                                        
-                                                                                        
+                                                                                                
                                                                                 })
                                                                                 
                                                                             }
