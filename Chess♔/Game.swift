@@ -1972,6 +1972,61 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.takenPiecesToReload.append(self.pieces[iy])
                                                                                 self.takenPiecesToReloadAtIndex.append(iy)
                                                                                 
+                                                                                
+                                                                                func chartData() {
+                                                                                    for var gr = 0; gr < self.whiteRooks.count; gr++ {
+                                                                                        if self.pieces[iy] == self.whiteRooks[gr]  {
+                                                                                            self.points -= 500
+                                                                                            self.whiteRooks.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    
+                                                                                    for var gr = 0; gr < self.blackRooks.count; gr++ {
+                                                                                        if self.pieces[iy] == self.blackRooks[gr]  {
+                                                                                            self.points += 500
+                                                                                            self.blackRooks.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < self.whiteKnights.count; gr++ {
+                                                                                        if self.pieces[iy] == self.whiteKnights[gr]  {
+                                                                                            self.points -= 300
+                                                                                            self.whiteKnights.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < self.blackKnights.count; gr++ {
+                                                                                        if self.pieces[iy] == self.blackKnights[gr]  {
+                                                                                            self.points += 300
+                                                                                            self.blackKnights.removeAtIndex(gr)
+                                                                                            print("blackKnights taken")
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < self.whiteBishops.count; gr++ {
+                                                                                        if self.pieces[iy] == self.whiteBishops[gr]  {
+                                                                                            self.points -= 300
+                                                                                            self.whiteBishops.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < self.blackBishops.count; gr++ {
+                                                                                        if self.pieces[iy] == self.blackBishops[gr]  {
+                                                                                            self.points += 300
+                                                                                            self.blackBishops.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < self.whiteQueens.count; gr++ {
+                                                                                        if self.pieces[iy] == self.whiteQueens[gr]  {
+                                                                                            self.points -= 900
+                                                                                            self.whiteQueens.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < self.blackQueens.count; gr++ {
+                                                                                        if self.pieces[iy] == self.blackQueens[gr]  {
+                                                                                            self.points += 900
+                                                                                            self.blackQueens.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                                chartData()
+                                                                                
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     self.pieces[iy].alpha = 0
                                                                                     }, completion: {finish in
@@ -2029,11 +2084,25 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 var checkMate4 = false
                                                                                 var checkMate5 = false
                                                                                 
+                                                                                if self.whiteKnights.count == 0 {
+                                                                                    checkMate1 = true
+                                                                                }
+                                                                                if self.whiteBishops.count == 0 {
+                                                                                    checkMate2 = true
+                                                                                }
+                                                                                if self.whiteRooks.count == 0 {
+                                                                                    checkMate3 = true
+                                                                                }
+                                                                                if self.whiteQueens.count == 0 {
+                                                                                    checkMate4 = true
+                                                                                }
+                                                                                 self.removePieceOptions()
                                                                                 for var i = 0; i < self.whiteKnights.count;i++ {
                                                                                     if self.chessPieceSelected(2, pieceid: 2, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKnights[i]) == 0 {
                                                                                         checkMate1 = true
                                                                                     }
                                                                                 }
+                                                                               
                                                                                 for var i = 0; i < self.whiteBishops.count;i++ {
                                                                                     if self.chessPieceSelected(9, pieceid: 1, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteBishops[i]) == 0 {
                                                                                         checkMate2 = true
@@ -2069,6 +2138,19 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 var staleMate4 = false
                                                                                 var staleMate5 = false
                                                                                 
+                                                                                if self.whiteKnights.count == 0 {
+                                                                                    staleMate1 = true
+                                                                                }
+                                                                                if self.whiteBishops.count == 0 {
+                                                                                    staleMate2 = true
+                                                                                }
+                                                                                if self.whiteRooks.count == 0 {
+                                                                                    staleMate3 = true
+                                                                                }
+                                                                                if self.whiteQueens.count == 0 {
+                                                                                    staleMate4 = true
+                                                                                }
+                                                                                self.removePieceOptions()
                                                                                 for var i = 0; i < self.whiteKnights.count;i++ {
                                                                                     if self.chessPieceSelected(2, pieceid: 2, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKnights[i]) == 0 {
                                                                                         staleMate1 = true
@@ -2817,58 +2899,61 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 
                                                                                 self.takenPiecesToReload.append(self.pieces[iy])
                                                                                 self.takenPiecesToReloadAtIndex.append(iy)
-                                                                            }
-                                                                            func chartData() {
-                                                                                for var gr = 0; gr < whiteRooks.count; gr++ {
-                                                                                    if self.pieces[iy] == whiteRooks[gr]  {
-                                                                                        points -= 500
-                                                                                        whiteRooks.removeAtIndex(gr)
-                                                                                    }
-                                                                                }
                                                                                 
-                                                                                for var gr = 0; gr < blackRooks.count; gr++ {
-                                                                                    if self.pieces[iy] == blackRooks[gr]  {
-                                                                                        points += 500
-                                                                                        blackRooks.removeAtIndex(gr)
+                                                                                func chartData() {
+                                                                                    for var gr = 0; gr < whiteRooks.count; gr++ {
+                                                                                        if self.pieces[iy] == whiteRooks[gr]  {
+                                                                                            points -= 500
+                                                                                            whiteRooks.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    
+                                                                                    for var gr = 0; gr < blackRooks.count; gr++ {
+                                                                                        if self.pieces[iy] == blackRooks[gr]  {
+                                                                                            points += 500
+                                                                                            blackRooks.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < whiteKnights.count; gr++ {
+                                                                                        if self.pieces[iy] == whiteKnights[gr]  {
+                                                                                            points -= 300
+                                                                                            whiteKnights.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < blackKnights.count; gr++ {
+                                                                                        if self.pieces[iy] == blackKnights[gr]  {
+                                                                                            points += 300
+                                                                                            blackKnights.removeAtIndex(gr)
+                                                                                            print("blackKnights taken")
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < whiteBishops.count; gr++ {
+                                                                                        if self.pieces[iy] == whiteBishops[gr]  {
+                                                                                            points -= 300
+                                                                                            whiteBishops.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < blackBishops.count; gr++ {
+                                                                                        if self.pieces[iy] == blackBishops[gr]  {
+                                                                                            points += 300
+                                                                                            blackBishops.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < whiteQueens.count; gr++ {
+                                                                                        if self.pieces[iy] == whiteQueens[gr]  {
+                                                                                            points -= 900
+                                                                                            whiteQueens.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < blackQueens.count; gr++ {
+                                                                                        if self.pieces[iy] == blackQueens[gr]  {
+                                                                                            points += 900
+                                                                                            blackQueens.removeAtIndex(gr)
+                                                                                        }
                                                                                     }
                                                                                 }
-                                                                                for var gr = 0; gr < whiteKnights.count; gr++ {
-                                                                                    if self.pieces[iy] == whiteKnights[gr]  {
-                                                                                        points -= 300
-                                                                                        whiteKnights.removeAtIndex(gr)
-                                                                                    }
-                                                                                }
-                                                                                for var gr = 0; gr < blackKnights.count; gr++ {
-                                                                                    if self.pieces[iy] == blackKnights[gr]  {
-                                                                                        points += 300
-                                                                                        blackKnights.removeAtIndex(gr)
-                                                                                        print("blackKnights taken")
-                                                                                    }
-                                                                                }
-                                                                                for var gr = 0; gr < whiteBishops.count; gr++ {
-                                                                                    if self.pieces[iy] == whiteBishops[gr]  {
-                                                                                        points -= 300
-                                                                                        whiteBishops.removeAtIndex(gr)
-                                                                                    }
-                                                                                }
-                                                                                for var gr = 0; gr < blackBishops.count; gr++ {
-                                                                                    if self.pieces[iy] == blackBishops[gr]  {
-                                                                                        points += 300
-                                                                                        blackBishops.removeAtIndex(gr)
-                                                                                    }
-                                                                                }
-                                                                                for var gr = 0; gr < whiteQueens.count; gr++ {
-                                                                                    if self.pieces[iy] == whiteQueens[gr]  {
-                                                                                        points -= 900
-                                                                                        whiteQueens.removeAtIndex(gr)
-                                                                                    }
-                                                                                }
-                                                                                for var gr = 0; gr < blackQueens.count; gr++ {
-                                                                                    if self.pieces[iy] == blackQueens[gr]  {
-                                                                                        points += 900
-                                                                                        blackQueens.removeAtIndex(gr)
-                                                                                    }
-                                                                                }
+                                                                                chartData()
+                                                                                
                                                                             }
                                                           //                  chartData()
                                                                         }
@@ -3294,11 +3379,65 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.takenPiecesToReload.append(self.pieces[iy])
                                                                                 self.takenPiecesToReloadAtIndex.append(iy)
                                                                                 
+                                                                                func chartData() {
+                                                                                    for var gr = 0; gr < self.whiteRooks.count; gr++ {
+                                                                                        if self.pieces[iy] == self.whiteRooks[gr]  {
+                                                                                            self.points -= 500
+                                                                                            self.whiteRooks.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    
+                                                                                    for var gr = 0; gr < self.blackRooks.count; gr++ {
+                                                                                        if self.pieces[iy] == self.blackRooks[gr]  {
+                                                                                            self.points += 500
+                                                                                            self.blackRooks.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < self.whiteKnights.count; gr++ {
+                                                                                        if self.pieces[iy] == self.whiteKnights[gr]  {
+                                                                                            self.points -= 300
+                                                                                            self.whiteKnights.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < self.blackKnights.count; gr++ {
+                                                                                        if self.pieces[iy] == self.blackKnights[gr]  {
+                                                                                            self.points += 300
+                                                                                            self.blackKnights.removeAtIndex(gr)
+                                                                                            print("blackKnights taken")
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < self.whiteBishops.count; gr++ {
+                                                                                        if self.pieces[iy] == self.whiteBishops[gr]  {
+                                                                                            self.points -= 300
+                                                                                            self.whiteBishops.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < self.blackBishops.count; gr++ {
+                                                                                        if self.pieces[iy] == self.blackBishops[gr]  {
+                                                                                            self.points += 300
+                                                                                            self.blackBishops.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < self.whiteQueens.count; gr++ {
+                                                                                        if self.pieces[iy] == self.whiteQueens[gr]  {
+                                                                                            self.points -= 900
+                                                                                            self.whiteQueens.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                    for var gr = 0; gr < self.blackQueens.count; gr++ {
+                                                                                        if self.pieces[iy] == self.blackQueens[gr]  {
+                                                                                            self.points += 900
+                                                                                            self.blackQueens.removeAtIndex(gr)
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                                chartData()
+                                                                                
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     self.pieces[iy].alpha = 0
                                                                                     }, completion: {finish in
                                                                                         
-                                                                                                
+                                                                                        
                                                                                 })
                                                                                 
                                                                             }
@@ -3346,6 +3485,19 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 var checkMate4 = false
                                                                                 var checkMate5 = false
                                                                                 
+                                                                                if self.whiteKnights.count == 0 {
+                                                                                    checkMate1 = true
+                                                                                }
+                                                                                if self.whiteBishops.count == 0 {
+                                                                                    checkMate2 = true
+                                                                                }
+                                                                                if self.whiteRooks.count == 0 {
+                                                                                    checkMate3 = true
+                                                                                }
+                                                                                if self.whiteQueens.count == 0 {
+                                                                                    checkMate4 = true
+                                                                                }
+                                                                                self.removePieceOptions()
                                                                                 for var i = 0; i < self.whiteKnights.count;i++ {
                                                                                     if self.chessPieceSelected(2, pieceid: 2, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKnights[i]) == 0 {
                                                                                         checkMate1 = true
@@ -3385,34 +3537,43 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 var staleMate4 = false
                                                                                 var staleMate5 = false
                                                                                 
+                                                                                if self.whiteKnights.count == 0 {
+                                                                                    staleMate1 = true
+                                                                                }
+                                                                                if self.whiteBishops.count == 0 {
+                                                                                    staleMate2 = true
+                                                                                }
+                                                                                if self.whiteRooks.count == 0 {
+                                                                                    staleMate3 = true
+                                                                                }
+                                                                                if self.whiteQueens.count == 0 {
+                                                                                    staleMate4 = true
+                                                                                }
+                                                                                self.removePieceOptions()
                                                                                 for var i = 0; i < self.whiteKnights.count;i++ {
                                                                                     if self.chessPieceSelected(2, pieceid: 2, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKnights[i]) == 0 {
                                                                                         staleMate1 = true
                                                                                         print(staleMate1)
                                                                                     }
                                                                                 }
-                                                                                self.removePieceOptions()
                                                                                 for var i = 0; i < self.whiteBishops.count;i++ {
                                                                                     if self.chessPieceSelected(9, pieceid: 1, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteBishops[i]) == 0 {
                                                                                         staleMate2 = true
                                                                                         print(staleMate2)
                                                                                     }
                                                                                 }
-                                                                                self.removePieceOptions()
                                                                                 for var i = 0; i < self.whiteRooks.count;i++ {
                                                                                     if self.chessPieceSelected(9, pieceid: 3, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteRooks[i]) == 0 {
                                                                                         staleMate3 = true
                                                                                         print(staleMate3)
                                                                                     }
                                                                                 }
-                                                                                self.removePieceOptions()
                                                                                 for var i = 0; i < self.whiteQueens.count;i++ {
                                                                                     if self.chessPieceSelected(9, pieceid: 4, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteQueens[i]) == 0 {
                                                                                         staleMate4 = true
                                                                                         print(staleMate4)
                                                                                     }
                                                                                 }
-                                                                                self.removePieceOptions()
                                                                                 if self.chessPieceSelected(2, pieceid: 5, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKing) == 0 {
                                                                                     staleMate5 = true
                                                                                     print(staleMate5)
