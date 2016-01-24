@@ -4646,28 +4646,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         for var ty = 0; ty < self.whitePieces.count; ty++ {
                                                                             if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                 
-                                                                                if (!self.contains(takenWhitePieces, _image: self.pieces[iy])) {
-                                                                                    var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
-                                                                                    takenPiece.image = self.pieces[iy].image
-                                                                                    takenWhitePieces += [self.pieces[iy]]
-                                                                                    self.view.addSubview(takenPiece)
-                                                                                }
-                                                                                takenWhitePiecesForInfo += [self.pieces[iy]]
-                                                                                for var t = 0; t < takenWhitePiecesLbl.count; t++ {
-                                                                                    if (self.pieces[iy].image == UIImage(named: whitePiecesTypes[t])) {
-                                                                                        whiteCount[t] += 1
-                                                                                        if (!self.containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[t])) {
-                                                                                            takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
-                                                                                            takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
-                                                                                        }
-                                                                                        takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
-                                                                                        takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                        takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
-                                                                                        takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                        self.view.addSubview(takenWhitePiecesLbl[t])
-                                                                                    }
-                                                                                }
-                                                                                
+                                              
                                                                                 self.pieceToTake += [self.whitePieces[ty]]
                                                                                 //    self.whitePieces[ty].removeFromSuperview()
                                                                                 self.whitePieces.removeAtIndex(ty)
@@ -4680,31 +4659,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         for var ty = 0; ty < self.blackPieces.count; ty++ {
                                                                             if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                 
-                                                                                if (!self.contains(takenBlackPieces, _image: pieces[iy])) {
-                                                                                    var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
-                                                                                    takenPiece.image = pieces[iy].image
-                                                                                    takenBlackPieces += [pieces[iy]]
-                                                                                    view.addSubview(takenPiece)
-                                                                                }
-                                                                                takenBlackPiecesForInfo += [self.pieces[iy]]
-                                                                                
-                                                                                for var t = 0; t < takenBlackPiecesLbl.count; t++ {
-                                                                                    print(blackCount[t])
-                                                                                    if (pieces[iy].image == UIImage(named: blackPiecesTypes[t])) {
-                                                                                        blackCount[t] += 1
-                                                                                        print("Taken piece")
-                                                                                        if (!containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[t])) {
-                                                                                            takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
-                                                                                            takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
-                                                                                        }
-                                                                                        takenBlackPiecesLbl[t].text = "" + blackCount[t].description
-                                                                                        takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                        takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
-                                                                                        takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                        view.addSubview(takenBlackPiecesLbl[t])
-                                                                                    }
-                                                                                }
-                                                                                
+                     
                                                                                 self.pieceToTake += [self.blackPieces[ty]]
                                                                                 //      self.blackPieces[ty].removeFromSuperview()
                                                                                 self.blackPieces.removeAtIndex(ty)
@@ -4799,6 +4754,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
             }
         }
+        updateLogic() 
     }
     
     var d3 = 0
@@ -4823,7 +4779,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if String(movesCap[moveNumber][2])  == "0" {
                         if  moveNumber % 2 == 0 {
                             print("Castling white long")
-                            UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
+                            UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                                 
                                 if self.iamWhite {
                                     self.whiteKing.frame.origin.x = c
@@ -4853,7 +4809,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         else {
                             
                             print("Castling black long")
-                            UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
+                            UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                                 
                                 if self.iamWhite {
                                     self.blackKing.frame.origin.x = c
@@ -4888,7 +4844,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if  moveNumber % 2 == 0 {
                         print("Castling white short")
                         
-                        UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
+                        UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                             
                             if self.iamWhite {
                                 self.whiteKing.frame.origin.x = g
@@ -4916,7 +4872,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                     } else {
                         print("Castling black short")
-                        UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
+                        UIView.animateWithDuration(0.15, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                             // white castling bottom-right
                             
                             if self.iamWhite {
@@ -5029,28 +4985,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         
                                                                         for var ty = 0; ty < self.whitePieces.count; ty++ {
                                                                             if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                
-                                                                                if (!self.contains(takenWhitePieces, _image: self.pieces[iy])) {
-                                                                                    var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
-                                                                                    takenPiece.image = self.pieces[iy].image
-                                                                                    takenWhitePieces += [self.pieces[iy]]
-                                                                                    self.view.addSubview(takenPiece)
-                                                                                }
-                                                                                takenWhitePiecesForInfo += [self.pieces[iy]]
-                                                                                for var t = 0; t < takenWhitePiecesLbl.count; t++ {
-                                                                                    if (self.pieces[iy].image == UIImage(named: whitePiecesTypes[t])) {
-                                                                                        whiteCount[t] += 1
-                                                                                        if (!self.containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[t])) {
-                                                                                            takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
-                                                                                            takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
-                                                                                        }
-                                                                                        takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
-                                                                                        takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                        takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
-                                                                                        takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                        self.view.addSubview(takenWhitePiecesLbl[t])
-                                                                                    }
-                                                                                }
+                                  
                                                                                 
                                                                                 self.pieceToTake += [self.whitePieces[ty]]
                                                                                 //    self.whitePieces[ty].removeFromSuperview()
@@ -5063,31 +4998,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         }
                                                                         for var ty = 0; ty < self.blackPieces.count; ty++ {
                                                                             if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                
-                                                                                if (!self.contains(takenBlackPieces, _image: pieces[iy])) {
-                                                                                    var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
-                                                                                    takenPiece.image = pieces[iy].image
-                                                                                    takenBlackPieces += [pieces[iy]]
-                                                                                    view.addSubview(takenPiece)
-                                                                                }
-                                                                                takenBlackPiecesForInfo += [self.pieces[iy]]
-                                                                                
-                                                                                for var t = 0; t < takenBlackPiecesLbl.count; t++ {
-                                                                                    print(blackCount[t])
-                                                                                    if (pieces[iy].image == UIImage(named: blackPiecesTypes[t])) {
-                                                                                        blackCount[t] += 1
-                                                                                        print("Taken piece")
-                                                                                        if (!containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[t])) {
-                                                                                            takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
-                                                                                            takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
-                                                                                        }
-                                                                                        takenBlackPiecesLbl[t].text = "" + blackCount[t].description
-                                                                                        takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                        takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
-                                                                                        takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                        view.addSubview(takenBlackPiecesLbl[t])
-                                                                                    }
-                                                                                }
                                                                                 
                                                                                 self.pieceToTake += [self.blackPieces[ty]]
                                                                                 //      self.blackPieces[ty].removeFromSuperview()
