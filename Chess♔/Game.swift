@@ -2955,7 +2955,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 chartData()
                                                                                 
                                                                             }
-                                                          //                  chartData()
+                                                                            
                                                                         }
                                                                         
                                                                     }
