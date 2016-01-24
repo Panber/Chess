@@ -1306,7 +1306,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         }
                                                                                     }
                                                                                 }
-                                                                                chartData()
+                                                                          //      chartData()
                                                                                 
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     
@@ -1570,7 +1570,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         }
                                                                                     }
                                                                                 }
-                                                                                chartData()
+                                                                     //           chartData()
                                                                             }
                                                                         }
                                                                         
@@ -1738,7 +1738,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             let check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
             check.observeEventType(.ChildChanged, withBlock: { snapshot in
                 print(snapshot.value)
-                
+                if self.didEnterTimeCapsule {
+                    self.magic4(Int(self.slider.value))
+                }
                 if self.game ["whitePlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "white" {
                     
                     //   self.loadVariablesAndConstants()
@@ -1889,7 +1891,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.blackKnights += [self.pieces[i]]
                                                                                 self.blackPawns.removeAtIndex(w)
                                                                             }
-                                                                            self.promotionAtIndex.append(self.notations.count-1)
+                                                                            self.promotionAtIndex.append(self.movesCap.count-1)
                                                                         }
                                                                     }
                                                                     
@@ -2175,11 +2177,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     
                 }
-                
+                self.myturnAfterTimeCapsule = true
                 }, withCancelBlock: { error in
                     print(error.description)
             })
             //firebase - end
+            
         }
         else {
             
@@ -2625,7 +2628,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         }
                                                                                     }
                                                                                 }
-                                                                                chartData()
+                                                                           //     chartData()
                                                                                 
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     self.pieces[iy].alpha = 0
@@ -2867,7 +2870,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     }
                                                                                 }
                                                                             }
-                                                                            chartData()
+                                                          //                  chartData()
                                                                         }
                                                                         
                                                                     }
@@ -3052,13 +3055,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
             })
             
+
             //firebase
             //check for any changes that may have accured at the destined game ≈_≈
             let check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
             check.observeEventType(.ChildChanged, withBlock: { snapshot in
                 print(snapshot.value)
                 
-                
+                if self.didEnterTimeCapsule {
+                    self.magic4(Int(self.slider.value))
+                }
                 if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black" {
                     
                     
@@ -3205,7 +3211,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 self.blackKnights += [self.pieces[i]]
                                                                                 self.blackPawns.removeAtIndex(w)
                                                                             }
-                                                                            self.promotionAtIndex.append(self.notations.count-1)
+                                                                            self.promotionAtIndex.append(self.movesCap.count-1)
                                                                             
                                                                         }
                                                                         
@@ -3475,11 +3481,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                 }
-                
+                self.myturnAfterTimeCapsule = true
                 }, withCancelBlock: { error in
                     print(error.description)
             })
             //firebase - end
+            
+ 
         }
         
     }
@@ -3662,11 +3670,46 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var sliderPointer = UILabel()
     var notationsL = UILabel()
     var fNum = Double()
-    
+    var myturnAfterTimeCapsule = Bool()
+    var didEnterTimeCapsule = false
+
     
     // MARK: -Time Capsule
     func capsuleButtonPressed(sender: UIButton!) {
         
+        removePieceOptions()
+        hideMarkedPiece()
+        
+        
+        didEnterTimeCapsule = true
+        
+        for var i = 0; i < piecesArrs.count; i++ {
+            for var t = 0; t < piecesArrs[i].count; t++ {
+                piecesArrs[i][t].userInteractionEnabled = false
+                piecesArrs[i][t].multipleTouchEnabled = false
+            }
+        }
+        
+        if iamWhite {
+            if movesCap.count % 2 == 0 {
+                myturnAfterTimeCapsule = true
+            }
+            else {
+                myturnAfterTimeCapsule = false
+
+            }
+        }
+        else {
+            if movesCap.count % 2 == 0 {
+                myturnAfterTimeCapsule = false
+            }
+            else {
+                myturnAfterTimeCapsule = true
+                
+            }
+        }
+        
+
         
         forwardB.userInteractionEnabled = true
         backwardB.userInteractionEnabled = true
@@ -3860,6 +3903,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         if canPressForwardButton == true {
             
+            
+            
             slider.value++
             backwardB.enabled = true
             print(slider.value)
@@ -3890,6 +3935,18 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 forwardB.userInteractionEnabled = false
                 backwardB.userInteractionEnabled = false
                 exitTimeCapsuleB.userInteractionEnabled = false
+                
+                didEnterTimeCapsule = false
+                
+                if myturnAfterTimeCapsule {
+                    
+                    for var i = 0; i < piecesArrs.count; i++ {
+                        for var t = 0; t < piecesArrs[i].count; t++ {
+                            piecesArrs[i][t].userInteractionEnabled = true
+                            piecesArrs[i][t].multipleTouchEnabled = true
+                        }
+                    }
+                }
                 
                 
                 self.timeGL.frame.origin.y -= 100
@@ -3960,6 +4017,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         
         if canPressBackwardButton == true {
+            
+            
+            
+            
             slider.value--
             print(slider.value)
             sliderPointer.frame.origin.x -= CGFloat((screenWidth/CGFloat(movesCap.count+1)))
@@ -4010,7 +4071,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         slider.value = slider.maximumValue
         
+        didEnterTimeCapsule = false
         
+        if myturnAfterTimeCapsule {
+            
+            for var i = 0; i < piecesArrs.count; i++ {
+                for var t = 0; t < piecesArrs[i].count; t++ {
+                    piecesArrs[i][t].userInteractionEnabled = true
+                    piecesArrs[i][t].multipleTouchEnabled = true
+                }
+            }
+        }
         
         if slider.value == slider.maximumValue {
             forwardB.enabled = false
@@ -4121,7 +4192,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             
                             }, completion: { finish in
-                                self.updateLogic()
+                              //  self.updateLogic()
                                 self.canPressBackwardButton = true
                         })
                         
@@ -4148,7 +4219,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             
                             }, completion: { finish in
-                                self.updateLogic()
+                              //  self.updateLogic()
                                 self.canPressBackwardButton = true
                         })
                         
@@ -4181,7 +4252,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         
                         }, completion: { finish in
-                            self.updateLogic()
+                         //   self.updateLogic()
                             self.canPressBackwardButton = true
                     })
                     
@@ -4204,7 +4275,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.whiteRook2.frame.origin.y = _1
                         }
                         }, completion: { finish in
-                            self.updateLogic()
+                       //     self.updateLogic()
                             self.canPressBackwardButton = true
                     })
                     
@@ -4319,6 +4390,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     
                                                                     blackPawns += [pieces[i]]
                                                                     print("pat is \(promotionAtIndex[pat])")
+                                                                    print(iamWhite)
+                                                                    print(o)
+                                                                    print(movesCap.count)
+
+
                                                                     pieces[i].image = UIImage(named:"blackPawn")
                                                                 }
                                                             }
@@ -6156,6 +6232,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     func showMarkedPiece() {
         pieceMarked.hidden = false
         pieceMarked.frame = CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y, pieceSize, pieceSize)
+    }
+    func hideMarkedPiece() {
+        pieceMarked.hidden = true
+
     }
     
     func removePieceOptions() {
