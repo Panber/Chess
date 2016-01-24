@@ -1169,6 +1169,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 whiteCount[t] += 1
                                                                                                 if (!self.containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[t])) {
                                                                                                     takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                                                                                    takenWhitePiecesLbl[t].frame.origin.y += 5
+
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
                                                                                                 takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
@@ -1206,6 +1208,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 print("Taken piece")
                                                                                                 if (!containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[t])) {
                                                                                                     takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                                                                                    takenBlackPiecesLbl[t].frame.origin.y += 5
+
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].text = "" + blackCount[t].description
@@ -1405,6 +1409,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 whiteCount[t] += 1
                                                                                                 if (!self.containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[t])) {
                                                                                                     takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                                                                                    takenWhitePiecesLbl[t].frame.origin.y += 5
+
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
                                                                                                 takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
@@ -1442,6 +1448,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 print("Taken piece")
                                                                                                 if (!containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[t])) {
                                                                                                     takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                                                                                    takenBlackPiecesLbl[t].frame.origin.y += 5
+
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].text = "" + blackCount[t].description
@@ -2047,14 +2055,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     //                                                                                                                popViewController.title = "This is a popup view"
                                                                                     //                                                                                                                popViewController.showInView(self.view, withImage: self.otherUserImage, withMessage: "hans won by Checkmate", animated: true)
                                                                                     
-                                                                                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                                                        visualEffectView.alpha = 1
-                                                                                        }, completion: {finish in
-                                                                                            visualEffectSub.userInteractionEnabled = true
-                                                                                            visualEffectView.userInteractionEnabled = true
-                                                                                    })
+                                                       
                                                                                     
-                                                                                    self.gameFinishedScreen("")
+                                                                                    self.gameFinishedScreen("won",statusBy: "chekmate.")
                                                                                     
                                                                                 }
                                                                             } else {
@@ -2092,14 +2095,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     //                                                                                                                popViewController.title = "This is a popup view"
                                                                                     //                                                                                                                popViewController.showInView(self.view, withImage: self.otherUserImage, withMessage: "hans won by Checkmate", animated: true)
                                                                                     
-                                                                                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                                                        visualEffectView.alpha = 1
-                                                                                        }, completion: {finish in
-                                                                                            visualEffectSub.userInteractionEnabled = true
-                                                                                            visualEffectView.userInteractionEnabled = true
-                                                                                    })
+
                                                                                     
-                                                                                    self.gameFinishedScreen("")
+                                                                                    self.gameFinishedScreen("drew",statusBy: "stalemate")
                                                                                     
                                                                                 }
                                                                             }
@@ -2481,7 +2479,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
                                                                                         if (!self.contains(takenBlackPieces, _image: self.pieces[iy])) {
+                                                                                            
                                                                                             var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                                                                            
                                                                                             takenPiece.image = self.pieces[iy].image
                                                                                             takenBlackPieces += [self.pieces[iy]]
                                                                                             self.view.addSubview(takenPiece)
@@ -2491,7 +2491,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             if (self.pieces[iy].image == UIImage(named: blackPiecesTypes[t])) {
                                                                                                 blackCount[t] += 1
                                                                                                 if (!self.containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[t])) {
+                                                                                                    
                                                                                                     takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                                                                                    takenBlackPiecesLbl[t].frame.origin.y += 5
+                                                                                                    
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].text = "" + blackCount[t].description
@@ -2526,6 +2529,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 whiteCount[t] += 1
                                                                                                 if (!self.containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[t])) {
                                                                                                     takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                                                                                    takenWhitePiecesLbl[t].frame.origin.y += 5
+
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
                                                                                                 takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
@@ -2729,6 +2734,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 blackCount[t] += 1
                                                                                                 if (!self.containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[t])) {
                                                                                                     takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                                                                                    takenBlackPiecesLbl[t].frame.origin.y += 5
+
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].text = "" + blackCount[t].description
@@ -2763,6 +2770,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 whiteCount[t] += 1
                                                                                                 if (!self.containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[t])) {
                                                                                                     takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                                                                                    takenWhitePiecesLbl[t].frame.origin.y += 5
+
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
                                                                                                 takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
@@ -3358,14 +3367,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     //                                                                                    var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
                                                                                     //                                                                                    popViewController.title = "This is a popup view"
                                                                                     //                                                                                    popViewController.showInView(self.view, withImage: self.otherUserImage, withMessage: "hans won by Checkmate", animated: true)
-                                                                                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                                                        visualEffectView.alpha = 1
-                                                                                        }, completion: {finish in
-                                                                                            visualEffectSub.userInteractionEnabled = true
-                                                                                            visualEffectView.userInteractionEnabled = true
-                                                                                    })
+                                    
                                                                                     
-                                                                                    self.gameFinishedScreen("")
+                                                                                    self.gameFinishedScreen("won",statusBy: "chekmate.")
                                                                                 }
                                                                             } else {
                                                                                 // Stalemate
@@ -5319,7 +5323,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     
-    func gameFinishedScreen(var statusWhite:String) {
+    func gameFinishedScreen(var statusWhite:String, var statusBy:String) {
         
         
         
@@ -5361,7 +5365,29 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         scrollView1.addSubview(iImage)
         
         var wonLabel = UILabel(frame: CGRectMake(20,screenHeight/2-56 - screenHeight/8 - 30 - 10,screenWidth-40, 102))
-        wonLabel.text = "You won against arnold by checkmate!"
+        
+        let sb = (game["blackPlayer"] as? String)!
+        let sw = (game["whitePlayer"] as? String)!
+        if statusWhite == "won" && iamWhite {
+            wonLabel.text = "You won against " + "\(sb)" + " by " + statusBy
+        }
+        else if statusWhite == "lost" && iamWhite {
+            wonLabel.text = "You lost against " + "\(sb)" + " by " + statusBy
+        }
+        if statusWhite == "won" && !iamWhite {
+            wonLabel.text = "You lost against " + "\(sw)" + " by " + statusBy
+        }
+        else if statusWhite == "lost" && !iamWhite {
+            wonLabel.text = "You won against " + "\(sw)" + " by " + statusBy
+        }
+        else if statusWhite == "drew" && !iamWhite {
+            wonLabel.text = "You drew against " + "\(sw)" + " by " + statusBy
+        }
+        else if statusWhite == "drew" && iamWhite {
+            wonLabel.text = "You drew against " + "\(sb)" + " by " + statusBy
+        }
+        
+        
         wonLabel.textAlignment = .Center
         if darkMode {wonLabel.textColor = UIColor.whiteColor()}
         else {wonLabel.textColor = UIColor.blackColor() }
@@ -7591,19 +7617,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         //                    popViewController.title = "This is a popup view"
                         //                    popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
                         
-                        UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            visualEffectView.alpha = 1
-                            }, completion: {finish in
-                                visualEffectSub.userInteractionEnabled = true
-                                visualEffectView.userInteractionEnabled = true
-                        })
+
                         
-                        gameFinishedScreen("")
+                        self.gameFinishedScreen("won",statusBy: "chekmate.")
                         
                         print("Check mate!")
                         
                     }
-                } else {
+                }
+                else {
                     var staleMate1 = false
                     var staleMate2 = false
                     var staleMate3 = false
@@ -7705,14 +7727,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         //                    popViewController.title = "This is a popup view"
                         //                    popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
                         
-                        UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            visualEffectView.alpha = 1
-                            }, completion: {finish in
-                                visualEffectSub.userInteractionEnabled = true
-                                visualEffectView.userInteractionEnabled = true
-                        })
+
                         
-                        gameFinishedScreen("")
+                        self.gameFinishedScreen("won",statusBy: "chekmate.")
                         
                         print("Check mate!")
                     }
