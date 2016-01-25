@@ -96,6 +96,8 @@ var takenBlackBishop = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count 
 var takenBlackKnight = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
 var takenBlackRook = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
 var takenBlackQueen = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
+
+
 var takenBlackPiecesLbl :Array<UILabel> = [takenBlackPawn, takenBlackBishop, takenBlackKnight, takenBlackRook, takenBlackQueen]
 var takenBlackPiecesShow :Array<UILabel> = []
 
@@ -115,6 +117,7 @@ var takenWhiteBishop = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count 
 var takenWhiteKnight = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 - 4.7 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
 var takenWhiteRook = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 - 4.7 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
 var takenWhiteQueen = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 - 4.7 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
+
 var takenWhitePiecesLbl :Array<UILabel> = [takenWhitePawn, takenWhiteBishop, takenWhiteKnight, takenWhiteRook, takenWhiteQueen]
 var takenWhitePiecesShow :Array<UILabel> = []
 
@@ -1739,7 +1742,94 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             check.observeEventType(.ChildChanged, withBlock: { snapshot in
                 print(snapshot.value)
                 if self.didEnterTimeCapsule {
+                    self.forwardB.userInteractionEnabled = false
+                    self.backwardB.userInteractionEnabled = false
+                    self.exitTimeCapsuleB.userInteractionEnabled = false
+                    
                     self.magic4(Int(self.slider.value))
+                    
+                    self.slider.value = self.slider.maximumValue
+                    
+                    self.didEnterTimeCapsule = false
+                    
+                    if self.myturnAfterTimeCapsule {
+                        
+                        for var i = 0; i < self.piecesArrs.count; i++ {
+                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                self.piecesArrs[i][t].userInteractionEnabled = true
+                                self.piecesArrs[i][t].multipleTouchEnabled = true
+                            }
+                        }
+                    }
+                    
+                    if self.slider.value == self.slider.maximumValue {
+                        self.forwardB.enabled = false
+                        
+                        
+                        
+                        UIView.animateWithDuration(0.8, animations: { () -> Void in
+                            self.slider.frame.origin.y = screenHeight/2 + 150
+                            self.capsuleB.frame.origin.y = screenHeight/2 + 246
+                            self.capsuleL.frame.origin.y = 200
+                            
+                            self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                            self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                            
+                            self.collectionView.frame.origin.y  = 86
+                            self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 20
+                            self.otherImage.frame.origin.y = 64 + 13
+                            
+                            
+                            self.sliderPointer.frame.origin.y = screenHeight/2 + screenWidth/2
+                            self.notationsL.frame.origin.y = screenHeight/2 + 150 - 47
+                            self.exitTimeCapsuleB.frame.origin.y = screenHeight/2 + 150 - 47
+                            
+                            
+                            
+                            self.timeGL.frame.origin.y -= 100
+                            self.turnGL.frame.origin.y -= 100
+                            self.turnIndicatorG.frame.origin.y -= 100
+                            
+                            if screenHeight == 667 {
+                                self.capsuleB.frame.origin.y = screenHeight/2 + 220
+                                self.slider.frame.origin.y = screenHeight/2 + 150
+                                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                                self.collectionView.frame.origin.y = 78
+                                
+                                self.otherImage.frame.origin.y = 64 + 8
+                                self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 13
+                                
+                                
+                            }
+                            else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                                self.slider.frame.origin.y = screenHeight/2 + 150 - 50
+                                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                                self.collectionView.frame.origin.y = 74
+                                
+                                self.otherImage.frame.origin.y = 64 + 7
+                                self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 9
+                                
+                                
+                            }
+                            else   if screenHeight == 480 {
+                                self.slider.frame.origin.y = screenHeight/2 + 150 - 47
+                                self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                                self.collectionView.frame.origin.y = 74
+                                
+                                
+                            }
+                            
+                            }, completion: {finish in
+                                //sender.value = 50
+                                
+                        })
+                        
+                    }
+
                 }
                 if self.game ["whitePlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "white" {
                     
@@ -1916,6 +2006,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 whiteCount[t] += 1
                                                                                                 if (!self.containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[t])) {
                                                                                                     takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                                                                                    takenWhitePiecesLbl[t].frame.origin.y += 5
+
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
                                                                                                 takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
@@ -3148,7 +3240,94 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 print(snapshot.value)
                 
                 if self.didEnterTimeCapsule {
+                    self.forwardB.userInteractionEnabled = false
+                    self.backwardB.userInteractionEnabled = false
+                    self.exitTimeCapsuleB.userInteractionEnabled = false
+                    
                     self.magic4(Int(self.slider.value))
+                    
+                    self.slider.value = self.slider.maximumValue
+                    
+                    self.didEnterTimeCapsule = false
+                    
+                    if self.myturnAfterTimeCapsule {
+                        
+                        for var i = 0; i < self.piecesArrs.count; i++ {
+                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                self.piecesArrs[i][t].userInteractionEnabled = true
+                                self.piecesArrs[i][t].multipleTouchEnabled = true
+                            }
+                        }
+                    }
+                    
+                    if self.slider.value == self.slider.maximumValue {
+                        self.forwardB.enabled = false
+                        
+                        
+                        
+                        UIView.animateWithDuration(0.8, animations: { () -> Void in
+                            self.slider.frame.origin.y = screenHeight/2 + 150
+                            self.capsuleB.frame.origin.y = screenHeight/2 + 246
+                            self.capsuleL.frame.origin.y = 200
+                            
+                            self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                            self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                            
+                            self.collectionView.frame.origin.y  = 86
+                            self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 20
+                            self.otherImage.frame.origin.y = 64 + 13
+                            
+                            
+                            self.sliderPointer.frame.origin.y = screenHeight/2 + screenWidth/2
+                            self.notationsL.frame.origin.y = screenHeight/2 + 150 - 47
+                            self.exitTimeCapsuleB.frame.origin.y = screenHeight/2 + 150 - 47
+                            
+                            
+                            
+                            self.timeGL.frame.origin.y -= 100
+                            self.turnGL.frame.origin.y -= 100
+                            self.turnIndicatorG.frame.origin.y -= 100
+                            
+                            if screenHeight == 667 {
+                                self.capsuleB.frame.origin.y = screenHeight/2 + 220
+                                self.slider.frame.origin.y = screenHeight/2 + 150
+                                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
+                                self.collectionView.frame.origin.y = 78
+                                
+                                self.otherImage.frame.origin.y = 64 + 8
+                                self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 13
+                                
+                                
+                            }
+                            else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                                self.slider.frame.origin.y = screenHeight/2 + 150 - 50
+                                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                                self.collectionView.frame.origin.y = 74
+                                
+                                self.otherImage.frame.origin.y = 64 + 7
+                                self.meImage.frame.origin.y = (screenHeight/2) + (screenWidth/2) + 9
+                                
+                                
+                            }
+                            else   if screenHeight == 480 {
+                                self.slider.frame.origin.y = screenHeight/2 + 150 - 47
+                                self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                                self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                                self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
+                                self.collectionView.frame.origin.y = 74
+                                
+                                
+                            }
+                            
+                            }, completion: {finish in
+                                //sender.value = 50
+                                
+                        })
+                        
+                    }
+
                 }
                 if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black" {
                     
@@ -3325,6 +3504,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 blackCount[t] += 1
                                                                                                 if (!self.containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[t])) {
                                                                                                     takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                                                                                    takenBlackPiecesLbl[t].frame.origin.y += 5
+
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].text = "" + blackCount[t].description
