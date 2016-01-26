@@ -457,12 +457,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         let pieceSize = sqrt(screenWidth * screenWidth / 64)
         
         promotionAtIndex = []
-        
-        
+
         pointsStorage = []
-        
-        
-        
+
         points = Double()
         
         
@@ -6995,7 +6992,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     // This is for left castling white king
                     for var q = 0; q < friend.count; q++ {
                         for var i = 1; i < 4; i++ {
-                            if pieceid == 5 && hasWhiteKingMoved == false && hasWhiteRookMoved == false {
+                            if pieceid == 5 && hasWhiteKingMoved == false && hasWhiteRookMoved == false && chosenPiece.image == UIImage(named:"whiteKing") {
                                 print("Castlle white long")
                                 let pieceOption2 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x - CGFloat(i) * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
@@ -7006,7 +7003,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                         for var i = 1; i < 3; i++ {
-                            if pieceid == 5 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false {
+                            if pieceid == 5 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false && chosenPiece.image == UIImage(named:"whiteKing") {
                                 print("Castlle white short")
                                 let pieceOption2 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x + CGFloat(i) * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
@@ -7019,7 +7016,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     for var q = 0; q < friend.count; q++ {
                         for var i = 1; i < 3; i++ {
-                            if pieceid == 5 && hasBlackKingMoved == false && hasBlackRookMoved == false {
+                            if pieceid == 5 && hasBlackKingMoved == false && hasBlackRookMoved == false && chosenPiece.image == UIImage(named:"blackKing") {
                                 print("Castlle black short")
                                 let pieceOption2 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x - CGFloat(i) * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
@@ -7030,7 +7027,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                         for var i = 1; i < 4; i++ {
-                            if pieceid == 5 && hasBlackKingMoved == false && hasBlackRookMoved2 == false {
+                            if pieceid == 5 && hasBlackKingMoved == false && hasBlackRookMoved2 == false && chosenPiece.image == UIImage(named:"blackKing") {
                                 print("Castlle black long")
                                 let pieceOption2 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x + CGFloat(i) * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                                 //pieceOption2.image = UIImage(named: "piecePossibilities.png")
