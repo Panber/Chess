@@ -3485,7 +3485,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     if  (range != nil) {
                                                                         print("letters  found")
                                                                         for var iy = 0; iy < self.pieces.count; iy++ {
-                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassant == true {
+                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.blackPawns) && self.canPassantBlack == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassant == true {
                                                                                 
                                                                                 print("iy is \(iy)")
                                                                                 
@@ -8888,6 +8888,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     whiteCount[t] += 1
                                     if (!containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[t])) {
                                         takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                        takenWhitePiecesLbl[t].frame.origin.y += 5
                                         takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                     }
                                     takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
@@ -8964,6 +8965,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     whiteCount[b] += 1
                                     if (!containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[b])) {
                                         takenWhitePiecesLbl[b].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                        takenWhitePiecesLbl[t].frame.origin.y += 5
                                         takenWhitePiecesShow += [takenWhitePiecesLbl[b]]
                                     }
                                     takenWhitePiecesLbl[b].text = "" + whiteCount[b].description
