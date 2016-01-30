@@ -1203,7 +1203,7 @@
         <scene sceneID="ICd-Pm-2GB">
             <objects>
                 <navigationController storyboardIdentifier="Tab" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZtP-fs-Dvj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Play" image="ChessIconTab.png" id="dHm-k1-ffu"/>
+                    <tabBarItem key="tabBarItem" title="Play" image="ChessIconTab2.png" id="dHm-k1-ffu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dlM-n8-8sJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2904,7 +2904,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ChessIconTab.png" width="30" height="30"/>
+        <image name="ChessIconTab2.png" width="30" height="30"/>
         <image name="DarkModePreview.png" width="1472" height="1490"/>
         <image name="Data.png" width="30" height="30"/>
         <image name="Data@3x_blue.png" width="140" height="140"/>

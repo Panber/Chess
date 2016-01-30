@@ -3485,7 +3485,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     if  (range != nil) {
                                                                         print("letters  found")
                                                                         for var iy = 0; iy < self.pieces.count; iy++ {
-                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.blackPawns) && self.canPassantBlack == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassant == true {
+                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && self.canSaveKing(self.pieces[iy], array: self.whitePawns) && self.canPassant == true {
                                                                                 
                                                                                 print("iy is \(iy)")
                                                                                 
@@ -8916,6 +8916,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                     }
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackPieces[t].frame.origin.x && pieceOptions[o].frame.origin.y == blackPieces[t].frame.origin.y - 1 * pieceSize && whitePassant == true && hasBeenTaken(selectedPiece, array: whitePieces)  {
+                        
+                        
+                        takenPiecesToReload.append(blackPieces[t])
+                        for var o = 0; o < pieces.count; o++ {
+                            if pieces[o] == blackPieces[t] {
+                                takenPiecesToReloadAtIndex.append(o)
+                            }
+                        }
                         blackPieces[t].removeFromSuperview()
                         blackPieces.removeAtIndex(t)
                         
