@@ -1392,10 +1392,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("x  found")
                                                                         
                                                                         for var iy = 0; iy < pieces.count ; iy++ {
-                                                                            
+
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns) {
-                                                                                
-                                                                                
+
+                                                                            
                                                                                 for var ty = 0; ty < self.whitePieces.count; ty++ {
                                                                                     if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         print("whitePieces take")
@@ -2888,10 +2888,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters  found")
                                                                         
                                                                         for var iy = 0; iy < pieces.count; iy++ {
-                                                                            
+
                                                                             if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns) {
-                                                                                
-                                                                                
+
+                                                                            
                                                                                 print("iy is \(iy)")
                                                                                 
                                                                                 for var ty = 0; ty < self.whitePieces.count; ty++ {
@@ -4902,7 +4902,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                     
                                                     
                                                 }}}}}}}}}}
-            
+
             
         }
         
@@ -8707,7 +8707,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if selectedPiece == whitePawns[i] && selectedPiece.frame.origin.y == _7 {
                         let promotionPiece = i
                         self.promoted = true
-                        
+                        self.promotionAtIndex.append(self.movesCap.count)
                         let actionSheet = UIAlertController(title: nil, message: "Promote pawn to:", preferredStyle: UIAlertControllerStyle.ActionSheet)
                         
                         let promoteToQueen = UIAlertAction(title: "Queen", style: .Default, handler: {
@@ -8727,6 +8727,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             for var q = 0; q < self.whiteQueens.count; q++ {
                                 self.chessPieceMovementLogic(9, pieceid: 4, friend: self.whitePieces, enemy: self.blackPieces, piece: self.whiteQueens[q] , logicOptions: self.piecesBlackLogic)
                             }
+                            
                             self.game.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
                                 if error == nil {
                                 }
@@ -8794,6 +8795,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 }
                             })
                         })
+                        
                         
                         actionSheet.addAction(promoteToQueen)
                         actionSheet.addAction(promoteToRook)
@@ -8921,7 +8923,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         takenPiecesToReload.append(blackPieces[t])
                         for var o = 0; o < pieces.count; o++ {
                             if pieces[o] == blackPieces[t] {
-                                takenPiecesToReloadAtIndex.append(o)
+                        takenPiecesToReloadAtIndex.append(o)
                             }
                         }
                         blackPieces[t].removeFromSuperview()
@@ -9288,4 +9290,3 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
     }
 }
-
