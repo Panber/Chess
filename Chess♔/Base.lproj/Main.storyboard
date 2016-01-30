@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -1203,7 +1203,7 @@
         <scene sceneID="ICd-Pm-2GB">
             <objects>
                 <navigationController storyboardIdentifier="Tab" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZtP-fs-Dvj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Play" image="ChessIconTab.png" id="dHm-k1-ffu"/>
+                    <tabBarItem key="tabBarItem" title="Play" image="ChessIconTab2.png" id="dHm-k1-ffu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dlM-n8-8sJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2904,7 +2904,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ChessIconTab.png" width="30" height="30"/>
+        <image name="ChessIconTab2.png" width="30" height="30"/>
         <image name="DarkModePreview.png" width="1472" height="1490"/>
         <image name="Data.png" width="30" height="30"/>
         <image name="Data@3x_blue.png" width="140" height="140"/>
