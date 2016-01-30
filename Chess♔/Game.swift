@@ -78,9 +78,14 @@ let xAxisArrq = [h,g,f,e,d,c,b,a]
 // This is for taken pieces
 var takenWhitePieces : Array<UIImageView> = []
 var takenBlackPieces : Array<UIImageView> = []
+// This is for taken pieces
+var takenWhitePiecesForMove : Array<UIImageView> = []
+var takenBlackPiecesForMove : Array<UIImageView> = []
 
 var takenWhitePiecesForInfo : Array<UIImageView> = []
 var takenBlackPiecesForInfo : Array<UIImageView> = []
+
+var takenPiece = UIImageView()
 
 var blackPawnCount = 0
 var blackBishopCount = 0
@@ -1161,9 +1166,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
                                                                                         if (!self.contains(takenWhitePieces, _image: self.pieces[iy])) {
-                                                                                            var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                                                                             takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                                                                             takenPiece.image = self.pieces[iy].image
                                                                                             takenWhitePieces += [self.pieces[iy]]
+                                                                                            takenWhitePiecesForMove += [takenPiece]
+
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
                                                                                         takenWhitePiecesForInfo += [self.pieces[iy]]
@@ -1197,9 +1204,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
                                                                                         if (!self.contains(takenBlackPieces, _image: pieces[iy])) {
-                                                                                            var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                                                                             takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                                                                             takenPiece.image = pieces[iy].image
                                                                                             takenBlackPieces += [pieces[iy]]
+                                                                                            takenBlackPiecesForMove += [takenPiece]
+
                                                                                             view.addSubview(takenPiece)
                                                                                         }
                                                                                         takenBlackPiecesForInfo += [self.pieces[iy]]
@@ -1400,9 +1409,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         print("whitePieces take")
                                                                                         if (!self.contains(takenWhitePieces, _image: self.pieces[iy])) {
-                                                                                            var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                                                                             takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                                                                             takenPiece.image = self.pieces[iy].image
                                                                                             takenWhitePieces += [self.pieces[iy]]
+                                                                                            takenWhitePiecesForMove += [takenPiece]
+
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
                                                                                         takenWhitePiecesForInfo += [self.pieces[iy]]
@@ -1436,9 +1447,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         print("blackPieces take")
                                                                                         if (!self.contains(takenBlackPieces, _image: pieces[iy])) {
-                                                                                            var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                                                                             takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                                                                             takenPiece.image = pieces[iy].image
                                                                                             takenBlackPieces += [pieces[iy]]
+                                                                                            takenBlackPiecesForMove += [takenPiece]
+
                                                                                             view.addSubview(takenPiece)
                                                                                         }
                                                                                         takenBlackPiecesForInfo += [self.pieces[iy]]
@@ -1769,6 +1782,34 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         
                         UIView.animateWithDuration(0.8, animations: { () -> Void in
+                            if self.iamWhite {
+                                for var t = 0; t < takenWhitePiecesLbl.count; t++ {
+                                    takenWhitePiecesLbl[t].frame.origin.y += 100
+                                }
+                                for var t = 0; t < takenWhitePiecesForMove.count; t++ {
+                                    takenWhitePiecesForMove[t].frame.origin.y += 100
+                                }
+                                for var t = 0; t < takenBlackPiecesLbl.count; t++ {
+                                    takenBlackPiecesLbl[t].frame.origin.y -= 100
+                                }
+                                for var t = 0; t < takenBlackPiecesForMove.count; t++ {
+                                    takenBlackPiecesForMove[t].frame.origin.y -= 100
+                                }
+                            }
+                            else {
+                                for var t = 0; t < takenWhitePiecesLbl.count; t++ {
+                                    takenWhitePiecesLbl[t].frame.origin.y -= 100
+                                }
+                                for var t = 0; t < takenWhitePiecesForMove.count; t++ {
+                                    takenWhitePiecesForMove[t].frame.origin.y -= 100
+                                }
+                                for var t = 0; t < takenBlackPiecesLbl.count; t++ {
+                                    takenBlackPiecesLbl[t].frame.origin.y += 100
+                                }
+                                for var t = 0; t < takenBlackPiecesForMove.count; t++ {
+                                    takenBlackPiecesForMove[t].frame.origin.y += 100
+                                }
+                            }
                             self.slider.frame.origin.y = screenHeight/2 + 150
                             self.capsuleB.frame.origin.y = screenHeight/2 + 246
                             self.capsuleL.frame.origin.y = 200
@@ -1996,9 +2037,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
                                                                                         if (!self.contains(takenWhitePieces, _image: self.pieces[iy])) {
-                                                                                            var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                                                                             takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                                                                             takenPiece.image = self.pieces[iy].image
                                                                                             takenWhitePieces += [self.pieces[iy]]
+                                                                                            takenWhitePiecesForMove += [takenPiece]
+
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
                                                                                         takenWhitePiecesForInfo += [self.pieces[iy]]
@@ -2658,10 +2701,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         
                                                                                         if (!self.contains(takenBlackPieces, _image: self.pieces[iy])) {
                                                                                             
-                                                                                            var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                                                                             takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                                                                             
                                                                                             takenPiece.image = self.pieces[iy].image
                                                                                             takenBlackPieces += [self.pieces[iy]]
+                                                                                            takenBlackPiecesForMove += [takenPiece]
+
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
                                                                                         takenBlackPiecesForInfo += [self.pieces[iy]]
@@ -2696,9 +2741,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
                                                                                         if (!self.contains(takenWhitePieces, _image: self.pieces[iy])) {
-                                                                                            var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                                                                             takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                                                                             takenPiece.image = self.pieces[iy].image
                                                                                             takenWhitePieces += [self.pieces[iy]]
+                                                                                            takenWhitePiecesForMove += [takenPiece]
+
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
                                                                                         takenWhitePiecesForInfo += [self.pieces[iy]]
@@ -2898,9 +2945,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
                                                                                         if (!self.contains(takenBlackPieces, _image: self.pieces[iy])) {
-                                                                                            var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                                                                             takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                                                                             takenPiece.image = self.pieces[iy].image
                                                                                             takenBlackPieces += [self.pieces[iy]]
+                                                                                            takenBlackPiecesForMove += [takenPiece]
+
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
                                                                                         takenBlackPiecesForInfo += [self.pieces[iy]]
@@ -2934,9 +2983,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
                                                                                         if (!self.contains(takenWhitePieces, _image: self.pieces[iy])) {
-                                                                                            var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                                                                             takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                                                                             takenPiece.image = self.pieces[iy].image
                                                                                             takenWhitePieces += [self.pieces[iy]]
+                                                                                            takenWhitePiecesForMove += [takenPiece]
+
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
                                                                                         takenWhitePiecesForInfo += [self.pieces[iy]]
@@ -3266,6 +3317,34 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         
                         UIView.animateWithDuration(0.8, animations: { () -> Void in
+                            if self.iamWhite {
+                                for var t = 0; t < takenWhitePiecesLbl.count; t++ {
+                                    takenWhitePiecesLbl[t].frame.origin.y += 100
+                                }
+                                for var t = 0; t < takenWhitePiecesForMove.count; t++ {
+                                    takenWhitePiecesForMove[t].frame.origin.y += 100
+                                }
+                                for var t = 0; t < takenBlackPiecesLbl.count; t++ {
+                                    takenBlackPiecesLbl[t].frame.origin.y -= 100
+                                }
+                                for var t = 0; t < takenBlackPiecesForMove.count; t++ {
+                                    takenBlackPiecesForMove[t].frame.origin.y -= 100
+                                }
+                            }
+                            else {
+                                for var t = 0; t < takenWhitePiecesLbl.count; t++ {
+                                    takenWhitePiecesLbl[t].frame.origin.y -= 100
+                                }
+                                for var t = 0; t < takenWhitePiecesForMove.count; t++ {
+                                    takenWhitePiecesForMove[t].frame.origin.y -= 100
+                                }
+                                for var t = 0; t < takenBlackPiecesLbl.count; t++ {
+                                    takenBlackPiecesLbl[t].frame.origin.y += 100
+                                }
+                                for var t = 0; t < takenBlackPiecesForMove.count; t++ {
+                                    takenBlackPiecesForMove[t].frame.origin.y += 100
+                                }
+                            }
                             self.slider.frame.origin.y = screenHeight/2 + 150
                             self.capsuleB.frame.origin.y = screenHeight/2 + 246
                             self.capsuleL.frame.origin.y = 200
@@ -3493,9 +3572,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
                                                                                         if (!self.contains(takenBlackPieces, _image: self.pieces[iy])) {
-                                                                                            var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                                                                             takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                                                                             takenPiece.image = self.pieces[iy].image
                                                                                             takenBlackPieces += [self.pieces[iy]]
+                                                                                            takenBlackPiecesForMove += [takenPiece]
+
                                                                                             self.view.addSubview(takenPiece)
                                                                                         }
                                                                                         takenBlackPiecesForInfo += [self.pieces[iy]]
@@ -4110,6 +4191,36 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         UIView.animateWithDuration(0.8, animations: { () -> Void in
             //self.slider.frame.origin.y = 652
+            if self.iamWhite {
+                for var t = 0; t < takenWhitePiecesLbl.count; t++ {
+                    takenWhitePiecesLbl[t].frame.origin.y -= 100
+                }
+                for var t = 0; t < takenWhitePiecesForMove.count; t++ {
+                    takenWhitePiecesForMove[t].frame.origin.y -= 100
+                }
+                for var t = 0; t < takenBlackPiecesLbl.count; t++ {
+                    takenBlackPiecesLbl[t].frame.origin.y += 100
+                }
+                for var t = 0; t < takenBlackPiecesForMove.count; t++ {
+                    takenBlackPiecesForMove[t].frame.origin.y += 100
+                }
+            }
+            else {
+            for var t = 0; t < takenWhitePiecesLbl.count; t++ {
+            takenWhitePiecesLbl[t].frame.origin.y += 100
+            }
+            for var t = 0; t < takenWhitePiecesForMove.count; t++ {
+                takenWhitePiecesForMove[t].frame.origin.y += 100
+            }
+            for var t = 0; t < takenBlackPiecesLbl.count; t++ {
+                takenBlackPiecesLbl[t].frame.origin.y -= 100
+            }
+            for var t = 0; t < takenBlackPiecesForMove.count; t++ {
+                takenBlackPiecesForMove[t].frame.origin.y -= 100
+            }
+            }
+            
+            
             
             self.timeGL.frame.origin.y += 100
             self.turnGL.frame.origin.y += 100
@@ -4296,6 +4407,35 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 self.turnIndicatorG.frame.origin.y -= 100
                 
                 UIView.animateWithDuration(0.8, animations: { () -> Void in
+                    
+                    if self.iamWhite {
+                        for var t = 0; t < takenWhitePiecesLbl.count; t++ {
+                            takenWhitePiecesLbl[t].frame.origin.y += 100
+                        }
+                        for var t = 0; t < takenWhitePiecesForMove.count; t++ {
+                            takenWhitePiecesForMove[t].frame.origin.y += 100
+                        }
+                        for var t = 0; t < takenBlackPiecesLbl.count; t++ {
+                            takenBlackPiecesLbl[t].frame.origin.y -= 100
+                        }
+                        for var t = 0; t < takenBlackPiecesForMove.count; t++ {
+                            takenBlackPiecesForMove[t].frame.origin.y -= 100
+                        }
+                    }
+                    else {
+                        for var t = 0; t < takenWhitePiecesLbl.count; t++ {
+                            takenWhitePiecesLbl[t].frame.origin.y -= 100
+                        }
+                        for var t = 0; t < takenWhitePiecesForMove.count; t++ {
+                            takenWhitePiecesForMove[t].frame.origin.y -= 100
+                        }
+                        for var t = 0; t < takenBlackPiecesLbl.count; t++ {
+                            takenBlackPiecesLbl[t].frame.origin.y += 100
+                        }
+                        for var t = 0; t < takenBlackPiecesForMove.count; t++ {
+                            takenBlackPiecesForMove[t].frame.origin.y += 100
+                        }
+                    }
                     self.slider.frame.origin.y = screenHeight/2 + 150
                     self.capsuleB.frame.origin.y = screenHeight/2 + 246
                     self.capsuleL.frame.origin.y = 200
@@ -4431,6 +4571,37 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             
             UIView.animateWithDuration(0.8, animations: { () -> Void in
+                
+                
+                if self.iamWhite {
+                    for var t = 0; t < takenWhitePiecesLbl.count; t++ {
+                        takenWhitePiecesLbl[t].frame.origin.y += 100
+                    }
+                    for var t = 0; t < takenWhitePiecesForMove.count; t++ {
+                        takenWhitePiecesForMove[t].frame.origin.y += 100
+                    }
+                    for var t = 0; t < takenBlackPiecesLbl.count; t++ {
+                        takenBlackPiecesLbl[t].frame.origin.y -= 100
+                    }
+                    for var t = 0; t < takenBlackPiecesForMove.count; t++ {
+                        takenBlackPiecesForMove[t].frame.origin.y -= 100
+                    }
+                }
+                else {
+                    for var t = 0; t < takenWhitePiecesLbl.count; t++ {
+                        takenWhitePiecesLbl[t].frame.origin.y -= 100
+                    }
+                    for var t = 0; t < takenWhitePiecesForMove.count; t++ {
+                        takenWhitePiecesForMove[t].frame.origin.y -= 100
+                    }
+                    for var t = 0; t < takenBlackPiecesLbl.count; t++ {
+                        takenBlackPiecesLbl[t].frame.origin.y += 100
+                    }
+                    for var t = 0; t < takenBlackPiecesForMove.count; t++ {
+                        takenBlackPiecesForMove[t].frame.origin.y += 100
+                    }
+                }
+                
                 self.slider.frame.origin.y = screenHeight/2 + 150
                 self.capsuleB.frame.origin.y = screenHeight/2 + 246
                 self.capsuleL.frame.origin.y = 200
@@ -8855,9 +9026,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         if self.colorLcolor == "You are White" {
                             if (!self.contains(takenBlackPieces, _image: pieces[i])) {
-                                var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                 takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                 takenPiece.image = pieces[i].image
                                 takenBlackPieces += [pieces[i]]
+                                takenBlackPiecesForMove += [takenPiece]
+
                                 view.addSubview(takenPiece)
                             }
                             
@@ -8877,9 +9050,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         } else if self.colorLcolor == "You are Black" {
                             if (!self.contains(takenWhitePieces, _image: pieces[i])) {
-                                var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                 takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                 takenPiece.image = pieces[i].image
                                 takenWhitePieces += [pieces[i]]
+                                takenWhitePiecesForMove += [takenPiece]
+
                                 view.addSubview(takenPiece)
                             }
                             
@@ -8932,9 +9107,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         if self.colorLcolor == "You are White" {
                             if (!self.contains(takenBlackPieces, _image: blackPieces[t])) {
-                                var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                 takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                 takenPiece.image = blackPieces[t].image
                                 takenBlackPieces += [blackPieces[t]]
+                                takenBlackPiecesForMove += [takenPiece]
+
                                 view.addSubview(takenPiece)
                             }
                             
@@ -8954,9 +9131,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         } else if self.colorLcolor == "You are Black" {
                             if (!self.contains(takenWhitePieces, _image: blackPieces[t])) {
-                                var takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+                                 takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
                                 takenPiece.image = blackPieces[t].image
                                 takenWhitePieces += [blackPieces[t]]
+                                takenWhitePiecesForMove += [takenPiece]
+
                                 view.addSubview(takenPiece)
                             }
                             

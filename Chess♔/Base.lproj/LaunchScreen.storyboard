@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -19,15 +18,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chessLaucnhBC.png" translatesAutoresizingMaskIntoConstraints="NO" id="w4C-GD-p7f">
-                                <rect key="frame" x="-30" y="-29" width="661" height="658"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="w4C-GD-p7f" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="CPF-FS-hBB"/>
-                            <constraint firstItem="w4C-GD-p7f" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="I4Z-pI-aRU"/>
-                            <constraint firstItem="w4C-GD-p7f" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" constant="-29" id="Rrd-ly-sbj"/>
-                            <constraint firstItem="w4C-GD-p7f" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-50" id="cz5-9W-IGj"/>
+                            <constraint firstItem="w4C-GD-p7f" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Vsf-LQ-DzB"/>
+                            <constraint firstItem="w4C-GD-p7f" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="aeD-Q5-fEe"/>
+                            <constraint firstItem="w4C-GD-p7f" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="ew4-GE-qDf"/>
+                            <constraint firstAttribute="trailing" secondItem="w4C-GD-p7f" secondAttribute="trailing" id="qzW-Q5-oY6"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
