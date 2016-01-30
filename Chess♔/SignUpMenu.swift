@@ -72,9 +72,9 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
         visualEffectView.frame = view.bounds
         
-        let iconImage = UIImageView(frame: CGRectMake(0, 10, view.frame.size.width, view.frame.size.height/3))
+        let iconImage = UIImageView(frame: CGRectMake(0, 40, view.frame.size.width, view.frame.size.height/3 + 30))
         iconImage.contentMode = .ScaleAspectFit
-        iconImage.image = UIImage(named: "ChessIconAndTExt.png")
+        iconImage.image = UIImage(named: "testCrest.png")
         scrollView.addSubview(iconImage)
         
         let loginButton = UIButton(frame: CGRectMake(30, view.frame.size.height - 170, screenWidth-60, 55))
