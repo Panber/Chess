@@ -8707,7 +8707,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if selectedPiece == whitePawns[i] && selectedPiece.frame.origin.y == _7 {
                         let promotionPiece = i
                         self.promoted = true
-                        
+                        self.promotionAtIndex.append(self.movesCap.count)
                         let actionSheet = UIAlertController(title: nil, message: "Promote pawn to:", preferredStyle: UIAlertControllerStyle.ActionSheet)
                         
                         let promoteToQueen = UIAlertAction(title: "Queen", style: .Default, handler: {
@@ -8727,6 +8727,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             for var q = 0; q < self.whiteQueens.count; q++ {
                                 self.chessPieceMovementLogic(9, pieceid: 4, friend: self.whitePieces, enemy: self.blackPieces, piece: self.whiteQueens[q] , logicOptions: self.piecesBlackLogic)
                             }
+                            
                             self.game.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
                                 if error == nil {
                                 }
@@ -8794,6 +8795,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 }
                             })
                         })
+                        
                         
                         actionSheet.addAction(promoteToQueen)
                         actionSheet.addAction(promoteToRook)
