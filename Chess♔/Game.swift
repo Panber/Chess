@@ -1184,7 +1184,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
                                                                                                 takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
-                                                                                                takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                if darkMode {takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()}
+                                                                                                else {takenWhitePiecesLbl[t].textColor = UIColor.blackColor()}
                                                                                                 takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenWhitePiecesLbl[t])
@@ -1225,7 +1226,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].text = "" + blackCount[t].description
-                                                                                                takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                if darkMode {
+                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                }else {
+                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.blackColor()
+                                                                                                    
+                                                                                                }
                                                                                                 takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 view.addSubview(takenBlackPiecesLbl[t])
@@ -1427,7 +1433,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
                                                                                                 takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
-                                                                                                takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                if darkMode {takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()}
+                                                                                                else {takenWhitePiecesLbl[t].textColor = UIColor.blackColor()}
                                                                                                 takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenWhitePiecesLbl[t])
@@ -1468,7 +1475,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].text = "" + blackCount[t].description
-                                                                                                takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                if darkMode {
+                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                }else {
+                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.blackColor()
+                                                                                                    
+                                                                                                }
                                                                                                 takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 view.addSubview(takenBlackPiecesLbl[t])
@@ -2055,7 +2067,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                                                                                 }
                                                                                                 takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
+                                                                                                if darkMode {
                                                                                                 takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                }else {
+                                                                                                    takenWhitePiecesLbl[t].textColor = UIColor.blackColor()
+
+                                                                                                }
+                                                                                                
                                                                                                 takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenWhitePiecesLbl[t])
@@ -2721,7 +2739,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].text = "" + blackCount[t].description
-                                                                                                takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                if darkMode {
+                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                }else {
+                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.blackColor()
+                                                                                                    
+                                                                                                }
                                                                                                 takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenBlackPiecesLbl[t])
@@ -2760,6 +2783,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 }
                                                                                                 takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
                                                                                                 takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                if darkMode {
+                                                                                                    takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                }else {
+                                                                                                    takenWhitePiecesLbl[t].textColor = UIColor.blackColor()
+                                                                                                    
+                                                                                                }
                                                                                                 takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenWhitePiecesLbl[t])
@@ -2963,7 +2992,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].text = "" + blackCount[t].description
-                                                                                                takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                if darkMode {
+                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                }else {
+                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.blackColor()
+                                                                                                    
+                                                                                                }
                                                                                                 takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenBlackPiecesLbl[t])
@@ -3002,6 +3036,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 }
                                                                                                 takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
                                                                                                 takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                if darkMode {
+                                                                                                    takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                }else {
+                                                                                                    takenWhitePiecesLbl[t].textColor = UIColor.blackColor()
+                                                                                                    
+                                                                                                }
                                                                                                 takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenWhitePiecesLbl[t])
@@ -3590,7 +3630,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                     takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].text = "" + blackCount[t].description
-                                                                                                takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                if darkMode {
+                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                                                                                }else {
+                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.blackColor()
+                                                                                                    
+                                                                                                }
+                                                                                                
+                                                                                                
                                                                                                 takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
                                                                                                 self.view.addSubview(takenBlackPiecesLbl[t])
@@ -9042,7 +9089,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                     }
                                     takenBlackPiecesLbl[t].text = "" + blackCount[t].description
-                                    takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                    if darkMode {
+                                        takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                    }else {
+                                        takenBlackPiecesLbl[t].textColor = UIColor.blackColor()
+                                        
+                                    }
+                                    
                                     takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                     takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
                                     view.addSubview(takenBlackPiecesLbl[t])
@@ -9067,7 +9120,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
                                     }
                                     takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
-                                    takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
+                                    if darkMode {
+                                        takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
+                                    }else {
+                                        takenWhitePiecesLbl[t].textColor = UIColor.blackColor()
+                                    }
                                     takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                     takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
                                     view.addSubview(takenWhitePiecesLbl[t])
@@ -9123,7 +9180,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         takenBlackPiecesShow += [takenBlackPiecesLbl[b]]
                                     }
                                     takenBlackPiecesLbl[b].text = "" + blackCount[b].description
-                                    takenBlackPiecesLbl[b].textColor = UIColor.whiteColor()
+                                    if darkMode {
+                                        takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                    }else {
+                                        takenBlackPiecesLbl[t].textColor = UIColor.blackColor()
+                                        
+                                    }
                                     takenBlackPiecesLbl[b].font = UIFont(name: "Times", size: 18)
                                     takenBlackPiecesLbl[b].textAlignment = NSTextAlignment.Center
                                     view.addSubview(takenBlackPiecesLbl[b])
@@ -9148,7 +9210,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         takenWhitePiecesShow += [takenWhitePiecesLbl[b]]
                                     }
                                     takenWhitePiecesLbl[b].text = "" + whiteCount[b].description
-                                    takenWhitePiecesLbl[b].textColor = UIColor.whiteColor()
+                                    if darkMode {
+                                        takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
+                                    }else {
+                                        takenWhitePiecesLbl[t].textColor = UIColor.blackColor()
+                                        
+                                    }
                                     takenWhitePiecesLbl[b].font = UIFont(name: "Times", size: 18)
                                     takenWhitePiecesLbl[b].textAlignment = NSTextAlignment.Center
                                     view.addSubview(takenWhitePiecesLbl[b])
