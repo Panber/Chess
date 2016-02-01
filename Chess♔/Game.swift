@@ -1250,8 +1250,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 for var ty = 0; ty < self.whitePawns.count; ty++ {
                                                                                     if self.whitePawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         points -= 100
-                                                                                        self.whitePawns.removeAtIndex(ty)
-                                                                                        ty--
+//                                                                                        self.whitePawns.removeAtIndex(ty)
+//                                                                                        ty--
                                                                                         print("TAKEN")
                                                                                     }
                                                                                     
@@ -1260,8 +1260,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     if self.blackPawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         points += 100
                                                                                         
-                                                                                        self.blackPawns.removeAtIndex(ty)
-                                                                                        ty--
+//                                                                                        self.blackPawns.removeAtIndex(ty)
+//                                                                                        ty--
                                                                                         print("TAKEN")
                                                                                     }
                                                                                     
@@ -1324,7 +1324,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         }
                                                                                     }
                                                                                 }
-                                                                                chartData()
+                                                                              //  chartData()
                                                                                 
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     
@@ -1496,30 +1496,30 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     }
                                                                                     
                                                                                 }
-                                                                                for var ty = 0; ty < self.whitePawns.count; ty++ {
-                                                                                    if self.whitePawns[ty] == self.pieces[iy] {
-                                                                                        
-                                                                                        //chrta
-                                                                                        points -= 100
-                                                                                        
-                                                                                        self.whitePawns.removeAtIndex(ty)
-                                                                                        ty--
-                                                                                        print("TAKEN")
-                                                                                    }
-                                                                                    
-                                                                                }
-                                                                                for var ty = 0; ty < self.blackPawns.count; ty++ {
-                                                                                    if self.blackPawns[ty] == self.pieces[iy]{
-                                                                                        
-                                                                                        //chrta
-                                                                                        points += 100
-                                                                                        
-                                                                                        self.blackPawns.removeAtIndex(ty)
-                                                                                        ty--
-                                                                                        print("TAKEN")
-                                                                                    }
-                                                                                    
-                                                                                }
+//                                                                                for var ty = 0; ty < self.whitePawns.count; ty++ {
+//                                                                                    if self.whitePawns[ty] == self.pieces[iy] {
+//                                                                                        
+//                                                                                        //chrta
+//                                                                                        points -= 100
+//                                                                                        
+////                                                                                        self.whitePawns.removeAtIndex(ty)
+////                                                                                        ty--
+//                                                                                        print("TAKEN")
+//                                                                                    }
+//                                                                                    
+//                                                                                }
+//                                                                                for var ty = 0; ty < self.blackPawns.count; ty++ {
+//                                                                                    if self.blackPawns[ty] == self.pieces[iy]{
+//                                                                                        
+//                                                                                        //chrta
+//                                                                                        points += 100
+//                                                                                        
+////                                                                                        self.blackPawns.removeAtIndex(ty)
+////                                                                                        ty--
+//                                                                                        print("TAKEN")
+//                                                                                    }
+//                                                                                    
+//                                                                                }
                                                                                 
                                                                                 self.pieces[iy].alpha = 0
                                                                                 
@@ -1599,7 +1599,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         }
                                                                                     }
                                                                                 }
-                                                                                chartData()
+                                                                               // chartData()
                                                                             }
                                                                         }
                                                                         
@@ -2105,8 +2105,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 for var ty = 0; ty < self.whitePawns.count; ty++ {
                                                                                     if self.whitePawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
-                                                                                        self.whitePawns.removeAtIndex(ty)
-                                                                                        ty--
+//                                                                                        self.whitePawns.removeAtIndex(ty)
+//                                                                                        ty--
                                                                                         print("TAKEN PAWN")
                                                                                     }
                                                                                     
@@ -2114,8 +2114,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 for var ty = 0; ty < self.blackPawns.count; ty++ {
                                                                                     if self.blackPawns[ty].frame.origin.x - 1 * pieceSize == self.pieces[iy].frame.origin.x && self.blackPawns[ty].frame.origin.y - 1 * pieceSize == self.pieces[iy].frame.origin.y {
                                                                                         
-                                                                                        self.blackPawns.removeAtIndex(ty)
-                                                                                        ty--
+//                                                                                        self.blackPawns.removeAtIndex(ty)
+//                                                                                        ty--
                                                                                         print("TAKEN PAWN")
                                                                                     }
                                                                                     
@@ -2179,7 +2179,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         }
                                                                                     }
                                                                                 }
-                                                                                chartData()
+                                                                                //chartData()
                                                                                 
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     self.pieces[iy].alpha = 0
@@ -2625,6 +2625,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                         else if String(moves[o][0]) == xAxisArrStr2[t] {
+                            
                             for var p = 0; p < yAxisArrStr2.count; p++ {
                                 if String(moves[o][1]) == yAxisArrStr2[p] {
                                     for var i = 0; i < pieces.count; i++ {
@@ -2807,8 +2808,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 for var ty = 0; ty < self.whitePawns.count; ty++ {
                                                                                     if self.whitePawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
-                                                                                        self.whitePawns.removeAtIndex(ty)
-                                                                                        ty--
+//                                                                                        self.whitePawns.removeAtIndex(ty)
+//                                                                                        ty--
                                                                                         print("TAKEN")
                                                                                     }
                                                                                     
@@ -2816,8 +2817,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 for var ty = 0; ty < self.blackPawns.count; ty++ {
                                                                                     if self.blackPawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
-                                                                                        self.blackPawns.removeAtIndex(ty)
-                                                                                        ty--
+//                                                                                        self.blackPawns.removeAtIndex(ty)
+//                                                                                        ty--
                                                                                         print("TAKEN")
                                                                                     }
                                                                                     
@@ -3057,24 +3058,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     }
                                                                                     
                                                                                 }
-                                                                                for var ty = 0; ty < self.whitePawns.count; ty++ {
-                                                                                    if self.whitePawns[ty] == self.pieces[iy] {
-                                                                                        
-                                                                                        self.whitePawns.removeAtIndex(ty)
-                                                                                        ty--
-                                                                                        print("TAKEN")
-                                                                                    }
-                                                                                    
-                                                                                }
-                                                                                for var ty = 0; ty < self.blackPawns.count; ty++ {
-                                                                                    if self.blackPawns[ty] == self.pieces[iy]{
-                                                                                        
-                                                                                        self.blackPawns.removeAtIndex(ty)
-                                                                                        ty--
-                                                                                        print("TAKEN")
-                                                                                    }
-                                                                                    
-                                                                                }
+//                                                                                for var ty = 0; ty < self.whitePawns.count; ty++ {
+//                                                                                    if self.whitePawns[ty] == self.pieces[iy] {
+//                                                                                        
+//                                                                                       // self.whitePawns.removeAtIndex(ty)
+//                                                                                      //  ty--
+//                                                                                        print("TAKEN")
+//                                                                                    }
+//                                                                                    
+//                                                                                }
+//                                                                                for var ty = 0; ty < self.blackPawns.count; ty++ {
+//                                                                                    if self.blackPawns[ty] == self.pieces[iy]{
+//                                                                                        
+//                                                                                     //   self.blackPawns.removeAtIndex(ty)
+//                                                                                     //   ty--
+//                                                                                        print("TAKEN")
+//                                                                                    }
+//                                                                                    
+//                                                                                }
                                                                                 
                                                                                 self.pieces[iy].alpha = 0
                                                                                 
@@ -3135,7 +3136,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         }
                                                                                     }
                                                                                 }
-                                                                                chartData()
+                                                                               // chartData()
                                                                                 
                                                                             }
                                                                             
@@ -3181,8 +3182,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                 }
                                             }
                                         }
-                                        if remove {
-                                        }}
+                                       }
                                 }
                             }
                             
@@ -3670,8 +3670,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 for var ty = 0; ty < self.whitePawns.count; ty++ {
                                                                                     if self.whitePawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
-                                                                                        self.whitePawns.removeAtIndex(ty)
-                                                                                        ty--
+//                                                                                        self.whitePawns.removeAtIndex(ty)
+//                                                                                        ty--
                                                                                         print("TAKEN")
                                                                                     }
                                                                                     
@@ -3679,8 +3679,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 for var ty = 0; ty < self.blackPawns.count; ty++ {
                                                                                     if self.blackPawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
                                                                                         
-                                                                                        self.blackPawns.removeAtIndex(ty)
-                                                                                        ty--
+//                                                                                        self.blackPawns.removeAtIndex(ty)
+//                                                                                        ty--
                                                                                         print("TAKEN")
                                                                                     }
                                                                                     
@@ -3742,7 +3742,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                         }
                                                                                     }
                                                                                 }
-                                                                                chartData()
+                                                                             //   chartData()
                                                                                 
                                                                                 UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     self.pieces[iy].alpha = 0
@@ -4405,7 +4405,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         if canPressForwardButton == true {
             
-            
+            canPressBackwardButton = false
+            canPressForwardButton = false
+
             
             slider.value++
             backwardB.enabled = true
@@ -4430,7 +4432,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
             
             magic5(Int(slider.value-1))
-            canPressForwardButton = false
+            
             if slider.value == slider.maximumValue {
                 forwardB.enabled = false
                 
@@ -4549,7 +4551,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         if canPressBackwardButton == true {
             
-            
+            canPressBackwardButton = false
+            canPressForwardButton = false
+
             
             
             slider.value--
@@ -4585,7 +4589,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
             }
             //change to false later
-            canPressBackwardButton = false
             magic3()
         }
     }
@@ -4756,6 +4759,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }, completion: { finish in
                                 //  self.updateLogic()
                                 self.canPressBackwardButton = true
+                                self.canPressForwardButton = true
+
                         })
                         
                         
@@ -4783,6 +4788,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }, completion: { finish in
                                 //  self.updateLogic()
                                 self.canPressBackwardButton = true
+                                self.canPressForwardButton = true
+
                         })
                         
                         
@@ -4816,6 +4823,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }, completion: { finish in
                             //   self.updateLogic()
                             self.canPressBackwardButton = true
+                            self.canPressForwardButton = true
+
                     })
                     
                     
@@ -4839,6 +4848,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }, completion: { finish in
                             //     self.updateLogic()
                             self.canPressBackwardButton = true
+                            self.canPressForwardButton = true
+
                     })
                     
                     
@@ -4864,7 +4875,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                     
                                                     for var pat = 0; pat < promotionAtIndex.count; pat++ {
                                                         //for var elon = 0; elon < pieces.count; elon++ {
-                                                        print(promotionAtIndex)
+                                                        print("promotion at index is \(promotionAtIndex)")
                                                         if promotionAtIndex[pat] == o {
                                                             
                                                             if iamWhite {
@@ -4906,9 +4917,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         }
                                                                     }
                                                                     
-                                                                    whitePawns += [pieces[i]]
                                                                     print("pat is \(promotionAtIndex[pat])")
                                                                     pieces[i].image = UIImage(named:"whitePawn")
+                                                                    whitePawns += [pieces[i]]
+
                                                                     
                                                                 }
                                                                     
@@ -4950,7 +4962,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     }
                                                                     
                                                                     
-                                                                    blackPawns += [pieces[i]]
                                                                     print("pat is \(promotionAtIndex[pat])")
                                                                     print(iamWhite)
                                                                     print(o)
@@ -4958,6 +4969,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     
                                                                     
                                                                     pieces[i].image = UIImage(named:"blackPawn")
+                                                                    blackPawns += [pieces[i]]
+
                                                                 }
                                                             }
                                                             else {
@@ -4998,9 +5011,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         }
                                                                     }
                                                                     
-                                                                    blackPawns += [pieces[i]]
                                                                     print("pat is \(promotionAtIndex[pat])")
                                                                     pieces[i].image = UIImage(named:"whitePawn")
+                                                                    blackPawns += [pieces[i]]
+
                                                                     
                                                                 }
                                                                     
@@ -5042,9 +5056,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     }
                                                                     
                                                                     
-                                                                    whitePawns += [pieces[i]]
                                                                     print("pat is \(promotionAtIndex[pat])")
                                                                     pieces[i].image = UIImage(named:"blackPawn")
+                                                                    whitePawns += [pieces[i]]
+
                                                                 }
                                                                 
                                                             }
@@ -5065,7 +5080,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                             
                                                             view.addSubview(takenPiecesToReload[takenPiecesToReload.count - 1 - d2])
                                                             takenPiecesToReload[takenPiecesToReload.count - 1 - d2].alpha = 0
-                                                            //   pieces.append(takenPiecesToReload[takenPiecesToReload.count - 1 - d2])
+                                                             //  pieces.append(takenPiecesToReload[takenPiecesToReload.count - 1 - d2])
                                                             
                                                             didIncrease_d2 = true
                                                             
@@ -5088,33 +5103,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                             //self.deletePiecesAfterLoad()
                                                             //      self.updateLogic()
                                                             self.canPressBackwardButton = true
+                                                            self.canPressForwardButton = true
+
                                                             
                                                             if didIncrease_d2 == true {
                                                                 self.pieces.append(self.takenPiecesToReload[self.takenPiecesToReload.count - 1 - self.d2])
+                                                                self.takenPiecesToReload.removeAtIndex(self.takenPiecesToReload.count - 1 - self.d2)
                                                                 
-                                                                //                                                                if self.iamWhite == true {
-                                                                //                                                                    if self.takenPiecesToReload[self.takenPiecesToReload.count - 1 - self.d2].image == UIImage(named:"blackPawn") {
-                                                                //                                                                        self.blackPawns.append(self.takenPiecesToReload[self.takenPiecesToReload.count - 1 - self.d2])
-                                                                //
-                                                                //                                                                    }
-                                                                //                                                                    else if self.takenPiecesToReload[self.takenPiecesToReload.count - 1 - self.d2].image == UIImage(named:"whitePawn") {
-                                                                //                                                                        self.whitePawns.append(self.takenPiecesToReload[self.takenPiecesToReload.count - 1 - self.d2])
-                                                                //
-                                                                //                                                                    }
-                                                                //                                                                }
-                                                                //                                                                else {
-                                                                //                                                                    if self.takenPiecesToReload[self.takenPiecesToReload.count - 1 - self.d2].image == UIImage(named:"blackPawn") {
-                                                                //                                                                        self.whitePawns.append(self.takenPiecesToReload[self.takenPiecesToReload.count - 1 - self.d2])
-                                                                //
-                                                                //                                                                    }
-                                                                //                                                                    else if self.takenPiecesToReload[self.takenPiecesToReload.count - 1 - self.d2].image == UIImage(named:"whitePawn") {
-                                                                //                                                                        self.blackPawns.append(self.takenPiecesToReload[self.takenPiecesToReload.count - 1 - self.d2])
-                                                                //
-                                                                //                                                                    }
-                                                                //                                                                }
-                                                                //
-                                                                
-                                                                self.d2++
+          
                                                                 
                                                             }
                                                     })
@@ -5255,8 +5251,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                         
                                                         let range = notations[o].rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
                                                         
-                                                        func checkIfTaken() {
-                                                            
+                                                        if iamWhite {
                                                             for var w = 0; w < whitePawns.count; w++ {
                                                                 if String(movesCap[o][1])  == "7" && String(movesCap[o][3]) == "8" && pieces[i].image == UIImage(named:"whitePawn") && pieces[i] == whitePawns[w]   {
                                                                     print("Notation promotion")
@@ -5310,95 +5305,94 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     }
                                                                 }
                                                             }
-                                                            
-                                                            print("checkIfTaken")
-                                                            // range will be nil if no x is found
-                                                            if  (range != nil) {
-                                                                print("x  found")
+                                                        }
+                                                        else {
+                                                            for var w = 0; w < whitePawns.count; w++ {
+                                                                if String(movesCap[o][1])  == "2" && String(movesCap[o][3]) == "1" && pieces[i].image == UIImage(named:"blackPawn") && pieces[i] == whitePawns[w]  {
+                                                                    print("Notation promotion")
+                                                                    if blackPromotionType[countBlack] == "Queen"{
+                                                                        self.pieces[i].image = UIImage(named:"blackQueen")
+                                                                        self.whiteQueens += [pieces[i]]
+                                                                        self.whitePawns.removeAtIndex(w)
+                                                                        countBlack++
+                                                                    } else if blackPromotionType[countBlack] == "Rook" {
+                                                                        self.pieces[i].image = UIImage(named:"blackRook")
+                                                                        self.whiteRooks += [pieces[i]]
+                                                                        self.whitePawns.removeAtIndex(w)
+                                                                        countBlack++
+                                                                    } else  if blackPromotionType[countBlack] == "Bishop" {
+                                                                        self.pieces[i].image = UIImage(named:"blackBishop")
+                                                                        self.whiteBishops += [pieces[i]]
+                                                                        self.whitePawns.removeAtIndex(w)
+                                                                        countBlack++
+                                                                    } else  if blackPromotionType[countBlack] == "Knight" {
+                                                                        self.pieces[i].image = UIImage(named:"blackKnight")
+                                                                        self.whiteKnights += [pieces[i]]
+                                                                        self.whitePawns.removeAtIndex(w)
+                                                                        countBlack++
+                                                                    }
+                                                                    
+                                                                }
                                                                 
-                                                                for var iy = 0; iy < pieces.count ; iy++ {
-                                                                    if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] {
-                                                                        //                                                                        if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns) {
+                                                            }
+                                                            
+                                                            for var w = 0; w < blackPawns.count; w++ {
+                                                                if String(movesCap[o][1])  == "7" && String(movesCap[o][3]) == "8"  && pieces[i].image == UIImage(named:"whitePawn") && pieces[i] == blackPawns[w] {
+                                                                    print("Notation promotion white")
+                                                                    print(blackPawns.count)
+                                                                    print(w)
+                                                                    if whitePromotionType[count] == "Queen" {
+                                                                        self.pieces[i].image = UIImage(named:"whiteQueen")
+                                                                        self.blackQueens += [pieces[i]]
+                                                                        self.blackPawns.removeAtIndex(w)
+                                                                        count++
+                                                                    } else if whitePromotionType[count] == "Rook" {
+                                                                        self.pieces[i].image = UIImage(named:"whiteRook")
+                                                                        self.blackRooks += [pieces[i]]
+                                                                        self.blackPawns.removeAtIndex(w)
+                                                                        count++
+                                                                    } else if whitePromotionType[count] == "Bishop" {
+                                                                        self.pieces[i].image = UIImage(named:"whiteBishop")
+                                                                        self.blackBishops += [pieces[i]]
+                                                                        self.blackPawns.removeAtIndex(w)
+                                                                        count++
+                                                                    } else if whitePromotionType[count] == "Knight" {
+                                                                        self.pieces[i].image = UIImage(named:"whiteKnight")
+                                                                        self.blackKnights += [pieces[i]]
+                                                                        self.blackPawns.removeAtIndex(w)
+                                                                        count++
+                                                                    }
+                                                                    
+                                                                }
+                                                            }
+                                                        }
+                                                        
+                                                        func checkIfTaken() {
+                                                            // range will be nil if no letters is found
+                                                            if  (range != nil) {
+                                                                print("letters  found")
+                                                                
+                                                                for var iy = 0; iy < pieces.count; iy++ {
+                                                                    
+                                                                    
+                                                                    if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns){
                                                                         
                                                                         
-                                                                        
-                                                                        
-                                                                        for var ty = 0; ty < self.whitePieces.count; ty++ {
-                                                                            if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                
-                                                                                
-                                                                                self.pieceToTake += [self.whitePieces[ty]]
-                                                                                //    self.whitePieces[ty].removeFromSuperview()
-                                                                                self.whitePieces.removeAtIndex(ty)
-                                                                                self.whitePiecesString.removeAtIndex(ty)
-                                                                                ty--
-                                                                                print("TAKEN")
-                                                                            }
+                                                                        piecesToDelete.append(pieces[iy])
+                                                                        UIView.animateWithDuration(0.15, delay: 0, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                            self.pieces[iy].alpha=0
                                                                             
-                                                                        }
-                                                                        for var ty = 0; ty < self.blackPieces.count; ty++ {
-                                                                            if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                
-                                                                                
-                                                                                self.pieceToTake += [self.blackPieces[ty]]
-                                                                                //      self.blackPieces[ty].removeFromSuperview()
-                                                                                self.blackPieces.removeAtIndex(ty)
-                                                                                self.blackPiecesString.removeAtIndex(ty)
-                                                                                ty--
-                                                                                print("TAKEN")
-                                                                            }
-                                                                            
-                                                                        }
+                                                                            }, completion: { finish in })
                                                                         
-                                                                        for var ty = 0; ty < self.whitePawns.count; ty++ {
-                                                                            if self.whitePawns[ty] == self.pieces[iy] {
-                                                                                
-                                                                                //chrta
-                                                                                
-                                                                                self.whitePawns.removeAtIndex(ty)
-                                                                                ty--
-                                                                                print("TAKEN")
-                                                                            }
-                                                                            
-                                                                        }
-                                                                        for var ty = 0; ty < self.blackPawns.count; ty++ {
-                                                                            if self.blackPawns[ty] == self.pieces[iy] {
-                                                                                
-                                                                                //chrta
-                                                                                
-                                                                                self.blackPawns.removeAtIndex(ty)
-                                                                                ty--
-                                                                                print("TAKEN")
-                                                                            }
-                                                                            
-                                                                        }
-                                                                        
-                                                                        
-                                                                        self.pieces[iy].alpha = 0
-                                                                        
-                                                                        self.piecesToDelete.append(self.pieces[iy])
-                                                                        
-                                                                        
-                                                                        
-                                                                        self.takenPiecesToReload.append(self.pieces[iy])
-                                                                        self.takenPiecesToReloadAtIndex.append(iy)
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
+                                                                        takenPiecesToReload.append(pieces[iy])
+                                                                        print("takenPiecesToReload.count - 1 - d3 i \(takenPiecesToReload.count - 1 - d3)")
                                                                     }
                                                                 }
                                                                 
                                                                 
+                                                            } else {
+                                                                print("letters not found")
                                                             }
-                                                            else {
-                                                                print("x not found")
-                                                            }
-                                                            
-                                                            
                                                         }
                                                         
                                                         
@@ -5437,7 +5431,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
             }
         }
-        updateLogic()
     }
     
     var d3 = 0
@@ -5478,10 +5471,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             }, completion: { finish in
                                 self.canPressForwardButton = true
+                                self.canPressBackwardButton = true
+
                                 
                                 if didIncrease_d3 == true {
                                     
-                                    self.d3++
+                                    //self.d3++
                                 }
                         })
                         
@@ -5509,10 +5504,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             }, completion: { finish in
                                 self.canPressForwardButton = true
+                                self.canPressBackwardButton = true
+
                                 
                                 if didIncrease_d3 == true {
                                     
-                                    self.d3++
+                                    //self.d3++
                                 }
                         })
                         
@@ -5545,10 +5542,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                         }, completion: { finish in
                             self.canPressForwardButton = true
+                            self.canPressBackwardButton = true
+
                             
                             if didIncrease_d3 == true {
                                 
-                                self.d3++
+                                //self.d3++
                             }})
                     
                     
@@ -5573,10 +5572,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                         }, completion: { finish in
                             self.canPressForwardButton = true
+                            self.canPressBackwardButton = true
+
                             
                             if didIncrease_d3 == true {
                                 
-                                self.d3++
+                                //self.d3++
                             }})
                     
                     
@@ -5601,8 +5602,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                     
                                                     let range = notations[moveNumber].rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "x"))
                                                     
-                                                    func checkIfTaken() {
-                                                        
+                                                    if iamWhite {
                                                         for var w = 0; w < whitePawns.count; w++ {
                                                             if String(movesCap[moveNumber][1])  == "7" && String(movesCap[moveNumber][3]) == "8" && pieces[i].image == UIImage(named:"whitePawn") && pieces[i] == whitePawns[w]   {
                                                                 print("Notation promotion")
@@ -5656,94 +5656,99 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 }
                                                             }
                                                         }
-                                                        
-                                                        print("checkIfTaken")
-                                                        // range will be nil if no x is found
-                                                        if  (range != nil) {
-                                                            print("x  found")
-                                                            
-                                                            for var iy = 0; iy < pieces.count ; iy++ {
-                                                                if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns) {
-                                                                    
-                                                                    self.pieces[iy].alpha = 0
-                                                                    
-                                                                    
-                                                                    for var ty = 0; ty < self.whitePieces.count; ty++ {
-                                                                        if self.whitePieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                            
-                                                                            
-                                                                            self.pieceToTake += [self.whitePieces[ty]]
-                                                                            //    self.whitePieces[ty].removeFromSuperview()
-                                                                            self.whitePieces.removeAtIndex(ty)
-                                                                            self.whitePiecesString.removeAtIndex(ty)
-                                                                            ty--
-                                                                            print("TAKEN")
-                                                                        }
-                                                                        
-                                                                    }
-                                                                    for var ty = 0; ty < self.blackPieces.count; ty++ {
-                                                                        if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                            
-                                                                            self.pieceToTake += [self.blackPieces[ty]]
-                                                                            //      self.blackPieces[ty].removeFromSuperview()
-                                                                            self.blackPieces.removeAtIndex(ty)
-                                                                            self.blackPiecesString.removeAtIndex(ty)
-                                                                            ty--
-                                                                            print("TAKEN")
-                                                                        }
-                                                                        
-                                                                    }
-                                                                    
-                                                                    for var ty = 0; ty < self.whitePawns.count; ty++ {
-                                                                        if self.whitePawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.whitePawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                            
-                                                                            //chrta
-                                                                            
-                                                                            self.whitePawns.removeAtIndex(ty)
-                                                                            ty--
-                                                                            print("TAKEN")
-                                                                        }
-                                                                        
-                                                                    }
-                                                                    for var ty = 0; ty < self.blackPawns.count; ty++ {
-                                                                        if self.blackPawns[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPawns[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                            
-                                                                            //chrta
-                                                                            
-                                                                            self.blackPawns.removeAtIndex(ty)
-                                                                            ty--
-                                                                            print("TAKEN")
-                                                                        }
-                                                                        
-                                                                    }
-                                                                    
-                                                                    self.piecesToDelete.append(self.pieces[iy])
-                                                                    
-                                                                    
-                                                                    
-                                                                    self.takenPiecesToReload.append(self.pieces[iy])
-                                                                    self.takenPiecesToReloadAtIndex.append(iy)
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
+                                                    }
+                                                    else {
+                                                        for var w = 0; w < whitePawns.count; w++ {
+                                                            if String(movesCap[moveNumber][1])  == "2" && String(movesCap[moveNumber][3]) == "1" && pieces[i].image == UIImage(named:"blackPawn") && pieces[i] == whitePawns[w]  {
+                                                                print("Notation promotion")
+                                                                if blackPromotionType[countBlack] == "Queen"{
+                                                                    self.pieces[i].image = UIImage(named:"blackQueen")
+                                                                    self.whiteQueens += [pieces[i]]
+                                                                    self.whitePawns.removeAtIndex(w)
+                                                                    countBlack++
+                                                                } else if blackPromotionType[countBlack] == "Rook" {
+                                                                    self.pieces[i].image = UIImage(named:"blackRook")
+                                                                    self.whiteRooks += [pieces[i]]
+                                                                    self.whitePawns.removeAtIndex(w)
+                                                                    countBlack++
+                                                                } else  if blackPromotionType[countBlack] == "Bishop" {
+                                                                    self.pieces[i].image = UIImage(named:"blackBishop")
+                                                                    self.whiteBishops += [pieces[i]]
+                                                                    self.whitePawns.removeAtIndex(w)
+                                                                    countBlack++
+                                                                } else  if blackPromotionType[countBlack] == "Knight" {
+                                                                    self.pieces[i].image = UIImage(named:"blackKnight")
+                                                                    self.whiteKnights += [pieces[i]]
+                                                                    self.whitePawns.removeAtIndex(w)
+                                                                    countBlack++
                                                                 }
+                                                                
                                                             }
                                                             
+                                                        }
+                                                        
+                                                        for var w = 0; w < blackPawns.count; w++ {
+                                                            if String(movesCap[moveNumber][1])  == "7" && String(movesCap[moveNumber][3]) == "8"  && pieces[i].image == UIImage(named:"whitePawn") && pieces[i] == blackPawns[w] {
+                                                                print("Notation promotion white")
+                                                                print(blackPawns.count)
+                                                                print(w)
+                                                                if whitePromotionType[count] == "Queen" {
+                                                                    self.pieces[i].image = UIImage(named:"whiteQueen")
+                                                                    self.blackQueens += [pieces[i]]
+                                                                    self.blackPawns.removeAtIndex(w)
+                                                                    count++
+                                                                } else if whitePromotionType[count] == "Rook" {
+                                                                    self.pieces[i].image = UIImage(named:"whiteRook")
+                                                                    self.blackRooks += [pieces[i]]
+                                                                    self.blackPawns.removeAtIndex(w)
+                                                                    count++
+                                                                } else if whitePromotionType[count] == "Bishop" {
+                                                                    self.pieces[i].image = UIImage(named:"whiteBishop")
+                                                                    self.blackBishops += [pieces[i]]
+                                                                    self.blackPawns.removeAtIndex(w)
+                                                                    count++
+                                                                } else if whitePromotionType[count] == "Knight" {
+                                                                    self.pieces[i].image = UIImage(named:"whiteKnight")
+                                                                    self.blackKnights += [pieces[i]]
+                                                                    self.blackPawns.removeAtIndex(w)
+                                                                    count++
+                                                                }
+                                                                
+                                                            }
+                                                        }
+                                                    }
+                                                    
+                                                    func checkIfTakenLast() {
+                                                        // range will be nil if no letters is found
+                                                        if  (range != nil) {
+                                                            print("letters  found")
                                                             
+                                                            for var iy = 0; iy < pieces.count; iy++ {
+
+                                                            
+                                                                if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns){
+                                                                    
+
+                                                                    piecesToDelete.append(pieces[iy])
+                                                                    UIView.animateWithDuration(0.15, delay: 0, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                        self.pieces[iy].alpha=0
+
+                                                                        }, completion: { finish in })
+
+                                                                    takenPiecesToReload.append(pieces[iy])
+                                                                    print("takenPiecesToReload.count - 1 - d3 i \(takenPiecesToReload.count - 1 - d3)")
+                                                                    didIncrease_d3 = true
+                                                                }
+                                                            }
+
+                                 
+                                                        } else {
+                                                            print("letters not found")
                                                         }
-                                                        else {
-                                                            print("x not found")
-                                                        }
-                                                        
-                                                        
                                                     }
                                                     
                                                     
-                                                    checkIfTaken()
+                                                    checkIfTakenLast()
                                                     
                                                     print("pieces[i] is \(pieces[i]) with")
                                                     self.deletePiecesAfterLoad()
@@ -5751,20 +5756,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                     UIView.animateWithDuration(0.15, delay: 0, options: .CurveEaseInOut, animations:{ () -> Void in
                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
-                                                        
-                                                        
+                                                
                                                         
                                                         print("last pieces[i] is \(self.pieces[i])  ")
                                                         
                                                         }, completion: { finish in
                                                             
                                                             self.canPressForwardButton = true
+                                                            self.canPressBackwardButton = true
+
                                                             
-                                                            if didIncrease_d3 == true {
-                                                                
-                                                                self.d3++
-                                                                
-                                                            }
+                                            
                                                     })
                                                     
                                                     
@@ -9037,41 +9039,44 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 for var i = 0; i < blackPawns.count; i++ {
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackPawns[i].frame.origin.x && pieceOptions[o].frame.origin.y == blackPawns[i].frame.origin.y  {
-                        blackPawns.removeAtIndex(i)
+                        //blackPawns.removeAtIndex(i)
                         print("PAWN TAKEN")
                     }
                 }
                 
                 for var i = 0; i < blackQueens.count; i++ {
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackQueens[i].frame.origin.x && pieceOptions[o].frame.origin.y == blackQueens[i].frame.origin.y  {
-                        blackQueens.removeAtIndex(i)
+                        //blackQueens.removeAtIndex(i)
                         print("QUEEN TAKEN")
                     }
                 }
                 
                 for var i = 0; i < blackBishops.count; i++ {
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackBishops[i].frame.origin.x && pieceOptions[o].frame.origin.y == blackBishops[i].frame.origin.y  {
-                        blackBishops.removeAtIndex(i)
+                        //blackBishops.removeAtIndex(i)
                         print("BISHOP TAKEN")
                     }
                 }
                 
                 for var i = 0; i < blackRooks.count; i++ {
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackRooks[i].frame.origin.x && pieceOptions[o].frame.origin.y == blackRooks[i].frame.origin.y  {
-                        blackRooks.removeAtIndex(i)
+                        //blackRooks.removeAtIndex(i)
                         print("BISHOP TAKEN")
                     }
                 }
                 
                 for var i = 0; i < blackKnights.count; i++ {
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackKnights[i].frame.origin.x && pieceOptions[o].frame.origin.y == blackKnights[i].frame.origin.y  {
-                        blackKnights.removeAtIndex(i)
+                        //blackKnights.removeAtIndex(i)
+                        //takenPiecesToReload.append(blackKnights[i])
                         print("KNIGHT TAKEN")
                     }
                 }
                 
                 for var i = 0; i < pieces.count; i++ {
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y  {
+                        
+
                         
                         if self.colorLcolor == "You are White" {
                             if (!self.contains(takenBlackPieces, _image: pieces[i])) {
