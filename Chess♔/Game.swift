@@ -3930,6 +3930,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnIndicatorG.backgroundColor = blue
                         
                         self.myTurnAtlaunch = true
+                        //self.alreadyloadedTime = false
                         
                         self.addMyTurnAndTime()
                         
@@ -5804,6 +5805,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     
     func addMyTurnAndTime() {
+
         
         if myTurnAtlaunch == true {
             
@@ -5812,6 +5814,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 turnGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 80,80,30))
                 
+                timeGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 30,80,30))
+                timeGL.font = UIFont(name: "Times", size: 16)
+                timeGL.textAlignment = .Center
+
                 
                 turnGL.text = "Your Turn"
                 turnGL.alpha = 0
@@ -5826,9 +5832,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     view.sendSubviewToBack(turnGL)
                 }
                 
-                timeGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 30,80,30))
-                timeGL.font = UIFont(name: "Times", size: 16)
-                timeGL.textAlignment = .Center
+
                 if alreadyloadedTime == false {
                     view.addSubview(timeGL)
                     view.sendSubviewToBack(timeGL)
@@ -5919,6 +5923,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         else {
             
             if didloadTurnGL == true {
+                
+            
+                
+                
                 turnGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 80,80,30))
                 
                 turnIndicatorG = UILabel(frame: CGRectMake(turnGL.frame.origin.x - 10, turnGL.frame.origin.y + 10 , 11, 11))
@@ -5926,6 +5934,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 turnIndicatorG.clipsToBounds = true
                 turnIndicatorG.backgroundColor = turnIndicatorturn
                 turnIndicatorG.frame.origin.x = screenWidth/2 - turnIndicatorG.frame.size.width/2
+                
+                
                 
                 if screenHeight == 667 {turnIndicatorG.frame.origin.y = screenHeight/2 + screenWidth/2 + 79}
                 else if screenHeight == 568 { turnIndicatorG.frame.origin.y = screenHeight/2 + screenWidth/2 + 57}
