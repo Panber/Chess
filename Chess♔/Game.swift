@@ -6769,6 +6769,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             timeL.font = UIFont(name: "Times-Italic", size: 19)
             timeGL.text = "😒"
             
+            if movesCap.count % 2 == 0 {
+                if iamWhite {
+                    gameFinishedScreen("lost",statusBy: "time.")}
+                else {gameFinishedScreen("won",statusBy: "time.")}
+            }
+            else {
+                if iamWhite {
+                    gameFinishedScreen("won",statusBy: "time.")}
+                else {gameFinishedScreen("lost",statusBy: "time.")}
+            }
             timer.invalidate()
         }
         
