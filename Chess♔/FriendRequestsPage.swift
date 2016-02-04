@@ -52,7 +52,27 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
         
     }
     
-
+    func checkForFriends() {
+        if userArray.count == 0 {
+            
+            let alert = UIAlertController(title: "Oops!", message: "It does not seem like you have any friend requests at the moment.", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
+                switch action.style{
+                case .Default:
+                    print("default")
+                    self.navigationController!.popViewControllerAnimated(true)
+                case .Cancel:
+                    print("cancel")
+                    
+                case .Destructive:
+                    print("destructive")
+                }
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+    }
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
@@ -160,6 +180,7 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                                         
                                     }
                                 }
+
                                 
                             }
                         } else {
@@ -173,9 +194,8 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                     
                     
                 }
-                
+
                 }
-                
                 
             })
             

@@ -729,6 +729,11 @@
                             <constraint firstItem="Vfo-tr-haq" firstAttribute="leading" secondItem="06D-YG-zpp" secondAttribute="leading" id="xnA-80-YYk"/>
                             <constraint firstItem="VBu-ym-CjT" firstAttribute="top" secondItem="7fK-oV-AvV" secondAttribute="bottom" constant="19" id="zUv-Ic-GRb"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="J8d-OG-3K7"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="2XB-op-rYo">
                         <barButtonItem key="rightBarButtonItem" title="Send" id="o0Q-pb-MBo">
@@ -951,13 +956,22 @@
                             <constraint firstItem="nDc-vd-mPc" firstAttribute="top" secondItem="Gss-A6-8f8" secondAttribute="top" id="YBS-cP-EZ1"/>
                             <constraint firstAttribute="trailing" secondItem="IPR-yG-B81" secondAttribute="trailing" id="ZSK-So-8jZ"/>
                             <constraint firstItem="Gss-A6-8f8" firstAttribute="centerY" secondItem="IPR-yG-B81" secondAttribute="centerY" id="aVw-2F-fhR"/>
+                            <constraint firstItem="fPy-ZP-HCq" firstAttribute="top" secondItem="Q8G-ZD-0gR" secondAttribute="bottom" constant="19" id="ctR-xY-DOh"/>
                             <constraint firstItem="Q8G-ZD-0gR" firstAttribute="top" secondItem="Fft-AD-pQE" secondAttribute="bottom" id="dMP-RR-asN"/>
                             <constraint firstItem="33W-qG-1LT" firstAttribute="top" secondItem="IPR-yG-B81" secondAttribute="bottom" constant="356" id="geH-vm-5YV"/>
                             <constraint firstItem="Gss-A6-8f8" firstAttribute="leading" secondItem="nDc-vd-mPc" secondAttribute="trailing" constant="14" id="h48-Ac-h06"/>
+                            <constraint firstItem="IPR-yG-B81" firstAttribute="top" secondItem="fPy-ZP-HCq" secondAttribute="bottom" id="hoa-xz-9db"/>
                             <constraint firstItem="Q8G-ZD-0gR" firstAttribute="trailing" secondItem="IPR-yG-B81" secondAttribute="trailing" id="lfF-FW-lpB"/>
                             <constraint firstItem="Gss-A6-8f8" firstAttribute="trailing" secondItem="z5m-NK-ur1" secondAttribute="trailingMargin" id="v3k-jk-JD2"/>
                             <constraint firstItem="nDc-vd-mPc" firstAttribute="top" secondItem="fPy-ZP-HCq" secondAttribute="bottom" constant="20" id="wEj-oq-QpY"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="3Z7-Yc-E6J"/>
+                                <exclude reference="DqW-oz-coD"/>
+                                <exclude reference="geH-vm-5YV"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Regular" id="jpp-10-fOD">
                         <barButtonItem key="rightBarButtonItem" title="Create" id="BHl-xr-AEN">

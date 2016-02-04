@@ -8,6 +8,8 @@
 
 import UIKit
 import Parse
+import Firebase
+
 
 class GameInvitesPage: UIViewController,UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -245,6 +247,21 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
                     for result in result {
                         
                         result["confirmed"] = true
+                        
+                        
+                        //firebaseeeee
+                        //add who's turn it is
+                        let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                        var status = ["turn": "black"]
+                        if result["whitePlayer"] as? String == PFUser.currentUser()?.username {
+                            status = ["turn": "black"]
+                        }
+                        else if result["blackPlayer"] as? String == PFUser.currentUser()?.username {
+                            status = ["turn": "white"]
+                        }
+                        let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                        statusRef.setValue(status)
+                        /////firebase
                         
                         if result["whitePlayer"] as? String == PFUser.currentUser()?.username {
                         

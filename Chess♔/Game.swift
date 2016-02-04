@@ -708,7 +708,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     @IBOutlet weak var chessBoard: UIImageView!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewDidLoad() {
         
         
         loadVariablesAndConstants()
@@ -3932,6 +3932,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnIndicatorG.backgroundColor = blue
                         
                         self.myTurnAtlaunch = true
+                        //self.alreadyloadedTime = false
                         
                         self.addMyTurnAndTime()
                         
@@ -3962,7 +3963,142 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
         }
         
-    }
+        func viewDidLoad2() {
+            
+            takenBlackPieces = []
+            takenWhitePieces = []
+            blackPawnCount = 0
+            blackBishopCount = 0
+            blackKnightCount = 0
+            blackRookCount = 0
+            blackQueenCount = 0
+            
+            let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+            layout.itemSize = CGSize(width: 109, height: 22)
+            
+            if screenHeight == 736.0 {
+                collectionView = UICollectionView(frame: CGRectMake(screenWidth-125, 86, 111, 46), collectionViewLayout: layout)
+            } else if screenHeight == 667.0 {
+                collectionView = UICollectionView(frame: CGRectMake(screenWidth-108, 78, 111, 46), collectionViewLayout: layout)
+            } else if screenHeight == 568.0 {
+                collectionView = UICollectionView(frame: CGRectMake(screenWidth-92, 74, 101, 36), collectionViewLayout: layout)
+                layout.itemSize = CGSize(width: 99, height: 17)
+            } else if screenHeight == 480.0 {
+                collectionView = UICollectionView(frame: CGRectMake(screenWidth-92, 74, 101, 36), collectionViewLayout: layout)
+                layout.itemSize = CGSize(width: 99, height: 17)
+                collectionView.alpha = 0
+                collectionView.userInteractionEnabled = false
+                
+                
+            }
+            
+            collectionView.dataSource = self
+            collectionView.delegate = self
+            collectionView.registerClass(MoveCell.self, forCellWithReuseIdentifier: "Move")
+            self.view.addSubview(collectionView)
+            
+            collectionView.showsVerticalScrollIndicator = false
+            if darkMode == true {
+                
+                collectionView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            } else if darkMode == false {
+                collectionView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            }
+            
+            super.viewDidLoad()
+            
+            
+            
+            
+            //slider stuff
+            //
+            slider = UISlider(frame:CGRectMake(00, screenHeight/2 + 150, screenWidth - 0, 20))
+            if screenHeight == 568 {slider.frame.origin.y = screenHeight/2 + 150 - 47}
+            slider.minimumValue = 0
+            slider.maximumValue = Float(notations.count)
+            
+            slider.value = slider.maximumValue
+            slider.continuous = true
+            slider.tintColor = red
+            slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
+            //view.addSubview(slider)
+            //view.sendSubviewToBack(slider)
+            //
+            
+            capsuleL = UILabel(frame: CGRectMake(0,screenHeight/2 - 150,screenWidth,60))
+            capsuleL.text = "TIME CAPSULE"
+            capsuleL.font = UIFont(name: "Didot", size: 22)
+            capsuleL.textAlignment = .Center
+            view.addSubview(capsuleL)
+            view.sendSubviewToBack(capsuleL)
+            
+            notationsL = UILabel(frame: CGRectMake(0,screenHeight/2 + 150 - 47,screenWidth/2 - 60,30))
+            notationsL.text = ""
+            notationsL.font = UIFont(name: "Times", size: 20)
+            notationsL.textAlignment = .Center
+            view.addSubview(notationsL)
+            view.sendSubviewToBack(notationsL)
+            
+            
+            capsuleB = UIButton(frame: CGRectMake(screenWidth - 60,screenHeight/2 + 246,40,40))
+            if screenHeight == 667 { capsuleB.frame.origin.y = screenHeight/2 + 220}
+            else if screenHeight ==  568 {capsuleB.frame.origin.y = screenHeight/2 + 180}
+            capsuleB.setBackgroundImage(UIImage(named: "capsuleClock.png"), forState: .Normal)
+            capsuleB.addTarget(self, action: "capsuleButtonPressed:", forControlEvents: .TouchUpInside)
+            view.addSubview(capsuleB)
+            
+            backwardB = UIButton(frame: CGRectMake(screenWidth/2-60,screenHeight/2 + 150 - 47,40,40))
+            backwardB.setBackgroundImage(UIImage(named: "arrow_blueB.png"), forState: .Normal)
+            backwardB.addTarget(self, action: "backwardButtonPressed:", forControlEvents: .TouchUpInside)
+            view.addSubview(backwardB)
+            backwardB.enabled = false
+            view.sendSubviewToBack(backwardB)
+            
+            
+            //        let sliderOverlay = UILabel(frame: CGRectMake(0,screenHeight/2 + screenWidth/2 + 12,screenWidth,25))
+            //        sliderOverlay.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            //        view.addSubview(sliderOverlay)
+            // var uu: CGFloat = screenWidth/CGFloat(notations.count)
+            
+            forwardB = UIButton(frame: CGRectMake(screenWidth/2+20,screenHeight/2 + 150 - 47,40,40))
+            forwardB.setBackgroundImage(UIImage(named: "arrow_blueF.png"), forState: .Normal)
+            forwardB.addTarget(self, action: "forwardButtonPressed:", forControlEvents: .TouchUpInside)
+            forwardB.enabled = false
+            view.addSubview(forwardB)
+            view.sendSubviewToBack(forwardB)
+            print(screenHeight)
+            
+            
+            exitTimeCapsuleB = UIButton(frame: CGRectMake(screenWidth/2 + 60,screenHeight/2 + 150 - 47,screenWidth/2 - 60,40))
+            exitTimeCapsuleB.titleLabel?.font = UIFont(name: "Times", size: 20)
+            exitTimeCapsuleB.setTitle("Exit", forState: .Normal)
+            exitTimeCapsuleB.setTitleColor(red, forState: .Normal)
+            exitTimeCapsuleB.addTarget(self, action: "exitTimeCapsuleBPressed:", forControlEvents: .TouchUpInside)
+            exitTimeCapsuleB.titleLabel?.textAlignment = NSTextAlignment.Center
+            view.addSubview(exitTimeCapsuleB)
+            view.sendSubviewToBack(exitTimeCapsuleB)
+            
+            
+            var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(movesCap.count + 1) - screenWidth/CGFloat(movesCap.count+1)/CGFloat(movesCap.count + 1)))
+            print("uu is \(uu)")
+            sliderPointer = UILabel(frame: CGRectMake(screenWidth - uu - CGFloat(((screenWidth/CGFloat(movesCap.count + 1))/CGFloat(movesCap.count + 1))),screenHeight/2 + screenWidth/2 ,uu + CGFloat(((screenWidth/CGFloat(movesCap.count+1))/CGFloat(movesCap.count+1))),7))
+            if sliderPointer.frame.size.width < 15 { sliderPointer.frame.size.width = 15; sliderPointer.frame.origin.x = screenWidth - 15}
+            sliderPointer.backgroundColor = blue
+            sliderPointer.alpha = 0.75
+            view.addSubview(sliderPointer)
+            view.sendSubviewToBack(sliderPointer)
+            
+            
+            if screenHeight == 480 {
+                self.tabBarController?.tabBar.hidden = true
+                slider.frame.origin.y = screenHeight/2 + 150 - 47
+                capsuleB.frame.origin.y = screenHeight/2 + 180
+            }
+            
+            //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
+            
+        }
+        viewDidLoad2()}
     
     //last thing i did was to check ewther or noyou can take a peice that was jsut ttaken, remember to add peicetodelete at black
     func deletePiecesAfterLoad () {
@@ -4002,141 +4138,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     // MARK: - View did load! 😄
-    override func viewDidLoad() {
-        
-        takenBlackPieces = []
-        takenWhitePieces = []
-        blackPawnCount = 0
-        blackBishopCount = 0
-        blackKnightCount = 0
-        blackRookCount = 0
-        blackQueenCount = 0
-        
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 109, height: 22)
-        
-        if screenHeight == 736.0 {
-            collectionView = UICollectionView(frame: CGRectMake(screenWidth-125, 86, 111, 46), collectionViewLayout: layout)
-        } else if screenHeight == 667.0 {
-            collectionView = UICollectionView(frame: CGRectMake(screenWidth-108, 78, 111, 46), collectionViewLayout: layout)
-        } else if screenHeight == 568.0 {
-            collectionView = UICollectionView(frame: CGRectMake(screenWidth-92, 74, 101, 36), collectionViewLayout: layout)
-            layout.itemSize = CGSize(width: 99, height: 17)
-        } else if screenHeight == 480.0 {
-            collectionView = UICollectionView(frame: CGRectMake(screenWidth-92, 74, 101, 36), collectionViewLayout: layout)
-            layout.itemSize = CGSize(width: 99, height: 17)
-            collectionView.alpha = 0
-            collectionView.userInteractionEnabled = false
-            
-            
-        }
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.registerClass(MoveCell.self, forCellWithReuseIdentifier: "Move")
-        self.view.addSubview(collectionView)
-        
-        collectionView.showsVerticalScrollIndicator = false
-        if darkMode == true {
-            
-            collectionView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
-        } else if darkMode == false {
-            collectionView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
-        }
-        
-        super.viewDidLoad()
-        
-        
-        
-        
-        //slider stuff
-        //
-        slider = UISlider(frame:CGRectMake(00, screenHeight/2 + 150, screenWidth - 0, 20))
-        if screenHeight == 568 {slider.frame.origin.y = screenHeight/2 + 150 - 47}
-        slider.minimumValue = 0
-        slider.maximumValue = Float(notations.count)
-        
-        slider.value = slider.maximumValue
-        slider.continuous = true
-        slider.tintColor = red
-        slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
-        //view.addSubview(slider)
-        //view.sendSubviewToBack(slider)
-        //
-        
-        capsuleL = UILabel(frame: CGRectMake(0,screenHeight/2 - 150,screenWidth,60))
-        capsuleL.text = "TIME CAPSULE"
-        capsuleL.font = UIFont(name: "Didot", size: 22)
-        capsuleL.textAlignment = .Center
-        view.addSubview(capsuleL)
-        view.sendSubviewToBack(capsuleL)
-        
-        notationsL = UILabel(frame: CGRectMake(0,screenHeight/2 + 150 - 47,screenWidth/2 - 60,30))
-        notationsL.text = ""
-        notationsL.font = UIFont(name: "Times", size: 20)
-        notationsL.textAlignment = .Center
-        view.addSubview(notationsL)
-        view.sendSubviewToBack(notationsL)
-        
-        
-        capsuleB = UIButton(frame: CGRectMake(screenWidth - 60,screenHeight/2 + 246,40,40))
-        if screenHeight == 667 { capsuleB.frame.origin.y = screenHeight/2 + 220}
-        else if screenHeight ==  568 {capsuleB.frame.origin.y = screenHeight/2 + 180}
-        capsuleB.setBackgroundImage(UIImage(named: "capsuleClock.png"), forState: .Normal)
-        capsuleB.addTarget(self, action: "capsuleButtonPressed:", forControlEvents: .TouchUpInside)
-        view.addSubview(capsuleB)
-        
-        backwardB = UIButton(frame: CGRectMake(screenWidth/2-60,screenHeight/2 + 150 - 47,40,40))
-        backwardB.setBackgroundImage(UIImage(named: "arrow_blueB.png"), forState: .Normal)
-        backwardB.addTarget(self, action: "backwardButtonPressed:", forControlEvents: .TouchUpInside)
-        view.addSubview(backwardB)
-        backwardB.enabled = false
-        view.sendSubviewToBack(backwardB)
-        
-        
-        //        let sliderOverlay = UILabel(frame: CGRectMake(0,screenHeight/2 + screenWidth/2 + 12,screenWidth,25))
-        //        sliderOverlay.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
-        //        view.addSubview(sliderOverlay)
-        // var uu: CGFloat = screenWidth/CGFloat(notations.count)
-        
-        forwardB = UIButton(frame: CGRectMake(screenWidth/2+20,screenHeight/2 + 150 - 47,40,40))
-        forwardB.setBackgroundImage(UIImage(named: "arrow_blueF.png"), forState: .Normal)
-        forwardB.addTarget(self, action: "forwardButtonPressed:", forControlEvents: .TouchUpInside)
-        forwardB.enabled = false
-        view.addSubview(forwardB)
-        view.sendSubviewToBack(forwardB)
-        print(screenHeight)
-        
-        
-        exitTimeCapsuleB = UIButton(frame: CGRectMake(screenWidth/2 + 60,screenHeight/2 + 150 - 47,screenWidth/2 - 60,40))
-        exitTimeCapsuleB.titleLabel?.font = UIFont(name: "Times", size: 20)
-        exitTimeCapsuleB.setTitle("Exit", forState: .Normal)
-        exitTimeCapsuleB.setTitleColor(red, forState: .Normal)
-        exitTimeCapsuleB.addTarget(self, action: "exitTimeCapsuleBPressed:", forControlEvents: .TouchUpInside)
-        exitTimeCapsuleB.titleLabel?.textAlignment = NSTextAlignment.Center
-        view.addSubview(exitTimeCapsuleB)
-        view.sendSubviewToBack(exitTimeCapsuleB)
-        
-        
-        var uu: CGFloat = CGFloat(Int(screenWidth/CGFloat(movesCap.count + 1) - screenWidth/CGFloat(movesCap.count+1)/CGFloat(movesCap.count + 1)))
-        print("uu is \(uu)")
-        sliderPointer = UILabel(frame: CGRectMake(screenWidth - uu - CGFloat(((screenWidth/CGFloat(movesCap.count + 1))/CGFloat(movesCap.count + 1))),screenHeight/2 + screenWidth/2 ,uu + CGFloat(((screenWidth/CGFloat(movesCap.count+1))/CGFloat(movesCap.count+1))),7))
-        if sliderPointer.frame.size.width < 15 { sliderPointer.frame.size.width = 15; sliderPointer.frame.origin.x = screenWidth - 15}
-        sliderPointer.backgroundColor = blue
-        sliderPointer.alpha = 0.75
-        view.addSubview(sliderPointer)
-        view.sendSubviewToBack(sliderPointer)
-        
-        
-        if screenHeight == 480 {
-            self.tabBarController?.tabBar.hidden = true
-            slider.frame.origin.y = screenHeight/2 + 150 - 47
-            capsuleB.frame.origin.y = screenHeight/2 + 180
-        }
-        
-        //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
-        
-    }
+
     
     var exitTimeCapsuleB = UIButton()
     var sliderPointer = UILabel()
@@ -5806,6 +5808,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     
     func addMyTurnAndTime() {
+
         
         if myTurnAtlaunch == true {
             
@@ -5814,6 +5817,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 turnGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 80,80,30))
                 
+                timeGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 30,80,30))
+                timeGL.font = UIFont(name: "Times", size: 16)
+                timeGL.textAlignment = .Center
+
                 
                 turnGL.text = "Your Turn"
                 turnGL.alpha = 0
@@ -5828,9 +5835,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     view.sendSubviewToBack(turnGL)
                 }
                 
-                timeGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 30,80,30))
-                timeGL.font = UIFont(name: "Times", size: 16)
-                timeGL.textAlignment = .Center
+
                 if alreadyloadedTime == false {
                     view.addSubview(timeGL)
                     view.sendSubviewToBack(timeGL)
@@ -5921,6 +5926,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         else {
             
             if didloadTurnGL == true {
+                
+            
+                
+                
                 turnGL = UILabel(frame: CGRectMake(screenWidth/2 - 40,screenHeight/2 + screenWidth/2 + 80,80,30))
                 
                 turnIndicatorG = UILabel(frame: CGRectMake(turnGL.frame.origin.x - 10, turnGL.frame.origin.y + 10 , 11, 11))
@@ -5928,6 +5937,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 turnIndicatorG.clipsToBounds = true
                 turnIndicatorG.backgroundColor = turnIndicatorturn
                 turnIndicatorG.frame.origin.x = screenWidth/2 - turnIndicatorG.frame.size.width/2
+                
+                
                 
                 if screenHeight == 667 {turnIndicatorG.frame.origin.y = screenHeight/2 + screenWidth/2 + 79}
                 else if screenHeight == 568 { turnIndicatorG.frame.origin.y = screenHeight/2 + screenWidth/2 + 57}
@@ -6758,6 +6769,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             timeL.font = UIFont(name: "Times-Italic", size: 19)
             timeGL.text = "😒"
             
+            if movesCap.count % 2 == 0 {
+                if iamWhite {
+                    gameFinishedScreen("lost",statusBy: "time.")}
+                else {gameFinishedScreen("won",statusBy: "time.")}
+            }
+            else {
+                if iamWhite {
+                    gameFinishedScreen("won",statusBy: "time.")}
+                else {gameFinishedScreen("lost",statusBy: "time.")}
+            }
             timer.invalidate()
         }
         

@@ -173,7 +173,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
     func setUpProfile () {
 
         popOverView = UIView(frame: CGRectMake(0, screenHeight - 220, screenWidth, 200))
-        bcView = UIButton(frame: CGRectMake(0, 0, screenWidth, view.frame.size.height ))
+        bcView = UIButton(frame: CGRectMake(0, 0, screenWidth, screenHeight + 400))
         
         
         navigationController?.navigationBar.topItem?.title = NSUserDefaults.standardUserDefaults().objectForKey("other_username") as? String
@@ -748,8 +748,10 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         unfriendButton.titleLabel?.font = UIFont(name: "Times", size: 20)
         unfriendButton.layer.cornerRadius = cornerRadius
         unfriendButton.userInteractionEnabled = true
-        if darkMode {unfriendButton.backgroundColor = UIColor(red: 0.10, green: 0.10 , blue: 0.10, alpha: 1)}
-        else {unfriendButton.backgroundColor = UIColor.whiteColor()}
+       // if darkMode {unfriendButton.backgroundColor = UIColor(red: 0.10, green: 0.10 , blue: 0.10, alpha: 1)}
+        //else {
+            unfriendButton.backgroundColor = UIColor.whiteColor()
+       // }
         popOverView.addSubview(unfriendButton)
         
         dismissButton = UIButton(frame: CGRectMake(screenWidth + 60, 55, screenWidth - 10, 45))
@@ -759,8 +761,10 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         dismissButton.layer.cornerRadius = cornerRadius
         dismissButton.alpha = 1
         dismissButton.userInteractionEnabled = true
-        if darkMode {dismissButton.backgroundColor = UIColor(red: 0.10, green: 0.10 , blue: 0.10, alpha: 1)}
-        else {dismissButton.backgroundColor = UIColor.whiteColor()}
+       // if darkMode {dismissButton.backgroundColor = UIColor(red: 0.10, green: 0.10 , blue: 0.10, alpha: 1)}
+       // else {
+            dismissButton.backgroundColor = UIColor.whiteColor()
+    //}
         popOverView.addSubview(dismissButton)
         
         unfriendButton.addTarget(self, action: "unfriendPressed:", forControlEvents: .TouchUpInside)
@@ -1169,9 +1173,11 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
             label15.textColor = UIColor.whiteColor()
             label17.textColor = UIColor.lightTextColor()
 
-            unfriendButton.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
-            dismissButton.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+         //   unfriendButton.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            //dismissButton.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
+            unfriendButton.backgroundColor = UIColor.whiteColor()
+            dismissButton.backgroundColor = UIColor.whiteColor()
             
         }
         else if darkMode == false {
