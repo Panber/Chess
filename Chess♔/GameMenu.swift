@@ -287,6 +287,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         
         
+        lightOrDarkMode()
     }
 
     // Location Manager helper stuff
@@ -1492,7 +1493,8 @@ var loaded = false
 //            }, withCancelBlock: { error in
 //                print(error.description)
 //        })
-        
+        lightOrDarkMode()
+
     }
     
     override func viewDidDisappear(animated: Bool) {

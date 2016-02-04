@@ -50,7 +50,7 @@ class NewGameFriends: UIViewController, UITableViewDelegate, UIScrollViewDelegat
                         self.tableView.reloadData()
                     }
                 }
-                
+                self.checkForFriends()
             })
         }
         
@@ -79,6 +79,8 @@ class NewGameFriends: UIViewController, UITableViewDelegate, UIScrollViewDelegat
         
         let cell:NewGameFriendsTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("newGameFriendsCell", forIndexPath: indexPath) as! NewGameFriendsTableViewCell
         
+        
+
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
@@ -167,7 +169,31 @@ class NewGameFriends: UIViewController, UITableViewDelegate, UIScrollViewDelegat
         
         tableView.reloadData()
         getFriends()
+        
 
+
+    }
+    
+    func checkForFriends() {
+        if friendsArray.count == 0 {
+            
+            let alert = UIAlertController(title: "Oops!", message: "It seems like you have no friends yet. Add friends by using the 'explore' tab.", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
+                switch action.style{
+                case .Default:
+                    print("default")
+                    self.navigationController!.popViewControllerAnimated(true)
+                case .Cancel:
+                    print("cancel")
+                    
+                case .Destructive:
+                    print("destructive")
+                }
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {

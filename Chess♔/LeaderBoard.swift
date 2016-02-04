@@ -23,7 +23,27 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
     
     var found = false
     
-    
+    func checkForFriends() {
+        if userArray.count == 0 {
+            
+            let alert = UIAlertController(title: "Oops!", message: "We can not load the leaderboard right now.", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
+                switch action.style{
+                case .Default:
+                    print("default")
+                    self.navigationController!.popViewControllerAnimated(true)
+                case .Cancel:
+                    print("cancel")
+                    
+                case .Destructive:
+                    print("destructive")
+                }
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+    }
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
@@ -67,8 +87,10 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
                             
                         
                         }
-                    
+
                     }
+                    self.checkForFriends()
+
                 self.tableView.reloadData()
                 }
                 
@@ -90,7 +112,8 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
                         
                         }
                     }
-                    
+                    self.checkForFriends()
+
                     self.tableView.reloadData()
                     
                 
@@ -125,6 +148,8 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
                         }
                         
                     }
+                    self.checkForFriends()
+
                     self.tableView.reloadData()
                 }
                 

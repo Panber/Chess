@@ -54,7 +54,7 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
                         self.tableView.reloadData()
                     }
                 }
-                
+              self.checkForFriends()
             })
         }
         
@@ -78,6 +78,27 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
         return friendsArray.count
         
     }
+    func checkForFriends() {
+        if friendsArray.count == 0 {
+            
+            let alert = UIAlertController(title: "Oops!", message: "It seems like you have no friends yet. Add friends by using the 'explore' tab.", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
+                switch action.style{
+                case .Default:
+                    print("default")
+                    self.navigationController!.popViewControllerAnimated(true)
+                case .Cancel:
+                    print("cancel")
+                    
+                case .Destructive:
+                    print("destructive")
+                }
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -99,6 +120,9 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
             cell.rating.textColor = UIColor.darkGrayColor()
             cell.username.textColor =  UIColor.blackColor()
         }
+        
+
+        
         
         cell.username.text = friendsArray[indexPath.row] as! String
         

@@ -75,6 +75,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         self.searchDisplayController?.searchResultsTableView.reloadData()
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
