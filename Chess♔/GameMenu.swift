@@ -1450,6 +1450,12 @@ var loaded = false
     
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
+
+        lightOrDarkMode()
+    }
+    override func viewDidAppear(animated: Bool) {
+        
+        
         
         
         gameIDSYourTurn = []
@@ -1458,20 +1464,15 @@ var loaded = false
         gameID = ""
         
         findGames()
-
+        
         
         
         invitesButtonOutlet.title = "Invites"
         invitesButtonOutlet.enabled = false
         self.invitesButtonOutlet.tintColor = UIColor.grayColor()
-
-
+        
+        
         darkMode = NSUserDefaults.standardUserDefaults().boolForKey("dark_mode")
-        lightOrDarkMode()
-    }
-    override func viewDidAppear(animated: Bool) {
-        
-        
 
         //        //adding the game
 //        let game = ["id": "123456"]
