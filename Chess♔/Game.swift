@@ -8575,7 +8575,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             var newDate = now!.dateByAddingTimeInterval(60*60*24*multiplySpeedWith)
             
             
-            if notations.count <= 1 {
+            if notations.count <= 2 {
                 print(notations.count)
                 newDate = NSDate().dateByAddingTimeInterval(60*60*24*(multiplySpeedWithIfNew + multiplySpeedWith))
             }
