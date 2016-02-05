@@ -4139,6 +4139,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         backwardB.userInteractionEnabled = false
         exitTimeCapsuleB.userInteractionEnabled = false
         
+        self.view.userInteractionEnabled = true
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
+        self.view.addGestureRecognizer(longPressRecognizer)
+        
     }
     
     // MARK: - View did load! 😄
@@ -4151,7 +4155,92 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var myturnAfterTimeCapsule = Bool()
     var didEnterTimeCapsule = false
     
+    // MARK: Focyus
     
+
+    
+
+    
+var didLongPress = false
+    
+    func longPressed(sender: UILongPressGestureRecognizer)
+    {
+        
+        if !didLongPress{
+        var visualEffectViewT = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+        if darkMode { visualEffectViewT.effect = UIBlurEffect(style: .Dark) }
+        else { visualEffectViewT.effect = UIBlurEffect(style: .ExtraLight) }
+        visualEffectViewT.frame = view.bounds
+        
+        visualEffectViewT.alpha = 0
+     
+            self.view.addSubview(visualEffectViewT)
+           // self.view.sendSubviewToBack(visualEffectViewT)
+            for var i = 0; i < pieces.count; i++ {
+            self.view.bringSubviewToFront(pieces[i])
+            }
+            for var i = 0; i < pieceOptions.count; i++ {
+                self.view.bringSubviewToFront(pieceOptions[i])
+            }
+            self.view.bringSubviewToFront(pieceMarked)
+
+                    var  boardI = UIImageView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
+                    boardI.contentMode = .ScaleAspectFit
+                    boardI.image = UIImage(named: "brownChessBoard")
+            view.insertSubview(boardI, aboveSubview: visualEffectViewT)
+
+            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide) // with animation option.
+
+        
+            navigationController?.setNavigationBarHidden(navigationController?.navigationBarHidden == false, animated: true)
+            setTabBarVisible(!tabBarIsVisible(), animated: true)
+
+
+
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            visualEffectViewT.alpha = 1
+            }, completion: {finish in
+                visualEffectViewT.userInteractionEnabled = true
+        })
+        
+didLongPress = true
+        print("longpressed")
+        }
+    }
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return UIStatusBarAnimation.Slide
+    }
+    
+    func setTabBarVisible(visible:Bool, animated:Bool) {
+        
+        //* This cannot be called before viewDidLayoutSubviews(), because the frame is not set before this time
+        
+        // bail if the current state matches the desired state
+        if (tabBarIsVisible() == visible) { return }
+        
+        // get a frame calculation ready
+        let frame = self.tabBarController?.tabBar.frame
+        let height = frame?.size.height
+        let offsetY = (visible ? -height! : height)
+        
+        // zero duration means no animation
+        let duration:NSTimeInterval = (animated ? 0.3 : 0.0)
+        
+        //  animate the tabBar
+        if frame != nil {
+            UIView.animateWithDuration(duration) {
+                self.tabBarController?.tabBar.frame = CGRectOffset(frame!, 0, offsetY!)
+                return
+            }
+        }
+    }
+    
+    func tabBarIsVisible() ->Bool {
+        return self.tabBarController?.tabBar.frame.origin.y < CGRectGetMaxY(self.view.frame)
+    }
+    
+    
+
     // MARK: -Time Capsule
     func capsuleButtonPressed(sender: UIButton!) {
         
@@ -9308,8 +9397,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 if (blackPieces[t].image == UIImage(named: whitePiecesTypes[b])) {
                                     whiteCount[b] += 1
                                     if (!containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[b])) {
-                                        takenWhitePiecesLbl[b].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
-                                        takenWhitePiecesLbl[t].frame.origin.y += 5
+                                        takenWhitePiecesLbl[b].frame = CGRectMake( CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                        takenWhitePiecesLbl[b].frame.origin.y += 5
                                         takenWhitePiecesShow += [takenWhitePiecesLbl[b]]
                                     }
                                     takenWhitePiecesLbl[b].text = "" + whiteCount[b].description
