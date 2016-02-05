@@ -966,7 +966,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
                 
             }
-            
+            xAxisArrStr = ["a","b","c","d","e","f","g","h"]
+            yAxisArrStr = ["1","2","3","4","5","6","7","8"]
             ////////this is where the magic happens\\\\\\\\
             func magic1() {
                 xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
@@ -4138,6 +4139,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         backwardB.userInteractionEnabled = false
         exitTimeCapsuleB.userInteractionEnabled = false
         
+        self.view.userInteractionEnabled = true
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
+        self.view.addGestureRecognizer(longPressRecognizer)
+        
     }
     
     // MARK: - View did load! 😄
@@ -4150,7 +4155,92 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var myturnAfterTimeCapsule = Bool()
     var didEnterTimeCapsule = false
     
+    // MARK: Focyus
     
+
+    
+
+    
+var didLongPress = false
+    
+    func longPressed(sender: UILongPressGestureRecognizer)
+    {
+        
+        if !didLongPress{
+        var visualEffectViewT = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+        if darkMode { visualEffectViewT.effect = UIBlurEffect(style: .Dark) }
+        else { visualEffectViewT.effect = UIBlurEffect(style: .ExtraLight) }
+        visualEffectViewT.frame = view.bounds
+        
+        visualEffectViewT.alpha = 0
+     
+            self.view.addSubview(visualEffectViewT)
+           // self.view.sendSubviewToBack(visualEffectViewT)
+            for var i = 0; i < pieces.count; i++ {
+            self.view.bringSubviewToFront(pieces[i])
+            }
+            for var i = 0; i < pieceOptions.count; i++ {
+                self.view.bringSubviewToFront(pieceOptions[i])
+            }
+            self.view.bringSubviewToFront(pieceMarked)
+
+                    var  boardI = UIImageView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
+                    boardI.contentMode = .ScaleAspectFit
+                    boardI.image = UIImage(named: "brownChessBoard")
+            view.insertSubview(boardI, aboveSubview: visualEffectViewT)
+
+            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide) // with animation option.
+
+        
+            navigationController?.setNavigationBarHidden(navigationController?.navigationBarHidden == false, animated: true)
+            setTabBarVisible(!tabBarIsVisible(), animated: true)
+
+
+
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            visualEffectViewT.alpha = 1
+            }, completion: {finish in
+                visualEffectViewT.userInteractionEnabled = true
+        })
+        
+didLongPress = true
+        print("longpressed")
+        }
+    }
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return UIStatusBarAnimation.Slide
+    }
+    
+    func setTabBarVisible(visible:Bool, animated:Bool) {
+        
+        //* This cannot be called before viewDidLayoutSubviews(), because the frame is not set before this time
+        
+        // bail if the current state matches the desired state
+        if (tabBarIsVisible() == visible) { return }
+        
+        // get a frame calculation ready
+        let frame = self.tabBarController?.tabBar.frame
+        let height = frame?.size.height
+        let offsetY = (visible ? -height! : height)
+        
+        // zero duration means no animation
+        let duration:NSTimeInterval = (animated ? 0.3 : 0.0)
+        
+        //  animate the tabBar
+        if frame != nil {
+            UIView.animateWithDuration(duration) {
+                self.tabBarController?.tabBar.frame = CGRectOffset(frame!, 0, offsetY!)
+                return
+            }
+        }
+    }
+    
+    func tabBarIsVisible() ->Bool {
+        return self.tabBarController?.tabBar.frame.origin.y < CGRectGetMaxY(self.view.frame)
+    }
+    
+    
+
     // MARK: -Time Capsule
     func capsuleButtonPressed(sender: UIButton!) {
         
@@ -5080,7 +5170,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                         // range will be nil if no letters is found
                                                         if  (range != nil) {
                                                             print("letters  found")
-                                                            
+                                                            print(takenPiecesToReload.count)
+                                                            print(takenPiecesToReload.count - 1 - d2)
                                                             
                                                             view.addSubview(takenPiecesToReload[takenPiecesToReload.count - 1 - d2])
                                                             takenPiecesToReload[takenPiecesToReload.count - 1 - d2].alpha = 0
@@ -6020,25 +6111,30 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         var wonLabel = UILabel(frame: CGRectMake(20,screenHeight/2-56 - screenHeight/8 - 30 - 10,screenWidth-40, 102))
         
+        var by = " by "
+        if statusBy == "time" {
+        by = " on "
+        }
+        
         let sb = (game["blackPlayer"] as? String)!
         let sw = (game["whitePlayer"] as? String)!
         if statusWhite == "won" && iamWhite {
-            wonLabel.text = "You won against " + "\(sb)" + " by " + statusBy
+            wonLabel.text = "You won against " + "\(sb)" + by + statusBy
         }
         else if statusWhite == "lost" && iamWhite {
-            wonLabel.text = "You lost against " + "\(sb)" + " by " + statusBy
+            wonLabel.text = "You lost against " + "\(sb)" + by + statusBy
         }
         if statusWhite == "won" && !iamWhite {
-            wonLabel.text = "You lost against " + "\(sw)" + " by " + statusBy
+            wonLabel.text = "You lost against " + "\(sw)" + by + statusBy
         }
         else if statusWhite == "lost" && !iamWhite {
-            wonLabel.text = "You won against " + "\(sw)" + " by " + statusBy
+            wonLabel.text = "You won against " + "\(sw)" + by + statusBy
         }
         else if statusWhite == "drew" && !iamWhite {
-            wonLabel.text = "You drew against " + "\(sw)" + " by " + statusBy
+            wonLabel.text = "You drew against " + "\(sw)"
         }
         else if statusWhite == "drew" && iamWhite {
-            wonLabel.text = "You drew against " + "\(sb)" + " by " + statusBy
+            wonLabel.text = "You drew against " + "\(sb)"
         }
         
         
@@ -8961,6 +9057,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                         }
                         else {
+                            xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
+                            yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
+                            
                             pieceStringPos = xAxisArrStr[t] + yAxisArrStr[g]
                             
                         }
@@ -9297,8 +9396,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 if (blackPieces[t].image == UIImage(named: whitePiecesTypes[b])) {
                                     whiteCount[b] += 1
                                     if (!containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[b])) {
-                                        takenWhitePiecesLbl[b].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
-                                        takenWhitePiecesLbl[t].frame.origin.y += 5
+                                        takenWhitePiecesLbl[b].frame = CGRectMake( CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                        takenWhitePiecesLbl[b].frame.origin.y += 5
                                         takenWhitePiecesShow += [takenWhitePiecesLbl[b]]
                                     }
                                     takenWhitePiecesLbl[b].text = "" + whiteCount[b].description
