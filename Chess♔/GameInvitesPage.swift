@@ -259,7 +259,7 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
                         else if result["blackPlayer"] as? String == PFUser.currentUser()?.username {
                             status = ["turn": "white"]
                         }
-                        let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                        let statusRef = checkstatus.childByAppendingPath("\(result.objectId!)")
                         statusRef.setValue(status)
                         /////firebase
                         
