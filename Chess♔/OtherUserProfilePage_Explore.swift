@@ -718,9 +718,30 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
             
             NSUserDefaults.standardUserDefaults().setObject(u, forKey: "other_username_from_explore")
             
-            
-            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("NewGameSettingsPage_Explore")
-            self.showViewController(vc as! UIViewController, sender: vc)
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                
+                self.inviteButton.frame.size.width += 4
+                self.inviteButton.frame.origin.x -= 2
+                self.inviteButton.backgroundColor = UIColor(red:0.50, green:0.69, blue:0.93, alpha:1.0)
+                
+                }, completion: {finish in
+                    
+                    UIView.animateWithDuration(0.2, animations: { () -> Void in
+                        
+                        self.inviteButton.frame.size.width -= 4
+                        self.inviteButton.frame.origin.x += 2
+                        self.inviteButton.backgroundColor = blue
+                        
+                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("NewGameSettingsPage_Explore")
+                        self.showViewController(vc as! UIViewController, sender: vc)
+                        
+                        }, completion: {finish in
+                            
+                            
+                            
+                    })
+            })
+
             
         
         }

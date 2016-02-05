@@ -5377,7 +5377,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 for var iy = 0; iy < pieces.count; iy++ {
                                                                     
                                                                     
-                                                                    if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns){
+                                                                    if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && self.iamWhite == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && self.iamWhite == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && self.iamWhite == false || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && self.iamWhite == false  {
                                                                         
                                                                         
                                                                         piecesToDelete.append(pieces[iy])
@@ -5728,7 +5728,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                             for var iy = 0; iy < pieces.count; iy++ {
 
                                                             
-                                                                if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.blackPawns) || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && canSaveKing(self.pieces[iy], array: self.whitePawns){
+                                                                
+                                                                
+                                                                if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && self.iamWhite == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && self.iamWhite == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && self.iamWhite == false || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && self.iamWhite == false  {
                                                                     
 
                                                                     piecesToDelete.append(pieces[iy])
@@ -6767,17 +6769,28 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         if timeLeftT <= 0 {
             timeL.text = "Game Finished"
             timeL.font = UIFont(name: "Times-Italic", size: 19)
-            timeGL.text = "😒"
             
             if movesCap.count % 2 == 0 {
                 if iamWhite {
-                    gameFinishedScreen("lost",statusBy: "time.")}
-                else {gameFinishedScreen("won",statusBy: "time.")}
+                    gameFinishedScreen("lost",statusBy: "time.")
+                    timeGL.text = "😒"
+
+                }
+                else {gameFinishedScreen("won",statusBy: "time.")
+                    timeGL.text = "😎"
+
+                }
             }
             else {
                 if iamWhite {
-                    gameFinishedScreen("won",statusBy: "time.")}
-                else {gameFinishedScreen("lost",statusBy: "time.")}
+                    gameFinishedScreen("won",statusBy: "time.")
+                    timeGL.text = "😎"
+
+                }
+                else {gameFinishedScreen("lost",statusBy: "time.")
+                    timeGL.text = "😒"
+
+                }
             }
             timer.invalidate()
         }
@@ -8595,7 +8608,56 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 //self.game.setObject(false, forKey: "passant")
             }
             
+            let safetyTest = PFQuery(className: "Games")
+            safetyTest.whereKey("objectId", equalTo: gameID)
+            let safety = safetyTest.getFirstObject()
             
+//            if iamWhite{
+//                if safety!["status_white"] as? String == "notmove"{
+//                
+//                    self.navigationController!.popViewControllerAnimated(true)
+//
+//                    
+//                    let alert = UIAlertController(title: "Oops!", message: "It seems like we encountered an error while trying to save your game. Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+//                    
+//                    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
+//                        switch action.style{
+//                        case .Default:
+//                            print("default")
+//                        case .Cancel:
+//                            print("cancel")
+//                        case .Destructive:
+//                            print("destructive")
+//                        }
+//                    }))
+//                    self.presentViewController(alert, animated: true, completion: nil)
+//                }
+//                else {
+//                    return
+//                }
+//            }
+//            else  {
+//                if safety!["status_black"] as? String == "notmove"{
+//                    self.navigationController!.popViewControllerAnimated(true)
+//
+//                    let alert = UIAlertController(title: "Oops!", message: "It seems like we encountered an error while trying to save your game. Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+//                    
+//                    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
+//                        switch action.style{
+//                        case .Default:
+//                            print("default")
+//                        case .Cancel:
+//                            print("cancel")
+//                        case .Destructive:
+//                            print("destructive")
+//                        }
+//                    }))
+//                    self.presentViewController(alert, animated: true, completion: nil)
+//                }
+//                else {
+//                    return
+//                }
+//            }
             
             game.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
                 if error == nil {
@@ -8668,8 +8730,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             castleLeft = false
             castleRight = false
-            
-        }
+            }
+        
             
         else {
             var positionx = selectedPiece.frame.origin.x
