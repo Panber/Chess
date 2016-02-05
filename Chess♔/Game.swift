@@ -966,7 +966,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
                 
             }
-            
+            xAxisArrStr = ["a","b","c","d","e","f","g","h"]
+            yAxisArrStr = ["1","2","3","4","5","6","7","8"]
             ////////this is where the magic happens\\\\\\\\
             func magic1() {
                 xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
@@ -5081,7 +5082,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                         // range will be nil if no letters is found
                                                         if  (range != nil) {
                                                             print("letters  found")
-                                                            
+                                                            print(takenPiecesToReload.count)
+                                                            print(takenPiecesToReload.count - 1 - d2)
                                                             
                                                             view.addSubview(takenPiecesToReload[takenPiecesToReload.count - 1 - d2])
                                                             takenPiecesToReload[takenPiecesToReload.count - 1 - d2].alpha = 0
@@ -6021,25 +6023,30 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         var wonLabel = UILabel(frame: CGRectMake(20,screenHeight/2-56 - screenHeight/8 - 30 - 10,screenWidth-40, 102))
         
+        var by = " by "
+        if statusBy == "time" {
+        by = " on "
+        }
+        
         let sb = (game["blackPlayer"] as? String)!
         let sw = (game["whitePlayer"] as? String)!
         if statusWhite == "won" && iamWhite {
-            wonLabel.text = "You won against " + "\(sb)" + " by " + statusBy
+            wonLabel.text = "You won against " + "\(sb)" + by + statusBy
         }
         else if statusWhite == "lost" && iamWhite {
-            wonLabel.text = "You lost against " + "\(sb)" + " by " + statusBy
+            wonLabel.text = "You lost against " + "\(sb)" + by + statusBy
         }
         if statusWhite == "won" && !iamWhite {
-            wonLabel.text = "You lost against " + "\(sw)" + " by " + statusBy
+            wonLabel.text = "You lost against " + "\(sw)" + by + statusBy
         }
         else if statusWhite == "lost" && !iamWhite {
-            wonLabel.text = "You won against " + "\(sw)" + " by " + statusBy
+            wonLabel.text = "You won against " + "\(sw)" + by + statusBy
         }
         else if statusWhite == "drew" && !iamWhite {
-            wonLabel.text = "You drew against " + "\(sw)" + " by " + statusBy
+            wonLabel.text = "You drew against " + "\(sw)"
         }
         else if statusWhite == "drew" && iamWhite {
-            wonLabel.text = "You drew against " + "\(sb)" + " by " + statusBy
+            wonLabel.text = "You drew against " + "\(sb)"
         }
         
         
@@ -8962,6 +8969,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                         }
                         else {
+                            xAxisArrStr2 = ["a","b","c","d","e","f","g","h"]
+                            yAxisArrStr2 = ["1","2","3","4","5","6","7","8"]
+                            
                             pieceStringPos = xAxisArrStr[t] + yAxisArrStr[g]
                             
                         }
