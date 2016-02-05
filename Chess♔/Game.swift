@@ -9274,9 +9274,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     }
                                     takenBlackPiecesLbl[b].text = "" + blackCount[b].description
                                     if darkMode {
-                                        takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+                                        takenBlackPiecesLbl[b].textColor = UIColor.whiteColor()
                                     }else {
-                                        takenBlackPiecesLbl[t].textColor = UIColor.blackColor()
+                                        takenBlackPiecesLbl[b].textColor = UIColor.blackColor()
                                         
                                     }
                                     takenBlackPiecesLbl[b].font = UIFont(name: "Times", size: 18)
@@ -9304,9 +9304,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     }
                                     takenWhitePiecesLbl[b].text = "" + whiteCount[b].description
                                     if darkMode {
-                                        takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()
+                                        takenWhitePiecesLbl[b].textColor = UIColor.whiteColor()
                                     }else {
-                                        takenWhitePiecesLbl[t].textColor = UIColor.blackColor()
+                                        takenWhitePiecesLbl[b].textColor = UIColor.blackColor()
                                         
                                     }
                                     takenWhitePiecesLbl[b].font = UIFont(name: "Times", size: 18)
