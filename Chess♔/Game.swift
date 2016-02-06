@@ -9384,16 +9384,6 @@ var didLongPress = false
         }
         
         
-        for var i = 0; i < blackPawns.count;i++ {
-            if touch.view == blackPawns[i] && isWhiteTurn == false && canOnlyMoveWhite == false {
-                selectedPiece = blackPawns[i]
-                removePieceOptions()
-                removeBlackCastlingLeft()
-                removeBlackCastlingRight()
-                //updateLogic()
-                blackPawnSelected(event!, _touch: touch)
-            }
-        }
         
         for var i = 0; i < blackBishops.count;i++ {
             if touch.view == blackBishops[i] && isWhiteTurn == false && canOnlyMoveWhite == false {
