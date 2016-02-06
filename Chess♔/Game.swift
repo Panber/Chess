@@ -727,6 +727,30 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         //   self.tabBarController?.tabBar.hidden = true
         // let nav = self.navigationController?.navigationBar
         
+        if NSUserDefaults.standardUserDefaults().boolForKey("numbered_board") == true {
+            
+            if iamWhite {
+                numbered = UIImageView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
+                numbered.image = UIImage(named:"WN")
+                numbered.contentMode = .ScaleAspectFit
+                self.view.addSubview(numbered)
+            }
+            else {
+                numbered = UIImageView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
+                numbered.image = UIImage(named:"BN")
+                numbered.contentMode = .ScaleAspectFit
+                self.view.addSubview(numbered)
+            }
+            
+        }
+        else {
+            numbered = UIImageView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
+            numbered.image = UIImage(named:"BB")
+            numbered.contentMode = .ScaleAspectFit
+            self.view.addSubview(numbered)
+        }
+        
+        
         //load marker
         pieceMarked.image = UIImage(named: "pieceMarked.png")
         self.view.addSubview(pieceMarked)
@@ -4131,6 +4155,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+
+    if NSUserDefaults.standardUserDefaults().boolForKey("numbered_board") == true {
+    
+    if iamWhite {
+        numbered.image = UIImage(named:"WN")
+    }
+    else {
+        numbered.image = UIImage(named:"BN")
+    }
+    
+    }
+    else {
+        numbered.image = UIImage(named:"BB")
+    
+    }
+}
+
     override func viewDidAppear(animated: Bool) {
         var bottomOffset = CGPointMake(0, collectionView.contentSize.height - collectionView.bounds.size.height)
         collectionView.setContentOffset(bottomOffset, animated: false)
@@ -4143,7 +4185,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
         self.view.addGestureRecognizer(longPressRecognizer)
         
+        
+
+        
     }
+    
+    var numbered = UIImageView()
     
     // MARK: - View did load! 😄
 
@@ -4169,7 +4216,7 @@ var didLongPress = false
         if !didLongPress{
         var visualEffectViewT = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
         if darkMode { visualEffectViewT.effect = UIBlurEffect(style: .Dark) }
-        else { visualEffectViewT.effect = UIBlurEffect(style: .ExtraLight) }
+        else { visualEffectViewT.effect = UIBlurEffect(style: .Light) }
         visualEffectViewT.frame = view.bounds
         
         visualEffectViewT.alpha = 0
@@ -4196,6 +4243,10 @@ var didLongPress = false
             setTabBarVisible(!tabBarIsVisible(), animated: true)
 
 
+
+                self.view.addSubview(numbered)
+            
+            
 
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             visualEffectViewT.alpha = 1

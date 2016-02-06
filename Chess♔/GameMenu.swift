@@ -169,6 +169,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
           //  NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
 //            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
 //            self.showViewController(vc as! UIViewController, sender: vc)
+//        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "numbered_board")
+
 //
         
     
