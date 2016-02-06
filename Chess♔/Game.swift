@@ -266,6 +266,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var checkByPawn = false
     var checkByKnight = false
     
+    var foundKing: Bool = false
+    
     // Used in check logic to see if pieces are vertically aligned
     var verticallyAlignedWhite = false
     var horizontallyAlignedWhite = false
@@ -2212,7 +2214,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                         
-                                                                        
+                                                                        self.removeLeftWhiteCastleLogic()
+                                                                        self.removeRightWhiteCastleLogic()
                                                                         self.removeLogicOptions()
                                                                         self.removeBishopLogicOptions()
                                                                         self.removeRookLogicOptions()
@@ -2278,12 +2281,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     checkMate5 = true
                                                                                 }
                                                                                 if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
-                                                                                    //                                                                                                                var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
-                                                                                    //                                                                                                                popViewController.title = "This is a popup view"
-                                                                                    //                                                                                                                popViewController.showInView(self.view, withImage: self.otherUserImage, withMessage: "hans won by Checkmate", animated: true)
-                                                                                    
-                                                                                    
-                                                                                    
+
                                                                                     self.gameFinishedScreen("won",statusBy: "chekmate.")
                                                                                     
                                                                                 }
@@ -2331,12 +2329,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     staleMate5 = true
                                                                                 }
                                                                                 if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true {
-                                                                                    //                                                                                                                var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
-                                                                                    //                                                                                                                popViewController.title = "This is a popup view"
-                                                                                    //                                                                                                                popViewController.showInView(self.view, withImage: self.otherUserImage, withMessage: "hans won by Checkmate", animated: true)
-                                                                                    
-                                                                                    
-                                                                                    
                                                                                     self.gameFinishedScreen("drew",statusBy: "stalemate")
                                                                                     
                                                                                 }
@@ -7011,10 +7003,10 @@ didLongPress = true
     
     func removeLeftWhiteCastleLogic() {
         for var p = 0 ; p < leftBlackCastleLogic.count; p++ {
-            leftBlackCastleLogic[p].hidden = true
-            leftBlackCastleLogic[p].removeFromSuperview()
+             leftWhiteCastleLogic[p].hidden = true
+            leftWhiteCastleLogic[p].removeFromSuperview()
         }
-        leftBlackCastleLogic = []
+        leftWhiteCastleLogic = []
     }
     func removeLeftBlackCastleLogic() {
         for var p = 0 ; p < leftBlackCastleLogic.count; p++ {
@@ -7345,6 +7337,7 @@ didLongPress = true
                         pieceOptions += [pieceOption]
                     }
                     
+                    if hidden == false {
                     // This is for left castling white king
                     for var q = 0; q < friend.count; q++ {
                         for var i = 1; i < 4; i++ {
@@ -7394,8 +7387,9 @@ didLongPress = true
                             }
                         }
                     }
+                    }
                     
-                    if leftWhiteCastleLogic.count == 3 && hasWhiteKingMoved == false && hasWhiteRookMoved == false && pieceid == 5 && self.whiteKing.frame.origin.x == e && self.whiteKing.frame.origin.y == _1 {
+                    if leftWhiteCastleLogic.count == 3 && hasWhiteKingMoved == false && hasWhiteRookMoved == false && pieceid == 5 && self.whiteKing.frame.origin.x == e && self.whiteKing.frame.origin.y == _1 && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x - 2 * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         if hidden == true {
@@ -7405,7 +7399,7 @@ didLongPress = true
                         whiteCastlingLeft += [pieceOption3]
                         castlePiece = whiteRook2
                     }
-                    if rightWhiteCastleLogic.count == 2 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false && pieceid == 5 && self.whiteKing.frame.origin.x == e && self.whiteKing.frame.origin.y == _1  {
+                    if rightWhiteCastleLogic.count == 2 && hasWhiteKingMoved == false && hasWhiteRookMoved2 == false && pieceid == 5 && self.whiteKing.frame.origin.x == e && self.whiteKing.frame.origin.y == _1 && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x + 2 * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         if hidden == true {
@@ -7415,7 +7409,7 @@ didLongPress = true
                         whiteCastlingRight += [pieceOption3]
                         castlePiece = whiteRook1
                     }
-                    if leftBlackCastleLogic.count == 2 && hasBlackKingMoved == false && hasBlackRookMoved == false && pieceid == 5 && chosenPiece.image == UIImage(named:"blackKing")  {
+                    if leftBlackCastleLogic.count == 2 && hasBlackKingMoved == false && hasBlackRookMoved == false && pieceid == 5 && chosenPiece.image == UIImage(named:"blackKing") && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x - 2 * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         if hidden == true {
@@ -7425,7 +7419,7 @@ didLongPress = true
                         blackCastlingLeft += [pieceOption3]
                         castlePiece = blackRook2
                     }
-                    if rightBlackCastleLogic.count == 3 && hasBlackKingMoved == false && hasBlackRookMoved2 == false && pieceid == 5 && chosenPiece.image == UIImage(named:"blackKing")  {
+                    if rightBlackCastleLogic.count == 3 && hasBlackKingMoved == false && hasBlackRookMoved2 == false && pieceid == 5 && chosenPiece.image == UIImage(named:"blackKing") && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
                         let pieceOption3 = UIImageView(frame: CGRectMake(chosenPiece.frame.origin.x + 2 * pieceSize, chosenPiece.frame.origin.y, pieceSize, pieceSize))
                         pieceOption3.image = UIImage(named: "piecePossibilities.png")
                         if hidden == true {
@@ -7629,7 +7623,7 @@ didLongPress = true
         if !hasBeenTaken(piece, array: pieceToTake) {
             
             pieceID = pieceid
-            var foundKing: Bool = false
+            foundKing = false
             var foundKingWhite: Bool = false
             var foundKingBlack: Bool = false
             
@@ -7705,79 +7699,7 @@ didLongPress = true
                         }
                     }
                     if foundKing == true {
-                        
-                        //                        var checkMate1 = false
-                        //                        var checkMate2 = false
-                        //                        var checkMate3 = false
-                        //                        var checkMate4 = false
-                        //                        var checkMate5 = false
-                        //
-                        //                        for var i = 0; i < whiteKnights.count;i++ {
-                        //                        if chessPieceSelected(2, pieceid: 2, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteKnights[i]) == 0 {
-                        //                            checkMate1 = true
-                        //                        }
-                        //                        }
-                        //                        for var i = 0; i < whiteBishops.count;i++ {
-                        //                            if chessPieceSelected(9, pieceid: 1, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteBishops[i]) == 0 {
-                        //                                checkMate2 = true
-                        //                            }
-                        //                        }
-                        //                        for var i = 0; i < whiteRooks.count;i++ {
-                        //                            if chessPieceSelected(9, pieceid: 3, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteRooks[i]) == 0 {
-                        //                                checkMate3 = true
-                        //                            }
-                        //                        }
-                        //                        for var i = 0; i < whiteQueens.count;i++ {
-                        //                            if chessPieceSelected(9, pieceid: 4, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteQueens[i]) == 0 {
-                        //                                checkMate4 = true
-                        //                            }
-                        //                        }
-                        //                        if chessPieceSelected(2, pieceid: 5, friend: whitePieces, enemy: blackPieces, hidden: true, chosenPiece: whiteKing) == 0 {
-                        //                            checkMate5 = true
-                        //                        }
-                        //                            if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true {
-                        //                                var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
-                        //                                popViewController.title = "This is a popup view"
-                        //                                popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
-                        //                        }
-                        
-                        //                            var checkMate1Black = false
-                        //                            var checkMate2Black = false
-                        //                            var checkMate3Black = false
-                        //                            var checkMate4Black = false
-                        //                            var checkMate5Black = false
-                        //
-                        //                            for var i = 0; i < blackKnights.count;i++ {
-                        //                                if chessPieceSelected(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKnights[i]) == 0 {
-                        //                                    checkMate1Black = true
-                        //                                }
-                        //                            }
-                        //                            for var i = 0; i < blackBishops.count;i++ {
-                        //                                if chessPieceSelected(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackBishops[i]) == 0 {
-                        //                                    checkMate2Black = true
-                        //                                }
-                        //                            }
-                        //                            for var i = 0; i < blackRooks.count;i++ {
-                        //                                if chessPieceSelected(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackRooks[i]) == 0 {
-                        //                                    checkMate3Black = true
-                        //                                }
-                        //                            }
-                        //                            for var i = 0; i < blackQueens.count;i++ {
-                        //                                if chessPieceSelected(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackQueens[i]) == 0 {
-                        //                                    checkMate4Black = true
-                        //                                }
-                        //                            }
-                        //                            if chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKing) == 0 {
-                        //                                checkMate5Black = true
-                        //                            }
-                        //                            if checkMate1Black == true && checkMate2Black == true && checkMate3Black == true && checkMate4Black == true && checkMate5Black == true {
-                        //                                var popViewController : PopUpViewControllerSwift! = PopUpViewControllerSwift(nibName: "PopUpViewController_iPhone6Plus", bundle: nil)
-                        //                                popViewController.title = "This is a popup view"
-                        //                                popViewController.showInView(self.view, withImage: otherUserImage, withMessage: "hans won by Checkmate", animated: true)
-                        //                                print("Check mate!")
-                        //                            }
-                        
-                        
+     
                         let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
                         //pieceOption.image = UIImage(named: "piecePossibilities.png")
                         self.view.addSubview(pieceOption)
