@@ -64,21 +64,30 @@ self.title = "Settings"
         setUpSettings()
         
         if NSUserDefaults.standardUserDefaults().boolForKey("dark_mode") == true {
-            darkModeSwitch.setOn(true, animated: true)
+            darkModeSwitch.setOn(true, animated: false)
         
         }
         else {
-            darkModeSwitch.setOn(false, animated: true)
+            darkModeSwitch.setOn(false, animated: false)
         
+        }
+        
+        if NSUserDefaults.standardUserDefaults().boolForKey("numbered_board") == true {
+            submitSwitch.setOn(true, animated: false)
+            
+        }
+        else {
+            submitSwitch.setOn(false, animated: false)
+            
         }
 
         
         if PFUser.currentUser()!.objectForKey("request_everyone") as? Bool == true {
             print(PFUser.currentUser()!.objectForKey("request_everyone") as? Bool)
-            everyoneSwitch.setOn(true, animated: true)
+            everyoneSwitch.setOn(true, animated: false)
         }
         else {
-            everyoneSwitch.setOn(false, animated: true)
+            everyoneSwitch.setOn(false, animated: false)
         }
         
         lightOrDarkMode()
@@ -137,7 +146,7 @@ self.title = "Settings"
         //adding Submit button: label
         label3 = UILabel(frame: CGRectMake(20, 45, screenWidth, 45))
         label3.textAlignment = NSTextAlignment.Left
-        label3.text = "Submit button"
+        label3.text = "Numbered Board"
         label3.font = UIFont(name: "Times", size: 16)
         if darkMode { label3.textColor = UIColor.whiteColor() }
         else { label3.textColor = UIColor.blackColor() }
@@ -227,7 +236,7 @@ self.title = "Settings"
         else { label11.backgroundColor = UIColor.lightGrayColor() }
         bc2.addSubview(label11)
         
-        notificationsSwitch.setOn(true, animated: true)
+        notificationsSwitch.setOn(true, animated: false)
         notificationsSwitch.onTintColor = blue
         notificationsSwitch.tintColor = UIColor(red:0.93, green:0.92, blue:0.92, alpha:1.0)
         notificationsSwitch.frame = CGRectMake(screenWidth - 65, label1.frame.origin.y + 7, 0, 0)
@@ -235,7 +244,7 @@ self.title = "Settings"
         notificationsSwitch.addTarget(self, action: "notificationsSwitchValueDidChange:", forControlEvents: .ValueChanged)
         scrollView.addSubview(notificationsSwitch)
         
-        darkModeSwitch.setOn(false, animated: true)
+        darkModeSwitch.setOn(false, animated: false)
         darkModeSwitch.onTintColor = blue
         darkModeSwitch.tintColor = UIColor(red:0.93, green:0.92, blue:0.92, alpha:1.0)
         darkModeSwitch.frame = CGRectMake(screenWidth - 65, label2.frame.origin.y + 7, 0, 0)
@@ -243,7 +252,7 @@ self.title = "Settings"
         darkModeSwitch.addTarget(self, action: "darkmodeSwitchValueDidChange:", forControlEvents: .ValueChanged)
         bc1.addSubview(darkModeSwitch)
         
-        submitSwitch.setOn(true, animated: true)
+        submitSwitch.setOn(true, animated: false)
         submitSwitch.onTintColor = blue
         submitSwitch.tintColor = UIColor(red:0.93, green:0.92, blue:0.92, alpha:1.0)
         submitSwitch.frame = CGRectMake(screenWidth - 65,label3.frame.origin.y + 7, 0, 0)
@@ -251,7 +260,7 @@ self.title = "Settings"
         submitSwitch.addTarget(self, action: "submitSwitchValueDidChange:", forControlEvents: .ValueChanged)
         bc1.addSubview(submitSwitch)
         
-        everyoneSwitch.setOn(true, animated: true)
+        everyoneSwitch.setOn(true, animated: false)
         everyoneSwitch.onTintColor = blue
         everyoneSwitch.tintColor = UIColor(red:0.93, green:0.92, blue:0.92, alpha:1.0)
         everyoneSwitch.frame = CGRectMake(screenWidth - 65, friendsOnlyText.frame.origin.y + 7, 0, 0)
@@ -319,8 +328,11 @@ self.title = "Settings"
     func submitSwitchValueDidChange(sender:UISwitch!)
     {
         if (sender.on == true){
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "numbered_board")
         }
         else{
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "numbered_board")
+
         }
     }
     

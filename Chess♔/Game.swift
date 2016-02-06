@@ -729,6 +729,30 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         //   self.tabBarController?.tabBar.hidden = true
         // let nav = self.navigationController?.navigationBar
         
+        if NSUserDefaults.standardUserDefaults().boolForKey("numbered_board") == true {
+            
+            if iamWhite {
+                numbered = UIImageView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
+                numbered.image = UIImage(named:"WN")
+                numbered.contentMode = .ScaleAspectFit
+                self.view.addSubview(numbered)
+            }
+            else {
+                numbered = UIImageView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
+                numbered.image = UIImage(named:"BN")
+                numbered.contentMode = .ScaleAspectFit
+                self.view.addSubview(numbered)
+            }
+            
+        }
+        else {
+            numbered = UIImageView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
+            numbered.image = UIImage(named:"BB")
+            numbered.contentMode = .ScaleAspectFit
+            self.view.addSubview(numbered)
+        }
+        
+        
         //load marker
         pieceMarked.image = UIImage(named: "pieceMarked.png")
         self.view.addSubview(pieceMarked)
@@ -4094,7 +4118,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
             
         }
-        viewDidLoad2()}
+        viewDidLoad2()
+    }
     
     //last thing i did was to check ewther or noyou can take a peice that was jsut ttaken, remember to add peicetodelete at black
     func deletePiecesAfterLoad () {
@@ -4123,6 +4148,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+
+    if NSUserDefaults.standardUserDefaults().boolForKey("numbered_board") == true {
+    
+    if iamWhite {
+        numbered.image = UIImage(named:"WN")
+    }
+    else {
+        numbered.image = UIImage(named:"BN")
+    }
+    
+    }
+    else {
+        numbered.image = UIImage(named:"BB")
+    
+    }
+}
+
     override func viewDidAppear(animated: Bool) {
         var bottomOffset = CGPointMake(0, collectionView.contentSize.height - collectionView.bounds.size.height)
         collectionView.setContentOffset(bottomOffset, animated: false)
@@ -4135,7 +4178,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
         self.view.addGestureRecognizer(longPressRecognizer)
         
+        
+        
+        
+
+        
     }
+    
+    var numbered = UIImageView()
     
     // MARK: - View did load! 😄
     
@@ -4146,7 +4196,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var fNum = Double()
     var myturnAfterTimeCapsule = Bool()
     var didEnterTimeCapsule = false
-    
+    var visualEffectViewT = UIVisualEffectView()
     // MARK: Focyus
     
 
@@ -4159,13 +4209,19 @@ var didLongPress = false
     {
         
         if !didLongPress{
-        var visualEffectViewT = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+            
+
+            
+        visualEffectViewT = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
         if darkMode { visualEffectViewT.effect = UIBlurEffect(style: .Dark) }
-        else { visualEffectViewT.effect = UIBlurEffect(style: .ExtraLight) }
+        else { visualEffectViewT.effect = UIBlurEffect(style: .Light) }
         visualEffectViewT.frame = view.bounds
-        
+            let tapPressRecognizer = UITapGestureRecognizer(target: self, action: "visuPressed:")
+            self.visualEffectViewT.addGestureRecognizer(tapPressRecognizer)
         visualEffectViewT.alpha = 0
      
+            
+            
             self.view.addSubview(visualEffectViewT)
            // self.view.sendSubviewToBack(visualEffectViewT)
             for var i = 0; i < pieces.count; i++ {
@@ -4176,10 +4232,11 @@ var didLongPress = false
             }
             self.view.bringSubviewToFront(pieceMarked)
 
-                    var  boardI = UIImageView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
+                      boardI = UIImageView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
                     boardI.contentMode = .ScaleAspectFit
                     boardI.image = UIImage(named: "brownChessBoard")
             view.insertSubview(boardI, aboveSubview: visualEffectViewT)
+            //boardI.userInteractionEnabled = true
 
             UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide) // with animation option.
 
@@ -4189,16 +4246,62 @@ var didLongPress = false
 
 
 
+                self.view.addSubview(numbered)
+            
+            
+
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            visualEffectViewT.alpha = 1
+            self.visualEffectViewT.alpha = 1
             }, completion: {finish in
-                visualEffectViewT.userInteractionEnabled = true
+                self.visualEffectViewT.userInteractionEnabled = true
         })
         
-didLongPress = true
+            didLongPress = true
         print("longpressed")
         }
     }
+    
+    var  boardI = UIImageView()
+    
+    func visuPressed(sender: UITapGestureRecognizer)
+    {
+        
+        if didLongPress{
+            
+     
+            
+
+            
+
+            
+ 
+            
+            UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
+            
+            
+            navigationController?.setNavigationBarHidden(navigationController?.navigationBarHidden == false, animated: true)
+            
+            setTabBarVisible(!tabBarIsVisible(), animated: true)
+            
+            
+            
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.visualEffectViewT.alpha = 0
+                }, completion: {finish in
+                    self.visualEffectViewT.userInteractionEnabled = false
+                    self.boardI.removeFromSuperview()
+                    self.visualEffectViewT.removeFromSuperview()
+                    self.didLongPress = false
+
+            })
+            
+        }
+        
+        
+        print("tapped")
+    }
+
     override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
         return UIStatusBarAnimation.Slide
     }
