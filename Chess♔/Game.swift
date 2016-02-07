@@ -1439,10 +1439,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         
                                                                         for var iy = 0; iy < pieces.count ; iy++ {
 
-                                                                                     if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && passantArray[o] == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && passantArray[o] == true{
+                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && passantArray[o] == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && passantArray[o] == true{
 
-                                                                            
-                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") {
                                                                                 
                                                                                 
                                                                                 for var ty = 0; ty < self.whitePieces.count; ty++ {
@@ -3032,8 +3030,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                        if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && passantArray[o] == true ||  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && passantArray[o] == true   {
 
                                                                             
-                                                                            if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn")   {
-                                                                                
+                                                                      
                                                                                 
                                                                                 print("iy is \(iy)")
                                                                                 
@@ -4200,6 +4197,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         viewDidLoad2()
     }
+        
     
     //last thing i did was to check ewther or noyou can take a peice that was jsut ttaken, remember to add peicetodelete at black
     func deletePiecesAfterLoad () {
@@ -5644,20 +5642,20 @@ var didLongPress = false
                                                             if  (range != nil) {
                                                                 print("letters  found")
                                                                 
-                                                                for var iy = 0; iy < pieces.count; iy++ {
+                                                                for var iy = 0; iy < self.pieces.count; iy++ {
                                                                     
                                                                     
-                                                                    if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && self.iamWhite == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && self.iamWhite == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && self.iamWhite == false || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && self.iamWhite == false  {
+                                                                    if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && self.pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && self.iamWhite == true && passantArray[o] == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && self.iamWhite == true && passantArray[o] == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && self.iamWhite == false && passantArray[o] == true  || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && self.iamWhite == false && passantArray[o] == true   {
                                                                         
                                                                         
-                                                                        piecesToDelete.append(pieces[iy])
+                                                                        self.piecesToDelete.append(pieces[iy])
                                                                         UIView.animateWithDuration(0.15, delay: 0, options: .CurveEaseInOut, animations:{ () -> Void in
                                                                             self.pieces[iy].alpha=0
                                                                             
                                                                             }, completion: { finish in })
                                                                         
-                                                                        takenPiecesToReload.append(pieces[iy])
-                                                                        print("takenPiecesToReload.count - 1 - d3 i \(takenPiecesToReload.count - 1 - d3)")
+                                                                        self.takenPiecesToReload.append(pieces[iy])
+                                                                        print("takenPiecesToReload.count - 1 - d3 i \(takenPiecesToReload.count - 1 - self.d3)")
                                                                     }
                                                                 }
                                                                 
@@ -6000,7 +5998,7 @@ var didLongPress = false
                                                                 
                                                                 
                                                                 
-                                                                if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && self.iamWhite == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && self.iamWhite == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && self.iamWhite == false || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && self.iamWhite == false  {
+                                                                if  self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y == yAxisArr[a] || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && self.iamWhite == true && passantArray[moveNumber] == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && self.iamWhite == true && passantArray[moveNumber] == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y - 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"blackPawn") && pieces[iy].image == UIImage(named:"whitePawn") && self.iamWhite == false && passantArray[moveNumber] == true || self.pieces[iy].frame.origin.x == xAxisArr[q] && self.pieces[iy].frame.origin.y + 1 * pieceSize == yAxisArr[a] && pieces[i].image == UIImage(named:"whitePawn") && pieces[iy].image == UIImage(named:"blackPawn") && self.iamWhite == false && passantArray[moveNumber] == true {
                                                                     
                                                                     
                                                                     piecesToDelete.append(pieces[iy])
@@ -9841,5 +9839,5 @@ var didLongPress = false
         }
         
     }
-}
+        }
 
