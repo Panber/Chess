@@ -81,6 +81,14 @@
 		8F56E1721C665D880000ECDB /* BN.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F56E1701C665D880000ECDB /* BN.png */; };
 		8F56E1731C665D880000ECDB /* WN.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F56E1711C665D880000ECDB /* WN.png */; };
 		8F56E1751C6665B80000ECDB /* BB.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F56E1741C6665B80000ECDB /* BB.png */; };
+		8F56E1791C66AD340000ECDB /* chessLogo300_180.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F56E1781C66AD340000ECDB /* chessLogo300_180.png */; };
+		8F56E17D1C66B6AB0000ECDB /* chessIcon400_180.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F56E17C1C66B6AB0000ECDB /* chessIcon400_180.png */; };
+		8F56E17F1C66B73D0000ECDB /* chessLaunchv4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F56E17E1C66B73D0000ECDB /* chessLaunchv4.png */; };
+		8F56E1811C66B9480000ECDB /* chessicon500_180.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F56E1801C66B9480000ECDB /* chessicon500_180.png */; };
+		8F56E1831C66B9D20000ECDB /* chessicon600_180.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F56E1821C66B9D20000ECDB /* chessicon600_180.png */; };
+		8F56E1851C66BBE80000ECDB /* chesslogo700_180.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F56E1841C66BBE80000ECDB /* chesslogo700_180.png */; };
+		8F56E1871C66BE650000ECDB /* chesslogo800_180.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F56E1861C66BE650000ECDB /* chesslogo800_180.png */; };
+		8F56E1891C66C55B0000ECDB /* chesslaunchv5.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F56E1881C66C55B0000ECDB /* chesslaunchv5.png */; };
 		8F62C6801C00918700312A58 /* OtherUserProfilePage_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C67F1C00918700312A58 /* OtherUserProfilePage_Profile.swift */; };
 		8F62C6821C0091A600312A58 /* OtherUserProfilePage_Analyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6811C0091A600312A58 /* OtherUserProfilePage_Analyze.swift */; };
 		8F62C6841C0091C000312A58 /* OtherUserProfilePage_Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C6831C0091C000312A58 /* OtherUserProfilePage_Play.swift */; };
@@ -339,6 +347,14 @@
 		8F56E1701C665D880000ECDB /* BN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BN.png; sourceTree = "<group>"; };
 		8F56E1711C665D880000ECDB /* WN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WN.png; sourceTree = "<group>"; };
 		8F56E1741C6665B80000ECDB /* BB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BB.png; sourceTree = "<group>"; };
+		8F56E1781C66AD340000ECDB /* chessLogo300_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessLogo300_180.png; sourceTree = "<group>"; };
+		8F56E17C1C66B6AB0000ECDB /* chessIcon400_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessIcon400_180.png; sourceTree = "<group>"; };
+		8F56E17E1C66B73D0000ECDB /* chessLaunchv4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessLaunchv4.png; sourceTree = "<group>"; };
+		8F56E1801C66B9480000ECDB /* chessicon500_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessicon500_180.png; sourceTree = "<group>"; };
+		8F56E1821C66B9D20000ECDB /* chessicon600_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessicon600_180.png; sourceTree = "<group>"; };
+		8F56E1841C66BBE80000ECDB /* chesslogo700_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chesslogo700_180.png; sourceTree = "<group>"; };
+		8F56E1861C66BE650000ECDB /* chesslogo800_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chesslogo800_180.png; sourceTree = "<group>"; };
+		8F56E1881C66C55B0000ECDB /* chesslaunchv5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chesslaunchv5.png; sourceTree = "<group>"; };
 		8F62C67F1C00918700312A58 /* OtherUserProfilePage_Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePage_Profile.swift; sourceTree = "<group>"; };
 		8F62C6811C0091A600312A58 /* OtherUserProfilePage_Analyze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePage_Analyze.swift; sourceTree = "<group>"; };
 		8F62C6831C0091C000312A58 /* OtherUserProfilePage_Play.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfilePage_Play.swift; sourceTree = "<group>"; };
@@ -653,6 +669,14 @@
 				8F56E1671C6408FC0000ECDB /* chessLogo120.png */,
 				8F56E1621C63EC170000ECDB /* chessLogo180.png */,
 				8F56E1521C5D14350000ECDB /* ChessIconTab2@3x.png */,
+				8F56E1781C66AD340000ECDB /* chessLogo300_180.png */,
+				8F56E17C1C66B6AB0000ECDB /* chessIcon400_180.png */,
+				8F56E17E1C66B73D0000ECDB /* chessLaunchv4.png */,
+				8F56E1801C66B9480000ECDB /* chessicon500_180.png */,
+				8F56E1841C66BBE80000ECDB /* chesslogo700_180.png */,
+				8F56E1821C66B9D20000ECDB /* chessicon600_180.png */,
+				8F56E1881C66C55B0000ECDB /* chesslaunchv5.png */,
+				8F56E1861C66BE650000ECDB /* chesslogo800_180.png */,
 				8F56E1321C5C2A9E0000ECDB /* testLogo180.jpg */,
 				8FA1F7CD1B9AFCA800A0C548 /* Pieces */,
 			);
@@ -1018,6 +1042,7 @@
 				8FD804741C24CADB00902DB9 /* chessLaunchGold.png in Resources */,
 				8FE58AAC1C3B32E9007888F4 /* whiteBishop.png in Resources */,
 				F176C7F71C50466100518A81 /* PopUpViewController_iPad.xib in Resources */,
+				8F56E1831C66B9D20000ECDB /* chessicon600_180.png in Resources */,
 				8FA569121C02829700AFC460 /* PanBerLogo1.png in Resources */,
 				F176C8001C50466100518A81 /* PopUpViewController.xib in Resources */,
 				F176C7FA1C50466100518A81 /* PopUpViewController_iPhone6.xib in Resources */,
@@ -1055,6 +1080,7 @@
 				8FDB6EFE1C4AA4C000F50324 /* emAnalysis.png in Resources */,
 				8FEF2AAB1BFCE136006E1359 /* group4-2.png in Resources */,
 				8FEF2AB21BFD0F2F006E1359 /* cross-mark1-3.png in Resources */,
+				8F56E17D1C66B6AB0000ECDB /* chessIcon400_180.png in Resources */,
 				8FA018D91B9B1FAE002B410E /* ChessIconAndTExt.png in Resources */,
 				8F273CF51BF29E4300275378 /* clock104.png in Resources */,
 				8F2392A11C08C7E200CC4B0F /* PanBerLogo2.png in Resources */,
@@ -1069,9 +1095,11 @@
 				8F970FBF1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png in Resources */,
 				8F2DD6E51B9AFFF80059CEFA /* pieceMarked.png in Resources */,
 				8FA569161C063CCD00AFC460 /* PanBerLogoFadeSquare.png in Resources */,
+				8F56E1811C66B9480000ECDB /* chessicon500_180.png in Resources */,
 				8F87E8BC1BD6DBE600506F2F /* arrow483.png in Resources */,
 				8F4A02851B9A3F240084024A /* chessIcon.png in Resources */,
 				8FE58AAA1C3B3198007888F4 /* blackBishop.png in Resources */,
+				8F56E1891C66C55B0000ECDB /* chesslaunchv5.png in Resources */,
 				8F6E64E91C2974730092471C /* arrow_blueB.png in Resources */,
 				F1431A611BD298F400C5854A /* panBeriPhone.jpg in Resources */,
 				8FA569091C011D0300AFC460 /* map158-2.png in Resources */,
@@ -1081,10 +1109,12 @@
 				8FDB6EFC1C4AA40500F50324 /* reAnalysis-2.png in Resources */,
 				8FEF2A9C1BFA7C8A006E1359 /* brownChessBoard.png in Resources */,
 				8FE58AC81C446A34007888F4 /* Main.storyboard in Resources */,
+				8F56E17F1C66B73D0000ECDB /* chessLaunchv4.png in Resources */,
 				8FB94F9B1BE62F360029EF00 /* Data@3x_blue.png in Resources */,
 				8FE58A981C3B1F26007888F4 /* blackKing.png in Resources */,
 				8F56E1691C6408FC0000ECDB /* chessLogo87.png in Resources */,
 				8F056AF71BAF533C00CD617B /* LightModePreview.png in Resources */,
+				8F56E1791C66AD340000ECDB /* chessLogo300_180.png in Resources */,
 				8F1E8EC21BD78EE900C41D37 /* mountain.jpg in Resources */,
 				8FE58A9B1C3B1F26007888F4 /* blackQueen.png in Resources */,
 				8F2DD6E91B9AFFF80059CEFA /* whiteSquare.png in Resources */,
@@ -1093,6 +1123,7 @@
 				8FEF2AB31BFD0F2F006E1359 /* cross-mark1-2.png in Resources */,
 				8F2DD6E21B9AFFF80059CEFA /* Friends@3x.png in Resources */,
 				8FE58A9F1C3B1F26007888F4 /* whiteKnight.png in Resources */,
+				8F56E1851C66BBE80000ECDB /* chesslogo700_180.png in Resources */,
 				8FEF2AAC1BFCE136006E1359 /* search74-2.png in Resources */,
 				8FEF2A9D1BFA7C8A006E1359 /* greenblueChessBoard.png in Resources */,
 				8F7480A41C4AC31000CE6735 /* reAnalysis.png in Resources */,
@@ -1114,6 +1145,7 @@
 				8F2392A91C09FBA900CC4B0F /* cm4.png in Resources */,
 				8F56E16B1C6408FC0000ECDB /* chessLogo120.png in Resources */,
 				8F970FBD1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png in Resources */,
+				8F56E1871C66BE650000ECDB /* chesslogo800_180.png in Resources */,
 				8F56E1631C63EC170000ECDB /* chessLogo180.png in Resources */,
 				8FEF2A9E1BFA7C8A006E1359 /* oldSkoolChessBoard.png in Resources */,
 				8FEF2A9B1BFA7C8A006E1359 /* blackSquareChessBoard.png in Resources */,

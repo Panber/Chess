@@ -1240,6 +1240,10 @@ var loaded = false
 
                     self.findGames()
                     
+                    gameIDSYourTurn = []
+                    gameIDSTheirTurn = []
+                    gameIDSGameOver = []
+                    gameID = ""
                     
                     self.loaded = true
                     
