@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         let attr = NSDictionary(object: UIFont(name: "Didot", size: 10.0)!, forKey: NSFontAttributeName)
        // UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject], forState: .Normal)
-        //
+       //
         
         return true
     }
