@@ -1213,11 +1213,11 @@
             </objects>
             <point key="canvasLocation" x="4785" y="314"/>
         </scene>
-        <!--CHESS-->
+        <!--Play-->
         <scene sceneID="ICd-Pm-2GB">
             <objects>
                 <navigationController storyboardIdentifier="Tab" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZtP-fs-Dvj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="CHESS" image="chesstabv7.png" id="dHm-k1-ffu"/>
+                    <tabBarItem key="tabBarItem" title="Play" image="chesstabv7.png" id="dHm-k1-ffu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dlM-n8-8sJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
