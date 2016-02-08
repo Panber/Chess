@@ -2416,6 +2416,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     
                                                                                 }
                                                                             }
+                                                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                                                    
+                                                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                                                }
+                                                                            }
+                                                                    
                                                                     })
                                                                     
                                                                 }
@@ -2460,12 +2467,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.addMyTurnAndTime()
                         
                         
-                        for var i = 0; i < self.piecesArrs.count; i++ {
-                            for var t = 0; t < self.piecesArrs[i].count; t++ {
-                                
-                                self.piecesArrs[i][t].userInteractionEnabled = true
-                            }
-                        }
+                        
                     }
                     else {
                         self.isWhiteTurn = false
@@ -4034,6 +4036,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 
                                                                             }
+                                                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                                                }
+                                                                            }
                                                                     })
                                                                     
                                                                 }
@@ -4076,11 +4083,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.addMyTurnAndTime()
                         
                         
-                        for var i = 0; i < self.piecesArrs.count; i++ {
-                            for var t = 0; t < self.piecesArrs[i].count; t++ {
-                                self.piecesArrs[i][t].userInteractionEnabled = true
-                            }
-                        }
+   
                     }
                     else {
                         self.isWhiteTurn = false
