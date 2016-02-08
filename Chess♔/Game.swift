@@ -2268,15 +2268,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters not found")
                                                                     }
                                                                 }
-                                                                
-                                                                
-                                                                
+
                                                                 if moves.last == moves.last {
                                                                     
                                                                     checkIfTakenLast()
                                                                     
                                                                     
                                                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                        
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                         
@@ -3866,6 +3865,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                         self.removeLogicOptions()
+                                                                        self.removeLeftBlackCastleLogic()
+                                                                        self.removeRightBlackCastleLogic()
                                                                         self.removeBishopLogicOptions()
                                                                         self.removeRookLogicOptions()
                                                                         self.removeKnightLogicOptions()
