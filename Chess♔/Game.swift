@@ -2291,15 +2291,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         print("letters not found")
                                                                     }
                                                                 }
-                                                                
-                                                                
-                                                                
+
                                                                 if moves.last == moves.last {
                                                                     
                                                                     checkIfTakenLast()
                                                                     
                                                                     
                                                                     UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                        
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                         
@@ -3915,6 +3914,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                         self.removeLogicOptions()
+                                                                        self.removeLeftBlackCastleLogic()
+                                                                        self.removeRightBlackCastleLogic()
                                                                         self.removeBishopLogicOptions()
                                                                         self.removeRookLogicOptions()
                                                                         self.removeKnightLogicOptions()
@@ -6093,12 +6094,7 @@ var didLongPress = false
                                                             
                                                             
                                                     })
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    
+ 
                                                     
                                                 }
                                             }
@@ -7121,10 +7117,7 @@ var didLongPress = false
             }
             timer.invalidate()
         }
-        
-        
-        
-        
+
     }
     
     
@@ -9103,6 +9096,13 @@ var didLongPress = false
         //        }
     }
     
+    func dissablePieceOptions(var options: Array<UIImageView>) {
+        for var o = 0 ; o < options.count; o++ {
+            options[o].userInteractionEnabled = false
+            options[o].multipleTouchEnabled = false
+        }
+    }
+    
     func hasBeenTaken(var image: UIImageView, var array: Array<UIImageView>) -> Bool {
         
         var bool = false
@@ -9792,6 +9792,7 @@ var didLongPress = false
             }
             
             if touch.view == pieceOptions[o] && promoted == false {
+                dissablePieceOptions(pieceOptions)
                 movePiece(pieceOptions[o].frame.origin.x - selectedPiece.frame.origin.x, _moveByAmounty: pieceOptions[o].frame.origin.y - selectedPiece.frame.origin.y)
                 if selectedPiece.image == UIImage(named:"whiteKing") {
                     game.setObject(true, forKey: "can_Castle_white")
@@ -9816,6 +9817,7 @@ var didLongPress = false
             
             
             if touch.view == whiteCastlingLeft[o] {
+                dissablePieceOptions(whiteCastlingLeft)
                 castlePiece = whiteRook2
                 whiteCastle = true
                 movePiece(whiteCastlingLeft[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: whiteCastlingLeft[o].frame.origin.y - whiteKing.frame.origin.y)
@@ -9830,6 +9832,7 @@ var didLongPress = false
             
             
             if touch.view == whiteCastlingRight[o] {
+                dissablePieceOptions(whiteCastlingRight)
                 castlePiece = whiteRook1
                 whiteCastle = true
                 movePiece(whiteCastlingRight[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: whiteCastlingRight[o].frame.origin.y - whiteKing.frame.origin.y)
@@ -9843,6 +9846,7 @@ var didLongPress = false
             blackCastlingLeft[o].multipleTouchEnabled = true
             
             if touch.view == blackCastlingLeft[o] {
+                dissablePieceOptions(blackCastlingLeft)
                 castlePiece = whiteRook2
                 blackCastle = true
                 movePiece(blackCastlingLeft[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: blackCastlingLeft[o].frame.origin.y - whiteKing.frame.origin.y)
@@ -9857,6 +9861,7 @@ var didLongPress = false
             
             
             if touch.view == blackCastlingRight[o] {
+                dissablePieceOptions(blackCastlingRight)
                 castlePiece = whiteRook1
                 blackCastle = true
                 movePiece(blackCastlingRight[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: blackCastlingRight[o].frame.origin.y - whiteKing.frame.origin.y)
