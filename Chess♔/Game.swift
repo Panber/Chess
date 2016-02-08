@@ -1970,6 +1970,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     loadMoves()
                     
 
+                    for var i = 0; i < self.piecesArrs.count; i++ {
+                        for var t = 0; t < self.piecesArrs[i].count; t++ {
+                            self.piecesArrs[i][t].userInteractionEnabled = false
+                        }
+                    }
                     
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if moves.last!.characters.count == 3 {
@@ -3580,7 +3585,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.canPassantBlack = r!["passantBlack"] as! Bool
                     self.canPassant = r!["passant"] as! Bool
                     
-
+                    for var i = 0; i < self.piecesArrs.count; i++ {
+                        for var t = 0; t < self.piecesArrs[i].count; t++ {
+                            self.piecesArrs[i][t].userInteractionEnabled = false
+                        }
+                    }
                     
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if moves.last!.characters.count == 3 {
