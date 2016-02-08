@@ -2463,7 +2463,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         for var i = 0; i < self.piecesArrs.count; i++ {
                             for var t = 0; t < self.piecesArrs[i].count; t++ {
                                 
-                                //self.piecesArrs[i][t].userInteractionEnabled = true
+                                self.piecesArrs[i][t].userInteractionEnabled = true
                             }
                         }
                     }
@@ -9087,6 +9087,13 @@ var didLongPress = false
         //        }
     }
     
+    func dissablePieceOptions(var options: Array<UIImageView>) {
+        for var o = 0 ; o < options.count; o++ {
+            options[o].userInteractionEnabled = false
+            options[o].multipleTouchEnabled = false
+        }
+    }
+    
     func hasBeenTaken(var image: UIImageView, var array: Array<UIImageView>) -> Bool {
         
         var bool = false
@@ -9776,6 +9783,7 @@ var didLongPress = false
             }
             
             if touch.view == pieceOptions[o] && promoted == false {
+                dissablePieceOptions(pieceOptions)
                 movePiece(pieceOptions[o].frame.origin.x - selectedPiece.frame.origin.x, _moveByAmounty: pieceOptions[o].frame.origin.y - selectedPiece.frame.origin.y)
                 if selectedPiece.image == UIImage(named:"whiteKing") {
                     game.setObject(true, forKey: "can_Castle_white")
@@ -9800,6 +9808,7 @@ var didLongPress = false
             
             
             if touch.view == whiteCastlingLeft[o] {
+                dissablePieceOptions(whiteCastlingLeft)
                 castlePiece = whiteRook2
                 whiteCastle = true
                 movePiece(whiteCastlingLeft[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: whiteCastlingLeft[o].frame.origin.y - whiteKing.frame.origin.y)
@@ -9814,6 +9823,7 @@ var didLongPress = false
             
             
             if touch.view == whiteCastlingRight[o] {
+                dissablePieceOptions(whiteCastlingRight)
                 castlePiece = whiteRook1
                 whiteCastle = true
                 movePiece(whiteCastlingRight[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: whiteCastlingRight[o].frame.origin.y - whiteKing.frame.origin.y)
@@ -9827,6 +9837,7 @@ var didLongPress = false
             blackCastlingLeft[o].multipleTouchEnabled = true
             
             if touch.view == blackCastlingLeft[o] {
+                dissablePieceOptions(blackCastlingLeft)
                 castlePiece = whiteRook2
                 blackCastle = true
                 movePiece(blackCastlingLeft[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: blackCastlingLeft[o].frame.origin.y - whiteKing.frame.origin.y)
@@ -9841,6 +9852,7 @@ var didLongPress = false
             
             
             if touch.view == blackCastlingRight[o] {
+                dissablePieceOptions(blackCastlingRight)
                 castlePiece = whiteRook1
                 blackCastle = true
                 movePiece(blackCastlingRight[o].frame.origin.x - whiteKing.frame.origin.x, _moveByAmounty: blackCastlingRight[o].frame.origin.y - whiteKing.frame.origin.y)
