@@ -389,7 +389,8 @@ self.title = "Settings"
             self.scrollView.backgroundColor = UIColor(red: 0.20, green: 0.20, blue: 0.20, alpha: 1)
             
 
-            
+            UIApplication.sharedApplication().statusBarStyle = .LightContent
+
             
         }
         else if darkMode == false {
@@ -418,7 +419,8 @@ self.title = "Settings"
             
             self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
 
-            
+            UIApplication.sharedApplication().statusBarStyle = .Default
+
         }
         
         

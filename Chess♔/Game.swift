@@ -982,7 +982,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         piecesArrs[i][t].image = UIImage(named: piecesString[i])
                         self.view.addSubview(piecesArrs[i][t])
                         piecesArrs[i][t].contentMode = .ScaleAspectFit
-                        piecesArrs[i][t].userInteractionEnabled = true
+                        piecesArrs[i][t].userInteractionEnabled = false
                         piecesArrs[i][t].multipleTouchEnabled = true
                     }
                 }
@@ -1041,7 +1041,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.whiteRook2.frame.origin.x = d
                                             self.whiteRook2.frame.origin.y = _1
                                             
-                                            }, completion: { finish in})
+                                            }, completion: { finish in
+                                                
+                                                for var i = 0; i < self.piecesArrs.count; i++ {
+                                                    for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                        self.piecesArrs[i][t].userInteractionEnabled = true
+                                                    }
+                                                }
+                                                self.deletePiecesAfterLoad()
+                                                self.updateLogic()
+                                        })
                                         
                                     }
                                     else {
@@ -1064,7 +1073,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.blackRook1.frame.origin.y = _8
                                             
                                             
-                                            }, completion: { finish in})
+                                            }, completion: { finish in
+                                                for var i = 0; i < self.piecesArrs.count; i++ {
+                                                    for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                        self.piecesArrs[i][t].userInteractionEnabled = true
+                                                    }
+                                                }
+                                                self.deletePiecesAfterLoad()
+                                                self.updateLogic()
+                                        })
                                         
                                     }
                                     else {
@@ -1090,7 +1107,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.whiteRook1.frame.origin.x = f
                                         self.whiteRook1.frame.origin.y = _1
                                         
-                                        }, completion: { finish in})
+                                        }, completion: { finish in
+                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                }
+                                            }
+                                            self.deletePiecesAfterLoad()
+                                            self.updateLogic()
+                                    })
                                     
                                     
                                 }  else {
@@ -1111,7 +1136,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.blackRook2.frame.origin.x = f
                                         self.blackRook2.frame.origin.y = _8
                                         
-                                        }, completion: { finish in})
+                                        }, completion: { finish in
+                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                }
+                                            }
+                                            self.deletePiecesAfterLoad()
+                                            self.updateLogic()})
                                     
                                 }
                                 else {
@@ -1685,6 +1717,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
                                                                             self.updateLogic()
+                                                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                                                }
+                                                                            }
+                                                                          
                                                                             //return
                                                                     })
                                                                     
@@ -2615,7 +2653,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.blackRook2.frame.origin.y = _8
                                             
                                             
-                                            }, completion: { finish in})
+                                            }, completion: { finish in
+                                                for var i = 0; i < self.piecesArrs.count; i++ {
+                                                    for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                        self.piecesArrs[i][t].userInteractionEnabled = true
+                                                    }
+                                                }
+                                                self.deletePiecesAfterLoad()
+                                                self.updateLogic()
+                                        })
                                         
                                     }
                                     else {
@@ -2641,7 +2687,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             
                                             
-                                            }, completion: { finish in})
+                                            }, completion: { finish in
+                                                for var i = 0; i < self.piecesArrs.count; i++ {
+                                                    for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                        self.piecesArrs[i][t].userInteractionEnabled = true
+                                                    }
+                                                }
+                                                self.deletePiecesAfterLoad()
+                                                self.updateLogic()})
                                         
                                     }
                                     else {
@@ -2654,27 +2707,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     
                                     
                                 }
-                            } else if String(moves[o][2])  == "0" {
-                                //can return false value??
-                                if  moves.indexOf(moves[o])!  % 2 == 0 {
-                                    // test
-                                    
-                                    self.blackKing.frame.origin.x = f
-                                    self.blackKing.frame.origin.y = _8
-                                    self.blackRook2.frame.origin.x = e
-                                    self.blackRook2.frame.origin.y = _8
-                                    
-                                }
-                                    
-                                else {
-                                    
-                                    self.whiteKing.frame.origin.x = f
-                                    self.whiteKing.frame.origin.y = _1
-                                    self.whiteRook1.frame.origin.x = e
-                                    self.whiteRook1.frame.origin.y = _1
-                                    
-                                }
                             }
+                           
                         }
                         else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
                             
@@ -2691,7 +2725,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         
                                         
-                                        }, completion: { finish in})
+                                        }, completion: { finish in
+                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                }
+                                            }
+                                            self.deletePiecesAfterLoad()
+                                            self.updateLogic()
+                                    })
                                     
                                 }
                                 else {
@@ -2714,7 +2756,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.whiteRook2.frame.origin.x = c
                                         self.whiteRook2.frame.origin.y = _1
                                         
-                                        }, completion: { finish in})
+                                        }, completion: { finish in
+                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                }
+                                            }
+                                            self.deletePiecesAfterLoad()
+                                            self.updateLogic()})
                                     
                                 }
                                 else {
@@ -3265,9 +3314,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         
                                                                         
                                                                         
-                                                                        }, completion: { finish in})
-                                                                    self.deletePiecesAfterLoad()
-                                                                    self.updateLogic()
+                                                                        }, completion: { finish in
+                                                                            self.deletePiecesAfterLoad()
+                                                                            self.updateLogic()
+                                                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                                                }
+                                                                            }
+                                                                         
+                                                                    })
+                                                                   
                                                                     
                                                                 }
                                                                 else {
@@ -4262,6 +4319,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
         }
         viewDidLoad2()
+        lightOrDarkMode()
     }
         
     
@@ -9901,10 +9959,14 @@ var didLongPress = false
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
+            
             self.capsuleL.textColor = UIColor.whiteColor()
             self.notationsL.textColor = UIColor.whiteColor()
             self.timeGL.textColor = UIColor.whiteColor()
             self.turnGL.textColor = UIColor.whiteColor()
+            
+            UIApplication.sharedApplication().statusBarStyle = .LightContent
+
             
             
         }
@@ -9925,6 +9987,7 @@ var didLongPress = false
             self.timeGL.textColor = UIColor.blackColor()
             self.turnGL.textColor = UIColor.blackColor()
             
+            UIApplication.sharedApplication().statusBarStyle = .Default
             
             
         }
