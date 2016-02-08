@@ -281,23 +281,32 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
                         
                         let now = NSDate()
                         var newDate = now.dateByAddingTimeInterval(60 * 60 * 24)
+                        var daysToAdd = Double()
                         
                         if result["speed"] as? String == "Normal" {
                             
-                            let daysToAdd: Double = 0.25
+                             daysToAdd = 0.16666667
                             newDate = now.dateByAddingTimeInterval(60 * 60 * 24 * daysToAdd)
                         }
                         else if result["speed"] as? String == "Fast" {
                             
-                            let daysToAdd: Double = 0.00695
+                             daysToAdd = 0.003475
                             newDate = now.dateByAddingTimeInterval(60 * 60 * 24 * daysToAdd)
                         }
                             
                         else if result["speed"] as? String == "Slow" {
                             
-                            let daysToAdd: Double = 3
+                             daysToAdd = 2
                             newDate = now.dateByAddingTimeInterval(60 * 60 * 24 * daysToAdd)
                         }
+                        
+                        result["whiteDate"] = newDate
+                        result["blackDate"] = newDate
+
+                        result["whiteTime"] = (60 * 60 * 24 * daysToAdd)
+                        result["blackTime"] = (60 * 60 * 24 * daysToAdd)
+
+
                         
                         
                         result["timeLeftToMove"] = newDate
