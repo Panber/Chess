@@ -1975,7 +1975,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.piecesArrs[i][t].userInteractionEnabled = false
                         }
                     }
-                    
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if moves.last!.characters.count == 3 {
                             
@@ -2297,7 +2298,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     checkIfTakenLast()
                                                                     
                                                                     
-                                                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                    UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                                                                         
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
@@ -2318,6 +2319,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.checkByPawn = false
                                                                         self.pieceWhiteLogicOptions = []
                                                                         self.pieceBlackLogicOptions = []
+                                                                        for var i = 0; i < self.piecesArrs.count; i++ {
+                                                                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                                                
+                                                                                self.piecesArrs[i][t].userInteractionEnabled = false
+                                                                            }
+                                                                        }
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
                                                                             
@@ -2446,7 +2453,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                     }
                     
-                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     self.isWhiteTurn = true
                     
                     //self.updateLogic()
@@ -3589,7 +3595,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.piecesArrs[i][t].userInteractionEnabled = false
                         }
                     }
-                    
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if moves.last!.characters.count == 3 {
                             
@@ -3910,7 +3917,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     
                                                                     checkIfTakenLast()
                                                                     
-                                                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                    UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                         self.removeLogicOptions()
@@ -3929,6 +3936,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.checkByPawn = false
                                                                         self.pieceWhiteLogicOptions = []
                                                                         self.pieceBlackLogicOptions = []
+                                                                        for var i = 0; i < self.piecesArrs.count; i++ {
+                                                                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                                                self.piecesArrs[i][t].userInteractionEnabled = false
+                                                                            }
+                                                                        }
                                                                         
                                                                         }, completion: { finish in
                                                                             
@@ -3987,7 +3999,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     
                                                                                     self.gameFinishedScreen("won",statusBy: "chekmate.")
                                                                                 }
-                                                                            } else {
+                                                                            }
+                                                                            else {
                                                                                 // Stalemate
                                                                                 var staleMate1 = false
                                                                                 var staleMate2 = false
@@ -4068,7 +4081,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                     }
                     
-                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     self.isWhiteTurn = true
                     
 //                    let lastupdate = self.game["timeLeftToMove"] as? NSDate
@@ -9465,6 +9477,8 @@ var didLongPress = false
                                     blackCount[t] += 1
                                     if (!containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[t])) {
                                         takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                        takenBlackPiecesLbl[t].frame.origin.y += 5
+
                                         takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                     }
                                     takenBlackPiecesLbl[t].text = "" + blackCount[t].description
@@ -9556,6 +9570,8 @@ var didLongPress = false
                                     blackCount[b] += 1
                                     if (!containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[b])) {
                                         takenBlackPiecesLbl[b].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                        takenBlackPiecesLbl[b].frame.origin.y += 5
+
                                         takenBlackPiecesShow += [takenBlackPiecesLbl[b]]
                                     }
                                     takenBlackPiecesLbl[b].text = "" + blackCount[b].description
