@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "chesslaunchv5.png",
+      "filename" : "chesslaunchv9-2.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "chesslaunchv5-1.png",
+      "filename" : "chesslaunchv9-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "chesslaunchv5-2.png",
+      "filename" : "chesslaunchv9.png",
       "scale" : "3x"
     }
   ],

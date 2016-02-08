@@ -273,7 +273,7 @@
             </objects>
             <point key="canvasLocation" x="2460" y="-361"/>
         </scene>
-        <!--Play-->
+        <!--CHESS-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="Play" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="GameMenu" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
@@ -456,7 +456,7 @@
                             <constraint firstItem="M9E-Ld-z3g" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xPT-51-fLz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Play" id="bfc-qg-EO6">
+                    <navigationItem key="navigationItem" title="CHESS" id="bfc-qg-EO6">
                         <barButtonItem key="leftBarButtonItem" title="Invites (0)" id="WWc-vX-6hi">
                             <connections>
                                 <segue destination="eKl-sz-M1y" kind="show" id="Xd8-BE-Bg9"/>
@@ -1213,11 +1213,11 @@
             </objects>
             <point key="canvasLocation" x="4785" y="314"/>
         </scene>
-        <!--Play-->
+        <!--CHESS-->
         <scene sceneID="ICd-Pm-2GB">
             <objects>
                 <navigationController storyboardIdentifier="Tab" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZtP-fs-Dvj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Play" image="ChessIconTab2.png" id="dHm-k1-ffu"/>
+                    <tabBarItem key="tabBarItem" title="CHESS" image="chesstabv7.png" id="dHm-k1-ffu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dlM-n8-8sJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2918,7 +2918,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ChessIconTab2.png" width="30" height="30"/>
         <image name="DarkModePreview.png" width="1472" height="1490"/>
         <image name="Data.png" width="30" height="30"/>
         <image name="Data@3x_blue.png" width="140" height="140"/>
@@ -2926,6 +2925,7 @@
         <image name="LightModePreview.png" width="1472" height="1490"/>
         <image name="brownChessBoard.png" width="2000" height="2096"/>
         <image name="checkmark11.png" width="256" height="256"/>
+        <image name="chesstabv7.png" width="30" height="30"/>
         <image name="clack and white board with half boarder copy.png" width="2000" height="2096"/>
         <image name="close38.png" width="256" height="256"/>
         <image name="profilePicPlaceholder.jpg" width="552" height="552"/>

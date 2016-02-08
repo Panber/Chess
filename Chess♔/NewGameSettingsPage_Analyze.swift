@@ -127,6 +127,8 @@ class NewGameSettingsPage_Analyze: UIViewController {
         game["whitePromotionType"] = NSMutableArray()
         game["blackPromotionType"] = NSMutableArray()
         game["passantArray"] = NSMutableArray()
+        game["whiteTime"] = Int()
+        game["blackTime"] = Int()
 
         
         game["timeLeftToMove"] = NSDate()

@@ -879,10 +879,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
         }
         
-        let lastupdate = game["timeLeftToMove"] as? NSDate
-        timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
-        
+
+//        let lastupdate = game["timeLeftToMove"] as? NSDate
+//        timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+//        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
         
         var moves: Array<String> = []
         func loadMoves() {
@@ -944,12 +944,30 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
             
+            let lastupdate = game["whiteDate"] as? NSDate
+            timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+            
+
+            
+            
+            if (["blackTime"] as? Int) < 0 {
+                print("I won on time")
+            }
+            
+            
+//            let timeToAdd = game["whiteTime"] as? Int
+//            newDate = now.dateByAddingTimeInterval(timeToAdd)
+//            game["whiteDate"] = newDate
+            
             colorLcolor = "You are White"
             colorIndicatorcolor = UIColor.whiteColor()
             
             //chesspieces loading - REMEMBER TO ADD PIECES TO ARRAYS!! Right order as well!!
             if r!["status_white"] as! String == "move" {
                 isWhiteTurn = true
+                
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
+                
                 
                 turnLturn = "Your Turn"
                 turnIndicatorturn = blue
@@ -1951,7 +1969,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.canPassantBlack = r!["passantBlack"] as! Bool
                     loadMoves()
                     
-                    
+
                     
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if moves.last!.characters.count == 3 {
@@ -2420,9 +2438,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.isWhiteTurn = true
                     
                     //self.updateLogic()
-                    let lastupdate = self.game["timeLeftToMove"] as? NSDate
-                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+//                    let lastupdate2 = self.game["timeLeftToMove"] as? NSDate
+//                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate2!)
+//                    let lastupdate = self.game["whiteDate"] as? NSDate
+//                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
                     
+                    self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
+
                     
                     if r!["status_white"] as! String == "move" {
                         self.isWhiteTurn = true
@@ -2480,6 +2502,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
         }
         else {
+            
+            let lastupdate = game["blackDate"] as? NSDate
+            timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+            
+
+            
+            if (game["blackTime"] as? Int) < 0 {
+                print("I won on time")
+            }
             
             colorLcolor = "You are Black"
             colorIndicatorcolor = UIColor.blackColor()
@@ -3263,6 +3294,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 turnLturn = "Your Turn"
                 turnIndicatorturn = blue
                 
+                
+                timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
+                
+                
                 self.myTurnAtlaunch = true
                 
                 self.addMyTurnAndTime()
@@ -3541,6 +3576,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.passantPiece = (r!["passantPiece"] as? Int)!
                     self.canPassantBlack = r!["passantBlack"] as! Bool
                     self.canPassant = r!["passant"] as! Bool
+                    
+
+                    
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if moves.last!.characters.count == 3 {
                             
@@ -4017,9 +4055,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     self.isWhiteTurn = true
                     
-                    let lastupdate = self.game["timeLeftToMove"] as? NSDate
-                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
-                    
+//                    let lastupdate = self.game["timeLeftToMove"] as? NSDate
+//                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+//                    let lastupdate = self.game["blackDate"] as? NSDate
+//                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+                    self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
+
                     if r!["status_black"] as! String == "move" {
                         self.isWhiteTurn = true
                         
@@ -6966,6 +7007,7 @@ var didLongPress = false
         visualEffectSub.userInteractionEnabled = false
         
     }
+    
     //use this to checki fuser lost on time
     func updateTimer() {
         
@@ -8795,13 +8837,29 @@ var didLongPress = false
                 newDate = NSDate().dateByAddingTimeInterval(60*60*24*(multiplySpeedWithIfNew + multiplySpeedWith))
             }
             
-            print(notations.count)
-            
-            
             
             game["timeLeftToMove"] = newDate
             
+            if iamWhite {
+                let timeToAdd = game["blackTime"] as? Double
+                newDate = NSDate().dateByAddingTimeInterval(timeToAdd!)
+                game["blackDate"] = newDate
+                
+                game["whiteTime"] = -timeLeft - 2
+            }
+            else {
+                let timeToAdd = game["whiteTime"] as? Double
+                newDate = NSDate().dateByAddingTimeInterval(timeToAdd!)
+                game["whiteDate"] = newDate
+                
+                game["blackTime"] = -timeLeft - 2
+            }
+
+            timer.invalidate()
             
+            
+            print(notations.count)
+
             if self.colorLcolor == "You are White" {
                 self.game.setObject(false, forKey: "promotionBlack")
                 //self.game.setObject(false, forKey: "passantBlack")
