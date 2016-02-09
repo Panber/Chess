@@ -7344,6 +7344,10 @@ var didLongPress = false
 
     }
     
+
+
+    
+
     // MARK: Calculate the RATING
     ///////
     
@@ -7360,10 +7364,10 @@ var didLongPress = false
     //  ExB  = expected blackRating after based on blackRating before
     //  wR_2 = final calculation of whiteScore
     //  bR_2 = final calculation of blackScore
-
+    
     //calculateRating to calculate rating of players
     func calculateRating(wR:Double, bR:Double, K:Double, sW:Double, sB:Double) -> (Int,Int) {
-          
+        
         var wR_2 = Double(10^^(Int(wR / 400)))
         var bR_2 = Double(10^^(Int(bR / 400)))
         
@@ -7375,17 +7379,8 @@ var didLongPress = false
         
         return (Int(wR_2) , Int(bR_2))
     }
-
+    
     ///////
-
-    
-    //    override func prefersStatusBarHidden() -> Bool {
-    //        return true
-    //    }
-    
-    //    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-    //        return UIStatusBarAnimation.Slide
-    //    }
     
     // MARK: - Functions to make life easier 💕
     func movePiece(_moveByAmountx:CGFloat,_moveByAmounty:CGFloat) {
