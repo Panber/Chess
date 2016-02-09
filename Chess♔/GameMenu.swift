@@ -209,7 +209,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                                 users["won"] = "0"
                                 users["drawn"] = "0"
                                 users["lost"] = "0"
-                                users["rating"] = 601
+                                users["rating"] = 1200
                                 users["request_everyone"] = true
                                 
                                 

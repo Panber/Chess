@@ -139,6 +139,8 @@ class NewGameSettingsPage: UIViewController {
         game["whitePromotionType"] = NSMutableArray()
         game["blackPromotionType"] = NSMutableArray()
         game["passantArray"] = NSMutableArray()
+        game["whiteRatedComplete"] = false
+        game["blackRatedComplete"] = false
         
         game["whiteTime"] = Int()
         game["blackTime"] = Int()

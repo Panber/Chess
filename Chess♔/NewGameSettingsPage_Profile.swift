@@ -129,7 +129,8 @@ class NewGameSettingsPage_Profile: UIViewController {
         game["passantArray"] = NSMutableArray()
         game["whiteTime"] = Int()
         game["blackTime"] = Int()
-
+        game["whiteRatedComplete"] = false
+        game["blackRatedComplete"] = false
         
         game["timeLeftToMove"] = NSDate()
         

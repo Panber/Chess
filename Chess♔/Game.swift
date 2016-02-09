@@ -11,6 +11,7 @@ import SpriteKit
 import Firebase
 import AudioToolbox
 import Social
+import Darwin
 
 
 extension String
@@ -27,6 +28,14 @@ extension String
         return self[range]
     }
 }
+
+//        //  function to raise number
+infix operator ^^ { }
+func ^^ (radix: Int, power: Int) -> Int {
+    return Int(pow(Double(radix), Double(power)))
+}
+
+
 
 var game = PFObject(className: "Games")
 var notations: Array<String> = []
@@ -154,6 +163,8 @@ class MoveCell: UICollectionViewCell {
 
 class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    var shouldLoadGameFinished = false
+    var typeOfGameFinished = ""
     
     var promotionAtIndex: Array<Int> = []
     
@@ -201,6 +212,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var otherUserRating = ""
     var otherUserRatingInt = Int()
     
+    var otherUserWon = Int()
+    var otherUserLost = Int()
+    var otherUserDrawn = Int()
+
+    
     
     var meUserImage = UIImage()
     
@@ -208,6 +224,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var meUserRating = ""
     var meUserRatingInt = Int()
     
+    var meUserWon = Int()
+    var meUserLost = Int()
+    var meUserDrawn = Int()
+
+
     
     
     //BOARDER
@@ -961,6 +982,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             colorLcolor = "You are White"
             colorIndicatorcolor = UIColor.whiteColor()
+            
+
+
+
+            
             
             //chesspieces loading - REMEMBER TO ADD PIECES TO ARRAYS!! Right order as well!!
             if r!["status_white"] as! String == "move" {
@@ -1785,6 +1811,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             let rating = result["rating"] as? Int
                             
+                            if (result["username"] as? String)! == r!["whitePlayer"]! as! String {
+                                self.meUserRatingInt = result["rating"] as! Int!
+                                self.meUserWon = Int(result["won"] as! String!)!
+                                self.meUserLost = Int(result["lost"] as! String!)!
+                                self.meUserDrawn = Int(result["drawn"] as! String!)!
+
+                            }
+                            else {
+                                self.otherUserRatingInt = result["rating"] as! Int!
+                            }
+                            
                             let profilePictureObject = result["profile_picture"] as? PFFile
                             
                             if(profilePictureObject != nil)
@@ -1801,7 +1838,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             self.meUserImage = UIImage(data: imageData!)!
                                             self.meUserName = (result["username"] as? String)!
-                                            self.meUserRatingInt = result["rating"] as! Int!
                                             self.meUserRating = "\(result["rating"] as! Int)"
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -1825,7 +1861,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             self.otherUserImage = UIImage(data: imageData!)!
                                             self.otherUserRating = "\(result["rating"] as! Int!)"
-                                            self.otherUserRatingInt = result["rating"] as! Int!
                                             self.otherUserName = (result["username"] as? String)!
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -1836,6 +1871,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                 }
                                             })
                                         }
+                                        
                                     }
                                     
                                 }
@@ -1844,11 +1880,65 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             
                         }
+                        
+                    }
+                    //setting rating and won/lost/drawn
+                    if r!["status_white"] as! String == "won" {
+                        if r!["whiteRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                    
+                            let s = self.meUserWon + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                           // r!["whiteRatedComplete"] = true
+                            r!.save()
+
+                            self.gameFinishedScreen("won",statusBy: "")
+                        }
+                    }
+                    else if r!["status_white"] as! String == "lost" {
+                        if r!["whiteRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0, sB: 1).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserLost + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                           // r!["whiteRatedComplete"] = true
+                            r!.save()
+
+                            self.gameFinishedScreen("lost",statusBy: "")
+
+                        }
+                    }
+                    else if r!["status_white"] as! String == "draw" {
+                        if r!["whiteRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserDrawn + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            //r!["whiteRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("drew",statusBy: "")
+
+                        }
                     }
                     
                 }
                 
             })
+            
+
             
             //firebase
             //check for any changes that may have accured at the destined game ≈_≈
@@ -3425,7 +3515,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         for result in result {
                             
                             let rating = result["rating"] as? Int
-                            
+                            if (result["username"] as? String)! == r!["blackPlayer"]! as! String {
+                                self.meUserRatingInt = result["rating"] as! Int!
+                                self.meUserWon = Int(result["won"] as! String!)!
+                                self.meUserLost = Int(result["lost"] as! String!)!
+                                self.meUserDrawn = Int(result["drawn"] as! String!)!
+                                
+                            }
+                            else {
+                                self.otherUserRatingInt = result["rating"] as! Int!
+                            }
                             let profilePictureObject = result["profile_picture"] as? PFFile
                             
                             if(profilePictureObject != nil)
@@ -3443,7 +3542,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.meUserImage = UIImage(data: imageData!)!
                                             self.meUserName = (result["username"] as? String)!
                                             self.meUserRating = "\(result["rating"] as! Int)"
-                                            self.meUserRatingInt = result["rating"] as! Int!
                                             
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -3465,7 +3563,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             self.otherUserImage = UIImage(data: imageData!)!
                                             self.otherUserRating = "\(result["rating"] as! Int)"
-                                            self.otherUserRatingInt = result["rating"] as! Int!
                                             
                                             self.otherUserName = (result["username"] as? String)!
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -3485,8 +3582,60 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                         }
                     }
-                    
-                    
+                    //setting rating and won/lost/drawn
+                    if r!["status_black"] as! String == "won" {
+                        if r!["blackRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1).1
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserWon + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                          //  r!["blackRatedComplete"] = true
+                            r!.save()
+                            
+             
+                            
+                            self.gameFinishedScreen("won",statusBy: "")
+
+                        }
+                    }
+                    else if r!["status_black"] as! String == "lost" {
+                        if r!["blackRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 1, sB: 0).1
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserLost + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                           // r!["blackRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("lost",statusBy: "")
+
+                        }
+                    }
+                    else if r!["status_black"] as! String == "draw" {
+                        if r!["blackRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserDrawn + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            //r!["blackRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("drew",statusBy: "")
+
+                        }
+                    }
                 }
             })
             
@@ -6410,6 +6559,10 @@ var didLongPress = false
         by = " on "
         }
         
+        if statusBy == "" {
+        by = ""
+        }
+        
         let sb = (game["blackPlayer"] as? String)!
         let sw = (game["whitePlayer"] as? String)!
         if statusWhite == "won" && iamWhite {
@@ -6425,10 +6578,10 @@ var didLongPress = false
             wonLabel.text = "You won against " + "\(sw)" + by + statusBy
         }
         else if statusWhite == "drew" && !iamWhite {
-            wonLabel.text = "You drew against " + "\(sw)"
+            wonLabel.text = "You drew " + "\(sw)"
         }
         else if statusWhite == "drew" && iamWhite {
-            wonLabel.text = "You drew against " + "\(sb)"
+            wonLabel.text = "You drew " + "\(sb)"
         }
         
         
@@ -7093,6 +7246,7 @@ var didLongPress = false
     //use this to checki fuser lost on time
     func updateTimer() {
         
+        
         if notations.count <= 1 {
             
             
@@ -7190,7 +7344,40 @@ var didLongPress = false
 
     }
     
+    // MARK: Calculate the RATING
+    ///////
     
+    //  ----- the parameters -----
+    //  wR  = whiteRating before
+    //  bR  = blacRating before
+    //  K   = K-factor, how much the rating will impact
+    //  sW  = scoreWhite -> 1 , 0.5 or 0 , depending on who won
+    //  sB  = scoreblack -> 1 , 0.5 or 0 , depending on who won
+    //  ----- the calculation -----
+    //  wR_2 = tranformed whiteRating, part of the calcultaion
+    //  bR_2 = tranformed blackRating, part of the calcultaion
+    //  ExW  = expected whiteRating after based on whiteRating before
+    //  ExB  = expected blackRating after based on blackRating before
+    //  wR_2 = final calculation of whiteScore
+    //  bR_2 = final calculation of blackScore
+
+    //calculateRating to calculate rating of players
+    func calculateRating(wR:Double, bR:Double, K:Double, sW:Double, sB:Double) -> (Int,Int) {
+        
+        var wR_2 = Double(10^^(Int(wR / 400)))
+        var bR_2 = Double(10^^(Int(bR / 400)))
+        
+        let ExW:Double = wR_2/(wR_2 + bR_2)
+        let ExB:Double = bR_2/(wR_2 + bR_2)
+        
+        wR_2 = wR+(K*(sW - ExW))
+        bR_2 = wR+(K*(sB - ExB))
+        
+        return (Int(wR_2) , Int(bR_2))
+    }
+
+    ///////
+
     
     //    override func prefersStatusBarHidden() -> Bool {
     //        return true

@@ -38,6 +38,7 @@
 		8F2DD6E51B9AFFF80059CEFA /* pieceMarked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D91B9AFFF80059CEFA /* pieceMarked.png */; };
 		8F2DD6E61B9AFFF80059CEFA /* piecePossibilities.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6DA1B9AFFF80059CEFA /* piecePossibilities.png */; };
 		8F2DD6E91B9AFFF80059CEFA /* whiteSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */; };
+		8F2EEC721C6A9BF200FB6127 /* ChessLogoFront.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2EEC711C6A9BF200FB6127 /* ChessLogoFront.png */; };
 		8F2F6C4A1BDED9100048342A /* NewGameFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF77E1BDBAF1E0037865C /* NewGameFriends.swift */; };
 		8F2F6C4B1BDEDCC00048342A /* NewGameSettingsPage_Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage_Play.swift */; };
 		8F31DCE11BC70E30004544CC /* checkmark13.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCE01BC70E30004544CC /* checkmark13.png */; };
@@ -306,6 +307,7 @@
 		8F2DD6D91B9AFFF80059CEFA /* pieceMarked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pieceMarked.png; sourceTree = "<group>"; };
 		8F2DD6DA1B9AFFF80059CEFA /* piecePossibilities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piecePossibilities.png; sourceTree = "<group>"; };
 		8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteSquare.png; sourceTree = "<group>"; };
+		8F2EEC711C6A9BF200FB6127 /* ChessLogoFront.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessLogoFront.png; sourceTree = "<group>"; };
 		8F31DCE01BC70E30004544CC /* checkmark13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark13.png; sourceTree = "<group>"; };
 		8F31DCE41BC716F9004544CC /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		8F31DCE61BC7189B004544CC /* add1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add1.png; sourceTree = "<group>"; };
@@ -680,6 +682,7 @@
 				8F31ECD81C67964B0081F888 /* chesstabv8@4x.png */,
 				8F31ECD21C678C2F0081F888 /* chesslaunchv9.png */,
 				8F31ECDA1C6796C00081F888 /* chesstabv7@3x.png */,
+				8F2EEC711C6A9BF200FB6127 /* ChessLogoFront.png */,
 				8F56E1321C5C2A9E0000ECDB /* testLogo180.jpg */,
 				8FA1F7CD1B9AFCA800A0C548 /* Pieces */,
 			);
@@ -1159,6 +1162,7 @@
 				8F31DCED1BC7C8B5004544CC /* pending.png in Resources */,
 				8F2392A51C09EF3A00CC4B0F /* cm2.png in Resources */,
 				8FE58AB81C44676B007888F4 /* whitePawn.png in Resources */,
+				8F2EEC721C6A9BF200FB6127 /* ChessLogoFront.png in Resources */,
 				8FE58A991C3B1F26007888F4 /* blackKnight.png in Resources */,
 				8F4A02871B9A3F240084024A /* chessIcon180.png in Resources */,
 				8FB94F991BE62EA80029EF00 /* chatIcon.png in Resources */,
