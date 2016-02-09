@@ -7410,9 +7410,7 @@ var didLongPress = false
     //        return true
     //    }
     
-    //    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-    //        return UIStatusBarAnimation.Slide
-    //    }
+    ///////
     
     // MARK: - Functions to make life easier 💕
     func movePiece(_moveByAmountx:CGFloat,_moveByAmounty:CGFloat) {
