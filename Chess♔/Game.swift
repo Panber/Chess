@@ -7363,7 +7363,7 @@ var didLongPress = false
 
     //calculateRating to calculate rating of players
     func calculateRating(wR:Double, bR:Double, K:Double, sW:Double, sB:Double) -> (Int,Int) {
-        
+          
         var wR_2 = Double(10^^(Int(wR / 400)))
         var bR_2 = Double(10^^(Int(bR / 400)))
         
