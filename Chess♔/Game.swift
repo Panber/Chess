@@ -11,6 +11,7 @@ import SpriteKit
 import Firebase
 import AudioToolbox
 import Social
+import Darwin
 
 
 extension String
@@ -27,6 +28,14 @@ extension String
         return self[range]
     }
 }
+
+//        //  function to raise number
+infix operator ^^ { }
+func ^^ (radix: Int, power: Int) -> Int {
+    return Int(pow(Double(radix), Double(power)))
+}
+
+
 
 var game = PFObject(className: "Games")
 var notations: Array<String> = []
@@ -154,6 +163,8 @@ class MoveCell: UICollectionViewCell {
 
 class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    var shouldLoadGameFinished = false
+    var typeOfGameFinished = ""
     
     var promotionAtIndex: Array<Int> = []
     
@@ -201,6 +212,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var otherUserRating = ""
     var otherUserRatingInt = Int()
     
+    var otherUserWon = Int()
+    var otherUserLost = Int()
+    var otherUserDrawn = Int()
+
+    
     
     var meUserImage = UIImage()
     
@@ -208,6 +224,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var meUserRating = ""
     var meUserRatingInt = Int()
     
+    var meUserWon = Int()
+    var meUserLost = Int()
+    var meUserDrawn = Int()
+
+
     
     
     //BOARDER
@@ -962,6 +983,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             colorLcolor = "You are White"
             colorIndicatorcolor = UIColor.whiteColor()
             
+
+
+
+            
+            
             //chesspieces loading - REMEMBER TO ADD PIECES TO ARRAYS!! Right order as well!!
             if r!["status_white"] as! String == "move" {
                 isWhiteTurn = true
@@ -982,7 +1008,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         piecesArrs[i][t].image = UIImage(named: piecesString[i])
                         self.view.addSubview(piecesArrs[i][t])
                         piecesArrs[i][t].contentMode = .ScaleAspectFit
-                        piecesArrs[i][t].userInteractionEnabled = true
+                        piecesArrs[i][t].userInteractionEnabled = false
                         piecesArrs[i][t].multipleTouchEnabled = true
                     }
                 }
@@ -1041,7 +1067,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.whiteRook2.frame.origin.x = d
                                             self.whiteRook2.frame.origin.y = _1
                                             
-                                            }, completion: { finish in})
+                                            }, completion: { finish in
+                                                
+                                                for var i = 0; i < self.piecesArrs.count; i++ {
+                                                    for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                        self.piecesArrs[i][t].userInteractionEnabled = true
+                                                    }
+                                                }
+                                                self.deletePiecesAfterLoad()
+                                                self.updateLogic()
+                                        })
                                         
                                     }
                                     else {
@@ -1064,7 +1099,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.blackRook1.frame.origin.y = _8
                                             
                                             
-                                            }, completion: { finish in})
+                                            }, completion: { finish in
+                                                for var i = 0; i < self.piecesArrs.count; i++ {
+                                                    for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                        self.piecesArrs[i][t].userInteractionEnabled = true
+                                                    }
+                                                }
+                                                self.deletePiecesAfterLoad()
+                                                self.updateLogic()
+                                        })
                                         
                                     }
                                     else {
@@ -1090,7 +1133,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.whiteRook1.frame.origin.x = f
                                         self.whiteRook1.frame.origin.y = _1
                                         
-                                        }, completion: { finish in})
+                                        }, completion: { finish in
+                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                }
+                                            }
+                                            self.deletePiecesAfterLoad()
+                                            self.updateLogic()
+                                    })
                                     
                                     
                                 }  else {
@@ -1111,7 +1162,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.blackRook2.frame.origin.x = f
                                         self.blackRook2.frame.origin.y = _8
                                         
-                                        }, completion: { finish in})
+                                        }, completion: { finish in
+                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                }
+                                            }
+                                            self.deletePiecesAfterLoad()
+                                            self.updateLogic()})
                                     
                                 }
                                 else {
@@ -1685,6 +1743,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
                                                                             self.updateLogic()
+                                                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                                                }
+                                                                            }
+                                                                          
                                                                             //return
                                                                     })
                                                                     
@@ -1747,6 +1811,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             let rating = result["rating"] as? Int
                             
+                            if (result["username"] as? String)! == r!["whitePlayer"]! as! String {
+                                self.meUserRatingInt = result["rating"] as! Int!
+                                self.meUserWon = Int(result["won"] as! String!)!
+                                self.meUserLost = Int(result["lost"] as! String!)!
+                                self.meUserDrawn = Int(result["drawn"] as! String!)!
+
+                            }
+                            else {
+                                self.otherUserRatingInt = result["rating"] as! Int!
+                            }
+                            
                             let profilePictureObject = result["profile_picture"] as? PFFile
                             
                             if(profilePictureObject != nil)
@@ -1763,7 +1838,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             self.meUserImage = UIImage(data: imageData!)!
                                             self.meUserName = (result["username"] as? String)!
-                                            self.meUserRatingInt = result["rating"] as! Int!
                                             self.meUserRating = "\(result["rating"] as! Int)"
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -1787,7 +1861,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             self.otherUserImage = UIImage(data: imageData!)!
                                             self.otherUserRating = "\(result["rating"] as! Int!)"
-                                            self.otherUserRatingInt = result["rating"] as! Int!
                                             self.otherUserName = (result["username"] as? String)!
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -1798,6 +1871,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                 }
                                             })
                                         }
+                                        
                                     }
                                     
                                 }
@@ -1806,11 +1880,65 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             
                         }
+                        
+                    }
+                    //setting rating and won/lost/drawn
+                    if r!["status_white"] as! String == "won" {
+                        if r!["whiteRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                    
+                            let s = self.meUserWon + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                           // r!["whiteRatedComplete"] = true
+                            r!.save()
+
+                            self.gameFinishedScreen("won",statusBy: "")
+                        }
+                    }
+                    else if r!["status_white"] as! String == "lost" {
+                        if r!["whiteRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0, sB: 1).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserLost + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                           // r!["whiteRatedComplete"] = true
+                            r!.save()
+
+                            self.gameFinishedScreen("lost",statusBy: "")
+
+                        }
+                    }
+                    else if r!["status_white"] as! String == "draw" {
+                        if r!["whiteRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserDrawn + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            //r!["whiteRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("drew",statusBy: "")
+
+                        }
                     }
                     
                 }
                 
             })
+            
+
             
             //firebase
             //check for any changes that may have accured at the destined game ≈_≈
@@ -1970,7 +2098,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     loadMoves()
                     
 
-                    
+                    for var i = 0; i < self.piecesArrs.count; i++ {
+                        for var t = 0; t < self.piecesArrs[i].count; t++ {
+                            self.piecesArrs[i][t].userInteractionEnabled = false
+                        }
+                    }
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if moves.last!.characters.count == 3 {
                             
@@ -2292,7 +2426,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     checkIfTakenLast()
                                                                     
                                                                     
-                                                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                    UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                                                                         
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
@@ -2313,6 +2447,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.checkByPawn = false
                                                                         self.pieceWhiteLogicOptions = []
                                                                         self.pieceBlackLogicOptions = []
+                                                                        for var i = 0; i < self.piecesArrs.count; i++ {
+                                                                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                                                
+                                                                                self.piecesArrs[i][t].userInteractionEnabled = false
+                                                                            }
+                                                                        }
                                                                         }, completion: { finish in
                                                                             self.deletePiecesAfterLoad()
                                                                             
@@ -2478,7 +2618,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                     }
                     
-                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     self.isWhiteTurn = true
                     
                     //self.updateLogic()
@@ -2641,7 +2780,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.blackRook2.frame.origin.y = _8
                                             
                                             
-                                            }, completion: { finish in})
+                                            }, completion: { finish in
+                                                for var i = 0; i < self.piecesArrs.count; i++ {
+                                                    for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                        self.piecesArrs[i][t].userInteractionEnabled = true
+                                                    }
+                                                }
+                                                self.deletePiecesAfterLoad()
+                                                self.updateLogic()
+                                        })
                                         
                                     }
                                     else {
@@ -2667,7 +2814,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             
                                             
-                                            }, completion: { finish in})
+                                            }, completion: { finish in
+                                                for var i = 0; i < self.piecesArrs.count; i++ {
+                                                    for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                        self.piecesArrs[i][t].userInteractionEnabled = true
+                                                    }
+                                                }
+                                                self.deletePiecesAfterLoad()
+                                                self.updateLogic()})
                                         
                                     }
                                     else {
@@ -2680,27 +2834,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     
                                     
                                 }
-                            } else if String(moves[o][2])  == "0" {
-                                //can return false value??
-                                if  moves.indexOf(moves[o])!  % 2 == 0 {
-                                    // test
-                                    
-                                    self.blackKing.frame.origin.x = f
-                                    self.blackKing.frame.origin.y = _8
-                                    self.blackRook2.frame.origin.x = e
-                                    self.blackRook2.frame.origin.y = _8
-                                    
-                                }
-                                    
-                                else {
-                                    
-                                    self.whiteKing.frame.origin.x = f
-                                    self.whiteKing.frame.origin.y = _1
-                                    self.whiteRook1.frame.origin.x = e
-                                    self.whiteRook1.frame.origin.y = _1
-                                    
-                                }
                             }
+                           
                         }
                         else if String(moves[o][0])  == "0" && String(moves[o][1])  == "0" {
                             
@@ -2717,7 +2852,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         
                                         
-                                        }, completion: { finish in})
+                                        }, completion: { finish in
+                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                }
+                                            }
+                                            self.deletePiecesAfterLoad()
+                                            self.updateLogic()
+                                    })
                                     
                                 }
                                 else {
@@ -2740,7 +2883,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.whiteRook2.frame.origin.x = c
                                         self.whiteRook2.frame.origin.y = _1
                                         
-                                        }, completion: { finish in})
+                                        }, completion: { finish in
+                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                }
+                                            }
+                                            self.deletePiecesAfterLoad()
+                                            self.updateLogic()})
                                     
                                 }
                                 else {
@@ -3291,9 +3441,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         
                                                                         
                                                                         
-                                                                        }, completion: { finish in})
-                                                                    self.deletePiecesAfterLoad()
-                                                                    self.updateLogic()
+                                                                        }, completion: { finish in
+                                                                            self.deletePiecesAfterLoad()
+                                                                            self.updateLogic()
+                                                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                                                }
+                                                                            }
+                                                                         
+                                                                    })
+                                                                   
                                                                     
                                                                 }
                                                                 else {
@@ -3394,7 +3552,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         for result in result {
                             
                             let rating = result["rating"] as? Int
-                            
+                            if (result["username"] as? String)! == r!["blackPlayer"]! as! String {
+                                self.meUserRatingInt = result["rating"] as! Int!
+                                self.meUserWon = Int(result["won"] as! String!)!
+                                self.meUserLost = Int(result["lost"] as! String!)!
+                                self.meUserDrawn = Int(result["drawn"] as! String!)!
+                                
+                            }
+                            else {
+                                self.otherUserRatingInt = result["rating"] as! Int!
+                            }
                             let profilePictureObject = result["profile_picture"] as? PFFile
                             
                             if(profilePictureObject != nil)
@@ -3412,7 +3579,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.meUserImage = UIImage(data: imageData!)!
                                             self.meUserName = (result["username"] as? String)!
                                             self.meUserRating = "\(result["rating"] as! Int)"
-                                            self.meUserRatingInt = result["rating"] as! Int!
                                             
                                             
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -3434,7 +3600,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             
                                             self.otherUserImage = UIImage(data: imageData!)!
                                             self.otherUserRating = "\(result["rating"] as! Int)"
-                                            self.otherUserRatingInt = result["rating"] as! Int!
                                             
                                             self.otherUserName = (result["username"] as? String)!
                                             UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -3454,8 +3619,60 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                         }
                     }
-                    
-                    
+                    //setting rating and won/lost/drawn
+                    if r!["status_black"] as! String == "won" {
+                        if r!["blackRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1).1
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserWon + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                          //  r!["blackRatedComplete"] = true
+                            r!.save()
+                            
+             
+                            
+                            self.gameFinishedScreen("won",statusBy: "")
+
+                        }
+                    }
+                    else if r!["status_black"] as! String == "lost" {
+                        if r!["blackRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 1, sB: 0).1
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserLost + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                           // r!["blackRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("lost",statusBy: "")
+
+                        }
+                    }
+                    else if r!["status_black"] as! String == "draw" {
+                        if r!["blackRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserDrawn + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            //r!["blackRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("drew",statusBy: "")
+
+                        }
+                    }
                 }
             })
             
@@ -3616,8 +3833,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.canPassantBlack = r!["passantBlack"] as! Bool
                     self.canPassant = r!["passant"] as! Bool
                     
+                    for var i = 0; i < self.piecesArrs.count; i++ {
+                        for var t = 0; t < self.piecesArrs[i].count; t++ {
+                            self.piecesArrs[i][t].userInteractionEnabled = false
+                        }
+                    }
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
 
-                    
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if moves.last!.characters.count == 3 {
                             
@@ -3938,7 +4160,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     
                                                                     checkIfTakenLast()
                                                                     
-                                                                    UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
+                                                                    UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations:{ () -> Void in
                                                                         self.pieces[i].frame.origin.x = xAxisArr[q]
                                                                         self.pieces[i].frame.origin.y = yAxisArr[a]
                                                                         self.removeLogicOptions()
@@ -3957,6 +4179,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                         self.checkByPawn = false
                                                                         self.pieceWhiteLogicOptions = []
                                                                         self.pieceBlackLogicOptions = []
+                                                                        for var i = 0; i < self.piecesArrs.count; i++ {
+                                                                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                                                self.piecesArrs[i][t].userInteractionEnabled = false
+                                                                            }
+                                                                        }
                                                                         
                                                                         }, completion: { finish in
                                                                             
@@ -4030,7 +4257,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
  
                                                                                     self.gameFinishedScreen("won",statusBy: "chekmate.")
                                                                                 }
-                                                                            } else {
+                                                                            }
+                                                                            else {
                                                                                 // Stalemate
                                                                                 var staleMate1 = false
                                                                                 var staleMate2 = false
@@ -4121,7 +4349,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                     }
                     
-                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     self.isWhiteTurn = true
                     
 //                    let lastupdate = self.game["timeLeftToMove"] as? NSDate
@@ -4303,6 +4530,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
         }
         viewDidLoad2()
+        lightOrDarkMode()
     }
         
     
@@ -6393,6 +6621,10 @@ var didLongPress = false
         by = " on "
         }
         
+        if statusBy == "" {
+        by = ""
+        }
+        
         let sb = (game["blackPlayer"] as? String)!
         let sw = (game["whitePlayer"] as? String)!
         if statusWhite == "won" && iamWhite {
@@ -6408,10 +6640,10 @@ var didLongPress = false
             wonLabel.text = "You won against " + "\(sw)" + by + statusBy
         }
         else if statusWhite == "drew" && !iamWhite {
-            wonLabel.text = "You drew against " + "\(sw)"
+            wonLabel.text = "You drew " + "\(sw)"
         }
         else if statusWhite == "drew" && iamWhite {
-            wonLabel.text = "You drew against " + "\(sb)"
+            wonLabel.text = "You drew " + "\(sb)"
         }
         
         
@@ -7075,6 +7307,7 @@ var didLongPress = false
     
     //use this to checki fuser lost on time
     func updateTimer() {
+        
         
         if notations.count <= 1 {
             
@@ -9617,6 +9850,8 @@ var didLongPress = false
                                     blackCount[t] += 1
                                     if (!containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[t])) {
                                         takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                        takenBlackPiecesLbl[t].frame.origin.y += 5
+
                                         takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
                                     }
                                     takenBlackPiecesLbl[t].text = "" + blackCount[t].description
@@ -9708,6 +9943,8 @@ var didLongPress = false
                                     blackCount[b] += 1
                                     if (!containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[b])) {
                                         takenBlackPiecesLbl[b].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+                                        takenBlackPiecesLbl[b].frame.origin.y += 5
+
                                         takenBlackPiecesShow += [takenBlackPiecesLbl[b]]
                                     }
                                     takenBlackPiecesLbl[b].text = "" + blackCount[b].description
@@ -10037,10 +10274,14 @@ var didLongPress = false
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
+            
             self.capsuleL.textColor = UIColor.whiteColor()
             self.notationsL.textColor = UIColor.whiteColor()
             self.timeGL.textColor = UIColor.whiteColor()
             self.turnGL.textColor = UIColor.whiteColor()
+            
+            UIApplication.sharedApplication().statusBarStyle = .LightContent
+
             
             
         }
@@ -10061,6 +10302,7 @@ var didLongPress = false
             self.timeGL.textColor = UIColor.blackColor()
             self.turnGL.textColor = UIColor.blackColor()
             
+            UIApplication.sharedApplication().statusBarStyle = .Default
             
             
         }

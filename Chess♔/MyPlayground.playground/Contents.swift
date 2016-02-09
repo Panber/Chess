@@ -3,6 +3,7 @@
 //only testsss
 
 import UIKit
+import Darwin
 
 //coulors
 let white = "white"; let black = "black"
@@ -89,6 +90,60 @@ func loadNewGame() {
 }
 
 var arra: Array<String> = []
+
+
+// MARK: Rating calc
+///////
+
+    //  ----- the parameters -----
+    //  wR  = whiteRating before
+    //  bR  = blacRating before
+    //  K   = K-factor, how much the rating will impact
+    //  sW  = scoreWhite -> 1 , 0.5 or 0 , depending on who won
+    //  sB  = scoreblack -> 1 , 0.5 or 0 , depending on who won
+    //  ----- the calculation -----
+    //  wR_2 = tranformed whiteRating, part of the calcultaion
+    //  bR_2 = tranformed blackRating, part of the calcultaion
+    //  ExW  = expected whiteRating after based on whiteRating before
+    //  ExB  = expected blackRating after based on blackRating before
+    //  wR_2 = final calculation of whiteScore
+    //  bR_2 = final calculation of blackScore
+
+//  function to raise number
+infix operator ^^ { }
+func ^^ (radix: Int, power: Int) -> Int {
+    return Int(pow(Double(radix), Double(power)))
+}
+
+//calculateRating to calculate rating of players
+func calculateRating(wR:Double, bR:Double, K:Double, sW:Double, sB:Double) -> (Int,Int) {
+
+    var wR_2 = Double(10^^(Int(wR / 400)))
+    var bR_2 = Double(10^^(Int(bR / 400)))
+    
+    let ExW:Double = wR_2/(wR_2 + bR_2)
+    let ExB:Double = bR_2/(wR_2 + bR_2)
+    
+    wR_2 = wR+(K*(sW - ExW))
+    bR_2 = wR+(K*(sB - ExB))
+
+    return (Int(wR_2) , Int(bR_2))
+}
+
+let rating = calculateRating(1000, bR: 1000, K: 32, sW: 1, sB: 0)
+
+//print whiteRating
+let whiteRating = rating.0
+print("whiteRating after is \(whiteRating)")
+
+//print blackRating
+let blackRating = rating.1
+print("blackRating after is \(blackRating)")
+
+
+////////
+
+
 
 
 

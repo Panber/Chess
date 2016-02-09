@@ -209,7 +209,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                                 users["won"] = "0"
                                 users["drawn"] = "0"
                                 users["lost"] = "0"
-                                users["rating"] = 601
+                                users["rating"] = 1200
                                 users["request_everyone"] = true
                                 
                                 
@@ -1808,6 +1808,7 @@ var loaded = false
                 
             
 
+            UIApplication.sharedApplication().statusBarStyle = .LightContent
 
             
                 tableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
@@ -1834,6 +1835,7 @@ var loaded = false
                 tableView.backgroundColor = UIColor.whiteColor()
 
 
+            UIApplication.sharedApplication().statusBarStyle = .Default
 
 
 
