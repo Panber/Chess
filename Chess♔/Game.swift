@@ -2403,7 +2403,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 //chartData()
                                                                                 
-                                                                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
+                                                                                UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     self.pieces[iy].alpha = 0
                                                                                     }, completion: {finish in
                                                                                         
@@ -2458,8 +2458,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             
                                                                             self.updateLogic()
                                                                             
+                                                                             //this is checkmate, black won
                                                                             if self.checkByQueen == true || self.checkByBishop == true || self.checkByRook == true || self.checkByKnight == true || self.checkByPawn == true {
-                                                                                print("Check mate cheking")
+
                                                                                 var checkMate1 = false
                                                                                 var checkMate2 = false
                                                                                 var checkMate3 = false
@@ -2527,6 +2528,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     
                                                                                 }
                                                                             } else {
+                                                                                 //this is stalemate, draw
                                                                                 var staleMate1 = false
                                                                                 var staleMate2 = false
                                                                                 var staleMate3 = false
@@ -4139,7 +4141,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 //   chartData()
                                                                                 
-                                                                                UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations: { () -> Void in
+                                                                                UIView.animateWithDuration(0.8, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
                                                                                     self.pieces[iy].alpha = 0
                                                                                     }, completion: {finish in
                                                                                         
@@ -4191,6 +4193,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             
                                                                             self.updateLogic()
                                                                             
+                                                                             //this is checkmate, white won
                                                                             if self.checkByQueen == true || self.checkByBishop == true || self.checkByRook == true || self.checkByKnight == true || self.checkByPawn == true {
                                                                                 var checkMate1 = false
                                                                                 var checkMate2 = false
@@ -4259,7 +4262,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                             }
                                                                             else {
-                                                                                // Stalemate
+                                                                                 //this is stalemate, draw
                                                                                 var staleMate1 = false
                                                                                 var staleMate2 = false
                                                                                 var staleMate3 = false
@@ -7412,6 +7415,40 @@ var didLongPress = false
     
     ///////
     
+    // MARK: Calculate the RATING
+    ///////
+    
+    //  ----- the parameters -----
+    //  wR  = whiteRating before
+    //  bR  = blacRating before
+    //  K   = K-factor, how much the rating will impact
+    //  sW  = scoreWhite -> 1 , 0.5 or 0 , depending on who won
+    //  sB  = scoreblack -> 1 , 0.5 or 0 , depending on who won
+    //  ----- the calculation -----
+    //  wR_2 = tranformed whiteRating, part of the calcultaion
+    //  bR_2 = tranformed blackRating, part of the calcultaion
+    //  ExW  = expected whiteRating after based on whiteRating before
+    //  ExB  = expected blackRating after based on blackRating before
+    //  wR_2 = final calculation of whiteScore
+    //  bR_2 = final calculation of blackScore
+    
+    //calculateRating to calculate rating of players
+    func calculateRating(wR:Double, bR:Double, K:Double, sW:Double, sB:Double) -> (Int,Int) {
+        
+        var wR_2 = Double(10^^(Int(wR / 400)))
+        var bR_2 = Double(10^^(Int(bR / 400)))
+        
+        let ExW:Double = wR_2/(wR_2 + bR_2)
+        let ExB:Double = bR_2/(wR_2 + bR_2)
+        
+        wR_2 = wR+(K*(sW - ExW))
+        bR_2 = wR+(K*(sB - ExB))
+        
+        return (Int(wR_2) , Int(bR_2))
+    }
+    
+    ///////
+    
     // MARK: - Functions to make life easier 💕
     func movePiece(_moveByAmountx:CGFloat,_moveByAmounty:CGFloat) {
         resetTimer()
@@ -8825,7 +8862,7 @@ var didLongPress = false
                 chessPieceMovementLogic(2, pieceid: 7, friend: blackPieces, enemy: whitePieces, piece: blackPawns[w], logicOptions: piecesWhiteLogic)
             }
             
-            // Checks if check mate
+            //this is checkmate, black won
             if self.colorLcolor == "You are Black" {
                 if self.checkByQueen == true || self.checkByBishop == true || self.checkByRook == true || self.checkByKnight == true || self.checkByPawn == true {
                     var checkMate1 = false
@@ -8897,6 +8934,8 @@ var didLongPress = false
                     }
                 }
                 else {
+                    
+                    //this is salemate, draw
                     var staleMate1 = false
                     var staleMate2 = false
                     var staleMate3 = false
@@ -8965,7 +9004,12 @@ var didLongPress = false
             
             if self.colorLcolor == "You are White" {
                 
+                //this is checkmate, white won
+                
                 if self.checkByQueen == true || self.checkByBishop == true || self.checkByRook == true || self.checkByKnight == true || self.checkByPawn == true {
+                    
+                    print("this is checkmate, white won")
+                    
                     var checkMate1 = false
                     var checkMate2 = false
                     var checkMate3 = false
@@ -8988,6 +9032,7 @@ var didLongPress = false
                     
                     for var i = 0; i < blackKnights.count;i++ {
                         if blackKnights[i].alpha == 1 {
+                            print("blackKnights")
                             if chessPieceSelected(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKnights[i]) == 0 {
                                 checkMate1 = true
                             }
@@ -8995,6 +9040,7 @@ var didLongPress = false
                     }
                     for var i = 0; i < blackBishops.count;i++ {
                         if blackBishops[i].alpha == 1 {
+                            print("blackBishops")
                             if chessPieceSelected(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackBishops[i]) == 0 {
                                 checkMate2 = true
                             }
@@ -9002,6 +9048,7 @@ var didLongPress = false
                     }
                     for var i = 0; i < blackRooks.count;i++ {
                         if blackRooks[i].alpha == 1 {
+                            print("blackRooks")
                             if chessPieceSelected(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackRooks[i]) == 0 {
                                 checkMate3 = true
                             }
@@ -9009,6 +9056,7 @@ var didLongPress = false
                     }
                     for var i = 0; i < blackQueens.count;i++ {
                         if blackQueens[i].alpha == 1 {
+                            print("blackQueens")
                             if chessPieceSelected(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackQueens[i]) == 0 {
                                 checkMate4 = true
                             }
@@ -9020,6 +9068,7 @@ var didLongPress = false
                     
                     for var i = 0; i < blackPawns.count;i++ {
                         if blackPawns[i].alpha == 1 {
+                            print("blackPawns")
                             if whitePawnSelected(true, chosenPiece: blackPawns[i]) == 0 {
                                 checkMate6 = true
                             }
@@ -9032,6 +9081,8 @@ var didLongPress = false
                         print("Check mate!")
                     }
                 } else {
+                    
+                    //this is stalemate, draw
                     var staleMate1 = false
                     var staleMate2 = false
                     var staleMate3 = false
@@ -9899,6 +9950,7 @@ var didLongPress = false
                         pieceToTake += [pieces[i]]
                         takenPiecesToReload.append(pieces[i])
                         takenPiecesToReloadAtIndex.append(i)
+                        pieces[i].alpha = 0
                         pieces[i].removeFromSuperview()
                         pieces.removeAtIndex(i)
                         print(pieceToTake.count)
