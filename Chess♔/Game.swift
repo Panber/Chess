@@ -2574,8 +2574,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     })
                                                                     
                                                                 }
-                                                                
-                                                                
+ 
                                                             }
                                                         }
                                                     }
