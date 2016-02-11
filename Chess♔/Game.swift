@@ -2468,46 +2468,26 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 var checkMate5 = false
                                                                                 var checkMate6 = false
                                                                                 
-                                                                                if self.whiteKnights.count == 0 {
-                                                                                    checkMate1 = true
-                                                                                }
-                                                                                if self.whiteBishops.count == 0 {
-                                                                                    checkMate2 = true
-                                                                                }
-                                                                                if self.whiteRooks.count == 0 {
-                                                                                    checkMate3 = true
-                                                                                }
-                                                                                if self.whiteQueens.count == 0 {
-                                                                                    checkMate4 = true
-                                                                                }
                                                                                 self.removePieceOptions()
                                                                                 for var i = 0; i < self.whiteKnights.count;i++ {
-                                                                                    if self.whiteKnights[i].alpha == 1 {
                                                                                     if self.chessPieceSelected(2, pieceid: 2, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKnights[i]) == 0 {
                                                                                         checkMate1 = true
-                                                                                    }
                                                                                     }
                                                                                 }
                                                                                 
                                                                                 for var i = 0; i < self.whiteBishops.count;i++ {
-                                                                                    if self.whiteBishops[i].alpha == 1 {
                                                                                     if self.chessPieceSelected(9, pieceid: 1, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteBishops[i]) == 0 {
                                                                                         checkMate2 = true
                                                                                     }
-                                                                                    }
                                                                                 }
                                                                                 for var i = 0; i < self.whiteRooks.count;i++ {
-                                                                                     if self.whiteRooks[i].alpha == 1 {
                                                                                     if self.chessPieceSelected(9, pieceid: 3, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteRooks[i]) == 0 {
                                                                                         checkMate3 = true
                                                                                     }
-                                                                                    }
                                                                                 }
                                                                                 for var i = 0; i < self.whiteQueens.count;i++ {
-                                                                                    if self.whiteQueens[i].alpha == 1 {
                                                                                     if self.chessPieceSelected(9, pieceid: 4, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteQueens[i]) == 0 {
                                                                                         checkMate4 = true
-                                                                                    }
                                                                                     }
                                                                                 }
                                                                                 if self.chessPieceSelected(2, pieceid: 5, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKing) == 0 {
@@ -2515,11 +2495,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 }
                                                                                 
                                                                                 for var i = 0; i < self.whitePawns.count;i++ {
-                                                                                    if self.whitePawns[i].alpha == 1 {
                                                                                         if self.whitePawnSelected(true, chosenPiece: self.whitePawns[i]) == 0 {
                                                                                             checkMate6 = true
                                                                                         }
-                                                                                    }
                                                                                 }
                                                                                 
                                                                                 if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true && checkMate6 == true {
@@ -2534,20 +2512,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 var staleMate3 = false
                                                                                 var staleMate4 = false
                                                                                 var staleMate5 = false
-                                                                                var staleMate6 = false
-                                                                                
-                                                                                if self.whiteKnights.count == 0 {
-                                                                                    staleMate1 = true
-                                                                                }
-                                                                                if self.whiteBishops.count == 0 {
-                                                                                    staleMate2 = true
-                                                                                }
-                                                                                if self.whiteRooks.count == 0 {
-                                                                                    staleMate3 = true
-                                                                                }
-                                                                                if self.whiteQueens.count == 0 {
-                                                                                    staleMate4 = true
-                                                                                }
+
                                                                                 self.removePieceOptions()
                                                                                 for var i = 0; i < self.whiteKnights.count;i++ {
                                                                                     if self.whiteKnights[i].alpha == 1 {
@@ -2581,16 +2546,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 if self.chessPieceSelected(2, pieceid: 5, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKing) == 0 {
                                                                                     staleMate5 = true
                                                                                 }
-                                                                                
-                                                                                for var i = 0; i < self.whitePawns.count;i++ {
-                                                                                    if self.whitePawns[i].alpha == 1 {
-                                                                                        if self.whitePawnSelected(true, chosenPiece: self.whitePawns[i]) == 0 {
-                                                                                            staleMate6 = true
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                                
-                                                                                if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true && staleMate6 == true {
+                                                                                if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true {
                                                                                     self.gameFinishedScreen("drew",statusBy: "stalemate")
                                                                                     
                                                                                 }
@@ -4195,6 +4151,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             
                                                                              //this is checkmate, white won
                                                                             if self.checkByQueen == true || self.checkByBishop == true || self.checkByRook == true || self.checkByKnight == true || self.checkByPawn == true {
+                                                                                
                                                                                 var checkMate1 = false
                                                                                 var checkMate2 = false
                                                                                 var checkMate3 = false
@@ -4202,58 +4159,37 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 var checkMate5 = false
                                                                                 var checkMate6 = false
                                                                                 
-                                                                                if self.whiteKnights.count == 0 {
-                                                                                    checkMate1 = true
-                                                                                }
-                                                                                if self.whiteBishops.count == 0 {
-                                                                                    checkMate2 = true
-                                                                                }
-                                                                                if self.whiteRooks.count == 0 {
-                                                                                    checkMate3 = true
-                                                                                }
-                                                                                if self.whiteQueens.count == 0 {
-                                                                                    checkMate4 = true
-                                                                                }
                                                                                 self.removePieceOptions()
+                                                                                
                                                                                 for var i = 0; i < self.whiteKnights.count;i++ {
-                                                                                    if self.whiteKnights[i].alpha == 1 {
                                                                                         if self.chessPieceSelected(2, pieceid: 2, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKnights[i]) == 0 {
                                                                                             checkMate1 = true
                                                                                         }
-                                                                                    }
                                                                                 }
                                                                                 
                                                                                 for var i = 0; i < self.whiteBishops.count;i++ {
-                                                                                    if self.whiteBishops[i].alpha == 1 {
                                                                                         if self.chessPieceSelected(9, pieceid: 1, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteBishops[i]) == 0 {
                                                                                             checkMate2 = true
                                                                                         }
-                                                                                    }
                                                                                 }
                                                                                 for var i = 0; i < self.whiteRooks.count;i++ {
-                                                                                    if self.whiteRooks[i].alpha == 1 {
                                                                                         if self.chessPieceSelected(9, pieceid: 3, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteRooks[i]) == 0 {
                                                                                             checkMate3 = true
                                                                                         }
-                                                                                    }
                                                                                 }
                                                                                 for var i = 0; i < self.whiteQueens.count;i++ {
-                                                                                    if self.whiteQueens[i].alpha == 1 {
                                                                                         if self.chessPieceSelected(9, pieceid: 4, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteQueens[i]) == 0 {
                                                                                             checkMate4 = true
                                                                                         }
-                                                                                    }
                                                                                 }
                                                                                 if self.chessPieceSelected(2, pieceid: 5, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKing) == 0 {
                                                                                     checkMate5 = true
                                                                                 }
                                                                                 
                                                                                 for var i = 0; i < self.whitePawns.count;i++ {
-                                                                                    if self.whitePawns[i].alpha == 1 {
                                                                                         if self.whitePawnSelected(true, chosenPiece: self.whitePawns[i]) == 0 {
                                                                                             checkMate6 = true
                                                                                         }
-                                                                                    }
                                                                                 }
                                                                                 
                                                                                 if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true && checkMate6 == true {
@@ -4268,20 +4204,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 var staleMate3 = false
                                                                                 var staleMate4 = false
                                                                                 var staleMate5 = false
-                                                                                var staleMate6 = false
                                                                                 
-                                                                                if self.whiteKnights.count == 0 {
-                                                                                    staleMate1 = true
-                                                                                }
-                                                                                if self.whiteBishops.count == 0 {
-                                                                                    staleMate2 = true
-                                                                                }
-                                                                                if self.whiteRooks.count == 0 {
-                                                                                    staleMate3 = true
-                                                                                }
-                                                                                if self.whiteQueens.count == 0 {
-                                                                                    staleMate4 = true
-                                                                                }
                                                                                 self.removePieceOptions()
                                                                                 for var i = 0; i < self.whiteKnights.count;i++ {
                                                                                     if self.whiteKnights[i].alpha == 1 {
@@ -4315,17 +4238,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                 if self.chessPieceSelected(2, pieceid: 5, friend: self.whitePieces, enemy: self.blackPieces, hidden: true, chosenPiece: self.whiteKing) == 0 {
                                                                                     staleMate5 = true
                                                                                 }
-                                                                                
-                                                                                for var i = 0; i < self.whitePawns.count;i++ {
-                                                                                    if self.whitePawns[i].alpha == 1 {
-                                                                                        if self.whitePawnSelected(true, chosenPiece: self.whitePawns[i]) == 0 {
-                                                                                            staleMate6 = true
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                                
-                                                                                if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true && staleMate6 == true {
+                                                                                if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true {
                                                                                     self.gameFinishedScreen("drew",statusBy: "stalemate")
+                                                                                    
                                                                                 }
                                                                                 
                                                                             }
@@ -8871,46 +8786,25 @@ var didLongPress = false
                     var checkMate4 = false
                     var checkMate5 = false
                     var checkMate6 = false
-                    
-                    if blackKnights.count == 0 {
-                        checkMate1 = true
-                    }
-                    if blackBishops.count == 0 {
-                        checkMate2 = true
-                    }
-                    if blackRooks.count == 0 {
-                        checkMate3 = true
-                    }
-                    if blackQueens.count == 0 {
-                        checkMate4 = true
-                    }
-                    
+
                     for var i = 0; i < blackKnights.count;i++ {
-                        if blackKnights[i].alpha == 1 {
                         if chessPieceSelected(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKnights[i]) == 0 {
                             checkMate1 = true
                         }
-                        }
                     }
                     for var i = 0; i < blackBishops.count;i++ {
-                        if blackBishops[i].alpha == 1 {
                         if chessPieceSelected(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackBishops[i]) == 0 {
                             checkMate2 = true
                         }
-                        }
                     }
                     for var i = 0; i < blackRooks.count;i++ {
-                         if blackRooks[i].alpha == 1 {
                         if chessPieceSelected(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackRooks[i]) == 0 {
                             checkMate3 = true
                         }
-                        }
                     }
                     for var i = 0; i < blackQueens.count;i++ {
-                        if blackQueens[i].alpha == 1 {
                         if chessPieceSelected(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackQueens[i]) == 0 {
                             checkMate4 = true
-                        }
                         }
                     }
                     if chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKing) == 0 {
@@ -8918,11 +8812,9 @@ var didLongPress = false
                     }
                     
                     for var i = 0; i < blackPawns.count;i++ {
-                        if blackPawns[i].alpha == 1 {
                             if whitePawnSelected(true, chosenPiece: blackPawns[i]) == 0 {
                                 checkMate6 = true
                             }
-                        }
                     }
                     
                     if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true && checkMate6 == true {
@@ -8941,20 +8833,7 @@ var didLongPress = false
                     var staleMate3 = false
                     var staleMate4 = false
                     var staleMate5 = false
-                    var staleMate6 = false
                     
-                    if blackKnights.count == 0 {
-                        staleMate1 = true
-                    }
-                    if blackBishops.count == 0 {
-                        staleMate2 = true
-                    }
-                    if blackRooks.count == 0 {
-                        staleMate3 = true
-                    }
-                    if blackQueens.count == 0 {
-                        staleMate4 = true
-                    }
                     
                     for var i = 0; i < blackKnights.count;i++ {
                         if blackKnights[i].alpha == 1 {
@@ -8987,17 +8866,8 @@ var didLongPress = false
                     if chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKing) == 0 {
                         staleMate5 = true
                     }
-                    
-                    for var i = 0; i < blackPawns.count;i++ {
-                        if blackPawns[i].alpha == 1 {
-                            if whitePawnSelected(true, chosenPiece: blackPawns[i]) == 0 {
-                                staleMate6 = true
-                            }
-                        }
-                    }
-                    
-                    if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true && staleMate6 == true  {
-                        self.gameFinishedScreen("won",statusBy: "stalemate.")
+                    if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true {
+                        self.gameFinishedScreen("drew",statusBy: "stalemate")
                     }
                 }
             }
@@ -9017,62 +8887,41 @@ var didLongPress = false
                     var checkMate5 = false
                     var checkMate6 = false
                     
-                    if blackKnights.count == 0 {
-                        checkMate1 = true
-                    }
-                    if blackBishops.count == 0 {
-                        checkMate2 = true
-                    }
-                    if blackRooks.count == 0 {
-                        checkMate3 = true
-                    }
-                    if blackQueens.count == 0 {
-                        checkMate4 = true
-                    }
                     
                     for var i = 0; i < blackKnights.count;i++ {
-                        if blackKnights[i].alpha == 1 {
                             print("blackKnights")
                             if chessPieceSelected(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKnights[i]) == 0 {
                                 checkMate1 = true
                             }
-                        }
                     }
                     for var i = 0; i < blackBishops.count;i++ {
-                        if blackBishops[i].alpha == 1 {
                             print("blackBishops")
                             if chessPieceSelected(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackBishops[i]) == 0 {
                                 checkMate2 = true
                             }
-                        }
                     }
                     for var i = 0; i < blackRooks.count;i++ {
-                        if blackRooks[i].alpha == 1 {
                             print("blackRooks")
                             if chessPieceSelected(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackRooks[i]) == 0 {
                                 checkMate3 = true
                             }
-                        }
                     }
                     for var i = 0; i < blackQueens.count;i++ {
-                        if blackQueens[i].alpha == 1 {
                             print("blackQueens")
                             if chessPieceSelected(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackQueens[i]) == 0 {
                                 checkMate4 = true
                             }
-                        }
                     }
                     if chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKing) == 0 {
+                        print("blackKnights")
                         checkMate5 = true
                     }
                     
                     for var i = 0; i < blackPawns.count;i++ {
-                        if blackPawns[i].alpha == 1 {
                             print("blackPawns")
                             if whitePawnSelected(true, chosenPiece: blackPawns[i]) == 0 {
                                 checkMate6 = true
                             }
-                        }
                     }
                     
                     if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true && checkMate6 == true {
@@ -9088,20 +8937,7 @@ var didLongPress = false
                     var staleMate3 = false
                     var staleMate4 = false
                     var staleMate5 = false
-                    var staleMate6 = false
                     
-                    if blackKnights.count == 0 {
-                        staleMate1 = true
-                    }
-                    if blackBishops.count == 0 {
-                        staleMate2 = true
-                    }
-                    if blackRooks.count == 0 {
-                        staleMate3 = true
-                    }
-                    if blackQueens.count == 0 {
-                        staleMate4 = true
-                    }
                     
                     for var i = 0; i < blackKnights.count;i++ {
                         if blackKnights[i].alpha == 1 {
@@ -9134,16 +8970,7 @@ var didLongPress = false
                     if chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKing) == 0 {
                         staleMate5 = true
                     }
-                    
-                    for var i = 0; i < blackPawns.count;i++ {
-                        if blackPawns[i].alpha == 1 {
-                            if whitePawnSelected(true, chosenPiece: blackPawns[i]) == 0 {
-                                staleMate6 = true
-                            }
-                        }
-                    }
-                    
-                    if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true && staleMate6 == true {
+                    if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true {
                         self.gameFinishedScreen("drew",statusBy: "stalemate")
                     }
                 }
