@@ -1791,6 +1791,19 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             magic1()
             
+            if r!["status_white"] as! String == "move" {
+                
+                if movesCap.count == 0 {
+                    for var i = 0; i < piecesArrs.count; i++ {
+                        for var t = 0; t < piecesArrs[i].count; t++ {
+
+                            piecesArrs[i][t].userInteractionEnabled = true
+                        }
+                    }
+                }
+                
+            }
+            
             print("I am white player!")
             iamWhite = true
             canOnlyMoveWhite = true
