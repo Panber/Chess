@@ -379,7 +379,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
                 
                     
-                    if games["status_white"] as? String == "move" {
+                    if games["status_white"] as? String == "move" || games["status_white"] as? String == "drawto" {
                         
                         self.yourturnArray.append((games["blackPlayer"] as? String)!)
                         
@@ -402,7 +402,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
                         
                     }
-                    else if games["status_white"] as? String == "notmove" {
+                    else if games["status_white"] as? String == "notmove" || games["status_white"] as? String == "drawfrom"{
                         
                         self.theirturnArray.append((games["blackPlayer"] as? String)!)
                         
@@ -426,7 +426,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
                         
                     }
-                    else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost"{
+                    else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost" || games["status_white"] as? String == "drew"{
                         
                         self.gameoverArray.append((games["blackPlayer"] as? String)!)
                         self.typeofGameover.append((games["status_white"] as? String)!)
@@ -451,7 +451,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 }
                     else {
                     
-                    if games["status_black"] as? String == "move" {
+                    if games["status_black"] as? String == "move" || games["status_black"] as? String == "drawto" {
                         
                         self.yourturnArray.append((games["whitePlayer"] as? String)!)
                         
@@ -476,7 +476,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     
                         
                     }
-                    else if games["status_black"] as? String == "notmove" {
+                    else if games["status_black"] as? String == "notmove" || games["status_black"] as? String == "drawfrom" {
                         
                         self.theirturnArray.append((games["whitePlayer"] as? String)!)
                         
@@ -499,7 +499,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
                         
                     }
-                    else if games["status_black"] as? String == "won" || games["status_black"] as? String == "lost"{
+                    else if games["status_black"] as? String == "won" || games["status_black"] as? String == "lost" || games["status_black"] as? String == "drew"{
                         
                         self.gameoverArray.append((games["whitePlayer"] as? String)!)
                         self.typeofGameover.append((games["status_black"] as? String)!)

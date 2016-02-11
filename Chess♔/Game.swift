@@ -1926,6 +1926,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                     else if r!["status_white"] as! String == "draw" {
+                        
                         if r!["whiteRatedComplete"] as! Bool == false {
                             let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
                             PFUser.currentUser()!.setObject(myRating, forKey: "rating")
@@ -1941,6 +1942,81 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.gameFinishedScreen("drew",statusBy: "")
 
                         }
+                    }
+                    else if r!["status_white"] as! String == "drawto" {
+                        
+                        let drawAlert = UIAlertController(title: "Draw Offered", message: "You have been offered a draw. Do you want to accept it?", preferredStyle: UIAlertControllerStyle.Alert)
+                        
+                        drawAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { action in
+                            switch action.style{
+                                
+                            case .Cancel:
+                                print("cancel")
+                                
+                            case .Destructive:
+                                print("destructive")
+                                
+                            case .Default:
+                                print("default")
+                                
+                                if self.iamWhite {
+                                    
+                                    if r!["whiteRatedComplete"] as! Bool == false {
+                                        
+                                        let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
+                                        PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                                        
+                                        let s = self.meUserDrawn + 1
+                                        PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                                        
+                                        PFUser.currentUser()!.save()
+                                        
+                                        r!["status_white"] = "draw"
+                                        
+                                        r!["status_black"] = "draw"
+                                        
+                                        
+                                        r!["whiteRatedComplete"] = true
+                                        r!.save()
+                                        
+                                        self.gameFinishedScreen("drew",statusBy: "")
+                                        
+                                    
+                                    
+                                 
+                                    
+                                    //firebase
+                                    
+                                    //add who's turn it is
+                                    let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                    var status = ["turn": "done"]
+                                    
+                                    let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                                    statusRef.setValue(status)
+                                    //firebase - end
+                                    
+                                    }
+                                }
+                                
+                            }
+                        }))
+                        drawAlert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { action in
+                            switch action.style{
+                                
+                            case .Cancel:
+                                print("cancel")
+                                
+                            case .Destructive:
+                                print("destructive")
+                                
+                            case .Default:
+                                print("default")
+                                
+                            }
+                        }))
+                        self.presentViewController(drawAlert, animated: true, completion: nil)
+
+
                     }
                     
                 }
@@ -3755,6 +3831,82 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.gameFinishedScreen("drew",statusBy: "")
 
                         }
+                        
+                    }
+                    else if r!["status_black"] as! String == "drawto" {
+                        
+                        let drawAlert = UIAlertController(title: "Draw Offered", message: "You have been offered a draw. Do you want to accept it?", preferredStyle: UIAlertControllerStyle.Alert)
+                        
+                        drawAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { action in
+                            switch action.style{
+                                
+                            case .Cancel:
+                                print("cancel")
+                                
+                            case .Destructive:
+                                print("destructive")
+                                
+                            case .Default:
+                                print("default")
+                                
+                                if self.iamWhite == false {
+                                    
+                                    if r!["blackRatedComplete"] as! Bool == false {
+                                        
+                                        let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).1
+                                        PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                                        
+                                        let s = self.meUserDrawn + 1
+                                        PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                                        
+                                        PFUser.currentUser()!.save()
+                                        
+                                        r!["status_white"] = "draw"
+                                        
+                                        r!["status_black"] = "draw"
+                                        
+                                        
+                                        r!["blackRatedComplete"] = true
+                                        r!.save()
+                                        
+                                        self.gameFinishedScreen("drew",statusBy: "")
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        //firebase
+                                        
+                                        //add who's turn it is
+                                        let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                        var status = ["turn": "done"]
+                                        
+                                        let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                                        statusRef.setValue(status)
+                                        //firebase - end
+                                        
+                                    }
+                                }
+                                
+                            }
+                        }))
+                        drawAlert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { action in
+                            switch action.style{
+                                
+                            case .Cancel:
+                                print("cancel")
+                                
+                            case .Destructive:
+                                print("destructive")
+                                
+                            case .Default:
+                                print("default")
+                                
+                            }
+                        }))
+                        self.presentViewController(drawAlert, animated: true, completion: nil)
+
+                        
                     }
                 }
             })
@@ -7336,6 +7488,26 @@ var didLongPress = false
     }
     
     func resignButtonPressed(sender:UIButton) {
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            
+            self.resignB.frame.size.width += 4
+            self.resignB.frame.origin.x -= 2
+            self.resignB.backgroundColor = red
+            
+            }, completion: {finish in
+                
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    
+                    self.resignB.frame.size.width -= 4
+                    self.resignB.frame.origin.x += 2
+                    self.resignB.backgroundColor = red
+          
+                    }, completion: {finish in
+                        
+                        
+                        
+                })
+        })
         
         let resignAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -7347,6 +7519,61 @@ var didLongPress = false
                 
             case .Destructive:
                 print("destructive")
+                
+                if self.iamWhite {
+                    
+                    if self.game["whiteRatedComplete"] as! Bool == false {
+                        
+                        let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0, sB: 1).0
+                        PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        
+                        let s = self.meUserLost + 1
+                        PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                        
+                        PFUser.currentUser()!.save()
+                        
+                        self.game["status_white"] = "lost"
+                        self.game["status_black"] = "won"
+                        
+                        self.game["whiteRatedComplete"] = true
+                        self.game.save()
+                        
+                        self.gameFinishedScreen("lost",statusBy: "resigning")
+                        
+                    }
+                }
+                else {
+                    if self.game["blackRatedComplete"] as! Bool == false {
+                        
+                        let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 1, sB: 0).1
+                        PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        
+                        let s = self.meUserLost + 1
+                        PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                        
+                        PFUser.currentUser()!.save()
+                        
+                        self.game["status_black"] = "lost"
+                        self.game["status_white"] = "won"
+                        
+                        self.game["blackRatedComplete"] = true
+                        self.game.save()
+                        
+                        self.gameFinishedScreen("lost",statusBy: "resigning")
+                        
+                    }
+                    
+                }
+                
+                //firebase
+                
+                //add who's turn it is
+                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                var status = ["turn": "done"]
+                
+                let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                statusRef.setValue(status)
+                //firebase - end
                 
             case .Default:
                 print("default")
@@ -7381,6 +7608,26 @@ var didLongPress = false
     
     func drawButtonPressed(sender:UIButton) {
         
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            
+            self.drawB.frame.size.width += 4
+            self.drawB.frame.origin.x -= 2
+            
+            }, completion: {finish in
+                
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    
+                    self.drawB.frame.size.width -= 4
+                    self.drawB.frame.origin.x += 2
+                    
+                    }, completion: {finish in
+                        
+                        
+                        
+                })
+        })
+        
+        
         let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to offer a draw?", preferredStyle: UIAlertControllerStyle.Alert)
         
         drawAlert.addAction(UIAlertAction(title: "Draw", style: .Default, handler: { action in
@@ -7394,6 +7641,45 @@ var didLongPress = false
                 
             case .Default:
                 print("default")
+                
+                if self.iamWhite {
+                    
+
+                        
+                        self.game["status_white"] = "drawfrom"
+                        self.game["status_black"] = "drawto"
+                        
+                        self.game.save()
+                    
+                    //firebase
+                    
+                    //add who's turn it is
+                    let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                    var status = ["turn": "done"]
+                    
+                    let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                    statusRef.setValue(status)
+                    //firebase - end
+                        
+                    
+                }
+                else {
+                    self.game["status_white"] = "drawfrom"
+                    self.game["status_black"] = "drawto"
+                    
+                    self.game.save()
+                    
+                    //firebase
+                    
+                    //add who's turn it is
+                    let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                    var status = ["turn": "done"]
+                    
+                    let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                    statusRef.setValue(status)
+                    //firebase - end
+                    
+                }
                 
             }
         }))
