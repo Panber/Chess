@@ -735,7 +735,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     override func viewDidLoad() {
         
-        
+       while true {
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+        }
+       
         loadVariablesAndConstants()
         
         lightOrDarkMode()
