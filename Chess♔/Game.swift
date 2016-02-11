@@ -974,11 +974,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
 
             
-            
-            if (["blackTime"] as? Int) < 0 {
-                print("I won on time")
-            }
-            
+        
             
 //            let timeToAdd = game["whiteTime"] as? Int
 //            newDate = now.dateByAddingTimeInterval(timeToAdd)
@@ -1910,7 +1906,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             PFUser.currentUser()!.save()
                             
-                           // r!["whiteRatedComplete"] = true
+                            r!["whiteRatedComplete"] = true
                             r!.save()
 
                             self.gameFinishedScreen("won",statusBy: "")
@@ -1926,7 +1922,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             PFUser.currentUser()!.save()
                             
-                           // r!["whiteRatedComplete"] = true
+                            r!["whiteRatedComplete"] = true
                             r!.save()
 
                             self.gameFinishedScreen("lost",statusBy: "")
@@ -1943,7 +1939,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             PFUser.currentUser()!.save()
                             
-                            //r!["whiteRatedComplete"] = true
+                            r!["whiteRatedComplete"] = true
                             r!.save()
                             
                             self.gameFinishedScreen("drew",statusBy: "")
@@ -2108,6 +2104,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     dispatch_async(dispatch_get_main_queue()) {
                         self.collectionView.reloadData()
                     }
+                    
+                    
+                    
                     print("notations.count is \(self.notations.count)")
                     self.passantPiece = (r!["passantPiece"] as? Int)!
                     self.canPassant = r!["passant"] as! Bool
@@ -2600,6 +2599,59 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
 //                    let lastupdate = self.game["whiteDate"] as? NSDate
 //                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
                     
+                    //setting rating and won/lost/drawn
+                    if r!["status_white"] as! String == "won" {
+                        if r!["whiteRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserWon + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            r!["whiteRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("won",statusBy: "")
+                        }
+                    }
+                    else if r!["status_white"] as! String == "lost" {
+                        if r!["whiteRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0, sB: 1).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserLost + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            r!["whiteRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("lost",statusBy: "")
+                            
+                        }
+                    }
+                    else if r!["status_white"] as! String == "draw" {
+                        if r!["whiteRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserDrawn + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            r!["whiteRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("drew",statusBy: "")
+                            
+                        }
+                    }
+
+                    
                     self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
 
                     
@@ -2643,6 +2695,67 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     // self.updateLogic()
                     print(self.piecesToDelete)
+                    
+                    
+                }
+                else if snapshot.value as! String == "done" {
+                    
+                    let query = PFQuery(className: "Games")
+                    query.whereKey("objectId", equalTo: gameID)
+                    let r = query.getFirstObject()
+                    self.game = r!
+                    
+                    //setting rating and won/lost/drawn
+                    if r!["status_white"] as! String == "won" {
+                        if r!["whiteRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserWon + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            r!["whiteRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("won",statusBy: "")
+                        }
+                    }
+                    else if r!["status_white"] as! String == "lost" {
+                        if r!["whiteRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0, sB: 1).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserLost + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            r!["whiteRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("lost",statusBy: "")
+                            
+                        }
+                    }
+                    else if r!["status_white"] as! String == "draw" {
+                        if r!["whiteRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserDrawn + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            r!["whiteRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("drew",statusBy: "")
+                            
+                        }
+                    }
                     
                     
                 }
@@ -3604,7 +3717,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             PFUser.currentUser()!.save()
                             
-                          //  r!["blackRatedComplete"] = true
+                            r!["blackRatedComplete"] = true
                             r!.save()
                             
              
@@ -3623,7 +3736,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             PFUser.currentUser()!.save()
                             
-                           // r!["blackRatedComplete"] = true
+                            r!["blackRatedComplete"] = true
                             r!.save()
                             
                             self.gameFinishedScreen("lost",statusBy: "")
@@ -3640,7 +3753,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             PFUser.currentUser()!.save()
                             
-                            //r!["blackRatedComplete"] = true
+                            r!["blackRatedComplete"] = true
                             r!.save()
                             
                             self.gameFinishedScreen("drew",statusBy: "")
@@ -4289,6 +4402,61 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
 //                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
 //                    let lastupdate = self.game["blackDate"] as? NSDate
 //                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+                    //setting rating and won/lost/drawn
+                    if r!["status_black"] as! String == "won" {
+                        if r!["blackRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1).1
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserWon + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            r!["blackRatedComplete"] = true
+                            r!.save()
+                            
+                            
+                            
+                            self.gameFinishedScreen("won",statusBy: "")
+                            
+                        }
+                    }
+                    else if r!["status_black"] as! String == "lost" {
+                        if r!["blackRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 1, sB: 0).1
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserLost + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            r!["blackRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("lost",statusBy: "")
+                            
+                        }
+                    }
+                    else if r!["status_black"] as! String == "draw" {
+                        if r!["blackRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserDrawn + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            r!["blackRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("drew",statusBy: "")
+                            
+                        }
+                    }
+
                     self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
 
                     if r!["status_black"] as! String == "move" {
@@ -4318,6 +4486,68 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                     }
+                }
+                else if snapshot.value as! String == "done" {
+                
+                    let query = PFQuery(className: "Games")
+                    query.whereKey("objectId", equalTo: gameID)
+                    let r = query.getFirstObject()
+                    self.game = r!
+                    
+                    if r!["status_black"] as! String == "won" {
+                        if r!["blackRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1).1
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserWon + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            r!["blackRatedComplete"] = true
+                            r!.save()
+                            
+                            
+                            
+                            self.gameFinishedScreen("won",statusBy: "")
+                            
+                        }
+                    }
+                    else if r!["status_black"] as! String == "lost" {
+                        if r!["blackRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 1, sB: 0).1
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserLost + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            r!["blackRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("lost",statusBy: "")
+                            
+                        }
+                    }
+                    else if r!["status_black"] as! String == "draw" {
+                        if r!["blackRatedComplete"] as! Bool == false {
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserDrawn + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            r!["blackRatedComplete"] = true
+                            r!.save()
+                            
+                            self.gameFinishedScreen("drew",statusBy: "")
+                            
+                        }
+                    }
+                    
                 }
                 self.myturnAfterTimeCapsule = true
                 }, withCancelBlock: { error in
@@ -7313,28 +7543,74 @@ var didLongPress = false
             timeL.text = "Game Finished"
             timeL.font = UIFont(name: "Times-Italic", size: 19)
             
-            if movesCap.count % 2 == 0 {
-                if iamWhite {
-                    gameFinishedScreen("lost",statusBy: "time.")
-                    timeGL.text = "😒"
-                    
+            
+            
+            
+            timeGL.text = "😒"
+
+            for var i = 0; i < piecesArrs.count; i++ {
+                for var t = 0; t < piecesArrs[i].count; t++ {
+
+                    piecesArrs[i][t].userInteractionEnabled = false
                 }
-                else {gameFinishedScreen("won",statusBy: "time.")
-                    timeGL.text = "😎"
+            }
+            
+            if iamWhite {
+            
+                if game["whiteRatedComplete"] as! Bool == false {
+                
+                    let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0, sB: 1).0
+                    PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                    
+                    let s = self.meUserLost + 1
+                    PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                    
+                    PFUser.currentUser()!.save()
+                    
+                    game["status_white"] = "lost"
+                    game["status_black"] = "won"
+
+                    game["whiteRatedComplete"] = true
+                    game.save()
+                    
+                    self.gameFinishedScreen("lost",statusBy: "time.")
                     
                 }
             }
             else {
-                if iamWhite {
-                    gameFinishedScreen("won",statusBy: "time.")
-                    timeGL.text = "😎"
+                if game["blackRatedComplete"] as! Bool == false {
+                    
+                    let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 1, sB: 0).1
+                    PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                    
+                    let s = self.meUserLost + 1
+                    PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                    
+                    PFUser.currentUser()!.save()
+                    
+                    game["status_black"] = "lost"
+                    game["status_white"] = "won"
+
+                    game["blackRatedComplete"] = true
+                    game.save()
+                    
+                    self.gameFinishedScreen("lost",statusBy: "time.")
                     
                 }
-                else {gameFinishedScreen("lost",statusBy: "time.")
-                    timeGL.text = "😒"
-                    
-                }
+            
             }
+            
+            //firebase
+            
+            //add who's turn it is
+            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+            var status = ["turn": "done"]
+         
+            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+            statusRef.setValue(status)
+            //firebase - end
+
+
             timer.invalidate()
         }
 
@@ -9229,11 +9505,7 @@ var didLongPress = false
                     push.sendPushInBackground()
                     
                     //firebase
-                    //adding the game
-                    //                    let game = ["id": gameID]
-                    //                    let gamesRef = ref.childByAppendingPath("games")
-                    //                    gamesRef.setValue(game)
-                    
+           
                     //add who's turn it is
                     let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
                     var status = ["turn": "black"]
