@@ -9323,7 +9323,7 @@ var didLongPress = false
                 }
             }
             
-            if checkByQueen == true {
+            if checkByQueen == true || checkByBishop == true || checkByRook == true || checkByKnight == true || checkByPawn == true {
                 chessNotationCheck = "+"
             }
             var LAN = ""
