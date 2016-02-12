@@ -141,6 +141,9 @@ class NewGameSettingsPage: UIViewController {
         game["passantArray"] = NSMutableArray()
         game["whiteRatedComplete"] = false
         game["blackRatedComplete"] = false
+        game["draw_black"] = ""
+        game["draw_white"] = ""
+
         
         game["whiteTime"] = Int()
         game["blackTime"] = Int()

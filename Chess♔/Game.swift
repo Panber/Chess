@@ -1942,7 +1942,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
 
                         }
                     }
-                    else if r!["status_white"] as! String == "drawto" {
+                    if r!["draw_white"] as! String == "drawto" {
                         
                         let drawAlert = UIAlertController(title: "Draw Offered", message: "You have been offered a draw. Do you want to accept it?", preferredStyle: UIAlertControllerStyle.Alert)
                         
@@ -2004,6 +2004,23 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 
                             case .Cancel:
                                 print("cancel")
+                                
+                                if self.iamWhite {
+                                
+                                    if self.movesCap.count % 2 == 0 {
+                                    
+
+                                        
+                                        r!["draw_white"] = ""
+                                        
+                                        r!["draw_black"] = ""
+                                        
+                                        
+                                        r!.save()
+                                    
+                                    }
+
+                                }
                                 
                             case .Destructive:
                                 print("destructive")
@@ -3793,7 +3810,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
              
                             
-                            self.gameFinishedScreen("won",statusBy: "")
+                            self.gameFinishedScreen("lost",statusBy: "")
 
                         }
                     }
@@ -3810,7 +3827,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             r!["blackRatedComplete"] = true
                             r!.save()
                             
-                            self.gameFinishedScreen("lost",statusBy: "")
+                            self.gameFinishedScreen("won",statusBy: "")
 
                         }
                     }
@@ -3832,7 +3849,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                         
                     }
-                    else if r!["status_black"] as! String == "drawto" {
+                    if r!["draw_black"] as! String == "drawto" {
                         
                         let drawAlert = UIAlertController(title: "Draw Offered", message: "You have been offered a draw. Do you want to accept it?", preferredStyle: UIAlertControllerStyle.Alert)
                         
@@ -3848,7 +3865,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             case .Default:
                                 print("default")
                                 
-                                if self.iamWhite == false {
+                                if self.iamWhite {
                                     
                                     if r!["blackRatedComplete"] as! Bool == false {
                                         
@@ -3895,6 +3912,23 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             case .Cancel:
                                 print("cancel")
                                 
+                                if self.iamWhite {
+                                    
+                                    if self.movesCap.count % 2 == 0 {
+                                        
+                                        
+                                        
+                                        r!["draw_white"] = ""
+                                        
+                                        r!["draw_black"] = ""
+                                        
+                                        
+                                        r!.save()
+                                        
+                                    }
+                                    
+                                }
+                                
                             case .Destructive:
                                 print("destructive")
                                 
@@ -3904,7 +3938,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }))
                         self.presentViewController(drawAlert, animated: true, completion: nil)
-
+                        
                         
                     }
                 }
@@ -4565,7 +4599,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             
                             
-                            self.gameFinishedScreen("won",statusBy: "")
+                            self.gameFinishedScreen("lost",statusBy: "")
                             
                         }
                     }
@@ -4582,7 +4616,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             r!["blackRatedComplete"] = true
                             r!.save()
                             
-                            self.gameFinishedScreen("lost",statusBy: "")
+                            self.gameFinishedScreen("won",statusBy: "")
                             
                         }
                     }
@@ -4656,7 +4690,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             
                             
-                            self.gameFinishedScreen("won",statusBy: "")
+                            self.gameFinishedScreen("lost",statusBy: "")
                             
                         }
                     }
@@ -4673,7 +4707,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             r!["blackRatedComplete"] = true
                             r!.save()
                             
-                            self.gameFinishedScreen("lost",statusBy: "")
+                            self.gameFinishedScreen("won",statusBy: "")
                             
                         }
                     }
@@ -7558,7 +7592,7 @@ var didLongPress = false
                         self.game["blackRatedComplete"] = true
                         self.game.save()
                         
-                        self.gameFinishedScreen("lost",statusBy: "resigning")
+                        self.gameFinishedScreen("won",statusBy: "resigning")
                         
                     }
                     
@@ -7645,8 +7679,8 @@ var didLongPress = false
                     
 
                         
-                        self.game["status_white"] = "drawfrom"
-                        self.game["status_black"] = "drawto"
+                        self.game["draw_white"] = "drawfrom"
+                        self.game["draw_black"] = "drawto"
                         
                         self.game.save()
                     
@@ -7663,8 +7697,8 @@ var didLongPress = false
                     
                 }
                 else {
-                    self.game["status_white"] = "drawfrom"
-                    self.game["status_black"] = "drawto"
+                    self.game["draw_white"] = "drawfrom"
+                    self.game["draw_black"] = "drawto"
                     
                     self.game.save()
                     
@@ -7875,7 +7909,7 @@ var didLongPress = false
                     game["blackRatedComplete"] = true
                     game.save()
                     
-                    self.gameFinishedScreen("lost",statusBy: "time.")
+                    self.gameFinishedScreen("won",statusBy: "time.")
                     
                 }
             

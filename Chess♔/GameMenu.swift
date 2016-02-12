@@ -379,7 +379,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
                 
                     
-                    if games["status_white"] as? String == "move" || games["status_white"] as? String == "drawto" {
+                    if games["status_white"] as? String == "move" {
                         
                         self.yourturnArray.append((games["blackPlayer"] as? String)!)
                         
@@ -402,7 +402,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
                         
                     }
-                    else if games["status_white"] as? String == "notmove" || games["status_white"] as? String == "drawfrom"{
+                    else if games["status_white"] as? String == "notmove" {
                         
                         self.theirturnArray.append((games["blackPlayer"] as? String)!)
                         
@@ -451,7 +451,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 }
                     else {
                     
-                    if games["status_black"] as? String == "move" || games["status_black"] as? String == "drawto" {
+                    if games["status_black"] as? String == "move"  {
                         
                         self.yourturnArray.append((games["whitePlayer"] as? String)!)
                         
@@ -476,7 +476,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     
                         
                     }
-                    else if games["status_black"] as? String == "notmove" || games["status_black"] as? String == "drawfrom" {
+                    else if games["status_black"] as? String == "notmove"  {
                         
                         self.theirturnArray.append((games["whitePlayer"] as? String)!)
                         
@@ -863,9 +863,16 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             if typeofGameover[indexPath.row] == "lost" {
                 cell.colorIndicator.backgroundColor = UIColor.redColor()
             }
-            else {
+            else if typeofGameover[indexPath.row] == "won"{
                 cell.colorIndicator.backgroundColor = UIColor.greenColor()
             }
+            else {
+                cell.colorIndicator.backgroundColor = UIColor.yellowColor()
+            }
+            
+            
+            
+            
                 find(gameoverArray[indexPath.row])
             
             if gameoverTurnColor[indexPath.row] == "white" {

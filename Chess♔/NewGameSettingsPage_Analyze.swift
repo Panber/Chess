@@ -131,6 +131,8 @@ class NewGameSettingsPage_Analyze: UIViewController {
         game["blackTime"] = Int()
         game["whiteRatedComplete"] = false
         game["blackRatedComplete"] = false
+        game["draw_black"] = ""
+        game["draw_white"] = ""
         
         game["timeLeftToMove"] = NSDate()
         
