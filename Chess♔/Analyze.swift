@@ -1,11 +1,3 @@
-////
-////  ViewController.swift
-////  ChessNow
-////
-////  Created by Johannes Berge on 21/11/14.
-////  Copyright (c) 2014 Johannes Berge & Alexander Panayotov. All rights reserved.
-////
-//
 //  ViewController.swift
 //  ChessNow
 //
@@ -870,6 +862,19 @@ class Analyze: UIViewController {
                                                             UIView.animateWithDuration(0.8, delay: 0.5, options: .CurveEaseInOut, animations:{ () -> Void in
                                                                 pieces[i].frame.origin.x = xAxisArr[q]
                                                                 pieces[i].frame.origin.y = yAxisArr[a]
+                                                                
+                                                                for var w = 0; w < whitePieces.count; w++ {
+                                                                    if pieces[i] == whitePieces[w] {
+                                                                        isWhiteTurn = false
+                                                                    }
+                                                                }
+                                                                
+                                                                for var w = 0; w < blackPieces.count; w++ {
+                                                                    if pieces[i] == blackPieces[w] {
+                                                                        isWhiteTurn = true
+                                                                    }
+                                                                }
+                                                                
                                                                 
                                                                 print("last pieces[i] is \(pieces[i])  ")
                                                                 
