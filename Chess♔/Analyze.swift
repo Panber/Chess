@@ -840,9 +840,7 @@ class Analyze: UIViewController {
                                                                         pieces[iy].alpha = 0
                                                                         
                                                                         piecesToDelete.append(pieces[iy])
-                                                                        
-                                                                        
-                                                                        
+
                                                                         takenPiecesToReload.append(pieces[iy])
                                                                         self.takenPiecesToReloadAtIndex.append(iy)
 
