@@ -1978,6 +1978,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         r!["whiteRatedComplete"] = true
                                         r!.save()
                                         
+                                        for var i = 0; i < self.piecesArrs.count; i++ {
+                                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                
+                                                self.piecesArrs[i][t].userInteractionEnabled = false
+                                            }
+                                        }
+                                        
                                         self.gameFinishedScreen("drew",statusBy: "")
                                         
                                     
@@ -2007,7 +2014,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 
                                 if self.iamWhite {
                                 
-                                    if self.movesCap.count % 2 == 0 {
                                     
 
                                         
@@ -2018,7 +2024,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         r!.save()
                                     
-                                    }
+                                    
 
                                 }
                                 
@@ -2786,7 +2792,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     
                 }
-                else if snapshot.value as! String == "done" {
+                else if self.iamWhite && snapshot.value as! String == "done" {
                     
                     let query = PFQuery(className: "Games")
                     query.whereKey("objectId", equalTo: gameID)
@@ -2808,6 +2814,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             r!.save()
                             
                             self.gameFinishedScreen("won",statusBy: "")
+                            
+                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                    self.piecesArrs[i][t].userInteractionEnabled = false
+                                }
+                            }
                         }
                     }
                     else if r!["status_white"] as! String == "lost" {
@@ -2824,6 +2836,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             r!.save()
                             
                             self.gameFinishedScreen("lost",statusBy: "")
+                            
+                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                    self.piecesArrs[i][t].userInteractionEnabled = false
+                                }
+                            }
                             
                         }
                     }
@@ -2842,7 +2860,112 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             self.gameFinishedScreen("drew",statusBy: "")
                             
+                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                    self.piecesArrs[i][t].userInteractionEnabled = false
+                                }
+                            }
+                            
                         }
+                    }
+                    
+                    if r!["draw_white"] as! String == "drawto" {
+                        
+                        let drawAlert = UIAlertController(title: "Draw Offered", message: "You have been offered a draw. Do you want to accept it?", preferredStyle: UIAlertControllerStyle.Alert)
+                        
+                        drawAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { action in
+                            switch action.style{
+                                
+                            case .Cancel:
+                                print("cancel")
+                                
+                            case .Destructive:
+                                print("destructive")
+                                
+                            case .Default:
+                                print("default")
+                                
+                                if self.iamWhite {
+                                    
+                                    if r!["whiteRatedComplete"] as! Bool == false {
+                                        
+                                        let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
+                                        PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                                        
+                                        let s = self.meUserDrawn + 1
+                                        PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                                        
+                                        PFUser.currentUser()!.save()
+                                        
+                                        r!["status_white"] = "draw"
+                                        
+                                        r!["status_black"] = "draw"
+                                        
+                                        
+                                        r!["whiteRatedComplete"] = true
+                                        r!.save()
+                                        
+                                        for var i = 0; i < self.piecesArrs.count; i++ {
+                                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                
+                                                self.piecesArrs[i][t].userInteractionEnabled = false
+                                            }
+                                        }
+                                        
+                                        self.gameFinishedScreen("drew",statusBy: "")
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        //firebase
+                                        
+                                        //add who's turn it is
+                                        let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                        var status = ["turn": "done"]
+                                        
+                                        let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                                        statusRef.setValue(status)
+                                        //firebase - end
+                                        
+                                    }
+                                }
+                                
+                            }
+                        }))
+                        drawAlert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { action in
+                            switch action.style{
+                                
+                            case .Cancel:
+                                print("cancel")
+                                
+                                if self.iamWhite {
+                                    
+                                    
+                                        
+                                        
+                                        r!["draw_white"] = ""
+                                        
+                                        r!["draw_black"] = ""
+                                        
+                                        
+                                        r!.save()
+                                        
+                                    
+                                    
+                                }
+                                
+                            case .Destructive:
+                                print("destructive")
+                                
+                            case .Default:
+                                print("default")
+                                
+                            }
+                        }))
+                        self.presentViewController(drawAlert, animated: true, completion: nil)
+                        
+                        
                     }
                     
                     
@@ -3865,7 +3988,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             case .Default:
                                 print("default")
                                 
-                                if self.iamWhite {
+                                if !self.iamWhite {
                                     
                                     if r!["blackRatedComplete"] as! Bool == false {
                                         
@@ -3888,7 +4011,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.gameFinishedScreen("drew",statusBy: "")
                                         
                                         
-                                        
+                                        for var i = 0; i < self.piecesArrs.count; i++ {
+                                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                self.piecesArrs[i][t].userInteractionEnabled = false
+                                            }
+                                        }
                                         
                                         
                                         //firebase
@@ -3912,10 +4039,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             case .Cancel:
                                 print("cancel")
                                 
-                                if self.iamWhite {
+                                if !self.iamWhite {
                                     
-                                    if self.movesCap.count % 2 == 0 {
-                                        
+                                    
                                         
                                         
                                         r!["draw_white"] = ""
@@ -3925,7 +4051,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         r!.save()
                                         
-                                    }
+                                    
                                     
                                 }
                                 
@@ -4668,7 +4794,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                 }
-                else if snapshot.value as! String == "done" {
+                else if snapshot.value as! String == "done" && !self.iamWhite{
                 
                     let query = PFQuery(className: "Games")
                     query.whereKey("objectId", equalTo: gameID)
@@ -4688,6 +4814,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             r!["blackRatedComplete"] = true
                             r!.save()
                             
+                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                    self.piecesArrs[i][t].userInteractionEnabled = false
+                                }
+                            }
                             
                             
                             self.gameFinishedScreen("lost",statusBy: "")
@@ -4707,6 +4838,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             r!["blackRatedComplete"] = true
                             r!.save()
                             
+                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                    self.piecesArrs[i][t].userInteractionEnabled = false
+                                }
+                            }
+                            
                             self.gameFinishedScreen("won",statusBy: "")
                             
                         }
@@ -4724,9 +4861,110 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             r!["blackRatedComplete"] = true
                             r!.save()
                             
+                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                    self.piecesArrs[i][t].userInteractionEnabled = false
+                                }
+                            }
+                            
                             self.gameFinishedScreen("drew",statusBy: "")
                             
                         }
+                    }
+                    if r!["draw_black"] as! String == "drawto" {
+                        
+                        let drawAlert = UIAlertController(title: "Draw Offered", message: "You have been offered a draw. Do you want to accept it?", preferredStyle: UIAlertControllerStyle.Alert)
+                        
+                        drawAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { action in
+                            switch action.style{
+                                
+                            case .Cancel:
+                                print("cancel")
+                                
+                            case .Destructive:
+                                print("destructive")
+                                
+                            case .Default:
+                                print("default")
+                                
+                                if self.iamWhite {
+                                    
+                                    if r!["blackRatedComplete"] as! Bool == false {
+                                        
+                                        let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).1
+                                        PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                                        
+                                        let s = self.meUserDrawn + 1
+                                        PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                                        
+                                        PFUser.currentUser()!.save()
+                                        
+                                        r!["status_white"] = "draw"
+                                        
+                                        r!["status_black"] = "draw"
+                                        
+                                        
+                                        r!["blackRatedComplete"] = true
+                                        r!.save()
+                                        
+                                        self.gameFinishedScreen("drew",statusBy: "")
+                                        
+                                        
+                                        for var i = 0; i < self.piecesArrs.count; i++ {
+                                            for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                self.piecesArrs[i][t].userInteractionEnabled = false
+                                            }
+                                        }
+                                        
+                                        
+                                        //firebase
+                                        
+                                        //add who's turn it is
+                                        let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                        var status = ["turn": "done"]
+                                        
+                                        let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                                        statusRef.setValue(status)
+                                        //firebase - end
+                                        
+                                    }
+                                }
+                                
+                            }
+                        }))
+                        drawAlert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { action in
+                            switch action.style{
+                                
+                            case .Cancel:
+                                print("cancel")
+                                
+                                if !self.iamWhite {
+                                    
+                                    
+                                        
+                                        
+                                        r!["draw_white"] = ""
+                                        
+                                        r!["draw_black"] = ""
+                                        
+                                        
+                                        r!.save()
+                                        
+                                    
+                                    
+                                }
+                                
+                            case .Destructive:
+                                print("destructive")
+                                
+                            case .Default:
+                                print("default")
+                                
+                            }
+                        }))
+                        self.presentViewController(drawAlert, animated: true, completion: nil)
+                        
+                        
                     }
                     
                 }
@@ -7572,6 +7810,15 @@ var didLongPress = false
                         self.game.save()
                         
                         self.gameFinishedScreen("lost",statusBy: "resigning")
+                        //firebase
+                        
+                        //add who's turn it is
+                        let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                        var status = ["turn": "done"]
+                        
+                        let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                        statusRef.setValue(status)
+                        //firebase - end
                         
                     }
                 }
@@ -7594,19 +7841,20 @@ var didLongPress = false
                         
                         self.gameFinishedScreen("won",statusBy: "resigning")
                         
+                        //firebase
+                        
+                        //add who's turn it is
+                        let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                        var status = ["turn": "done"]
+                        
+                        let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                        statusRef.setValue(status)
+                        //firebase - end
                     }
                     
                 }
                 
-                //firebase
-                
-                //add who's turn it is
-                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                var status = ["turn": "done"]
-                
-                let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                statusRef.setValue(status)
-                //firebase - end
+
                 
             case .Default:
                 print("default")
@@ -7697,8 +7945,8 @@ var didLongPress = false
                     
                 }
                 else {
-                    self.game["draw_white"] = "drawfrom"
-                    self.game["draw_black"] = "drawto"
+                    self.game["draw_white"] = "drawto"
+                    self.game["draw_black"] = "drawfrom"
                     
                     self.game.save()
                     
@@ -9638,6 +9886,11 @@ var didLongPress = false
                     }
                     
                     if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true && staleMate6 == true {
+                        
+                        
+                        
+                        
+                        
                         self.gameFinishedScreen("drew",statusBy: "stalemate")
                     }
                 }
