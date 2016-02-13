@@ -966,11 +966,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             let lastupdate = game["whiteDate"] as? NSDate
             timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
-            
 
-            
-        
-            
 //            let timeToAdd = game["whiteTime"] as? Int
 //            newDate = now.dateByAddingTimeInterval(timeToAdd)
 //            game["whiteDate"] = newDate
@@ -10822,8 +10818,6 @@ var didLongPress = false
             
             UIApplication.sharedApplication().statusBarStyle = .LightContent
 
-            
-            
         }
         else if darkMode == false {
             
