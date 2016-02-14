@@ -11,10 +11,10 @@ import Parse
 import Charts
 
 
+var analyzeIDS:Array<String> = []
+var analyzeID = ""
+
 class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
-    
-    var analyzeIDS:Array<String> = []
-    var analyzeID = ""
     
     var usernameArray: Array<String> = []
     var updatedArray: Array<String> = []
@@ -26,18 +26,15 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
 
     
     var instructionsLabel = UILabel()
-
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
         navigationController?.navigationBar.topItem?.title = "Analyze"
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
-        
-        
+
     }
     
     func findGames() {
@@ -70,9 +67,9 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
                                     
                                     //adding time left
                                     
-                                    self.analyzeIDS.append(games.objectId!)
-                                    
-
+                                    analyzeIDS.append(games.objectId!)
+                                    print("added analyzeIDS")
+                                    print(analyzeIDS.count)
                                 
                             }
                         
@@ -232,19 +229,6 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
         }
         loadMoves()
         
-        
-
-        
-        
-
-        
-        
-        
-        
-        
-        
-        
-        
         cell.lineChartView.delegate = self
 
         cell.lineChartView.noDataText = "NO DATA YET"
@@ -256,9 +240,7 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
         
 
         func setChart(dataPoints: [String], values: [Double]) {
-            
-            
-            
+
             cell.lineChartView.noDataText = "NO DATA YET"
             
             var dataEntries: [ChartDataEntry] = []
@@ -332,22 +314,13 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
             cell.username.text = name
 
         }
-        
-        
-        
-        
-        
-        
+
         
         // cell.rating.text = "601"
         // cell.updated.text = "Last Update: 1h 5min"
         
             find(turnArray[indexPath.row])
-            
 
-            
-
-            
             var since = turnUpdateSince[indexPath.row]
             //making to minutes
             cell.updated.text = "Last Updated: Now"
@@ -604,14 +577,7 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
             self.navigationController?.navigationBar.tintColor = blue
             visualEffectView.effect = UIBlurEffect(style: .Dark)
             
-            
-            
-            
-            
-            
-            
-            
-            
+ 
             tableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
             
@@ -633,13 +599,7 @@ class AnalyzeMenu: UIViewController,UITableViewDelegate,ChartViewDelegate {
             visualEffectView.effect = UIBlurEffect(style: .Light)
             
             tableView.backgroundColor = UIColor.whiteColor()
-            
-            
-            
-            
-            
-            
-            
+
         }
         
         

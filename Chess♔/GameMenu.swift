@@ -32,6 +32,8 @@ public class Reachability {
 }
 
 
+var gameAnalyze = PFObject(className: "Analyze")
+
 //var blue = UIColor(red:0.17, green:0.33, blue:0.71, alpha:1.0)
 //var blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
 var blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
@@ -1269,7 +1271,84 @@ var loaded = false
 
     @IBAction func analyze(sender: AnyObject) {
         
+        print(gameID)
+        var position: CGPoint = sender.convertPoint(CGPointZero, toView: self.tableView)
+        let indexPath = self.tableView.indexPathForRowAtPoint(position)
+        let cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath!)! as
+        UITableViewCell
         
+        switch indexPath!.section {
+        case 0:
+            gameID = gameIDSYourTurn[indexPath!.row]
+        case 1:
+            gameID = gameIDSTheirTurn[indexPath!.row]
+        case 2:
+            gameID = gameIDSGameOver[indexPath!.row]
+        default :
+            ""
+            
+        }
+        print(gameID)
+        
+        let query = PFQuery(className: "Games")
+        query.whereKey("objectId", equalTo: gameID)
+        let r = query.getFirstObject()
+        
+        if r!["isAnalyze"] as? Bool == false {
+        
+         var white =  ""
+        var black =  ""
+
+        if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
+            
+             white = (PFUser.currentUser()?.username)!
+             black = (r!["blackPlayer"] as? String)!
+        } else {
+             white = (r!["blackPlayer"] as? String)!
+             black = (PFUser.currentUser()?.username)!
+        }
+        gameAnalyze["player"] = (PFUser.currentUser()?.username)!
+        gameAnalyze["whitePlayer"] = white
+        gameAnalyze["blackPlayer"] = black
+        gameAnalyze["players"] = [white,black]
+        gameAnalyze["confirmed"] = true
+        gameAnalyze["piecePosition"] = r!["piecePosition"] as! Array<String>
+        gameAnalyze["status_white"] = "analyze"
+        gameAnalyze["status_black"] = "analyze"
+        gameAnalyze["whitePromotionType"] = NSMutableArray()
+        gameAnalyze["blackPromotionType"] = NSMutableArray()
+        gameAnalyze["board"] = "regular"
+        
+        gameAnalyze["name"] = (r!["blackPlayer"] as? String)!
+        
+        gameAnalyze.saveInBackgroundWithBlock { (bool:Bool, error:NSError?) -> Void in
+            if error == nil {
+                print("analyze Made!!")
+  
+            }
+        }
+        
+        } else if r!["isAnalyze"] as? Bool == true {
+            gameAnalyze["piecePosition"] = r!["piecePosition"] as! Array<String>
+            gameAnalyze.saveInBackgroundWithBlock { (bool:Bool, error:NSError?) -> Void in
+                if error == nil {
+                    print("analyze Made!!")
+                    
+                }
+            }
+        }
+        
+         var game2 = PFObject(className: "Games")
+        game2 = r!
+        
+        game2.setObject(true, forKey: "isAnalyze")
+        
+        game2.saveInBackgroundWithBlock { (bool:Bool, error:NSError?) -> Void in
+            if error == nil {
+                print("analyze Made!!")
+                
+            }
+        }
         
         let alert = UIAlertController(title: "ALERT", message: "Are you sure that you want to analyze this game?", preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -1294,6 +1373,7 @@ var loaded = false
                         self.navigationItem.title = "CHESS"
                         self.tabBarController?.selectedIndex = 1
                         self.tableView.frame.origin.x = 0
+                        
                 }
                 
             case .Cancel:
@@ -1319,19 +1399,7 @@ var loaded = false
         }))
         
         self.presentViewController(alert, animated: true, completion: nil)
-        
-        
-
-
-        
-        
-        
-        
-        
-        
-
-
-        
+       
         struct GAME {
             
             var objectID: String
@@ -1374,6 +1442,7 @@ var loaded = false
 
        // NSUserDefaults.standardUserDefaults().setObject(gameToAnalyze, forKey: gameToAnalyze.objectID)
       //  let tabledata = NSUserDefaults.standardUserDefaults().arrayForKey("testArray")
+        
         
     }
     
@@ -1468,19 +1537,14 @@ var loaded = false
         lightOrDarkMode()
     }
     override func viewDidAppear(animated: Bool) {
-        
-        
-        
-        
+
         gameIDSYourTurn = []
         gameIDSTheirTurn = []
         gameIDSGameOver = []
         gameID = ""
         
         findGames()
-        
-        
-        
+
         invitesButtonOutlet.title = "Invites"
         invitesButtonOutlet.enabled = false
         self.invitesButtonOutlet.tintColor = UIColor.grayColor()
