@@ -9871,11 +9871,45 @@ var didLongPress = false
                         
                         print("Check mate!")
                         
+                        
+               
+                            if self.game["blackRatedComplete"] as! Bool == false {
+                                
+                                let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1).1
+                                PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                                
+                                let s = self.meUserWon + 1
+                                PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                                
+                                PFUser.currentUser()!.save()
+                                
+                                self.game["status_black"] = "won"
+                                self.game["status_white"] = "lost"
+                                
+                                self.game["blackRatedComplete"] = true
+                                self.game.save()
+                                
+                                self.gameFinishedScreen("lost",statusBy: "checkmate")
+
+                                //firebase
+                                
+                                //add who's turn it is
+                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                var status = ["turn": "done"]
+                                
+                                let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                                statusRef.setValue(status)
+                                //firebase - end
+                            }
+                            
+                        
+                        
+                        
                     }
                 }
                 else {
                     print("this is salemate, draw")
-                    //this is salemate, draw
+                    //this is stalemate, draw
                     var staleMate1 = false
                     var staleMate2 = false
                     var staleMate3 = false
@@ -9945,6 +9979,34 @@ var didLongPress = false
                     }
                     
                     if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true && staleMate6 == true {
+                        
+                        if self.game["blackRatedComplete"] as! Bool == false {
+                            
+                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).1
+                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            
+                            let s = self.meUserDrawn + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                            
+                            PFUser.currentUser()!.save()
+                            
+                            self.game["status_white"] = "draw"
+                            self.game["status_black"] = "draw"
+                            
+                            self.game["blackRatedComplete"] = true
+                            self.game.save()
+                            
+                            //firebase
+                            
+                            //add who's turn it is
+                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                            var status = ["turn": "done"]
+                            
+                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                            statusRef.setValue(status)
+                            //firebase - end
+                            
+                        }
                         self.gameFinishedScreen("drew",statusBy: "stalemate")
                     }
                 }
@@ -10006,8 +10068,41 @@ var didLongPress = false
                         self.gameFinishedScreen("won",statusBy: "chekmate.")
                         
                         print("Check mate!")
+                        
+                        
+                            if self.game["whiteRatedComplete"] as! Bool == false {
+                                
+                                let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0).0
+                                PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                                
+                                let s = self.meUserWon + 1
+                                PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                                
+                                PFUser.currentUser()!.save()
+                                
+                                self.game["status_white"] = "won"
+                                self.game["status_black"] = "lost"
+                                
+                                self.game["whiteRatedComplete"] = true
+                                self.game.save()
+                                
+                                self.gameFinishedScreen("won",statusBy: "chekmate")
+                                //firebase
+                                
+                                //add who's turn it is
+                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                var status = ["turn": "done"]
+                                
+                                let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                                statusRef.setValue(status)
+                                //firebase - end
+                                
+                            }
+                        
+                       
                     }
-                } else {
+                }
+                else {
                     
                     //this is stalemate, draw
                     var staleMate1 = false
@@ -10081,7 +10176,37 @@ var didLongPress = false
                     if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true && staleMate6 == true {
                         
                         
-                        
+                        if self.iamWhite {
+                            
+                            if self.game["whiteRatedComplete"] as! Bool == false {
+                                
+                                let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
+                                PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                                
+                                let s = self.meUserDrawn + 1
+                                PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
+                                
+                                PFUser.currentUser()!.save()
+                                
+                                self.game["status_white"] = "draw"
+                                self.game["status_black"] = "draw"
+                                
+                                self.game["whiteRatedComplete"] = true
+                                self.game.save()
+                                
+                                //firebase
+                                
+                                //add who's turn it is
+                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                var status = ["turn": "done"]
+                                
+                                let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                                statusRef.setValue(status)
+                                //firebase - end
+                                
+                            }
+                        }
+                       
                         
                         
                         self.gameFinishedScreen("drew",statusBy: "stalemate")
