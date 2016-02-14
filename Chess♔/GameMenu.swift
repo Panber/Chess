@@ -760,6 +760,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 cell.timeleft.text = "Time Left: Less than a minute"
                 cell.timeleft.textColor = red
                 
+  
+                
                 if timeLeftC <= -60 {
                     timeLeftC = timeLeftC/60
                     let sinceOutput = Int(timeLeftC) * -1
@@ -841,6 +843,16 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 var timeLeftC = theirturnLeft[indexPath.row]
                 cell.timeleft.text = "Their Time: Less than a minute"
                 cell.timeleft.textColor = red
+                
+                if timeLeftC >= 0 {
+                    print("times up mate")
+                    cell.timeleft.text = "Time is up. Claim your victory."
+                    cell.timeleft.textColor = green
+
+
+                    
+                }
+                print(timeLeftC)
                 
                 if timeLeftC <= -60 {
                     timeLeftC = timeLeftC/60
