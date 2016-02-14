@@ -148,13 +148,13 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         }
         
         if speedmodeArray[indexPath.row] == "Normal" {
-            cell.speedIndicator.image = UIImage(named: "normalIndicator.png")
+            cell.speedIndicator.image = UIImage(named: "normalIndicator2.png")
         }
         else if speedmodeArray[indexPath.row] == "Fast" {
             cell.speedIndicator.image = UIImage(named: "flash31.png")
         }
         else if speedmodeArray[indexPath.row] == "Slow" {
-            cell.speedIndicator.image = UIImage(named: "clock104.png")
+            cell.speedIndicator.image = UIImage(named: "clock108.png")
         }
         
         

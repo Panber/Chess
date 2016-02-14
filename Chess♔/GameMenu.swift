@@ -45,6 +45,7 @@ var gameIDSTheirTurn:Array<String> = []
 var gameIDSGameOver:Array<String> = []
 var gameID = ""
 
+
 var pressedCreateNewGame = NSUserDefaults()
 
 var scrollView: UIScrollView!
@@ -199,43 +200,43 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 //        }
         
         
-        //setting the different variables for the current user, remember to implement this in a firstload method
-            let users = PFQuery(className: "_User")
-            if let user = PFUser.currentUser() {
-                users.whereKey("username", equalTo: user.username!)
-                users.findObjectsInBackgroundWithBlock({ (users: [AnyObject]?, error: NSError?) -> Void in
-        
-                    if error == nil {
-                        if let users = users as? [PFObject]{
-                            for users in users {
-                                users["won"] = "0"
-                                users["drawn"] = "0"
-                                users["lost"] = "0"
-                                users["rating"] = 1200
-                                users["request_everyone"] = true
-                                
-                                
-                                PFGeoPoint.geoPointForCurrentLocationInBackground {
-                                    (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
-                                    if error == nil {
-                                        users["location"] = geoPoint
-                                        users.saveInBackground()
-                                        location = geoPoint!
-                                        print("location added to parse")
-                                        //add later!!
-                                        //NSUserDefaults.standardUserDefaults().setObject(geoP, forKey: "user_geopoint")
-                                        
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-                    else {
-                        print("annerror accured")
-                    }
-                })
-            }
+//        //setting the different variables for the current user, remember to implement this in a firstload method
+//            let users = PFQuery(className: "_User")
+//            if let user = PFUser.currentUser() {
+//                users.whereKey("username", equalTo: user.username!)
+//                users.findObjectsInBackgroundWithBlock({ (users: [AnyObject]?, error: NSError?) -> Void in
+//        
+//                    if error == nil {
+//                        if let users = users as? [PFObject]{
+//                            for users in users {
+//                                users["won"] = "0"
+//                                users["drawn"] = "0"
+//                                users["lost"] = "0"
+//                                users["rating"] = 1200
+//                                users["request_everyone"] = true
+//                                
+//                                
+//                                PFGeoPoint.geoPointForCurrentLocationInBackground {
+//                                    (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+//                                    if error == nil {
+//                                        users["location"] = geoPoint
+//                                        users.saveInBackground()
+//                                        location = geoPoint!
+//                                        print("location added to parse")
+//                                        //add later!!
+//                                        //NSUserDefaults.standardUserDefaults().setObject(geoP, forKey: "user_geopoint")
+//                                        
+//                                    }
+//                                }
+//
+//                            }
+//                        }
+//                    }
+//                    else {
+//                        print("annerror accured")
+//                    }
+//                })
+//            }
         
         
         
@@ -392,10 +393,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         
                         
                         //adding time left
-                        let left = games["timeLeftToMove"] as? NSDate
+                        let left = games["whiteDate"] as? NSDate
                         let left2 = NSDate().timeIntervalSinceDate(left!)
                         self.yourturnLeft.append(left2)
                         print(self.yourturnLeft)
+                        
+//                        let lastUpdate = game["whiteDate"] as? NSDate
+//                        var timeLeft = NSDate().timeIntervalSinceDate(lastUpdate!)
+//                        self.timeleftArray.append(timeLeft)
                         
                         gameIDSYourTurn.append(games.objectId!)
                         self.yourTurnColor.append("white")
@@ -415,7 +420,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.theirturnUpdateSince.append(since)
                         
                         //adding time left
-                        let left = games["timeLeftToMove"] as? NSDate
+                        let left = games["blackDate"] as? NSDate
                         let left2 = NSDate().timeIntervalSinceDate(left!)
                         self.theirturnLeft.append(left2)
                         
@@ -463,7 +468,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.yourturnUpdateSince.append(since)
                         
                         //adding left
-                        let left = games["timeLeftToMove"] as? NSDate
+                        let left = games["blackDate"] as? NSDate
                         let left2 = NSDate().timeIntervalSinceDate(left!)
                         self.yourturnLeft.append(left2)
                         
@@ -488,7 +493,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.theirturnUpdateSince.append(since)
                         
                         //adding left
-                        let left = games["timeLeftToMove"] as? NSDate
+                        let left = games["whiteDate"] as? NSDate
                         let left2 = NSDate().timeIntervalSinceDate(left!)
                         self.theirturnLeft.append(left2)
                         
@@ -711,14 +716,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 
                 
                 if yourTurnSpeed[indexPath.row] == "Normal" {
-                    cell.speedIndicator.image = UIImage(named: "normalIndicator.png")
+                    cell.speedIndicator.image = UIImage(named: "normalIndicator2.png")
                 }
                 else if yourTurnSpeed[indexPath.row] == "Fast" {
                     cell.speedIndicator.image = UIImage(named: "flash31.png")
 
                 }
                 else if yourTurnSpeed[indexPath.row] == "Slow" {
-                    cell.speedIndicator.image = UIImage(named: "clock104.png")
+                    cell.speedIndicator.image = UIImage(named: "clock108.png")
                 }
 
 
@@ -750,13 +755,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 }
             
                 var timeLeftC = yourturnLeft[indexPath.row]
-                cell.timeleft.text = "Left To Move: Less than a minute"
+                cell.timeleft.text = "Time Left: Less than a minute"
                 cell.timeleft.textColor = red
                 
                 if timeLeftC <= -60 {
                     timeLeftC = timeLeftC/60
                     let sinceOutput = Int(timeLeftC) * -1
-                    cell.timeleft.text = "Left To Move: \(sinceOutput)min"
+                    cell.timeleft.text = "Time Left: \(sinceOutput)min"
                     print("time left in is \(sinceOutput)")
                 }
 
@@ -764,7 +769,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 if timeLeftC <= -60 {
                     timeLeftC = timeLeftC/60
                     let sinceOutput = Int(timeLeftC) * -1
-                    cell.timeleft.text = "Left To Move: \(sinceOutput)h"
+                    cell.timeleft.text = "Time Left: \(sinceOutput)h"
                     cell.timeleft.textColor = UIColor.lightGrayColor()
 
                     
@@ -772,7 +777,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     if timeLeftC <= -24 {
                         timeLeftC = timeLeftC/24
                         let sinceOutput = Int(timeLeftC) * -1
-                        cell.timeleft.text = "Left To Move: \(sinceOutput)d"
+                        cell.timeleft.text = "Time Left: \(sinceOutput)d"
                         
                     }
                     
@@ -795,14 +800,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 }
                 
                 if theirTurnSpeed[indexPath.row] == "Normal" {
-                    cell.speedIndicator.image = UIImage(named: "normalIndicator.png")
+                    cell.speedIndicator.image = UIImage(named: "normalIndicator2.png")
                 }
                 else if theirTurnSpeed[indexPath.row] == "Fast" {
                     cell.speedIndicator.image = UIImage(named: "flash31.png")
                     
                 }
                 else if theirTurnSpeed[indexPath.row] == "Slow" {
-                    cell.speedIndicator.image = UIImage(named: "clock104.png")
+                    cell.speedIndicator.image = UIImage(named: "clock108.png")
                 }
                 
                 var since = theirturnUpdateSince[indexPath.row]
@@ -832,13 +837,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             
             
                 var timeLeftC = theirturnLeft[indexPath.row]
-                cell.timeleft.text = "Left To Move: Less than a minute"
+                cell.timeleft.text = "Their Time: Less than a minute"
                 cell.timeleft.textColor = red
                 
                 if timeLeftC <= -60 {
                     timeLeftC = timeLeftC/60
                     let sinceOutput = Int(timeLeftC) * -1
-                    cell.timeleft.text = "Left To Move: \(sinceOutput)min"
+                    cell.timeleft.text = "Their Time: \(sinceOutput)min"
                     
                 }
                 
@@ -846,7 +851,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 if timeLeftC <= -60 {
                     timeLeftC = timeLeftC/60
                     let sinceOutput = Int(timeLeftC) * -1
-                    cell.timeleft.text = "Left To Move: \(sinceOutput)h"
+                    cell.timeleft.text = "Their Time: \(sinceOutput)h"
                     cell.timeleft.textColor = UIColor.lightGrayColor()
 
                     
@@ -854,7 +859,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     if timeLeftC <= -24 {
                         timeLeftC = timeLeftC/24
                         let sinceOutput = Int(timeLeftC) * -1
-                        cell.timeleft.text = "Left To Move: \(sinceOutput)d"
+                        cell.timeleft.text = "Their Time: \(sinceOutput)d"
                         
                     }
                     
@@ -885,14 +890,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             }
             
             if gameoverTurnSpeed[indexPath.row] == "Normal" {
-                cell.speedIndicator.image = UIImage(named: "normalIndicator.png")
+                cell.speedIndicator.image = UIImage(named: "normalIndicator2.png")
             }
             else if gameoverTurnSpeed[indexPath.row] == "Fast" {
                 cell.speedIndicator.image = UIImage(named: "flash31.png")
                 
             }
             else if gameoverTurnSpeed[indexPath.row] == "Slow" {
-                cell.speedIndicator.image = UIImage(named: "clock104.png")
+                cell.speedIndicator.image = UIImage(named: "clock108.png")
             }
             
             var since = gameoverUpdateSince[indexPath.row]
@@ -1023,163 +1028,163 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     }
     
     
-    func tableView(tableView:UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    
-    
-    }
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?
-    {
-        
-        switch indexPath.section {
-        case 0:
-            var shareAction = UITableViewRowAction(style: .Destructive, title: "Resign") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
-                
-                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
-                
-                drawAlert.addAction(UIAlertAction(title: "Resign", style: .Destructive, handler: { action in
-                    switch action.style{
-                        
-                    case .Cancel:
-                        print("cancel")
-                        
-                    case .Destructive:
-                        print("destructive")
-                        
-                    case .Default:
-                        print("default")
-                        
-                    }
-                }))
-                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
-                    switch action.style{
-                        
-                    case .Cancel:
-                        print("cancel")
-                        
-                    case .Destructive:
-                        print("destructive")
-                        
-                    case .Default:
-                        print("default")
-                        
-                    }
-                }))
-                
-                
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    self.removeNewView()
-                    } , completion: {finish in
-                        self.presentViewController(drawAlert, animated: true, completion: nil)
-                        
-                })
-                
-            }
-            shareAction.backgroundColor = red
-            return [shareAction]
-
-        case 1:
-            var shareAction = UITableViewRowAction(style: .Destructive, title: "Resign") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
-                
-                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
-                
-                drawAlert.addAction(UIAlertAction(title: "Resign", style: .Destructive, handler: { action in
-                    switch action.style{
-                        
-                    case .Cancel:
-                        print("cancel")
-                        
-                    case .Destructive:
-                        print("destructive")
-                        
-                    case .Default:
-                        print("default")
-                        
-                    }
-                }))
-                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
-                    switch action.style{
-                        
-                    case .Cancel:
-                        print("cancel")
-                        
-                    case .Destructive:
-                        print("destructive")
-                        
-                    case .Default:
-                        print("default")
-                        
-                    }
-                }))
-                
-                
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    self.removeNewView()
-                    } , completion: {finish in
-                        self.presentViewController(drawAlert, animated: true, completion: nil)
-                        
-                })
-                
-            }
-            shareAction.backgroundColor = red
-            return [shareAction]
-
-        case 2:
-            var shareAction = UITableViewRowAction(style: .Destructive, title: "Delete") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
-                
-                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to delete this game?", preferredStyle: UIAlertControllerStyle.Alert)
-                
-                drawAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { action in
-                    switch action.style{
-                        
-                    case .Cancel:
-                        print("cancel")
-                        
-                    case .Destructive:
-                        print("destructive")
-                        
-                    case .Default:
-                        print("default")
-                        
-                    }
-                }))
-                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
-                    switch action.style{
-                        
-                    case .Cancel:
-                        print("cancel")
-                        
-                    case .Destructive:
-                        print("destructive")
-                        
-                    case .Default:
-                        print("default")
-                        
-                    }
-                }))
-                
-                
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    self.removeNewView()
-                    } , completion: {finish in
-                        self.presentViewController(drawAlert, animated: true, completion: nil)
-                        
-                })
-                
-            }
-            shareAction.backgroundColor = red
-            return [shareAction]
-
-        default :
-            ""
-            
-        }
-        
-
-        
-        
-        return nil
-        
-    }
+//    func tableView(tableView:UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//    
+//    
+//    }
+//    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?
+//    {
+//        
+//        switch indexPath.section {
+//        case 0:
+//            var shareAction = UITableViewRowAction(style: .Destructive, title: "Resign") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+//                
+//                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
+//                
+//                drawAlert.addAction(UIAlertAction(title: "Resign", style: .Destructive, handler: { action in
+//                    switch action.style{
+//                        
+//                    case .Cancel:
+//                        print("cancel")
+//                        
+//                    case .Destructive:
+//                        print("destructive")
+//                        
+//                    case .Default:
+//                        print("default")
+//                        
+//                    }
+//                }))
+//                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+//                    switch action.style{
+//                        
+//                    case .Cancel:
+//                        print("cancel")
+//                        
+//                    case .Destructive:
+//                        print("destructive")
+//                        
+//                    case .Default:
+//                        print("default")
+//                        
+//                    }
+//                }))
+//                
+//                
+//                UIView.animateWithDuration(0.3, animations: { () -> Void in
+//                    self.removeNewView()
+//                    } , completion: {finish in
+//                        self.presentViewController(drawAlert, animated: true, completion: nil)
+//                        
+//                })
+//                
+//            }
+//            shareAction.backgroundColor = red
+//            return [shareAction]
+//
+//        case 1:
+//            var shareAction = UITableViewRowAction(style: .Destructive, title: "Resign") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+//                
+//                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
+//                
+//                drawAlert.addAction(UIAlertAction(title: "Resign", style: .Destructive, handler: { action in
+//                    switch action.style{
+//                        
+//                    case .Cancel:
+//                        print("cancel")
+//                        
+//                    case .Destructive:
+//                        print("destructive")
+//                        
+//                    case .Default:
+//                        print("default")
+//                        
+//                    }
+//                }))
+//                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+//                    switch action.style{
+//                        
+//                    case .Cancel:
+//                        print("cancel")
+//                        
+//                    case .Destructive:
+//                        print("destructive")
+//                        
+//                    case .Default:
+//                        print("default")
+//                        
+//                    }
+//                }))
+//                
+//                
+//                UIView.animateWithDuration(0.3, animations: { () -> Void in
+//                    self.removeNewView()
+//                    } , completion: {finish in
+//                        self.presentViewController(drawAlert, animated: true, completion: nil)
+//                        
+//                })
+//                
+//            }
+//            shareAction.backgroundColor = red
+//            return [shareAction]
+//
+//        case 2:
+//            var shareAction = UITableViewRowAction(style: .Destructive, title: "Delete") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+//                
+//                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to delete this game?", preferredStyle: UIAlertControllerStyle.Alert)
+//                
+//                drawAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { action in
+//                    switch action.style{
+//                        
+//                    case .Cancel:
+//                        print("cancel")
+//                        
+//                    case .Destructive:
+//                        print("destructive")
+//                        
+//                    case .Default:
+//                        print("default")
+//                        
+//                    }
+//                }))
+//                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+//                    switch action.style{
+//                        
+//                    case .Cancel:
+//                        print("cancel")
+//                        
+//                    case .Destructive:
+//                        print("destructive")
+//                        
+//                    case .Default:
+//                        print("default")
+//                        
+//                    }
+//                }))
+//                
+//                
+//                UIView.animateWithDuration(0.3, animations: { () -> Void in
+//                    self.removeNewView()
+//                    } , completion: {finish in
+//                        self.presentViewController(drawAlert, animated: true, completion: nil)
+//                        
+//                })
+//                
+//            }
+//            shareAction.backgroundColor = red
+//            return [shareAction]
+//
+//        default :
+//            ""
+//            
+//        }
+//        
+//
+//        
+//        
+//        return nil
+//        
+//    }
     
     let loadingView = UIImageView(frame: CGRectMake((screenWidth/2)-30,-70,60,60))
 var loaded = false

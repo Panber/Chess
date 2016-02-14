@@ -174,6 +174,7 @@ class GameMenuTableViewCell: UITableViewCell {
         self.pieceIndicator.layer.borderWidth = 1
         self.pieceIndicator.backgroundColor = UIColor.whiteColor()
         
+        self.analyzeButton.hidden = true
 
 //        visualEffectView.frame.size.height += 20
 //        visualEffectView.frame.size.width += 20

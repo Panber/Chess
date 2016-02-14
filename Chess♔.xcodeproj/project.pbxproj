@@ -39,6 +39,8 @@
 		8F2DD6E61B9AFFF80059CEFA /* piecePossibilities.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6DA1B9AFFF80059CEFA /* piecePossibilities.png */; };
 		8F2DD6E91B9AFFF80059CEFA /* whiteSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */; };
 		8F2EEC721C6A9BF200FB6127 /* ChessLogoFront.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2EEC711C6A9BF200FB6127 /* ChessLogoFront.png */; };
+		8F2EEC7F1C70F02100FB6127 /* normalIndicator2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2EEC7E1C70F02100FB6127 /* normalIndicator2.png */; };
+		8F2EEC831C70F27600FB6127 /* clock108.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2EEC821C70F27600FB6127 /* clock108.png */; };
 		8F2F6C4A1BDED9100048342A /* NewGameFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF77E1BDBAF1E0037865C /* NewGameFriends.swift */; };
 		8F2F6C4B1BDEDCC00048342A /* NewGameSettingsPage_Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage_Play.swift */; };
 		8F31DCE11BC70E30004544CC /* checkmark13.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCE01BC70E30004544CC /* checkmark13.png */; };
@@ -308,6 +310,8 @@
 		8F2DD6DA1B9AFFF80059CEFA /* piecePossibilities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piecePossibilities.png; sourceTree = "<group>"; };
 		8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteSquare.png; sourceTree = "<group>"; };
 		8F2EEC711C6A9BF200FB6127 /* ChessLogoFront.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessLogoFront.png; sourceTree = "<group>"; };
+		8F2EEC7E1C70F02100FB6127 /* normalIndicator2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalIndicator2.png; sourceTree = "<group>"; };
+		8F2EEC821C70F27600FB6127 /* clock108.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock108.png; sourceTree = "<group>"; };
 		8F31DCE01BC70E30004544CC /* checkmark13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark13.png; sourceTree = "<group>"; };
 		8F31DCE41BC716F9004544CC /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		8F31DCE61BC7189B004544CC /* add1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add1.png; sourceTree = "<group>"; };
@@ -586,7 +590,9 @@
 				8F1E8ECD1BD7F66C00C41D37 /* profilePicPlaceholder.jpg */,
 				8FEF2A911BFA7C7C006E1359 /* Boards */,
 				8F273CF21BF29E4300275378 /* clock104.png */,
+				8F2EEC821C70F27600FB6127 /* clock108.png */,
 				8F56E1701C665D880000ECDB /* BN.png */,
+				8F2EEC7E1C70F02100FB6127 /* normalIndicator2.png */,
 				8F56E1711C665D880000ECDB /* WN.png */,
 				8FDB6EFB1C4AA40500F50324 /* reAnalysis-2.png */,
 				8FDB6EFD1C4AA4C000F50324 /* emAnalysis.png */,
@@ -961,7 +967,7 @@
 				TargetAttributes = {
 					8FA5C88C1B9A264F0097637E = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = G542NRN7XT;
+						DevelopmentTeam = V47FUAKS5S;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1043,6 +1049,7 @@
 				8F2DD6DF1B9AFFF80059CEFA /* ChessIconTab@3x.png in Resources */,
 				8F7480A01C4ABA1200CE6735 /* emAnalysis-2.png in Resources */,
 				8FA55EEE1C53CCA700250403 /* facebook_logo.png in Resources */,
+				8F2EEC7F1C70F02100FB6127 /* normalIndicator2.png in Resources */,
 				8F31DCF31BC9513B004544CC /* equalization2.png in Resources */,
 				8F1E8EC41BD78F9600C41D37 /* nasaearth.jpg in Resources */,
 				8FD804741C24CADB00902DB9 /* chessLaunchGold.png in Resources */,
@@ -1155,6 +1162,7 @@
 				8F56E1871C66BE650000ECDB /* chesslogo800_180.png in Resources */,
 				8F56E1631C63EC170000ECDB /* chessLogo180.png in Resources */,
 				8FEF2A9E1BFA7C8A006E1359 /* oldSkoolChessBoard.png in Resources */,
+				8F2EEC831C70F27600FB6127 /* clock108.png in Resources */,
 				8FEF2A9B1BFA7C8A006E1359 /* blackSquareChessBoard.png in Resources */,
 				8F8BD2BD1BC6E22B00B25CFE /* close1.png in Resources */,
 				8FE58AA21C3B1F26007888F4 /* whiteRook.png in Resources */,
@@ -1436,8 +1444,8 @@
 			baseConfigurationReference = DEC0A4D6A8F0888440ED5221 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Panayotov (8JHAHM7T3P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Panayotov (8JHAHM7T3P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
