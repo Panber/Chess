@@ -9836,74 +9836,75 @@ var didLongPress = false
                     var checkMate6 = false
 
                     for var i = 0; i < blackKnights.count;i++ {
-                        if chessPieceSelected(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKnights[i]) == 0 {
+                        print("blackKnights")
+                        if blackKnights[i].alpha == 1 {
+                            if chessPieceSelected(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKnights[i]) == 0 {
+                                checkMate1 = true
+                            }
+                        } else if blackKnights[i].alpha == 0 {
                             checkMate1 = true
+                        } else {
+                            checkMate1 = false
                         }
                     }
                     for var i = 0; i < blackBishops.count;i++ {
-                        if chessPieceSelected(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackBishops[i]) == 0 {
+                        print("blackBishops")
+                        if blackBishops[i].alpha == 1 {
+                            if chessPieceSelected(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackBishops[i]) == 0 {
+                                checkMate2 = true
+                            }
+                        } else if blackBishops[i].alpha == 0 {
                             checkMate2 = true
+                        } else {
+                            checkMate2 = false
                         }
                     }
                     for var i = 0; i < blackRooks.count;i++ {
-                        if chessPieceSelected(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackRooks[i]) == 0 {
+                        print("blackRooks")
+                        if blackRooks[i].alpha == 1 {
+                            if chessPieceSelected(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackRooks[i]) == 0 {
+                                checkMate3 = true
+                            }
+                        } else if blackRooks[i].alpha == 0 {
                             checkMate3 = true
+                        } else {
+                            checkMate3 = false
                         }
                     }
                     for var i = 0; i < blackQueens.count;i++ {
-                        if chessPieceSelected(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackQueens[i]) == 0 {
+                        print("blackQueens")
+                        if blackQueens[i].alpha == 1 {
+                            if chessPieceSelected(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackQueens[i]) == 0 {
+                                checkMate4 = true
+                            }
+                        } else if blackQueens[i].alpha == 0 {
                             checkMate4 = true
+                        } else {
+                            checkMate4 = false
                         }
                     }
                     if chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKing) == 0 {
+                        print("blackKing")
                         checkMate5 = true
                     }
                     
                     for var i = 0; i < blackPawns.count;i++ {
+                        print("blackPawns")
+                        if blackPawns[i].alpha == 1 {
                             if whitePawnSelected(true, chosenPiece: blackPawns[i]) == 0 {
                                 checkMate6 = true
                             }
+                        } else if blackPawns[i].alpha == 0 {
+                            checkMate6 = true
+                        } else {
+                            checkMate6 = false
+                        }
                     }
                     
                     if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true && checkMate6 == true {
-
+                        self.gameFinishedScreen("lost",statusBy: "chekmate.")
                         
                         print("Check mate!")
-                        
-                        
-               
-                            if self.game["blackRatedComplete"] as! Bool == false {
-                                
-                                let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1).1
-                                PFUser.currentUser()!.setObject(myRating, forKey: "rating")
-                                
-                                let s = self.meUserWon + 1
-                                PFUser.currentUser()!.setObject("\(s)", forKey: "won")
-                                
-                                PFUser.currentUser()!.save()
-                                
-                                self.game["status_black"] = "won"
-                                self.game["status_white"] = "lost"
-                                
-                                self.game["blackRatedComplete"] = true
-                                self.game.save()
-                                
-                                self.gameFinishedScreen("lost",statusBy: "checkmate")
-
-                                //firebase
-                                
-                                //add who's turn it is
-                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                                var status = ["turn": "done"]
-                                
-                                let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                                statusRef.setValue(status)
-                                //firebase - end
-                            }
-                            
-                        
-                        
-                        
                     }
                 }
                 else {
@@ -10026,41 +10027,70 @@ var didLongPress = false
                     var checkMate5 = false
                     var checkMate6 = false
                     
-                    
                     for var i = 0; i < blackKnights.count;i++ {
                             print("blackKnights")
+                         if blackKnights[i].alpha == 1 {
                             if chessPieceSelected(2, pieceid: 2, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKnights[i]) == 0 {
                                 checkMate1 = true
                             }
+                         } else if blackKnights[i].alpha == 0 {
+                            checkMate1 = true
+                         } else {
+                            checkMate1 = false
+                        }
                     }
                     for var i = 0; i < blackBishops.count;i++ {
                             print("blackBishops")
+                          if blackBishops[i].alpha == 1 {
                             if chessPieceSelected(9, pieceid: 1, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackBishops[i]) == 0 {
                                 checkMate2 = true
                             }
+                          } else if blackBishops[i].alpha == 0 {
+                            checkMate2 = true
+                          } else {
+                            checkMate2 = false
+                        }
                     }
                     for var i = 0; i < blackRooks.count;i++ {
                             print("blackRooks")
+                        if blackRooks[i].alpha == 1 {
                             if chessPieceSelected(9, pieceid: 3, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackRooks[i]) == 0 {
                                 checkMate3 = true
                             }
+                        } else if blackRooks[i].alpha == 0 {
+                            checkMate3 = true
+                        } else {
+                            checkMate3 = false
+                        }
                     }
                     for var i = 0; i < blackQueens.count;i++ {
                             print("blackQueens")
+                        if blackQueens[i].alpha == 1 {
                             if chessPieceSelected(9, pieceid: 4, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackQueens[i]) == 0 {
                                 checkMate4 = true
                             }
+                        } else if blackQueens[i].alpha == 0 {
+                            checkMate4 = true
+                        } else {
+                            checkMate4 = false
+                        }
                     }
                     if chessPieceSelected(2, pieceid: 5, friend: blackPieces, enemy: whitePieces, hidden: true, chosenPiece: blackKing) == 0 {
-                        print("blackKnights")
+                        print("blackKing")
                         checkMate5 = true
                     }
                     
                     for var i = 0; i < blackPawns.count;i++ {
                             print("blackPawns")
+                        if blackPawns[i].alpha == 1 {
                             if whitePawnSelected(true, chosenPiece: blackPawns[i]) == 0 {
                                 checkMate6 = true
                             }
+                        } else if blackPawns[i].alpha == 0 {
+                            checkMate6 = true
+                        } else {
+                            checkMate6 = false
+                        }
                     }
                     
                     if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true && checkMate6 == true {
