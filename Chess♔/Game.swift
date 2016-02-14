@@ -169,6 +169,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var promotionAtIndex: Array<Int> = []
     
     
+    var hasOfferedDraw = Bool()
+    
     var iamWhite = Bool()
     
     var takenPiecesToReload: Array<UIImageView> = []
@@ -1944,6 +1946,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     if r!["draw_white"] as! String == "drawto" {
                         
+                        self.hasOfferedDraw = true
+
                         let drawAlert = UIAlertController(title: "Draw Offered", message: "You have been offered a draw. Do you want to accept it?", preferredStyle: UIAlertControllerStyle.Alert)
                         
                         drawAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { action in
@@ -2023,7 +2027,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         
                                         r!.save()
-                                    
+                                    self.hasOfferedDraw = false
                                     
 
                                 }
@@ -2039,6 +2043,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.presentViewController(drawAlert, animated: true, completion: nil)
 
 
+                    }
+                    else if r!["draw_white"] as! String == "drawfrom" {
+                        
+                        self.hasOfferedDraw = true
                     }
                     
                 }
@@ -2871,6 +2879,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     if r!["draw_white"] as! String == "drawto" {
                         
+                        self.hasOfferedDraw = true
+
                         let drawAlert = UIAlertController(title: "Draw Offered", message: "You have been offered a draw. Do you want to accept it?", preferredStyle: UIAlertControllerStyle.Alert)
                         
                         drawAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { action in
@@ -2950,7 +2960,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         
                                         r!.save()
-                                        
+                                    self.hasOfferedDraw = false
+
                                     
                                     
                                 }
@@ -2967,7 +2978,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         
                     }
-                    
+                    if r!["draw_white"] as! String == "drawfrom" {
+                        
+                        self.hasOfferedDraw = true
+                    }
                     
                 }
                 self.myturnAfterTimeCapsule = true
@@ -3974,6 +3988,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     if r!["draw_black"] as! String == "drawto" {
                         
+                        
+                        self.hasOfferedDraw = true
                         let drawAlert = UIAlertController(title: "Draw Offered", message: "You have been offered a draw. Do you want to accept it?", preferredStyle: UIAlertControllerStyle.Alert)
                         
                         drawAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { action in
@@ -4050,7 +4066,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         
                                         r!.save()
-                                        
+                                    self.hasOfferedDraw = false
+
                                     
                                     
                                 }
@@ -4066,6 +4083,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.presentViewController(drawAlert, animated: true, completion: nil)
                         
                         
+                    }
+                    else if r!["draw_black"] as! String == "drawfrom" {
+                        
+                        
+                        self.hasOfferedDraw = true
                     }
                 }
             })
@@ -4195,6 +4217,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     
                 }
+                
                 if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black" {
                     
                     
@@ -4794,6 +4817,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                 }
+              
                 else if snapshot.value as! String == "done" && !self.iamWhite{
                 
                     let query = PFQuery(className: "Games")
@@ -4873,6 +4897,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     if r!["draw_black"] as! String == "drawto" {
                         
+                        self.hasOfferedDraw = true
+
                         let drawAlert = UIAlertController(title: "Draw Offered", message: "You have been offered a draw. Do you want to accept it?", preferredStyle: UIAlertControllerStyle.Alert)
                         
                         drawAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { action in
@@ -4887,7 +4913,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             case .Default:
                                 print("default")
                                 
-                                if self.iamWhite {
+                                if !self.iamWhite {
                                     
                                     if r!["blackRatedComplete"] as! Bool == false {
                                         
@@ -4949,7 +4975,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         
                                         r!.save()
-                                        
+                                    self.hasOfferedDraw = false
+
                                     
                                     
                                 }
@@ -4965,6 +4992,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.presentViewController(drawAlert, animated: true, completion: nil)
                         
                         
+                    }
+                    else if r!["draw_black"] as! String == "drawfrom" {
+                        
+                        
+                        self.hasOfferedDraw = true
                     }
                     
                 }
@@ -7471,6 +7503,13 @@ var didLongPress = false
         drawB.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         drawB.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
         drawB.backgroundColor = blue
+        if hasOfferedDraw {
+        drawB.backgroundColor = UIColor.lightGrayColor()
+            drawB.userInteractionEnabled = false
+            drawB.setTitle("Draw Offered", forState: .Normal)
+
+        }
+
         drawB.addTarget(self, action: "drawButtonPressed:", forControlEvents: .TouchUpInside)
         scrollView1.addSubview(drawB)
         
@@ -7932,6 +7971,8 @@ var didLongPress = false
                         
                         self.game.save()
                     
+                    self.hasOfferedDraw = true
+
                     //firebase
                     
                     //add who's turn it is
@@ -7945,11 +7986,14 @@ var didLongPress = false
                     
                 }
                 else {
+                    
                     self.game["draw_white"] = "drawto"
                     self.game["draw_black"] = "drawfrom"
                     
                     self.game.save()
                     
+                    self.hasOfferedDraw = true
+
                     //firebase
                     
                     //add who's turn it is
