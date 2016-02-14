@@ -9867,7 +9867,6 @@ var didLongPress = false
                     
                     if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true && checkMate6 == true {
 
-                        self.gameFinishedScreen("lost",statusBy: "chekmate.")
                         
                         print("Check mate!")
                         
@@ -10065,7 +10064,6 @@ var didLongPress = false
                     }
                     
                     if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true && checkMate6 == true {
-                        self.gameFinishedScreen("won",statusBy: "chekmate.")
                         
                         print("Check mate!")
                         
