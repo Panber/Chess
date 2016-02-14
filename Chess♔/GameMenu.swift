@@ -38,6 +38,8 @@ var gameAnalyze = PFObject(className: "Analyze")
 //var blue = UIColor(red:0.27, green:0.59, blue:0.94, alpha:1.0)
 var blue = UIColor(red:0.36, green:0.56, blue:0.79, alpha:1.0)
 var red = UIColor(red:0.89, green:0.36, blue:0.36, alpha:1.0)
+var green = UIColor(red: 0.2275, green: 0.7882, blue: 0.2196, alpha: 1.0)
+var purple = UIColor(red: 0.6314, green: 0.2078, blue: 0.749, alpha: 1.0)
 
 
 var gameIDSYourTurn:Array<String> = []
@@ -433,7 +435,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
                         
                     }
-                    else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost" || games["status_white"] as? String == "drew"{
+                    else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost" || games["status_white"] as? String == "draw"{
                         
                         self.gameoverArray.append((games["blackPlayer"] as? String)!)
                         self.typeofGameover.append((games["status_white"] as? String)!)
@@ -506,7 +508,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
                         
                     }
-                    else if games["status_black"] as? String == "won" || games["status_black"] as? String == "lost" || games["status_black"] as? String == "drew"{
+                    else if games["status_black"] as? String == "won" || games["status_black"] as? String == "lost" || games["status_black"] as? String == "draw"{
                         
                         self.gameoverArray.append((games["whitePlayer"] as? String)!)
                         self.typeofGameover.append((games["status_black"] as? String)!)
@@ -871,10 +873,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 cell.colorIndicator.backgroundColor = UIColor.redColor()
             }
             else if typeofGameover[indexPath.row] == "won"{
-                cell.colorIndicator.backgroundColor = UIColor.greenColor()
+                cell.colorIndicator.backgroundColor = green
             }
             else {
-                cell.colorIndicator.backgroundColor = UIColor.yellowColor()
+                cell.colorIndicator.backgroundColor = UIColor.purpleColor()
             }
             
             

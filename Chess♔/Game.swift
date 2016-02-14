@@ -1895,7 +1895,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     //setting rating and won/lost/drawn
                     if r!["status_white"] as! String == "won" {
                         self.turnLturn = "You Won"
-                        self.turnIndicatorturn = UIColor.greenColor()
+                        self.turnIndicatorturn = green
                         
                         if r!["whiteRatedComplete"] as! Bool == false {
                             let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0).0
@@ -2719,7 +2719,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     //setting rating and won/lost/drawn
                     if r!["status_white"] as! String == "won" {
                         self.turnLturn = "You Won"
-                        self.turnIndicatorturn = UIColor.greenColor()
+                        self.turnIndicatorturn = green
                         if r!["whiteRatedComplete"] as! Bool == false {
                             let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0).0
                             PFUser.currentUser()!.setObject(myRating, forKey: "rating")
@@ -2838,7 +2838,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     //setting rating and won/lost/drawn
                     if r!["status_white"] as! String == "won" {
                         self.turnLturn = "You Won"
-                        self.turnIndicatorturn = UIColor.greenColor()
+                        self.turnIndicatorturn = green
                         for var i = 0; i < self.piecesArrs.count; i++ {
                             for var t = 0; t < self.piecesArrs[i].count; t++ {
                                 self.piecesArrs[i][t].userInteractionEnabled = false
@@ -3983,7 +3983,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     //setting rating and won/lost/drawn
                     if r!["status_black"] as! String == "won" {
                         self.turnLturn = "You Won"
-                        self.turnIndicatorturn = UIColor.greenColor()
+                        self.turnIndicatorturn = green
                         
                         if r!["blackRatedComplete"] as! Bool == false {
                             let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1).1
@@ -4797,7 +4797,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     //setting rating and won/lost/drawn
                     if r!["status_black"] as! String == "won" {
                         self.turnLturn = "You Won"
-                        self.turnIndicatorturn = UIColor.greenColor()
+                        self.turnIndicatorturn = green
                         if r!["blackRatedComplete"] as! Bool == false {
                             let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1).1
                             PFUser.currentUser()!.setObject(myRating, forKey: "rating")
@@ -4899,7 +4899,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     if r!["status_black"] as! String == "won" {
                         self.turnLturn = "You Won"
-                        self.turnIndicatorturn = UIColor.greenColor()
+                        self.turnIndicatorturn = green
                         for var i = 0; i < self.piecesArrs.count; i++ {
                             for var t = 0; t < self.piecesArrs[i].count; t++ {
                                 self.piecesArrs[i][t].userInteractionEnabled = false
