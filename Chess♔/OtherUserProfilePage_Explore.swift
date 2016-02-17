@@ -102,12 +102,10 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
     override func viewDidAppear(animated: Bool) {
 
     }
- 
-    
-    
-    
+
     override func viewDidLoad() {
         
+        print("OtherUserProfilePage_Explore")
 
         super.viewDidLoad()
 

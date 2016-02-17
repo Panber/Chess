@@ -668,7 +668,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         let user:PFUser = users[indexPath.row] as! PFUser
         
-        cell.username.text = user["username"] as? String
+        //cell.username.text = user["username"] as? String
         NSUserDefaults.standardUserDefaults().setObject(cell.username.text, forKey: "other_username")
         
         let profilePictureObject = user["profile_picture"] as? PFFile
