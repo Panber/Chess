@@ -863,9 +863,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     
                     gameID = gameIDSTheirTurn[indexPath.row]
                     
-//                    
-//                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
-//                    self.showViewController(vc as! UIViewController, sender: vc)
+                    
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+                    self.showViewController(vc as! UIViewController, sender: vc)
 
                 }
                 print(timeLeftC)
