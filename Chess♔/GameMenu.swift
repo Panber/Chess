@@ -760,6 +760,17 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 cell.timeleft.text = "Time Left: Less than a minute"
                 cell.timeleft.textColor = red
                 
+                
+                if timeLeftC >= 0 {
+                    
+                    gameID = gameIDSYourTurn[indexPath.row]
+
+                    
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+                    self.showViewController(vc as! UIViewController, sender: vc)
+                    
+                    
+                }
   
                 
                 if timeLeftC <= -60 {
@@ -846,11 +857,16 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 
                 if timeLeftC >= 0 {
                     print("times up mate")
-                    cell.timeleft.text = "Time is up. Claim your victory."
+                    cell.timeleft.text = "Time's up. Claim your victory."
                     cell.timeleft.textColor = green
-
-
                     
+                    
+                    gameID = gameIDSTheirTurn[indexPath.row]
+                    
+                    
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+                    self.showViewController(vc as! UIViewController, sender: vc)
+
                 }
                 print(timeLeftC)
                 
