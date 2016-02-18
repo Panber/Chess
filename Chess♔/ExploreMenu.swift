@@ -544,10 +544,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             })
         }
         
-        for var i = 0; i < userFriends.count; i++ {
-            if (userFriends[i].lowercaseString.rangeOfString(searchString.lowercaseString) != nil) {
                 let userQuery = PFQuery(className: "_User")
-                userQuery.whereKey("username", equalTo: userFriends[i])
+                userQuery.whereKey("username", matchesRegex:searchString, modifiers:"i")
+                userQuery.whereKey("username", containedIn: userFriends)
                 userQuery.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
                     if error == nil {
                         self.users.removeAllObjects()
@@ -560,8 +559,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                         }
                     }
                 }
-            }
-        }
         
     }
     
