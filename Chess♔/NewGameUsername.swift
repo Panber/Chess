@@ -20,6 +20,8 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
     // Array for users that are being searched for
     var users:NSMutableArray = []
     
+    var usersArray: Array<String> = []
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -40,7 +42,9 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
         
         imageDataArray = []
         
+        usersArray = []
         users = []
+        searchUsers( searchBar.text!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,6 +95,7 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
         cell.rating.text = "\(rating!)"
         ratingArray.append(user["rating"] as! Int)
         cell.username.text = user["username"] as? String
+        usersArray .append((user["username"] as? String)!)
         
         let profilePictureObject = user["profile_picture"] as? PFFile
         
@@ -119,7 +124,8 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        NSUserDefaults.standardUserDefaults().setObject(users[indexPath.row], forKey: "other_username_from_friends_gamemenu")
+        print(usersArray.count)
+        NSUserDefaults.standardUserDefaults().setObject(usersArray[indexPath.row], forKey: "other_username_from_friends_gamemenu")
         
         let p = imageDataArray[indexPath.row]
         NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friends_gamemenu")
