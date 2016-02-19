@@ -686,7 +686,6 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             
             let profilePictureData = NSData(contentsOfURL: profilePictureUrl!)
             
-            
             // Prepare PFUser object
             if(profilePictureData != nil)
             {
