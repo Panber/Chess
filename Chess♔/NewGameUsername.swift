@@ -28,7 +28,7 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
     override func viewDidLoad() {
         super.viewDidLoad()
          print("viewDidLoad")
-        navigationController?.navigationBar.topItem?.title = "Users"
+        //navigationController?.navigationBar.topItem?.title = "Users"
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
@@ -44,9 +44,8 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
         
         usersArray = []
         users = []
-        searchUsers( searchBar.text!)
+        searchUsers(searchBar.text!)
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -138,6 +137,9 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
     }
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.searchDisplayController?.searchResultsTableView.reloadData()
+        }
         if searchText.characters.count > 0 {
             searchUsers(searchText)
         }
