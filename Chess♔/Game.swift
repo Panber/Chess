@@ -214,6 +214,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var otherUserName = ""
     var otherUserRating = ""
     var otherUserRatingInt = Int()
+    var otherUserRatingIntStart = Int()
+
     
     var otherUserWon = Int()
     var otherUserLost = Int()
@@ -226,6 +228,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var meUserName = ""
     var meUserRating = ""
     var meUserRatingInt = Int()
+    var meUserRatingIntStart = Int()
+
     
     var meUserWon = Int()
     var meUserLost = Int()
@@ -980,6 +984,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             colorLcolor = "You are White"
             colorIndicatorcolor = UIColor.whiteColor()
             
+             meUserRatingIntStart = game["whiteRating"] as! Int
+            otherUserRatingIntStart = game["blackRating"] as! Int
+
 
 
 
@@ -1024,6 +1031,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 self.myTurnAtlaunch = false
                 self.addMyTurnAndTime()
+               
+                
                 
                 
                 for var i = 0; i < piecesArrs.count; i++ {
@@ -1807,11 +1816,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.title = r!["blackPlayer"] as? String
             self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
             self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
-            let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
             self.passantPiece = (r!["passantPiece"] as? Int)!
             self.canPassant = r!["passant"] as! Bool
             self.canPassantBlack = r!["passantBlack"] as! Bool
             self.promotionBlack = r!["promotionBlack"] as! Bool
+            let un = [r!["blackPlayer"]!,r!["whitePlayer"]!]
+            
             let userQuery = PFQuery(className: "_User")
             userQuery.whereKey("username", containedIn: un )
             userQuery.findObjectsInBackgroundWithBlock({ (result:[AnyObject]?, error:NSError?) -> Void in
@@ -1830,6 +1840,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             else {
                                 self.otherUserRatingInt = result["rating"] as! Int!
+                                self.otherUserName = (result["username"] as? String)!
+
                             }
                             
                             let profilePictureObject = result["profile_picture"] as? PFFile
@@ -1897,66 +1909,197 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnLturn = "You Won"
                         self.turnIndicatorturn = green
                         
-                        if r!["whiteRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0).0
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
-                    
+                        if self.game["whiteRatedComplete"] as! Bool == false {
+                           
+                            
+                            
+                            //won
+                            let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 1, sB: 0)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.0 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
                             let s = self.meUserWon + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "won")
-                            
                             PFUser.currentUser()!.save()
                             
-                            r!["whiteRatedComplete"] = true
-                            r!.save()
                             
-
-
+                            self.game["status_white"] = "won"
+                            self.game["status_black"] = "lost"
+                            
+                            self.game["whiteRatedComplete"] = true
+                            
+                            self.game.save()
+                            
                             self.gameFinishedScreen("won",statusBy: "")
+                            //firebase
+                            
+                            //add who's turn it is
+                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                            var status = ["turn": "done"]
+                            
+                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                            statusRef.setValue(status)
+                            //firebase - end
+                            
+                            
+                            
                         }
+                        
+              
                     }
                     else if r!["status_white"] as! String == "lost" {
                         self.turnLturn = "You Lost"
                         self.turnIndicatorturn = red
                         
-                        if r!["whiteRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0, sB: 1).0
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        if self.game["whiteRatedComplete"] as! Bool == false {
                             
+                            
+                            //lost
+                            let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0, sB: 1)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.0 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserLost = Int(PFUser.currentUser()!.objectForKey("lost") as! String!)!
                             let s = self.meUserLost + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
-                            
                             PFUser.currentUser()!.save()
                             
-                            r!["whiteRatedComplete"] = true
-                            r!.save()
                             
-     
-
+                            self.game["status_white"] = "lost"
+                            self.game["status_black"] = "won"
+                            
+                            self.game["whiteRatedComplete"] = true
+                            
+                            self.game.save()
+                            
                             self.gameFinishedScreen("lost",statusBy: "")
-
+                            //firebase
+                            
+                            //add who's turn it is
+                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                            var status = ["turn": "done"]
+                            
+                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                            statusRef.setValue(status)
+                            //firebase - end
+                            
+                            
+                            
                         }
+                      
                     }
                     else if r!["status_white"] as! String == "draw" {
                         self.turnLturn = "Draw"
                         self.turnIndicatorturn = UIColor.purpleColor()
                         
-                        if r!["whiteRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        if self.game["whiteRatedComplete"] as! Bool == false {
+                       
                             
+                            
+                            //draw
+                            let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.0 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserDrawn = Int(PFUser.currentUser()!.objectForKey("drawn") as! String!)!
                             let s = self.meUserDrawn + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
-                            
                             PFUser.currentUser()!.save()
                             
-                  
                             
-                            r!["whiteRatedComplete"] = true
-                            r!.save()
+                            self.game["status_white"] = "draw"
+                            self.game["status_black"] = "draw"
+                            
+                            self.game["whiteRatedComplete"] = true
+                            
+                            self.game.save()
                             
                             self.gameFinishedScreen("drew",statusBy: "")
-
+                            //firebase
+                            
+                            //add who's turn it is
+                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                            var status = ["turn": "done"]
+                            
+                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                            statusRef.setValue(status)
+                            //firebase - end
+                            
+                            
+                            
                         }
+                        
+                    }
+                    else if r!["status_white"] as! String == "notmove" {
+                        
+                        let lastupdate = r!["blackDate"] as? NSDate
+                        var timeLeft2 = NSDate().timeIntervalSinceDate(lastupdate!)
+                        print(timeLeft2)
+                        
+                        if timeLeft2 >= 0 {
+                            //won
+                      
+                            if self.game["whiteRatedComplete"] as! Bool == false {
+                                self.turnLturn = "You Won"
+                                self.turnIndicatorturn = red
+                               
+                                
+                                let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 1, sB: 0)
+                                
+                                let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                                let addRating = Rating.0 - self.meUserRatingIntStart
+                                
+                                print(addRating+nowRating)
+                                
+                                PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                                self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
+                                let s = self.meUserWon + 1
+                                PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                                PFUser.currentUser()!.save()
+                                
+                                
+                                self.game["status_white"] = "won"
+                                self.game["status_black"] = "lost"
+                                
+                                self.game["whiteRatedComplete"] = true
+                                
+                                self.game.save()
+                                
+                                self.gameFinishedScreen("won",statusBy: "")
+                                //firebase
+                                
+                                //add who's turn it is
+                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                var status = ["turn": "done"]
+                                
+                                let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                                statusRef.setValue(status)
+                                //firebase - end
+                                
+                                
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    else if r!["status_white"] as! String == "move" {
+                        
+                      
+                        
                     }
                     if r!["draw_white"] as! String == "drawto" {
                         
@@ -2716,73 +2859,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
 //                    let lastupdate = self.game["whiteDate"] as? NSDate
 //                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
                     
-                    //setting rating and won/lost/drawn
-                    if r!["status_white"] as! String == "won" {
-                        self.turnLturn = "You Won"
-                        self.turnIndicatorturn = green
-                        if r!["whiteRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0).0
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
-                            
-                            let s = self.meUserWon + 1
-                            PFUser.currentUser()!.setObject("\(s)", forKey: "won")
-                            
-                            PFUser.currentUser()!.save()
-                            
-                            r!["whiteRatedComplete"] = true
-                            r!.save()
-                            
-                   
-                            
-                            self.gameFinishedScreen("won",statusBy: "")
-                        }
-                    }
-                    else if r!["status_white"] as! String == "lost" {
-                        self.turnLturn = "You Lost"
-                        self.turnIndicatorturn = red
-                        if r!["whiteRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0, sB: 1).0
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
-                            
-                            let s = self.meUserLost + 1
-                            PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
-                            
-                            PFUser.currentUser()!.save()
-                            
-                            r!["whiteRatedComplete"] = true
-                            r!.save()
-                            
-                            
-                            
-                            
-                            self.gameFinishedScreen("lost",statusBy: "")
-                            
-                        }
-                    }
-                    else if r!["status_white"] as! String == "draw" {
-                        
-                        self.turnLturn = "Draw"
-                        self.turnIndicatorturn = UIColor.purpleColor()
-                        if r!["whiteRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
-                            
-                            let s = self.meUserDrawn + 1
-                            PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
-                            
-                            PFUser.currentUser()!.save()
-                            
-                            r!["whiteRatedComplete"] = true
-                            r!.save()
-                 
-                            
-                            self.gameFinishedScreen("drew",statusBy: "")
-                            
-                        }
-                    }
 
                     
-                    self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
 
                     
                     if r!["status_white"] as! String == "move" {
@@ -2820,7 +2898,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                         }
                     }
-                    
+                    self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
+
                     self.isWhiteTurn = true
                     
                     // self.updateLogic()
@@ -2836,94 +2915,129 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.game = r!
                     
                     //setting rating and won/lost/drawn
+
+                    
+                    //setting rating and won/lost/drawn
                     if r!["status_white"] as! String == "won" {
                         self.turnLturn = "You Won"
                         self.turnIndicatorturn = green
-                        for var i = 0; i < self.piecesArrs.count; i++ {
-                            for var t = 0; t < self.piecesArrs[i].count; t++ {
-                                self.piecesArrs[i][t].userInteractionEnabled = false
-                            }
-                        }
-                        if r!["whiteRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0).0
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        
+                        if self.game["whiteRatedComplete"] as! Bool == false {
                             
+                            
+                            
+                            //won
+                            let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 1, sB: 0)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.0 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
                             let s = self.meUserWon + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "won")
-                            
                             PFUser.currentUser()!.save()
                             
-                            r!["whiteRatedComplete"] = true
-                            r!.save()
+                            
+                            self.game["status_white"] = "won"
+                            self.game["status_black"] = "lost"
+                            
+                            self.game["whiteRatedComplete"] = true
+                            
+                            self.game.save()
                             
                             self.gameFinishedScreen("won",statusBy: "")
+                      
                             
-               
                             
-
+                            
                         }
+                        
+                        
                     }
                     else if r!["status_white"] as! String == "lost" {
                         self.turnLturn = "You Lost"
                         self.turnIndicatorturn = red
-                        for var i = 0; i < self.piecesArrs.count; i++ {
-                            for var t = 0; t < self.piecesArrs[i].count; t++ {
-                                self.piecesArrs[i][t].userInteractionEnabled = false
-                            }
-                        }
-                        if r!["whiteRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0, sB: 1).0
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        
+                        if self.game["whiteRatedComplete"] as! Bool == false {
                             
+                            
+                            //lost
+                            let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0, sB: 1)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.0 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserLost = Int(PFUser.currentUser()!.objectForKey("lost") as! String!)!
                             let s = self.meUserLost + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
-                            
                             PFUser.currentUser()!.save()
                             
-                            r!["whiteRatedComplete"] = true
-                            r!.save()
+                            
+                            self.game["status_white"] = "lost"
+                            self.game["status_black"] = "won"
+                            
+                            self.game["whiteRatedComplete"] = true
+                            
+                            self.game.save()
                             
                             self.gameFinishedScreen("lost",statusBy: "")
+                   
                             
-                          
                             
-                
                             
                         }
+                        
                     }
                     else if r!["status_white"] as! String == "draw" {
-                        
                         self.turnLturn = "Draw"
                         self.turnIndicatorturn = UIColor.purpleColor()
-                        for var i = 0; i < self.piecesArrs.count; i++ {
-                            for var t = 0; t < self.piecesArrs[i].count; t++ {
-                                self.piecesArrs[i][t].userInteractionEnabled = false
-                            }
-                        }
-                        if r!["whiteRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        
+                        if self.game["whiteRatedComplete"] as! Bool == false {
                             
+                            
+                            
+                            //draw
+                            let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.0 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserDrawn = Int(PFUser.currentUser()!.objectForKey("drawn") as! String!)!
                             let s = self.meUserDrawn + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
-                            
                             PFUser.currentUser()!.save()
                             
-                            r!["whiteRatedComplete"] = true
-                            r!.save()
+                            
+                            self.game["status_white"] = "draw"
+                            self.game["status_black"] = "draw"
+                            
+                            self.game["whiteRatedComplete"] = true
+                            
+                            self.game.save()
                             
                             self.gameFinishedScreen("drew",statusBy: "")
                
                             
- 
+                            
                             
                         }
+                        
                     }
                     
+               
                     if r!["draw_white"] as! String == "drawto" {
                         
                         self.hasOfferedDraw = true
-
+                        
                         let drawAlert = UIAlertController(title: "Draw Offered", message: "You have been offered a draw. Do you want to accept it?", preferredStyle: UIAlertControllerStyle.Alert)
                         
                         drawAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { action in
@@ -2954,8 +3068,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         r!["status_black"] = "draw"
                                         
-                                        self.turnLturn = "Draw"
-                                        self.turnIndicatorturn = UIColor.purpleColor()
                                         
                                         r!["whiteRatedComplete"] = true
                                         r!.save()
@@ -2970,7 +3082,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.gameFinishedScreen("drew",statusBy: "")
                                         
                                         
-                                        
+                                        self.turnLturn = "Draw"
+                                        self.turnIndicatorturn = UIColor.purpleColor()
                                         
                                         
                                         //firebase
@@ -2997,16 +3110,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 if self.iamWhite {
                                     
                                     
-                                        
-                                        
-                                        r!["draw_white"] = ""
-                                        
-                                        r!["draw_black"] = ""
-                                        
-                                        
-                                        r!.save()
+                                    
+                                    
+                                    r!["draw_white"] = ""
+                                    
+                                    r!["draw_black"] = ""
+                                    
+                                    
+                                    r!.save()
                                     self.hasOfferedDraw = false
-
                                     
                                     
                                 }
@@ -3027,6 +3139,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         self.hasOfferedDraw = true
                     }
+                    
+                    
+                    
+             
                     else if r!["draw_white"] as! String == "" {
                         
                         self.hasOfferedDraw = false
@@ -3045,7 +3161,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             let lastupdate = game["blackDate"] as? NSDate
             timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
             
-
+            meUserRatingIntStart = game["blackRating"] as! Int
+            otherUserRatingIntStart = game["whiteRating"] as! Int
             
             if (game["blackTime"] as? Int) < 0 {
                 print("I won on time")
@@ -3880,6 +3997,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 myTurnAtlaunch = false
                 addMyTurnAndTime()
                 
+                
                 for var i = 0; i < piecesArrs.count; i++ {
                     for var t = 0; t < piecesArrs[i].count; t++ {
                         piecesArrs[i][t].image = UIImage(named: piecesString[i])
@@ -3919,9 +4037,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 self.meUserLost = Int(result["lost"] as! String!)!
                                 self.meUserDrawn = Int(result["drawn"] as! String!)!
                                 
+
+                                
                             }
                             else {
                                 self.otherUserRatingInt = result["rating"] as! Int!
+                                self.otherUserName = (result["username"] as? String)!
+
                             }
                             let profilePictureObject = result["profile_picture"] as? PFFile
                             
@@ -3985,65 +4107,187 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnLturn = "You Won"
                         self.turnIndicatorturn = green
                         
-                        if r!["blackRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1).1
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        if self.game["blackRatedComplete"] as! Bool == false {
                             
+                            //won
+                            let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0, sB: 1)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.1 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
                             let s = self.meUserWon + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "won")
-                            
                             PFUser.currentUser()!.save()
                             
-                            r!["blackRatedComplete"] = true
-                            r!.save()
                             
-                       
+                            self.game["status_white"] = "lost"
+                            self.game["status_black"] = "won"
                             
-                            self.gameFinishedScreen("lost",statusBy: "")
-
+                            self.game["blackRatedComplete"] = true
+                            
+                            self.game.save()
+                            
+                            self.gameFinishedScreen("lost",statusBy: "time")
+                            //firebase
+                            
+                            //add who's turn it is
+                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                            var status = ["turn": "done"]
+                            
+                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                            statusRef.setValue(status)
+                            //firebase - end
+                            
+                            
+                            
                         }
+                       
                     }
                     else if r!["status_black"] as! String == "lost" {
                         self.turnLturn = "You Lost"
                         self.turnIndicatorturn = red
-                        if r!["blackRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 1, sB: 0).1
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        
+                        if self.game["blackRatedComplete"] as! Bool == false {
                             
+                            //lost
+                            let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 1, sB: 0)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.1 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserLost = Int(PFUser.currentUser()!.objectForKey("lost") as! String!)!
                             let s = self.meUserLost + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
-                            
                             PFUser.currentUser()!.save()
                             
-                            r!["blackRatedComplete"] = true
-                            r!.save()
                             
-                      
+                            self.game["status_white"] = "won"
+                            self.game["status_black"] = "lost"
                             
-                            self.gameFinishedScreen("won",statusBy: "")
-
+                            self.game["blackRatedComplete"] = true
+                            
+                            self.game.save()
+                            
+                            self.gameFinishedScreen("won",statusBy: "time")
+                            //firebase
+                            
+                            //add who's turn it is
+                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                            var status = ["turn": "done"]
+                            
+                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                            statusRef.setValue(status)
+                            //firebase - end
+                            
+                            
+                            
                         }
+                    
                     }
                     else if r!["status_black"] as! String == "draw" {
                         self.turnLturn = "Draw"
                         self.turnIndicatorturn = UIColor.purpleColor()
-                        if r!["blackRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        
+                        if self.game["blackRatedComplete"] as! Bool == false {
                             
+                            //draw
+                            let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.1 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserDrawn = Int(PFUser.currentUser()!.objectForKey("drawn") as! String!)!
                             let s = self.meUserDrawn + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
-                            
                             PFUser.currentUser()!.save()
                             
-                            r!["blackRatedComplete"] = true
-                            r!.save()
                             
-                     
+                            self.game["status_white"] = "draw"
+                            self.game["status_black"] = "draw"
+                            
+                            self.game["blackRatedComplete"] = true
+                            
+                            self.game.save()
                             
                             self.gameFinishedScreen("drew",statusBy: "")
-
+                            //firebase
+                            
+                            //add who's turn it is
+                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                            var status = ["turn": "done"]
+                            
+                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                            statusRef.setValue(status)
+                            //firebase - end
+                            
+                            
+                            
                         }
+                       
+                        
+                    }
+                    else if r!["status_black"] as! String == "notmove" {
+                    
+                        let lastupdate = r!["whiteDate"] as? NSDate
+                        var timeLeft2 = NSDate().timeIntervalSinceDate(lastupdate!)
+                        print(timeLeft2)
+                        //won
+                        if timeLeft2 >= 0 {
+                            if self.game["blackRatedComplete"] as! Bool == false {
+                                
+                                //won
+                                let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0, sB: 1)
+                                
+                                let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                                let addRating = Rating.1 - self.meUserRatingIntStart
+                                
+                                print(addRating+nowRating)
+                                
+                                PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                                self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
+                                let s = self.meUserWon + 1
+                                PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                                PFUser.currentUser()!.save()
+                                
+                                
+                                self.game["status_white"] = "lost"
+                                self.game["status_black"] = "won"
+                                
+                                self.game["blackRatedComplete"] = true
+                                
+                                self.game.save()
+                                
+                                self.gameFinishedScreen("lost",statusBy: "time")
+                                //firebase
+                                
+                                //add who's turn it is
+                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                var status = ["turn": "done"]
+                                
+                                let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                                statusRef.setValue(status)
+                                //firebase - end
+                                
+                                
+                                
+                            }
+                        }
+
+                    }
+                    else if r!["status_black"] as! String == "move" {
+                        
+                     
+
                         
                     }
                     if r!["draw_black"] as! String == "drawto" {
@@ -4066,37 +4310,40 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 
                                 if !self.iamWhite {
                                     
-                                    if r!["blackRatedComplete"] as! Bool == false {
+                                    self.turnLturn = "Draw"
+                                    self.turnIndicatorturn = UIColor.purpleColor()
+                                    
+                                    if self.game["blackRatedComplete"] as! Bool == false {
                                         
-                                        let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).1
-                                        PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                                        //draw
+                                        let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
                                         
+                                        let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                                        let addRating = Rating.1 - self.meUserRatingIntStart
+                                        
+                                        print(addRating+nowRating)
+                                        
+                                        PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                                        self.meUserDrawn = Int(PFUser.currentUser()!.objectForKey("drawn") as! String!)!
                                         let s = self.meUserDrawn + 1
                                         PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
-                                        
                                         PFUser.currentUser()!.save()
                                         
-                                        r!["status_white"] = "draw"
                                         
-                                        r!["status_black"] = "draw"
+                                        self.game["status_white"] = "draw"
+                                        self.game["status_black"] = "draw"
                                         
-                                        self.turnLturn = "Draw"
-                                        self.turnIndicatorturn = UIColor.purpleColor()
+                                        self.game["blackRatedComplete"] = true
                                         
-                                        r!["blackRatedComplete"] = true
-                                        r!.save()
+                                        self.game.save()
                                         
                                         self.gameFinishedScreen("drew",statusBy: "")
-                                        
-                                        
+                                        //firebase
                                         for var i = 0; i < self.piecesArrs.count; i++ {
                                             for var t = 0; t < self.piecesArrs[i].count; t++ {
                                                 self.piecesArrs[i][t].userInteractionEnabled = false
                                             }
                                         }
-                                        
-                                        
-                                        //firebase
                                         
                                         //add who's turn it is
                                         let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
@@ -4106,7 +4353,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         statusRef.setValue(status)
                                         //firebase - end
                                         
+                                        
+                                        
                                     }
+
+                                   
                                 }
                                 
                             }
@@ -4795,69 +5046,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
 //                    let lastupdate = self.game["blackDate"] as? NSDate
 //                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
                     //setting rating and won/lost/drawn
-                    if r!["status_black"] as! String == "won" {
-                        self.turnLturn = "You Won"
-                        self.turnIndicatorturn = green
-                        if r!["blackRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1).1
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
-                            
-                            let s = self.meUserWon + 1
-                            PFUser.currentUser()!.setObject("\(s)", forKey: "won")
-                            
-                            PFUser.currentUser()!.save()
-                            
-                            r!["blackRatedComplete"] = true
-                            r!.save()
-                            
-                     
-                            
-                            self.gameFinishedScreen("lost",statusBy: "")
-                            
-                        }
-                    }
-                    else if r!["status_black"] as! String == "lost" {
-                        self.turnLturn = "You Lost"
-                        self.turnIndicatorturn = red
-                        if r!["blackRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 1, sB: 0).1
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
-                            
-                            let s = self.meUserLost + 1
-                            PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
-                            
-                            PFUser.currentUser()!.save()
-                            
-                            r!["blackRatedComplete"] = true
-                            r!.save()
-                            
-                         
-                            
-                            self.gameFinishedScreen("won",statusBy: "")
-                            
-                        }
-                    }
-                    else if r!["status_black"] as! String == "draw" {
-                        self.turnLturn = "Draw"
-                        self.turnIndicatorturn = UIColor.purpleColor()
-                        if r!["blackRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
-                            
-                            let s = self.meUserDrawn + 1
-                            PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
-                            
-                            PFUser.currentUser()!.save()
-                            
-                            r!["blackRatedComplete"] = true
-                            r!.save()
-                            
-                      
-                            
-                            self.gameFinishedScreen("drew",statusBy: "")
-                            
-                        }
-                    }
+              
 
                     self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
 
@@ -4883,7 +5072,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         for var i = 0; i < self.piecesArrs.count; i++ {
                             for var t = 0; t < self.piecesArrs[i].count; t++ {
-                                
                                 self.piecesArrs[i][t].userInteractionEnabled = false
                             }
                         }
@@ -4897,95 +5085,120 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     let r = query.getFirstObject()
                     self.game = r!
                     
+                    //setting rating and won/lost/drawn
                     if r!["status_black"] as! String == "won" {
                         self.turnLturn = "You Won"
                         self.turnIndicatorturn = green
-                        for var i = 0; i < self.piecesArrs.count; i++ {
-                            for var t = 0; t < self.piecesArrs[i].count; t++ {
-                                self.piecesArrs[i][t].userInteractionEnabled = false
-                            }
-                        }
-                        if r!["blackRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1).1
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        
+                        if self.game["blackRatedComplete"] as! Bool == false {
                             
+                            //won
+                            let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0, sB: 1)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.1 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
                             let s = self.meUserWon + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "won")
-                            
                             PFUser.currentUser()!.save()
                             
-                            r!["blackRatedComplete"] = true
-                            r!.save()
                             
-                    
+                            self.game["status_white"] = "lost"
+                            self.game["status_black"] = "won"
                             
-       
+                            self.game["blackRatedComplete"] = true
+                            
+                            self.game.save()
+                            
+                            self.gameFinishedScreen("lost",statusBy: "time")
+                   
                             
                             
-                            self.gameFinishedScreen("lost",statusBy: "")
                             
                         }
+                        
                     }
                     else if r!["status_black"] as! String == "lost" {
                         self.turnLturn = "You Lost"
                         self.turnIndicatorturn = red
-                        for var i = 0; i < self.piecesArrs.count; i++ {
-                            for var t = 0; t < self.piecesArrs[i].count; t++ {
-                                self.piecesArrs[i][t].userInteractionEnabled = false
-                            }
-                        }
-                        if r!["blackRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 1, sB: 0).1
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        
+                        if self.game["blackRatedComplete"] as! Bool == false {
                             
+                            //lost
+                            let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 1, sB: 0)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.1 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserLost = Int(PFUser.currentUser()!.objectForKey("lost") as! String!)!
                             let s = self.meUserLost + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
-                            
                             PFUser.currentUser()!.save()
                             
-                          
                             
-                            r!["blackRatedComplete"] = true
-                            r!.save()
+                            self.game["status_white"] = "won"
+                            self.game["status_black"] = "lost"
                             
-
+                            self.game["blackRatedComplete"] = true
                             
-                            self.gameFinishedScreen("won",statusBy: "")
+                            self.game.save()
+                            
+                            self.gameFinishedScreen("won",statusBy: "time")
+                        
+                            
+                            
                             
                         }
+                        
                     }
                     else if r!["status_black"] as! String == "draw" {
                         self.turnLturn = "Draw"
                         self.turnIndicatorturn = UIColor.purpleColor()
-                        for var i = 0; i < self.piecesArrs.count; i++ {
-                            for var t = 0; t < self.piecesArrs[i].count; t++ {
-                                self.piecesArrs[i][t].userInteractionEnabled = false
-                            }
-                        }
-                        if r!["blackRatedComplete"] as! Bool == false {
-                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        
+                        if self.game["blackRatedComplete"] as! Bool == false {
                             
+                            //draw
+                            let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.1 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserDrawn = Int(PFUser.currentUser()!.objectForKey("drawn") as! String!)!
                             let s = self.meUserDrawn + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
-                            
                             PFUser.currentUser()!.save()
                             
-                       
                             
-                            r!["blackRatedComplete"] = true
-                            r!.save()
+                            self.game["status_white"] = "draw"
+                            self.game["status_black"] = "draw"
                             
-     
+                            self.game["blackRatedComplete"] = true
+                            
+                            self.game.save()
                             
                             self.gameFinishedScreen("drew",statusBy: "")
                             
+                            
+                            
                         }
+                        
+                        
                     }
+
                     if r!["draw_black"] as! String == "drawto" {
                         
+                        
                         self.hasOfferedDraw = true
-
                         let drawAlert = UIAlertController(title: "Draw Offered", message: "You have been offered a draw. Do you want to accept it?", preferredStyle: UIAlertControllerStyle.Alert)
                         
                         drawAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { action in
@@ -5002,37 +5215,40 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 
                                 if !self.iamWhite {
                                     
-                                    if r!["blackRatedComplete"] as! Bool == false {
+                                    self.turnLturn = "Draw"
+                                    self.turnIndicatorturn = UIColor.purpleColor()
+                                    
+                                    if self.game["blackRatedComplete"] as! Bool == false {
                                         
-                                        let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).1
-                                        PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                                        //draw
+                                        let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
                                         
+                                        let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                                        let addRating = Rating.1 - self.meUserRatingIntStart
+                                        
+                                        print(addRating+nowRating)
+                                        
+                                        PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                                        self.meUserDrawn = Int(PFUser.currentUser()!.objectForKey("drawn") as! String!)!
                                         let s = self.meUserDrawn + 1
                                         PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
-                                        
                                         PFUser.currentUser()!.save()
                                         
-                                        r!["status_white"] = "draw"
                                         
-                                        r!["status_black"] = "draw"
+                                        self.game["status_white"] = "draw"
+                                        self.game["status_black"] = "draw"
                                         
-                                        self.turnLturn = "Draw"
-                                        self.turnIndicatorturn = UIColor.purpleColor()
+                                        self.game["blackRatedComplete"] = true
                                         
-                                        r!["blackRatedComplete"] = true
-                                        r!.save()
+                                        self.game.save()
                                         
                                         self.gameFinishedScreen("drew",statusBy: "")
-                                        
-                                        
+                                        //firebase
                                         for var i = 0; i < self.piecesArrs.count; i++ {
                                             for var t = 0; t < self.piecesArrs[i].count; t++ {
                                                 self.piecesArrs[i][t].userInteractionEnabled = false
                                             }
                                         }
-                                        
-                                        
-                                        //firebase
                                         
                                         //add who's turn it is
                                         let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
@@ -5042,7 +5258,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         statusRef.setValue(status)
                                         //firebase - end
                                         
+                                        
+                                        
                                     }
+                                    
+                                    
                                 }
                                 
                             }
@@ -5056,16 +5276,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 if !self.iamWhite {
                                     
                                     
-                                        
-                                        
-                                        r!["draw_white"] = ""
-                                        
-                                        r!["draw_black"] = ""
-                                        
-                                        
-                                        r!.save()
+                                    
+                                    
+                                    r!["draw_white"] = ""
+                                    
+                                    r!["draw_black"] = ""
+                                    
+                                    
+                                    r!.save()
                                     self.hasOfferedDraw = false
-
+                                    
                                     
                                     
                                 }
@@ -7299,6 +7519,8 @@ var didLongPress = false
         
     }
     
+    var ratToIncreaseMe = Int()
+    var ratToIncreaseOther = Int()
     
     func gameFinishedScreen(var statusWhite:String, var statusBy:String) {
         
@@ -7351,26 +7573,53 @@ var didLongPress = false
         if statusBy == "" {
         by = ""
         }
-        
+        var meRating = Int()
+        var otherRating = Int()
         let sb = (game["blackPlayer"] as? String)!
         let sw = (game["whitePlayer"] as? String)!
         if statusWhite == "won" && iamWhite {
             wonLabel.text = "You won against " + "\(sb)" + by + statusBy
+            
+            let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 1, sB: 0)
+            meRating = Rating.0
+            otherRating = Rating.1
+
         }
         else if statusWhite == "lost" && iamWhite {
             wonLabel.text = "You lost against " + "\(sb)" + by + statusBy
+            
+            let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0, sB: 1)
+            meRating = Rating.0
+            otherRating = Rating.1
         }
         if statusWhite == "won" && !iamWhite {
             wonLabel.text = "You lost against " + "\(sw)" + by + statusBy
+            
+            let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 1, sB: 0)
+            meRating = Rating.1
+            otherRating = Rating.0
         }
         else if statusWhite == "lost" && !iamWhite {
             wonLabel.text = "You won against " + "\(sw)" + by + statusBy
+            
+            let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0, sB: 1)
+            meRating = Rating.1
+            otherRating = Rating.0
         }
         else if statusWhite == "drew" && !iamWhite {
             wonLabel.text = "You drew " + "\(sw)"
+            
+            let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
+            meRating = Rating.1
+            otherRating = Rating.0
+
         }
         else if statusWhite == "drew" && iamWhite {
             wonLabel.text = "You drew " + "\(sb)"
+            
+            let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
+            meRating = Rating.0
+            otherRating = Rating.1
         }
         
         
@@ -7453,18 +7702,23 @@ var didLongPress = false
             shareTwitterButton.frame.origin.y = screenHeight - 60
             shareFacebookButton.frame.origin.y = screenHeight - 60
             
-            let mR = Int(self.meUserRatingInt)
-            let oR = Int(self.otherUserRatingInt)
+            let mR = Int(self.meUserRatingIntStart)
+            let oR = Int(self.otherUserRatingIntStart)
+            
+            self.ratToIncreaseMe = meRating-mR
+            self.ratToIncreaseOther = otherRating-oR
+            
+            
             
             wonLabel.alpha = 1
-            self.ratingI.text = "\(mR)" + "+45"
-            self.ratingOppo.text = "\(oR)" + "-45"
+            self.ratingI.text = "\(self.meUserRatingInt)" + "+ \(self.ratToIncreaseMe)"
+            self.ratingOppo.text = "\(self.otherUserRatingInt)" + "+ \(self.ratToIncreaseOther)"
             
             
             
         }), completion:  { finish in
             
-            self.waitTimerRating = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateWaitNum"), userInfo: nil, repeats: true)
+            self.waitTimerRating = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: Selector("updateWaitNum"), userInfo: nil, repeats: true)
             
             }
         )
@@ -7479,7 +7733,7 @@ var didLongPress = false
     var movementTimerRating = NSTimer()
     var waitTimerRating = NSTimer()
     
-    var meRating = Int()
+    var meRating2 = Int()
     var ratingI = UILabel()
     
     var oppoRating = Int()
@@ -7509,7 +7763,7 @@ var didLongPress = false
         
         
         
-        if meRating >= 45 {
+        if meRating2 == ratToIncreaseMe {
             
             UIView.animateWithDuration(0.8, delay: 0.0, usingSpringWithDamping: 1.3, initialSpringVelocity: 5.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
                 
@@ -7517,28 +7771,45 @@ var didLongPress = false
                 if darkMode {self.ratingI.textColor = UIColor.lightGrayColor()}
                 else {self.ratingI.textColor = UIColor.darkGrayColor() }
                 
-                
+                self.ratingI.text = "\(PFUser.currentUser()!.objectForKey("rating") as! Int)"
+
                 
             }), completion:
                 {finish in
                     
                     //self.movementTimerRating.invalidate()
+
             })
             
             
         }
         else  {
-            meRating++
-            ratingI.text = "\(meRating)"
+            if ratToIncreaseMe > 0 {
+            meRating2++
+            }
+            else if ratToIncreaseMe < 0 {
+                meRating2--
+
+            }
+            ratingI.text = "\(meUserRatingInt+meRating2)"
+
         }
         
-        if oppoRating <= -45 {
+        
+        
+        if oppoRating == ratToIncreaseOther {
             if darkMode {self.ratingOppo.textColor = UIColor.lightGrayColor()}
             else {self.ratingOppo.textColor = UIColor.darkGrayColor() }
         }
         else {
-            oppoRating--
-            ratingOppo.text = "\(oppoRating)"
+            if ratToIncreaseOther > 0 {
+                oppoRating++
+            }
+            else if ratToIncreaseOther < 0 {
+                oppoRating--
+                
+            }
+            ratingOppo.text = "\(otherUserRatingInt+oppoRating)"
         }
         
     }
@@ -7547,7 +7818,7 @@ var didLongPress = false
         removeNewView()
         
         let vc = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-        vc.setInitialText("I won against hans at CHESS")
+        vc.setInitialText("I won against \(otherUserName) playing CHESS")
         vc.addURL(NSURL(string: "http://www.nasa.gov"))
         presentViewController(vc, animated: true, completion: nil)
         
@@ -7555,7 +7826,7 @@ var didLongPress = false
     func shareTwitterButtonPressed(sender: UIButton!) {
         removeNewView()
         let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-        vc.setInitialText("I won against hans at CHESS")
+        vc.setInitialText("I won against \(otherUserName) playing CHESS")
         vc.addURL(NSURL(string: "http://www.nasa.gov"))
         presentViewController(vc, animated: true, completion: nil)
     }
@@ -7956,19 +8227,31 @@ var didLongPress = false
                 if self.iamWhite {
                     
                     if self.game["whiteRatedComplete"] as! Bool == false {
+                        self.turnLturn = "You Lost"
+                        self.turnIndicatorturn = red
+                        self.updateLaunchTimerInt = 0
+                        self.launchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateLaunchTimer", userInfo: nil, repeats: true)
+
+                        //lost
+                        let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0, sB: 1)
                         
-                        let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0, sB: 1).0
-                        PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                        let addRating = Rating.0 - self.meUserRatingIntStart
                         
+                        print(addRating+nowRating)
+                        
+                        PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                        self.meUserLost = Int(PFUser.currentUser()!.objectForKey("lost") as! String!)!
                         let s = self.meUserLost + 1
                         PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
-                        
                         PFUser.currentUser()!.save()
+                        
                         
                         self.game["status_white"] = "lost"
                         self.game["status_black"] = "won"
                         
                         self.game["whiteRatedComplete"] = true
+                        
                         self.game.save()
                         
                         self.gameFinishedScreen("lost",statusBy: "resigning")
@@ -7982,27 +8265,40 @@ var didLongPress = false
                         statusRef.setValue(status)
                         //firebase - end
                         
+                        
+                        
                     }
                 }
                 else {
                     if self.game["blackRatedComplete"] as! Bool == false {
+                        self.turnLturn = "You Lost"
+                        self.turnIndicatorturn = red
                         
-                        let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 1, sB: 0).1
-                        PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                        self.updateLaunchTimerInt = 0
+                        self.launchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateLaunchTimer", userInfo: nil, repeats: true)
+                        //lost
+                        let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 1, sB: 0)
                         
+                        let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                        let addRating = Rating.1 - self.meUserRatingIntStart
+                        
+                        print(addRating+nowRating)
+                        
+                        PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                        self.meUserLost = Int(PFUser.currentUser()!.objectForKey("lost") as! String!)!
                         let s = self.meUserLost + 1
                         PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
-                        
                         PFUser.currentUser()!.save()
                         
-                        self.game["status_black"] = "lost"
+                        
                         self.game["status_white"] = "won"
+                        self.game["status_black"] = "lost"
                         
                         self.game["blackRatedComplete"] = true
+                        
                         self.game.save()
                         
                         self.gameFinishedScreen("won",statusBy: "resigning")
-                        
                         //firebase
                         
                         //add who's turn it is
@@ -8012,6 +8308,9 @@ var didLongPress = false
                         let statusRef = checkstatus.childByAppendingPath("\(gameID)")
                         statusRef.setValue(status)
                         //firebase - end
+                        
+                        
+                        
                     }
                     
                 }
@@ -8313,46 +8612,98 @@ var didLongPress = false
             
             if iamWhite {
             
-                if game["whiteRatedComplete"] as! Bool == false {
-                
-                    let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0, sB: 1).0
-                    PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                    if self.game["whiteRatedComplete"] as! Bool == false && self.game["blackRatedComplete"] as! Bool == false {
                     
-                    let s = self.meUserLost + 1
-                    PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
                     
+                    let Rating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1)
+                    
+                    PFUser.currentUser()!.setObject(Rating.1, forKey: "rating")
+                    self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
+                    let s = self.meUserWon + 1
+                    PFUser.currentUser()!.setObject("\(s)", forKey: "won")
                     PFUser.currentUser()!.save()
                     
-                    game["status_white"] = "lost"
-                    game["status_black"] = "won"
-
-                    game["whiteRatedComplete"] = true
-                    game.save()
                     
-                    self.gameFinishedScreen("lost",statusBy: "time.")
+                    var otherUserQuery = PFQuery(className:"_User")
+                    otherUserQuery.whereKey("username", equalTo: otherUserName)
+                    var otherUser = otherUserQuery.getFirstObject()
+                    
+                    otherUser!.setObject(Rating.0, forKey: "rating")
+                    self.otherUserLost = Int(otherUser!["lost"] as! String!)!
+                    let l = self.otherUserLost + 1
+                    otherUser!.setObject("\(l)", forKey: "lost")
+                    otherUser!.save()
+                    
+                    self.game["status_white"] = "lost"
+                    self.game["status_black"] = "won"
+                    
+                    self.game["whiteRatedComplete"] = true
+                    self.game["blackRatedComplete"] = true
+                    
+                    self.game.save()
+                    
+                    self.gameFinishedScreen("lost",statusBy: "chekmate")
+                    //firebase
+                    
+                    //add who's turn it is
+                    let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                    var status = ["turn": "done"]
+                    
+                    let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                    statusRef.setValue(status)
+                    //firebase - end
+                    
+                    
                     
                 }
             }
             else {
-                if game["blackRatedComplete"] as! Bool == false {
+                if self.game["whiteRatedComplete"] as! Bool == false && self.game["blackRatedComplete"] as! Bool == false {
                     
-                    let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 1, sB: 0).1
-                    PFUser.currentUser()!.setObject(myRating, forKey: "rating")
                     
-                    let s = self.meUserLost + 1
-                    PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                    let Rating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0)
                     
+                    PFUser.currentUser()!.setObject(Rating.0, forKey: "rating")
+                    self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
+                    let s = self.meUserWon + 1
+                    PFUser.currentUser()!.setObject("\(s)", forKey: "won")
                     PFUser.currentUser()!.save()
                     
-                    game["status_black"] = "lost"
-                    game["status_white"] = "won"
-
-                    game["blackRatedComplete"] = true
-                    game.save()
                     
-                    self.gameFinishedScreen("won",statusBy: "time.")
+                    var otherUserQuery = PFQuery(className:"_User")
+                    otherUserQuery.whereKey("username", equalTo: otherUserName)
+                    var otherUser = otherUserQuery.getFirstObject()
+                    
+                    otherUser!.setObject(Rating.1, forKey: "rating")
+                    self.otherUserLost = Int(otherUser!["lost"] as! String!)!
+                    let l = self.otherUserLost + 1
+                    otherUser!.setObject("\(l)", forKey: "lost")
+                    otherUser!.save()
+                    
+                    self.game["status_white"] = "won"
+                    self.game["status_black"] = "lost"
+                    
+                    self.game["whiteRatedComplete"] = true
+                    self.game["blackRatedComplete"] = true
+                    
+                    self.game.save()
+                    
+                    self.gameFinishedScreen("won",statusBy: "chekmate")
+                    //firebase
+                    
+                    //add who's turn it is
+                    let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                    var status = ["turn": "done"]
+                    
+                    let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                    statusRef.setValue(status)
+                    //firebase - end
+                    
+                    
+                    
                     
                 }
+
             
             }
             
@@ -9902,8 +10253,50 @@ var didLongPress = false
                     }
                     
                     if checkMate1 == true && checkMate2 == true && checkMate3 == true && checkMate4 == true && checkMate5 == true && checkMate6 == true {
-                        self.gameFinishedScreen("lost",statusBy: "chekmate.")
                         
+                        self.turnLturn = "You Won"
+                        self.turnIndicatorturn = green
+                        self.updateLaunchTimerInt = 0
+                        self.launchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateLaunchTimer", userInfo: nil, repeats: true)
+                        
+                        if self.game["blackRatedComplete"] as! Bool == false {
+                            
+                            //won
+                            let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0, sB: 1)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.1 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
+                            let s = self.meUserWon + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                            PFUser.currentUser()!.save()
+                            
+                            
+                            self.game["status_white"] = "lost"
+                            self.game["status_black"] = "won"
+                            
+                            self.game["blackRatedComplete"] = true
+                            
+                            self.game.save()
+                            
+                            self.gameFinishedScreen("lost",statusBy: "time")
+                            //firebase
+                            
+                            //add who's turn it is
+                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                            var status = ["turn": "done"]
+                            
+                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                            statusRef.setValue(status)
+                            //firebase - end
+                            
+                            
+                            
+                        }
                         print("Check mate!")
                     }
                 }
@@ -9980,22 +10373,36 @@ var didLongPress = false
                     
                     if staleMate1 == true && staleMate2 == true && staleMate3 == true && staleMate4 == true && staleMate5 == true && staleMate6 == true {
                         
+                        self.turnLturn = "Draw"
+                        self.turnIndicatorturn = UIColor.purpleColor()
+                        self.updateLaunchTimerInt = 0
+                        self.launchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateLaunchTimer", userInfo: nil, repeats: true)
+                        
                         if self.game["blackRatedComplete"] as! Bool == false {
                             
-                            let myRating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0.5, sB: 0.5).1
-                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                            //draw
+                            let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
                             
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.1 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserDrawn = Int(PFUser.currentUser()!.objectForKey("drawn") as! String!)!
                             let s = self.meUserDrawn + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
-                            
                             PFUser.currentUser()!.save()
+                            
                             
                             self.game["status_white"] = "draw"
                             self.game["status_black"] = "draw"
                             
                             self.game["blackRatedComplete"] = true
+                            
                             self.game.save()
                             
+                            self.gameFinishedScreen("drew",statusBy: "")
                             //firebase
                             
                             //add who's turn it is
@@ -10006,8 +10413,10 @@ var didLongPress = false
                             statusRef.setValue(status)
                             //firebase - end
                             
+                            
+                            
                         }
-                        self.gameFinishedScreen("drew",statusBy: "stalemate")
+
                     }
                 }
             }
@@ -10098,34 +10507,52 @@ var didLongPress = false
                         print("Check mate!")
                         
                         
-                            if self.game["whiteRatedComplete"] as! Bool == false {
-                                
-                                let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0).0
-                                PFUser.currentUser()!.setObject(myRating, forKey: "rating")
-                                
-                                let s = self.meUserWon + 1
-                                PFUser.currentUser()!.setObject("\(s)", forKey: "won")
-                                
-                                PFUser.currentUser()!.save()
-                                
-                                self.game["status_white"] = "won"
-                                self.game["status_black"] = "lost"
-                                
-                                self.game["whiteRatedComplete"] = true
-                                self.game.save()
-                                
-                                self.gameFinishedScreen("won",statusBy: "chekmate")
-                                //firebase
-                                
-                                //add who's turn it is
-                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                                var status = ["turn": "done"]
-                                
-                                let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                                statusRef.setValue(status)
-                                //firebase - end
-                                
-                            }
+                        self.turnLturn = "You Won"
+                        self.turnIndicatorturn = green
+                        self.updateLaunchTimerInt = 0
+                        self.launchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateLaunchTimer", userInfo: nil, repeats: true)
+                        
+                        
+                        if self.game["whiteRatedComplete"] as! Bool == false {
+                            
+                            
+                            
+                            //won
+                            let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 1, sB: 0)
+                            
+                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                            let addRating = Rating.0 - self.meUserRatingIntStart
+                            
+                            print(addRating+nowRating)
+                            
+                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                            self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
+                            let s = self.meUserWon + 1
+                            PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                            PFUser.currentUser()!.save()
+                            
+                            
+                            self.game["status_white"] = "won"
+                            self.game["status_black"] = "lost"
+                            
+                            self.game["whiteRatedComplete"] = true
+                            
+                            self.game.save()
+                            
+                            self.gameFinishedScreen("won",statusBy: "")
+                            //firebase
+                            
+                            //add who's turn it is
+                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                            var status = ["turn": "done"]
+                            
+                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+                            statusRef.setValue(status)
+                            //firebase - end
+                            
+                            
+                            
+                        }
                         
                        
                     }
@@ -10206,22 +10633,36 @@ var didLongPress = false
                         
                         if self.iamWhite {
                             
+                            self.turnLturn = "Draw"
+                            self.turnIndicatorturn = UIColor.purpleColor()
+                            
                             if self.game["whiteRatedComplete"] as! Bool == false {
                                 
-                                let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
-                                PFUser.currentUser()!.setObject(myRating, forKey: "rating")
                                 
+                                
+                                //draw
+                                let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
+                                
+                                let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                                let addRating = Rating.0 - self.meUserRatingIntStart
+                                
+                                print(addRating+nowRating)
+                                
+                                PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                                self.meUserDrawn = Int(PFUser.currentUser()!.objectForKey("drawn") as! String!)!
                                 let s = self.meUserDrawn + 1
                                 PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
-                                
                                 PFUser.currentUser()!.save()
+                                
                                 
                                 self.game["status_white"] = "draw"
                                 self.game["status_black"] = "draw"
                                 
                                 self.game["whiteRatedComplete"] = true
+                                
                                 self.game.save()
                                 
+                                self.gameFinishedScreen("drew",statusBy: "")
                                 //firebase
                                 
                                 //add who's turn it is
@@ -10232,12 +10673,13 @@ var didLongPress = false
                                 statusRef.setValue(status)
                                 //firebase - end
                                 
+                                
+                                
                             }
                         }
                        
                         
                         
-                        self.gameFinishedScreen("drew",statusBy: "stalemate")
                     }
                 }
             }

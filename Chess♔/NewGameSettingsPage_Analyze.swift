@@ -100,19 +100,26 @@ class NewGameSettingsPage_Analyze: UIViewController {
         var black = ""
         var pushto = ""
         
+        let game = PFObject(className: "Games")
+
         
         if color == "White" {
             white = (PFUser.currentUser()?.username)!
             black = useruserName.text!
             pushto = black
+            
+            game["whiteRating"] = PFUser.currentUser()!.objectForKey("rating") as! Int
+
         }
         else {
             black = (PFUser.currentUser()?.username)!
             white = useruserName.text!
             pushto = white
+            
+            game["blackRating"] = PFUser.currentUser()!.objectForKey("rating") as! Int
+
         }
         
-        let game = PFObject(className: "Games")
         game["whitePlayer"] = white
         game["blackPlayer"] = black
         game["players"] = [white,black]

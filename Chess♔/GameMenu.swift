@@ -126,6 +126,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var locationFixAchieved : Bool = false
     var locationStatus : NSString = "Not Started"
 
+    var gameOverRated: Array<Bool> = []
+    
+    var didLaunchGame = false
     
     
     override func viewDidLoad() {
@@ -452,6 +455,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.gameoverTurnColor.append("white")
                         
                         self.gameoverTurnSpeed.append((games["speed"] as? String)!)
+                        
+                        self.gameOverRated.append((games["whiteRatedComplete"] as? Bool)!)
 
 
                         
@@ -524,7 +529,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         
                         self.gameoverTurnSpeed.append((games["speed"] as? String)!)
 
-
+                        self.gameOverRated.append((games["blackRatedComplete"] as? Bool)!)
                         
                     }
 
@@ -766,9 +771,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     gameID = gameIDSYourTurn[indexPath.row]
 
                     
+                    if didLaunchGame == false {
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
                     self.showViewController(vc as! UIViewController, sender: vc)
-                    
+                    didLaunchGame = true
+                    }
                     
                 }
   
@@ -864,9 +871,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     gameID = gameIDSTheirTurn[indexPath.row]
                     
                     
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
-                    self.showViewController(vc as! UIViewController, sender: vc)
-
+                    if didLaunchGame == false {
+                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+                        self.showViewController(vc as! UIViewController, sender: vc)
+                        didLaunchGame = true
+                    }
                 }
                 print(timeLeftC)
                 
@@ -934,6 +943,18 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             //making to minutes
             cell.updated.text = "Last Updated: Now"
 
+            if gameOverRated[indexPath.row] == false {
+                
+                gameID = gameIDSGameOver[indexPath.row]
+                
+                
+                if didLaunchGame == false {
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+                    self.showViewController(vc as! UIViewController, sender: vc)
+                    didLaunchGame = true
+                }
+            }
+            
             if since >= 60 {
                 since = since/60
                 let sinceOutput = Int(since)
@@ -1281,6 +1302,7 @@ var loaded = false
                     self.gameoverLeft = []
                     
                     self.tableView.reloadData()
+                    self.gameOverRated = []
 
                     self.findGames()
                     
@@ -1288,6 +1310,8 @@ var loaded = false
                     gameIDSTheirTurn = []
                     gameIDSGameOver = []
                     gameID = ""
+                    
+
                     
                     self.loaded = true
                     
@@ -1568,7 +1592,7 @@ var loaded = false
     
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
-
+didLaunchGame = false
         lightOrDarkMode()
     }
     override func viewDidAppear(animated: Bool) {
@@ -1633,6 +1657,7 @@ var loaded = false
          theirturnLeft = []
         gameoverLeft = []
 
+        gameOverRated = []
         
         tableView.alpha = 0
         tableView.reloadData()

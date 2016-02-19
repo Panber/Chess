@@ -268,6 +268,7 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
                             result["status_white"] = "move"
                             result["status_black"] = "notmove"
                             
+                            result["whiteRating"] = PFUser.currentUser()!.objectForKey("rating") as! Int
 
                             
                         }
@@ -276,6 +277,9 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
                         
                             result["status_white"] = "move"
                             result["status_black"] = "notmove"
+                            
+                            result["blackRating"] = PFUser.currentUser()!.objectForKey("rating") as! Int
+
                         
                         }
                         
@@ -310,7 +314,7 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
                         
                         
                         result["timeLeftToMove"] = newDate
-                        result.saveEventually()
+                        result.save()
                         
                         // Create our Installation query
                         let pushQuery = PFInstallation.query()
