@@ -612,7 +612,6 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
     func facebookSignUpButtonPressed(sender:UIButton!) {
     
         // Create Permissions array
