@@ -1710,6 +1710,7 @@ var loaded = false
         usernameButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
         usernameButton.layer.cornerRadius = cornerRadius
         usernameButton.clipsToBounds = true
+        usernameButton.addTarget(self, action: "usernameButtonPressed:", forControlEvents: .TouchUpInside)
         visualEffectSub.addSubview(usernameButton)
         //------username end
         
@@ -1765,6 +1766,13 @@ var loaded = false
         removeNewView()
     
         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("newGameFriends")
+        self.showViewController(vc as! UIViewController, sender: vc)
+    }
+    
+    func usernameButtonPressed(sender: UIButton) {
+        removeNewView()
+        
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("newGameUsername")
         self.showViewController(vc as! UIViewController, sender: vc)
     }
     

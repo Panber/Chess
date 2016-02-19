@@ -271,7 +271,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="71T-lH-3BU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2460" y="-361"/>
+            <point key="canvasLocation" x="2530" y="-335"/>
         </scene>
         <!--CHESS-->
         <scene sceneID="tne-QT-ifu">
@@ -479,6 +479,118 @@
             </objects>
             <point key="canvasLocation" x="1824" y="313"/>
         </scene>
+        <!--New Game Username-->
+        <scene sceneID="lve-Pj-AQN">
+            <objects>
+                <viewController storyboardIdentifier="newGameUsername" id="Pnh-1S-y1p" customClass="NewGameUsername" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HFX-DT-x2O"/>
+                        <viewControllerLayoutGuide type="bottom" id="tTS-wT-LAM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mWF-JV-fgY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lFW-hy-nVf">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newGameUsernameCell" rowHeight="70" id="u05-UE-Fwa" customClass="NewGameUsernameTableViewCell" customModule="Chess_" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u05-UE-Fwa" id="v7K-98-DKR">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hIZ-nq-d1y">
+                                                    <rect key="frame" x="21" y="8" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="HF9-eK-ldE"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wps-3S-Hsu">
+                                                    <rect key="frame" x="84" y="35" width="209" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="209" id="xOj-0f-0GR"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSu-LI-6EX">
+                                                    <rect key="frame" x="84" y="17" width="400" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="400" id="umW-BI-BEw"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="GSu-LI-6EX" firstAttribute="top" secondItem="v7K-98-DKR" secondAttribute="topMargin" constant="9" id="1mS-kF-BRy"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="GSu-LI-6EX" secondAttribute="bottom" constant="23" id="C8q-8e-5Ad"/>
+                                                <constraint firstItem="hIZ-nq-d1y" firstAttribute="leading" secondItem="v7K-98-DKR" secondAttribute="leadingMargin" constant="13" id="FR3-ge-fA6"/>
+                                                <constraint firstItem="hIZ-nq-d1y" firstAttribute="top" secondItem="v7K-98-DKR" secondAttribute="topMargin" id="Lb4-4s-D6Y"/>
+                                                <constraint firstItem="GSu-LI-6EX" firstAttribute="leading" secondItem="hIZ-nq-d1y" secondAttribute="trailing" constant="13" id="XXw-bR-4uK"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="hIZ-nq-d1y" secondAttribute="bottom" constant="3" id="kUJ-Am-hU3"/>
+                                                <constraint firstItem="Wps-3S-Hsu" firstAttribute="top" secondItem="v7K-98-DKR" secondAttribute="topMargin" constant="27" id="rbn-30-FnQ"/>
+                                                <constraint firstItem="GSu-LI-6EX" firstAttribute="leading" secondItem="Wps-3S-Hsu" secondAttribute="leading" id="rdb-yC-nKv"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Wps-3S-Hsu" secondAttribute="bottom" constant="5" id="zJM-zC-Xe1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="rating" destination="Wps-3S-Hsu" id="KVJ-aK-oG6"/>
+                                            <outlet property="userProfileImage" destination="hIZ-nq-d1y" id="yJU-dA-yRO"/>
+                                            <outlet property="username" destination="GSu-LI-6EX" id="xnO-lI-khU"/>
+                                            <segue destination="jvY-pV-nF2" kind="show" id="jqr-W0-NbN"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Pnh-1S-y1p" id="Yp8-7d-FWB"/>
+                                    <outlet property="delegate" destination="Pnh-1S-y1p" id="mXS-en-BFg"/>
+                                </connections>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="E3X-mJ-I5m">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="mWF-JV-fgY" id="QYr-Pg-FIC"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="E3X-mJ-I5m" firstAttribute="trailing" secondItem="lFW-hy-nVf" secondAttribute="trailing" id="AkE-ca-qzX"/>
+                            <constraint firstItem="lFW-hy-nVf" firstAttribute="leading" secondItem="mWF-JV-fgY" secondAttribute="leading" id="GMp-Wr-n46"/>
+                            <constraint firstItem="E3X-mJ-I5m" firstAttribute="top" secondItem="HFX-DT-x2O" secondAttribute="bottom" id="QxN-Jb-Err"/>
+                            <constraint firstItem="lFW-hy-nVf" firstAttribute="leading" secondItem="E3X-mJ-I5m" secondAttribute="leading" id="gUz-av-6Qa"/>
+                            <constraint firstAttribute="trailing" secondItem="lFW-hy-nVf" secondAttribute="trailing" id="qES-OB-qsa"/>
+                            <constraint firstItem="lFW-hy-nVf" firstAttribute="bottom" secondItem="tTS-wT-LAM" secondAttribute="top" id="sV5-L1-MHH"/>
+                            <constraint firstItem="lFW-hy-nVf" firstAttribute="top" secondItem="E3X-mJ-I5m" secondAttribute="bottom" id="sha-x3-ZL0"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="searchBar" destination="E3X-mJ-I5m" id="9GK-2J-njf"/>
+                        <outlet property="searchDisplayController" destination="UMd-0d-yQp" id="hb8-3O-vqd"/>
+                        <outlet property="tableView" destination="lFW-hy-nVf" id="GeM-9h-g8P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VTC-ye-agN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="UMd-0d-yQp">
+                    <connections>
+                        <outlet property="delegate" destination="Pnh-1S-y1p" id="P7u-Md-255"/>
+                        <outlet property="searchBar" destination="E3X-mJ-I5m" id="fBj-Zj-M2q"/>
+                        <outlet property="searchContentsController" destination="Pnh-1S-y1p" id="HcB-aD-spj"/>
+                        <outlet property="searchResultsDataSource" destination="Pnh-1S-y1p" id="Jdt-Fq-snV"/>
+                        <outlet property="searchResultsDelegate" destination="Pnh-1S-y1p" id="qZs-2P-7Jk"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="3319" y="-923"/>
+        </scene>
         <!--New Game Friends-->
         <scene sceneID="SOa-Qi-xt5">
             <objects>
@@ -563,7 +675,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIK-B4-3DB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3254" y="-389"/>
+            <point key="canvasLocation" x="3314" y="-212"/>
         </scene>
         <!--New Game Settings Page-->
         <scene sceneID="dny-OR-sFx">
@@ -2772,7 +2884,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wH9-7B-skl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3924" y="-361"/>
+            <point key="canvasLocation" x="3981" y="-266"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="p94-aD-qGo">
@@ -2932,6 +3044,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="zru-9C-9yR"/>
-        <segue reference="yX0-R2-72x"/>
+        <segue reference="jqr-W0-NbN"/>
     </inferredMetricsTieBreakers>
 </document>

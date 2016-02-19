@@ -190,6 +190,7 @@
 		8FFAD4DA1C44FA97000F4100 /* AnalyzeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFAD4D91C44FA97000F4100 /* AnalyzeMenu.swift */; };
 		CEF2020CB78A7F85899B156E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EACA15DE07680AE61616A943 /* Pods.framework */; };
 		F12B6E001BFFE925009897FA /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12B6DFF1BFFE925009897FA /* Test.swift */; };
+		F12EC96B1C76753B008ED169 /* NewGameUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12EC96A1C76753B008ED169 /* NewGameUsername.swift */; };
 		F134DDDE1BC1C417005BA54C /* UsersProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */; };
 		F1431A5E1BD281B600C5854A /* UsersFriendsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */; };
 		F1431A611BD298F400C5854A /* panBeriPhone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F1431A601BD298F400C5854A /* panBeriPhone.jpg */; };
@@ -467,6 +468,7 @@
 		DEC0A4D6A8F0888440ED5221 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EACA15DE07680AE61616A943 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F12B6DFF1BFFE925009897FA /* Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		F12EC96A1C76753B008ED169 /* NewGameUsername.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameUsername.swift; sourceTree = "<group>"; };
 		F134DDDD1BC1C417005BA54C /* UsersProfilePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersProfilePage.swift; sourceTree = "<group>"; };
 		F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersFriendsPage.swift; sourceTree = "<group>"; };
 		F1431A601BD298F400C5854A /* panBeriPhone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = panBeriPhone.jpg; sourceTree = "<group>"; };
@@ -724,6 +726,7 @@
 				8F8BD2AC1BC5380100B25CFE /* FriendRequestsPage.swift */,
 				F1B4145F1BC72E5D00FEE6A4 /* SettingsPage.swift */,
 				F14E644D1BC98B7900751F20 /* FriendsPage.swift */,
+				F12EC96A1C76753B008ED169 /* NewGameUsername.swift */,
 				8F4CF77E1BDBAF1E0037865C /* NewGameFriends.swift */,
 				8FEF2ABE1BFE4CAA006E1359 /* NewGameNearby.swift */,
 				F1431A5D1BD281B600C5854A /* UsersFriendsPage.swift */,
@@ -1267,6 +1270,7 @@
 				F1648B611BDC19CA00AE1BC3 /* GameInterFace3.swift in Sources */,
 				F14E644E1BC98B7900751F20 /* FriendsPage.swift in Sources */,
 				8F2F6C4B1BDEDCC00048342A /* NewGameSettingsPage_Play.swift in Sources */,
+				F12EC96B1C76753B008ED169 /* NewGameUsername.swift in Sources */,
 				8FEF2ABF1BFE4CAA006E1359 /* NewGameNearby.swift in Sources */,
 				8F62C6801C00918700312A58 /* OtherUserProfilePage_Profile.swift in Sources */,
 				8F8BD2AD1BC5380100B25CFE /* FriendRequestsPage.swift in Sources */,
