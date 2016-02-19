@@ -544,21 +544,21 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             })
         }
         
-                let userQuery = PFQuery(className: "_User")
-                userQuery.whereKey("username", matchesRegex:searchString, modifiers:"i")
-                userQuery.whereKey("username", containedIn: userFriends)
-                userQuery.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-                    if error == nil {
-                        self.users.removeAllObjects()
-                        for object in objects! {
-                            self.users.addObject(object)
-                        }
-                        print(self.users.count)
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.searchDisplayController?.searchResultsTableView.reloadData()
-                        }
-                    }
+        let userQuery = PFQuery(className: "_User")
+        userQuery.whereKey("username", matchesRegex:searchString, modifiers:"i")
+        userQuery.whereKey("username", containedIn: userFriends)
+        userQuery.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                self.users.removeAllObjects()
+                for object in objects! {
+                    self.users.addObject(object)
                 }
+                print(self.users.count)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.searchDisplayController?.searchResultsTableView.reloadData()
+                }
+            }
+        }
         
     }
     

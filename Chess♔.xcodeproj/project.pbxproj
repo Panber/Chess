@@ -327,6 +327,7 @@
 		8F31ECDD1C67DAE80081F888 /* chesslogo800_87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chesslogo800_87.png; sourceTree = "<group>"; };
 		8F31ECDE1C67DAE80081F888 /* chesslogo800_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chesslogo800_80.png; sourceTree = "<group>"; };
 		8F31ECDF1C67DAE80081F888 /* chesslogo800_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chesslogo800_120.png; sourceTree = "<group>"; };
+		8F3666B21C77D59000067D5F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F38EF691BB8399D00668B3B /* JBpp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JBpp.jpg; sourceTree = "<group>"; };
 		8F3AC3811B9AFADC00815CDC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		8F3AC3831B9AFAE700815CDC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -413,7 +414,6 @@
 		8FA5C8901B9A264F0097637E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FA5C8971B9A264F0097637E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FA5C89A1B9A264F0097637E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8FA5C89C1B9A264F0097637E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FA5C8A11B9A264F0097637E /* Chess♔.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chess♔.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA5C8A51B9A264F0097637E /* Chess_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chess_Tests.swift; sourceTree = "<group>"; };
 		8FA5C8A71B9A264F0097637E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -822,7 +822,7 @@
 				8F4A02651B9A3E590084024A /* Assets */,
 				8F4A02881B9A3F730084024A /* Swift */,
 				8FA5C8991B9A264F0097637E /* LaunchScreen.storyboard */,
-				8FA5C89C1B9A264F0097637E /* Info.plist */,
+				8F3666B21C77D59000067D5F /* Info.plist */,
 			);
 			path = "Chess♔";
 			sourceTree = "<group>";
@@ -1401,8 +1401,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = mh_execute;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "@(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1440,7 +1442,9 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = mh_execute;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "@(inherited)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
