@@ -190,10 +190,10 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         
         
         //setting up bc image of profile pic
-        if NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") == nil {
-            sleep(5)
-        }
-        let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") as! NSData
+//        if NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") == nil {
+//            sleep(5)
+//        }
+//        let imageData = NSUserDefaults.standardUserDefaults().objectForKey("other_userImage") as! NSData
         
         profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.width, (contentView.frame.size.height+1)*2))
         profilePicBlur.contentMode = .ScaleAspectFill
