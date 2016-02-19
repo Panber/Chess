@@ -12,8 +12,6 @@ import MessageUI
 
 let usersObject = PFObject(className: "_User")
 
-
-
 var featuredViewText = UILabel()
 var featuredUsername = UILabel()
 var featuredRating = UILabel()
@@ -34,7 +32,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     var userFriends: Array<String> = []
     
     @IBOutlet weak var scrollView: UIScrollView!
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -47,11 +45,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     var top10FriendsArrayUsers:Array<String> = []
     var top10FriendsArrayImage: Array<NSData> = []
     var top10FriendsUserImage = NSData()
-
+    
     var userNameFromFeatured = String()
     var ratingFromFeatured = Int()
     var imageFromFeatured = NSData()
-
+    
     
     
     var featuredView = UIView()
@@ -62,10 +60,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     var usersScope:Bool = true
     var friendsScope:Bool = false
-
+    
     var blurBC1 = UIImageView()
     var blurBC2 = UIImageView()
-
+    
     var friendsArray: Array<String> = []
     
     override func viewWillDisappear(animated: Bool) {
@@ -83,10 +81,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         let tblView =  UIView(frame: CGRectZero)
         searchDisplayController?.searchResultsTableView.tableFooterView = tblView
         searchDisplayController?.searchResultsTableView.tableFooterView!.hidden = true
-//        searchDisplayController?.searchResultsTableView.backgroundColor = UIColor.clearColor()
+        //        searchDisplayController?.searchResultsTableView.backgroundColor = UIColor.clearColor()
         
         tableView.hidden = true
-
+        
         
         
         // Do any additional setup after loading the view.
@@ -110,17 +108,13 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
     }
     
-    
-    
-    
-    
     func addFeatured() {
-    
-    
+        
+        
         featuredView = UIView(frame: CGRectMake(0,0,screenWidth , 200))
         featuredView.userInteractionEnabled = true
         scrollView.addSubview(featuredView)
-    
+        
         featuredViewText = UILabel(frame: CGRectMake(0,10,screenWidth,50))
         featuredViewText.font = UIFont(name: "Didot", size: 25)
         featuredViewText.text = "FEATURED"
@@ -170,7 +164,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             if error == nil{
                 if let result = result as? [PFUser] {
                     for result in result {
-                    
+                        
                         if let userPicture = result["profile_picture"] as? PFFile {
                             
                             userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
@@ -198,11 +192,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                             
                         }
                         
-                    
+                        
                     }
-                
+                    
                 }
-            
+                
             }
             
         }
@@ -216,30 +210,30 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     }
     
     func featuredButton1Pressed(sender:UIButton) {
-    
+        
         if userNameFromFeatured == PFUser.currentUser()?.username {
-        
-        
-        
+            
+            
+            
         }
         else {
-        
-        NSUserDefaults.standardUserDefaults().setObject(userNameFromFeatured, forKey: "other_username")
-        
-        let data = imageFromFeatured
-        
-        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "other_userImage")
-        
-        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
-        self.showViewController(vc as! UIViewController, sender: vc)
-    
-        }
             
+            NSUserDefaults.standardUserDefaults().setObject(userNameFromFeatured, forKey: "other_username")
+            
+            let data = imageFromFeatured
+            
+            NSUserDefaults.standardUserDefaults().setObject(data, forKey: "other_userImage")
+            
+            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
+            self.showViewController(vc as! UIViewController, sender: vc)
+            
+        }
+        
     }
     
     
     func addTop() {
-    
+        
         topView = UIView(frame: CGRectMake(0,featuredView.frame.origin.y + featuredView.frame.size.height,screenWidth,375))
         topView.userInteractionEnabled = true
         scrollView.addSubview(topView)
@@ -317,7 +311,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     
     
     func topWorldButtonPressed(sender:UIButton) {
-    
+        
         NSUserDefaults.standardUserDefaults().setObject("world", forKey: "leaderboard")
         
         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("LeaderBoard")
@@ -328,7 +322,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func topFriendsButtonPressed(sender:UIButton) {
         
         NSUserDefaults.standardUserDefaults().setObject("friends", forKey: "leaderboard")
-
+        
         
         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("LeaderBoard")
         self.showViewController(vc as! UIViewController, sender: vc)
@@ -339,7 +333,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func topNearbyButtonPressed(sender:UIButton) {
         
         NSUserDefaults.standardUserDefaults().setObject("nearby", forKey: "leaderboard")
-
+        
         
         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("LeaderBoard")
         self.showViewController(vc as! UIViewController, sender: vc)
@@ -347,7 +341,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     }
     
     func addContact() {
-    
+        
         contactView = UIView(frame: CGRectMake(0,topView.frame.origin.y + topView.frame.size.height,screenWidth,235))
         contactView.userInteractionEnabled = true
         scrollView.addSubview(contactView)
@@ -402,10 +396,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         contactSeperator.backgroundColor = UIColor.lightGrayColor()
         contactView.addSubview(contactSeperator)
         
-    
+        
     }
     
-
+    
     
     func contactTwitterButtonPressed(sender:UIButton) {
         
@@ -425,9 +419,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             
             presentViewController(mail, animated: true, completion: nil)
         } else {
-
+            
         }
-    
+        
     }
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
@@ -457,7 +451,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         creatorLegalButton.addTarget(self, action: "creatorLegalButtonPressed:", forControlEvents: .TouchUpInside)
         creatorView.addSubview(creatorLegalButton)
         
-
+        
         
     }
     
@@ -482,7 +476,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             
             visualEffectView.alpha = 1
             visualEffectView.userInteractionEnabled = true
-
+            
             
             }, completion: {finish in
                 
@@ -496,9 +490,9 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                         logo.removeFromSuperview()
                         
                 })
-        
+                
         })
-       
+        
         
         
     }
@@ -508,13 +502,13 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         let yPos = -scrollView.contentOffset.y
         
         if yPos > 0 {
-
-        
-        
+            
+            
+            
+        }
     }
-    }
-
-
+    
+    
     // Func that searches for user with key and stores it in an array
     func searchUsers(searchString: String) {
         
@@ -549,25 +543,22 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 print(self.userFriends)
             })
         }
-
-       for var i = 0; i < userFriends.count; i++ {
-        if (userFriends[i].lowercaseString.rangeOfString(searchString.lowercaseString) != nil) {
-        let userQuery = PFQuery(className: "_User")
-        userQuery.whereKey("username", equalTo: userFriends[i])
-            userQuery.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-                if error == nil {
-                    self.users.removeAllObjects()
-                    for object in objects! {
-                        self.users.addObject(object)
-                    }
-                    print(self.users.count)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.searchDisplayController?.searchResultsTableView.reloadData()
+        
+                let userQuery = PFQuery(className: "_User")
+                userQuery.whereKey("username", matchesRegex:searchString, modifiers:"i")
+                userQuery.whereKey("username", containedIn: userFriends)
+                userQuery.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
+                    if error == nil {
+                        self.users.removeAllObjects()
+                        for object in objects! {
+                            self.users.addObject(object)
+                        }
+                        print(self.users.count)
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.searchDisplayController?.searchResultsTableView.reloadData()
+                        }
                     }
                 }
-            }
-            }
-        }
         
     }
     
@@ -582,7 +573,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     // MARK - Table View
     
     
-
+    
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -595,7 +586,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             self.searchDisplayController?.searchResultsTableView.rowHeight = 70
         }
         return users.count
-
+        
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -607,7 +598,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             searchFriends(searchText)
         }
         
-
         
         tableView.hidden = false
     }
@@ -615,11 +605,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
-
+        
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.searchDisplayController?.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-
+        
         
         if darkMode {
             cell.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
@@ -662,7 +652,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         return cell
     }
     
- 
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell:UserTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell
         
@@ -680,8 +670,11 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                 
                 if(imageData != nil)
                 {
+                    profilePic.image = UIImage(data: imageData!)
+                    profilePicBlur.image = UIImage(data: imageData!)
                     NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
                     tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                    print(indexPath.row)
                 }
                 
             }
@@ -744,14 +737,14 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             self.searchDisplayController?.searchResultsTableView.alpha = 0
             
             }, completion: { finish in
-        
+                
                 self.tableView.alpha = 1
                 self.searchDisplayController?.searchResultsTableView.alpha = 1
-
+                
                 self.tableView.hidden = true
-
-
-
+                
+                
+                
         })
         
     }
@@ -779,15 +772,15 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
-
+            
             self.scrollView.backgroundColor = UIColor(red:0.15, green:0.15, blue:0.15, alpha:1.0)
-
+            
             
             
             featuredViewText.textColor = UIColor.lightGrayColor()
             featuredUsername.textColor = UIColor.whiteColor()
             featuredRating.textColor = UIColor.lightGrayColor()
-
+            
             topText.textColor = UIColor.lightGrayColor()
             topWorldImage.image = UIImage(named:"map158-2.png")
             topFriendsImage.image = UIImage(named:"group4.png")
@@ -795,10 +788,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             
             contactMailImage.image = UIImage(named:"new100.png")
             contactText.textColor = UIColor.lightGrayColor()
-
+            
             searchBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
             searchBar.tintColor = UIColor.whiteColor()
-
+            
             
             self.searchDisplayController?.searchResultsTableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
@@ -813,12 +806,12 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             self.tabBarController?.tabBar.tintColor = blue
             self.navigationController?.navigationBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
-
+            
             
             self.searchDisplayController?.searchResultsTableView.backgroundColor = UIColor.whiteColor()
             
             self.scrollView.backgroundColor = UIColor.whiteColor()
-
+            
             
             featuredViewText.textColor = UIColor.darkGrayColor()
             featuredUsername.textColor = UIColor.blackColor()
@@ -833,7 +826,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             contactText.textColor = UIColor.darkGrayColor()
             
             searchBar.barStyle = UIBarStyle.Default
-
+            
             searchBar.barTintColor = UIColor.whiteColor()
             searchBar.tintColor = blue
             
