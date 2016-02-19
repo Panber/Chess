@@ -766,8 +766,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     gameID = gameIDSYourTurn[indexPath.row]
 
                     
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
-                    self.showViewController(vc as! UIViewController, sender: vc)
+//                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+//                    self.showViewController(vc as! UIViewController, sender: vc)
                     
                     
                 }
@@ -864,8 +864,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     gameID = gameIDSTheirTurn[indexPath.row]
                     
                     
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
-                    self.showViewController(vc as! UIViewController, sender: vc)
+//                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+//                    self.showViewController(vc as! UIViewController, sender: vc)
 
                 }
                 print(timeLeftC)
@@ -1731,6 +1731,7 @@ var loaded = false
         ratingButton.setBackgroundImage(UIImage(named:"dBlackBC.png"), forState: .Highlighted)
         ratingButton.layer.cornerRadius = cornerRadius
         ratingButton.clipsToBounds = true
+        ratingButton.addTarget(self, action: "ratingButtonPressed:", forControlEvents: .TouchUpInside)
         visualEffectSub.addSubview(ratingButton)
         //------rating end
         
@@ -1766,6 +1767,13 @@ var loaded = false
         removeNewView()
     
         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("newGameFriends")
+        self.showViewController(vc as! UIViewController, sender: vc)
+    }
+    
+    func ratingButtonPressed(sender: UIButton) {
+        removeNewView()
+        print("ratingButtonPressed")
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("newGameRating")
         self.showViewController(vc as! UIViewController, sender: vc)
     }
     
