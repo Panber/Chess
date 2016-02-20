@@ -128,7 +128,7 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
         
         let p = imageDataArray[indexPath.row]
         NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friends_gamemenu")
-        
+
         NSUserDefaults.standardUserDefaults().setObject(ratingArray[indexPath.row], forKey: "other_userrating_from_friends_gamemenu")
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
