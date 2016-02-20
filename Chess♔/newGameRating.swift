@@ -32,20 +32,22 @@ class NewGameRating: UIViewController, UISearchBarDelegate, UISearchDisplayDeleg
         tableView.dataSource = self
         searchBar.delegate = self
         // Do any additional setup after loading the view.
+         self.searchDisplayController!.active = true
+        self.searchDisplayController!.searchBar.becomeFirstResponder()
     }
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
         
-        profilePicArray = []
-        
-        imageDataArray = []
-        
-        usersArray = []
-        users = []
-        if searchBar.text!.characters.count > 0 {
-        searchUsers( Int(searchBar.text!)!)
-        }
+//        profilePicArray = []
+//        
+//        imageDataArray = []
+//        
+//        usersArray = []
+//        users = []
+//        if searchBar.text!.characters.count > 0 {
+//        searchUsers( Int(searchBar.text!)!)
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -149,10 +151,13 @@ class NewGameRating: UIViewController, UISearchBarDelegate, UISearchDisplayDeleg
 
         let query: PFQuery = PFQuery(className:"_User")
         query.whereKey("rating", equalTo: searchString)
-//        query.whereKey("username", notEqualTo: (PFUser.currentUser()?.username)!)
+        query.whereKey("username", notEqualTo: (PFUser.currentUser()?.username)!)
         query.orderByAscending("rating")
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
+                        self.profilePicArray = []
+                        self.imageDataArray = []
+                        self.usersArray = []
                 self.users.removeAllObjects()
                 for object in objects! {
                     self.users.addObject(object)
@@ -190,7 +195,7 @@ class NewGameRating: UIViewController, UISearchBarDelegate, UISearchDisplayDeleg
             
             searchBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
             searchBar.tintColor = UIColor.whiteColor()
-            
+            self.searchDisplayController?.searchBar.keyboardAppearance = UIKeyboardAppearance.Dark
             
             self.searchDisplayController?.searchResultsTableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             

@@ -33,18 +33,12 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
         tableView.dataSource = self
         searchBar.delegate = self
         // Do any additional setup after loading the view.
+        self.searchDisplayController!.active = true
+        self.searchDisplayController!.searchBar.becomeFirstResponder()
     }
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
-        
-        profilePicArray = []
-        
-        imageDataArray = []
-        
-        usersArray = []
-        users = []
-        searchUsers(searchBar.text!)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -128,7 +122,7 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
         
         let p = imageDataArray[indexPath.row]
         NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friends_gamemenu")
-
+        
         NSUserDefaults.standardUserDefaults().setObject(ratingArray[indexPath.row], forKey: "other_userrating_from_friends_gamemenu")
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -137,9 +131,6 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
     }
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.searchDisplayController?.searchResultsTableView.reloadData()
-        }
         if searchText.characters.count > 0 {
             searchUsers(searchText)
         }
@@ -155,6 +146,9 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
         query.orderByAscending("username")
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
+                        self.profilePicArray = []
+                        self.imageDataArray = []
+                        self.usersArray = []
                 self.users.removeAllObjects()
                 for object in objects! {
                     self.users.addObject(object)
@@ -192,7 +186,7 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
             
             searchBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
             searchBar.tintColor = UIColor.whiteColor()
-            
+            self.searchDisplayController?.searchBar.keyboardAppearance = UIKeyboardAppearance.Dark
             
             self.searchDisplayController?.searchResultsTableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
