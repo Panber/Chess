@@ -21,6 +21,8 @@ var topWorldImage = UIImageView()
 var topFriendsImage = UIImageView()
 var topNearbyImage = UIImageView()
 
+     var PData = NSData()
+
 
 var contactMailImage = UIImageView()
 var contactText = UILabel()
@@ -50,7 +52,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     var ratingFromFeatured = Int()
     var imageFromFeatured = NSData()
     
-    
+
     
     var featuredView = UIView()
     
@@ -171,6 +173,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                 if (error == nil) {
                                     
                                     featuredProfilePicView.image = UIImage(data: imageData!)
+                                    PData = imageData!
                                     let r = result["rating"] as! Int
                                     featuredRating.text = "\(r)"
                                     featuredUsername.text = result["username"] as? String
@@ -222,7 +225,10 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             
             let data = imageFromFeatured
             
-            NSUserDefaults.standardUserDefaults().setObject(data, forKey: "other_userImage")
+            NSUserDefaults.standardUserDefaults().setObject(PData, forKey: "other_userImage")
+            
+            profilePic.image = UIImage(data: PData)
+            profilePicBlur.image = UIImage(data: PData)
             
             let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
             self.showViewController(vc as! UIViewController, sender: vc)
@@ -675,6 +681,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                     NSUserDefaults.standardUserDefaults().setObject(imageData!, forKey: "other_userImage")
                     tableView.deselectRowAtIndexPath(indexPath, animated: true)
                     print(indexPath.row)
+                    PData = imageData!
                 }
                 
             }

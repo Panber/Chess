@@ -1625,7 +1625,7 @@
                                             <outlet property="rating" destination="c2d-7F-zNR" id="nIc-jA-nMq"/>
                                             <outlet property="userProfileImage" destination="9sN-ch-N56" id="nTg-7t-MzN"/>
                                             <outlet property="username" destination="hqL-nq-gch" id="qqQ-er-X2r"/>
-                                            <segue destination="6OR-ar-Hvm" kind="show" id="Miv-If-iP5"/>
+                                            <segue destination="6OR-ar-Hvm" kind="show" identifier="exploreprofile" id="Pcs-ZO-WQs"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -3155,7 +3155,7 @@
         <image name="profileTabBarIcon.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zru-9C-9yR"/>
         <segue reference="jqr-W0-NbN"/>
+        <segue reference="zru-9C-9yR"/>
     </inferredMetricsTieBreakers>
 </document>
