@@ -192,7 +192,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 //        }
 //        locationManager.startUpdatingLocation()
      
-        
             self.initLocationManager()
 
         //query for friends, find out if the user already has friends, if not add friends

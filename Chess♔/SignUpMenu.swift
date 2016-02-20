@@ -17,7 +17,7 @@ let screenHeight = screenSize.height
 var ref = Firebase(url: "https://chess-panber.firebaseio.com/")
 
 class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
-
+    
     @IBOutlet weak var scrollView: UIScrollView!
     
     let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
@@ -41,14 +41,14 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let nav = self.navigationController?.navigationBar
         nav?.barStyle = UIBarStyle.BlackTranslucent
         
         
         
         //view.frame.size.height = 2000
-      //  scrollView = UIScrollView(frame: view.bounds)
+        //  scrollView = UIScrollView(frame: view.bounds)
         scrollView.contentSize.height = 2000
         scrollView.frame.size.height = screenHeight
         scrollView.showsHorizontalScrollIndicator = true
@@ -56,15 +56,15 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         scrollView.delegate = self
         scrollView.bounces = true
         scrollView.scrollEnabled = false
-       // view.addSubview(scrollView)
+        // view.addSubview(scrollView)
         scrollView.showsVerticalScrollIndicator = false
-    
+        
         loadStartMenu()
         animateBC()
     }
     
     func loadStartMenu() {
-    
+        
         bcImage = UIImageView(frame: CGRectMake(0, 0, view.frame.size.height * 1.53, view.frame.size.height))
         bcImage.contentMode = .ScaleAspectFill
         bcImage.image = UIImage(named: "nasaearth.jpg")
@@ -111,14 +111,14 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         let gesture1 = UITapGestureRecognizer(target: self, action: "loginViewPressed:")
         gesture1.delegate = self
         self.view.addGestureRecognizer(gesture1)
-
+        
         let gesture3 = UITapGestureRecognizer(target: self, action: "effectViewViewPressed:")
         visualEffectView.userInteractionEnabled = true
         self.visualEffectView.addGestureRecognizer(gesture3)
-    
+        
     }
     
-
+    
     
     func effectViewViewPressed(sender:UITapGestureRecognizer){
         view.endEditing(true)
@@ -129,14 +129,14 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     }
     
     func loginMenu() {
-
-
+        
+        
         loginView = UIView(frame: CGRectMake(10, screenHeight + 30, screenWidth - 20, 370))
         loginView.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.4)
         loginView.layer.cornerRadius = cornerRadius
-
+        
         view.addSubview(loginView)
-
+        
         UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             
             self.loginView.frame.origin.y -= screenHeight
@@ -144,7 +144,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             self.visualEffectView.alpha = 1
             
             }, completion: nil)
-
+        
         //setting up loginview
         
         let cancelButton = UIButton(frame: CGRectMake(loginView.frame.size.width - 60, 15, 30, 30))
@@ -219,12 +219,12 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         forgotPasswordButton.setTitle("Forgot Password?", forState: .Normal)
         
         
-
+        
     }
-
+    
     
     func loadSignupView() {
-    
+        
         signupView = UIView(frame: CGRectMake(10, screenHeight + 30, screenWidth - 20, 475))
         signupView.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.4)
         signupView.layer.cornerRadius = cornerRadius
@@ -340,8 +340,8 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         facebookSignupButton.titleLabel?.font = UIFont(name: "Times", size: 20)
         facebookSignupButton.addTarget(self, action: "facebookSignUpButtonPressed:", forControlEvents: .TouchUpInside)
         signupView.addSubview(facebookSignupButton)
-    
-    
+        
+        
     }
     
     
@@ -350,56 +350,56 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         visualEffectView.frame = view.bounds
         view.addSubview(visualEffectView)
     }
-
+    
     func loginFromStartPressed(sender: UIButton!) {
         
         print("pressed")
-    loginMenu()
-    
+        loginMenu()
+        
     }
     
     func loginButtonPressed(sender: UIButton!) {
-    
-            let userName = usernameInputLogin.text
-            let userPassword = passwordInputLogin.text
-            
-            if (userName == "" || userPassword == "") {
-                
-                return
-            }
-            
-            PFUser.logInWithUsernameInBackground(userName!, password: userPassword!) { (user:PFUser?, error:NSError?) -> Void in
-                
-                var userMessage = "Welcome!"
-                
-                if user != nil {
-                    
-                    //remember sign in stage
-                    let userName: String? = user?.username
-                    NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "user_name")
-                    NSUserDefaults.standardUserDefaults().synchronize()
-                    
-                    //                    let maxinStoryboard: UIStoryboard = UIStoryboard(name: "Sett", bundle: nil)
-                    //                    var mainPage:MainPageViewcontroller = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
-                    
-                    if(userName != nil)
-                    {
-                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
-                        self.showViewController(vc as! UIViewController, sender: vc)
-                        
-                    }
-                }
-                else {
-                    userMessage = error!.localizedDescription
-                    
-                    let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                    let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
-                    myAlert.addAction(okAction)
-                    self.presentViewController(myAlert, animated: true, completion: nil)
-                }
-            }
         
-
+        let userName = usernameInputLogin.text
+        let userPassword = passwordInputLogin.text
+        
+        if (userName == "" || userPassword == "") {
+            
+            return
+        }
+        
+        PFUser.logInWithUsernameInBackground(userName!, password: userPassword!) { (user:PFUser?, error:NSError?) -> Void in
+            
+            var userMessage = "Welcome!"
+            
+            if user != nil {
+                
+                //remember sign in stage
+                let userName: String? = user?.username
+                NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "user_name")
+                NSUserDefaults.standardUserDefaults().synchronize()
+                
+                //                    let maxinStoryboard: UIStoryboard = UIStoryboard(name: "Sett", bundle: nil)
+                //                    var mainPage:MainPageViewcontroller = mainStoryboard.instantiateViewControllerWithIdentifier("Sett")
+                
+                if(userName != nil)
+                {
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
+                    self.showViewController(vc as! UIViewController, sender: vc)
+                    
+                }
+            }
+            else {
+                userMessage = error!.localizedDescription
+                
+                let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                myAlert.addAction(okAction)
+                self.presentViewController(myAlert, animated: true, completion: nil)
+            }
+        }
+        
+        
     }
     
     func cancelLoginButtonPressed(sender: UIButton!) {
@@ -412,7 +412,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             self.visualEffectView.alpha = 0
             
             }, completion: nil)
-    
+        
     }
     
     func cancelSignupButtonPressed(sender: UIButton!) {
@@ -425,167 +425,167 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             self.visualEffectView.alpha = 0
             
             }, completion: nil)
-    
+        
     }
     
     
     func animateBC() {
-
+        
         print("1")
-    UIView.animateWithDuration(60, animations: { () -> Void in
-        print("2")
-
-        if self.doAnimateBc == true {
-            self.bcImage.frame.origin.x -= screenWidth*1.53
-        }
+        UIView.animateWithDuration(60, animations: { () -> Void in
+            print("2")
+            
+            if self.doAnimateBc == true {
+                self.bcImage.frame.origin.x -= screenWidth*1.53
+            }
+            
+            }, completion: { Animate in
+                print("3")
+                
+                UIView.animateWithDuration(60, animations: { () -> Void in
+                    if self.doAnimateBc == true {
+                        self.bcImage.frame.origin.x += screenWidth*1.53
+                    }
+                    }, completion: { Void in
+                        return
+                })
+                
+        })
         
-        }, completion: { Animate in
-            print("3")
-
-            UIView.animateWithDuration(60, animations: { () -> Void in
-                if self.doAnimateBc == true {
-                    self.bcImage.frame.origin.x += screenWidth*1.53
-                }
-                }, completion: { Void in
-                    return
-            })
-         
-    })
         
-    
     }
     
     func signupFromStartPressed(sender:UIButton!) {
         
         loadSignupView()
-    
+        
     }
     
     func signupButtonPressed(sender:UIButton!) {
-    
-            print("signing up")
-            
-            let userEmail = emailInput.text
-            let userPassword = passwordInputSignup.text
-            var userName = usernameInputSignup.text?.lowercaseString
         
-            //checking if forms are typed in
-            if (userName == "" || userPassword == "" || userEmail == "" || profilePicImageView.image == UIImage(named:"profilePicPlaceholderDark.jpg") ){
-                
-                let myAlert = UIAlertController(title: "Alert", message: "You have to submit all forms", preferredStyle: UIAlertControllerStyle.Alert)
-                
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                myAlert.addAction(okAction)
-                
-                self.presentViewController(myAlert, animated: true, completion: nil)
-                
-                return
-                
-            }
+        print("signing up")
+        
+        let userEmail = emailInput.text
+        let userPassword = passwordInputSignup.text
+        var userName = usernameInputSignup.text?.lowercaseString
+        
+        //checking if forms are typed in
+        if (userName == "" || userPassword == "" || userEmail == "" || profilePicImageView.image == UIImage(named:"profilePicPlaceholderDark.jpg") ){
             
-            let myUser:PFUser = PFUser()
-            myUser.username = userName
-            myUser.email = userEmail
-            myUser.password = userPassword
-            myUser.setObject(userName!, forKey: "username")
+            let myAlert = UIAlertController(title: "Alert", message: "You have to submit all forms", preferredStyle: UIAlertControllerStyle.Alert)
             
+            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            myAlert.addAction(okAction)
             
-            func resizeImage(image:UIImage) -> UIImage
+            self.presentViewController(myAlert, animated: true, completion: nil)
+            
+            return
+            
+        }
+        
+        let myUser:PFUser = PFUser()
+        myUser.username = userName
+        myUser.email = userEmail
+        myUser.password = userPassword
+        myUser.setObject(userName!, forKey: "username")
+        
+        
+        func resizeImage(image:UIImage) -> UIImage
+        {
+            var actualHeight = image.size.height
+            var actualWidth = image.size.width
+            let maxHeight: CGFloat = 1000.0
+            let maxWidth: CGFloat = 1000.0
+            var imgRatio = actualWidth/actualHeight
+            let maxRatio = maxWidth/maxHeight
+            let compressionQuality: CGFloat = 0.0
+            //50 percent compression
+            
+            if (actualHeight > maxHeight || actualWidth > maxWidth)
             {
-                var actualHeight = image.size.height
-                var actualWidth = image.size.width
-                let maxHeight: CGFloat = 1000.0
-                let maxWidth: CGFloat = 1000.0
-                var imgRatio = actualWidth/actualHeight
-                let maxRatio = maxWidth/maxHeight
-                let compressionQuality: CGFloat = 0.0
-                //50 percent compression
-                
-                if (actualHeight > maxHeight || actualWidth > maxWidth)
+                if(imgRatio < maxRatio)
                 {
-                    if(imgRatio < maxRatio)
-                    {
-                        //adjust width according to maxHeight
-                        imgRatio = maxHeight / actualHeight;
-                        actualWidth = imgRatio * actualWidth;
-                        actualHeight = maxHeight;
-                    }
-                    else if(imgRatio > maxRatio)
-                    {
-                        //adjust height according to maxWidth
-                        imgRatio = maxWidth / actualWidth;
-                        actualHeight = imgRatio * actualHeight;
-                        actualWidth = maxWidth;
-                    }
-                    else
-                    {
-                        actualHeight = maxHeight;
-                        actualWidth = maxWidth;
-                    }
+                    //adjust width according to maxHeight
+                    imgRatio = maxHeight / actualHeight;
+                    actualWidth = imgRatio * actualWidth;
+                    actualHeight = maxHeight;
                 }
-                
-                let rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
-                UIGraphicsBeginImageContext(rect.size);
-                image.drawInRect(rect)
-                let img = UIGraphicsGetImageFromCurrentImageContext();
-                let imageData = UIImageJPEGRepresentation(img, compressionQuality)
-                UIGraphicsEndImageContext();
-                
-                return UIImage(data:imageData!)!
-                
-                
-                
+                else if(imgRatio > maxRatio)
+                {
+                    //adjust height according to maxWidth
+                    imgRatio = maxWidth / actualWidth;
+                    actualHeight = imgRatio * actualHeight;
+                    actualWidth = maxWidth;
+                }
+                else
+                {
+                    actualHeight = maxHeight;
+                    actualWidth = maxWidth;
+                }
             }
             
-            profilePicImageView.image = resizeImage(profilePicImageView.image!)
+            let rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
+            UIGraphicsBeginImageContext(rect.size);
+            image.drawInRect(rect)
+            let img = UIGraphicsGetImageFromCurrentImageContext();
+            let imageData = UIImageJPEGRepresentation(img, compressionQuality)
+            UIGraphicsEndImageContext();
             
-            if let profileImageData = profilePicImageView.image
-            {
-                
-                
-                let profileImageDataJPEG = UIImageJPEGRepresentation(profileImageData, 0)
-                
-                let profileImageFile = PFFile(data: profileImageDataJPEG!)
-                myUser.setObject(profileImageFile, forKey: "profile_picture")
-                
-            }
+            return UIImage(data:imageData!)!
             
             
             
-            
-            myUser.signUpInBackgroundWithBlock { (success, error) -> Void in
-                
-                var userMessage = "Welcome! Your registration was successfull"
-                
-                if !success {
-                    //                userMessage = "The registration was not completed."
-                    userMessage = error!.localizedDescription
-                }
-                
-                let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                
-                // if success sign up
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) { action in
-                    if success {
-                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
-                        self.showViewController(vc as! UIViewController, sender: vc)
-                        
-                        NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "user_name")
-                        NSUserDefaults.standardUserDefaults().synchronize()
-                    }
-                }
-                myAlert.addAction(okAction)
-                
-                self.presentViewController(myAlert, animated: true, completion: nil)
-                
-            }
+        }
         
-    
+        profilePicImageView.image = resizeImage(profilePicImageView.image!)
+        
+        if let profileImageData = profilePicImageView.image
+        {
+            
+            
+            let profileImageDataJPEG = UIImageJPEGRepresentation(profileImageData, 0)
+            
+            let profileImageFile = PFFile(data: profileImageDataJPEG!)
+            myUser.setObject(profileImageFile, forKey: "profile_picture")
+            
+        }
+        
+        
+        
+        
+        myUser.signUpInBackgroundWithBlock { (success, error) -> Void in
+            
+            var userMessage = "Welcome! Your registration was successfull"
+            
+            if !success {
+                //                userMessage = "The registration was not completed."
+                userMessage = error!.localizedDescription
+            }
+            
+            let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            // if success sign up
+            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) { action in
+                if success {
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
+                    self.showViewController(vc as! UIViewController, sender: vc)
+                    
+                    NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "user_name")
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                }
+            }
+            myAlert.addAction(okAction)
+            
+            self.presentViewController(myAlert, animated: true, completion: nil)
+            
+        }
+        
+        
     }
     
     func addProfilePicButtonPressed(sender:UIButton!) {
-    
-    
+        
+        
         let myPickerController = UIImagePickerController()
         myPickerController.delegate = self
         myPickerController.sourceType = UIImagePickerControllerSourceType.Camera
@@ -595,7 +595,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-
+        
         profilePicImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
         addProfileButton.setTitle("", forState: .Normal)
@@ -614,32 +614,40 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     
     func facebookSignUpButtonPressed(sender:UIButton!) {
         
-        // Create Permissions array
-        let permissions = ["public_profile","email","user_friends"]
-        
-        // Login to Facebook with Permissions
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions, block: { (user:PFUser?, error:NSError?) -> Void in
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile","email"], block: { (user:PFUser?, error:NSError?) -> Void in
             
-            // If error, display message
             if(error != nil)
             {
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-                    let userMessage = error!.localizedDescription
-                    let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                    
-                    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                    
-                    myAlert.addAction(okAction)
-                    
-                    self.presentViewController(myAlert, animated: true, completion: nil)
-                    return
-                } // end of async
+                //Display an alert message
+                let myAlert = UIAlertController(title:"Alert", message:error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert);
+                
+                let okAction =  UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+                
+                myAlert.addAction(okAction);
+                self.presentViewController(myAlert, animated:true, completion:nil);
+                
+                return
+            }
+            
+            print(user)
+            print("Current user token=\(FBSDKAccessToken.currentAccessToken().tokenString)")
+            
+            print("Current user id \(FBSDKAccessToken.currentAccessToken().userID)")
+            
+            if(FBSDKAccessToken.currentAccessToken() != nil)
+            {
+                // DO IT HERE
+                
+                
+                
+               // self.loadFacebookUserDetails()
+                
+                
             }
             
             
-            // Load facebook user details like user First name, Last name and email address
-            self.loadFacebookUserDetails()
+            
+            
         })
         
         
@@ -649,7 +657,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
         
         // Define fields we would like to read from Facebook User object
-        let requestParameters = ["fields": "id, email, first_name, last_name, name"]
+        let requestParameters = ["fields": "email, first_name, last_name, name"]
         
         // Send Facebook Graph API Request for /me
         let userDetails = FBSDKGraphRequest(graphPath: "me", parameters: requestParameters)
@@ -673,7 +681,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             }
             
             // Extract user fields
-            let userId:String = result["id"] as! String
+            let userId:String = FBSDKAccessToken.currentAccessToken().userID
             let userEmail:String? = result["email"] as? String
             let userFirstName:String?  = result["first_name"] as? String
             let userLastName:String? = result["last_name"] as? String
@@ -701,6 +709,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                 PFUser.currentUser()?.email = userEmail
                 PFUser.currentUser()?.username = username
             }
+            
             
             PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) -> Void in
                 
@@ -749,12 +758,12 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
         
-
-
+        
+        
     }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-
+    
 }
