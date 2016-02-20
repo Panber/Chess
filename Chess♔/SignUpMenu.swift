@@ -25,11 +25,15 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     var bcImage = UIImageView()
     
     var loginView = UIView()
+    var usernameMenu = UIView()
+
     var signupView = UIView()
     
     var doAnimateBc = true
     
     var usernameInputLogin = UITextField()
+    var usernameInputFacebook = UITextField()
+
     var passwordInputLogin = UITextField()
     
     var emailInput = UITextField()
@@ -222,6 +226,72 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
     }
     
+    func addUsername() {
+        
+        
+        usernameMenu = UIView(frame: CGRectMake(10, screenHeight + 30, screenWidth - 20, 210))
+        usernameMenu.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.4)
+        usernameMenu.layer.cornerRadius = cornerRadius
+        
+        view.addSubview(usernameMenu)
+        
+        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            
+            self.usernameMenu.frame.origin.y -= screenHeight
+            self.usernameMenu.alpha = 1
+            self.visualEffectView.alpha = 1
+            
+            }, completion: nil)
+        
+        //setting up loginview
+        
+        let cancelButton = UIButton(frame: CGRectMake(usernameMenu.frame.size.width - 60, 15, 30, 30))
+        cancelButton.setTitle("", forState: .Normal)
+        cancelButton.titleLabel?.font = UIFont(name: "Times", size: 20)
+        cancelButton.setTitleColor(blue, forState: .Normal)
+        cancelButton.setBackgroundImage(UIImage(named: "arrow483.png"), forState: .Normal)
+        cancelButton.titleLabel?.textAlignment = .Right
+        cancelButton.addTarget(self, action: "cancelDoneButtonPressed:", forControlEvents: .TouchUpInside)
+        usernameMenu.addSubview(cancelButton)
+        
+        usernameInputFacebook = UITextField(frame: CGRectMake(20, 60, view.frame.size.width-60, 55))
+        usernameInputFacebook.layer.cornerRadius = cornerRadius
+        usernameInputFacebook.backgroundColor = UIColor.darkGrayColor()
+        usernameInputFacebook.alpha = 0.8
+        usernameInputFacebook.textColor = UIColor.whiteColor()
+        usernameInputFacebook.font = UIFont(name: "Times", size: 20)
+        usernameInputFacebook.keyboardType = UIKeyboardType.Default
+        usernameInputFacebook.keyboardAppearance = UIKeyboardAppearance.Dark
+        usernameInputFacebook.attributedPlaceholder = NSAttributedString(string:"Please enter Username",
+            attributes:[NSForegroundColorAttributeName: UIColor.lightGrayColor()])
+        usernameInputFacebook.adjustsFontSizeToFitWidth = true
+        usernameInputFacebook.clearButtonMode = UITextFieldViewMode.WhileEditing
+        let paddingView = UIView(frame: CGRectMake(0, 0, 15, usernameInputFacebook.frame.height))
+        usernameInputFacebook.leftView = paddingView
+        usernameInputFacebook.leftViewMode = UITextFieldViewMode.Always
+        usernameInputFacebook.autocapitalizationType = UITextAutocapitalizationType.None
+        usernameMenu.addSubview(usernameInputFacebook)
+        //usernameInput.becomeFirstResponder()
+        
+        
+        let Done = UIButton(frame: CGRectMake(20, 60 + usernameInputFacebook.frame.size.height + 10 , view.frame.size.width-60, 55))
+        Done.layer.cornerRadius = cornerRadius
+        Done.backgroundColor = UIColor(red:0.10, green:0.67, blue:0.18, alpha:1.0)
+        Done.setTitle("Done", forState: .Normal)
+        Done.titleLabel?.font = UIFont(name: "Times", size: 20)
+        Done.addTarget(self, action: "DoneButtonPressed:", forControlEvents: .TouchUpInside)
+        usernameMenu.addSubview(Done)
+        
+
+        
+        
+    }
+    
+    
+    func DoneButtonPressed(sender: UIButton!){
+    
+    //something with usernameInputFacebook textfield
+    }
     
     func loadSignupView() {
         
@@ -355,6 +425,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
         print("pressed")
         loginMenu()
+      //  addUsername()
         
     }
     
@@ -408,6 +479,19 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             
             self.loginView.frame.origin.y += screenHeight
+            //self.loginView.alpha = 1
+            self.visualEffectView.alpha = 0
+            
+            }, completion: nil)
+        
+    }
+    
+    func cancelDoneButtonPressed(sender: UIButton!) {
+        view.endEditing(true)
+        
+        UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            
+            self.usernameMenu.frame.origin.y += screenHeight
             //self.loginView.alpha = 1
             self.visualEffectView.alpha = 0
             
@@ -638,7 +722,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             {
                 // DO IT HERE
                 
-                
+                self.addUsername()
                 
                // self.loadFacebookUserDetails()
                 
