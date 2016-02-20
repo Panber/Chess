@@ -646,8 +646,6 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             }
             
             
-            
-            
         })
         
         
