@@ -197,7 +197,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         
         profilePicBlur = UIImageView(frame: CGRectMake(0, 0, contentView.frame.size.width, (contentView.frame.size.height+1)*2))
         profilePicBlur.contentMode = .ScaleAspectFill
-        //profilePicBlur.image = UIImage(data: imageData)
+        profilePicBlur.image = UIImage(data: PData)
         profilePicBlur.clipsToBounds = true
         contentView.addSubview(profilePicBlur)
         
@@ -215,7 +215,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         profilePic.clipsToBounds = true
         profilePic.layer.borderColor = UIColor.whiteColor().CGColor
         profilePic.layer.borderWidth = 0
-        //profilePic.image = UIImage(data: imageData)
+        profilePic.image = UIImage(data: PData)
         profilePic.contentMode = UIViewContentMode.ScaleAspectFill
         contentView.addSubview(profilePic)
         

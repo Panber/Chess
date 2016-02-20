@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Chess♔ copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>Chess♔.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>8FA250211C77E81A00A4A32D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8FA5C88C1B9A264F0097637E</key>
 		<dict>
 			<key>primary</key>
