@@ -174,15 +174,15 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 //        }
 //        else {
 //            print("First launch, setting NSUserDefault.")
-          //  NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
+//            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
 //            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
 //            self.showViewController(vc as! UIViewController, sender: vc)
 //        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "numbered_board")
-
 //
-        
-    
-
+//
+//        
+//    
+//
 //        locationManager.delegate = self
 //        locationManager.desiredAccuracy = kCLLocationAccuracyBest
 //        let authstate = CLLocationManager.authorizationStatus()
@@ -202,7 +202,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 //        friends.saveInBackground()
 //
 //        }
-        
+    
         
 //        //setting the different variables for the current user, remember to implement this in a firstload method
 //            let users = PFQuery(className: "_User")

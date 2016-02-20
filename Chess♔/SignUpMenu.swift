@@ -26,14 +26,14 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     
     var loginView = UIView()
     var usernameMenu = UIView()
-
+    
     var signupView = UIView()
     
     var doAnimateBc = true
     
     var usernameInputLogin = UITextField()
     var usernameInputFacebook = UITextField()
-
+    
     var passwordInputLogin = UITextField()
     
     var emailInput = UITextField()
@@ -282,15 +282,81 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         Done.addTarget(self, action: "DoneButtonPressed:", forControlEvents: .TouchUpInside)
         usernameMenu.addSubview(Done)
         
-
+        
         
         
     }
     
     
     func DoneButtonPressed(sender: UIButton!){
-    
-    //something with usernameInputFacebook textfield
+        
+        if self.usernameInputFacebook.text!.characters.count == 0 {
+            let myAlert = UIAlertController(title: "Alert", message: "Please enter a username", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            myAlert.addAction(okAction)
+            self.presentViewController(myAlert, animated: true, completion: nil)
+        } else {
+            
+            var query = PFQuery(className: "_User")
+            query.whereKey("username", equalTo: self.usernameInputFacebook.text!)
+            query.findObjectsInBackgroundWithBlock {
+                (objects: [AnyObject]?, error: NSError?) in
+                if error == nil {
+                    if (objects!.count > 0){
+                        print("username is taken")
+                        let myAlert = UIAlertController(title: "Alert", message: "username is taken", preferredStyle: UIAlertControllerStyle.Alert)
+                        let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                        myAlert.addAction(okAction)
+                        self.presentViewController(myAlert, animated: true, completion: nil)
+                        
+                    } else {
+                        PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile","email"], block: { (user:PFUser?, error:NSError?) -> Void in
+                            
+                            if(error != nil)
+                            {
+                                //Display an alert message
+                                let myAlert = UIAlertController(title:"Alert", message:error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert);
+                                
+                                let okAction =  UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+                                
+                                myAlert.addAction(okAction);
+                                self.presentViewController(myAlert, animated:true, completion:nil);
+                                
+                                return
+                            }
+                            
+                            if let user = user {
+                                if user.isNew {
+                                    
+                                    print("Current user token=\(FBSDKAccessToken.currentAccessToken().tokenString)")
+                                    
+                                    print("Current user id \(FBSDKAccessToken.currentAccessToken().userID)")
+                                    
+                                    if(FBSDKAccessToken.currentAccessToken() != nil)
+                                    {
+                                        
+                                        self.loadFacebookUserDetails()
+                                    }
+                                } else {
+                                    print("User logged in through Facebook!")
+                                    let myAlert = UIAlertController(title: "Alert", message: "Your facebook account is already linked to CHESS", preferredStyle: UIAlertControllerStyle.Alert)
+                                    let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                                    myAlert.addAction(okAction)
+                                    self.presentViewController(myAlert, animated: true, completion: nil)
+                                }
+                            } else {
+                                print("Uh oh. The user cancelled the Facebook login.")
+                            }
+                            
+                        })
+                    }
+                }
+            }
+            
+        }
+        
+        //something with usernameInputFacebook textfield
+        
     }
     
     func loadSignupView() {
@@ -425,7 +491,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
         print("pressed")
         loginMenu()
-      //  addUsername()
+        //  addUsername()
         
     }
     
@@ -698,39 +764,11 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     
     func facebookSignUpButtonPressed(sender:UIButton!) {
         
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile","email"], block: { (user:PFUser?, error:NSError?) -> Void in
-            
-            if(error != nil)
-            {
-                //Display an alert message
-                let myAlert = UIAlertController(title:"Alert", message:error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert);
-                
-                let okAction =  UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                
-                myAlert.addAction(okAction);
-                self.presentViewController(myAlert, animated:true, completion:nil);
-                
-                return
-            }
-            
-            print(user)
-            print("Current user token=\(FBSDKAccessToken.currentAccessToken().tokenString)")
-            
-            print("Current user id \(FBSDKAccessToken.currentAccessToken().userID)")
-            
-            if(FBSDKAccessToken.currentAccessToken() != nil)
-            {
-                // DO IT HERE
-                
-                self.addUsername()
-                
-               // self.loadFacebookUserDetails()
-                
-                
-            }
-            
-            
-        })
+        self.view.endEditing(true)
+        self.signupView.frame.origin.y += screenHeight
+        self.visualEffectView.alpha = 0
+        
+        addUsername()
         
         
     }
@@ -767,7 +805,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             let userEmail:String? = result["email"] as? String
             let userFirstName:String?  = result["first_name"] as? String
             let userLastName:String? = result["last_name"] as? String
-            let username:String = (result.valueForKey("name") as? String)!
+            let username:String = self.usernameInputFacebook.text!
             
             // Get Facebook profile picture
             let userProfile = "https://graph.facebook.com/" + userId + "/picture?type=large"
