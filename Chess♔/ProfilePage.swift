@@ -418,18 +418,22 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
         imagePicker.modalPresentationStyle = .CurrentContext
         imagePicker.delegate = self
         
-        
         myAlert.addAction(UIAlertAction(title: "Camera", style: .Default, handler: {
             action in
+             self.tabBarController?.tabBar.hidden = true
             imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }))
         myAlert.addAction(UIAlertAction(title: "Photo Library", style: .Default, handler: {
             action in
+            self.tabBarController?.tabBar.hidden = true
             imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }))
-        myAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        myAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            action in
+            self.tabBarController?.tabBar.hidden = false
+            }))
         self.presentViewController(myAlert, animated: true, completion: nil)
     }
     
@@ -601,10 +605,14 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
     // Image delegate functions
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         //use image here!
+        
+        self.tabBarController?.tabBar.hidden = false
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        
+        self.tabBarController?.tabBar.hidden = false
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -621,10 +629,18 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
             
             let profileImageFile = PFFile(data: profileImageDataJPEG!)
             PFUser.currentUser()?.setObject(profileImageFile, forKey: "profile_picture")
-             PFUser.currentUser()?.saveInBackground()
+             //PFUser.currentUser()?.saveInBackground()
+            PFUser.currentUser()?.saveInBackgroundWithBlock {
+                (success: Bool, error: NSError?) -> Void in
+                if (success) {
+                    // The object has been saved.
+                } else {
+                    // There was a problem, check error.description
+                }
+            }
         }
         
-        
+        self.tabBarController?.tabBar.hidden = false
         self.dismissViewControllerAnimated(true, completion: nil)
         
         
