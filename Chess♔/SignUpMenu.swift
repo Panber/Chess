@@ -27,10 +27,13 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     var loginView = UIView()
     var usernameMenu = UIView()
     
+    var forgotPasswordMenu = UIView()
+    
     var signupView = UIView()
     
     var doAnimateBc = true
     
+    var forgotPasswordInput = UITextField()
     var usernameInputLogin = UITextField()
     var usernameInputFacebook = UITextField()
     
@@ -116,6 +119,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         forgotButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         forgotButton.setTitle("Forgot Password?", forState: .Normal)
         forgotButton.titleLabel?.font = UIFont(name: "Times", size: 20)
+        forgotButton.addTarget(self, action: "forgotPasswordPressed:", forControlEvents: .TouchUpInside)
         scrollView.addSubview(forgotButton)
         
         visualEffectView.alpha = 0
@@ -299,6 +303,97 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
     }
     
+    func forgotPasswordPressed(sender: UIButton!){
+       
+        forgotPasswordMenu = UIView(frame: CGRectMake(10, screenHeight + 30, screenWidth - 20, 210))
+        forgotPasswordMenu.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.4)
+        forgotPasswordMenu.layer.cornerRadius = cornerRadius
+        
+        view.addSubview(forgotPasswordMenu)
+        
+        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            
+            self.forgotPasswordMenu.frame.origin.y -= screenHeight
+            self.forgotPasswordMenu.alpha = 1
+            self.visualEffectView.alpha = 1
+            
+            }, completion: nil)
+        
+        let cancelButton = UIButton(frame: CGRectMake(forgotPasswordMenu.frame.size.width - 60, 15, 30, 30))
+        cancelButton.setTitle("", forState: .Normal)
+        cancelButton.titleLabel?.font = UIFont(name: "Times", size: 20)
+        cancelButton.setTitleColor(blue, forState: .Normal)
+        cancelButton.setBackgroundImage(UIImage(named: "arrow483.png"), forState: .Normal)
+        cancelButton.titleLabel?.textAlignment = .Right
+        cancelButton.addTarget(self, action: "cancelForgotPasswordPressed:", forControlEvents: .TouchUpInside)
+        forgotPasswordMenu.addSubview(cancelButton)
+        
+        forgotPasswordInput = UITextField(frame: CGRectMake(20, 60, view.frame.size.width-60, 55))
+        forgotPasswordInput.layer.cornerRadius = cornerRadius
+        forgotPasswordInput.backgroundColor = UIColor.darkGrayColor()
+        forgotPasswordInput.alpha = 0.8
+        forgotPasswordInput.textColor = UIColor.whiteColor()
+        forgotPasswordInput.font = UIFont(name: "Times", size: 20)
+        forgotPasswordInput.keyboardType = UIKeyboardType.Default
+        forgotPasswordInput.keyboardAppearance = UIKeyboardAppearance.Dark
+        forgotPasswordInput.attributedPlaceholder = NSAttributedString(string:"Please enter your email adress",
+            attributes:[NSForegroundColorAttributeName: UIColor.lightGrayColor()])
+        forgotPasswordInput.adjustsFontSizeToFitWidth = true
+        forgotPasswordInput.clearButtonMode = UITextFieldViewMode.WhileEditing
+        let paddingView = UIView(frame: CGRectMake(0, 0, 15, forgotPasswordInput.frame.height))
+        forgotPasswordInput.leftView = paddingView
+        forgotPasswordInput.leftViewMode = UITextFieldViewMode.Always
+        forgotPasswordInput.autocapitalizationType = UITextAutocapitalizationType.None
+        forgotPasswordMenu.addSubview(forgotPasswordInput)
+        
+        let Send = UIButton(frame: CGRectMake(20, 60 + forgotPasswordInput.frame.size.height + 10 , view.frame.size.width-60, 55))
+        Send.layer.cornerRadius = cornerRadius
+        Send.backgroundColor = UIColor(red:0.10, green:0.67, blue:0.18, alpha:1.0)
+        Send.setTitle("Send", forState: .Normal)
+        Send.titleLabel?.font = UIFont(name: "Times", size: 20)
+        Send.addTarget(self, action: "SendButtonPressed:", forControlEvents: .TouchUpInside)
+        forgotPasswordMenu.addSubview(Send)
+    }
+    
+    func SendButtonPressed(sender: UIButton!){
+        var emailAddress = forgotPasswordInput.text
+        
+        if emailAddress!.isEmpty {
+            
+            let myAlert = UIAlertController(title: "Alert", message: "Please enter your email adress", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            myAlert.addAction(okAction)
+            self.presentViewController(myAlert, animated: true, completion: nil)
+            
+            return
+        }
+        
+        PFUser.requestPasswordResetForEmailInBackground(emailAddress!, block: { (success: Bool, error:NSError?) -> Void in
+            
+            if error != nil {
+                let userMessage:String = error!.localizedDescription
+                let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                myAlert.addAction(okAction)
+                self.presentViewController(myAlert, animated: true, completion: nil)
+                
+            } else {
+                let userMessage:String = "An email message was sent to \(emailAddress!)"
+                let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: {(alert: UIAlertAction!) in
+                self.view.endEditing(true)
+                self.forgotPasswordMenu.frame.origin.y += screenHeight
+                self.visualEffectView.alpha = 0
+                    
+                })
+                myAlert.addAction(okAction)
+                self.presentViewController(myAlert, animated: true, completion: nil)
+                
+            }
+            
+        })
+        
+    }
     
     func DoneButtonPressed(sender: UIButton!){
         
@@ -566,19 +661,38 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                 
                 return
             }
-            print("Current user token=\(FBSDKAccessToken.currentAccessToken().tokenString)")
             
-            print("Current user id \(FBSDKAccessToken.currentAccessToken().userID)")
-            
-            if(FBSDKAccessToken.currentAccessToken() != nil)
-            {
-                NSUserDefaults.standardUserDefaults().setObject(FBSDKAccessToken.currentAccessToken().userID, forKey: "user_name")
-                NSUserDefaults.standardUserDefaults().synchronize()
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
-                    self.showViewController(vc as! UIViewController, sender: vc)
+            if let user = user {
+                if user.isNew {
+                    
+                    print("Current user token=\(FBSDKAccessToken.currentAccessToken().tokenString)")
+                    
+                    print("Current user id \(FBSDKAccessToken.currentAccessToken().userID)")
+                    
+                    if(FBSDKAccessToken.currentAccessToken() != nil)
+                    {
+                        user.deleteInBackground()
+                        
+                        let myAlert = UIAlertController(title: "Alert", message: "Please sign in with facebook first", preferredStyle: UIAlertControllerStyle.Alert)
+                        let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                        myAlert.addAction(okAction)
+                        self.presentViewController(myAlert, animated: true, completion: nil)
+                    }
+                } else {
+                    print("User logged in through Facebook!")
+                    
+                    NSUserDefaults.standardUserDefaults().setObject(FBSDKAccessToken.currentAccessToken().userID, forKey: "user_name")
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
+                        self.showViewController(vc as! UIViewController, sender: vc)
+                        
+                        
+                    }
                 }
+            } else {
+                print("Uh oh. The user cancelled the Facebook login.")
             }
             
         })
@@ -604,6 +718,19 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             
             self.usernameMenu.frame.origin.y += screenHeight
+            //self.loginView.alpha = 1
+            self.visualEffectView.alpha = 0
+            
+            }, completion: nil)
+        
+    }
+    
+    func cancelForgotPasswordPressed(sender: UIButton!) {
+        view.endEditing(true)
+        
+        UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            
+            self.forgotPasswordMenu.frame.origin.y += screenHeight
             //self.loginView.alpha = 1
             self.visualEffectView.alpha = 0
             
