@@ -946,7 +946,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     if theirTurnSpeed[indexPath.row] == "Fast" {
                         cell.timeleft.text = "Their Time: 5min"
                         cell.timeleft.textColor = red
-
+ 
                     }
                     else if theirTurnSpeed[indexPath.row] == "Normal" {
                         cell.timeleft.text = "Their Time: 4h"
