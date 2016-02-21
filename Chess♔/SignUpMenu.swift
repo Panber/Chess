@@ -42,14 +42,25 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     
     var profilePicImageView = UIImageView()
     var addProfileButton = UIButton()
+    override func prefersStatusBarHidden() -> Bool {
+        return navigationController?.navigationBarHidden == true
+    }
+    
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return UIStatusBarAnimation.Slide
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nav = self.navigationController?.navigationBar
-        nav?.barStyle = UIBarStyle.BlackTranslucent
-        
-        
+//        let nav = self.navigationController?.navigationBar
+//        nav?.barStyle = UIBarStyle.BlackTranslucent
+//        
+
+        navigationController?.setNavigationBarHidden(navigationController?.navigationBarHidden == false, animated: true)
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide) // with animation option.
+
+
         
         //view.frame.size.height = 2000
         //  scrollView = UIScrollView(frame: view.bounds)
@@ -78,7 +89,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
         let iconImage = UIImageView(frame: CGRectMake(0, 40, view.frame.size.width, view.frame.size.height/3 + 30))
         iconImage.contentMode = .ScaleAspectFit
-        iconImage.image = UIImage(named: "ChessLogoFront")
+        iconImage.image = UIImage(named: "CHESSLONG")
         scrollView.addSubview(iconImage)
         
         let loginButton = UIButton(frame: CGRectMake(30, view.frame.size.height - 170, screenWidth-60, 55))
@@ -917,16 +928,19 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBarHidden = true
-        
-        
-        
-    }
+//    override func prefersStatusBarHidden() -> Bool {
+//        if self.navigationController?.navigationBarHidden == true {
+//            return true
+//        }
+//        else
+//        {
+//            return false
+//        }
+//    }
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject:AnyObject]?) -> Bool {
-        application.statusBarHidden = true
-        return true
-    }
+//    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject:AnyObject]?) -> Bool {
+//        application.statusBarHidden = true
+//        return true
+//    }
     
 }

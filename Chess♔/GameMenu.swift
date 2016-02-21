@@ -134,6 +134,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     override func viewDidLoad() {
         
 
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
 
         
         instructionsLabel = UILabel(frame: CGRectMake(20, 64 ,screenWidth - 40,100))

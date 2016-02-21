@@ -132,6 +132,9 @@
 		8FA2501D1C77E31F00A4A32D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA2501A1C77E31F00A4A32D /* FBSDKLoginKit.framework */; };
 		8FA2501E1C77E31F00A4A32D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA2501B1C77E31F00A4A32D /* FBSDKShareKit.framework */; };
 		8FA250201C77E32C00A4A32D /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA2501F1C77E32C00A4A32D /* ParseFacebookUtilsV4.framework */; };
+		8FA250FF1C79EF4D00A4A32D /* CHESLONG.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA250FE1C79EF4D00A4A32D /* CHESLONG.png */; };
+		8FA251011C79EFD900A4A32D /* CHESSSHORT.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251001C79EFD900A4A32D /* CHESSSHORT.png */; };
+		8FA251051C79F47000A4A32D /* CHESSLONG.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251041C79F47000A4A32D /* CHESSLONG.png */; };
 		8FA55EEE1C53CCA700250403 /* facebook_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA55EED1C53CCA600250403 /* facebook_logo.png */; };
 		8FA569091C011D0300AFC460 /* map158-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569071C011D0200AFC460 /* map158-2.png */; };
 		8FA5690A1C011D0300AFC460 /* map158.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569081C011D0200AFC460 /* map158.png */; };
@@ -406,6 +409,9 @@
 		8FA2501B1C77E31F00A4A32D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		8FA2501F1C77E32C00A4A32D /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		8FA250F51C77E81A00A4A32D /* Chess♔ copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Chess♔ copy-Info.plist"; path = "/Users/Johannes/Documents/Chess/Chess♔ copy-Info.plist"; sourceTree = "<absolute>"; };
+		8FA250FE1C79EF4D00A4A32D /* CHESLONG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHESLONG.png; sourceTree = "<group>"; };
+		8FA251001C79EFD900A4A32D /* CHESSSHORT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHESSSHORT.png; sourceTree = "<group>"; };
+		8FA251041C79F47000A4A32D /* CHESSLONG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHESSLONG.png; sourceTree = "<group>"; };
 		8FA55EED1C53CCA600250403 /* facebook_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_logo.png; sourceTree = "<group>"; };
 		8FA569071C011D0200AFC460 /* map158-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map158-2.png"; sourceTree = "<group>"; };
 		8FA569081C011D0200AFC460 /* map158.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map158.png; sourceTree = "<group>"; };
@@ -595,6 +601,9 @@
 				8F1E8ECD1BD7F66C00C41D37 /* profilePicPlaceholder.jpg */,
 				8FEF2A911BFA7C7C006E1359 /* Boards */,
 				8F273CF21BF29E4300275378 /* clock104.png */,
+				8FA251041C79F47000A4A32D /* CHESSLONG.png */,
+				8FA251001C79EFD900A4A32D /* CHESSSHORT.png */,
+				8FA250FE1C79EF4D00A4A32D /* CHESLONG.png */,
 				8F2EEC821C70F27600FB6127 /* clock108.png */,
 				8F56E1701C665D880000ECDB /* BN.png */,
 				8F2EEC7E1C70F02100FB6127 /* normalIndicator2.png */,
@@ -1056,6 +1065,7 @@
 				8FEF2AA91BFCE136006E1359 /* group4.png in Resources */,
 				8F2DD6DF1B9AFFF80059CEFA /* ChessIconTab@3x.png in Resources */,
 				8F7480A01C4ABA1200CE6735 /* emAnalysis-2.png in Resources */,
+				8FA251051C79F47000A4A32D /* CHESSLONG.png in Resources */,
 				8FA55EEE1C53CCA700250403 /* facebook_logo.png in Resources */,
 				8F2EEC7F1C70F02100FB6127 /* normalIndicator2.png in Resources */,
 				8F31DCF31BC9513B004544CC /* equalization2.png in Resources */,
@@ -1073,6 +1083,7 @@
 				8FA5690C1C02775C00AFC460 /* TwitterLogo_#55acee.png in Resources */,
 				8FEF2A9A1BFA7C8A006E1359 /* blackChessBoard.png in Resources */,
 				8F1E8ED01BD7F74500C41D37 /* profilePicPlaceholderDark.jpg in Resources */,
+				8FA251011C79EFD900A4A32D /* CHESSSHORT.png in Resources */,
 				8F1E8ED41BD8362A00C41D37 /* PanBerLogoDark2.png in Resources */,
 				8FE58A9E1C3B1F26007888F4 /* whiteKing.png in Resources */,
 				8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */,
@@ -1082,6 +1093,7 @@
 				8FEF2AAF1BFCE136006E1359 /* multimedia option23.png in Resources */,
 				8F8BD2B71BC6C1C500B25CFE /* checkmark11.png in Resources */,
 				8F8BD2A81BC41ED700B25CFE /* arrow_white.png in Resources */,
+				8FA250FF1C79EF4D00A4A32D /* CHESLONG.png in Resources */,
 				8FEF2A9F1BFA7C8A006E1359 /* whiteSquareChessBoard.png in Resources */,
 				8F56E1681C6408FC0000ECDB /* chessLogo58.png in Resources */,
 				8F56E1751C6665B80000ECDB /* BB.png in Resources */,
