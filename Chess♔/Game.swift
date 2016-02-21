@@ -758,6 +758,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
         }
         
+        
         //tab-bar and navigation bar
         //   self.tabBarController?.tabBar.hidden = true
         // let nav = self.navigationController?.navigationBar
