@@ -631,6 +631,4 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
         
     }
 
-  
-
 }
