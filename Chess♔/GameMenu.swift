@@ -90,6 +90,12 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
 
     
+    
+    var notationsCountYourTurn: Array<Int> = []
+    var notationsCountTheirTurn: Array<Int> = []
+    var notationsCountGameOver: Array<Int> = []
+    
+    
     var yourturnLeft: Array<NSTimeInterval> = []
     var theirturnLeft: Array<NSTimeInterval> = []
     var gameoverLeft: Array<NSTimeInterval> = []
@@ -365,7 +371,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     }
     
     func findGames() {
-        
+      //  self.tableView.alpha = 0
+
         //tableView.hidden = true
         let gamesQuery = PFQuery(className: "Games")
         //fix this
@@ -392,6 +399,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.yourturnUpdateSince.append(since)
                         
+                        let notations = games["piecePosition"] as? NSMutableArray
+                        self.notationsCountYourTurn.append(notations!.count)
                         
                         //adding time left
                         let left = games["whiteDate"] as? NSDate
@@ -413,6 +422,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     else if games["status_white"] as? String == "notmove" {
                         
                         self.theirturnArray.append((games["blackPlayer"] as? String)!)
+                        
+                        let notations = games["piecePosition"] as? NSMutableArray
+                        self.notationsCountTheirTurn.append(notations!.count)
                         
                         //adding updated since
                         let lastupdate = games.updatedAt!
@@ -436,6 +448,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     }
                     else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost" || games["status_white"] as? String == "draw"{
                         
+                   
                         self.gameoverArray.append((games["blackPlayer"] as? String)!)
                         self.typeofGameover.append((games["status_white"] as? String)!)
                         
@@ -465,6 +478,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         
                         self.yourturnArray.append((games["whitePlayer"] as? String)!)
                         
+                        let notations = games["piecePosition"] as? NSMutableArray
+                        self.notationsCountYourTurn.append(notations!.count)
+
                         //adding updated since
                         let lastupdate = games.updatedAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
@@ -489,6 +505,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     else if games["status_black"] as? String == "notmove"  {
                         
                         self.theirturnArray.append((games["whitePlayer"] as? String)!)
+                        let notations = games["piecePosition"] as? NSMutableArray
+                        self.notationsCountTheirTurn.append(notations!.count)
                         
                         //adding updated since
                         let lastupdate = games.updatedAt!
@@ -513,6 +531,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         
                         self.gameoverArray.append((games["whitePlayer"] as? String)!)
                         self.typeofGameover.append((games["status_black"] as? String)!)
+                  
                         
                         //adding updated since
                         let lastupdate = games.updatedAt!
@@ -556,7 +575,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             self.tableView.hidden = false
                 
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    if self.yourturnArray.count != 0 || self.theirturnArray.count != 0 || self.gameoverArray.count != 0 {
                     self.tableView.alpha = 1
+                    }
                     }, completion: { (finished) -> Void in
                         if finished {
                         
@@ -616,7 +637,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+
         return 150
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -799,6 +823,26 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     
                 }
             
+                if notationsCountYourTurn[indexPath.row] <= 0 {
+                    
+                    if yourTurnSpeed[indexPath.row] == "Fast" {
+                        cell.timeleft.text = "Time Left: 5min"
+                        cell.timeleft.textColor = red
+
+                    }
+                    else if yourTurnSpeed[indexPath.row] == "Normal" {
+                        cell.timeleft.text = "Time Left: 4h"
+                        cell.timeleft.textColor = UIColor.lightGrayColor()
+
+                    }
+                    else if yourTurnSpeed[indexPath.row] == "Slow" {
+                        cell.timeleft.text = "Time Left: 2d"
+                        cell.timeleft.textColor = UIColor.lightGrayColor()
+
+                    }
+            
+                }
+            
    
 
 
@@ -858,7 +902,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 
                 if timeLeftC >= 0 {
                     print("times up mate")
-                    cell.timeleft.text = "Time's up. Claim your victory."
+                    cell.timeleft.text = "Time is up. Claim your victory."
                     cell.timeleft.textColor = green
                     
                     
@@ -891,6 +935,28 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         timeLeftC = timeLeftC/24
                         let sinceOutput = Int(timeLeftC) * -1
                         cell.timeleft.text = "Their Time: \(sinceOutput)d"
+                        
+                    }
+                    
+            }
+            
+                if notationsCountTheirTurn[indexPath.row] <= 0 {
+                    
+                    if theirTurnSpeed[indexPath.row] == "Fast" {
+                        cell.timeleft.text = "Their Time: 5min"
+                        cell.timeleft.textColor = red
+
+                    }
+                    else if theirTurnSpeed[indexPath.row] == "Normal" {
+                        cell.timeleft.text = "Their Time: 4h"
+                        cell.timeleft.textColor = UIColor.lightGrayColor()
+
+                    }
+                    else if theirTurnSpeed[indexPath.row] == "Slow" {
+                        cell.timeleft.text = "Their Time: 2d"
+                        cell.timeleft.textColor = UIColor.lightGrayColor()
+
+                        
                         
                     }
                     
@@ -1031,8 +1097,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
        
-        
-        return 3
+        if self.yourturnArray.count != 0 || self.theirturnArray.count != 0 || self.gameoverArray.count != 0 {
+            return 3
+
+        }
+        return 0
+
+
     }
     
     
@@ -1641,6 +1712,14 @@ didLaunchGame = false
          imageDataArray = []
          indicatorDataArray = []
         
+         notationsCountYourTurn = []
+         notationsCountTheirTurn = []
+         notationsCountGameOver = []
+        
+         yourTurnSpeed = []
+         theirTurnSpeed = []
+         gameoverTurnSpeed = []
+     
          yourturnUpdateSince = []
          theirturnUpdateSince = []
          gameoverUpdateSince = []
