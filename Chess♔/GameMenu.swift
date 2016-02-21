@@ -138,12 +138,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     
     override func viewDidLoad() {
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-
-        tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
-
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
-
         
         instructionsLabel = UILabel(frame: CGRectMake(20, 64 ,screenWidth - 40,100))
         let new = "-New-"

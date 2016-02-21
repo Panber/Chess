@@ -572,6 +572,8 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             
             if(FBSDKAccessToken.currentAccessToken() != nil)
             {
+                NSUserDefaults.standardUserDefaults().setObject(FBSDKAccessToken.currentAccessToken().userID, forKey: "user_name")
+                NSUserDefaults.standardUserDefaults().synchronize()
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
