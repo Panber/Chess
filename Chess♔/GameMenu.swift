@@ -90,6 +90,12 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
 
     
+    
+    var notationsCountYourTurn: Array<Int> = []
+    var notationsCountTheirTurn: Array<Int> = []
+    var notationsCountGameOver: Array<Int> = []
+    
+    
     var yourturnLeft: Array<NSTimeInterval> = []
     var theirturnLeft: Array<NSTimeInterval> = []
     var gameoverLeft: Array<NSTimeInterval> = []
@@ -132,7 +138,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     
     override func viewDidLoad() {
-        
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+
+        tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
 
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
 
@@ -369,7 +377,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     }
     
     func findGames() {
-        
+      //  self.tableView.alpha = 0
+
         //tableView.hidden = true
         let gamesQuery = PFQuery(className: "Games")
         //fix this
@@ -396,6 +405,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.yourturnUpdateSince.append(since)
                         
+                        let notations = games["piecePosition"] as? NSMutableArray
+                        self.notationsCountYourTurn.append(notations!.count)
                         
                         //adding time left
                         let left = games["whiteDate"] as? NSDate
@@ -469,6 +480,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         
                         self.yourturnArray.append((games["whitePlayer"] as? String)!)
                         
+                        let notations = games["piecePosition"] as? NSMutableArray
+                        self.notationsCountYourTurn.append(notations!.count)
+
                         //adding updated since
                         let lastupdate = games.updatedAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
@@ -560,7 +574,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             self.tableView.hidden = false
                 
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    if self.yourturnArray.count != 0 || self.theirturnArray.count != 0 || self.gameoverArray.count != 0 {
                     self.tableView.alpha = 1
+                    }
                     }, completion: { (finished) -> Void in
                         if finished {
                         
@@ -620,7 +636,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+
         return 150
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -801,6 +820,20 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         
                     }
                     
+                }
+            
+                if notationsCountYourTurn[indexPath.row] <= 0 {
+                    
+                    if yourTurnSpeed[indexPath.row] == "Fast" {
+                        cell.timeleft.text = "Time Left: 5min"
+                    }
+                    else if yourTurnSpeed[indexPath.row] == "Normal" {
+                        cell.timeleft.text = "Time Left: 4h"
+                    }
+                    else if yourTurnSpeed[indexPath.row] == "Slow" {
+                        cell.timeleft.text = "Time Left: 2d"
+                    }
+            
                 }
             
    
@@ -1035,8 +1068,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
        
-        
-        return 3
+        if self.yourturnArray.count != 0 || self.theirturnArray.count != 0 || self.gameoverArray.count != 0 {
+            return 3
+
+        }
+        return 0
+
+
     }
     
     

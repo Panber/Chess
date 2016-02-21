@@ -8517,8 +8517,20 @@ var didLongPress = false
         
         if notations.count <= 1 {
             
+            if speedLspeed == "Fast Speedmode" {
+            timeLeft = -300
+            }
+            else if speedLspeed == "Normal Speedmode" {
+                timeLeft = -14_400
+
+            }
+            else if speedLspeed == "Fast Speedmode" {
+                timeLeft = -172_800
+
+            }
             
-        }else {
+        }
+        else {
             timeLeft++
             
         }
