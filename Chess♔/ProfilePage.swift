@@ -10,7 +10,7 @@
 import UIKit
 import Parse
 
-class ProfilePage: UIViewController, UIScrollViewDelegate {
+class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var scrollView: UIScrollView!
     var profilePicBlur = UIImageView()
@@ -20,6 +20,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
     let friendsButton = UIButton()
     let friendRequestsButton = UIButton()
     let settingsButton = UIButton()
+    let profilePic = UIImageView(frame: CGRectMake(20, 20, 75, 75))
     var label0 = UILabel()
     var label2 = UILabel()
     var label12 = UILabel()
@@ -43,6 +44,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
     var userLost = String()
     var userJoined = NSDate()
     
+    var changeProfilePicture = UIButton()
     
     override func viewWillAppear(animated: Bool) {
           setUpProfile()
@@ -140,13 +142,20 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         
         
         //adding the profile pic
-        let profilePic = UIImageView(frame: CGRectMake(20, 20, 75, 75))
         profilePic.layer.cornerRadius = profilePic.frame.size.height / 2
         profilePic.clipsToBounds = true
         profilePic.layer.borderColor = UIColor.whiteColor().CGColor
         profilePic.layer.borderWidth = 0
         profilePic.contentMode = UIViewContentMode.ScaleAspectFill
         contentView.addSubview(profilePic)
+        
+        // Button for changing profile pic
+        changeProfilePicture = UIButton(frame: CGRectMake(20, 20, 75, 75))
+        changeProfilePicture.setTitle("", forState: .Normal)
+        changeProfilePicture.titleLabel?.font = UIFont(name: "Times", size: 18)
+        changeProfilePicture.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        changeProfilePicture.addTarget(self, action: "changeProfilePicButtonPressed:", forControlEvents: .TouchUpInside)
+        contentView.addSubview(changeProfilePicture)
         
         let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as? PFFile
         
@@ -158,7 +167,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
                 
                 if(error == nil)
                 {
-                    profilePic.image = UIImage(data: imageData!)
+                    self.profilePic.image = UIImage(data: imageData!)
                     self.profilePicBlur.image = UIImage(data: imageData!)
                     //bluring bc of profile pic
                     let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
@@ -402,6 +411,28 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         
     }
     
+    func changeProfilePicButtonPressed(sender:UIButton!) {
+        let myAlert = UIAlertController(title: "Profile Picture", message: "How do you want to set your profile picture?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.modalPresentationStyle = .CurrentContext
+        imagePicker.delegate = self
+        
+        
+        myAlert.addAction(UIAlertAction(title: "Camera", style: .Default, handler: {
+            action in
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }))
+        myAlert.addAction(UIAlertAction(title: "Photo Library", style: .Default, handler: {
+            action in
+            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }))
+        myAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        self.presentViewController(myAlert, animated: true, completion: nil)
+    }
+    
     func friendRequestsPressed(sender: UIButton!) {
     
         
@@ -565,7 +596,39 @@ class ProfilePage: UIViewController, UIScrollViewDelegate {
         
         
     }
-
-  
+    
+    
+    // Image delegate functions
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        //use image here!
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        
+        profilePic.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        if let profileImageData = profilePic.image
+        {
+            
+            
+            let profileImageDataJPEG = UIImageJPEGRepresentation(profileImageData, 0)
+            
+            let profileImageFile = PFFile(data: profileImageDataJPEG!)
+            PFUser.currentUser()?.setObject(profileImageFile, forKey: "profile_picture")
+             PFUser.currentUser()?.saveInBackground()
+        }
+        
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        
+        
+    }
 
 }
