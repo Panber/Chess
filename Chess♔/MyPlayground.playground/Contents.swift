@@ -141,6 +141,14 @@ let blackRating = rating.1
 print("blackRating after is \(blackRating)")
 
 
+
+let Rating = calculateRating(Double(900), bR: Double(1200), K: 32, sW: 1, sB: 0)
+
+let nowRating = 900
+let addRating = Rating.1 - 900
+
+print(addRating+nowRating)
+
 ////////
 
 

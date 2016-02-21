@@ -148,7 +148,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         instructionsLabel.textAlignment = .Center
         view.addSubview(instructionsLabel)
         
-        
+        tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
+
         
         super.viewDidLoad()
         
