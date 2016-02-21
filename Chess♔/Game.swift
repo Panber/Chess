@@ -744,7 +744,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var passantArray: Array<Bool> = []
     
     override func viewDidLoad() {
-       
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
+
         loadVariablesAndConstants()
         
         lightOrDarkMode()
@@ -1936,15 +1937,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.game.save()
                             
                             self.gameFinishedScreen("won",statusBy: "")
-                            //firebase
-                            
-                            //add who's turn it is
-                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                            var status = ["turn": "done"]
-                            
-                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                            statusRef.setValue(status)
-                            //firebase - end
+              
                             
                             
                             
@@ -1982,15 +1975,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.game.save()
                             
                             self.gameFinishedScreen("lost",statusBy: "")
-                            //firebase
-                            
-                            //add who's turn it is
-                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                            var status = ["turn": "done"]
-                            
-                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                            statusRef.setValue(status)
-                            //firebase - end
+                      
                             
                             
                             
@@ -2028,15 +2013,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.game.save()
                             
                             self.gameFinishedScreen("drew",statusBy: "")
-                            //firebase
-                            
-                            //add who's turn it is
-                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                            var status = ["turn": "done"]
-                            
-                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                            statusRef.setValue(status)
-                            //firebase - end
+               
                             
                             
                             
@@ -2079,15 +2056,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 self.game.save()
                                 
                                 self.gameFinishedScreen("won",statusBy: "")
-                                //firebase
-                                
-                                //add who's turn it is
-                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                                var status = ["turn": "done"]
-                                
-                                let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                                statusRef.setValue(status)
-                                //firebase - end
+                         
                                 
                                 
                                 
@@ -4132,16 +4101,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.game.save()
                             
                             self.gameFinishedScreen("lost",statusBy: "time")
-                            //firebase
-                            
-                            //add who's turn it is
-                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                            var status = ["turn": "done"]
-                            
-                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                            statusRef.setValue(status)
-                            //firebase - end
-                            
+                 
                             
                             
                         }
@@ -4176,15 +4136,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.game.save()
                             
                             self.gameFinishedScreen("won",statusBy: "time")
-                            //firebase
-                            
-                            //add who's turn it is
-                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                            var status = ["turn": "done"]
-                            
-                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                            statusRef.setValue(status)
-                            //firebase - end
+                   
                             
                             
                             
@@ -4220,16 +4172,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.game.save()
                             
                             self.gameFinishedScreen("drew",statusBy: "")
-                            //firebase
-                            
-                            //add who's turn it is
-                            let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                            var status = ["turn": "done"]
-                            
-                            let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                            statusRef.setValue(status)
-                            //firebase - end
-                            
+                  
                             
                             
                         }
@@ -4269,15 +4212,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 self.game.save()
                                 
                                 self.gameFinishedScreen("lost",statusBy: "time")
-                                //firebase
-                                
-                                //add who's turn it is
-                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                                var status = ["turn": "done"]
-                                
-                                let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                                statusRef.setValue(status)
-                                //firebase - end
+                          
                                 
                                 
                                 
@@ -8625,83 +8560,77 @@ var didLongPress = false
             
             if iamWhite {
             
-                    if self.game["whiteRatedComplete"] as! Bool == false && self.game["blackRatedComplete"] as! Bool == false {
+                if self.game["whiteRatedComplete"] as! Bool == false {
                     
                     
-                    let Rating = self.calculateRating(Double(self.otherUserRatingInt), bR: Double(self.meUserRatingInt), K: 32, sW: 0, sB: 1)
+                    //lost
+                    let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0, sB: 1)
                     
-                    PFUser.currentUser()!.setObject(Rating.1, forKey: "rating")
-                    self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
-                    let s = self.meUserWon + 1
-                    PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                    let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                    let addRating = Rating.0 - self.meUserRatingIntStart
+                    
+                    print("addrating is \(addRating) and nowRating is  \(nowRating) and both are \(addRating+nowRating)")
+                    
+                    PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                    self.meUserLost = Int(PFUser.currentUser()!.objectForKey("lost") as! String!)!
+                    let s = self.meUserLost + 1
+                    PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
                     PFUser.currentUser()!.save()
                     
-                    
-                    var otherUserQuery = PFQuery(className:"_User")
-                    otherUserQuery.whereKey("username", equalTo: otherUserName)
-                    var otherUser = otherUserQuery.getFirstObject()
-                    
-                    otherUser!.setObject(Rating.0, forKey: "rating")
-                    self.otherUserLost = Int(otherUser!["lost"] as! String!)!
-                    let l = self.otherUserLost + 1
-                    otherUser!.setObject("\(l)", forKey: "lost")
-                    otherUser!.save()
                     
                     self.game["status_white"] = "lost"
                     self.game["status_black"] = "won"
                     
+                    
                     self.game["whiteRatedComplete"] = true
-                    self.game["blackRatedComplete"] = true
                     
                     self.game.save()
                     
-                    self.gameFinishedScreen("lost",statusBy: "chekmate")
-                    //firebase
+                    self.gameFinishedScreen("lost",statusBy: "time")
                     
-                    //add who's turn it is
-                    let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                    var status = ["turn": "done"]
                     
-                    let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                    statusRef.setValue(status)
-                    //firebase - end
                     
+                    
+//                    //add who's turn it is
+//                    let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+//                    var status = ["turn": "done"]
+//                    
+//                    let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+//                    statusRef.setValue(status)
+//                    //firebase - end
+//                    
                     
                     
                 }
             }
             else {
-                if self.game["whiteRatedComplete"] as! Bool == false && self.game["blackRatedComplete"] as! Bool == false {
+                if self.game["blackRatedComplete"] as! Bool == false {
                     
+                    //lost
+                    let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 1, sB: 0)
                     
-                    let Rating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 1, sB: 0)
+                    let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                    let addRating = Rating.1 - self.meUserRatingIntStart
                     
-                    PFUser.currentUser()!.setObject(Rating.0, forKey: "rating")
-                    self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
-                    let s = self.meUserWon + 1
-                    PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                    print(addRating+nowRating)
+                    
+                    PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                    self.meUserLost = Int(PFUser.currentUser()!.objectForKey("lost") as! String!)!
+                    let s = self.meUserLost + 1
+                    PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
                     PFUser.currentUser()!.save()
                     
-                    
-                    var otherUserQuery = PFQuery(className:"_User")
-                    otherUserQuery.whereKey("username", equalTo: otherUserName)
-                    var otherUser = otherUserQuery.getFirstObject()
-                    
-                    otherUser!.setObject(Rating.1, forKey: "rating")
-                    self.otherUserLost = Int(otherUser!["lost"] as! String!)!
-                    let l = self.otherUserLost + 1
-                    otherUser!.setObject("\(l)", forKey: "lost")
-                    otherUser!.save()
                     
                     self.game["status_white"] = "won"
                     self.game["status_black"] = "lost"
                     
-                    self.game["whiteRatedComplete"] = true
                     self.game["blackRatedComplete"] = true
                     
                     self.game.save()
                     
-                    self.gameFinishedScreen("won",statusBy: "chekmate")
+                    self.gameFinishedScreen("won",statusBy: "time")
+                    
+                    
                     //firebase
                     
                     //add who's turn it is

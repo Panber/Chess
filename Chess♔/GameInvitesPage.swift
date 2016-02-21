@@ -29,6 +29,7 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
 
         // Do any additional setup after loading the view.
     }

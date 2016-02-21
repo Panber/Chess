@@ -139,6 +139,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     override func viewDidLoad() {
         
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
+
+        
         instructionsLabel = UILabel(frame: CGRectMake(20, 64 ,screenWidth - 40,100))
         let new = "-New-"
         instructionsLabel.text = "Please add a new game by pressing \(new)"
@@ -148,7 +151,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         instructionsLabel.textAlignment = .Center
         view.addSubview(instructionsLabel)
         
-        
+        tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
+
         
         super.viewDidLoad()
         
@@ -945,7 +949,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     if theirTurnSpeed[indexPath.row] == "Fast" {
                         cell.timeleft.text = "Their Time: 5min"
                         cell.timeleft.textColor = red
-
+ 
                     }
                     else if theirTurnSpeed[indexPath.row] == "Normal" {
                         cell.timeleft.text = "Their Time: 4h"
