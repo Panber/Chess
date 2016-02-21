@@ -134,6 +134,12 @@
 		8FA250201C77E32C00A4A32D /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA2501F1C77E32C00A4A32D /* ParseFacebookUtilsV4.framework */; };
 		8FA251071C79F57E00A4A32D /* CHESSLONG.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251061C79F57E00A4A32D /* CHESSLONG.png */; };
 		8FA251091C79F60600A4A32D /* CHESSLONG2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251081C79F60600A4A32D /* CHESSLONG2.png */; };
+		8FA2510F1C7A70D400A4A32D /* panbertestlogov2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA2510D1C7A70D400A4A32D /* panbertestlogov2.png */; };
+		8FA251101C7A70D400A4A32D /* panbertestlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA2510E1C7A70D400A4A32D /* panbertestlogo.png */; };
+		8FA251121C7A723200A4A32D /* panbertestlogov3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251111C7A723200A4A32D /* panbertestlogov3.png */; };
+		8FA251141C7A790B00A4A32D /* panbertestlogov4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251131C7A790B00A4A32D /* panbertestlogov4.png */; };
+		8FA251161C7A79A500A4A32D /* panbertestlogov45.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251151C7A79A500A4A32D /* panbertestlogov45.png */; };
+		8FA2511A1C7A7A8100A4A32D /* PanberLogov9 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251191C7A7A8100A4A32D /* PanberLogov9 copy.png */; };
 		8FA55EEE1C53CCA700250403 /* facebook_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA55EED1C53CCA600250403 /* facebook_logo.png */; };
 		8FA569091C011D0300AFC460 /* map158-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569071C011D0200AFC460 /* map158-2.png */; };
 		8FA5690A1C011D0300AFC460 /* map158.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569081C011D0200AFC460 /* map158.png */; };
@@ -410,6 +416,12 @@
 		8FA250F51C77E81A00A4A32D /* Chess♔ copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Chess♔ copy-Info.plist"; path = "/Users/Johannes/Documents/Chess/Chess♔ copy-Info.plist"; sourceTree = "<absolute>"; };
 		8FA251061C79F57E00A4A32D /* CHESSLONG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHESSLONG.png; sourceTree = "<group>"; };
 		8FA251081C79F60600A4A32D /* CHESSLONG2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHESSLONG2.png; sourceTree = "<group>"; };
+		8FA2510D1C7A70D400A4A32D /* panbertestlogov2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panbertestlogov2.png; sourceTree = "<group>"; };
+		8FA2510E1C7A70D400A4A32D /* panbertestlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panbertestlogo.png; sourceTree = "<group>"; };
+		8FA251111C7A723200A4A32D /* panbertestlogov3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panbertestlogov3.png; sourceTree = "<group>"; };
+		8FA251131C7A790B00A4A32D /* panbertestlogov4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panbertestlogov4.png; sourceTree = "<group>"; };
+		8FA251151C7A79A500A4A32D /* panbertestlogov45.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panbertestlogov45.png; sourceTree = "<group>"; };
+		8FA251191C7A7A8100A4A32D /* PanberLogov9 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PanberLogov9 copy.png"; sourceTree = "<group>"; };
 		8FA55EED1C53CCA600250403 /* facebook_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_logo.png; sourceTree = "<group>"; };
 		8FA569071C011D0200AFC460 /* map158-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map158-2.png"; sourceTree = "<group>"; };
 		8FA569081C011D0200AFC460 /* map158.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map158.png; sourceTree = "<group>"; };
@@ -599,7 +611,13 @@
 				8F1E8ECD1BD7F66C00C41D37 /* profilePicPlaceholder.jpg */,
 				8FEF2A911BFA7C7C006E1359 /* Boards */,
 				8F273CF21BF29E4300275378 /* clock104.png */,
+				8FA251151C7A79A500A4A32D /* panbertestlogov45.png */,
+				8FA251191C7A7A8100A4A32D /* PanberLogov9 copy.png */,
+				8FA251131C7A790B00A4A32D /* panbertestlogov4.png */,
+				8FA2510D1C7A70D400A4A32D /* panbertestlogov2.png */,
+				8FA2510E1C7A70D400A4A32D /* panbertestlogo.png */,
 				8FA251081C79F60600A4A32D /* CHESSLONG2.png */,
+				8FA251111C7A723200A4A32D /* panbertestlogov3.png */,
 				8FA251061C79F57E00A4A32D /* CHESSLONG.png */,
 				8F2EEC821C70F27600FB6127 /* clock108.png */,
 				8F56E1701C665D880000ECDB /* BN.png */,
@@ -1088,6 +1106,7 @@
 				F176C7FD1C50466100518A81 /* PopUpViewController_iPhone6Plus.xib in Resources */,
 				8FEF2AAF1BFCE136006E1359 /* multimedia option23.png in Resources */,
 				8F8BD2B71BC6C1C500B25CFE /* checkmark11.png in Resources */,
+				8FA2510F1C7A70D400A4A32D /* panbertestlogov2.png in Resources */,
 				8F8BD2A81BC41ED700B25CFE /* arrow_white.png in Resources */,
 				8FEF2A9F1BFA7C8A006E1359 /* whiteSquareChessBoard.png in Resources */,
 				8F56E1681C6408FC0000ECDB /* chessLogo58.png in Resources */,
@@ -1116,8 +1135,10 @@
 				8F273CF51BF29E4300275378 /* clock104.png in Resources */,
 				8F2392A11C08C7E200CC4B0F /* PanBerLogo2.png in Resources */,
 				8F38EF6A1BB8399D00668B3B /* JBpp.jpg in Resources */,
+				8FA251101C7A70D400A4A32D /* panbertestlogo.png in Resources */,
 				8F31DCE71BC7189B004544CC /* add1.png in Resources */,
 				8F2392A31C09EF2D00CC4B0F /* cm1.png in Resources */,
+				8FA251161C7A79A500A4A32D /* panbertestlogov45.png in Resources */,
 				8F4A02691B9A3E890084024A /* PANBERlogo.png in Resources */,
 				8FEF2AB51BFD1779006E1359 /* grayBC.jpg in Resources */,
 				8F6E64E61C28BC720092471C /* capsuleClock.png in Resources */,
@@ -1181,11 +1202,14 @@
 				8F2EEC831C70F27600FB6127 /* clock108.png in Resources */,
 				8FEF2A9B1BFA7C8A006E1359 /* blackSquareChessBoard.png in Resources */,
 				8F8BD2BD1BC6E22B00B25CFE /* close1.png in Resources */,
+				8FA2511A1C7A7A8100A4A32D /* PanberLogov9 copy.png in Resources */,
+				8FA251121C7A723200A4A32D /* panbertestlogov3.png in Resources */,
 				8FE58AA21C3B1F26007888F4 /* whiteRook.png in Resources */,
 				8F2DD6E31B9AFFF80059CEFA /* graySquare.png in Resources */,
 				8F31DCED1BC7C8B5004544CC /* pending.png in Resources */,
 				8F2392A51C09EF3A00CC4B0F /* cm2.png in Resources */,
 				8FE58AB81C44676B007888F4 /* whitePawn.png in Resources */,
+				8FA251141C7A790B00A4A32D /* panbertestlogov4.png in Resources */,
 				8F2EEC721C6A9BF200FB6127 /* ChessLogoFront.png in Resources */,
 				8FE58A991C3B1F26007888F4 /* blackKnight.png in Resources */,
 				8F4A02871B9A3F240084024A /* chessIcon180.png in Resources */,
