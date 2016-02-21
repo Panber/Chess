@@ -327,7 +327,7 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         cell.username.text = userArray[indexPath.row]
 
         let data = profilePicArray[indexPath.row]
-        
+        PData = data
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: "other_userImage")
         
         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("OtherProfile")
