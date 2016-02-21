@@ -744,7 +744,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var passantArray: Array<Bool> = []
     
     override func viewDidLoad() {
-       
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
+
         loadVariablesAndConstants()
         
         lightOrDarkMode()
@@ -8579,6 +8580,7 @@ var didLongPress = false
                     
                     self.game["status_white"] = "lost"
                     self.game["status_black"] = "won"
+                    
                     
                     self.game["whiteRatedComplete"] = true
                     
