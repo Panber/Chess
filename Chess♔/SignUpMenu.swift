@@ -798,10 +798,19 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     func facebookSignUpButtonPressed(sender:UIButton!) {
         
         self.view.endEditing(true)
-        self.signupView.frame.origin.y += screenHeight
-        self.visualEffectView.alpha = 0
+        UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            
+            self.signupView.frame.origin.y += screenHeight
+            self.visualEffectView.alpha = 0
+            
+            }, completion:  { finish in
+            
+            self.addUsername()
+        }
+    )
+    
         
-        addUsername()
+        
         
         
     }
