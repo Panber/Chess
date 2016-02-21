@@ -482,7 +482,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             
             visualEffectView.alpha = 1
             visualEffectView.userInteractionEnabled = true
-            
+             
             
             }, completion: {finish in
                 
