@@ -2366,7 +2366,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.blackRook1.frame.origin.x = d
                                             self.blackRook1.frame.origin.y = _8
                                             
-                                            }, completion: { finish in})
+                                            }, completion: { finish in
+                                                for var i = 0; i < self.piecesArrs.count; i++ {
+                                                    for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                        self.piecesArrs[i][t].userInteractionEnabled = true
+                                                    }
+                                                }
+                                                self.deletePiecesAfterLoad()
+                                                self.updateLogic()
+                                        })
                                         
                                     }
                                     
@@ -2384,7 +2392,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.blackRook1.frame.origin.x = d
                                             self.blackRook1.frame.origin.y = _8
                                             
-                                            }, completion: { finish in})
+                                            }, completion: { finish in
+                                                for var i = 0; i < self.piecesArrs.count; i++ {
+                                                    for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                        self.piecesArrs[i][t].userInteractionEnabled = true
+                                                    }
+                                                }
+                                                self.deletePiecesAfterLoad()
+                                                self.updateLogic()
+                                        })
                                         
                                     }
                                     
@@ -2404,7 +2420,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.blackRook2.frame.origin.x = f
                                         self.blackRook2.frame.origin.y = _8
                                         
-                                        }, completion: { finish in})
+                                        }, completion: { finish in
+                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                }
+                                            }
+                                            self.deletePiecesAfterLoad()
+                                            self.updateLogic()
+                                    })
                                 }
                                 
                             }
@@ -2421,7 +2445,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.blackRook2.frame.origin.y = _8
                                         
                                         
-                                        }, completion: { finish in})
+                                        }, completion: { finish in
+                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                }
+                                            }
+                                            self.deletePiecesAfterLoad()
+                                            self.updateLogic()
+                                    })
                                     
                                 }
                                 
@@ -4523,7 +4555,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.blackRook2.frame.origin.x = e
                                             self.blackRook2.frame.origin.y = _8
                                             
-                                            }, completion: { finish in})
+                                            }, completion: { finish in
+                                                for var i = 0; i < self.piecesArrs.count; i++ {
+                                                    for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                        self.piecesArrs[i][t].userInteractionEnabled = true
+                                                    }
+                                                }
+                                                self.deletePiecesAfterLoad()
+                                                self.updateLogic()
+                                        })
                                         
                                     }
                                     
@@ -4540,7 +4580,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                             self.blackRook2.frame.origin.x = e
                                             self.blackRook2.frame.origin.y = _8
                                             
-                                            }, completion: { finish in})
+                                            }, completion: { finish in
+                                                for var i = 0; i < self.piecesArrs.count; i++ {
+                                                    for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                        self.piecesArrs[i][t].userInteractionEnabled = true
+                                                    }
+                                                }
+                                                self.deletePiecesAfterLoad()
+                                                self.updateLogic()
+                                        })
                                         
                                     }
                                     
@@ -4561,7 +4609,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.blackRook1.frame.origin.x = c
                                         self.blackRook1.frame.origin.y = _8
                                         
-                                        }, completion: { finish in})
+                                        }, completion: { finish in
+                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                }
+                                            }
+                                            self.deletePiecesAfterLoad()
+                                            self.updateLogic()
+                                    })
                                     
                                 }
                                 
@@ -4580,7 +4636,15 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         
                                         
-                                        }, completion: { finish in})
+                                        }, completion: { finish in
+                                            for var i = 0; i < self.piecesArrs.count; i++ {
+                                                for var t = 0; t < self.piecesArrs[i].count; t++ {
+                                                    self.piecesArrs[i][t].userInteractionEnabled = true
+                                                }
+                                            }
+                                            self.deletePiecesAfterLoad()
+                                            self.updateLogic()
+                                    })
                                     
                                 }
                                 
