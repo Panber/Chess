@@ -27,6 +27,9 @@ class NewGameRating: UIViewController, UISearchBarDelegate, UISearchDisplayDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Rating"
+        tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
+
         //navigationController?.navigationBar.topItem?.title = "Rating"
         tableView.delegate = self
         tableView.dataSource = self

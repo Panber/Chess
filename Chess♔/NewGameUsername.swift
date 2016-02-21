@@ -28,6 +28,9 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
     override func viewDidLoad() {
         super.viewDidLoad()
          print("viewDidLoad")
+        self.title = "Username"
+        tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
+
         //navigationController?.navigationBar.topItem?.title = "Users"
         tableView.delegate = self
         tableView.dataSource = self
