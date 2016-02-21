@@ -566,19 +566,38 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                 
                 return
             }
-            print("Current user token=\(FBSDKAccessToken.currentAccessToken().tokenString)")
             
-            print("Current user id \(FBSDKAccessToken.currentAccessToken().userID)")
-            
-            if(FBSDKAccessToken.currentAccessToken() != nil)
-            {
-                NSUserDefaults.standardUserDefaults().setObject(FBSDKAccessToken.currentAccessToken().userID, forKey: "user_name")
-                NSUserDefaults.standardUserDefaults().synchronize()
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
-                    self.showViewController(vc as! UIViewController, sender: vc)
+            if let user = user {
+                if user.isNew {
+                    
+                    print("Current user token=\(FBSDKAccessToken.currentAccessToken().tokenString)")
+                    
+                    print("Current user id \(FBSDKAccessToken.currentAccessToken().userID)")
+                    
+                    if(FBSDKAccessToken.currentAccessToken() != nil)
+                    {
+                        user.deleteInBackground()
+                        
+                        let myAlert = UIAlertController(title: "Alert", message: "Please sign in with facebook first", preferredStyle: UIAlertControllerStyle.Alert)
+                        let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                        myAlert.addAction(okAction)
+                        self.presentViewController(myAlert, animated: true, completion: nil)
+                    }
+                } else {
+                    print("User logged in through Facebook!")
+                    
+                    NSUserDefaults.standardUserDefaults().setObject(FBSDKAccessToken.currentAccessToken().userID, forKey: "user_name")
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Sett")
+                        self.showViewController(vc as! UIViewController, sender: vc)
+                        
+                        
+                    }
                 }
+            } else {
+                print("Uh oh. The user cancelled the Facebook login.")
             }
             
         })
