@@ -355,6 +355,9 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         forgotPasswordMenu.addSubview(Send)
     }
     
+    
+    
+    
     func SendButtonPressed(sender: UIButton!){
         var emailAddress = forgotPasswordInput.text
         
@@ -372,18 +375,25 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             
             if error != nil {
                 let userMessage:String = error!.localizedDescription
-                let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                let myAlert = UIAlertController(title: "Password Reset", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
                 let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
                 myAlert.addAction(okAction)
                 self.presentViewController(myAlert, animated: true, completion: nil)
                 
             } else {
-                let userMessage:String = "An email message was sent to \(emailAddress!)"
+                let userMessage:String = "An email was sent to \(emailAddress!)"
                 let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
                 let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: {(alert: UIAlertAction!) in
                 self.view.endEditing(true)
-                self.forgotPasswordMenu.frame.origin.y += screenHeight
-                self.visualEffectView.alpha = 0
+                
+                    
+                    UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+                        
+                        self.forgotPasswordMenu.frame.origin.y += screenHeight
+                        //self.loginView.alpha = 1
+                        self.visualEffectView.alpha = 0
+                        
+                        }, completion: nil)
                     
                 })
                 myAlert.addAction(okAction)
