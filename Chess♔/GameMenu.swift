@@ -429,6 +429,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         
                         self.theirturnArray.append((games["blackPlayer"] as? String)!)
                         
+                        let notations = games["piecePosition"] as? NSMutableArray
+                        self.notationsCountTheirTurn.append(notations!.count)
+                        
                         //adding updated since
                         let lastupdate = games.updatedAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
@@ -451,6 +454,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     }
                     else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost" || games["status_white"] as? String == "draw"{
                         
+                   
                         self.gameoverArray.append((games["blackPlayer"] as? String)!)
                         self.typeofGameover.append((games["status_white"] as? String)!)
                         
@@ -507,6 +511,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     else if games["status_black"] as? String == "notmove"  {
                         
                         self.theirturnArray.append((games["whitePlayer"] as? String)!)
+                        let notations = games["piecePosition"] as? NSMutableArray
+                        self.notationsCountTheirTurn.append(notations!.count)
                         
                         //adding updated since
                         let lastupdate = games.updatedAt!
@@ -531,6 +537,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         
                         self.gameoverArray.append((games["whitePlayer"] as? String)!)
                         self.typeofGameover.append((games["status_black"] as? String)!)
+                  
                         
                         //adding updated since
                         let lastupdate = games.updatedAt!
@@ -826,12 +833,18 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     
                     if yourTurnSpeed[indexPath.row] == "Fast" {
                         cell.timeleft.text = "Time Left: 5min"
+                        cell.timeleft.textColor = red
+
                     }
                     else if yourTurnSpeed[indexPath.row] == "Normal" {
                         cell.timeleft.text = "Time Left: 4h"
+                        cell.timeleft.textColor = UIColor.lightGrayColor()
+
                     }
                     else if yourTurnSpeed[indexPath.row] == "Slow" {
                         cell.timeleft.text = "Time Left: 2d"
+                        cell.timeleft.textColor = UIColor.lightGrayColor()
+
                     }
             
                 }
@@ -895,7 +908,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 
                 if timeLeftC >= 0 {
                     print("times up mate")
-                    cell.timeleft.text = "Time's up. Claim your victory."
+                    cell.timeleft.text = "Time is up. Claim your victory."
                     cell.timeleft.textColor = green
                     
                     
@@ -928,6 +941,28 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         timeLeftC = timeLeftC/24
                         let sinceOutput = Int(timeLeftC) * -1
                         cell.timeleft.text = "Their Time: \(sinceOutput)d"
+                        
+                    }
+                    
+            }
+            
+                if notationsCountTheirTurn[indexPath.row] <= 0 {
+                    
+                    if theirTurnSpeed[indexPath.row] == "Fast" {
+                        cell.timeleft.text = "Their Time: 5min"
+                        cell.timeleft.textColor = red
+
+                    }
+                    else if theirTurnSpeed[indexPath.row] == "Normal" {
+                        cell.timeleft.text = "Their Time: 4h"
+                        cell.timeleft.textColor = UIColor.lightGrayColor()
+
+                    }
+                    else if theirTurnSpeed[indexPath.row] == "Slow" {
+                        cell.timeleft.text = "Their Time: 2d"
+                        cell.timeleft.textColor = UIColor.lightGrayColor()
+
+                        
                         
                     }
                     
@@ -1683,6 +1718,14 @@ didLaunchGame = false
          imageDataArray = []
          indicatorDataArray = []
         
+         notationsCountYourTurn = []
+         notationsCountTheirTurn = []
+         notationsCountGameOver = []
+        
+         yourTurnSpeed = []
+         theirTurnSpeed = []
+         gameoverTurnSpeed = []
+     
          yourturnUpdateSince = []
          theirturnUpdateSince = []
          gameoverUpdateSince = []

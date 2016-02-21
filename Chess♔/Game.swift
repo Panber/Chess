@@ -2048,7 +2048,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         let lastupdate = r!["blackDate"] as? NSDate
                         var timeLeft2 = NSDate().timeIntervalSinceDate(lastupdate!)
                         print(timeLeft2)
-                        
+                        if self.movesCap.count > 1 {
                         if timeLeft2 >= 0 {
                             //won
                       
@@ -2094,7 +2094,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             
                         }
-                        
+                        }
                     }
                     else if r!["status_white"] as! String == "move" {
                         
@@ -4242,6 +4242,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         var timeLeft2 = NSDate().timeIntervalSinceDate(lastupdate!)
                         print(timeLeft2)
                         //won
+                        if self.movesCap.count < 1{
                         if timeLeft2 >= 0 {
                             if self.game["blackRatedComplete"] as! Bool == false {
                                 
@@ -4282,7 +4283,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 
                             }
                         }
-
+                        }
                     }
                     else if r!["status_black"] as! String == "move" {
                         
