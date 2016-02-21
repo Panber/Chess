@@ -844,7 +844,8 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject:AnyObject]?) -> Bool {
+        application.statusBarHidden = true
         return true
     }
     
