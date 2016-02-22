@@ -9185,6 +9185,22 @@ var didLongPress = false
                         blackCastlingRight += [pieceOption3]
                         castlePiece = blackRook1
                     }
+                    
+                    if pieceid == 5 && chosenPiece == whiteKing {
+                        for var p = 0 ; p < pieceOptions.count; p++ {
+                            if canSaveKing(pieceOptions[p], array: pieceBlackLogicOptions) == true {
+                                [pieceOptions[p] .removeFromSuperview()]
+                                pieceOptions.removeAtIndex(p)
+                            }
+                        }
+                    } else if pieceid == 5 && chosenPiece == blackKing {
+                        for var p = 0 ; p < pieceOptions.count; p++ {
+                            if canSaveKing(pieceOptions[p], array: pieceWhiteLogicOptions) == true {
+                                [pieceOptions[p] .removeFromSuperview()]
+                                pieceOptions.removeAtIndex(p)
+                            }
+                        }
+                    }
                 }
                 
                 for var r = 0; r < enemy.count; r++ {
