@@ -211,7 +211,7 @@ class NewGameSettingsPage_Analyze: UIViewController {
                 // Send push notification to query
                 let push = PFPush()
                 push.setQuery(pushQuery) // Set our Installation query
-                push.setMessage("\(PFUser.currentUser()!.username!) has invited you to play Chess!")
+                push.setMessage("\(PFUser.currentUser()!.username!) invited you to play Chess!")
                 push.sendPushInBackground()
                 
             }

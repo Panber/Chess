@@ -125,6 +125,7 @@ var whiteQueenCount = 0
 
 var whiteCount : Array<Int> = [whitePawnCount,whiteBishopCount,whiteKnightCount,whiteRookCount,whiteQueenCount]
 
+var gameIsRatedMode = Bool()
 
 var takenWhitePawn = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 - 4.7 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
 var takenWhiteBishop = UILabel(frame: CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50, screenHeight / 2 - 4.7 * pieceSize + pieceSize * 0.3, pieceSize * 0.65, pieceSize * 0.65))
@@ -880,12 +881,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         promotion = r!["promotion"] as! Bool
         promotionBlack = r!["promotionBlack"] as! Bool
         
+        gameIsRatedMode = false
+
         if game["mode"] as? String == "Rated" {
             ratedLrated = "Rated"
-            
+            gameIsRatedMode = true
         }
         else {
-            ratedLrated = "Not Rated"
+            ratedLrated = "Unrated"
             
         }
         if game["speed"] as? String == "Normal" {
@@ -1915,7 +1918,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         if self.game["whiteRatedComplete"] as! Bool == false {
                            
                             
-                            
+                            if gameIsRatedMode {
                             //won
                             let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 1, sB: 0)
                             
@@ -1928,8 +1931,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.meUserWon = Int(PFUser.currentUser()!.objectForKey("won") as! String!)!
                             let s = self.meUserWon + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "won")
+                                
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "won"
                             self.game["status_black"] = "lost"
@@ -1953,7 +1957,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         if self.game["whiteRatedComplete"] as! Bool == false {
                             
-                            
+                            if gameIsRatedMode {
+
                             //lost
                             let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0, sB: 1)
                             
@@ -1967,7 +1972,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             let s = self.meUserLost + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "lost"
                             self.game["status_black"] = "won"
@@ -1990,7 +1995,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         if self.game["whiteRatedComplete"] as! Bool == false {
                        
-                            
+                            if gameIsRatedMode {
+
                             
                             //draw
                             let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
@@ -2005,7 +2011,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             let s = self.meUserDrawn + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "draw"
                             self.game["status_black"] = "draw"
@@ -2035,7 +2041,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 self.turnLturn = "You Won"
                                 self.turnIndicatorturn = red
                                
-                                
+                                if gameIsRatedMode {
+
                                 let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 1, sB: 0)
                                 
                                 let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
@@ -2048,7 +2055,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 let s = self.meUserWon + 1
                                 PFUser.currentUser()!.setObject("\(s)", forKey: "won")
                                 PFUser.currentUser()!.save()
-                                
+                                }
                                 
                                 self.game["status_white"] = "won"
                                 self.game["status_black"] = "lost"
@@ -2094,6 +2101,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     
                                     if r!["whiteRatedComplete"] as! Bool == false {
                                         
+                                        if gameIsRatedMode {
+
                                         let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
                                         PFUser.currentUser()!.setObject(myRating, forKey: "rating")
                                         
@@ -2101,7 +2110,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
                                         
                                         PFUser.currentUser()!.save()
-                                        
+                                        }
                                         r!["status_white"] = "draw"
                                         
                                         r!["status_black"] = "draw"
@@ -2927,7 +2936,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         if self.game["whiteRatedComplete"] as! Bool == false {
                             
-                            
+                            if gameIsRatedMode {
+
                             
                             //won
                             let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 1, sB: 0)
@@ -2942,7 +2952,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             let s = self.meUserWon + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "won")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "won"
                             self.game["status_black"] = "lost"
@@ -2966,7 +2976,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         if self.game["whiteRatedComplete"] as! Bool == false {
                             
-                            
+                            if gameIsRatedMode {
+
                             //lost
                             let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0, sB: 1)
                             
@@ -2980,7 +2991,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             let s = self.meUserLost + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "lost"
                             self.game["status_black"] = "won"
@@ -3004,7 +3015,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         if self.game["whiteRatedComplete"] as! Bool == false {
                             
                             
-                            
+                            if gameIsRatedMode {
+
                             //draw
                             let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
                             
@@ -3018,7 +3030,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             let s = self.meUserDrawn + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "draw"
                             self.game["status_black"] = "draw"
@@ -3058,7 +3070,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 if self.iamWhite {
                                     
                                     if r!["whiteRatedComplete"] as! Bool == false {
-                                        
+                                        if gameIsRatedMode {
+
                                         let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
                                         PFUser.currentUser()!.setObject(myRating, forKey: "rating")
                                         
@@ -3066,7 +3079,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
                                         
                                         PFUser.currentUser()!.save()
-                                        
+                                        }
                                         r!["status_white"] = "draw"
                                         
                                         r!["status_black"] = "draw"
@@ -4111,7 +4124,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnIndicatorturn = green
                         
                         if self.game["blackRatedComplete"] as! Bool == false {
-                            
+                            if gameIsRatedMode {
+
                             //won
                             let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0, sB: 1)
                             
@@ -4125,7 +4139,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             let s = self.meUserWon + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "won")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "lost"
                             self.game["status_black"] = "won"
@@ -4146,7 +4160,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnIndicatorturn = red
                         
                         if self.game["blackRatedComplete"] as! Bool == false {
-                            
+                            if gameIsRatedMode {
+
                             //lost
                             let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 1, sB: 0)
                             
@@ -4160,7 +4175,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             let s = self.meUserLost + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "won"
                             self.game["status_black"] = "lost"
@@ -4182,7 +4197,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnIndicatorturn = UIColor.purpleColor()
                         
                         if self.game["blackRatedComplete"] as! Bool == false {
-                            
+                            if gameIsRatedMode {
+
                             //draw
                             let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
                             
@@ -4196,7 +4212,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             let s = self.meUserDrawn + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "draw"
                             self.game["status_black"] = "draw"
@@ -4222,7 +4238,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         if self.movesCap.count < 1{
                         if timeLeft2 >= 0 {
                             if self.game["blackRatedComplete"] as! Bool == false {
-                                
+                                if gameIsRatedMode {
+
                                 //won
                                 let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0, sB: 1)
                                 
@@ -4236,7 +4253,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 let s = self.meUserWon + 1
                                 PFUser.currentUser()!.setObject("\(s)", forKey: "won")
                                 PFUser.currentUser()!.save()
-                                
+                                }
                                 
                                 self.game["status_white"] = "lost"
                                 self.game["status_black"] = "won"
@@ -4285,6 +4302,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     
                                     if self.game["blackRatedComplete"] as! Bool == false {
                                         
+                                        if gameIsRatedMode {
+
                                         //draw
                                         let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
                                         
@@ -4298,7 +4317,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         let s = self.meUserDrawn + 1
                                         PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
                                         PFUser.currentUser()!.save()
-                                        
+                                        }
                                         
                                         self.game["status_white"] = "draw"
                                         self.game["status_black"] = "draw"
@@ -5094,6 +5113,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         if self.game["blackRatedComplete"] as! Bool == false {
                             
+                            if gameIsRatedMode {
+
                             //won
                             let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0, sB: 1)
                             
@@ -5107,7 +5128,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             let s = self.meUserWon + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "won")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "lost"
                             self.game["status_black"] = "won"
@@ -5129,7 +5150,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnIndicatorturn = red
                         
                         if self.game["blackRatedComplete"] as! Bool == false {
-                            
+                            if gameIsRatedMode {
+
                             //lost
                             let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 1, sB: 0)
                             
@@ -5143,7 +5165,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             let s = self.meUserLost + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "won"
                             self.game["status_black"] = "lost"
@@ -5165,7 +5187,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.turnIndicatorturn = UIColor.purpleColor()
                         
                         if self.game["blackRatedComplete"] as! Bool == false {
-                            
+                            if gameIsRatedMode {
+
                             //draw
                             let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
                             
@@ -5179,7 +5202,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             let s = self.meUserDrawn + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "draw"
                             self.game["status_black"] = "draw"
@@ -5221,7 +5244,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     self.turnIndicatorturn = UIColor.purpleColor()
                                     
                                     if self.game["blackRatedComplete"] as! Bool == false {
-                                        
+                                        if gameIsRatedMode {
+
                                         //draw
                                         let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
                                         
@@ -5236,7 +5260,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
                                         PFUser.currentUser()!.save()
                                         
-                                        
+                                        }
                                         self.game["status_white"] = "draw"
                                         self.game["status_black"] = "draw"
                                         
@@ -7762,8 +7786,12 @@ var didLongPress = false
     
     func updateCountTimer() {
         
-        
-        
+        if !gameIsRatedMode {
+            self.ratingI.text = "\(PFUser.currentUser()!.objectForKey("rating") as! Int)"
+            ratingOppo.text = "\(otherUserRatingIntStart)"
+
+        }
+        else{
         
         if meRating2 == ratToIncreaseMe {
             
@@ -7813,7 +7841,7 @@ var didLongPress = false
             }
             ratingOppo.text = "\(otherUserRatingInt+oppoRating)"
         }
-        
+        }
     }
     
     func shareFacebookButtonPressed(sender: UIButton!) {
@@ -8257,6 +8285,7 @@ var didLongPress = false
                         self.turnIndicatorturn = red
                         self.updateLaunchTimerInt = 0
                         self.launchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateLaunchTimer", userInfo: nil, repeats: true)
+                        if gameIsRatedMode {
 
                         //lost
                         let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0, sB: 1)
@@ -8271,7 +8300,7 @@ var didLongPress = false
                         let s = self.meUserLost + 1
                         PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
                         PFUser.currentUser()!.save()
-                        
+                        }
                         
                         self.game["status_white"] = "lost"
                         self.game["status_black"] = "won"
@@ -8302,6 +8331,8 @@ var didLongPress = false
                         
                         self.updateLaunchTimerInt = 0
                         self.launchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateLaunchTimer", userInfo: nil, repeats: true)
+                        if gameIsRatedMode {
+
                         //lost
                         let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 1, sB: 0)
                         
@@ -8315,7 +8346,7 @@ var didLongPress = false
                         let s = self.meUserLost + 1
                         PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
                         PFUser.currentUser()!.save()
-                        
+                        }
                         
                         self.game["status_white"] = "won"
                         self.game["status_black"] = "lost"
@@ -8652,7 +8683,8 @@ var didLongPress = false
             
                 if self.game["whiteRatedComplete"] as! Bool == false {
                     
-                    
+                    if gameIsRatedMode {
+
                     //lost
                     let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0, sB: 1)
                     
@@ -8666,7 +8698,7 @@ var didLongPress = false
                     let s = self.meUserLost + 1
                     PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
                     PFUser.currentUser()!.save()
-                    
+                    }
                     
                     self.game["status_white"] = "lost"
                     self.game["status_black"] = "won"
@@ -8695,7 +8727,8 @@ var didLongPress = false
             }
             else {
                 if self.game["blackRatedComplete"] as! Bool == false {
-                    
+                    if gameIsRatedMode {
+
                     //lost
                     let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 1, sB: 0)
                     
@@ -8709,7 +8742,7 @@ var didLongPress = false
                     let s = self.meUserLost + 1
                     PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
                     PFUser.currentUser()!.save()
-                    
+                    }
                     
                     self.game["status_white"] = "won"
                     self.game["status_black"] = "lost"
@@ -10292,7 +10325,8 @@ var didLongPress = false
                         self.launchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateLaunchTimer", userInfo: nil, repeats: true)
                         gameIsOver = true
                         if self.game["blackRatedComplete"] as! Bool == false {
-                            
+                            if gameIsRatedMode {
+
                             //won
                             let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0, sB: 1)
                             
@@ -10306,7 +10340,7 @@ var didLongPress = false
                             let s = self.meUserWon + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "won")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "lost"
                             self.game["status_black"] = "won"
@@ -10412,7 +10446,8 @@ var didLongPress = false
                         gameIsOver = true
 
                         if self.game["blackRatedComplete"] as! Bool == false {
-                            
+                            if gameIsRatedMode {
+
                             //draw
                             let Rating = self.calculateRating(Double(self.otherUserRatingIntStart), bR: Double(self.meUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
                             
@@ -10426,7 +10461,7 @@ var didLongPress = false
                             let s = self.meUserDrawn + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "draw"
                             self.game["status_black"] = "draw"
@@ -10550,7 +10585,8 @@ var didLongPress = false
                         if self.game["whiteRatedComplete"] as! Bool == false {
                             
                             
-                            
+                            if gameIsRatedMode {
+
                             //won
                             let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 1, sB: 0)
                             
@@ -10564,7 +10600,7 @@ var didLongPress = false
                             let s = self.meUserWon + 1
                             PFUser.currentUser()!.setObject("\(s)", forKey: "won")
                             PFUser.currentUser()!.save()
-                            
+                            }
                             
                             self.game["status_white"] = "won"
                             self.game["status_black"] = "lost"
@@ -10678,7 +10714,8 @@ var didLongPress = false
                             if self.game["whiteRatedComplete"] as! Bool == false {
                                 
                                 
-                                
+                                if gameIsRatedMode {
+
                                 //draw
                                 let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
                                 
@@ -10692,7 +10729,7 @@ var didLongPress = false
                                 let s = self.meUserDrawn + 1
                                 PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
                                 PFUser.currentUser()!.save()
-                                
+                                }
                                 
                                 self.game["status_white"] = "draw"
                                 self.game["status_black"] = "draw"

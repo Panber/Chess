@@ -388,9 +388,15 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             for games in games {
                 
                 
+                let delt = games.updatedAt
+                let delt2 = NSDate().timeIntervalSinceDate(delt!)
                 
+                print("delt2 is \(delt2)")
+                if delt2 > 432_000 {
+                games.delete()
+                }
                 
-                if games["confirmed"] as? Bool == true {
+                else if games["confirmed"] as? Bool == true {
                     if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
                 
                     
@@ -979,6 +985,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             
             
         case 2:
+            
+            
             if typeofGameover[indexPath.row] == "lost" {
                 cell.colorIndicator.backgroundColor = UIColor.redColor()
             }
@@ -1046,7 +1054,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     cell.updated.text = "Last Updated: \(sinceOutput)d ago"
                 }
             }
-            
+            cell.timeleft.textColor = UIColor.lightGrayColor()
             cell.timeleft.text = "Game Over"
             cell.timeleft.font = UIFont(name: "Times-Italic", size: 14)
 
