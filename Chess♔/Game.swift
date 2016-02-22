@@ -2057,7 +2057,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 
                                 self.game.save()
                                 
-                                self.gameFinishedScreen("won",statusBy: "")
+                                self.gameFinishedScreen("won",statusBy: "time")
                          
                                 
                                 
@@ -4134,7 +4134,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             self.game.save()
                             
-                            self.gameFinishedScreen("lost",statusBy: "time")
+                            self.gameFinishedScreen("lost",statusBy: "")
                  
                             
                             
@@ -4169,7 +4169,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             self.game.save()
                             
-                            self.gameFinishedScreen("won",statusBy: "time")
+                            self.gameFinishedScreen("won",statusBy: "")
                    
                             
                             
@@ -5116,7 +5116,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             self.game.save()
                             
-                            self.gameFinishedScreen("lost",statusBy: "time")
+                            self.gameFinishedScreen("lost",statusBy: "")
                    
                             
                             
@@ -5152,7 +5152,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             self.game.save()
                             
-                            self.gameFinishedScreen("won",statusBy: "time")
+                            self.gameFinishedScreen("won",statusBy: "")
                         
                             
                             
@@ -10315,7 +10315,7 @@ var didLongPress = false
                             
                             self.game.save()
                             
-                            self.gameFinishedScreen("lost",statusBy: "time")
+                            self.gameFinishedScreen("lost",statusBy: "checkmate")
                             //firebase
                             
                             //add who's turn it is
