@@ -7910,7 +7910,12 @@ var didLongPress = false
         visualEffectSub.addSubview(scrollView1)
         
         var plusNum: CGFloat = 130
-        
+        var isOver = false
+        if game["status_white"] as? String == "won" || game["status_white"] as? String == "lost" || game["status_white"] as? String == "draw" {
+        plusNum = 0
+            isOver = true
+        }
+        else {
         var actions = UILabel(frame: CGRectMake(0,37,screenWidth, 32))
         actions.text = "ACTIONS"
         actions.textAlignment = .Center
@@ -7945,9 +7950,11 @@ var didLongPress = false
             drawB.setTitle("Draw Offered", forState: .Normal)
 
         }
+            
 
         drawB.addTarget(self, action: "drawButtonPressed:", forControlEvents: .TouchUpInside)
         scrollView1.addSubview(drawB)
+        }
         
         var info = UILabel(frame: CGRectMake(0,37 + plusNum,screenWidth, 32))
         info.text = "INFORMATION"
@@ -8008,7 +8015,11 @@ var didLongPress = false
         if darkMode {timeLeftL.textColor = UIColor.lightGrayColor()}
         else {timeLeftL.textColor = UIColor.darkGrayColor() }
         timeLeftL.font = UIFont(name: "Times", size: 19)
+        
+        if !isOver {
         scrollView1.addSubview(timeLeftL)
+        } else { plusNum -= 30}
+        
         
         timeL = UILabel(frame: CGRectMake(199,216 - 10 + plusNum,screenWidth-208, 29))
         timeL.text = ""
