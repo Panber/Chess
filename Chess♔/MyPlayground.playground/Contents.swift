@@ -125,7 +125,7 @@ func calculateRating(wR:Double, bR:Double, K:Double, sW:Double, sB:Double) -> (I
     let ExB:Double = bR_2/(wR_2 + bR_2)
     
     wR_2 = wR+(K*(sW - ExW))
-    bR_2 = wR+(K*(sB - ExB))
+    bR_2 = bR+(K*(sB - ExB))
 
     return (Int(wR_2) , Int(bR_2))
 }
@@ -142,18 +142,20 @@ print("blackRating after is \(blackRating)")
 
 
 
-let Rating = calculateRating(Double(900), bR: Double(1200), K: 32, sW: 1, sB: 0)
 
-let nowRating = 900
-let addRating = Rating.1 - 900
-
-print(addRating+nowRating)
 
 ////////
 
 
 
+let Rating = calculateRating(Double(900), bR: Double(1200), K: 32, sW: 1, sB: 0)
+Rating.0
+Rating.1
+let nowRating = 1200
+let addRating = Rating.0 - 1200
 
+print("me addrating is \(addRating) and nowRating is  \(nowRating) and both are \(addRating+nowRating)")
+print("other addrating is \(Rating.1 - 900) and nowRating is  \(843) and both are \(843+Rating.1 - 900)")
 
 
 

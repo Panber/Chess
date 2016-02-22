@@ -474,7 +474,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         let logo = UIImageView(frame: CGRectMake((screenWidth/2) - 75, (screenHeight/2) - 75, 150, 150))
         logo.contentMode = .ScaleAspectFill
-        if darkMode {logo.image = UIImage(named: "PanberLogov9 copy.png")}
+        if darkMode {logo.image = UIImage(named: "PanberLogov9 copy2.png")}
         else {logo.image = UIImage(named: "PanberLogov9 copy.png")}
         visualEffectView.addSubview(logo)
         

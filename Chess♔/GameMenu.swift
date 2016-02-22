@@ -388,9 +388,15 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             for games in games {
                 
                 
+                let delt = games.updatedAt
+                let delt2 = NSDate().timeIntervalSinceDate(delt!)
                 
+                print("delt2 is \(delt2)")
+                if delt2 > 432_000 && games["status_white"] as? String == "won" && (games["whiteRatedComplete"] as? Bool)! == false && (games["blackRatedComplete"] as? Bool)! == false  || delt2 > 432_000 && (games["whiteRatedComplete"] as? Bool)! == false && (games["blackRatedComplete"] as? Bool)! == false   && games["status_white"] as? String == "lost"  || delt2 > 432_000 && games["status_white"] as? String == "draw" && (games["whiteRatedComplete"] as? Bool)! == false && (games["blackRatedComplete"] as? Bool)! == false {
+                games.delete()
+                }
                 
-                if games["confirmed"] as? Bool == true {
+                else if games["confirmed"] as? Bool == true {
                     if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
                 
                     
@@ -795,8 +801,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     gameID = gameIDSYourTurn[indexPath.row]
 
                     
-//                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
-//                    self.showViewController(vc as! UIViewController, sender: vc)
+
                     
                     
                 }
@@ -846,6 +851,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     }
             
                 }
+                else if timeLeftC >= 0 {
+                    if didLaunchGame == false {
+                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+                        self.showViewController(vc as! UIViewController, sender: vc)
+                        didLaunchGame = true
+                    }
+            }
             
    
 
@@ -913,9 +925,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     gameID = gameIDSTheirTurn[indexPath.row]
                     
                     
-//                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
-//                    self.showViewController(vc as! UIViewController, sender: vc)
-
+                 
                 }
                 print(timeLeftC)
                 
@@ -964,10 +974,19 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         
                     }
                     
+                }
+                else if timeLeftC >= 0 {
+                    if didLaunchGame == false {
+                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+                        self.showViewController(vc as! UIViewController, sender: vc)
+                        didLaunchGame = true
+                    }
             }
             
             
         case 2:
+            
+            
             if typeofGameover[indexPath.row] == "lost" {
                 cell.colorIndicator.backgroundColor = UIColor.redColor()
             }
@@ -1035,7 +1054,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     cell.updated.text = "Last Updated: \(sinceOutput)d ago"
                 }
             }
-            
+            cell.timeleft.textColor = UIColor.lightGrayColor()
             cell.timeleft.text = "Game Over"
             cell.timeleft.font = UIFont(name: "Times-Italic", size: 14)
 

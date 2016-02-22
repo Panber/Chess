@@ -140,6 +140,7 @@
 		8FA251141C7A790B00A4A32D /* panbertestlogov4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251131C7A790B00A4A32D /* panbertestlogov4.png */; };
 		8FA251161C7A79A500A4A32D /* panbertestlogov45.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251151C7A79A500A4A32D /* panbertestlogov45.png */; };
 		8FA2511A1C7A7A8100A4A32D /* PanberLogov9 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251191C7A7A8100A4A32D /* PanberLogov9 copy.png */; };
+		8FA2511F1C7A7D6800A4A32D /* PanberLogov9 copy2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA2511E1C7A7D6800A4A32D /* PanberLogov9 copy2.png */; };
 		8FA55EEE1C53CCA700250403 /* facebook_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA55EED1C53CCA600250403 /* facebook_logo.png */; };
 		8FA569091C011D0300AFC460 /* map158-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569071C011D0200AFC460 /* map158-2.png */; };
 		8FA5690A1C011D0300AFC460 /* map158.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569081C011D0200AFC460 /* map158.png */; };
@@ -422,6 +423,7 @@
 		8FA251131C7A790B00A4A32D /* panbertestlogov4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panbertestlogov4.png; sourceTree = "<group>"; };
 		8FA251151C7A79A500A4A32D /* panbertestlogov45.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panbertestlogov45.png; sourceTree = "<group>"; };
 		8FA251191C7A7A8100A4A32D /* PanberLogov9 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PanberLogov9 copy.png"; sourceTree = "<group>"; };
+		8FA2511E1C7A7D6800A4A32D /* PanberLogov9 copy2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PanberLogov9 copy2.png"; sourceTree = "<group>"; };
 		8FA55EED1C53CCA600250403 /* facebook_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_logo.png; sourceTree = "<group>"; };
 		8FA569071C011D0200AFC460 /* map158-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map158-2.png"; sourceTree = "<group>"; };
 		8FA569081C011D0200AFC460 /* map158.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map158.png; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 				8FEF2A911BFA7C7C006E1359 /* Boards */,
 				8F273CF21BF29E4300275378 /* clock104.png */,
 				8FA251151C7A79A500A4A32D /* panbertestlogov45.png */,
+				8FA2511E1C7A7D6800A4A32D /* PanberLogov9 copy2.png */,
 				8FA251191C7A7A8100A4A32D /* PanberLogov9 copy.png */,
 				8FA251131C7A790B00A4A32D /* panbertestlogov4.png */,
 				8FA2510D1C7A70D400A4A32D /* panbertestlogov2.png */,
@@ -999,7 +1002,7 @@
 				TargetAttributes = {
 					8FA5C88C1B9A264F0097637E = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = G542NRN7XT;
+						DevelopmentTeam = V47FUAKS5S;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1118,6 +1121,7 @@
 				8FA5C8981B9A264F0097637E /* Assets.xcassets in Resources */,
 				8F56E16F1C665B390000ECDB /* brownChessBoardN.png in Resources */,
 				8F8BD2BB1BC6D83F00B25CFE /* close.png in Resources */,
+				8FA2511F1C7A7D6800A4A32D /* PanberLogov9 copy2.png in Resources */,
 				8F6E64EA1C2974730092471C /* arrow_blueF.png in Resources */,
 				8F273CF61BF29E4300275378 /* flash31.png in Resources */,
 				8FA5690F1C02795100AFC460 /* new100.png in Resources */,
@@ -1490,8 +1494,8 @@
 			baseConfigurationReference = DEC0A4D6A8F0888440ED5221 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Panayotov (8JHAHM7T3P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Panayotov (8JHAHM7T3P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

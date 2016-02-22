@@ -412,7 +412,7 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
     }
     
     func changeProfilePicButtonPressed(sender:UIButton!) {
-        let myAlert = UIAlertController(title: "Profile Picture", message: "How do you want to set your profile picture?", preferredStyle: UIAlertControllerStyle.Alert)
+        let myAlert = UIAlertController(title: "Profile Picture", message: "How do you wish to set your profile picture?", preferredStyle: UIAlertControllerStyle.Alert)
         
         let imagePicker = UIImagePickerController()
         imagePicker.modalPresentationStyle = .CurrentContext
