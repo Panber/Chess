@@ -35,7 +35,7 @@ func ^^ (radix: Int, power: Int) -> Int {
     return Int(pow(Double(radix), Double(power)))
 }
 
-
+var gameIsOver = Bool()
 
 var game = PFObject(className: "Games")
 var notations: Array<String> = []
@@ -758,7 +758,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
         }
         
-        
+        gameIsOver = false
+
         //tab-bar and navigation bar
         //   self.tabBarController?.tabBar.hidden = true
         // let nav = self.navigationController?.navigationBar
@@ -8247,7 +8248,8 @@ var didLongPress = false
                 
             case .Destructive:
                 print("destructive")
-                
+                gameIsOver = true
+
                 if self.iamWhite {
                     
                     if self.game["whiteRatedComplete"] as! Bool == false {
@@ -10288,7 +10290,7 @@ var didLongPress = false
                         self.turnIndicatorturn = green
                         self.updateLaunchTimerInt = 0
                         self.launchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateLaunchTimer", userInfo: nil, repeats: true)
-                        
+                        gameIsOver = true
                         if self.game["blackRatedComplete"] as! Bool == false {
                             
                             //won
@@ -10407,7 +10409,8 @@ var didLongPress = false
                         self.turnIndicatorturn = UIColor.purpleColor()
                         self.updateLaunchTimerInt = 0
                         self.launchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateLaunchTimer", userInfo: nil, repeats: true)
-                        
+                        gameIsOver = true
+
                         if self.game["blackRatedComplete"] as! Bool == false {
                             
                             //draw
@@ -10542,7 +10545,8 @@ var didLongPress = false
                         self.updateLaunchTimerInt = 0
                         self.launchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateLaunchTimer", userInfo: nil, repeats: true)
                         
-                        
+                        gameIsOver = true
+
                         if self.game["whiteRatedComplete"] as! Bool == false {
                             
                             
@@ -10665,7 +10669,12 @@ var didLongPress = false
                             
                             self.turnLturn = "Draw"
                             self.turnIndicatorturn = UIColor.purpleColor()
+                            self.updateLaunchTimerInt = 0
+                            self.launchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateLaunchTimer", userInfo: nil, repeats: true)
                             
+                            
+                            gameIsOver = true
+
                             if self.game["whiteRatedComplete"] as! Bool == false {
                                 
                                 
@@ -10777,17 +10786,20 @@ var didLongPress = false
                 notationsWithNumber +=  "\(notations.count / 2 + 1). "
                 
                 notationsWithNumber += "\(notations.last!) "
-                
-                game["status_white"] = "notmove"
-                game["status_black"] = "move"
+                if !gameIsOver {
+                    game["status_white"] = "notmove"
+                    game["status_black"] = "move"
+                }
                 uuser = (game["blackPlayer"] as? String)!
                 
             }
             else {
                 notationsWithNumber += "\(notations.last!) "
                 
+                if !gameIsOver {
                 game["status_white"] = "move"
                 game["status_black"] = "notmove"
+                }
                 uuser = (game["whitePlayer"] as? String)!
             }
             movesField.text = notationsWithNumber
