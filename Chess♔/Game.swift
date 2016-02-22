@@ -7847,6 +7847,29 @@ var didLongPress = false
                 visualEffectView.userInteractionEnabled = true
         })
         
+        
+//        //lost
+//        let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0, sB: 1)
+//        
+//        let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+//        let addRating = Rating.0 - self.meUserRatingIntStart
+//        
+//        print("me addrating is \(addRating) and nowRating is  \(nowRating) and both are \(addRating+nowRating)")
+//        print("other addrating is \(Rating.1 - self.otherUserRatingIntStart) and nowRating is  \(843) and both are \(843+Rating.1 - self.otherUserRatingIntStart)")
+//
+//        
+//        let Rating2 = calculateRating(Double(900), bR: Double(1200), K: 32, sW: 1, sB: 0)
+//        
+//        let nowRating2 = 1200
+//        let addRating2 = Rating2.0 - 1200
+//        
+//        print("me addrating is \(addRating2) and nowRating is  \(nowRating2) and both are \(addRating2+nowRating2)")
+//        print("other addrating is \(Rating2.1 - 900) and nowRating is  \(843) and both are \(843+Rating2.1 - 900)")
+//        
+//        
+        
+        
+        
         //gameFinishedScreen("")
         
         var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
@@ -8697,14 +8720,14 @@ var didLongPress = false
                     
                     
                     //firebase
-                    
-                    //add who's turn it is
-                    let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                    var status = ["turn": "done"]
-                    
-                    let statusRef = checkstatus.childByAppendingPath("\(gameID)")
-                    statusRef.setValue(status)
-                    //firebase - end
+//                    
+//                    //add who's turn it is
+//                    let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+//                    var status = ["turn": "done"]
+//                    
+//                    let statusRef = checkstatus.childByAppendingPath("\(gameID)")
+//                    statusRef.setValue(status)
+//                    //firebase - end
                     
                     
                     
@@ -8755,7 +8778,7 @@ var didLongPress = false
     
     //calculateRating to calculate rating of players
     func calculateRating(wR:Double, bR:Double, K:Double, sW:Double, sB:Double) -> (Int,Int) {
-        
+        print("calculating...")
         var wR_2 = Double(10^^(Int(wR / 400)))
         var bR_2 = Double(10^^(Int(bR / 400)))
         
@@ -8763,7 +8786,7 @@ var didLongPress = false
         let ExB:Double = bR_2/(wR_2 + bR_2)
         
         wR_2 = wR+(K*(sW - ExW))
-        bR_2 = wR+(K*(sB - ExB))
+        bR_2 = bR+(K*(sB - ExB))
         
         return (Int(wR_2) , Int(bR_2))
     }
