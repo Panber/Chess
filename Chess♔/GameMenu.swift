@@ -795,8 +795,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     gameID = gameIDSYourTurn[indexPath.row]
 
                     
-//                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
-//                    self.showViewController(vc as! UIViewController, sender: vc)
+
                     
                     
                 }
@@ -846,6 +845,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     }
             
                 }
+                else if timeLeftC >= 0 {
+                    if didLaunchGame == false {
+                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+                        self.showViewController(vc as! UIViewController, sender: vc)
+                        didLaunchGame = true
+                    }
+            }
             
    
 
@@ -913,9 +919,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     gameID = gameIDSTheirTurn[indexPath.row]
                     
                     
-//                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
-//                    self.showViewController(vc as! UIViewController, sender: vc)
-
+                 
                 }
                 print(timeLeftC)
                 
@@ -964,6 +968,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         
                     }
                     
+                }
+                else if timeLeftC >= 0 {
+                    if didLaunchGame == false {
+                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+                        self.showViewController(vc as! UIViewController, sender: vc)
+                        didLaunchGame = true
+                    }
             }
             
             
