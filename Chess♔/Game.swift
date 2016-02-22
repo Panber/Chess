@@ -5285,10 +5285,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     override func viewDidDisappear(animated: Bool) {
-        notations = []
-        whitePromotionType = []
-        blackPromotionType = []
-        game = PFObject(className: "Games")
+//        notations = []
+//        whitePromotionType = []
+//        blackPromotionType = []
+        //game = PFObject(className: "Games")
         
         timer.invalidate()
         
@@ -5326,7 +5326,22 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         self.view.addGestureRecognizer(longPressRecognizer)
         
         
-        
+        if shouldContinueTimer == true {
+            if iamWhite {
+                let lastupdate = game["whiteDate"] as? NSDate
+                print(game)
+
+                timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+            }
+            else {
+                let lastupdate = game["blackDate"] as? NSDate
+                print(game)
+                timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+            
+            }
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
+
+        }
         
 
         
@@ -8354,10 +8369,11 @@ var didLongPress = false
         launchTimer.invalidate()
         }
     }
-
+var shouldContinueTimer = false
     
     //use this to checki fuser lost on time
     func updateTimer() {
+        
         
         
         if notations.count <= 1 {
@@ -8378,6 +8394,7 @@ var didLongPress = false
         else {
             timeLeft++
             
+            shouldContinueTimer = true
         }
         
         
@@ -8572,6 +8589,8 @@ var didLongPress = false
 
 
             timer.invalidate()
+            shouldContinueTimer = false
+
         }
 
     }
@@ -10705,7 +10724,7 @@ var didLongPress = false
             }
 
             timer.invalidate()
-            
+            shouldContinueTimer = false
             
             print(notations.count)
 
