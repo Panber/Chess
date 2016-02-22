@@ -1290,7 +1290,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenWhitePieces += [self.pieces[iy]]
                                                                                             takenWhitePiecesForMove += [takenPiece]
 
-                                                                                            self.view.addSubview(takenPiece)
+                                                                                            //self.view.addSubview(takenPiece)
+                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                                                                                         }
                                                                                         takenWhitePiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenWhitePiecesLbl.count; t++ {
@@ -1307,7 +1309,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 else {takenWhitePiecesLbl[t].textColor = UIColor.blackColor()}
                                                                                                 takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                                self.view.addSubview(takenWhitePiecesLbl[t])
+                                                                                                //self.view.addSubview(takenWhitePiecesLbl[t])
+                                                                                                self.view.insertSubview(takenWhitePiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+
                                                                                             }
                                                                                         }
                                                                                         
@@ -1329,7 +1333,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenBlackPieces += [pieces[iy]]
                                                                                             takenBlackPiecesForMove += [takenPiece]
                                                                                             
-                                                                                            view.addSubview(takenPiece)
+                                                                                            //view.addSubview(takenPiece)
+                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                                                                                         }
                                                                                         takenBlackPiecesForInfo += [self.pieces[iy]]
                                                                                         
@@ -1353,7 +1359,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                                view.addSubview(takenBlackPiecesLbl[t])
+                                                                                                //view.addSubview(takenBlackPiecesLbl[t])
+                                                                                                self.view.insertSubview(takenBlackPiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+
                                                                                             }
                                                                                         }
                                                                                         
@@ -1540,7 +1548,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenWhitePieces += [self.pieces[iy]]
                                                                                             takenWhitePiecesForMove += [takenPiece]
                                                                                             
-                                                                                            self.view.addSubview(takenPiece)
+                                                                                            //self.view.addSubview(takenPiece)
+                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                                                                                         }
                                                                                         takenWhitePiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenWhitePiecesLbl.count; t++ {
@@ -1557,7 +1567,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 else {takenWhitePiecesLbl[t].textColor = UIColor.blackColor()}
                                                                                                 takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                                self.view.addSubview(takenWhitePiecesLbl[t])
+                                                                                               // self.view.addSubview(takenWhitePiecesLbl[t])
+                                                                                                self.view.insertSubview(takenWhitePiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+
                                                                                             }
                                                                                         }
                                                                                         
@@ -1579,7 +1591,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenBlackPieces += [pieces[iy]]
                                                                                             takenBlackPiecesForMove += [takenPiece]
                                                                                             
-                                                                                            view.addSubview(takenPiece)
+                                                                                            //view.addSubview(takenPiece)
+                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                                                                                         }
                                                                                         takenBlackPiecesForInfo += [self.pieces[iy]]
                                                                                         
@@ -1603,7 +1617,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                                view.addSubview(takenBlackPiecesLbl[t])
+                                                                                               // view.addSubview(takenBlackPiecesLbl[t])
+                                                                                                self.view.insertSubview(takenBlackPiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+
                                                                                             }
                                                                                         }
                                                                                         
@@ -2529,8 +2545,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenPiece.image = self.pieces[iy].image
                                                                                             takenWhitePieces += [self.pieces[iy]]
                                                                                             takenWhitePiecesForMove += [takenPiece]
-                                                                                            
-                                                                                            self.view.addSubview(takenPiece)
+                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+                                                                                            //self.view.addSubview(takenPiece)
                                                                                         }
                                                                                         takenWhitePiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenWhitePiecesLbl.count; t++ {
@@ -2552,6 +2568,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 
                                                                                                 takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
+                                                                                                //self.view.insertSubview(takenPiece, belowSubview: self.boarderBoard)
+
                                                                                                 self.view.addSubview(takenWhitePiecesLbl[t])
                                                                                             }
                                                                                         }
@@ -2575,7 +2593,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenBlackPieces += [self.pieces[iy]]
                                                                                             takenBlackPiecesForMove += [takenPiece]
                                                                                             
-                                                                                            self.view.addSubview(takenPiece)
+                                                                                            //self.view.addSubview(takenPiece)
+                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                                                                                         }
                                                                                         takenBlackPiecesForInfo += [self.pieces[iy]]
                                                                                         
@@ -2599,7 +2619,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                                self.view.addSubview(takenBlackPiecesLbl[t])
+                                                                                               // self.view.addSubview(takenBlackPiecesLbl[t])
+                                                                                                self.view.insertSubview(takenBlackPiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+
                                                                                             }
                                                                                         }
                                                                                         
@@ -3389,7 +3411,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenBlackPieces += [self.pieces[iy]]
                                                                                             takenBlackPiecesForMove += [takenPiece]
                                                                                             
-                                                                                            self.view.addSubview(takenPiece)
+                                                                                            //self.view.addSubview(takenPiece)
+                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                                                                                         }
                                                                                         takenBlackPiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenBlackPiecesLbl.count; t++ {
@@ -3411,7 +3435,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                                self.view.addSubview(takenBlackPiecesLbl[t])
+                                                                                               // self.view.addSubview()
+                                                                                                self.view.insertSubview(takenBlackPiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
                                                                                             }
                                                                                         }
                                                                                         
@@ -3433,7 +3458,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenWhitePieces += [self.pieces[iy]]
                                                                                             takenWhitePiecesForMove += [takenPiece]
                                                                                             
-                                                                                            self.view.addSubview(takenPiece)
+                                                                                            //self.view.addSubview(takenPiece)
+                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                                                                                         }
                                                                                         takenWhitePiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenWhitePiecesLbl.count; t++ {
@@ -3455,7 +3482,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 }
                                                                                                 takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                                self.view.addSubview(takenWhitePiecesLbl[t])
+                                                                                               // self.view.addSubview(takenWhitePiecesLbl[t])
+                                                                                                self.view.insertSubview(takenWhitePiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+
                                                                                             }
                                                                                         }
                                                                                         
@@ -3645,7 +3674,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenBlackPieces += [self.pieces[iy]]
                                                                                             takenBlackPiecesForMove += [takenPiece]
                                                                                             
-                                                                                            self.view.addSubview(takenPiece)
+                                                                                            //self.view.addSubview(takenPiece)
+                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                                                                                         }
                                                                                         takenBlackPiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenBlackPiecesLbl.count; t++ {
@@ -3666,7 +3697,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 }
                                                                                                 takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                                self.view.addSubview(takenBlackPiecesLbl[t])
+                                                                                                //self.view.addSubview(takenBlackPiecesLbl[t])
+                                                                                                self.view.insertSubview(takenBlackPiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+
                                                                                             }
                                                                                         }
                                                                                         
@@ -3688,7 +3721,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenWhitePieces += [self.pieces[iy]]
                                                                                             takenWhitePiecesForMove += [takenPiece]
                                                                                             
-                                                                                            self.view.addSubview(takenPiece)
+                                                                                            //self.view.addSubview(takenPiece)
+                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                                                                                         }
                                                                                         takenWhitePiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenWhitePiecesLbl.count; t++ {
@@ -3710,7 +3745,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 }
                                                                                                 takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                                self.view.addSubview(takenWhitePiecesLbl[t])
+                                                                                                //self.view.addSubview(takenWhitePiecesLbl[t])
+                                                                                                self.view.insertSubview(takenWhitePiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+
                                                                                             }
                                                                                         }
                                                                                         
@@ -4672,7 +4709,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                             takenWhitePieces += [self.pieces[iy]]
                                                                                             takenWhitePiecesForMove += [takenPiece]
                                                                                             
-                                                                                            self.view.addSubview(takenPiece)
+                                                                                            //self.view.addSubview(takenPiece)
+                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                                                                                         }
                                                                                         takenWhitePiecesForInfo += [self.pieces[iy]]
                                                                                         for var t = 0; t < takenWhitePiecesLbl.count; t++ {
@@ -4689,7 +4728,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                                 else {takenWhitePiecesLbl[t].textColor = UIColor.blackColor()}
                                                                                                 takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                                                                                 takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                                self.view.addSubview(takenWhitePiecesLbl[t])
+                                                                                                //self.view.addSubview(takenWhitePiecesLbl[t])
+                                                                                                self.view.insertSubview(takenWhitePiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+
                                                                                             }
                                                                                         }
                                                                                         
@@ -5285,10 +5326,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     override func viewDidDisappear(animated: Bool) {
-        notations = []
-        whitePromotionType = []
-        blackPromotionType = []
-        game = PFObject(className: "Games")
+//        notations = []
+//        whitePromotionType = []
+//        blackPromotionType = []
+        //game = PFObject(className: "Games")
         
         timer.invalidate()
         
@@ -5326,7 +5367,22 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         self.view.addGestureRecognizer(longPressRecognizer)
         
         
-        
+        if shouldContinueTimer == true {
+            if iamWhite {
+                let lastupdate = game["whiteDate"] as? NSDate
+                print(game)
+
+                timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+            }
+            else {
+                let lastupdate = game["blackDate"] as? NSDate
+                print(game)
+                timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
+            
+            }
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
+
+        }
         
 
         
@@ -7628,7 +7684,7 @@ var didLongPress = false
         vc.setInitialText("I won against \(otherUserName) playing CHESS")
         vc.addURL(NSURL(string: "http://www.nasa.gov"))
         presentViewController(vc, animated: true, completion: nil)
-        
+     
     }
     func shareTwitterButtonPressed(sender: UIButton!) {
         removeNewView()
@@ -7687,7 +7743,12 @@ var didLongPress = false
         visualEffectSub.addSubview(scrollView1)
         
         var plusNum: CGFloat = 130
-        
+        var isOver = false
+        if game["status_white"] as? String == "won" || game["status_white"] as? String == "lost" || game["status_white"] as? String == "draw" {
+        plusNum = 0
+            isOver = true
+        }
+        else {
         var actions = UILabel(frame: CGRectMake(0,37,screenWidth, 32))
         actions.text = "ACTIONS"
         actions.textAlignment = .Center
@@ -7722,9 +7783,11 @@ var didLongPress = false
             drawB.setTitle("Draw Offered", forState: .Normal)
 
         }
+            
 
         drawB.addTarget(self, action: "drawButtonPressed:", forControlEvents: .TouchUpInside)
         scrollView1.addSubview(drawB)
+        }
         
         var info = UILabel(frame: CGRectMake(0,37 + plusNum,screenWidth, 32))
         info.text = "INFORMATION"
@@ -7785,7 +7848,11 @@ var didLongPress = false
         if darkMode {timeLeftL.textColor = UIColor.lightGrayColor()}
         else {timeLeftL.textColor = UIColor.darkGrayColor() }
         timeLeftL.font = UIFont(name: "Times", size: 19)
+        
+        if !isOver {
         scrollView1.addSubview(timeLeftL)
+        } else { plusNum -= 30}
+        
         
         timeL = UILabel(frame: CGRectMake(199,216 - 10 + plusNum,screenWidth-208, 29))
         timeL.text = ""
@@ -8343,10 +8410,11 @@ var didLongPress = false
         launchTimer.invalidate()
         }
     }
-
+var shouldContinueTimer = false
     
     //use this to checki fuser lost on time
     func updateTimer() {
+        
         
         
         if notations.count <= 1 {
@@ -8367,6 +8435,7 @@ var didLongPress = false
         else {
             timeLeft++
             
+            shouldContinueTimer = true
         }
         
         
@@ -8561,6 +8630,8 @@ var didLongPress = false
 
 
             timer.invalidate()
+            shouldContinueTimer = false
+
         }
 
     }
@@ -10710,7 +10781,7 @@ var didLongPress = false
             }
 
             timer.invalidate()
-            
+            shouldContinueTimer = false
             
             print(notations.count)
 
@@ -11298,7 +11369,9 @@ var didLongPress = false
                                 takenBlackPieces += [pieces[i]]
                                 takenBlackPiecesForMove += [takenPiece]
                                 
-                                view.addSubview(takenPiece)
+                                //view.addSubview(takenPiece)
+                                self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                             }
                             takenBlackPiecesForInfo += [takenPiece]
                             for var t = 0; t < takenBlackPiecesLbl.count; t++ {
@@ -11320,7 +11393,9 @@ var didLongPress = false
                                     
                                     takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                     takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                    view.addSubview(takenBlackPiecesLbl[t])
+                                    //view.addSubview(takenBlackPiecesLbl[t])
+                                    self.view.insertSubview(takenBlackPiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+
                                 }
                             }
                         } else if self.colorLcolor == "You are Black" {
@@ -11330,7 +11405,9 @@ var didLongPress = false
                                 takenWhitePieces += [pieces[i]]
                                 takenWhitePiecesForMove += [takenPiece]
                                 
-                                view.addSubview(takenPiece)
+                                //view.addSubview(takenPiece)
+                                self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                             }
                             takenWhitePiecesForInfo += [takenPiece]
                             for var t = 0; t < takenWhitePiecesLbl.count; t++ {
@@ -11349,7 +11426,9 @@ var didLongPress = false
                                     }
                                     takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
                                     takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                    view.addSubview(takenWhitePiecesLbl[t])
+                                    //view.addSubview(takenWhitePiecesLbl[t])
+                                    self.view.insertSubview(takenWhitePiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+
                                 }
                             }
                         }
@@ -11392,7 +11471,9 @@ var didLongPress = false
                                 takenBlackPieces += [blackPieces[t]]
                                 takenBlackPiecesForMove += [takenPiece]
                                 
-                                view.addSubview(takenPiece)
+                                //view.addSubview(takenPiece)
+                                self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                             }
                              takenBlackPiecesForInfo += [takenPiece]
                             for var b = 0; b < takenBlackPiecesLbl.count; b++ {
@@ -11413,7 +11494,9 @@ var didLongPress = false
                                     }
                                     takenBlackPiecesLbl[b].font = UIFont(name: "Times", size: 18)
                                     takenBlackPiecesLbl[b].textAlignment = NSTextAlignment.Center
-                                    view.addSubview(takenBlackPiecesLbl[b])
+                                    //view.addSubview(takenBlackPiecesLbl[b])
+                                    self.view.insertSubview(takenBlackPiecesLbl[b], belowSubview: self.exitTimeCapsuleB)
+
                                 }
                             }
                         } else if self.colorLcolor == "You are Black" {
@@ -11423,7 +11506,9 @@ var didLongPress = false
                                 takenWhitePieces += [blackPieces[t]]
                                 takenWhitePiecesForMove += [takenPiece]
                                 
-                                view.addSubview(takenPiece)
+                                //view.addSubview(takenPiece)
+                                self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+
                             }
                             takenWhitePiecesForInfo += [takenPiece]
                             for var b = 0; b < takenWhitePiecesLbl.count; b++ {
@@ -11443,7 +11528,9 @@ var didLongPress = false
                                     }
                                     takenWhitePiecesLbl[b].font = UIFont(name: "Times", size: 18)
                                     takenWhitePiecesLbl[b].textAlignment = NSTextAlignment.Center
-                                    view.addSubview(takenWhitePiecesLbl[b])
+                                    //view.addSubview(takenWhitePiecesLbl[b])
+                                    self.view.insertSubview(takenWhitePiecesLbl[b], belowSubview: self.exitTimeCapsuleB)
+
                                 }
                             }
                         }
