@@ -870,10 +870,10 @@
             </objects>
             <point key="canvasLocation" x="4761" y="-347"/>
         </scene>
-        <!--Welcome!-->
+        <!--Thank You-->
         <scene sceneID="Jma-vQ-5Il">
             <objects>
-                <viewController storyboardIdentifier="firstLaunchVC" title="Welcome!" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z2e-Fv-mEq" customClass="FirstLaunchScreen" customModule="Chess_" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="firstLaunchVC" title="Thank You" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z2e-Fv-mEq" customClass="FirstLaunchScreen" customModule="Chess_" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lqX-nJ-PDo"/>
                         <viewControllerLayoutGuide type="bottom" id="xAF-iI-keJ"/>
@@ -882,7 +882,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please determine whether you want a to enable the dark side of Chess♔" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="19" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="cu9-YA-BAt">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please determine whether you want a to enable the dark side of CHESS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="19" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="cu9-YA-BAt">
                                 <rect key="frame" x="20" y="64" width="560" height="106"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="FQP-Bg-GJx"/>
@@ -897,10 +897,10 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DarkModePreview.png" translatesAutoresizingMaskIntoConstraints="NO" id="iDT-Mk-jlJ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DarkModePreview2.png" translatesAutoresizingMaskIntoConstraints="NO" id="iDT-Mk-jlJ">
                                 <rect key="frame" x="0.0" y="224" width="600" height="368"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LightModePreview.png" translatesAutoresizingMaskIntoConstraints="NO" id="4k9-Uc-5t6">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LightModePreview2.png" translatesAutoresizingMaskIntoConstraints="NO" id="4k9-Uc-5t6">
                                 <rect key="frame" x="0.0" y="224" width="600" height="368"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scS-Em-HAD">
@@ -3141,11 +3141,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DarkModePreview.png" width="1472" height="1490"/>
+        <image name="DarkModePreview2.png" width="1472" height="1490"/>
         <image name="Data.png" width="30" height="30"/>
         <image name="Data@3x_blue.png" width="140" height="140"/>
         <image name="Friends.png" width="30" height="30"/>
-        <image name="LightModePreview.png" width="1472" height="1490"/>
+        <image name="LightModePreview2.png" width="1472" height="1490"/>
         <image name="brownChessBoard.png" width="2000" height="2096"/>
         <image name="checkmark11.png" width="256" height="256"/>
         <image name="chesstabv7.png" width="30" height="30"/>

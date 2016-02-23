@@ -118,8 +118,21 @@ class FirstLaunchScreen: UIViewController {
                 self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
                 self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
                 self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-                self.darkModeCellLabel.backgroundColor = UIColor.darkGrayColor()
+                self.darkModeCellLabel.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
                 
+                self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+                self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
+                self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
+                //this is to gamemenu black
+                self.view.backgroundColor = UIColor(red: 0.20, green: 0.20 , blue: 0.20, alpha: 1)
+                self.tabBarController?.tabBar.barStyle = UIBarStyle.Black
+                self.tabBarController?.tabBar.tintColor = blue
+                self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+                self.navigationController?.navigationBar.tintColor = blue
+                visualEffectView.effect = UIBlurEffect(style: .Dark)
+                
+                UIApplication.sharedApplication().statusBarStyle = .LightContent
+
                 var i = 0
                 for var d = i; i < uiLabels.count; i++ {
                     uiLabels[i].textColor = UIColor.whiteColor()
@@ -154,7 +167,8 @@ class FirstLaunchScreen: UIViewController {
                 self.tabBarController?.tabBar.tintColor = blue
                 self.navigationController?.navigationBar.tintColor = blue
                 self.darkModeCellLabel.backgroundColor = UIColor.whiteColor()
-                
+                UIApplication.sharedApplication().statusBarStyle = .Default
+
                 self.lightPreviewWindow.alpha = 1
                 self.darkPreviewWindow.alpha = 0
                 

@@ -224,6 +224,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             NSUserDefaults.standardUserDefaults().setObject(userNameFromFeatured, forKey: "other_username")
             
             let data = imageFromFeatured
+            PData = data
             
             NSUserDefaults.standardUserDefaults().setObject(PData, forKey: "other_userImage")
             
@@ -443,7 +444,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         
         let creatorButton = UIButton(frame: CGRectMake(0,10,screenWidth,50))
         creatorButton.titleLabel!.font = UIFont(name: "Times", size: 14)
-        creatorButton.setTitle("A PANBER SOFTWARE PRODUCTION ©2015", forState: .Normal)
+        creatorButton.setTitle("A PANBER SOFTWARE PRODUCTION ©2016", forState: .Normal)
         creatorButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
         creatorButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
         creatorButton.addTarget(self, action: "creatorButtonPressed:", forControlEvents: .TouchUpInside)
