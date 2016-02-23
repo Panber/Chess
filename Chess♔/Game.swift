@@ -6822,7 +6822,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                         checkIfTaken()
                                                         
                                                         print("pieces[i] is \(pieces[i]) with")
-                                                        
+                                                         self.deletePiecesAfterLoad()
                                                         UIView.animateWithDuration(0.8, delay: 0, options: .CurveEaseInOut, animations:{ () -> Void in
                                                             self.pieces[i].frame.origin.x = xAxisArr[q]
                                                             self.pieces[i].frame.origin.y = yAxisArr[a]
@@ -6830,7 +6830,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                             print("last pieces[i] is \(self.pieces[i])  ")
                                                             
                                                             }, completion: { finish in
-                                                                self.deletePiecesAfterLoad()
+                                                               
                                                         })
                                                         
                                                         
@@ -11516,11 +11516,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         piecesNotationSeperator = "x"
                         
-                        let query = PFQuery(className: "Games")
-                        query.whereKey("objectId", equalTo: gameID)
-                        let r = query.getFirstObject()
-                        self.passantArray = self.game["passantArray"] as! Array<Bool>
-                        
                         takenPiecesToReload.append(blackPieces[t])
                         for var o = 0; o < pieces.count; o++ {
                             if pieces[o] == blackPieces[t] {
@@ -11603,6 +11598,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         whitePassant = false
                         //game.setObject(false, forKey: "passant")
+                        
+                        let query = PFQuery(className: "Games")
+                        query.whereKey("objectId", equalTo: gameID)
+                        let r = query.getFirstObject()
+                        self.passantArray = self.game["passantArray"] as! Array<Bool>
                     }
                 }
             }
