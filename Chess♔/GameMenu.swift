@@ -248,9 +248,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         
         
-        //...and remove this after a while
-                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
-                    self.showViewController(vc as! UIViewController, sender: vc)
+//        //...and remove this after a while
+//                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
+//                    self.showViewController(vc as! UIViewController, sender: vc)
 
         
  
@@ -828,7 +828,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     
                 }
             
-                if notationsCountYourTurn[indexPath.row] <= 0 {
+                if notationsCountYourTurn[indexPath.row] <= 1 {
                     
                     if yourTurnSpeed[indexPath.row] == "Fast" {
                         cell.timeleft.text = "Time Left: 5min"
@@ -950,7 +950,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     
             }
             
-                if notationsCountTheirTurn[indexPath.row] <= 0 {
+                if notationsCountTheirTurn[indexPath.row] <= 1 {
                     
                     if theirTurnSpeed[indexPath.row] == "Fast" {
                         cell.timeleft.text = "Their Time: 5min"
