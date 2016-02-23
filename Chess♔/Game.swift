@@ -6832,7 +6832,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                         checkIfTaken()
                                                         
                                                         print("pieces[i] is \(pieces[i]) with")
-                                                        self.deletePiecesAfterLoad()
                                                         
                                                         UIView.animateWithDuration(0.8, delay: 0, options: .CurveEaseInOut, animations:{ () -> Void in
                                                             self.pieces[i].frame.origin.x = xAxisArr[q]
@@ -6841,7 +6840,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                             print("last pieces[i] is \(self.pieces[i])  ")
                                                             
                                                             }, completion: { finish in
-                                                                
+                                                                self.deletePiecesAfterLoad()
                                                         })
                                                         
                                                         
@@ -11243,12 +11242,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             } else if hasBeenTaken(selectedPiece, array: whitePawns) || hasBeenTaken(selectedPiece, array: blackPawns) {
                                 pieceString = ""
                             }
-                            for var i = 0; i < pieces.count; i++ {
-                                if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y || whitePassant == true || blackPassant == true  {
-                                    piecesNotationSeperator = "x"
-                                    
-                                }
-                            }
+//                            for var i = 0; i < blackPieces.count; i++ {
+//                                if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackPieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == blackPieces[i].frame.origin.y || touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackPieces[t].frame.origin.x && pieceOptions[o].frame.origin.y == blackPieces[t].frame.origin.y - 1 * pieceSize && whitePassant == true && hasBeenTaken(selectedPiece, array: whitePieces)  {
+//                                    
+//                                    print("Piece taken!")
+//                                    
+//                                }
+//                            }
                             
                             if game["blackPlayer"] as? String == PFUser.currentUser()?.username {
                                 chessNotationx = xAxisArrStr2[t]
@@ -11270,15 +11270,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.promotionAtIndex.append(self.movesCap.count)
                         let actionSheet = UIAlertController(title: nil, message: "Promote pawn to:", preferredStyle: UIAlertControllerStyle.ActionSheet)
                         
+                        let query = PFQuery(className: "Games")
+                        query.whereKey("objectId", equalTo: gameID)
+                        let r = query.getFirstObject()
+                        
                         let promoteToQueen = UIAlertAction(title: "Queen", style: .Default, handler: {
                             (alert: UIAlertAction!) -> Void in
                             self.movePiece(self.touchPosition.origin.x - self.selectedPiece.frame.origin.x, _moveByAmounty: self.touchPosition.origin.y - self.selectedPiece.frame.origin.y)
                             if self.colorLcolor == "You are White" {
                                 self.selectedPiece.image = UIImage(named:"whiteQueen")
                                 self.game.addObject("Queen", forKey: "whitePromotionType")
+                                self.whitePromotionType = r!["whitePromotionType"] as! Array<String>
                             } else if self.colorLcolor == "You are Black" {
                                 self.selectedPiece.image = UIImage(named:"blackQueen")
                                 self.game.addObject("Queen", forKey: "blackPromotionType")
+                                self.blackPromotionType = r!["blackPromotionType"] as! Array<String>
                             }
                             self.whitePawns.removeAtIndex(promotionPiece)
                             self.whiteQueens += [self.selectedPiece]
@@ -11303,9 +11309,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             if self.colorLcolor == "You are White" {
                                 self.selectedPiece.image = UIImage(named:"whiteRook")
                                 self.game.addObject("Rook", forKey: "whitePromotionType")
+                                self.whitePromotionType = r!["whitePromotionType"] as! Array<String>
                             } else if self.colorLcolor == "You are Black" {
                                 self.selectedPiece.image = UIImage(named:"blackRook")
                                 self.game.addObject("Rook", forKey: "blackPromotionType")
+                                self.blackPromotionType = r!["blackPromotionType"] as! Array<String>
                             }
                             self.whitePawns.removeAtIndex(promotionPiece)
                             self.whiteRooks += [self.selectedPiece]
@@ -11325,9 +11333,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             if self.colorLcolor == "You are White" {
                                 self.selectedPiece.image = UIImage(named:"whiteBishop")
                                 self.game.addObject("Bishop", forKey: "whitePromotionType")
+                                self.whitePromotionType = r!["whitePromotionType"] as! Array<String>
                             } else if self.colorLcolor == "You are Black" {
                                 self.selectedPiece.image = UIImage(named:"blackBishop")
                                 self.game.addObject("Bishop", forKey: "blackPromotionType")
+                                self.blackPromotionType = r!["blackPromotionType"] as! Array<String>
                             }
                             self.whitePawns.removeAtIndex(promotionPiece)
                             self.whiteBishops += [self.selectedPiece]
@@ -11347,9 +11357,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             if self.colorLcolor == "You are White" {
                                 self.selectedPiece.image = UIImage(named:"whiteKnight")
                                 self.game.addObject("Knight", forKey: "whitePromotionType")
+                                self.whitePromotionType = r!["whitePromotionType"] as! Array<String>
                             } else if self.colorLcolor == "You are Black" {
                                 self.selectedPiece.image = UIImage(named:"blackKnight")
                                 self.game.addObject("Knight", forKey: "blackPromotionType")
+                                self.blackPromotionType = r!["blackPromotionType"] as! Array<String>
                             }
                             self.whitePawns.removeAtIndex(promotionPiece)
                             self.whiteKnights += [self.selectedPiece]
@@ -11508,10 +11520,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         blackPieces[t].removeFromSuperview()
                         blackPieces.removeAtIndex(t)
                         blackPiecesString.removeAtIndex(t)
-                        
+                        piecesNotationSeperator = "x"
                     }
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackPieces[t].frame.origin.x && pieceOptions[o].frame.origin.y == blackPieces[t].frame.origin.y - 1 * pieceSize && whitePassant == true && hasBeenTaken(selectedPiece, array: whitePieces)  {
                         
+                        piecesNotationSeperator = "x"
+                        
+                        let query = PFQuery(className: "Games")
+                        query.whereKey("objectId", equalTo: gameID)
+                        let r = query.getFirstObject()
+                        self.passantArray = self.game["passantArray"] as! Array<Bool>
                         
                         takenPiecesToReload.append(blackPieces[t])
                         for var o = 0; o < pieces.count; o++ {
