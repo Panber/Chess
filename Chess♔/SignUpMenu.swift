@@ -821,7 +821,13 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         myUser.email = userEmail
         myUser.password = userPassword
         myUser.setObject(userName!, forKey: "username")
-        
+        myUser.setObject("0", forKey: "won")
+        myUser.setObject("0", forKey: "drawn")
+        myUser.setObject("0", forKey: "lost")
+        myUser.setObject(1200, forKey: "rating")
+        myUser.setObject(true, forKey: "request_everyone")
+
+  
         
         func resizeImage(image:UIImage) -> UIImage
         {
@@ -1015,6 +1021,13 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             }
             
             PFUser.currentUser()?.setObject(username, forKey: "username")
+            PFUser.currentUser()?.setObject("0", forKey: "won")
+            PFUser.currentUser()?.setObject("0", forKey: "drawn")
+            PFUser.currentUser()?.setObject("0", forKey: "lost")
+            PFUser.currentUser()?.setObject(1200, forKey: "rating")
+            PFUser.currentUser()?.setObject(true, forKey: "request_everyone")
+            
+            
             
             if let userEmail = userEmail
             {

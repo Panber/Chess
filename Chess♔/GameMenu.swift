@@ -220,11 +220,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 //                    if error == nil {
 //                        if let users = users as? [PFObject]{
 //                            for users in users {
-//                                users["won"] = "0"
-//                                users["drawn"] = "0"
-//                                users["lost"] = "0"
-//                                users["rating"] = 1200
-//                                users["request_everyone"] = true
+//                                
 //                                
 //                                
 //                                PFGeoPoint.geoPointForCurrentLocationInBackground {
@@ -253,8 +249,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         
         //...and remove this after a while
-//                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
-//                    self.showViewController(vc as! UIViewController, sender: vc)
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
+                    self.showViewController(vc as! UIViewController, sender: vc)
 
         
  
