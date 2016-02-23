@@ -11538,11 +11538,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         piecesNotationSeperator = "x"
                         
-                        let query = PFQuery(className: "Games")
-                        query.whereKey("objectId", equalTo: gameID)
-                        let r = query.getFirstObject()
-                        self.passantArray = self.game["passantArray"] as! Array<Bool>
-                        
                         takenPiecesToReload.append(blackPieces[t])
                         for var o = 0; o < pieces.count; o++ {
                             if pieces[o] == blackPieces[t] {
@@ -11625,6 +11620,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         whitePassant = false
                         //game.setObject(false, forKey: "passant")
+                        
+                        let query = PFQuery(className: "Games")
+                        query.whereKey("objectId", equalTo: gameID)
+                        let r = query.getFirstObject()
+                        self.passantArray = self.game["passantArray"] as! Array<Bool>
                     }
                 }
             }
