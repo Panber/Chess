@@ -2128,12 +2128,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         if gameIsRatedMode {
                                             
-                                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
-                                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                                            let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
                                             
+                                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                                            let addRating = Rating.0 - self.meUserRatingIntStart
+                                            
+                                            print(addRating+nowRating)
+                                            
+                                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                                            self.meUserDrawn = Int(PFUser.currentUser()!.objectForKey("drawn") as! String!)!
                                             let s = self.meUserDrawn + 1
                                             PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
-                                            
                                             PFUser.currentUser()!.save()
                                         }
                                         r!["status_white"] = "draw"
@@ -2993,12 +2998,17 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     if r!["whiteRatedComplete"] as! Bool == false {
                                         if gameIsRatedMode {
                                             
-                                            let myRating = self.calculateRating(Double(self.meUserRatingInt), bR: Double(self.otherUserRatingInt), K: 32, sW: 0.5, sB: 0.5).0
-                                            PFUser.currentUser()!.setObject(myRating, forKey: "rating")
+                                            let Rating = self.calculateRating(Double(self.meUserRatingIntStart), bR: Double(self.otherUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
                                             
+                                            let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                                            let addRating = Rating.0 - self.meUserRatingIntStart
+                                            
+                                            print(addRating+nowRating)
+                                            
+                                            PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                                            self.meUserDrawn = Int(PFUser.currentUser()!.objectForKey("drawn") as! String!)!
                                             let s = self.meUserDrawn + 1
                                             PFUser.currentUser()!.setObject("\(s)", forKey: "drawn")
-                                            
                                             PFUser.currentUser()!.save()
                                         }
                                         r!["status_white"] = "draw"
