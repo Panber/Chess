@@ -88,6 +88,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var theirturnUpdateSince: Array<NSTimeInterval> = []
     var gameoverUpdateSince: Array<NSTimeInterval> = []
     
+    var gameoverStatus: Array<String> = []
+
+    
 
     
     
@@ -463,7 +466,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
                         self.gameoverUpdateSince.append(since)
                         
-               
+               self.gameoverStatus.append((games["gameEndStatus"] as? String)!)
                         
                         gameIDSGameOver.append(games.objectId!)
 
@@ -538,7 +541,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         self.gameoverArray.append((games["whitePlayer"] as? String)!)
                         self.typeofGameover.append((games["status_black"] as? String)!)
                   
-                        
+                        self.gameoverStatus.append((games["gameEndStatus"] as? String)!)
+
                         //adding updated since
                         let lastupdate = games.updatedAt!
                         let since = NSDate().timeIntervalSinceDate(lastupdate)
@@ -1051,7 +1055,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 }
             }
             cell.timeleft.textColor = UIColor.lightGrayColor()
-            cell.timeleft.text = "Game Over"
+            cell.timeleft.text = gameoverStatus[indexPath.row]
             cell.timeleft.font = UIFont(name: "Times-Italic", size: 14)
 
 
