@@ -149,6 +149,8 @@ class NewGameSettingsPage: UIViewController {
         game["blackRatedComplete"] = false
         game["draw_black"] = ""
         game["draw_white"] = ""
+        game["gameEndStatus"] = ""
+
 
         
         game["whiteTime"] = Int()

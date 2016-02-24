@@ -2084,7 +2084,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     
                                     self.game["status_white"] = "won"
                                     self.game["status_black"] = "lost"
-                                    
+                                    self.game["gameEndStatus"] = "Out of time"
+
                                     self.game["whiteRatedComplete"] = true
                                     
                                     self.game.save()
@@ -2145,7 +2146,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         r!["status_black"] = "draw"
                                         
-                                        
+                                        r!["gameEndStatus"] = "Offered draw"
+
                                         r!["whiteRatedComplete"] = true
                                         r!.save()
                                         
@@ -3014,7 +3016,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         r!["status_white"] = "draw"
                                         
                                         r!["status_black"] = "draw"
-                                        
+                                        r!["gameEndStatus"] = "Offered draw"
+
                                         
                                         r!["whiteRatedComplete"] = true
                                         r!.save()
@@ -4203,7 +4206,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                     
                                     self.game["status_white"] = "lost"
                                     self.game["status_black"] = "won"
-                                    
+                                    self.game["gameEndStatus"] = "Out of time"
+
                                     self.game["blackRatedComplete"] = true
                                     
                                     self.game.save()
@@ -4269,7 +4273,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.game["status_black"] = "draw"
                                         
                                         self.game["blackRatedComplete"] = true
-                                        
+                                        self.game["gameEndStatus"] = "Offered draw"
+
                                         self.game.save()
                                         
                                         self.gameFinishedScreen("drew",statusBy: "")
@@ -5104,7 +5109,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.game["status_black"] = "draw"
                                         
                                         self.game["blackRatedComplete"] = true
-                                        
+                                        self.game["gameEndStatus"] = "Offered draw"
+
                                         self.game.save()
                                         
                                         self.gameFinishedScreen("drew",statusBy: "")
@@ -6832,7 +6838,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                         checkIfTaken()
                                                         
                                                         print("pieces[i] is \(pieces[i]) with")
-                                                         self.deletePiecesAfterLoad()
+                                                        self.deletePiecesAfterLoad()
                                                         UIView.animateWithDuration(0.8, delay: 0, options: .CurveEaseInOut, animations:{ () -> Void in
                                                             self.pieces[i].frame.origin.x = xAxisArr[q]
                                                             self.pieces[i].frame.origin.y = yAxisArr[a]
@@ -6840,7 +6846,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                             print("last pieces[i] is \(self.pieces[i])  ")
                                                             
                                                             }, completion: { finish in
-                                                               
+                                                                
                                                         })
                                                         
                                                         
@@ -6859,7 +6865,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                 }
-                
                 
             }
         }
@@ -8171,7 +8176,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         self.game["status_black"] = "won"
                         
                         self.game["whiteRatedComplete"] = true
-                        
+                        self.game["gameEndStatus"] = "Resigned"
+
                         self.game.save()
                         
                         self.gameFinishedScreen("lost",statusBy: "resigning")
@@ -8215,7 +8221,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         self.game["status_white"] = "won"
                         self.game["status_black"] = "lost"
-                        
+                        self.game["gameEndStatus"] = "Resigned"
+
                         self.game["blackRatedComplete"] = true
                         
                         self.game.save()
@@ -8569,7 +8576,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     self.game["status_white"] = "lost"
                     self.game["status_black"] = "won"
-                    
+                    self.game["gameEndStatus"] = "Out of Time"
+
                     
                     self.game["whiteRatedComplete"] = true
                     
@@ -8613,7 +8621,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     self.game["status_white"] = "won"
                     self.game["status_black"] = "lost"
-                    
+                    self.game["gameEndStatus"] = "Out of Time"
                     self.game["blackRatedComplete"] = true
                     
                     self.game.save()
@@ -10314,7 +10322,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.game["status_black"] = "won"
                             
                             self.game["blackRatedComplete"] = true
-                            
+                            self.game["gameEndStatus"] = "Checkmate"
+
                             self.game.save()
                             
                             self.gameFinishedScreen("lost",statusBy: "checkmate")
@@ -10435,7 +10444,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.game["status_black"] = "draw"
                             
                             self.game["blackRatedComplete"] = true
-                            
+                            self.game["gameEndStatus"] = "Stalemate"
+
                             self.game.save()
                             
                             self.gameFinishedScreen("drew",statusBy: "")
@@ -10574,10 +10584,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             self.game["status_black"] = "lost"
                             
                             self.game["whiteRatedComplete"] = true
-                            
+                            self.game["gameEndStatus"] = "Checkmate"
+
                             self.game.save()
                             
-                            self.gameFinishedScreen("won",statusBy: "")
+                            self.gameFinishedScreen("won",statusBy: "checkmate")
                             //firebase
                             
                             //add who's turn it is
@@ -10703,10 +10714,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 self.game["status_black"] = "draw"
                                 
                                 self.game["whiteRatedComplete"] = true
-                                
+                                self.game["gameEndStatus"] = "Stalemate"
+
                                 self.game.save()
                                 
-                                self.gameFinishedScreen("drew",statusBy: "")
+                                self.gameFinishedScreen("drew",statusBy: "stalemate")
                                 //firebase
                                 
                                 //add who's turn it is
