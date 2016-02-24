@@ -2356,29 +2356,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     let r = query.getFirstObject()
                     self.game = r!
                     var last = r!["piecePosition"] as! Array<String>
-                    self.passantArray = self.game["passantArray"] as! Array<Bool>
-                    
-                    
+                   
+
                     self.notations.append(last.last!)
-                    //                    var lastPromotionType = r!["blackPromotionType"] as! Array<String>
-                    //                    if lastPromotionType.count > 0 {
-                    //                        self.blackPromotionType.append(lastPromotionType.last!)
-                    //                    }
+                    
+                    print(self.notations.count)
+                    let newIndexPath = NSIndexPath(forItem: self.notations.count - 1, inSection: 0)
+                    self.collectionView.insertItemsAtIndexPaths([newIndexPath])
+                    self.collectionView.layoutIfNeeded()
+                    self.collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
+                    //self.collectionView.reloadData()
+                    self.passantArray = self.game["passantArray"] as! Array<Bool>
                     self.blackPromotionType = r!["blackPromotionType"] as! Array<String>
                     self.hasWhiteRookMoved = r!["hasWhiteRookMoved"] as! Bool
                     self.hasWhiteRookMoved2 = r!["hasWhiteRookMoved2"] as! Bool
                     self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
                     self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
                     self.promotionBlack = r!["promotionBlack"] as! Bool
-                    let newIndexPath = NSIndexPath(forItem: self.notations.count - 1, inSection: 0)
-                    self.collectionView.insertItemsAtIndexPaths([newIndexPath])
-                    self.collectionView.layoutIfNeeded()
-                    self.collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.collectionView.reloadData()
-                    }
-                    
-                    
+
                     
                     print("notations.count is \(self.notations.count)")
                     self.passantPiece = (r!["passantPiece"] as? Int)!
@@ -4473,17 +4468,19 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black" {
                     
-                    
                     let query = PFQuery(className: "Games")
                     query.whereKey("objectId", equalTo: gameID)
                     let r = query.getFirstObject()
                     self.game = r!
                     var last = r!["piecePosition"] as! Array<String>
                     self.notations.append(last.last!)
-                    //                    var lastPromotionType = r!["whitePromotionType"] as! Array<String>
-                    //                    if lastPromotionType.count > 0 {
-                    //                        self.whitePromotionType.append(lastPromotionType.last!)
-                    //                    }
+                    
+                    let newIndexPath = NSIndexPath(forItem: self.notations.count - 1, inSection: 0)
+                    self.collectionView.insertItemsAtIndexPaths([newIndexPath])
+                    self.collectionView.layoutIfNeeded()
+                    self.collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
+                    //self.collectionView.reloadData()
+
                     self.whitePromotionType = r!["whitePromotionType"] as! Array<String>
                     self.passantArray = self.game["passantArray"] as! Array<Bool>
                     
@@ -4491,13 +4488,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     self.hasBlackKingMoved = r!["can_Castle_black"] as! Bool
                     self.hasWhiteKingMoved = r!["can_Castle_white"] as! Bool
                     self.promotion = r!["promotion"] as! Bool
-                    let newIndexPath = NSIndexPath(forItem: self.notations.count - 1, inSection: 0)
-                    self.collectionView.insertItemsAtIndexPaths([newIndexPath])
-                    self.collectionView.layoutIfNeeded()
-                    self.collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.collectionView.reloadData()
-                    }
                     print("notations.count is \(self.notations.count)")
                     loadMoves()
                     self.passantPiece = (r!["passantPiece"] as? Int)!
@@ -9584,7 +9574,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 canThePieceGofurther = false
                                 //print("found the King!")
                                 //chessNotationCheck = "+"
-                                queenFoundKing = true
+                                //queenFoundKing = true
                             }
                         }
                     } else if pieceid == 1 {
@@ -9593,7 +9583,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 foundKing = true
                                 checkByBishop = true
                                 canThePieceGofurther = false
-                                bishopFoundKing = true
+                                //bishopFoundKing = true
                             }
                         }
                         
@@ -9603,7 +9593,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 foundKing = true
                                 checkByRook = true
                                 canThePieceGofurther = false
-                                rookFoundKing = true
+                                //rookFoundKing = true
                             }
                         }
                     }
@@ -10792,9 +10782,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             collectionView.insertItemsAtIndexPaths([newIndexPath])
             collectionView.layoutIfNeeded()
             collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
-            dispatch_async(dispatch_get_main_queue()) {
-                self.collectionView.reloadData()
-            }
+//            dispatch_async(dispatch_get_main_queue()) {
+//                //self.collectionView.reloadData()
+//            }
             game.addObject(notations.last!, forKey: "piecePosition")
             
             var uuser = ""
@@ -11700,6 +11690,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         print(pieceToTake.count)
                         
                     }
+                    if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y - 1 * pieceSize && whitePassant == true && hasBeenTaken(selectedPiece, array: whitePieces)  {
+                        takenPiecesToReload.append(pieces[i])
+                        takenPiecesToReloadAtIndex.append(i)
+                        piecesNotationSeperator = "x"
+                    }
                 }
                 
                 for var t = 0; t < blackPieces.count; t++ {
@@ -11709,17 +11704,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         blackPieces.removeAtIndex(t)
                         blackPiecesString.removeAtIndex(t)
                         piecesNotationSeperator = "x"
+                        whitePassant = false
                     }
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == blackPieces[t].frame.origin.x && pieceOptions[o].frame.origin.y == blackPieces[t].frame.origin.y - 1 * pieceSize && whitePassant == true && hasBeenTaken(selectedPiece, array: whitePieces)  {
+
                         
-                        piecesNotationSeperator = "x"
-                        
-                        takenPiecesToReload.append(blackPieces[t])
-                        for var o = 0; o < pieces.count; o++ {
-                            if pieces[o] == blackPieces[t] {
-                                takenPiecesToReloadAtIndex.append(o)
-                            }
-                        }
                         blackPieces[t].removeFromSuperview()
                         blackPieces.removeAtIndex(t)
                         
