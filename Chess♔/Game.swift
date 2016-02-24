@@ -274,8 +274,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var pieceBlackLogicOptions: Array<UIImageView> = []
     
     // Logic options to check if piece can move if king is in danger
-    var pieceWhiteCanMove: Array<UIImageView> = []
-    var pieceBlackCanMove: Array<UIImageView> = []
+    var pieceWhiteCanMove: Array<Array<UIImageView>> = []
+    var pieceBlackCanMove: Array<Array<UIImageView>> = []
     
     // Logic options for Queen, Bishop and Rook
     var queenLogicOptions : Array<UIImageView> = []
@@ -8785,15 +8785,19 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     func removeWhiteCanMoveOptions() {
         for var p = 0 ; p < pieceWhiteCanMove.count; p++ {
-            pieceWhiteCanMove[p].hidden = true
-            pieceWhiteCanMove[p].removeFromSuperview()
+            for var q = 0 ; q < pieceWhiteCanMove[p].count; q++ {
+            pieceWhiteCanMove[p][q].hidden = true
+            pieceWhiteCanMove[p][q].removeFromSuperview()
+        }
         }
         pieceWhiteCanMove = []
     }
     func removeBlackCanMoveOptions() {
         for var p = 0 ; p < pieceBlackCanMove.count; p++ {
-            pieceBlackCanMove[p].hidden = true
-            pieceBlackCanMove[p].removeFromSuperview()
+            for var q = 0 ; q < pieceBlackCanMove[p].count; q++ {
+            pieceBlackCanMove[p][q].hidden = true
+            pieceBlackCanMove[p][q].removeFromSuperview()
+        }
         }
         pieceBlackCanMove = []
     }
@@ -8920,7 +8924,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if hidden == true {
                         pieceOption.hidden = true
                     }
-                    if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove, friends:  whitePieces)  == 2 && verticallyAlignedBlack == false {
+                    if canSaveKingForArray(selectedPiece, array: pieceBlackCanMove) == true && canSaveKingForArray(whiteKing, array: pieceBlackCanMove) && verticallyAlignedBlack == false {
                         logicBool = false
                         pieceOption.removeFromSuperview()
                     } else {
@@ -8963,7 +8967,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if hidden == true {
                         pieceOption.hidden = true
                     }
-                    if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove, friends:  whitePieces)  == 2 && verticallyAlignedBlack == false {
+                    if canSaveKingForArray(selectedPiece, array: pieceBlackCanMove) == true && canSaveKingForArray(whiteKing, array: pieceBlackCanMove) && verticallyAlignedBlack == false {
                         logicBool = false
                         pieceOption.removeFromSuperview()
                     } else {
@@ -9012,7 +9016,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         if hidden == true {
                             pieceOption.hidden = true
                         }
-                        if canSaveKing(selectedPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove, friends:  whitePieces)  == 2 && canSaveKing(pieceOption, array: pieceBlackCanMove) == false && canSaveKing(pieceOption, array: blackPieceLogic) == false {
+                        if canSaveKingForArray(selectedPiece, array: pieceBlackCanMove) == true && canSaveKingForArray(whiteKing, array: pieceBlackCanMove) && canSaveKingForArray(pieceOption, array: pieceBlackCanMove) == false && canSaveKing(pieceOption, array: blackPieceLogic) == false {
                             pieceOption.removeFromSuperview()
                         } else {
                             self.view.addSubview(pieceOption)
@@ -9112,9 +9116,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             for var d = byAmountz; byAmountz < movementNumber; byAmountx += increaserx, byAmounty += increasery, byAmountz += increaserz {
                 
-                if canSaveKing(chosenPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  friend)  == 2 && enemy == whitePieces {
+                if canSaveKingForArray(chosenPiece, array: pieceWhiteCanMove) == true && canSaveKingForArray(blackKing, array: pieceWhiteCanMove) && enemy == whitePieces {
                     startLogicChecking = true
-                } else if canSaveKing(chosenPiece, array: pieceBlackCanMove) == true && canSaveKing(whiteKing, array: pieceBlackCanMove) && logicCheck(pieces, array:pieceBlackCanMove, friends:  friend)  == 2 && enemy == blackPieces {
+                } else if canSaveKingForArray(chosenPiece, array: pieceBlackCanMove) == true && canSaveKingForArray(whiteKing, array: pieceBlackCanMove) && enemy == blackPieces {
                     startLogicCheckingWhite = true
                 }
                 
@@ -9169,11 +9173,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             logicBool = false
                         }
                     }
-                    if startLogicChecking == true && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false && pieceid != 5 && canSaveKing(pieceOption, array: whitePieceLogic) == false {
+                    if startLogicChecking == true && canSaveKingForArray(pieceOption, array: pieceWhiteCanMove) == false && pieceid != 5 && canSaveKing(pieceOption, array: whitePieceLogic) == false {
                         pieceOption.removeFromSuperview()
                         logicBool = false
                     }
-                    if startLogicCheckingWhite == true && canSaveKing(pieceOption, array: pieceBlackCanMove) == false && pieceid != 5 && canSaveKing(pieceOption, array: blackPieceLogic) == false  {
+                    if startLogicCheckingWhite == true && canSaveKingForArray(pieceOption, array: pieceBlackCanMove) == false && pieceid != 5 && canSaveKing(pieceOption, array: blackPieceLogic) == false  {
                         pieceOption.removeFromSuperview()
                         logicBool = false
                     }
@@ -9181,9 +9185,19 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         pieceOption.removeFromSuperview()
                         logicBool = false
                     }
+                    if startLogicCheckingWhite == true && logicMagic(chosenPiece, pieceOpt: pieceOption, array: pieceBlackCanMove) == false && pieceid != 5 {
+                        pieceOption.removeFromSuperview()
+                        logicBool = false
+                    }
+                    if startLogicChecking == true && logicMagic(chosenPiece, pieceOpt: pieceOption, array: pieceWhiteCanMove) == false && pieceid != 5 {
+                        pieceOption.removeFromSuperview()
+                        logicBool = false
+                    }
+                    
                     if logicBool == true {
                         pieceOptions += [pieceOption]
                     }
+
                     
                     if hidden == false {
                         // This is for left castling white king
@@ -9333,11 +9347,19 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 logicBool = false
                             }
                         }
-                        if startLogicChecking == true && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false && canSaveKing(pieceOption, array: whitePieceLogic) == false {
+                        if startLogicChecking == true && canSaveKingForArray(pieceOption, array: pieceWhiteCanMove) == false && canSaveKing(pieceOption, array: whitePieceLogic) == false {
                             pieceOption.removeFromSuperview()
                             logicBool = false
                         }
-                        if startLogicCheckingWhite == true && canSaveKing(pieceOption, array: pieceBlackCanMove) == false && canSaveKing(pieceOption, array: blackPieceLogic) == false {
+                        if startLogicCheckingWhite == true && canSaveKingForArray(pieceOption, array: pieceBlackCanMove) == false && canSaveKing(pieceOption, array: blackPieceLogic) == false {
+                            pieceOption.removeFromSuperview()
+                            logicBool = false
+                        }
+                        if startLogicCheckingWhite == true && logicMagic(chosenPiece, pieceOpt: pieceOption, array: pieceBlackCanMove) == false && pieceid != 5 {
+                            pieceOption.removeFromSuperview()
+                            logicBool = false
+                        }
+                        if startLogicChecking == true && logicMagic(chosenPiece, pieceOpt: pieceOption, array: pieceWhiteCanMove) == false && pieceid != 5 {
                             pieceOption.removeFromSuperview()
                             logicBool = false
                         }
@@ -9493,7 +9515,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     func chessPieceMovementLogic(var movementNumber: CGFloat, var pieceid: Int, var friend: [UIImageView], var enemy: [UIImageView], var piece: UIImageView, var logicOptions: [UIImageView])  {
         
-        //print(pieceWhiteCanMove.count)
+        var logicPieceBlackCanMove: Array<UIImageView> = []
+        
+        var logicPieceWhiteCanMove: Array<UIImageView> = []
         
         // Check if the piece is taken
         if !hasBeenTaken(piece, array: pieceToTake) {
@@ -9527,16 +9551,16 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                     
-                    for var q = 0; q < pieceWhiteCanMove.count; q++ {
-                        if CGRectContainsPoint(pieceWhiteCanMove[q].frame , blackKing.center) {
+                    for var q = 0; q < logicPieceWhiteCanMove.count; q++ {
+                        if CGRectContainsPoint(logicPieceWhiteCanMove[q].frame , blackKing.center) {
                             foundKingBlack = true
                             canGoFurtherWhite = false
                             
                         }
                     }
                     
-                    for var q = 0; q < pieceBlackCanMove.count; q++ {
-                        if CGRectContainsPoint(pieceBlackCanMove[q].frame , whiteKing.center) {
+                    for var q = 0; q < logicPieceBlackCanMove.count; q++ {
+                        if CGRectContainsPoint(logicPieceBlackCanMove[q].frame , whiteKing.center) {
                             foundKingWhite = true
                             canGoFurtherBlack = false
                         }
@@ -9703,24 +9727,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     if canGoFurtherWhite == true && enemy == blackPieces {
                         let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
                         //pieceOption.image = UIImage(named: "piecePossibilities.png")
-                        if canSaveKing(pieceOption, array: pieceWhiteCanMove) {
+                        if canSaveKing(pieceOption, array: logicPieceWhiteCanMove) {
                             pieceOption.removeFromSuperview()
                         } else {
                             self.view.addSubview(pieceOption)
-                            pieceWhiteCanMove += [pieceOption]
+                            logicPieceWhiteCanMove += [pieceOption]
                         }
                         let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
                         //pieceOption2.image = UIImage(named: "piecePossibilities.png")
-                        if canSaveKing(pieceOption2, array: pieceWhiteCanMove) {
+                        if canSaveKing(pieceOption2, array: logicPieceWhiteCanMove) {
                             pieceOption2.removeFromSuperview()
                         } else {
                             whitePieceLogic += [piece]
                         }
-                        if blackKing.frame.origin.x == piece.frame.origin.x && pieceWhiteCanMove.count == 3   {
+                        if blackKing.frame.origin.x == piece.frame.origin.x && logicPieceWhiteCanMove.count == 3   {
                             print("Vertically alligned")
                             verticallyAlignedWhite = true
                         }
-                        if blackKing.frame.origin.y == piece.frame.origin.y && pieceWhiteCanMove.count == 3   {
+                        if blackKing.frame.origin.y == piece.frame.origin.y && logicPieceWhiteCanMove.count == 3   {
                             print("Vertically alligned")
                             horizontallyAlignedWhite = true
                         }
@@ -9730,24 +9754,24 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                         let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
                         //pieceOption.image = UIImage(named: "piecePossibilities.png")
-                        if canSaveKing(pieceOption, array: pieceBlackCanMove) {
+                        if canSaveKing(pieceOption, array: logicPieceBlackCanMove) {
                             pieceOption.removeFromSuperview()
                         } else {
                             self.view.addSubview(pieceOption)
-                            pieceBlackCanMove += [pieceOption]
+                            logicPieceBlackCanMove += [pieceOption]
                         }
                         let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
                         //pieceOption2.image = UIImage(named: "piecePossibilities.png")
-                        if canSaveKing(pieceOption2, array: pieceBlackCanMove) {
+                        if canSaveKing(pieceOption2, array: logicPieceBlackCanMove) {
                             pieceOption2.removeFromSuperview()
                         } else {
                             blackPieceLogic += [piece]
                         }
-                        if whiteKing.frame.origin.x == piece.frame.origin.x && pieceBlackCanMove.count == 3  {
+                        if whiteKing.frame.origin.x == piece.frame.origin.x && logicPieceBlackCanMove.count == 3  {
                             print("Vertically alligned")
                             verticallyAlignedBlack = true
                         }
-                        if whiteKing.frame.origin.y == piece.frame.origin.y && pieceBlackCanMove.count == 3 {
+                        if whiteKing.frame.origin.y == piece.frame.origin.y && logicPieceBlackCanMove.count == 3 {
                             print("Vertically alligned")
                             horizontallyAlignedBlack = true
                         }
@@ -9809,12 +9833,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
                 if foundKingBlack == false {
                     
-                    for var o = 0 ; o < pieceWhiteCanMove.count; o++ {
-                        [pieceWhiteCanMove[o] .removeFromSuperview()]
+                    for var o = 0 ; o < logicPieceWhiteCanMove.count; o++ {
+                        [logicPieceWhiteCanMove[o] .removeFromSuperview()]
                     }
                     
-                    pieceWhiteCanMove.removeAll()
-                    pieceWhiteCanMove = []
+                    logicPieceWhiteCanMove.removeAll()
+                    logicPieceWhiteCanMove = []
                     
                     whitePieceLogic.removeAll()
                     whitePieceLogic = []
@@ -9822,12 +9846,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 if foundKingWhite == false {
                     
-                    for var o = 0 ; o < pieceBlackCanMove.count; o++ {
-                        [pieceBlackCanMove[o] .removeFromSuperview()]
+                    for var o = 0 ; o < logicPieceBlackCanMove.count; o++ {
+                        [logicPieceBlackCanMove[o] .removeFromSuperview()]
                     }
                     
-                    pieceBlackCanMove.removeAll()
-                    pieceBlackCanMove = []
+                    logicPieceBlackCanMove.removeAll()
+                    logicPieceBlackCanMove = []
                     
                     blackPieceLogic.removeAll()
                     blackPieceLogic = []
@@ -9859,6 +9883,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     rookLogicOptions = []
                 }
                 //print(queenLogicOptions.count)
+                print(logicCheck2(pieces, array:logicPieceBlackCanMove, friends: whitePieces))
             }
             
             // movementNumber = 2
@@ -9922,169 +9947,198 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 letThemAppear(-1,byAmounty: -1,increaserx: -1,increasery: -1, byAmountz: 1, increaserz: 1)
             }
         }
+        
+        let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
+        pieceOption.image = UIImage(named: "piecePossibilities.png")
+        self.view.addSubview(pieceOption)
+        logicPieceBlackCanMove += [pieceOption]
+         logicPieceWhiteCanMove += [pieceOption]
+
+        if logicCheck2(pieces, array:logicPieceBlackCanMove, friends: whitePieces)  == 2 {
+            pieceBlackCanMove += [logicPieceBlackCanMove]
+        }
+        
+        if logicCheck2(pieces, array:logicPieceWhiteCanMove, friends: blackPieces)  == 2 {
+            pieceWhiteCanMove += [logicPieceWhiteCanMove]
+        }
+        
+        for var o = 0 ; o < logicPieceBlackCanMove.count; o++ {
+            [logicPieceBlackCanMove[o] .removeFromSuperview()]
+        }
+        
+        logicPieceBlackCanMove.removeAll()
+        logicPieceBlackCanMove = []
+        
+        for var o = 0 ; o < logicPieceWhiteCanMove.count; o++ {
+            [logicPieceWhiteCanMove[o] .removeFromSuperview()]
+        }
+        
+        logicPieceWhiteCanMove.removeAll()
+        logicPieceWhiteCanMove = []
+        
     }
     
-    func blackPawnSelected(var _event:UIEvent, var _touch:UITouch) {
-        showMarkedPiece()
-        
-        func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat) {
-            var canThePieceGofurther: Bool = true
-            
-            for var d = byAmounty;  byAmounty <= 2 ; byAmountx += increaserx, byAmounty += increasery {
-                
-                for var q = 0; q < blackPieces.count; q++ {
-                    if blackPieces[q].frame.origin.x == selectedPiece.frame.origin.x && blackPieces[q].frame.origin.y == selectedPiece.frame.origin.y + 1 * pieceSize{
-                        canThePieceGofurther = false
-                    }
-                }
-                
-                for var q = 0; q < whitePieces.count; q++ {
-                    if whitePieces[q].frame.origin.x == selectedPiece.frame.origin.x && whitePieces[q].frame.origin.y - 1 * pieceSize == selectedPiece.frame.origin.y{
-                        canThePieceGofurther = false
-                    }
-                }
-                
-                if canThePieceGofurther == true && selectedPiece.frame.origin.y == _7 {
-                    
-                    let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + byAmounty * pieceSize, size, size))
-                    pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  blackPieces)  == 2 && verticallyAlignedWhite == false {
-                        pieceOption.removeFromSuperview()
-                    } else {
-                        self.view.addSubview(pieceOption)
-                    }
-                    // Check if a pawn can move when king is in check
-                    if checkByQueen == true {
-                        if canSaveKing(pieceOption, array: queenLogicOptions) == false {
-                            pieceOption.removeFromSuperview()
-                        }
-                    } else if checkByBishop == true {
-                        if canSaveKing(pieceOption, array: bishopLogicOptions) == false {
-                            pieceOption.removeFromSuperview()
-                        }
-                    } else if checkByRook == true {
-                        if canSaveKing(pieceOption, array: rookLogicOptions) == false {
-                            pieceOption.removeFromSuperview()
-                        }
-                    } else if checkByPawn == true {
-                        if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
-                            pieceOption.removeFromSuperview()
-                        }
-                    } else if checkByKnight == true {
-                        if canSaveKing(pieceOption, array: knightLogicOptions) == false {
-                            pieceOption.removeFromSuperview()
-                        }
-                    }
-                    //                    for var q = 0; q < blackPieces.count; q++ {
-                    //                        if blackPieces[q] == selectedPiece {
-                    //                            game.setObject(q, forKey: "passantPiece")
-                    //                        }
-                    //                    }
-                    //                    game.setObject(true, forKey: "passant")
-                    pieceOptions += [pieceOption]
-                } else if canThePieceGofurther == true {
-                    let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + 1 * pieceSize, size, size))
-                    pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  blackPieces)  == 2 && verticallyAlignedWhite == false {
-                        pieceOption.removeFromSuperview()
-                        //print("Cant move!")
-                    } else {
-                        self.view.addSubview(pieceOption)
-                    }
-                    // Check if a pawn can move when king is in check
-                    if checkByQueen == true {
-                        if canSaveKing(pieceOption, array: queenLogicOptions) == false {
-                            pieceOption.removeFromSuperview()
-                        }
-                    } else if checkByBishop == true {
-                        if canSaveKing(pieceOption, array: bishopLogicOptions) == false {
-                            pieceOption.removeFromSuperview()
-                        }
-                    } else if checkByRook == true {
-                        if canSaveKing(pieceOption, array: rookLogicOptions) == false {
-                            pieceOption.removeFromSuperview()
-                        }
-                    } else if checkByPawn == true {
-                        if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
-                            pieceOption.removeFromSuperview()
-                        }
-                    } else if checkByKnight == true {
-                        if canSaveKing(pieceOption, array: knightLogicOptions) == false {
-                            pieceOption.removeFromSuperview()
-                        }
-                    }
-                    pieceOptions += [pieceOption]
-                }
-                for var r = 0; r < whitePieces.count; r++ {
-                    if whitePieces[r].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && whitePieces[r].frame.origin.y == selectedPiece.frame.origin.y + 1 * pieceSize && canTake == true {
-                        
-                        let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y + 1 * pieceSize, pieceSize, pieceSize))
-                        pieceOption.image = UIImage(named: "piecePossibilities.png")
-                        if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  blackPieces)  == 2 && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false && canSaveKing(pieceOption, array: whitePieceLogic) == false  {
-                            pieceOption.removeFromSuperview()
-                            //print("Cant move!")
-                        } else {
-                            self.view.addSubview(pieceOption)
-                        }
-                        // Check if a pawn can move when king is in check
-                        if checkByQueen == true {
-                            if canSaveKing(pieceOption, array: queenLogicOptions) == false {
-                                pieceOption.removeFromSuperview()
-                            }
-                        } else if checkByBishop == true {
-                            if canSaveKing(pieceOption, array: bishopLogicOptions) == false {
-                                pieceOption.removeFromSuperview()
-                            }
-                        } else if checkByRook == true {
-                            if canSaveKing(pieceOption, array: rookLogicOptions) == false {
-                                pieceOption.removeFromSuperview()
-                            }
-                        } else if checkByPawn == true {
-                            if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
-                                pieceOption.removeFromSuperview()
-                            }
-                        } else if checkByKnight == true {
-                            if canSaveKing(pieceOption, array: knightLogicOptions) == false {
-                                pieceOption.removeFromSuperview()
-                            }
-                        }
-                        pieceOptions += [pieceOption]
-                        canThePieceGofurther = false
-                        
-                    }
-                }
-                
-                if selectedPiece.frame.origin.y == screenHeight/2 && whitePieces[passantPiece].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && whitePieces[passantPiece].frame.origin.y == selectedPiece.frame.origin.y && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
-                    //print("Passant!")
-                    blackPassant = true
-                    havePassant = true
-                    let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y + 1 * pieceSize, pieceSize, pieceSize))
-                    pieceOption.image = UIImage(named: "piecePossibilities.png")
-                    self.view.addSubview(pieceOption)
-                    pieceOptions += [pieceOption]
-                }
-                
-                for var o = 0 ; o < pieceOptions.count; o++ {
-                    if CGRectContainsPoint(boarderBoard.frame, pieceOptions[o].center) == false {
-                        [pieceOptions[o] .removeFromSuperview()]
-                        pieceOptions.removeAtIndex(o)
-                    }
-                }
-                
-                
-                for var q = 0; q < pieces.count; q++ {
-                    for var p = 0; p < pieceOptions.count; p++ {
-                        if CGRectContainsPoint(pieces[q].frame, pieceOptions[p].center) && selectedPiece.frame.origin.y == _7 && pieceOptions[p].frame.origin.y == _5 {
-                            [pieceOptions[p] .removeFromSuperview()]
-                        }
-                    }
-                }
-                
-            }
-        }
-        letThemAppear(1, byAmounty: 1, increaserx: 0, increasery: 1)
-        letThemAppear(-1, byAmounty: 1, increaserx: 0, increasery: 1)
-    }
+//    func blackPawnSelected(var _event:UIEvent, var _touch:UITouch) {
+//        showMarkedPiece()
+//        
+//        func letThemAppear(var byAmountx:CGFloat, var byAmounty:CGFloat, increaserx:CGFloat, increasery:CGFloat) {
+//            var canThePieceGofurther: Bool = true
+//            
+//            for var d = byAmounty;  byAmounty <= 2 ; byAmountx += increaserx, byAmounty += increasery {
+//                
+//                for var q = 0; q < blackPieces.count; q++ {
+//                    if blackPieces[q].frame.origin.x == selectedPiece.frame.origin.x && blackPieces[q].frame.origin.y == selectedPiece.frame.origin.y + 1 * pieceSize{
+//                        canThePieceGofurther = false
+//                    }
+//                }
+//                
+//                for var q = 0; q < whitePieces.count; q++ {
+//                    if whitePieces[q].frame.origin.x == selectedPiece.frame.origin.x && whitePieces[q].frame.origin.y - 1 * pieceSize == selectedPiece.frame.origin.y{
+//                        canThePieceGofurther = false
+//                    }
+//                }
+//                
+//                if canThePieceGofurther == true && selectedPiece.frame.origin.y == _7 {
+//                    
+//                    let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + byAmounty * pieceSize, size, size))
+//                    pieceOption.image = UIImage(named: "piecePossibilities.png")
+//                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  blackPieces)  == 2 && verticallyAlignedWhite == false {
+//                        pieceOption.removeFromSuperview()
+//                    } else {
+//                        self.view.addSubview(pieceOption)
+//                    }
+//                    // Check if a pawn can move when king is in check
+//                    if checkByQueen == true {
+//                        if canSaveKing(pieceOption, array: queenLogicOptions) == false {
+//                            pieceOption.removeFromSuperview()
+//                        }
+//                    } else if checkByBishop == true {
+//                        if canSaveKing(pieceOption, array: bishopLogicOptions) == false {
+//                            pieceOption.removeFromSuperview()
+//                        }
+//                    } else if checkByRook == true {
+//                        if canSaveKing(pieceOption, array: rookLogicOptions) == false {
+//                            pieceOption.removeFromSuperview()
+//                        }
+//                    } else if checkByPawn == true {
+//                        if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
+//                            pieceOption.removeFromSuperview()
+//                        }
+//                    } else if checkByKnight == true {
+//                        if canSaveKing(pieceOption, array: knightLogicOptions) == false {
+//                            pieceOption.removeFromSuperview()
+//                        }
+//                    }
+//                    //                    for var q = 0; q < blackPieces.count; q++ {
+//                    //                        if blackPieces[q] == selectedPiece {
+//                    //                            game.setObject(q, forKey: "passantPiece")
+//                    //                        }
+//                    //                    }
+//                    //                    game.setObject(true, forKey: "passant")
+//                    pieceOptions += [pieceOption]
+//                } else if canThePieceGofurther == true {
+//                    let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x, selectedPiece.frame.origin.y + 1 * pieceSize, size, size))
+//                    pieceOption.image = UIImage(named: "piecePossibilities.png")
+//                    if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  blackPieces)  == 2 && verticallyAlignedWhite == false {
+//                        pieceOption.removeFromSuperview()
+//                        //print("Cant move!")
+//                    } else {
+//                        self.view.addSubview(pieceOption)
+//                    }
+//                    // Check if a pawn can move when king is in check
+//                    if checkByQueen == true {
+//                        if canSaveKing(pieceOption, array: queenLogicOptions) == false {
+//                            pieceOption.removeFromSuperview()
+//                        }
+//                    } else if checkByBishop == true {
+//                        if canSaveKing(pieceOption, array: bishopLogicOptions) == false {
+//                            pieceOption.removeFromSuperview()
+//                        }
+//                    } else if checkByRook == true {
+//                        if canSaveKing(pieceOption, array: rookLogicOptions) == false {
+//                            pieceOption.removeFromSuperview()
+//                        }
+//                    } else if checkByPawn == true {
+//                        if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
+//                            pieceOption.removeFromSuperview()
+//                        }
+//                    } else if checkByKnight == true {
+//                        if canSaveKing(pieceOption, array: knightLogicOptions) == false {
+//                            pieceOption.removeFromSuperview()
+//                        }
+//                    }
+//                    pieceOptions += [pieceOption]
+//                }
+//                for var r = 0; r < whitePieces.count; r++ {
+//                    if whitePieces[r].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && whitePieces[r].frame.origin.y == selectedPiece.frame.origin.y + 1 * pieceSize && canTake == true {
+//                        
+//                        let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y + 1 * pieceSize, pieceSize, pieceSize))
+//                        pieceOption.image = UIImage(named: "piecePossibilities.png")
+//                        if canSaveKing(selectedPiece, array: pieceWhiteCanMove) == true && canSaveKing(blackKing, array: pieceWhiteCanMove) && logicCheck(pieces, array:pieceWhiteCanMove, friends:  blackPieces)  == 2 && canSaveKing(pieceOption, array: pieceWhiteCanMove) == false && canSaveKing(pieceOption, array: whitePieceLogic) == false  {
+//                            pieceOption.removeFromSuperview()
+//                            //print("Cant move!")
+//                        } else {
+//                            self.view.addSubview(pieceOption)
+//                        }
+//                        // Check if a pawn can move when king is in check
+//                        if checkByQueen == true {
+//                            if canSaveKing(pieceOption, array: queenLogicOptions) == false {
+//                                pieceOption.removeFromSuperview()
+//                            }
+//                        } else if checkByBishop == true {
+//                            if canSaveKing(pieceOption, array: bishopLogicOptions) == false {
+//                                pieceOption.removeFromSuperview()
+//                            }
+//                        } else if checkByRook == true {
+//                            if canSaveKing(pieceOption, array: rookLogicOptions) == false {
+//                                pieceOption.removeFromSuperview()
+//                            }
+//                        } else if checkByPawn == true {
+//                            if canSaveKing(pieceOption, array: pawnLogicOptions) == false {
+//                                pieceOption.removeFromSuperview()
+//                            }
+//                        } else if checkByKnight == true {
+//                            if canSaveKing(pieceOption, array: knightLogicOptions) == false {
+//                                pieceOption.removeFromSuperview()
+//                            }
+//                        }
+//                        pieceOptions += [pieceOption]
+//                        canThePieceGofurther = false
+//                        
+//                    }
+//                }
+//                
+//                if selectedPiece.frame.origin.y == screenHeight/2 && whitePieces[passantPiece].frame.origin.x == selectedPiece.frame.origin.x - byAmountx * pieceSize && whitePieces[passantPiece].frame.origin.y == selectedPiece.frame.origin.y && checkByQueen == false && checkByBishop == false && checkByRook == false && checkByKnight == false && checkByPawn == false  {
+//                    //print("Passant!")
+//                    blackPassant = true
+//                    havePassant = true
+//                    let pieceOption = UIImageView(frame: CGRectMake(selectedPiece.frame.origin.x - byAmountx * pieceSize, selectedPiece.frame.origin.y + 1 * pieceSize, pieceSize, pieceSize))
+//                    pieceOption.image = UIImage(named: "piecePossibilities.png")
+//                    self.view.addSubview(pieceOption)
+//                    pieceOptions += [pieceOption]
+//                }
+//                
+//                for var o = 0 ; o < pieceOptions.count; o++ {
+//                    if CGRectContainsPoint(boarderBoard.frame, pieceOptions[o].center) == false {
+//                        [pieceOptions[o] .removeFromSuperview()]
+//                        pieceOptions.removeAtIndex(o)
+//                    }
+//                }
+//                
+//                
+//                for var q = 0; q < pieces.count; q++ {
+//                    for var p = 0; p < pieceOptions.count; p++ {
+//                        if CGRectContainsPoint(pieces[q].frame, pieceOptions[p].center) && selectedPiece.frame.origin.y == _7 && pieceOptions[p].frame.origin.y == _5 {
+//                            [pieceOptions[p] .removeFromSuperview()]
+//                        }
+//                    }
+//                }
+//                
+//            }
+//        }
+//        letThemAppear(1, byAmounty: 1, increaserx: 0, increasery: 1)
+//        letThemAppear(-1, byAmounty: 1, increaserx: 0, increasery: 1)
+//    }
     
     // MARK: - Timer-functions ⏳
     func resetTimer() {
@@ -11090,7 +11144,128 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         return bool
     }
     
-    func logicCheck(var pieces: Array<UIImageView>, var array: Array<UIImageView>, var friends: Array<UIImageView>) -> Int {
+    func canSaveKingForArray(var image: UIImageView, var array: Array<Array<UIImageView>> = []) -> Bool {
+        
+        var bool = false
+        for var i = 0; i < array.count; i++ {
+            for var y = 0; y < array[i].count; y++ {
+            if CGRectContainsPoint(image.frame, array[i][y].center) {
+                bool = true
+            }
+        }
+        }
+        return bool
+    }
+    
+    func logicMagic(var piece: UIImageView, var pieceOpt: UIImageView, var array: Array<Array<UIImageView>> = []) -> Bool  {
+        
+        var bool = false
+        var count1 = 100
+        var count2 = 100
+        print("array count is \(array.count)")
+        for var i = 0; i < array.count; i++ {
+            for var y = 0; y < array[i].count; y++ {
+                if CGRectContainsPoint(piece.frame, array[i][y].center) {
+                    print("logicMagic piece at \(i)")
+                    count1 = i
+            }
+        }
+   
+    }
+        
+        for var i = 0; i < array.count; i++ {
+            for var y = 0; y < array[i].count; y++ {
+                if CGRectContainsPoint(pieceOpt.frame, array[i][y].center) {
+                    print("logicMagic pieceOpt at \(i)")
+                    count2 = i
+                }
+            }
+            
+        }
+        if count1 == count2 && count1 != 100 && count2 != 100   {
+            bool = true
+        }
+        return bool
+    }
+    
+    func logicCheck(var pieces: Array<UIImageView>, var array: Array<Array<UIImageView>> = [], var friends: Array<UIImageView>) -> Int {
+        
+        var count = 0
+        for var p = 0; p < pieces.count; p++ {
+            for var i = 0; i < array.count; i++ {
+                for var y = 0; y < array[i].count; y++ {
+                if CGRectContainsPoint(pieces[p].frame, array[i][y].center) {
+                    count++
+                }
+            }
+            }
+        }
+        
+        if friends == whitePieces {
+            for var p = 0; p < blackQueens.count; p++ {
+                for var i = 0; i < array.count; i++ {
+                    for var y = 0; y < array[i].count; y++ {
+                    if CGRectContainsPoint(blackQueens[p].frame, array[i][y].center) && !hasBeenTaken(blackQueens[p], array: pieceToTake) {
+                        count--
+                    }
+                    }
+                }
+            }
+            
+            for var p = 0; p < blackBishops.count; p++ {
+                for var i = 0; i < array.count; i++ {
+                    for var y = 0; y < array[i].count; y++ {
+                    if CGRectContainsPoint(blackBishops[p].frame, array[i][y].center) && !hasBeenTaken(blackBishops[p], array: pieceToTake) && verticallyAlignedBlack == false && horizontallyAlignedBlack == false {
+                        count--
+                    }
+                    }
+                }
+            }
+            for var p = 0; p < blackRooks.count; p++ {
+                for var i = 0; i < array.count; i++ {
+                    for var y = 0; y < array[i].count; y++ {
+                    if CGRectContainsPoint(blackRooks[p].frame, array[i][y].center) && !hasBeenTaken(blackRooks[p], array: pieceToTake) && horizontallyAlignedBlack == true || CGRectContainsPoint(blackRooks[p].frame, array[i][y].center) && !hasBeenTaken(blackRooks[p], array: pieceToTake) && verticallyAlignedBlack == true{
+                        count--
+                    }
+                    }
+                }
+            }
+        } else if friends == blackPieces {
+            for var p = 0; p < whiteQueens.count; p++ {
+                for var i = 0; i < array.count; i++ {
+                    for var y = 0; y < array[i].count; y++ {
+                    if CGRectContainsPoint(whiteQueens[p].frame, array[i][y].center) && !hasBeenTaken(whiteQueens[p], array: pieceToTake) {
+                        count--
+                    }
+                    }
+                }
+            }
+            
+            for var p = 0; p < whiteBishops.count; p++ {
+                for var i = 0; i < array.count; i++ {
+                    for var y = 0; y < array[i].count; y++ {
+                    if CGRectContainsPoint(whiteBishops[p].frame, array[i][y].center) && !hasBeenTaken(whiteBishops[p], array: pieceToTake) && verticallyAlignedWhite == false && horizontallyAlignedWhite == false {
+                        count--
+                    }
+                    }
+                }
+            }
+            for var p = 0; p < whiteRooks.count; p++ {
+                for var i = 0; i < array.count; i++ {
+                    for var y = 0; y < array[i].count; y++ {
+                    if CGRectContainsPoint(whiteRooks[p].frame, array[i][y].center) && !hasBeenTaken(whiteRooks[p], array: pieceToTake) && horizontallyAlignedWhite == true || CGRectContainsPoint(whiteRooks[p].frame, array[i][y].center) && !hasBeenTaken(whiteRooks[p], array: pieceToTake) && verticallyAlignedWhite == true {
+                        count--
+                    }
+                    }
+                }
+            }
+        }
+        
+        //print(count)
+        return count
+    }
+    
+    func logicCheck2(var pieces: Array<UIImageView>, var array: Array<UIImageView>, var friends: Array<UIImageView>) -> Int {
         
         var count = 0
         for var p = 0; p < pieces.count; p++ {
@@ -11152,6 +11327,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         //print(count)
         return count
     }
+
     
     func contains(var _imageArray:Array<UIImageView>, _image: UIImageView) -> Bool {
         
