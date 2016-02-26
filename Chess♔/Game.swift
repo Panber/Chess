@@ -500,6 +500,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var rookFoundKing: Bool = false
     var pawnFoundKing: Bool = false
     
+    var promotionCountWhite = 0
+    var promotionCountBlack = 0
     
     func loadVariablesAndConstants() {
         print("View did load!")
@@ -5582,7 +5584,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         removePieceOptions()
         hideMarkedPiece()
         
-        
+        self.promotionCountWhite = self.whitePromotionType.count
+        self.promotionCountBlack = self.blackPromotionType.count
         didEnterTimeCapsule = true
         
         for var i = 0; i < piecesArrs.count; i++ {
@@ -6026,7 +6029,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     
     func exitTimeCapsuleBPressed(sender: UIButton!) {
-        
         forwardB.userInteractionEnabled = false
         backwardB.userInteractionEnabled = false
         exitTimeCapsuleB.userInteractionEnabled = false
@@ -6316,6 +6318,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if whiteQueens[ram]  == pieces[i] {
                                                                                 whiteQueens.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountWhite--
                                                                             }
                                                                         }
                                                                     }
@@ -6325,6 +6328,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if whiteRooks[ram]  == pieces[i] {
                                                                                 whiteRooks.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountWhite--
                                                                             }
                                                                         }
                                                                     }
@@ -6334,6 +6338,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if whiteKnights[ram]  == pieces[i] {
                                                                                 whiteKnights.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountWhite--
                                                                             }
                                                                         }
                                                                     }
@@ -6343,6 +6348,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if whiteBishops[ram]  == pieces[i] {
                                                                                 whiteBishops.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountWhite--
                                                                             }
                                                                         }
                                                                     }
@@ -6360,6 +6366,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if blackQueens[ram]  == pieces[i] {
                                                                                 blackQueens.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountBlack--
                                                                             }
                                                                         }
                                                                     }
@@ -6369,6 +6376,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if blackRooks[ram]  == pieces[i] {
                                                                                 blackRooks.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountBlack--
                                                                             }
                                                                         }
                                                                     }
@@ -6378,6 +6386,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if blackKnights[ram]  == pieces[i] {
                                                                                 blackKnights.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountBlack--
                                                                             }
                                                                         }
                                                                     }
@@ -6387,6 +6396,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if blackBishops[ram] == pieces[i] {
                                                                                 blackBishops.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountBlack--
                                                                             }
                                                                         }
                                                                     }
@@ -6410,6 +6420,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if blackQueens[ram]  == pieces[i] {
                                                                                 blackQueens.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountWhite--
                                                                             }
                                                                         }
                                                                     }
@@ -6419,6 +6430,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if blackRooks[ram]  == pieces[i] {
                                                                                 blackRooks.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountWhite--
                                                                             }
                                                                         }
                                                                     }
@@ -6428,6 +6440,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if blackKnights[ram]  == pieces[i] {
                                                                                 blackKnights.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountWhite--
                                                                             }
                                                                         }
                                                                     }
@@ -6437,6 +6450,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if blackBishops[ram]  == pieces[i] {
                                                                                 blackBishops.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountWhite--
                                                                             }
                                                                         }
                                                                     }
@@ -6454,6 +6468,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if whiteQueens[ram]  == pieces[i] {
                                                                                 whiteQueens.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountBlack--
                                                                             }
                                                                         }
                                                                     }
@@ -6463,6 +6478,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if whiteRooks[ram]  == pieces[i] {
                                                                                 whiteRooks.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountBlack--
                                                                             }
                                                                         }
                                                                     }
@@ -6472,6 +6488,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if whiteKnights[ram]  == pieces[i] {
                                                                                 whiteKnights.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountBlack--
                                                                             }
                                                                         }
                                                                     }
@@ -6481,6 +6498,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                             if whiteBishops[ram]  == pieces[i] {
                                                                                 whiteBishops.removeAtIndex(ram)
                                                                                 ram--
+                                                                                promotionCountBlack--
                                                                             }
                                                                         }
                                                                     }
@@ -6558,8 +6576,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     func magic4(var fromMoveNumber:Int) {
         var am = 0
-        var count = 0
-        var countBlack = 0
+        
         for var o = fromMoveNumber; o < movesCap.count; o++ {
             am++
             print("am variable is \(am)")
@@ -6685,26 +6702,26 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                             for var w = 0; w < whitePawns.count; w++ {
                                                                 if String(movesCap[o][1])  == "7" && String(movesCap[o][3]) == "8" && pieces[i].image == UIImage(named:"whitePawn") && pieces[i] == whitePawns[w]   {
                                                                     print("Notation promotion")
-                                                                    if whitePromotionType[count] == "Queen" {
+                                                                    if whitePromotionType[promotionCountWhite] == "Queen" {
                                                                         self.pieces[i].image = UIImage(named:"whiteQueen")
                                                                         self.whiteQueens += [pieces[i]]
                                                                         self.whitePawns.removeAtIndex(w)
-                                                                        count++
-                                                                    } else if whitePromotionType[count] == "Rook" {
+                                                                        //promotionCountWhite++
+                                                                    } else if whitePromotionType[promotionCountWhite] == "Rook" {
                                                                         self.pieces[i].image = UIImage(named:"whiteRook")
                                                                         self.whiteRooks += [pieces[i]]
                                                                         self.whitePawns.removeAtIndex(w)
-                                                                        count++
-                                                                    } else  if whitePromotionType[count] == "Bishop" {
+                                                                        //promotionCountWhite++
+                                                                    } else  if whitePromotionType[promotionCountWhite] == "Bishop" {
                                                                         self.pieces[i].image = UIImage(named:"whiteBishop")
                                                                         self.whiteBishops += [pieces[i]]
                                                                         self.whitePawns.removeAtIndex(w)
-                                                                        count++
-                                                                    } else  if whitePromotionType[count] == "Knight" {
+                                                                        //promotionCountWhite++
+                                                                    } else  if whitePromotionType[promotionCountWhite] == "Knight" {
                                                                         self.pieces[i].image = UIImage(named:"whiteKnight")
                                                                         self.whiteKnights += [pieces[i]]
                                                                         self.whitePawns.removeAtIndex(w)
-                                                                        count++
+                                                                        //promotionCountWhite++
                                                                     }
                                                                 }
                                                             }
@@ -6712,26 +6729,26 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                             for var w = 0; w < blackPawns.count; w++ {
                                                                 if String(movesCap[o][1])  == "2" && String(movesCap[o][3]) == "1"  && pieces[i].image == UIImage(named:"blackPawn") && pieces[i] == blackPawns[w] {
                                                                     print("Notation promotion")
-                                                                    if blackPromotionType[countBlack] == "Queen" {
+                                                                    if blackPromotionType[promotionCountBlack] == "Queen" {
                                                                         self.pieces[i].image = UIImage(named:"blackQueen")
                                                                         self.blackQueens += [pieces[i]]
                                                                         self.blackPawns.removeAtIndex(w)
-                                                                        countBlack++
-                                                                    } else if blackPromotionType[countBlack] == "Rook" {
+                                                                        //promotionCountBlack++
+                                                                    } else if blackPromotionType[promotionCountBlack] == "Rook" {
                                                                         self.pieces[i].image = UIImage(named:"blackRook")
                                                                         self.blackRooks += [pieces[i]]
                                                                         self.blackPawns.removeAtIndex(w)
-                                                                        countBlack++
-                                                                    } else if blackPromotionType[countBlack] == "Bishop" {
+                                                                        //promotionCountBlack++
+                                                                    } else if blackPromotionType[promotionCountBlack] == "Bishop" {
                                                                         self.pieces[i].image = UIImage(named:"blackBishop")
                                                                         self.blackBishops += [pieces[i]]
                                                                         self.blackPawns.removeAtIndex(w)
-                                                                        countBlack++
-                                                                    } else if blackPromotionType[countBlack] == "Knight" {
+                                                                        //promotionCountBlack++
+                                                                    } else if blackPromotionType[promotionCountBlack] == "Knight" {
                                                                         self.pieces[i].image = UIImage(named:"blackKnight")
                                                                         self.blackKnights += [pieces[i]]
                                                                         self.blackPawns.removeAtIndex(w)
-                                                                        countBlack++
+                                                                        //promotionCountBlack++
                                                                     }
                                                                 }
                                                             }
@@ -6741,26 +6758,26 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 if String(movesCap[o][1])  == "2" && String(movesCap[o][3]) == "1" && pieces[i].image == UIImage(named:"blackPawn") && pieces[i] == whitePawns[w]  {
                                                                     print("Notation promotion")
                                                                     print(blackPromotionType.count)
-                                                                    if blackPromotionType[countBlack] == "Queen"{
+                                                                    if blackPromotionType[promotionCountBlack] == "Queen"{
                                                                         self.pieces[i].image = UIImage(named:"blackQueen")
                                                                         self.whiteQueens += [pieces[i]]
                                                                         self.whitePawns.removeAtIndex(w)
-                                                                        countBlack++
-                                                                    } else if blackPromotionType[countBlack] == "Rook" {
+                                                                        //promotionCountBlack++
+                                                                    } else if blackPromotionType[promotionCountBlack] == "Rook" {
                                                                         self.pieces[i].image = UIImage(named:"blackRook")
                                                                         self.whiteRooks += [pieces[i]]
                                                                         self.whitePawns.removeAtIndex(w)
-                                                                        countBlack++
-                                                                    } else  if blackPromotionType[countBlack] == "Bishop" {
+                                                                        //promotionCountBlack++
+                                                                    } else  if blackPromotionType[promotionCountBlack] == "Bishop" {
                                                                         self.pieces[i].image = UIImage(named:"blackBishop")
                                                                         self.whiteBishops += [pieces[i]]
                                                                         self.whitePawns.removeAtIndex(w)
-                                                                        countBlack++
-                                                                    } else  if blackPromotionType[countBlack] == "Knight" {
+                                                                        //promotionCountBlack++
+                                                                    } else  if blackPromotionType[promotionCountBlack] == "Knight" {
                                                                         self.pieces[i].image = UIImage(named:"blackKnight")
                                                                         self.whiteKnights += [pieces[i]]
                                                                         self.whitePawns.removeAtIndex(w)
-                                                                        countBlack++
+                                                                        //promotionCountBlack++
                                                                     }
                                                                     
                                                                 }
@@ -6772,26 +6789,26 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                     print("Notation promotion white")
                                                                     print(blackPawns.count)
                                                                     print(w)
-                                                                    if whitePromotionType[count] == "Queen" {
+                                                                    if whitePromotionType[promotionCountWhite] == "Queen" {
                                                                         self.pieces[i].image = UIImage(named:"whiteQueen")
                                                                         self.blackQueens += [pieces[i]]
                                                                         self.blackPawns.removeAtIndex(w)
-                                                                        count++
-                                                                    } else if whitePromotionType[count] == "Rook" {
+                                                                        //promotionCountWhite++
+                                                                    } else if whitePromotionType[promotionCountWhite] == "Rook" {
                                                                         self.pieces[i].image = UIImage(named:"whiteRook")
                                                                         self.blackRooks += [pieces[i]]
                                                                         self.blackPawns.removeAtIndex(w)
-                                                                        count++
-                                                                    } else if whitePromotionType[count] == "Bishop" {
+                                                                        //promotionCountWhite++
+                                                                    } else if whitePromotionType[promotionCountWhite] == "Bishop" {
                                                                         self.pieces[i].image = UIImage(named:"whiteBishop")
                                                                         self.blackBishops += [pieces[i]]
                                                                         self.blackPawns.removeAtIndex(w)
-                                                                        count++
-                                                                    } else if whitePromotionType[count] == "Knight" {
+                                                                        //promotionCountWhite++
+                                                                    } else if whitePromotionType[promotionCountWhite] == "Knight" {
                                                                         self.pieces[i].image = UIImage(named:"whiteKnight")
                                                                         self.blackKnights += [pieces[i]]
                                                                         self.blackPawns.removeAtIndex(w)
-                                                                        count++
+                                                                        //promotionCountWhite++
                                                                     }
                                                                     
                                                                 }
@@ -6864,15 +6881,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     var d3 = 0
     
-    
     var canPressForwardButton = true
     //magic 5 is
     func magic5(var moveNumber: Int) {
-        
+        print("forwardButtonPressed")
         // movesCap[moveNumber]
         var am = 0
-        var count = 0
-        var countBlack = 0
         var didIncrease_d3 = false
         
         //            am++
@@ -7035,26 +7049,27 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                             if String(movesCap[moveNumber][1])  == "7" && String(movesCap[moveNumber][3]) == "8" && pieces[i].image == UIImage(named:"whitePawn") && pieces[i] == whitePawns[w]   {
                                                                 print("Notation promotion")
                                                                 print(whitePromotionType.count)
-                                                                if whitePromotionType[count] == "Queen" {
+                                                                print(promotionCountWhite)
+                                                                if whitePromotionType[promotionCountWhite] == "Queen" {
                                                                     self.pieces[i].image = UIImage(named:"whiteQueen")
                                                                     self.whiteQueens += [pieces[i]]
                                                                     self.whitePawns.removeAtIndex(w)
-                                                                    count++
-                                                                } else if whitePromotionType[count] == "Rook" {
+                                                                    promotionCountWhite++
+                                                                } else if whitePromotionType[promotionCountWhite] == "Rook" {
                                                                     self.pieces[i].image = UIImage(named:"whiteRook")
                                                                     self.whiteRooks += [pieces[i]]
                                                                     self.whitePawns.removeAtIndex(w)
-                                                                    count++
-                                                                } else  if whitePromotionType[count] == "Bishop" {
+                                                                    promotionCountWhite++
+                                                                } else  if whitePromotionType[promotionCountWhite] == "Bishop" {
                                                                     self.pieces[i].image = UIImage(named:"whiteBishop")
                                                                     self.whiteBishops += [pieces[i]]
                                                                     self.whitePawns.removeAtIndex(w)
-                                                                    count++
-                                                                } else  if whitePromotionType[count] == "Knight" {
+                                                                    promotionCountWhite++
+                                                                } else  if whitePromotionType[promotionCountWhite] == "Knight" {
                                                                     self.pieces[i].image = UIImage(named:"whiteKnight")
                                                                     self.whiteKnights += [pieces[i]]
                                                                     self.whitePawns.removeAtIndex(w)
-                                                                    count++
+                                                                    promotionCountWhite++
                                                                 }
                                                             }
                                                         }
@@ -7062,26 +7077,26 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                         for var w = 0; w < blackPawns.count; w++ {
                                                             if String(movesCap[moveNumber][1])  == "2" && String(movesCap[moveNumber][3]) == "1"  && pieces[i].image == UIImage(named:"blackPawn") && pieces[i] == blackPawns[w] {
                                                                 print("Notation promotion")
-                                                                if blackPromotionType[countBlack] == "Queen" {
+                                                                if blackPromotionType[promotionCountBlack] == "Queen" {
                                                                     self.pieces[i].image = UIImage(named:"blackQueen")
                                                                     self.blackQueens += [pieces[i]]
                                                                     self.blackPawns.removeAtIndex(w)
-                                                                    countBlack++
-                                                                } else if blackPromotionType[countBlack] == "Rook" {
+                                                                    promotionCountBlack++
+                                                                } else if blackPromotionType[promotionCountBlack] == "Rook" {
                                                                     self.pieces[i].image = UIImage(named:"blackRook")
                                                                     self.blackRooks += [pieces[i]]
                                                                     self.blackPawns.removeAtIndex(w)
-                                                                    countBlack++
-                                                                } else if blackPromotionType[countBlack] == "Bishop" {
+                                                                    promotionCountBlack++
+                                                                } else if blackPromotionType[promotionCountBlack] == "Bishop" {
                                                                     self.pieces[i].image = UIImage(named:"blackBishop")
                                                                     self.blackBishops += [pieces[i]]
                                                                     self.blackPawns.removeAtIndex(w)
-                                                                    countBlack++
-                                                                } else if blackPromotionType[countBlack] == "Knight" {
+                                                                    promotionCountBlack++
+                                                                } else if blackPromotionType[promotionCountBlack] == "Knight" {
                                                                     self.pieces[i].image = UIImage(named:"blackKnight")
                                                                     self.blackKnights += [pieces[i]]
                                                                     self.blackPawns.removeAtIndex(w)
-                                                                    countBlack++
+                                                                    promotionCountBlack++
                                                                 }
                                                             }
                                                         }
@@ -7090,26 +7105,26 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                         for var w = 0; w < whitePawns.count; w++ {
                                                             if String(movesCap[moveNumber][1])  == "2" && String(movesCap[moveNumber][3]) == "1" && pieces[i].image == UIImage(named:"blackPawn") && pieces[i] == whitePawns[w]  {
                                                                 print("Notation promotion")
-                                                                if blackPromotionType[countBlack] == "Queen"{
+                                                                if blackPromotionType[promotionCountBlack] == "Queen"{
                                                                     self.pieces[i].image = UIImage(named:"blackQueen")
                                                                     self.whiteQueens += [pieces[i]]
                                                                     self.whitePawns.removeAtIndex(w)
-                                                                    countBlack++
-                                                                } else if blackPromotionType[countBlack] == "Rook" {
+                                                                    promotionCountBlack++
+                                                                } else if blackPromotionType[promotionCountBlack] == "Rook" {
                                                                     self.pieces[i].image = UIImage(named:"blackRook")
                                                                     self.whiteRooks += [pieces[i]]
                                                                     self.whitePawns.removeAtIndex(w)
-                                                                    countBlack++
-                                                                } else  if blackPromotionType[countBlack] == "Bishop" {
+                                                                    promotionCountBlack++
+                                                                } else  if blackPromotionType[promotionCountBlack] == "Bishop" {
                                                                     self.pieces[i].image = UIImage(named:"blackBishop")
                                                                     self.whiteBishops += [pieces[i]]
                                                                     self.whitePawns.removeAtIndex(w)
-                                                                    countBlack++
-                                                                } else  if blackPromotionType[countBlack] == "Knight" {
+                                                                    promotionCountBlack++
+                                                                } else  if blackPromotionType[promotionCountBlack] == "Knight" {
                                                                     self.pieces[i].image = UIImage(named:"blackKnight")
                                                                     self.whiteKnights += [pieces[i]]
                                                                     self.whitePawns.removeAtIndex(w)
-                                                                    countBlack++
+                                                                    promotionCountBlack++
                                                                 }
                                                                 
                                                             }
@@ -7121,26 +7136,26 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                 print("Notation promotion white")
                                                                 print(blackPawns.count)
                                                                 print(w)
-                                                                if whitePromotionType[count] == "Queen" {
+                                                                if whitePromotionType[promotionCountWhite] == "Queen" {
                                                                     self.pieces[i].image = UIImage(named:"whiteQueen")
                                                                     self.blackQueens += [pieces[i]]
                                                                     self.blackPawns.removeAtIndex(w)
-                                                                    count++
-                                                                } else if whitePromotionType[count] == "Rook" {
+                                                                    promotionCountWhite++
+                                                                } else if whitePromotionType[promotionCountWhite] == "Rook" {
                                                                     self.pieces[i].image = UIImage(named:"whiteRook")
                                                                     self.blackRooks += [pieces[i]]
                                                                     self.blackPawns.removeAtIndex(w)
-                                                                    count++
-                                                                } else if whitePromotionType[count] == "Bishop" {
+                                                                    promotionCountWhite++
+                                                                } else if whitePromotionType[promotionCountWhite] == "Bishop" {
                                                                     self.pieces[i].image = UIImage(named:"whiteBishop")
                                                                     self.blackBishops += [pieces[i]]
                                                                     self.blackPawns.removeAtIndex(w)
-                                                                    count++
-                                                                } else if whitePromotionType[count] == "Knight" {
+                                                                    promotionCountWhite++
+                                                                } else if whitePromotionType[promotionCountWhite] == "Knight" {
                                                                     self.pieces[i].image = UIImage(named:"whiteKnight")
                                                                     self.blackKnights += [pieces[i]]
                                                                     self.blackPawns.removeAtIndex(w)
-                                                                    count++
+                                                                    promotionCountWhite++
                                                                 }
                                                                 
                                                             }
