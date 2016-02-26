@@ -2598,56 +2598,56 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     
                                                                                     
                                                                                 }
-                                                                                for var ty = 0; ty < self.blackPieces.count; ty++ {
-                                                                                    if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                        
-                                                                                        if (!self.contains(takenBlackPieces, _image: self.pieces[iy])) {
-                                                                                            takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
-                                                                                            takenPiece.image = self.pieces[iy].image
-                                                                                            takenBlackPieces += [self.pieces[iy]]
-                                                                                            takenBlackPiecesForMove += [takenPiece]
-                                                                                            
-                                                                                            //self.view.addSubview(takenPiece)
-                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
-                                                                                            
-                                                                                        }
-                                                                                        takenBlackPiecesForInfo += [self.pieces[iy]]
-                                                                                        
-                                                                                        for var t = 0; t < takenBlackPiecesLbl.count; t++ {
-                                                                                            print(blackCount[t])
-                                                                                            if (self.pieces[iy].image == UIImage(named: blackPiecesTypes[t])) {
-                                                                                                blackCount[t] += 1
-                                                                                                print("Taken piece")
-                                                                                                if (!self.containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[t])) {
-                                                                                                    takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
-                                                                                                    takenBlackPiecesLbl[t].frame.origin.y += 5
-                                                                                                    
-                                                                                                    takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
-                                                                                                }
-                                                                                                takenBlackPiecesLbl[t].text = "" + blackCount[t].description
-                                                                                                if darkMode {
-                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
-                                                                                                }else {
-                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.blackColor()
-                                                                                                    
-                                                                                                }
-                                                                                                takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
-                                                                                                takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                                // self.view.addSubview(takenBlackPiecesLbl[t])
-                                                                                                self.view.insertSubview(takenBlackPiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
-                                                                                                
-                                                                                            }
-                                                                                        }
-                                                                                        
-                                                                                        self.pieceToTake += [self.blackPieces[ty]]
-                                                                                        //      self.blackPieces[ty].removeFromSuperview()
-                                                                                        self.blackPieces.removeAtIndex(ty)
-                                                                                        self.blackPiecesString.removeAtIndex(ty)
-                                                                                        ty--
-                                                                                        print("TAKEN by white")
-                                                                                    }
-                                                                                    
-                                                                                }
+//                                                                                for var ty = 0; ty < self.blackPieces.count; ty++ {
+//                                                                                    if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+//                                                                                        
+//                                                                                        if (!self.contains(takenBlackPieces, _image: self.pieces[iy])) {
+//                                                                                            takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenBlackPieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.5 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+//                                                                                            takenPiece.image = self.pieces[iy].image
+//                                                                                            takenBlackPieces += [self.pieces[iy]]
+//                                                                                            takenBlackPiecesForMove += [takenPiece]
+//                                                                                            
+//                                                                                            //self.view.addSubview(takenPiece)
+//                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+//                                                                                            
+//                                                                                        }
+//                                                                                        takenBlackPiecesForInfo += [self.pieces[iy]]
+//                                                                                        
+//                                                                                        for var t = 0; t < takenBlackPiecesLbl.count; t++ {
+//                                                                                            print(blackCount[t])
+//                                                                                            if (self.pieces[iy].image == UIImage(named: blackPiecesTypes[t])) {
+//                                                                                                blackCount[t] += 1
+//                                                                                                print("Taken piece")
+//                                                                                                if (!self.containsLabel(takenBlackPiecesShow, _label: takenBlackPiecesLbl[t])) {
+//                                                                                                    takenBlackPiecesLbl[t].frame = CGRectMake(CGFloat(takenBlackPieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 + 4.45 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+//                                                                                                    takenBlackPiecesLbl[t].frame.origin.y += 5
+//                                                                                                    
+//                                                                                                    takenBlackPiecesShow += [takenBlackPiecesLbl[t]]
+//                                                                                                }
+//                                                                                                takenBlackPiecesLbl[t].text = "" + blackCount[t].description
+//                                                                                                if darkMode {
+//                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.whiteColor()
+//                                                                                                }else {
+//                                                                                                    takenBlackPiecesLbl[t].textColor = UIColor.blackColor()
+//                                                                                                    
+//                                                                                                }
+//                                                                                                takenBlackPiecesLbl[t].font = UIFont(name: "Times", size: 18)
+//                                                                                                takenBlackPiecesLbl[t].textAlignment = NSTextAlignment.Center
+//                                                                                                // self.view.addSubview(takenBlackPiecesLbl[t])
+//                                                                                                self.view.insertSubview(takenBlackPiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+//                                                                                                
+//                                                                                            }
+//                                                                                        }
+//                                                                                        
+//                                                                                        self.pieceToTake += [self.blackPieces[ty]]
+//                                                                                        //      self.blackPieces[ty].removeFromSuperview()
+//                                                                                        self.blackPieces.removeAtIndex(ty)
+//                                                                                        self.blackPiecesString.removeAtIndex(ty)
+//                                                                                        ty--
+//                                                                                        print("TAKEN by white")
+//                                                                                    }
+//                                                                                    
+//                                                                                }
                                                                                 
                                                                                 self.piecesToDelete.append(self.pieces[iy])
                                                                                 
@@ -4718,49 +4718,49 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                                                                     }
                                                                                     
                                                                                 }
-                                                                                for var ty = 0; ty < self.blackPieces.count; ty++ {
-                                                                                    if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
-                                                                                        
-                                                                                        if (!self.contains(takenWhitePieces, _image: self.pieces[iy])) {
-                                                                                            takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
-                                                                                            takenPiece.image = self.pieces[iy].image
-                                                                                            takenWhitePieces += [self.pieces[iy]]
-                                                                                            takenWhitePiecesForMove += [takenPiece]
-                                                                                            
-                                                                                            //self.view.addSubview(takenPiece)
-                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
-                                                                                            
-                                                                                        }
-                                                                                        takenWhitePiecesForInfo += [self.pieces[iy]]
-                                                                                        for var t = 0; t < takenWhitePiecesLbl.count; t++ {
-                                                                                            if (self.pieces[iy].image == UIImage(named: whitePiecesTypes[t])) {
-                                                                                                whiteCount[t] += 1
-                                                                                                if (!self.containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[t])) {
-                                                                                                    takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
-                                                                                                    takenWhitePiecesLbl[t].frame.origin.y += 5
-                                                                                                    
-                                                                                                    takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
-                                                                                                }
-                                                                                                takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
-                                                                                                if darkMode {takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()}
-                                                                                                else {takenWhitePiecesLbl[t].textColor = UIColor.blackColor()}
-                                                                                                takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
-                                                                                                takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
-                                                                                                //self.view.addSubview(takenWhitePiecesLbl[t])
-                                                                                                self.view.insertSubview(takenWhitePiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
-                                                                                                
-                                                                                            }
-                                                                                        }
-                                                                                        
-                                                                                        self.pieceToTake += [self.blackPieces[ty]]
-                                                                                        //      self.blackPieces[ty].removeFromSuperview()
-                                                                                        self.blackPieces.removeAtIndex(ty)
-                                                                                        self.blackPiecesString.removeAtIndex(ty)
-                                                                                        ty--
-                                                                                        
-                                                                                    }
-                                                                                    
-                                                                                }
+//                                                                                for var ty = 0; ty < self.blackPieces.count; ty++ {
+//                                                                                    if  self.blackPieces[ty].frame.origin.x == self.pieces[iy].frame.origin.x && self.blackPieces[ty].frame.origin.y == self.pieces[iy].frame.origin.y {
+//                                                                                        
+//                                                                                        if (!self.contains(takenWhitePieces, _image: self.pieces[iy])) {
+//                                                                                            takenPiece = UIImageView(frame: CGRectMake(CGFloat(takenWhitePieces.count) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.05, pieceSize * 0.65, pieceSize * 0.65))
+//                                                                                            takenPiece.image = self.pieces[iy].image
+//                                                                                            takenWhitePieces += [self.pieces[iy]]
+//                                                                                            takenWhitePiecesForMove += [takenPiece]
+//                                                                                            
+//                                                                                            //self.view.addSubview(takenPiece)
+//                                                                                            self.view.insertSubview(takenPiece, belowSubview: self.exitTimeCapsuleB)
+//                                                                                            
+//                                                                                        }
+//                                                                                        takenWhitePiecesForInfo += [self.pieces[iy]]
+//                                                                                        for var t = 0; t < takenWhitePiecesLbl.count; t++ {
+//                                                                                            if (self.pieces[iy].image == UIImage(named: whitePiecesTypes[t])) {
+//                                                                                                whiteCount[t] += 1
+//                                                                                                if (!self.containsLabel(takenWhitePiecesShow, _label: takenWhitePiecesLbl[t])) {
+//                                                                                                    takenWhitePiecesLbl[t].frame = CGRectMake(CGFloat(takenWhitePieces.count - 1) * pieceSize * 0.50 + 15, screenHeight / 2 - 5.6 * pieceSize + pieceSize * 0.5, pieceSize * 0.65, pieceSize * 0.65)
+//                                                                                                    takenWhitePiecesLbl[t].frame.origin.y += 5
+//                                                                                                    
+//                                                                                                    takenWhitePiecesShow += [takenWhitePiecesLbl[t]]
+//                                                                                                }
+//                                                                                                takenWhitePiecesLbl[t].text = "" + whiteCount[t].description
+//                                                                                                if darkMode {takenWhitePiecesLbl[t].textColor = UIColor.whiteColor()}
+//                                                                                                else {takenWhitePiecesLbl[t].textColor = UIColor.blackColor()}
+//                                                                                                takenWhitePiecesLbl[t].font = UIFont(name: "Times", size: 18)
+//                                                                                                takenWhitePiecesLbl[t].textAlignment = NSTextAlignment.Center
+//                                                                                                //self.view.addSubview(takenWhitePiecesLbl[t])
+//                                                                                                self.view.insertSubview(takenWhitePiecesLbl[t], belowSubview: self.exitTimeCapsuleB)
+//                                                                                                
+//                                                                                            }
+//                                                                                        }
+//                                                                                        
+//                                                                                        self.pieceToTake += [self.blackPieces[ty]]
+//                                                                                        //      self.blackPieces[ty].removeFromSuperview()
+//                                                                                        self.blackPieces.removeAtIndex(ty)
+//                                                                                        self.blackPiecesString.removeAtIndex(ty)
+//                                                                                        ty--
+//                                                                                        
+//                                                                                    }
+//                                                                                    
+//                                                                                }
                                                                                 
                                                                                 self.piecesToDelete.append(self.pieces[iy])
                                                                                 
@@ -9599,7 +9599,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             rookLogicOptions += [pieceOption]
                             rookFoundKing = true
                         }
-                        
+                     }
+                    if foundKing == true {
                         // This pieceOption is for where the king can move when checked
                         let pieceOption2 = UIImageView(frame: CGRectMake(piece.frame.origin.x + byAmountx * pieceSize, piece.frame.origin.y - byAmounty * pieceSize, pieceSize, pieceSize))
                         //pieceOption2.image = UIImage(named: "piecePossibilities.png")
@@ -9610,6 +9611,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             pieceBlackLogicOptions += [pieceOption2]
                         }
                     }
+                    
                     
                     if canThePieceGofurther == true {
                         
@@ -11676,8 +11678,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                     }
                     if touch.view == pieceOptions[o] && pieceOptions[o].frame.origin.x == pieces[i].frame.origin.x && pieceOptions[o].frame.origin.y == pieces[i].frame.origin.y - 1 * pieceSize && whitePassant == true && hasBeenTaken(selectedPiece, array: whitePawns)  {
+                        pieceToTake += [pieces[i]]
                         takenPiecesToReload.append(pieces[i])
                         takenPiecesToReloadAtIndex.append(i)
+                        pieces[i].alpha = 0
+                        pieces[i].removeFromSuperview()
+                        pieces.removeAtIndex(i)
                         piecesNotationSeperator = "x"
                         havePassant = true
                         print("Passant just happened")
