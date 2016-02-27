@@ -761,6 +761,22 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
         //searchUsers(searchBar.text!)
+        
+        
+        // This is to keep the rating of featured player up to date
+        
+        let featuredQuery = PFQuery(className: "_User")
+        featuredQuery.orderByDescending("rating")
+        featuredQuery.limit = 1
+        featuredQuery.findObjectsInBackgroundWithBlock { (users:[AnyObject]?, error:NSError?) -> Void in
+            if error == nil{
+                for users in users as! [PFObject] {
+                    let r = users["rating"] as! Int
+                    featuredRating.text = "\(r)"
+                }
+            }
+            
+        }
     }
     
     
