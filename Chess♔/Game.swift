@@ -5495,8 +5495,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             self.view.addSubview(numbered)
             
             
-            
-            
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 self.visualEffectViewT.alpha = 1
                 }, completion: {finish in
