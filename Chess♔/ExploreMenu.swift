@@ -55,6 +55,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
 
     
     var featuredView = UIView()
+    let featuredProfilePicView = UIImageView(frame: CGRectMake(screenWidth/2 - 90, 85, 65, 65))
     
     var topView = UIView()
     
@@ -135,7 +136,6 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         featuredView.addSubview(_scrollView)
         
         
-        let featuredProfilePicView = UIImageView(frame: CGRectMake(screenWidth/2 - 90, 85, 65, 65))
         featuredProfilePicView.layer.cornerRadius = featuredProfilePicView.frame.size.width/2
         featuredProfilePicView.clipsToBounds = true
         featuredProfilePicView.alpha = 0
@@ -172,7 +172,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                             userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                 if (error == nil) {
                                     
-                                    featuredProfilePicView.image = UIImage(data: imageData!)
+                                    self.featuredProfilePicView.image = UIImage(data: imageData!)
                                     PData = imageData!
                                     let r = result["rating"] as! Int
                                     featuredRating.text = "\(r)"
@@ -183,7 +183,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
                                     self.imageFromFeatured = imageData!
                                     
                                     UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                        featuredProfilePicView.alpha = 1
+                                        self.featuredProfilePicView.alpha = 1
                                         featuredUsername.alpha = 1
                                         featuredRating.alpha = 1
                                         
@@ -768,12 +768,44 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
         let featuredQuery = PFQuery(className: "_User")
         featuredQuery.orderByDescending("rating")
         featuredQuery.limit = 1
-        featuredQuery.findObjectsInBackgroundWithBlock { (users:[AnyObject]?, error:NSError?) -> Void in
+        featuredQuery.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, error:NSError?) -> Void in
             if error == nil{
-                for users in users as! [PFObject] {
-                    let r = users["rating"] as! Int
-                    featuredRating.text = "\(r)"
+                if let result = result as? [PFUser] {
+                    for result in result {
+                        
+                        if let userPicture = result["profile_picture"] as? PFFile {
+                            
+                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                if (error == nil) {
+                                    
+                                    self.featuredProfilePicView.image = UIImage(data: imageData!)
+                                    PData = imageData!
+                                    let r = result["rating"] as! Int
+                                    featuredRating.text = "\(r)"
+                                    featuredUsername.text = result["username"] as? String
+                                    
+                                    self.userNameFromFeatured = (result["username"] as? String)!
+                                    self.ratingFromFeatured = result["rating"] as! Int
+                                    self.imageFromFeatured = imageData!
+                                    
+                                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                        self.featuredProfilePicView.alpha = 1
+                                        featuredUsername.alpha = 1
+                                        featuredRating.alpha = 1
+                                        
+                                    })
+                                    
+                                } else {
+                                }
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
                 }
+                
             }
             
         }
@@ -814,7 +846,7 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
             contactText.textColor = UIColor.lightGrayColor()
             
             searchBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
-            searchBar.tintColor = UIColor.whiteColor()
+            searchBar.tintColor = blue
             
             
             self.searchDisplayController?.searchResultsTableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
