@@ -35,12 +35,13 @@ class NewGameRating: UIViewController, UISearchBarDelegate, UISearchDisplayDeleg
         tableView.dataSource = self
         searchBar.delegate = self
         // Do any additional setup after loading the view.
-         self.searchDisplayController!.active = true
-        self.searchDisplayController!.searchBar.becomeFirstResponder()
     }
     
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
+        self.searchDisplayController!.searchBar.tintColor = blue
+        self.searchDisplayController!.active = true
+        self.searchDisplayController!.searchBar.becomeFirstResponder()
         
 //        profilePicArray = []
 //        
@@ -197,7 +198,7 @@ class NewGameRating: UIViewController, UISearchBarDelegate, UISearchDisplayDeleg
             self.navigationController?.navigationBar.tintColor = blue
             
             searchBar.barTintColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
-            searchBar.tintColor = UIColor.whiteColor()
+            searchBar.tintColor = blue
             self.searchDisplayController?.searchBar.keyboardAppearance = UIKeyboardAppearance.Dark
             
             self.searchDisplayController?.searchResultsTableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
