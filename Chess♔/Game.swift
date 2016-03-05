@@ -10022,11 +10022,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
         }
         
-//        let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
-//        pieceOption.image = UIImage(named: "piecePossibilities.png")
-//        self.view.addSubview(pieceOption)
-//        logicPieceBlackCanMove += [pieceOption]
-//         logicPieceWhiteCanMove += [pieceOption]
+        let pieceOption = UIImageView(frame: CGRectMake(piece.frame.origin.x, piece.frame.origin.y, pieceSize, pieceSize))
+        pieceOption.image = UIImage(named: "piecePossibilities.png")
+        self.view.addSubview(pieceOption)
+        logicPieceBlackCanMove += [pieceOption]
+         logicPieceWhiteCanMove += [pieceOption]
 
         if logicCheck2(pieces, array:logicPieceBlackCanMove, friends: whitePieces)  == 2 {
             pieceBlackCanMove += [logicPieceBlackCanMove]
