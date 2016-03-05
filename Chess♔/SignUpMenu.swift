@@ -448,7 +448,8 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                                     print("Current user token=\(FBSDKAccessToken.currentAccessToken().tokenString)")
                                     
                                     print("Current user id \(FBSDKAccessToken.currentAccessToken().userID)")
-                                    
+                                    PFUser.currentUser()?.setObject(true, forKey: "isLoggedIn")
+                                    PFUser.currentUser()!.save()
                                     if(FBSDKAccessToken.currentAccessToken() != nil)
                                     {
                                         
@@ -460,6 +461,8 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                                     let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
                                     myAlert.addAction(okAction)
                                     self.presentViewController(myAlert, animated: true, completion: nil)
+                                    PFUser.currentUser()?.setObject(true, forKey: "isLoggedIn")
+                                    PFUser.currentUser()!.save()
                                 }
                             } else {
                                 print("Uh oh. The user cancelled the Facebook login.")
@@ -624,8 +627,13 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
         PFUser.logInWithUsernameInBackground(userName!, password: userPassword!) { (user:PFUser?, error:NSError?) -> Void in
             
-            var userMessage = "Welcome!"
-            
+            if PFUser.currentUser()!.objectForKey("isLoggedIn") as? Bool == false {
+
+                PFUser.currentUser()?.setObject(true, forKey: "isLoggedIn")
+                PFUser.currentUser()!.save()
+                
+                var userMessage = "Welcome!"
+
             if user != nil {
                 
                 //remember sign in stage
@@ -650,6 +658,14 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                 let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
                 myAlert.addAction(okAction)
                 self.presentViewController(myAlert, animated: true, completion: nil)
+            }
+        }
+            else {
+                let myAlert = UIAlertController(title: "WOW", message: "You are already logged in somewhere else. Please log out and try again. If the problem persists, please contact us on Twitter @panberinc", preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                myAlert.addAction(okAction)
+                self.presentViewController(myAlert, animated: true, completion: nil)
+            
             }
         }
         
@@ -683,12 +699,18 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                     {
                         user.deleteInBackground()
                         
-                        let myAlert = UIAlertController(title: "Alert", message: "Please sign in with facebook first", preferredStyle: UIAlertControllerStyle.Alert)
+                        let myAlert = UIAlertController(title: "Alert", message: "Please log in with facebook", preferredStyle: UIAlertControllerStyle.Alert)
                         let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
                         myAlert.addAction(okAction)
                         self.presentViewController(myAlert, animated: true, completion: nil)
                     }
-                } else {
+                }
+                else {
+                    if PFUser.currentUser()!.objectForKey("isLoggedIn") as? Bool == false {
+                        
+                        PFUser.currentUser()?.setObject(true, forKey: "isLoggedIn")
+                        PFUser.currentUser()!.save()
+                        
                     print("User logged in through Facebook!")
                     
                     NSUserDefaults.standardUserDefaults().setObject(FBSDKAccessToken.currentAccessToken().userID, forKey: "user_name")
@@ -700,6 +722,13 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                         
                         
                     }
+                    }else {
+                            let myAlert = UIAlertController(title: "WOW", message: "You are already logged in somewhere else. Please log out and try again. If the problem persists, please contact us on Twitter @panberinc", preferredStyle: UIAlertControllerStyle.Alert)
+                            let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                            myAlert.addAction(okAction)
+                            self.presentViewController(myAlert, animated: true, completion: nil)
+                            
+                        }
                 }
             } else {
                 print("Uh oh. The user cancelled the Facebook login.")
@@ -826,7 +855,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         myUser.setObject("0", forKey: "lost")
         myUser.setObject(1200, forKey: "rating")
         myUser.setObject(true, forKey: "request_everyone")
-
+        myUser.setObject(true, forKey: "isLoggedIn")
   
         
         func resizeImage(image:UIImage) -> UIImage
