@@ -902,6 +902,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         }
         else {
             ratedLrated = "Unrated"
+            gameIsRatedMode = false
+
             
         }
         if game["speed"] as? String == "Normal" {
@@ -1014,7 +1016,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             //chesspieces loading - REMEMBER TO ADD PIECES TO ARRAYS!! Right order as well!!
             if r!["status_white"] as! String == "move" {
                 isWhiteTurn = true
-                
+//                if movesCap.count == 2 {
+//                    
+//                    if speedLspeed == "Fast Speedmode" {
+//                        timeLeft = -300
+//                    }
+//                    else if speedLspeed == "Normal Speedmode" {
+//                        timeLeft = -14_400
+//                        
+//                    }
+//                    else if speedLspeed == "Fast Speedmode" {
+//                        timeLeft = -172_800
+//                        
+//                    }
+//                    
+//                }
                 timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
                 
                 
@@ -2174,7 +2190,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         //add who's turn it is
                                         let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
                                         var status = ["turn": "done"]
-                                        
                                         let statusRef = checkstatus.childByAppendingPath("\(gameID)")
                                         statusRef.setValue(status)
                                         //firebase - end
@@ -2393,6 +2408,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
                     
+                    //firebase magic
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if moves.last!.characters.count == 3 {
                             
@@ -2803,6 +2819,23 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     
                     if r!["status_white"] as! String == "move" {
+                        
+                        if self.movesCap.count == 2 {
+                            
+                            if self.speedLspeed == "Fast Speedmode" {
+                                self.timeLeft = -300
+                            }
+                            else if self.speedLspeed == "Normal Speedmode" {
+                                self.timeLeft = -14_400
+                                
+                            }
+                            else if self.speedLspeed == "Fast Speedmode" {
+                                self.timeLeft = -172_800
+                                
+                            }
+                            
+                        }
+                        
                         self.isWhiteTurn = true
                         
                         self.turnLturn = "Your Turn"
@@ -3933,7 +3966,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 turnLturn = "Your Turn"
                 turnIndicatorturn = blue
                 
-                
+//                if movesCap.count == 3 {
+//                    
+//                    if speedLspeed == "Fast Speedmode" {
+//                        timeLeft = -300
+//                    }
+//                    else if speedLspeed == "Normal Speedmode" {
+//                        timeLeft = -14_400
+//                        
+//                    }
+//                    else if speedLspeed == "Fast Speedmode" {
+//                        timeLeft = -172_800
+//                        
+//                    }
+//                    
+//                }
                 timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
                 
                 
@@ -4504,7 +4551,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         }
                     }
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
-                    
+                    // firebase magic
                     for var t = 0; t < xAxisArrStr2.count; t++ {
                         if moves.last!.characters.count == 3 {
                             
@@ -4906,7 +4953,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     //                    self.timeLeft = NSDate().timeIntervalSinceDate(lastupdate!)
                     //setting rating and won/lost/drawn
                     
-                    
+                    if self.movesCap.count == 2 {
+                        
+                        if self.speedLspeed == "Fast Speedmode" {
+                            self.timeLeft = -300
+                        }
+                        else if self.speedLspeed == "Normal Speedmode" {
+                            self.timeLeft = -14_400
+                            
+                        }
+                        else if self.speedLspeed == "Fast Speedmode" {
+                            self.timeLeft = -172_800
+                            
+                        }
+                        
+                    }
                     self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
                     
                     if r!["status_black"] as! String == "move" {

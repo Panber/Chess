@@ -82,7 +82,7 @@ class NewGameSettingsPage_Profile: UIViewController {
     
     @IBAction func modeChanged(sender: UISegmentedControl) {
         
-        switch whiteOrBlack.selectedSegmentIndex
+        switch modeSegment.selectedSegmentIndex
         {
         case 0:
             mode = "Rated"

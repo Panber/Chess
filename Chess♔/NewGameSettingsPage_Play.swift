@@ -94,7 +94,7 @@ class NewGameSettingsPage: UIViewController {
     
     @IBAction func modeChanged(sender: UISegmentedControl) {
         
-        switch whiteOrBlack.selectedSegmentIndex
+        switch modeSegment.selectedSegmentIndex
         {
         case 0:
             mode = "Rated"
@@ -229,7 +229,6 @@ class NewGameSettingsPage: UIViewController {
                 let push = PFPush()
                 push.setQuery(pushQuery) // Set our Installation query
                 push.setMessage("\(PFUser.currentUser()!.username!) invited you to play Chess!")
-            //    push.setData(<#T##data: [NSObject : AnyObject]?##[NSObject : AnyObject]?#>)
                 push.sendPushInBackground()
                 
             }
