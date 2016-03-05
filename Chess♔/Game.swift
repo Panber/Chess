@@ -35,6 +35,8 @@ func ^^ (radix: Int, power: Int) -> Int {
     return Int(pow(Double(radix), Double(power)))
 }
 
+var check: Firebase!
+
 var gameIsOver = Bool()
 
 var oppoImageFromGameMenu = UIImage()
@@ -2244,12 +2246,12 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             })
             
             
-            
             //firebase
             //check for any changes that may have accured at the destined game ≈_≈
-            let check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
+             check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
             check.observeEventType(.ChildChanged, withBlock: { snapshot in
                 print(snapshot.value)
+               
                 if canCheckFirebase {
                 if self.didEnterTimeCapsule {
                     self.forwardB.userInteractionEnabled = false
@@ -2370,7 +2372,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                 }
                 if self.game ["whitePlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "white" {
-                    
+
                     //   self.loadVariablesAndConstants()
                     let query = PFQuery(className: "Games")
                     query.whereKey("objectId", equalTo: gameID)
@@ -2881,8 +2883,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     
                 }
-                else if self.iamWhite && snapshot.value as! String == "done" || self.iamWhite && snapshot.value as! String == "draw" {
-                    
+                else if self.iamWhite && snapshot.value as! String == "done" || self.iamWhite && snapshot.value as! String == "draw"  {
+
                     let query = PFQuery(className: "Games")
                     query.whereKey("objectId", equalTo: gameID)
                     let r = query.getFirstObject()
@@ -3135,6 +3137,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
                 self.myturnAfterTimeCapsule = true
                 }
+                
                 }, withCancelBlock: { error in
                     print(error.description)
             })
@@ -4391,10 +4394,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
             })
             
-            
             //firebase
             //check for any changes that may have accured at the destined game ≈_≈
-            let check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
+             check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
             check.observeEventType(.ChildChanged, withBlock: { snapshot in
                 print(snapshot.value)
                if canCheckFirebase {
@@ -4517,8 +4519,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                 }
                 
-                if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black" {
-                    
+                if self.game ["blackPlayer"] as? String == PFUser.currentUser()?.username && snapshot.value as! String == "black"  {
+
                     let query = PFQuery(className: "Games")
                     query.whereKey("objectId", equalTo: gameID)
                     let r = query.getFirstObject()
@@ -4998,8 +5000,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
                     
-                else if snapshot.value as! String == "done" && !self.iamWhite || snapshot.value as! String == "draw" && !self.iamWhite{
-                    
+                else if snapshot.value as! String == "done" && !self.iamWhite || snapshot.value as! String == "draw" && !self.iamWhite  {
+
                     let query = PFQuery(className: "Games")
                     query.whereKey("objectId", equalTo: gameID)
                     let r = query.getFirstObject()
@@ -5241,6 +5243,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
                 self.myturnAfterTimeCapsule = true
             }
+                
+                
+                
                 }, withCancelBlock: { error in
                     print(error.description)
             })
@@ -5416,6 +5421,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         canCheckFirebase = false
         timer.invalidate()
         
+        check.removeAllObservers()
+
         
     }
     
@@ -7479,40 +7486,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         let query = PFQuery(className: "_User")
         
-//        query.whereKey("username", containedIn: un)
-//        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
-//            if (error == nil) {
-//                
-//                if let userArray = objects as? [PFUser] {
-//                    for user in userArray {
-//                        
-//                        
-//                        if let userPicture = user["profile_picture"] as? PFFile {
-//                            
-//                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-//                                if (error == nil) {
-//                                    
-//                                    
-//                                    cell.userProfileImage.alpha = 0
-//                                    cell.userProfileImage.image = UIImage(data: imageData!)
-//                                    self.imageDataArray.append(imageData!)
-//                                    
-//                                   
-//                                    
-//                                } else {
-//                                }
-//                            }
-//                            
-//                        }
-//                    }
-//                    
-//                }
-//            } else {
-//                // Log details of the failure
-//                print("query error: \(error) \(error!.userInfo)")
-//            }
-//            
-//        }
+        
     
         
         UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -10248,7 +10222,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func updateMovementTimer() {
-        
         timerNumber++
         if timerNumber > 10 {
             movementTimer.invalidate()
@@ -11052,6 +11025,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
             havePassant = false
             whitePassant = false
+            
 
             game.saveInBackgroundWithBlock({ (bool:Bool, error:NSError?) -> Void in
                 if error == nil {
@@ -11219,7 +11193,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         //        if selectedPiece == blackRook2 {
         //            hasBlackRookMoved2 = true
         //        }
-    }
+ }
     
     func dissablePieceOptions(var options: Array<UIImageView>) {
         for var o = 0 ; o < options.count; o++ {
