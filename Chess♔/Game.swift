@@ -37,6 +37,8 @@ func ^^ (radix: Int, power: Int) -> Int {
 
 var gameIsOver = Bool()
 
+var oppoImageFromGameMenu = UIImage()
+
 var game = PFObject(className: "Games")
 var notations: Array<String> = []
 
@@ -56,6 +58,7 @@ let h = 7 * pieceSize
 
 let xAxisArr = [a,b,c,d,e,f,g,h]
 
+var canCheckFirebase = Bool()
 
 //y-Axis coordinates
 let _1 = screenHeight/2 + 3 * pieceSize
@@ -1899,52 +1902,50 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             if(profilePictureObject != nil)
                             {
-                                profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                                    
-                                    if(imageData != nil)
-                                    {
-                                        images.append(imageData!)
-                                        if (result["username"] as? String)! == r!["whitePlayer"]! as! String {
-                                            
-                                            self.meImage.image = UIImage(data: imageData!)
-                                            self.view.addSubview(self.meImage)
-                                            
-                                            self.meUserImage = UIImage(data: imageData!)!
-                                            self.meUserName = (result["username"] as? String)!
-                                            self.meUserRating = "\(result["rating"] as! Int)"
-                                            
-                                            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                self.meImage.alpha = 1
-                                                
-                                                
-                                                if screenHeight == 480.0 {
-                                                    self.meImage.alpha = 0
-                                                    
-                                                }
-                                                },completion: {finish in
-                                                    //self.addMyTurnAndTime()
-                                                    
-                                            })
-                                            
-                                        }
-                                        else {
-                                            self.otherImage.image = UIImage(data: imageData!)
-                                            self.view.addSubview(self.otherImage)
-                                            
-                                            
-                                            self.otherUserImage = UIImage(data: imageData!)!
-                                            self.otherUserRating = "\(result["rating"] as! Int!)"
-                                            self.otherUserName = (result["username"] as? String)!
-                                            
-                                            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                self.otherImage.alpha = 1
-                                                if screenHeight == 480.0 {
-                                                    self.otherImage.alpha = 0
-                                                    
-                                                }
-                                            })
-                                        }
+                                let imageData = profilePictureObject!.getData()
+                                
+                                if(imageData != nil)
+                                {
+                                    images.append(imageData!)
+                                    if (result["username"] as? String)! == r!["whitePlayer"]! as! String {
                                         
+                                        self.meImage.image = UIImage(data: imageData!)
+                                        self.view.addSubview(self.meImage)
+                                        
+                                        self.meUserImage = UIImage(data: imageData!)!
+                                        self.meUserName = (result["username"] as? String)!
+                                        self.meUserRating = "\(result["rating"] as! Int)"
+                                        
+                                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                            self.meImage.alpha = 1
+                                            
+                                            
+                                            if screenHeight == 480.0 {
+                                                self.meImage.alpha = 0
+                                                
+                                            }
+                                            },completion: {finish in
+                                                //self.addMyTurnAndTime()
+                                                
+                                        })
+                                        
+                                    }
+                                    else {
+                                        self.otherImage.image = UIImage(data: imageData!)
+                                        self.view.addSubview(self.otherImage)
+                                        
+                                        
+                                        self.otherUserImage = UIImage(data: imageData!)!
+                                        self.otherUserRating = "\(result["rating"] as! Int!)"
+                                        self.otherUserName = (result["username"] as? String)!
+                                        
+                                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                            self.otherImage.alpha = 1
+                                            if screenHeight == 480.0 {
+                                                self.otherImage.alpha = 0
+                                                
+                                            }
+                                        })
                                     }
                                     
                                 }
@@ -2249,6 +2250,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             let check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
             check.observeEventType(.ChildChanged, withBlock: { snapshot in
                 print(snapshot.value)
+                if canCheckFirebase {
                 if self.didEnterTimeCapsule {
                     self.forwardB.userInteractionEnabled = false
                     self.backwardB.userInteractionEnabled = false
@@ -3132,6 +3134,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                 }
                 self.myturnAfterTimeCapsule = true
+                }
                 }, withCancelBlock: { error in
                     print(error.description)
             })
@@ -4060,54 +4063,51 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             if(profilePictureObject != nil)
                             {
-                                profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                                    
-                                    if(imageData != nil)
-                                    {
-                                        images.append(imageData!)
-                                        if (result["username"] as? String)! == r!["blackPlayer"]! as! String {
-                                            
-                                            self.meImage.image = UIImage(data: imageData!)
-                                            self.view.addSubview(self.meImage)
-                                            
-                                            self.meUserImage = UIImage(data: imageData!)!
-                                            self.meUserName = (result["username"] as? String)!
-                                            self.meUserRating = "\(result["rating"] as! Int)"
-                                            
-                                            
-                                            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                self.meImage.alpha = 1
-                                                
-                                                if screenHeight == 480.0 {
-                                                    self.meImage.alpha = 0
-                                                    
-                                                }
-                                                },completion: { finish in
-                                                    // self.addMyTurnAndTime()
-                                                    
-                                            })
-                                            
-                                        }
-                                        else {
-                                            self.otherImage.image = UIImage(data: imageData!)
-                                            self.view.addSubview(self.otherImage)
-                                            
-                                            self.otherUserImage = UIImage(data: imageData!)!
-                                            self.otherUserRating = "\(result["rating"] as! Int)"
-                                            
-                                            self.otherUserName = (result["username"] as? String)!
-                                            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                                self.otherImage.alpha = 1
-                                                if screenHeight == 480.0 {
-                                                    self.otherImage.alpha = 0
-                                                    
-                                                }
-                                            })
-                                        }
-                                    }
-                                    
-                                }
+                                let imageData = profilePictureObject!.getData()
                                 
+                                if(imageData != nil)
+                                {
+                                    images.append(imageData!)
+                                    if (result["username"] as? String)! == r!["blackPlayer"]! as! String {
+                                        
+                                        self.meImage.image = UIImage(data: imageData!)
+                                        self.view.addSubview(self.meImage)
+                                        
+                                        self.meUserImage = UIImage(data: imageData!)!
+                                        self.meUserName = (result["username"] as? String)!
+                                        self.meUserRating = "\(result["rating"] as! Int)"
+                                        
+                                        
+                                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                            self.meImage.alpha = 1
+                                            
+                                            if screenHeight == 480.0 {
+                                                self.meImage.alpha = 0
+                                                
+                                            }
+                                            },completion: { finish in
+                                                // self.addMyTurnAndTime()
+                                                
+                                        })
+                                        
+                                    }
+                                    else {
+                                        self.otherImage.image = UIImage(data: imageData!)
+                                        self.view.addSubview(self.otherImage)
+                                        
+                                        self.otherUserImage = UIImage(data: imageData!)!
+                                        self.otherUserRating = "\(result["rating"] as! Int)"
+                                        
+                                        self.otherUserName = (result["username"] as? String)!
+                                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                            self.otherImage.alpha = 1
+                                            if screenHeight == 480.0 {
+                                                self.otherImage.alpha = 0
+                                                
+                                            }
+                                        })
+                                    }
+                                }
                                 
                             }
                             
@@ -4230,7 +4230,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         var timeLeft2 = NSDate().timeIntervalSinceDate(lastupdate!)
                         print(timeLeft2)
                         //won
-                        if self.movesCap.count < 1{
+                        if self.movesCap.count > 1 {
                             if timeLeft2 >= 0 {
                                 if self.game["blackRatedComplete"] as! Bool == false {
                                     if gameIsRatedMode {
@@ -4397,7 +4397,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             let check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
             check.observeEventType(.ChildChanged, withBlock: { snapshot in
                 print(snapshot.value)
-                
+               if canCheckFirebase {
                 if self.didEnterTimeCapsule {
                     self.forwardB.userInteractionEnabled = false
                     self.backwardB.userInteractionEnabled = false
@@ -5240,6 +5240,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                 }
                 self.myturnAfterTimeCapsule = true
+            }
                 }, withCancelBlock: { error in
                     print(error.description)
             })
@@ -5412,14 +5413,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         //        whitePromotionType = []
         //        blackPromotionType = []
         //game = PFObject(className: "Games")
-        
+        canCheckFirebase = false
         timer.invalidate()
         
         
     }
     
     override func viewWillAppear(animated: Bool) {
-        
         if NSUserDefaults.standardUserDefaults().boolForKey("numbered_board") == true {
             
             if iamWhite {
@@ -5437,6 +5437,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     override func viewDidAppear(animated: Bool) {
+        canCheckFirebase = true
         var bottomOffset = CGPointMake(0, collectionView.contentSize.height - collectionView.bounds.size.height)
         collectionView.setContentOffset(bottomOffset, animated: false)
         
@@ -7476,7 +7477,43 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     func gameFinishedScreen(var statusWhite:String, var statusBy:String) {
         
+        let query = PFQuery(className: "_User")
         
+//        query.whereKey("username", containedIn: un)
+//        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+//            if (error == nil) {
+//                
+//                if let userArray = objects as? [PFUser] {
+//                    for user in userArray {
+//                        
+//                        
+//                        if let userPicture = user["profile_picture"] as? PFFile {
+//                            
+//                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+//                                if (error == nil) {
+//                                    
+//                                    
+//                                    cell.userProfileImage.alpha = 0
+//                                    cell.userProfileImage.image = UIImage(data: imageData!)
+//                                    self.imageDataArray.append(imageData!)
+//                                    
+//                                   
+//                                    
+//                                } else {
+//                                }
+//                            }
+//                            
+//                        }
+//                    }
+//                    
+//                }
+//            } else {
+//                // Log details of the failure
+//                print("query error: \(error) \(error!.userInfo)")
+//            }
+//            
+//        }
+    
         
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             visualEffectView.alpha = 1

@@ -1070,8 +1070,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
-//        let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
+       // let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
+        
+        //oppoImageFromGameMenu = cell.userProfileImage.image!
         
         switch indexPath.section {
         case 0:
