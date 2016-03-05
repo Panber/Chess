@@ -253,12 +253,12 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
                         //firebaseeeee
                         //add who's turn it is
                         let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-                        var status = ["turn": "black"]
+                        var status = ["turn": ""]
                         if result["whitePlayer"] as? String == PFUser.currentUser()?.username {
-                            status = ["turn": "black"]
+                            status = ["turn": ""]
                         }
                         else if result["blackPlayer"] as? String == PFUser.currentUser()?.username {
-                            status = ["turn": "white"]
+                            status = ["turn": ""]
                         }
                         let statusRef = checkstatus.childByAppendingPath("\(result.objectId!)")
                         statusRef.setValue(status)
