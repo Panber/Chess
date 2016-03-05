@@ -204,6 +204,8 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
     func lightOrDarkMode() {
+        checkInternetConnection()
+
         if darkMode == true {
             
             

@@ -2975,6 +2975,8 @@ class Analyze: UIViewController {
     }
     
     func lightOrDarkMode() {
+        checkInternetConnection()
+
         if darkMode == true {
             
             
