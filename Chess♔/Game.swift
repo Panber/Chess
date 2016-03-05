@@ -56,6 +56,7 @@ let h = 7 * pieceSize
 
 let xAxisArr = [a,b,c,d,e,f,g,h]
 
+var canCheckFirebase = Bool()
 
 //y-Axis coordinates
 let _1 = screenHeight/2 + 3 * pieceSize
@@ -2249,6 +2250,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             let check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
             check.observeEventType(.ChildChanged, withBlock: { snapshot in
                 print(snapshot.value)
+                if canCheckFirebase {
                 if self.didEnterTimeCapsule {
                     self.forwardB.userInteractionEnabled = false
                     self.backwardB.userInteractionEnabled = false
@@ -3132,6 +3134,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                 }
                 self.myturnAfterTimeCapsule = true
+                }
                 }, withCancelBlock: { error in
                     print(error.description)
             })
@@ -4397,7 +4400,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             let check = Firebase(url:"https://chess-panber.firebaseio.com/games/\(gameID)")
             check.observeEventType(.ChildChanged, withBlock: { snapshot in
                 print(snapshot.value)
-                
+               if canCheckFirebase {
                 if self.didEnterTimeCapsule {
                     self.forwardB.userInteractionEnabled = false
                     self.backwardB.userInteractionEnabled = false
@@ -5240,6 +5243,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                 }
                 self.myturnAfterTimeCapsule = true
+            }
                 }, withCancelBlock: { error in
                     print(error.description)
             })
@@ -5412,14 +5416,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         //        whitePromotionType = []
         //        blackPromotionType = []
         //game = PFObject(className: "Games")
-        
+        canCheckFirebase = false
         timer.invalidate()
         
         
     }
     
     override func viewWillAppear(animated: Bool) {
-        
         if NSUserDefaults.standardUserDefaults().boolForKey("numbered_board") == true {
             
             if iamWhite {
@@ -5437,6 +5440,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     override func viewDidAppear(animated: Bool) {
+        canCheckFirebase = true
         var bottomOffset = CGPointMake(0, collectionView.contentSize.height - collectionView.bounds.size.height)
         collectionView.setContentOffset(bottomOffset, animated: false)
         
