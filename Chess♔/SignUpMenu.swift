@@ -407,7 +407,9 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
     
     func DoneButtonPressed(sender: UIButton!){
         
-        if self.usernameInputFacebook.text!.characters.count == 0 {
+        var uName = self.usernameInputFacebook.text!.stringByReplacingOccurrencesOfString(" ", withString: "")
+        uName = uName.lowercaseString
+        if uName.characters.count == 0 {
             let myAlert = UIAlertController(title: "Alert", message: "Please enter a username", preferredStyle: UIAlertControllerStyle.Alert)
             let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
             myAlert.addAction(okAction)
@@ -415,7 +417,8 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         } else {
             
             var query = PFQuery(className: "_User")
-            query.whereKey("username", equalTo: self.usernameInputFacebook.text!)
+            
+            query.whereKey("username", equalTo: uName)
             query.findObjectsInBackgroundWithBlock {
                 (objects: [AnyObject]?, error: NSError?) in
                 if error == nil {
@@ -448,8 +451,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                                     print("Current user token=\(FBSDKAccessToken.currentAccessToken().tokenString)")
                                     
                                     print("Current user id \(FBSDKAccessToken.currentAccessToken().userID)")
-                                    PFUser.currentUser()?.setObject(true, forKey: "isLoggedIn")
-                                    PFUser.currentUser()!.save()
+                                    
                                     if(FBSDKAccessToken.currentAccessToken() != nil)
                                     {
                                         
@@ -461,8 +463,6 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                                     let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
                                     myAlert.addAction(okAction)
                                     self.presentViewController(myAlert, animated: true, completion: nil)
-                                    PFUser.currentUser()?.setObject(true, forKey: "isLoggedIn")
-                                    PFUser.currentUser()!.save()
                                 }
                             } else {
                                 print("Uh oh. The user cancelled the Facebook login.")
@@ -629,8 +629,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             
             if PFUser.currentUser()!.objectForKey("isLoggedIn") as? Bool == false {
 
-                PFUser.currentUser()?.setObject(true, forKey: "isLoggedIn")
-                PFUser.currentUser()!.save()
+        
                 
                 var userMessage = "Welcome!"
 
@@ -708,8 +707,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                 else {
                     if PFUser.currentUser()!.objectForKey("isLoggedIn") as? Bool == false {
                         
-                        PFUser.currentUser()?.setObject(true, forKey: "isLoggedIn")
-                        PFUser.currentUser()!.save()
+           
                         
                     print("User logged in through Facebook!")
                     
@@ -830,6 +828,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         let userEmail = emailInput.text
         let userPassword = passwordInputSignup.text
         var userName = usernameInputSignup.text?.lowercaseString
+        userName = userName!.stringByReplacingOccurrencesOfString(" ", withString: "")
         
         //checking if forms are typed in
         if (userName == "" || userPassword == "" || userEmail == "" || profilePicImageView.image == UIImage(named:"profilePicPlaceholderDark.jpg") ){
@@ -855,7 +854,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         myUser.setObject("0", forKey: "lost")
         myUser.setObject(1200, forKey: "rating")
         myUser.setObject(true, forKey: "request_everyone")
-        myUser.setObject(true, forKey: "isLoggedIn")
+
   
         
         func resizeImage(image:UIImage) -> UIImage
@@ -1032,7 +1031,8 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             let userEmail:String? = result["email"] as? String
             let userFirstName:String?  = result["first_name"] as? String
             let userLastName:String? = result["last_name"] as? String
-            let username:String = self.usernameInputFacebook.text!
+            var username:String = self.usernameInputFacebook.text!.lowercaseString
+            username = username.stringByReplacingOccurrencesOfString(" ", withString: "")
             
             // Get Facebook profile picture
             let userProfile = "https://graph.facebook.com/" + userId + "/picture?type=large"

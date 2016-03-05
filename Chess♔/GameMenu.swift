@@ -13,21 +13,78 @@ import CoreLocation
 import SystemConfiguration
 import Firebase
 
-public class Reachability {
-    class func isConnectedToNetwork() -> Bool {
-        var zeroAddress = sockaddr_in()
-        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
-        zeroAddress.sin_family = sa_family_t(AF_INET)
-        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
-            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+
+extension UIViewController{
+    func checkInternetConnection() {
+        
+        func isConnectedToNetwork() -> Bool {
+            var zeroAddress = sockaddr_in()
+            zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+            zeroAddress.sin_family = sa_family_t(AF_INET)
+            let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
+                SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+            }
+            var flags = SCNetworkReachabilityFlags()
+            if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+                return false
+            }
+            let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+            let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+            return (isReachable && !needsConnection)
         }
-        var flags = SCNetworkReachabilityFlags()
-        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
-            return false
+        
+        func checkInternet1() {
+            if isConnectedToNetwork() == false {
+                
+                let userMessage = "Please check your network connection, and try again"
+                let myAlert = UIAlertController(title: "WOW", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                
+                myAlert.addAction(UIAlertAction(title: "Refresh", style: .Default, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        checkInternet2()
+                    }
+                }))
+                
+                self.presentViewController(myAlert, animated: true, completion: nil)
+                
+            }
         }
-        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
-        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
-        return (isReachable && !needsConnection)
+        
+        func checkInternet2() {
+            if isConnectedToNetwork() == false {
+                
+                let userMessage = "Please check your network connection, and try again."
+                let myAlert = UIAlertController(title: "WOW", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                
+                myAlert.addAction(UIAlertAction(title: "Refresh", style: .Default, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        checkInternet1()
+                    }
+                }))
+                
+                self.presentViewController(myAlert, animated: true, completion: nil)
+                
+            }
+        }
+        checkInternet1()
     }
 }
 
@@ -139,8 +196,13 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     var didLaunchGame = false
     
-    
+
     override func viewDidLoad() {
+        
+        checkInternetConnection()
+        
+        PFUser.currentUser()?.setObject(true, forKey: "isLoggedIn")
+        PFUser.currentUser()!.save()
         
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
 

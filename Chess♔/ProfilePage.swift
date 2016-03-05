@@ -59,6 +59,8 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
     }
     
     override func viewDidLoad() {
+        checkInternetConnection()
+
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = PFUser.currentUser()?.username
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]

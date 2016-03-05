@@ -196,6 +196,8 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
     }
     
     func lightOrDarkMode() {
+        checkInternetConnection()
+
         if darkMode == true {
             
             
