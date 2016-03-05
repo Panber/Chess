@@ -8631,7 +8631,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
             }
             
-            if iamWhite {
+            if iamWhite && game["status_white"] as? String == "move" {
                 
                 if self.game["whiteRatedComplete"] as! Bool == false {
                     
@@ -8678,7 +8678,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                 }
             }
-            else {
+            else if !iamWhite && game["status_black"] as? String == "move"{
                 if self.game["blackRatedComplete"] as! Bool == false {
                     if gameIsRatedMode {
                         
