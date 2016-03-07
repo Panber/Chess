@@ -460,7 +460,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                                         //query for friends, find out if the user already has friends, if not add friends
                                         let friends = PFObject(className: "Friends")
                                         friends["user"] = PFUser.currentUser()
-                                        friends["username"] = PFUser.currentUser()?.username
+                                        friends["username"] = uName
                                         friends["friends"] = []
                                         friends.saveInBackground()
                                         

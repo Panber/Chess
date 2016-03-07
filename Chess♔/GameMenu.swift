@@ -201,7 +201,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         checkInternetConnection()
         
-    
+ 
         
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
 
