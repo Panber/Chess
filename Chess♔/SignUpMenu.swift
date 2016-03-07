@@ -698,7 +698,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                     {
                         user.deleteInBackground()
                         
-                        let myAlert = UIAlertController(title: "Alert", message: "Please log in with facebook", preferredStyle: UIAlertControllerStyle.Alert)
+                        let myAlert = UIAlertController(title: "Alert", message: "Please sign up with facebook first", preferredStyle: UIAlertControllerStyle.Alert)
                         let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
                         myAlert.addAction(okAction)
                         self.presentViewController(myAlert, animated: true, completion: nil)
