@@ -941,7 +941,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             let friends = PFObject(className: "Friends")
             friends["user"] = PFUser.currentUser()
             friends["username"] = PFUser.currentUser()?.username
-            friends["friends"] = []
+            friends["friends"] = [] 
             friends.saveInBackground()
             }
             
