@@ -201,8 +201,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         checkInternetConnection()
         
-        PFUser.currentUser()?.setObject(true, forKey: "isLoggedIn")
-        PFUser.currentUser()!.save()
+    
         
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
 
@@ -225,6 +224,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         installation["username"] = PFUser.currentUser()!.username
         installation.saveInBackground()
 
+        PFUser.currentUser()?.setObject(true, forKey: "isLoggedIn")
+        PFUser.currentUser()!.save()
         
         let customFont = UIFont(name: "Times", size: 18.0)
         newButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
@@ -239,83 +240,76 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
 
         //check this before launching!!!!!!
-//        //Checking if first launch
-//        let notFirstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
-//        if notFirstLaunch  {
-//            print("Not first launch.")
-//        }
-//        else {
-//            print("First launch, setting NSUserDefault.")
-//            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
-//            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
-//            self.showViewController(vc as! UIViewController, sender: vc)
-//        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "numbered_board")
-//
-//
-//        
-//    
-//
-//        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        let authstate = CLLocationManager.authorizationStatus()
-//        if(authstate == CLAuthorizationStatus.NotDetermined){
-//            print("Not Authorised")
-//            locationManager.requestWhenInUseAuthorization()
-//        }
-//        locationManager.startUpdatingLocation()
+        //Checking if first launch
+        let notFirstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
+        if notFirstLaunch  {
+            print("Not first launch.")
+        }
+        else {
+            print("First launch, setting NSUserDefault.")
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
+            let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
+            self.showViewController(vc as! UIViewController, sender: vc)
+        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "numbered_board")
+
+
+        
+    
+
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        let authstate = CLLocationManager.authorizationStatus()
+        if(authstate == CLAuthorizationStatus.NotDetermined){
+            print("Not Authorised")
+            locationManager.requestWhenInUseAuthorization()
+        }
+        locationManager.startUpdatingLocation()
      
             self.initLocationManager()
 
-        //query for friends, find out if the user already has friends, if not add friends
-//        let friends = PFObject(className: "Friends")
-//        friends["user"] = PFUser.currentUser()
-//        friends["username"] = PFUser.currentUser()?.username
-//        friends["friends"] = []
-//        friends.saveInBackground()
-//
-//        }
+     
+
+        }
     
         
-//        //setting the different variables for the current user, remember to implement this in a firstload method
-//            let users = PFQuery(className: "_User")
-//            if let user = PFUser.currentUser() {
-//                users.whereKey("username", equalTo: user.username!)
-//                users.findObjectsInBackgroundWithBlock({ (users: [AnyObject]?, error: NSError?) -> Void in
-//        
-//                    if error == nil {
-//                        if let users = users as? [PFObject]{
-//                            for users in users {
-//                                
-//                                
-//                                
-//                                PFGeoPoint.geoPointForCurrentLocationInBackground {
-//                                    (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
-//                                    if error == nil {
-//                                        users["location"] = geoPoint
-//                                        users.saveInBackground()
-//                                        location = geoPoint!
-//                                        print("location added to parse")
-//                                        //add later!!
-//                                        //NSUserDefaults.standardUserDefaults().setObject(geoP, forKey: "user_geopoint")
-//                                        
-//                                    }
-//                                }
-//
-//                            }
-//                        }
-//                    }
-//                    else {
-//                        print("annerror accured")
-//                    }
-//                })
-//            }
+        //setting the different variables for the current user, remember to implement this in a firstload method
+            let users = PFQuery(className: "_User")
+            if let user = PFUser.currentUser() {
+                users.whereKey("username", equalTo: user.username!)
+                users.findObjectsInBackgroundWithBlock({ (users: [AnyObject]?, error: NSError?) -> Void in
+        
+                    if error == nil {
+                        if let users = users as? [PFObject]{
+                            for users in users {
+                                
+                                
+                                
+                                PFGeoPoint.geoPointForCurrentLocationInBackground {
+                                    (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+                                    if error == nil {
+                                        users["location"] = geoPoint
+                                        users.saveInBackground()
+                                        location = geoPoint!
+                                        print("location added to parse")
+                                        //add later!!
+                                        //NSUserDefaults.standardUserDefaults().setObject(geoP, forKey: "user_geopoint")
+                                        
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    else {
+                        print("annerror accured")
+                    }
+                })
+            }
         
         
         
         
-//        //...and remove this after a while
-//                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
-//                    self.showViewController(vc as! UIViewController, sender: vc)
+        
 
         
  
@@ -1050,7 +1044,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             
             
             if typeofGameover[indexPath.row] == "lost" {
-                cell.colorIndicator.backgroundColor = UIColor.redColor()
+                cell.colorIndicator.backgroundColor = red
             }
             else if typeofGameover[indexPath.row] == "won"{
                 cell.colorIndicator.backgroundColor = green

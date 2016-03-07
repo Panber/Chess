@@ -338,13 +338,16 @@ self.title = "Settings"
      
     func logOutPressed(sender: UIButton!) {
         
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("user_name")
-        NSUserDefaults.standardUserDefaults().synchronize()
+
         
+        PFUser.currentUser()?.setObject(false, forKey: "isLoggedIn")
         PFUser.currentUser()?.setObject(false, forKey: "isLoggedIn")
         PFUser.currentUser()!.save()
         
         PFUser.logOutInBackgroundWithBlock { (error:NSError?) -> Void in
+            
+            NSUserDefaults.standardUserDefaults().removeObjectForKey("user_name")
+            NSUserDefaults.standardUserDefaults().synchronize()
             
             let mainStoryBoard:UIStoryboard = UIStoryboard(name:"Main", bundle:nil)
             

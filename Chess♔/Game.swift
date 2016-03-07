@@ -5427,6 +5427,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     override func viewWillAppear(animated: Bool) {
+        lightOrDarkMode()
         if NSUserDefaults.standardUserDefaults().boolForKey("numbered_board") == true {
             
             if iamWhite {

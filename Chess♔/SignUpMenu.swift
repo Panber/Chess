@@ -456,6 +456,14 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
                                     {
                                         
                                         self.loadFacebookUserDetails()
+                                        
+                                        //query for friends, find out if the user already has friends, if not add friends
+                                        let friends = PFObject(className: "Friends")
+                                        friends["user"] = PFUser.currentUser()
+                                        friends["username"] = PFUser.currentUser()?.username
+                                        friends["friends"] = []
+                                        friends.saveInBackground()
+                                        
                                     }
                                 } else {
                                     print("User logged in through Facebook!")
@@ -660,7 +668,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             }
         }
             else {
-                let myAlert = UIAlertController(title: "WOW", message: "You are already logged in somewhere else. Please log out and try again. If the problem persists, please contact us on Twitter @panberinc", preferredStyle: UIAlertControllerStyle.Alert)
+                let myAlert = UIAlertController(title: "WOW", message: "You are already logged in somewhere else. Please log out and try again. If the problem persists, please contact us on Twitter @panbersoftware", preferredStyle: UIAlertControllerStyle.Alert)
                 let okAction  = UIAlertAction(title: "Ok", style: .Default, handler: nil)
                 myAlert.addAction(okAction)
                 self.presentViewController(myAlert, animated: true, completion: nil)
@@ -854,6 +862,10 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         myUser.setObject("0", forKey: "lost")
         myUser.setObject(1200, forKey: "rating")
         myUser.setObject(true, forKey: "request_everyone")
+        
+
+        
+    
 
   
         
@@ -923,6 +935,15 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         myUser.signUpInBackgroundWithBlock { (success, error) -> Void in
             
             var userMessage = "Welcome! Your registration was successfull"
+            
+            if success {
+            //query for friends, find out if the user already has friends, if not add friends
+            let friends = PFObject(className: "Friends")
+            friends["user"] = PFUser.currentUser()
+            friends["username"] = PFUser.currentUser()?.username
+            friends["friends"] = []
+            friends.saveInBackground()
+            }
             
             if !success {
                 //                userMessage = "The registration was not completed."
