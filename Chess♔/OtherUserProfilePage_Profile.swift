@@ -441,7 +441,7 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
                     
                     print("\(friendss)")
                     
-                    self.ifFriend.image = UIImage(named: "checkmark13.png")
+                    self.ifFriend.image = UIImage(named: "checkmark12.png")
                     self.friendStatusLabel.text = "You are Friends"
                     self.scrollView.addSubview(self.settingsButton)
                     
@@ -1059,7 +1059,7 @@ class OtherUserProfilePage_Profile: UIViewController, UIScrollViewDelegate, UIAl
         
         
         UIView.animateWithDuration(0.5) { () -> Void in
-            self.acceptRequest.setBackgroundImage(UIImage(named: "checkmark13.png"), forState: .Normal)
+            self.acceptRequest.setBackgroundImage(UIImage(named: "checkmark12.png"), forState: .Normal)
             self.acceptRequest.frame.origin.x = self.profilePic.frame.origin.x + (self.profilePic.frame.size.width / 2) - 15
             
             self.denyRequest.frame.origin.x = self.profilePic.frame.origin.x + (self.profilePic.frame.size.width / 2) - 15

@@ -56,7 +56,7 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         
         userArray = []
         ratingArray = []
-        profilePicArray = []
+       // profilePicArray = []
         USER = []
         
         tableView.reloadData()

@@ -934,14 +934,14 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
         myUser.signUpInBackgroundWithBlock { (success, error) -> Void in
             
-            var userMessage = "Welcome! Your registration was successfull"
+            var userMessage = "Welcome! Your registration was successful"
             
             if success {
             //query for friends, find out if the user already has friends, if not add friends
             let friends = PFObject(className: "Friends")
             friends["user"] = PFUser.currentUser()
             friends["username"] = PFUser.currentUser()?.username
-            friends["friends"] = [] 
+            friends["friends"] = []
             friends.saveInBackground()
             }
             

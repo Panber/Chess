@@ -776,6 +776,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 piecePos += [pieceSqr]
             }
         }
+        check = Firebase()
+        print(check)
+        check.removeAllObservers()
+
         
         gameIsOver = false
         
@@ -5418,10 +5422,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         //        whitePromotionType = []
         //        blackPromotionType = []
         //game = PFObject(className: "Games")
+        
         canCheckFirebase = false
         timer.invalidate()
         
-        check.removeAllObservers()
 
         
     }
@@ -5648,7 +5652,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     // MARK: -Time Capsule
     func capsuleButtonPressed(sender: UIButton!) {
-        
+
         removePieceOptions()
         hideMarkedPiece()
         
@@ -5831,6 +5835,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
         })
         
+    
+        
+        if movesCap.count == 0 {
+            backwardB.enabled = false
+            
+        }
+        else  {        backwardB.enabled = true
+        }
     }
     
     func sliderValueDidChange(sender:UISlider!)
@@ -6048,10 +6060,11 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func backwardButtonPressed(sender:UIButton!) {
-        
-        
+
+        if movesCap.count != 0 {
+
         if canPressBackwardButton == true {
-            
+
             canPressBackwardButton = false
             canPressForwardButton = false
             
@@ -6091,6 +6104,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             }
             //change to false later
             magic3()
+        }
         }
     }
     
@@ -7787,7 +7801,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         let vc = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
         vc.setInitialText("I won against \(otherUserName) playing CHESS")
-        vc.addURL(NSURL(string: "http://www.nasa.gov"))
+        vc.addURL(NSURL(string: "https://itunes.apple.com/us/app/chess-play-now/id1090933229?ls=1&mt=8"))
         presentViewController(vc, animated: true, completion: nil)
         
     }
@@ -7795,7 +7809,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         removeNewView()
         let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
         vc.setInitialText("I won against \(otherUserName) playing CHESS")
-        vc.addURL(NSURL(string: "http://www.nasa.gov"))
+        vc.addURL(NSURL(string: "https://itunes.apple.com/us/app/chess-play-now/id1090933229?ls=1&mt=8"))
         presentViewController(vc, animated: true, completion: nil)
     }
     // MARK: - Setup-functions 🔍
@@ -11442,6 +11456,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         
         let touch = touches.first as UITouch!
         
+        
+      
+        
         for var o = 0 ; o < piecePos.count; o++ {
             if CGRectContainsPoint(selectedPiece.frame, piecePos[o].center) {
                 selectedPiece.frame.origin.x = piecePos[o].frame.origin.x
@@ -12140,6 +12157,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
 
         if darkMode == true {
             
+            
+              //  self.collectionView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            
+            
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
             self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
             self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
@@ -12182,7 +12203,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             UIApplication.sharedApplication().statusBarStyle = .Default
             
-            
+          //  self.collectionView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+
         }
         
     }

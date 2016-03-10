@@ -978,7 +978,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     cell.timeleft.textColor = green
                     
                     
-                    gameID = gameIDSTheirTurn[indexPath.row]
+                   // gameID = gameIDSTheirTurn[indexPath.row]
                     
                     
                  
@@ -1009,7 +1009,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     }
                     
             }
-            
+            print(notationsCountTheirTurn[indexPath.row])
                 if notationsCountTheirTurn[indexPath.row] <= 1 {
                     
                     if theirTurnSpeed[indexPath.row] == "Fast" {
@@ -1031,7 +1031,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     }
                     
                 }
-                else if timeLeftC >= 0 {
+                else if timeLeftC >= 0  {
                     if didLaunchGame == false {
                         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
                         self.showViewController(vc as! UIViewController, sender: vc)
@@ -1795,7 +1795,6 @@ didLaunchGame = false
          notationsCountYourTurn = []
          notationsCountTheirTurn = []
          notationsCountGameOver = []
-        
          yourTurnSpeed = []
          theirTurnSpeed = []
          gameoverTurnSpeed = []

@@ -90,9 +90,9 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
     
     override func viewWillAppear(animated: Bool) {
         //  setUpProfile()
-        lightOrDarkMode()
         self.removeProfile()
         setUpProfile()
+        lightOrDarkMode()
         
         
     }
@@ -100,7 +100,8 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         
     }
     override func viewDidAppear(animated: Bool) {
-        
+      
+
     }
     
     
@@ -446,7 +447,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
                     
                     print("\(friendss)")
                     
-                    self.ifFriend.image = UIImage(named: "checkmark13.png")
+                    self.ifFriend.image = UIImage(named: "checkmark12.png")
                     self.friendStatusLabel.text = "You are Friends"
                     self.scrollView.addSubview(self.settingsButton)
                     
@@ -1049,7 +1050,7 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
         
         
         UIView.animateWithDuration(0.5) { () -> Void in
-            self.acceptRequest.setBackgroundImage(UIImage(named: "checkmark13.png"), forState: .Normal)
+            self.acceptRequest.setBackgroundImage(UIImage(named: "checkmark12.png"), forState: .Normal)
             self.acceptRequest.frame.origin.x = profilePic.frame.origin.x + (profilePic.frame.size.width / 2) - 15
             
             self.denyRequest.frame.origin.x = profilePic.frame.origin.x + (profilePic.frame.size.width / 2) - 15
