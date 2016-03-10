@@ -215,6 +215,8 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
     
     func checkmarkButtonPressed(sender:UIButton) {
         
+        print(inviteName[sender.tag - 1])
+
         
         let buttonRow = sender.tag
         let tmpButton = self.view.viewWithTag(buttonRow) as? UIButton
@@ -319,12 +321,17 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
                         
                         // Create our Installation query
                         let pushQuery = PFInstallation.query()
-                        pushQuery!.whereKey("username", equalTo: [sender.tag - 1])
-                        
+                        pushQuery!.whereKey("username", equalTo: self.inviteName[sender.tag - 1])
                         // Send push notification to query
                         let push = PFPush()
                         push.setQuery(pushQuery) // Set our Installation query
-                        push.setMessage("\(PFUser.currentUser()!.username!) accepted your invitation. Let's begin!")
+                        
+                        var data = [
+                            "alert": "\(PFUser.currentUser()!.username!) accepted your invitation. Let's begin!",
+                            "badge" : "Increment",
+                            "sound" : "default"]
+                        
+                        push.setData(data)
                         push.sendPushInBackground()
                         
                         

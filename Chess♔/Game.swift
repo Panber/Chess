@@ -11052,8 +11052,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     // Send push notification to query
                     let push = PFPush()
                     push.setQuery(pushQuery) // Set our Installation query
-                    push.setMessage("\(PFUser.currentUser()!.username!) made a move!")
                     //    push.setData(<#T##data: [NSObject : AnyObject]?##[NSObject : AnyObject]?#>)
+                    var data = [
+                        "alert": "\(PFUser.currentUser()!.username!) made a move!",
+                        "badge" : "Increment",
+                        "sound" : "default"]
+                    
+                    push.setData(data)
                     push.sendPushInBackground()
                     
                     //firebase

@@ -740,6 +740,7 @@
                                 <segments>
                                     <segment title="White"/>
                                     <segment title="Black"/>
+                                    <segment title="Random"/>
                                 </segments>
                                 <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -1872,6 +1873,7 @@
                                         <segments>
                                             <segment title="White"/>
                                             <segment title="Black"/>
+                                            <segment title="Random"/>
                                         </segments>
                                         <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
@@ -2164,6 +2166,7 @@
                                         <segments>
                                             <segment title="White"/>
                                             <segment title="Black"/>
+                                            <segment title="Random"/>
                                         </segments>
                                         <color key="tintColor" red="0.36470588235294116" green="0.56470588235294117" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
@@ -2684,6 +2687,7 @@
                                         <segments>
                                             <segment title="White"/>
                                             <segment title="Black"/>
+                                            <segment title="Random"/>
                                         </segments>
                                         <color key="tintColor" red="0.36470588240000001" green="0.56470588239999997" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>

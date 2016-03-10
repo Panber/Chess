@@ -111,6 +111,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 //                }
 //            }
 //        }
+        if (PFInstallation.currentInstallation().badge != 0) {
+            PFInstallation.currentInstallation().badge = 0
+            PFInstallation.currentInstallation().saveInBackground()
+        }
         
         return true
         
@@ -162,7 +166,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
-
+        if (PFInstallation.currentInstallation().badge != 0) {
+            PFInstallation.currentInstallation().badge = 0
+            PFInstallation.currentInstallation().saveInBackground()
+        }
         
         FBSDKAppEvents.activateApp()
     }

@@ -60,6 +60,20 @@ class NewGameSettingsPage_Analyze: UIViewController {
             color = "White"
         case 1:
             color = "Black"
+        case 2:
+            let MAX : UInt32 = 2
+            let MIN : UInt32 = 0
+            
+            var random_number = Int(arc4random_uniform(MAX) + MIN)
+            
+            if random_number == 0 {
+                color = "White"
+            }
+            else {
+                color = "Black"
+            }
+            print(color)
+            print(random_number)
         default:
             break;
         }
@@ -213,7 +227,12 @@ class NewGameSettingsPage_Analyze: UIViewController {
                 // Send push notification to query
                 let push = PFPush()
                 push.setQuery(pushQuery) // Set our Installation query
-                push.setMessage("\(PFUser.currentUser()!.username!) invited you to play Chess!")
+                var data = [
+                    "alert": "\(PFUser.currentUser()!.username!) invited you to play CHESS!",
+                    "badge" : "Increment",
+                    "sound" : "default"]
+                
+                push.setData(data)
                 push.sendPushInBackground()
                 
             }

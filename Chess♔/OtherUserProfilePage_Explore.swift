@@ -682,7 +682,12 @@ class OtherUserProfilePage: UIViewController, UIScrollViewDelegate, UIAlertViewD
                 // Send push notification to query
                 let push = PFPush()
                 push.setQuery(pushQuery) // Set our Installation query
-                push.setMessage("You have a friend request from \(PFUser.currentUser()!.username!)")
+                var data = [
+                    "alert": "You have a friend request from \(PFUser.currentUser()!.username!)",
+                    "badge" : "Increment",
+                    "sound" : "default"]
+                
+                push.setData(data)
                 push.sendPushInBackground()
                 
                 
