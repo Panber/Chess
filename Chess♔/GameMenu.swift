@@ -1812,7 +1812,7 @@ didLaunchGame = false
         gameoverLeft = []
 
         gameOverRated = []
-        
+        gameoverStatus = []
         tableView.alpha = 0
         tableView.reloadData()
         
