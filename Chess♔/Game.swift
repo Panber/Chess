@@ -776,8 +776,10 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 piecePos += [pieceSqr]
             }
         }
+        if check == nil {
         check = Firebase()
         print(check)
+        }
         check.removeAllObservers()
 
         

@@ -854,7 +854,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 
                 if timeLeftC >= 0 {
                     
-                    gameID = gameIDSYourTurn[indexPath.row]
 
                     
 
@@ -909,6 +908,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 }
                 else if timeLeftC >= 0 {
                     if didLaunchGame == false {
+                        gameID = gameIDSYourTurn[indexPath.row]
+
                         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
                         self.showViewController(vc as! UIViewController, sender: vc)
                         didLaunchGame = true
@@ -1033,6 +1034,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 }
                 else if timeLeftC >= 0  {
                     if didLaunchGame == false {
+                         gameID = gameIDSTheirTurn[indexPath.row]
+
                         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
                         self.showViewController(vc as! UIViewController, sender: vc)
                         didLaunchGame = true
@@ -1082,10 +1085,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
             if gameOverRated[indexPath.row] == false {
                 
-                gameID = gameIDSGameOver[indexPath.row]
                 
                 
                 if didLaunchGame == false {
+                    gameID = gameIDSGameOver[indexPath.row]
+
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
                     self.showViewController(vc as! UIViewController, sender: vc)
                     didLaunchGame = true
