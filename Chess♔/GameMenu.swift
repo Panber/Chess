@@ -447,7 +447,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 let delt2 = NSDate().timeIntervalSinceDate(delt!)
                 
                 print("delt2 is \(delt2)")
-                if delt2 > 432_000 && games["status_white"] as? String == "won" && (games["whiteRatedComplete"] as? Bool)! == false && (games["blackRatedComplete"] as? Bool)! == false  || delt2 > 432_000 && (games["whiteRatedComplete"] as? Bool)! == false && (games["blackRatedComplete"] as? Bool)! == false   && games["status_white"] as? String == "lost"  || delt2 > 432_000 && games["status_white"] as? String == "draw" && (games["whiteRatedComplete"] as? Bool)! == false && (games["blackRatedComplete"] as? Bool)! == false {
+                if delt2 > 432_000 && games["status_white"] as? String == "won" && (games["whiteRatedComplete"] as? Bool)! == true && (games["blackRatedComplete"] as? Bool)! == true  || delt2 > 432_000 && (games["whiteRatedComplete"] as? Bool)! == true && (games["blackRatedComplete"] as? Bool)! == true   && games["status_white"] as? String == "lost"  || delt2 > 432_000 && games["status_white"] as? String == "draw" && (games["whiteRatedComplete"] as? Bool)! == true && (games["blackRatedComplete"] as? Bool)! == true {
                 games.delete()
                 }
                 

@@ -40,6 +40,8 @@ var check: Firebase!
 var gameIsOver = Bool()
 
 var oppoImageFromGameMenu = UIImage()
+var shouldContinueTimer = false
+var goBackAfterLaunch = false
 
 var game = PFObject(className: "Games")
 var notations: Array<String> = []
@@ -764,7 +766,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     override func viewDidLoad() {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
-        
+        shouldContinueTimer = false 
         loadVariablesAndConstants()
         
         lightOrDarkMode()
@@ -5426,6 +5428,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         //game = PFObject(className: "Games")
         
         canCheckFirebase = false
+        goBackAfterLaunch = false
         timer.invalidate()
         
 
@@ -5452,6 +5455,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     
     override func viewDidAppear(animated: Bool) {
         canCheckFirebase = true
+        goBackAfterLaunch = true
         var bottomOffset = CGPointMake(0, collectionView.contentSize.height - collectionView.bounds.size.height)
         collectionView.setContentOffset(bottomOffset, animated: false)
         
@@ -5478,7 +5482,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
             }
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
-            
+            shouldContinueTimer = false
         }
         
         
@@ -8533,7 +8537,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             launchTimer.invalidate()
         }
     }
-    var shouldContinueTimer = false
     
     //use this to checki fuser lost on time
     func updateTimer() {
@@ -8630,7 +8633,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             timeL.textColor = red
         }
         
-        if timeLeftT <= 0 {
+        if timeLeftT <= 0 && movesCap.count > 1 {
             timeL.text = "Game Finished"
             timeL.font = UIFont(name: "Times-Italic", size: 19)
             
