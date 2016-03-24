@@ -345,6 +345,12 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
         
         //friendRequestsbutton
         friendRequestsButton.setTitle("Friend Requests", forState: .Normal)
+        if numberOfFriendRequests > 0 {
+            friendRequestsButton.setTitle("Friend Requests (\(numberOfFriendRequests))", forState: .Normal)
+            friendRequestsButton.setTitleColor(red, forState: .Normal)
+
+        }
+        self.tabBarController?.tabBar.items?.last?.badgeValue = "\(numberOfFriendRequests)"
         friendRequestsButton.titleLabel?.font = UIFont(name: "Times", size: 16)
         friendRequestsButton.layer.borderColor = blue.CGColor
         friendRequestsButton.frame.origin.x = 20
@@ -600,7 +606,13 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
 
         }
         
-        
+        if numberOfFriendRequests > 0 {
+            friendRequestsButton.setTitle("Friend Requests (\(numberOfFriendRequests))", forState: .Normal)
+            friendRequestsButton.setTitleColor(red, forState: .Normal)
+        }
+        else {
+            self.tabBarController?.tabBar.items?.last?.badgeValue = nil
+        }
     }
     
     

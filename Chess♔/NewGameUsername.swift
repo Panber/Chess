@@ -99,15 +99,12 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
         
         if(profilePictureObject != nil)
         {
-            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                
-                if(imageData != nil)
-                {
-                    cell.userProfileImage.image = UIImage(data: imageData!)
-                    self.imageDataArray.append(imageData!)
-                }
-                
+            let imageData = profilePictureObject!.getData()
+            if imageData != nil {
+                cell.userProfileImage.image = UIImage(data: imageData!)
+                self.imageDataArray.append(imageData!)
             }
+
         }
         return cell
     }
@@ -122,10 +119,13 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+//           let cell:NewGameUsernameTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("newGameUsernameCell", forIndexPath: indexPath) as! NewGameUsernameTableViewCell
+        
         print(usersArray.count)
         NSUserDefaults.standardUserDefaults().setObject(usersArray[indexPath.row], forKey: "other_username_from_friends_gamemenu")
         
-        let p = imageDataArray[indexPath.row]
+        let p =  imageDataArray[indexPath.row]
+
         NSUserDefaults.standardUserDefaults().setObject(p, forKey: "other_userImage_from_friends_gamemenu")
         
         NSUserDefaults.standardUserDefaults().setObject(ratingArray[indexPath.row], forKey: "other_userrating_from_friends_gamemenu")
@@ -149,6 +149,8 @@ class NewGameUsername: UIViewController, UISearchBarDelegate, UISearchDisplayDel
         query.whereKey("username", matchesRegex:searchString, modifiers:"i")
         query.whereKey("username", notEqualTo: (PFUser.currentUser()?.username)!)
         query.orderByAscending("username")
+        query.whereKey("request_everyone", equalTo: true)
+
         query.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
                         self.profilePicArray = []

@@ -108,15 +108,12 @@ class NewGameRating: UIViewController, UISearchBarDelegate, UISearchDisplayDeleg
         
         if(profilePictureObject != nil)
         {
-            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                
-                if(imageData != nil)
-                {
-                    cell.userProfileImage.image = UIImage(data: imageData!)
-                    self.imageDataArray.append(imageData!)
-                }
-                
+            let imageData = profilePictureObject!.getData()
+            if imageData != nil {
+                cell.userProfileImage.image = UIImage(data: imageData!)
+                self.imageDataArray.append(imageData!)
             }
+            
         }
         return cell
     }

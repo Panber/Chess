@@ -99,6 +99,8 @@ class UsersFriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDeleg
         
         let userQuery = PFQuery(className: "_User")
         userQuery.whereKey("username", equalTo: friendsArray[indexPath.row])
+        userQuery.whereKey("request_everyone", equalTo: true)
+
         let _user = userQuery.getFirstObject() as! PFUser
         
         let profilePictureObject = _user["profile_picture"] as? PFFile

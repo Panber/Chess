@@ -310,6 +310,8 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                             
                             friends["friends"]?.addObject(self.userFriends[self.userFriends.count - 1])
                             friends.saveInBackground()
+                            numberOfFriendRequests--
+                            self.tabBarController?.tabBar.items?.last?.badgeValue = "\(numberOfFriendRequests)"
                         }
                     }
                 }
@@ -373,6 +375,8 @@ class FriendRequestsPage: UIViewController, UITableViewDelegate, UIScrollViewDel
                 if error == nil {
                     for request in request! {
                         request.deleteEventually()
+                        numberOfFriendRequests--
+                        self.tabBarController?.tabBar.items?.last?.badgeValue = "\(numberOfFriendRequests)"
                     }
                 }
                     else {

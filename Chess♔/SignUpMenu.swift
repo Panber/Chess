@@ -841,7 +841,32 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         //checking if forms are typed in
         if (userName == "" || userPassword == "" || userEmail == "" || profilePicImageView.image == UIImage(named:"profilePicPlaceholderDark.jpg") ){
             
-            let myAlert = UIAlertController(title: "Alert", message: "You have to submit all forms", preferredStyle: UIAlertControllerStyle.Alert)
+            var message1 = "You have to submit all forms"
+            if (userName != "" && userPassword != "" && userEmail != "" && profilePicImageView.image == UIImage(named:"profilePicPlaceholderDark.jpg") ){
+                
+                message1 = "Please add an image at the top ('ADD')"
+                
+                UIView.animateWithDuration(0.15, animations: { () -> Void in
+                    
+                    self.profilePicImageView.frame.origin.y -= 20
+                    
+                    
+                    }, completion: {finish in
+                        
+                        UIView.animateWithDuration(0.15, delay: 0, options: .CurveEaseInOut, animations: { () -> Void in
+                            self.profilePicImageView.frame.origin.y += 20
+
+                            
+                            }, completion: { finish in
+                                
+                           
+                                
+                        })
+                        
+                })
+            }
+            
+            let myAlert = UIAlertController(title: "Alert", message: message1, preferredStyle: UIAlertControllerStyle.Alert)
             
             let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
             myAlert.addAction(okAction)
@@ -944,13 +969,14 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             friends["friends"] = []
             friends.saveInBackground()
             }
-            
+            var t = "Congratulations!"
             if !success {
                 //                userMessage = "The registration was not completed."
                 userMessage = error!.localizedDescription
+                t = "Oops!"
             }
             
-            let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            let myAlert = UIAlertController(title: t, message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
             
             // if success sign up
             let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) { action in
@@ -976,7 +1002,8 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
         let myPickerController = UIImagePickerController()
         myPickerController.delegate = self
-        myPickerController.sourceType = UIImagePickerControllerSourceType.Camera
+        myPickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        
         self.presentViewController(myPickerController, animated: true, completion: nil)
         
         

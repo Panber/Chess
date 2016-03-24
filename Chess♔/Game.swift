@@ -765,6 +765,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var passantArray: Array<Bool> = []
     
     override func viewDidLoad() {
+        timer.invalidate()
+
+        
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
         shouldContinueTimer = false 
         loadVariablesAndConstants()
@@ -8552,7 +8555,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 timeLeft = -14_400
                 
             }
-            else if speedLspeed == "Fast Speedmode" {
+            else if speedLspeed == "Slow Speedmode" {
                 timeLeft = -172_800
                 
             }

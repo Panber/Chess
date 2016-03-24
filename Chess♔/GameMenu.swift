@@ -112,6 +112,7 @@ var scrollView: UIScrollView!
 var logo = UIImage(named: "ChessIconSmallTextAndLogo.png")
 var logoView = UIImageView(image:logo)
 
+var numberOfFriendRequests = 0
 
 var location = PFGeoPoint()
 
@@ -198,11 +199,41 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
 
     override func viewDidLoad() {
-        
+        numberOfFriendRequests = 0
         checkInternetConnection()
         
- 
         
+        if (PFInstallation.currentInstallation().badge != 0) {
+            PFInstallation.currentInstallation().badge = 0
+            PFInstallation.currentInstallation().saveInBackground()
+        }
+        
+        let frequestsQuery = PFQuery(className: "FriendRequest")
+        if let user = PFUser.currentUser()?.username {
+            frequestsQuery.whereKey("toUserr", equalTo: (user))
+            frequestsQuery.orderByDescending("updatedAt")
+            frequestsQuery.whereKey("status", equalTo: "pending")
+            frequestsQuery.findObjectsInBackgroundWithBlock({ (frequests:[AnyObject]?, error:NSError?) -> Void in
+                
+                if let frequests = frequests as! [PFObject]! {
+                    for frequests in frequests {
+                        numberOfFriendRequests++
+                        self.tabBarController?.tabBar.items?.last?.badgeValue = "\(numberOfFriendRequests)"
+                        
+        
+                    }
+                    
+                }
+                
+            })
+            
+            // self.tableView.reloadData()
+        }
+        if numberOfFriendRequests == 0 {
+            self.tabBarController?.tabBar.items?.last?.badgeValue = nil
+
+            
+        }
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
 
         
@@ -251,10 +282,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
             self.showViewController(vc as! UIViewController, sender: vc)
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "numbered_board")
-
-
-        
-    
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -428,10 +455,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
      //   newGameSetup("", ProfilePic: UIImage(named: "")!, Rating: "", UpdatedAt: "", TimeLeft: "")
 
     }
-    
+    var noi = 0
     func findGames() {
       //  self.tableView.alpha = 0
-
+noi = 0
         //tableView.hidden = true
         let gamesQuery = PFQuery(className: "Games")
         //fix this
@@ -621,9 +648,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 else {
                     
                     if games["inviteTo"] as? String == PFUser.currentUser()?.username {
-                    self.invitesButtonOutlet.title = "Invites"
+                        self.noi++
+                    self.invitesButtonOutlet.title = "Invites (\(self.noi))"
                     self.invitesButtonOutlet.enabled = true
-                    self.invitesButtonOutlet.tintColor = blue
+                    self.invitesButtonOutlet.tintColor = red
+                        
+                        
+     
+                        
                     }
                 }
                 
@@ -1458,9 +1490,27 @@ var loaded = false
                     gameIDSGameOver = []
                     gameID = ""
                     
-
-                    
+            
                     self.loaded = true
+                    
+                    //
+                    
+              
+                    
+    
+                    
+                    self.notationsCountYourTurn = []
+                    self.notationsCountTheirTurn = []
+                    self.notationsCountGameOver = []
+                    self.yourTurnSpeed = []
+                    self.theirTurnSpeed = []
+                    self.gameoverTurnSpeed = []
+           
+                    
+                    
+                    self.gameOverRated = []
+                    self.gameoverStatus = []
+                  
                     
                     
                     
@@ -1744,6 +1794,9 @@ didLaunchGame = false
     }
     override func viewDidAppear(animated: Bool) {
 
+        shouldContinueTimer = false
+
+        
         gameIDSYourTurn = []
         gameIDSTheirTurn = []
         gameIDSGameOver = []

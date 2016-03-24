@@ -138,19 +138,17 @@ class NewGameNearby: UIViewController,UITableViewDelegate {
         let profilePictureObject = _user["profile_picture"] as? PFFile
         
         
+
         if(profilePictureObject != nil)
         {
-            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
-                
-                if(imageData != nil)
-                {
-                    self.profilePicArray.append(UIImage(data: imageData!)!)
-                    cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
-                    cell.userProfileImage.image = self.profilePicArray[indexPath.row]
-                    self.imageDataArray.append(imageData!)
-                }
-                
+            let imageData = profilePictureObject!.getData()
+            if imageData != nil {
+                self.profilePicArray.append(UIImage(data: imageData!)!)
+                cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.userProfileImage.image = self.profilePicArray[indexPath.row]
+                self.imageDataArray.append(imageData!)
             }
+            
         }
         
         if cell.username.text == userArray.last {
