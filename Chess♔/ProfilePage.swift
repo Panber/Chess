@@ -10,6 +10,14 @@
 import UIKit
 import Parse
 
+
+var myWonProfile = "\(0)"
+var myDrawnProfile = "\(0)"
+var myLostProfile = "\(0)"
+
+var myRatingProfile = 0
+
+
 class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var scrollView: UIScrollView!
@@ -21,6 +29,8 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
     let friendRequestsButton = UIButton()
     let settingsButton = UIButton()
     let profilePic = UIImageView(frame: CGRectMake(20, 20, 75, 75))
+    var editImageButton = UIImageView()
+
     var label0 = UILabel()
     var label2 = UILabel()
     var label12 = UILabel()
@@ -47,6 +57,14 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
     var changeProfilePicture = UIButton()
     
     override func viewWillAppear(animated: Bool) {
+        //setting labels
+        self.label12.text = myWonProfile
+        self.label13.text = myDrawnProfile
+        self.label14.text = myLostProfile
+        self.label15.text = "\(myRatingProfile)"
+        self.label2.text = "\(myRatingProfile)"
+        
+        
           setUpProfile()
         lightOrDarkMode()
         //loadUserInfoFromCloud()
@@ -94,12 +112,19 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
                     self.userDrawn = users["drawn"] as! String
                     self.userLost = users["lost"] as! String
                     
+                    
                     //setting labels
                     self.label12.text = self.userWon
                     self.label13.text = self.userDrawn
                     self.label14.text = self.userLost
                     self.label15.text = "\(self.userRating)"
                     self.label2.text = "\(self.userRating)"
+                    
+                    myWonProfile = self.userWon
+                    myDrawnProfile = self.userDrawn
+                    myLostProfile = self.userLost
+                    myRatingProfile = self.userRating
+                    myRatingProfile = self.userRating
                     
                     
                     
@@ -116,6 +141,10 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
         
         view.addSubview(scrollView)
 
+        
+
+        
+        
         loadUserInfoFromCloud()
         
         
@@ -142,6 +171,8 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
         profilePicBlur.clipsToBounds = true
         contentView.addSubview(profilePicBlur)
         
+
+
         
         //adding the profile pic
         profilePic.layer.cornerRadius = profilePic.frame.size.height / 2
@@ -150,6 +181,10 @@ class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControll
         profilePic.layer.borderWidth = 0
         profilePic.contentMode = UIViewContentMode.ScaleAspectFill
         contentView.addSubview(profilePic)
+        
+        editImageButton = UIImageView(frame: CGRectMake(profilePic.frame.origin.x + profilePic.frame.size.width - 27, profilePic.frame.origin.y + profilePic.frame.size.height - 27, 35, 35))
+        editImageButton.image = UIImage(named: "editimageButton.png")
+        contentView.addSubview(editImageButton)
         
         // Button for changing profile pic
         changeProfilePicture = UIButton(frame: CGRectMake(20, 20, 75, 75))
