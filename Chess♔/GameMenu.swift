@@ -12,6 +12,7 @@ import Bolts
 import CoreLocation
 import SystemConfiguration
 import Firebase
+import Social
 
 
 extension UIViewController{
@@ -98,6 +99,10 @@ var red = UIColor(red:0.89, green:0.36, blue:0.36, alpha:1.0)
 var green = UIColor(red: 0.2275, green: 0.7882, blue: 0.2196, alpha: 1.0)
 var purple = UIColor(red: 0.6314, green: 0.2078, blue: 0.749, alpha: 1.0)
 
+var gamesArrayYourTurn = [PFObject]()
+var gamesArrayTheirTurn = [PFObject]()
+var gamesArrayGameOver = [PFObject]()
+
 
 var gameIDSYourTurn:Array<String> = []
 var gameIDSTheirTurn:Array<String> = []
@@ -121,14 +126,14 @@ var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as
 var visualEffectSub = UIView()
 
 class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, UITableViewDelegate, UITabBarControllerDelegate, UITabBarDelegate, CLLocationManagerDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var tableView: UITableView!
-
+    
     @IBOutlet weak var invitesButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var newButtonOutlet: UIBarButtonItem!
     
-  //  @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
-
+    //  @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
+    
     
     var usernameArray: Array<String> = []
     var ratingArray: Array<Int> = []
@@ -137,7 +142,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var profilePicArray: Array<UIImage> = []
     var imageDataArray: Array<NSData> = []
     var indicatorDataArray: Array<String> = []
-
+    
     var yourturnArray: Array<String> = []
     var theirturnArray: Array<String> = []
     var gameoverArray: Array<String> = []
@@ -147,9 +152,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var gameoverUpdateSince: Array<NSTimeInterval> = []
     
     var gameoverStatus: Array<String> = []
-
     
-
+    
+    
     
     
     var notationsCountYourTurn: Array<Int> = []
@@ -160,23 +165,23 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var yourturnLeft: Array<NSTimeInterval> = []
     var theirturnLeft: Array<NSTimeInterval> = []
     var gameoverLeft: Array<NSTimeInterval> = []
-
+    
     var yourturnLeftPrint: Array<Int> = []
     var theirturnLeftPrint: Array<Int> = []
     var gameoverLeftPrint: Array<Int> = []
-
+    
     var yourTurnColor: Array<String> = []
     var theirTurnColor: Array<String> = []
     var gameoverTurnColor: Array<String> = []
-
+    
     var yourTurnSpeed: Array<String> = []
     var theirTurnSpeed: Array<String> = []
     var gameoverTurnSpeed: Array<String> = []
     
     var timer = NSTimer()
-
+    
     var loadingAlphas: Array<CGFloat> = [0.1,0.2,0.3,0.4,0.5,0.4,0.3,0.2,0.1,0.2,0.3,0.4,0.5]
-
+    
     
     var typeofGameover: Array<String> = []
     
@@ -188,16 +193,16 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var lastLocation = CLLocation()
     var locationAuthorizationStatus:CLAuthorizationStatus!
     var window: UIWindow?
-   // var locationManager: CLLocationManager!
+    // var locationManager: CLLocationManager!
     var seenError : Bool = false
     var locationFixAchieved : Bool = false
     var locationStatus : NSString = "Not Started"
-
+    
     var gameOverRated: Array<Bool> = []
     
     var didLaunchGame = false
     
-
+    
     override func viewDidLoad() {
         numberOfFriendRequests = 0
         checkInternetConnection()
@@ -220,7 +225,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         numberOfFriendRequests++
                         self.tabBarController?.tabBar.items?.last?.badgeValue = "\(numberOfFriendRequests)"
                         
-        
+                        
                     }
                     
                 }
@@ -231,11 +236,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         }
         if numberOfFriendRequests == 0 {
             self.tabBarController?.tabBar.items?.last?.badgeValue = nil
-
+            
             
         }
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
-
+        
         
         instructionsLabel = UILabel(frame: CGRectMake(20, 64 ,screenWidth - 40,100))
         let new = "-New-"
@@ -247,14 +252,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         view.addSubview(instructionsLabel)
         
         tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
-
+        
         
         super.viewDidLoad()
         
         let installation = PFInstallation.currentInstallation()
         installation["username"] = PFUser.currentUser()!.username
         installation.saveInBackground()
-
+        
         PFUser.currentUser()?.setObject(true, forKey: "isLoggedIn")
         PFUser.currentUser()!.save()
         
@@ -262,14 +267,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         newButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
         invitesButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
         
-   //     editButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
-
-       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        //     editButtonOutlet.setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+        
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         self.tableView.backgroundColor = UIColor.whiteColor()
         
         print("the current installation is \(PFInstallation.currentInstallation())")
-
-
+        
+        
         //check this before launching!!!!!!
         //Checking if first launch
         let notFirstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
@@ -281,87 +286,87 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
             let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("firstLaunchVC")
             self.showViewController(vc as! UIViewController, sender: vc)
-        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "numbered_board")
-
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        let authstate = CLLocationManager.authorizationStatus()
-        if(authstate == CLAuthorizationStatus.NotDetermined){
-            print("Not Authorised")
-            locationManager.requestWhenInUseAuthorization()
-        }
-        locationManager.startUpdatingLocation()
-     
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "numbered_board")
+            
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            let authstate = CLLocationManager.authorizationStatus()
+            if(authstate == CLAuthorizationStatus.NotDetermined){
+                print("Not Authorised")
+                locationManager.requestWhenInUseAuthorization()
+            }
+            locationManager.startUpdatingLocation()
+            
             self.initLocationManager()
-
-     
-
+            
+            
+            
         }
-    
+        
         
         //setting the different variables for the current user, remember to implement this in a firstload method
-            let users = PFQuery(className: "_User")
-            if let user = PFUser.currentUser() {
-                users.whereKey("username", equalTo: user.username!)
-                users.findObjectsInBackgroundWithBlock({ (users: [AnyObject]?, error: NSError?) -> Void in
-        
-                    if error == nil {
-                        if let users = users as? [PFObject]{
-                            for users in users {
-                                
-                                
-                                
-                                PFGeoPoint.geoPointForCurrentLocationInBackground {
-                                    (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
-                                    if error == nil {
-                                        users["location"] = geoPoint
-                                        users.saveInBackground()
-                                        location = geoPoint!
-                                        print("location added to parse")
-                                        //add later!!
-                                        //NSUserDefaults.standardUserDefaults().setObject(geoP, forKey: "user_geopoint")
-                                        
-                                    }
+        let users = PFQuery(className: "_User")
+        if let user = PFUser.currentUser() {
+            users.whereKey("username", equalTo: user.username!)
+            users.findObjectsInBackgroundWithBlock({ (users: [AnyObject]?, error: NSError?) -> Void in
+                
+                if error == nil {
+                    if let users = users as? [PFObject]{
+                        for users in users {
+                            
+                            
+                            
+                            PFGeoPoint.geoPointForCurrentLocationInBackground {
+                                (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+                                if error == nil {
+                                    users["location"] = geoPoint
+                                    users.saveInBackground()
+                                    location = geoPoint!
+                                    print("location added to parse")
+                                    //add later!!
+                                    //NSUserDefaults.standardUserDefaults().setObject(geoP, forKey: "user_geopoint")
+                                    
                                 }
-
                             }
+                            
                         }
                     }
-                    else {
-                        print("annerror accured")
-                    }
-                })
-            }
+                }
+                else {
+                    print("annerror accured")
+                }
+            })
+        }
         
         
         
         
         
-
         
- 
-
-//        //logo things
-//        logoView.contentMode = UIViewContentMode.ScaleAspectFit
-//        logoView.frame.size.height = 50
-//        self.navigationItem.titleView = logoView
-//        
+        
+        
+        
+        //        //logo things
+        //        logoView.contentMode = UIViewContentMode.ScaleAspectFit
+        //        logoView.frame.size.height = 50
+        //        self.navigationItem.titleView = logoView
+        //
         
         navigationController?.navigationBar.topItem?.title = "Play"
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Didot", size: 20)!]
-    
-//      //setting scrollview
-//        view.frame.size.height = 2000
-//        scrollView = UIScrollView(frame: view.bounds)
-//        scrollView.contentSize = view.bounds.size
-//        scrollView.frame.size.height = screenHeight
-//        scrollView.showsHorizontalScrollIndicator = true
-//        scrollView.userInteractionEnabled = true
-//        scrollView.delegate = self
-//        scrollView.bounces = false
-//        scrollView.scrollEnabled = true
-//        view.addSubview(scrollView)
-//        scrollView.showsVerticalScrollIndicator = false
+        
+        //      //setting scrollview
+        //        view.frame.size.height = 2000
+        //        scrollView = UIScrollView(frame: view.bounds)
+        //        scrollView.contentSize = view.bounds.size
+        //        scrollView.frame.size.height = screenHeight
+        //        scrollView.showsHorizontalScrollIndicator = true
+        //        scrollView.userInteractionEnabled = true
+        //        scrollView.delegate = self
+        //        scrollView.bounces = false
+        //        scrollView.scrollEnabled = true
+        //        view.addSubview(scrollView)
+        //        scrollView.showsVerticalScrollIndicator = false
         
         //setting newgameView
         visualEffectView.frame = view.bounds
@@ -373,8 +378,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         visualEffectSub.userInteractionEnabled = false
         
         visualEffectView.addSubview(visualEffectSub)
-
-
+        
+        
         
         let currentWindow: UIWindow = UIApplication.sharedApplication().keyWindow!
         currentWindow.addSubview(visualEffectView)
@@ -387,7 +392,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         lightOrDarkMode()
     }
-
+    
     // Location Manager helper stuff
     func initLocationManager() {
         seenError = false
@@ -403,11 +408,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         locationManager.stopUpdatingLocation()
-       // if error != nil {
-            if (seenError == false) {
-                seenError = true
-                print(error)
-        //    }
+        // if error != nil {
+        if (seenError == false) {
+            seenError = true
+            print(error)
+            //    }
         }
     }
     
@@ -451,14 +456,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     @IBAction func newGame(sender: AnyObject) {
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "created_New_Game")
         
-       // newGameSetup()
-     //   newGameSetup("", ProfilePic: UIImage(named: "")!, Rating: "", UpdatedAt: "", TimeLeft: "")
-
+        // newGameSetup()
+        //   newGameSetup("", ProfilePic: UIImage(named: "")!, Rating: "", UpdatedAt: "", TimeLeft: "")
+        
     }
     var noi = 0
     func findGames() {
-      //  self.tableView.alpha = 0
-noi = 0
+        //  self.tableView.alpha = 0
+        noi = 0
         //tableView.hidden = true
         let gamesQuery = PFQuery(className: "Games")
         //fix this
@@ -466,277 +471,294 @@ noi = 0
         gamesQuery.whereKey("players", equalTo: PFUser.currentUser()!.username!)
         gamesQuery.findObjectsInBackgroundWithBlock { (games:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
-            if let games = games as! [PFObject]! {
-            for games in games {
-                
-                
-                let delt = games.updatedAt
-                let delt2 = NSDate().timeIntervalSinceDate(delt!)
-                
-                print("delt2 is \(delt2)")
-                if delt2 > 432_000 && games["status_white"] as? String == "won" && (games["whiteRatedComplete"] as? Bool)! == true && (games["blackRatedComplete"] as? Bool)! == true  || delt2 > 432_000 && (games["whiteRatedComplete"] as? Bool)! == true && (games["blackRatedComplete"] as? Bool)! == true   && games["status_white"] as? String == "lost"  || delt2 > 432_000 && games["status_white"] as? String == "draw" && (games["whiteRatedComplete"] as? Bool)! == true && (games["blackRatedComplete"] as? Bool)! == true {
-                games.delete()
+                if let game = games as! [PFObject]! {
+                    //   gamesArray = games as! [PFObject]!
+                    
+                    for games in game {
+                        
+                        
+                        let delt = games.updatedAt
+                        let delt2 = NSDate().timeIntervalSinceDate(delt!)
+                        
+                        print("delt2 is \(delt2)")
+                        if delt2 > 432_000 && games["status_white"] as? String == "won" && (games["whiteRatedComplete"] as? Bool)! == true && (games["blackRatedComplete"] as? Bool)! == true  || delt2 > 432_000 && (games["whiteRatedComplete"] as? Bool)! == true && (games["blackRatedComplete"] as? Bool)! == true   && games["status_white"] as? String == "lost"  || delt2 > 432_000 && games["status_white"] as? String == "draw" && (games["whiteRatedComplete"] as? Bool)! == true && (games["blackRatedComplete"] as? Bool)! == true {
+                            games.delete()
+                        }
+                            
+                        else if games["confirmed"] as? Bool == true {
+                            if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
+                                
+                                if games["whiteDeleted"] as? Bool == nil || games["whiteDeleted"]as? Bool == false {
+                                    
+                                    if games["status_white"] as? String == "move"  {
+                                        
+                                        gamesArrayYourTurn.append(games)
+                                        
+                                        self.yourturnArray.append((games["blackPlayer"] as? String)!)
+                                        
+                                        //adding updated since
+                                        let lastupdate = games.updatedAt!
+                                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                                        self.yourturnUpdateSince.append(since)
+                                        
+                                        let notations = games["piecePosition"] as? NSMutableArray
+                                        self.notationsCountYourTurn.append(notations!.count)
+                                        
+                                        //adding time left
+                                        let left = games["whiteDate"] as? NSDate
+                                        let left2 = NSDate().timeIntervalSinceDate(left!)
+                                        self.yourturnLeft.append(left2)
+                                        print(self.yourturnLeft)
+                                        
+                                        //                        let lastUpdate = game["whiteDate"] as? NSDate
+                                        //                        var timeLeft = NSDate().timeIntervalSinceDate(lastUpdate!)
+                                        //                        self.timeleftArray.append(timeLeft)
+                                        
+                                        gameIDSYourTurn.append(games.objectId!)
+                                        self.yourTurnColor.append("white")
+                                        
+                                        self.yourTurnSpeed.append((games["speed"] as? String)!)
+                                        
+                                        
+                                    }
+                                    else if games["status_white"] as? String == "notmove" {
+                                        gamesArrayTheirTurn.append(games)
+                                        
+                                        self.theirturnArray.append((games["blackPlayer"] as? String)!)
+                                        
+                                        let notations = games["piecePosition"] as? NSMutableArray
+                                        self.notationsCountTheirTurn.append(notations!.count)
+                                        
+                                        //adding updated since
+                                        let lastupdate = games.updatedAt!
+                                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                                        
+                                        self.theirturnUpdateSince.append(since)
+                                        
+                                        //adding time left
+                                        let left = games["blackDate"] as? NSDate
+                                        let left2 = NSDate().timeIntervalSinceDate(left!)
+                                        self.theirturnLeft.append(left2)
+                                        
+                                        gameIDSTheirTurn.append(games.objectId!)
+                                        
+                                        self.theirTurnColor.append("white")
+                                        
+                                        self.theirTurnSpeed.append((games["speed"] as? String)!)
+                                        
+                                        
+                                        
+                                    }
+                                    else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost" || games["status_white"] as? String == "draw"{
+                                        gamesArrayGameOver.append(games)
+                                        
+                                        
+                                        self.gameoverArray.append((games["blackPlayer"] as? String)!)
+                                        self.typeofGameover.append((games["status_white"] as? String)!)
+                                        
+                                        //adding updated since
+                                        let lastupdate = games.updatedAt!
+                                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                                        self.gameoverUpdateSince.append(since)
+                                        
+                                        self.gameoverStatus.append((games["gameEndStatus"] as? String)!)
+                                        
+                                        gameIDSGameOver.append(games.objectId!)
+                                        
+                                        self.gameoverTurnColor.append("white")
+                                        
+                                        self.gameoverTurnSpeed.append((games["speed"] as? String)!)
+                                        
+                                        self.gameOverRated.append((games["whiteRatedComplete"] as? Bool)!)
+                                        
+                                        
+                                        
+                                    }
+                                }
+                            }
+                            else {
+                                if games["blackDeleted"] as? Bool == nil || games["blackDeleted"] as? Bool == false {
+                                    
+                                    if games["status_black"] as? String == "move"  {
+                                        
+                                        gamesArrayYourTurn.append(games)
+
+                                        
+                                        self.yourturnArray.append((games["whitePlayer"] as? String)!)
+                                        
+                                        let notations = games["piecePosition"] as? NSMutableArray
+                                        self.notationsCountYourTurn.append(notations!.count)
+                                        
+                                        //adding updated since
+                                        let lastupdate = games.updatedAt!
+                                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                                        self.yourturnUpdateSince.append(since)
+                                        
+                                        //adding left
+                                        let left = games["blackDate"] as? NSDate
+                                        let left2 = NSDate().timeIntervalSinceDate(left!)
+                                        self.yourturnLeft.append(left2)
+                                        
+                                        gameIDSYourTurn.append(games.objectId!)
+                                        
+                                        self.yourTurnColor.append("black")
+                                        
+                                        self.yourTurnSpeed.append((games["speed"] as? String)!)
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    }
+                                    else if games["status_black"] as? String == "notmove"  {
+                                        
+                                        gamesArrayTheirTurn.append(games)
+
+                                        
+                                        self.theirturnArray.append((games["whitePlayer"] as? String)!)
+                                        let notations = games["piecePosition"] as? NSMutableArray
+                                        self.notationsCountTheirTurn.append(notations!.count)
+                                        
+                                        //adding updated since
+                                        let lastupdate = games.updatedAt!
+                                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                                        self.theirturnUpdateSince.append(since)
+                                        
+                                        //adding left
+                                        let left = games["whiteDate"] as? NSDate
+                                        let left2 = NSDate().timeIntervalSinceDate(left!)
+                                        self.theirturnLeft.append(left2)
+                                        
+                                        gameIDSTheirTurn.append(games.objectId!)
+                                        
+                                        self.theirTurnColor.append("black")
+                                        
+                                        self.theirTurnSpeed.append((games["speed"] as? String)!)
+                                        
+                                        
+                                        
+                                    }
+                                    else if games["status_black"] as? String == "won" || games["status_black"] as? String == "lost" || games["status_black"] as? String == "draw"{
+                                        
+                                        gamesArrayGameOver.append(games)
+
+                                        
+                                        self.gameoverArray.append((games["whitePlayer"] as? String)!)
+                                        self.typeofGameover.append((games["status_black"] as? String)!)
+                                        
+                                        self.gameoverStatus.append((games["gameEndStatus"] as? String)!)
+                                        
+                                        //adding updated since
+                                        let lastupdate = games.updatedAt!
+                                        let since = NSDate().timeIntervalSinceDate(lastupdate)
+                                        self.gameoverUpdateSince.append(since)
+                                        
+                                        gameIDSGameOver.append(games.objectId!)
+                                        
+                                        self.gameoverTurnColor.append("black")
+                                        
+                                        self.gameoverTurnSpeed.append((games["speed"] as? String)!)
+                                        
+                                        self.gameOverRated.append((games["blackRatedComplete"] as? Bool)!)
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                        }
+                        else {
+                            
+                            if games["inviteTo"] as? String == PFUser.currentUser()?.username {
+                                self.noi++
+                                self.invitesButtonOutlet.title = "Invites (\(self.noi))"
+                                self.invitesButtonOutlet.enabled = true
+                                self.invitesButtonOutlet.tintColor = red
+                                
+                                
+                                
+                                
+                            }
+                        }
+                        
+                        
+                        
+                        self.loaded = false
+                        //self.ratingArray.append(games["blackPlayer"] as! Int)
+                        //  updatedArrayppend(games["blackPlayer"] as! String)
+                        //  timeleftArrayppend(games["blackPlayer"] as! String)
+                        
+                    }
                 }
                 
-                else if games["confirmed"] as? Bool == true {
-                    if games["whitePlayer"] as? String == PFUser.currentUser()?.username {
-                
-                    
-                    if games["status_white"] as? String == "move" {
-                        
-                        self.yourturnArray.append((games["blackPlayer"] as? String)!)
-                        
-                        //adding updated since
-                        let lastupdate = games.updatedAt!
-                        let since = NSDate().timeIntervalSinceDate(lastupdate)
-                        self.yourturnUpdateSince.append(since)
-                        
-                        let notations = games["piecePosition"] as? NSMutableArray
-                        self.notationsCountYourTurn.append(notations!.count)
-                        
-                        //adding time left
-                        let left = games["whiteDate"] as? NSDate
-                        let left2 = NSDate().timeIntervalSinceDate(left!)
-                        self.yourturnLeft.append(left2)
-                        print(self.yourturnLeft)
-                        
-//                        let lastUpdate = game["whiteDate"] as? NSDate
-//                        var timeLeft = NSDate().timeIntervalSinceDate(lastUpdate!)
-//                        self.timeleftArray.append(timeLeft)
-                        
-                        gameIDSYourTurn.append(games.objectId!)
-                        self.yourTurnColor.append("white")
-                        
-                        self.yourTurnSpeed.append((games["speed"] as? String)!)
-
-                        
-                    }
-                    else if games["status_white"] as? String == "notmove" {
-                        
-                        self.theirturnArray.append((games["blackPlayer"] as? String)!)
-                        
-                        let notations = games["piecePosition"] as? NSMutableArray
-                        self.notationsCountTheirTurn.append(notations!.count)
-                        
-                        //adding updated since
-                        let lastupdate = games.updatedAt!
-                        let since = NSDate().timeIntervalSinceDate(lastupdate)
-                        
-                        self.theirturnUpdateSince.append(since)
-                        
-                        //adding time left
-                        let left = games["blackDate"] as? NSDate
-                        let left2 = NSDate().timeIntervalSinceDate(left!)
-                        self.theirturnLeft.append(left2)
-                        
-                        gameIDSTheirTurn.append(games.objectId!)
-
-                        self.theirTurnColor.append("white")
-                        
-                        self.theirTurnSpeed.append((games["speed"] as? String)!)
-
-
-                        
-                    }
-                    else if games["status_white"] as? String == "won" || games["status_white"] as? String == "lost" || games["status_white"] as? String == "draw"{
-                        
-                   
-                        self.gameoverArray.append((games["blackPlayer"] as? String)!)
-                        self.typeofGameover.append((games["status_white"] as? String)!)
-                        
-                        //adding updated since
-                        let lastupdate = games.updatedAt!
-                        let since = NSDate().timeIntervalSinceDate(lastupdate)
-                        self.gameoverUpdateSince.append(since)
-                        
-               self.gameoverStatus.append((games["gameEndStatus"] as? String)!)
-                        
-                        gameIDSGameOver.append(games.objectId!)
-
-                        self.gameoverTurnColor.append("white")
-                        
-                        self.gameoverTurnSpeed.append((games["speed"] as? String)!)
-                        
-                        self.gameOverRated.append((games["whiteRatedComplete"] as? Bool)!)
-
-
-                        
-                    }
-                    
-                }
-                    else {
-                    
-                    if games["status_black"] as? String == "move"  {
-                        
-                        self.yourturnArray.append((games["whitePlayer"] as? String)!)
-                        
-                        let notations = games["piecePosition"] as? NSMutableArray
-                        self.notationsCountYourTurn.append(notations!.count)
-
-                        //adding updated since
-                        let lastupdate = games.updatedAt!
-                        let since = NSDate().timeIntervalSinceDate(lastupdate)
-                        self.yourturnUpdateSince.append(since)
-                        
-                        //adding left
-                        let left = games["blackDate"] as? NSDate
-                        let left2 = NSDate().timeIntervalSinceDate(left!)
-                        self.yourturnLeft.append(left2)
-                        
-                        gameIDSYourTurn.append(games.objectId!)
-
-                        self.yourTurnColor.append("black")
-                        
-                        self.yourTurnSpeed.append((games["speed"] as? String)!)
-
-
-                        
-                    
-                        
-                    }
-                    else if games["status_black"] as? String == "notmove"  {
-                        
-                        self.theirturnArray.append((games["whitePlayer"] as? String)!)
-                        let notations = games["piecePosition"] as? NSMutableArray
-                        self.notationsCountTheirTurn.append(notations!.count)
-                        
-                        //adding updated since
-                        let lastupdate = games.updatedAt!
-                        let since = NSDate().timeIntervalSinceDate(lastupdate)
-                        self.theirturnUpdateSince.append(since)
-                        
-                        //adding left
-                        let left = games["whiteDate"] as? NSDate
-                        let left2 = NSDate().timeIntervalSinceDate(left!)
-                        self.theirturnLeft.append(left2)
-                        
-                        gameIDSTheirTurn.append(games.objectId!)
-
-                        self.theirTurnColor.append("black")
-                        
-                        self.theirTurnSpeed.append((games["speed"] as? String)!)
-
-
-                        
-                    }
-                    else if games["status_black"] as? String == "won" || games["status_black"] as? String == "lost" || games["status_black"] as? String == "draw"{
-                        
-                        self.gameoverArray.append((games["whitePlayer"] as? String)!)
-                        self.typeofGameover.append((games["status_black"] as? String)!)
-                  
-                        self.gameoverStatus.append((games["gameEndStatus"] as? String)!)
-
-                        //adding updated since
-                        let lastupdate = games.updatedAt!
-                        let since = NSDate().timeIntervalSinceDate(lastupdate)
-                        self.gameoverUpdateSince.append(since)
-                        
-                        gameIDSGameOver.append(games.objectId!)
-
-                        self.gameoverTurnColor.append("black")
-                        
-                        self.gameoverTurnSpeed.append((games["speed"] as? String)!)
-
-                        self.gameOverRated.append((games["blackRatedComplete"] as? Bool)!)
-                        
-                    }
-
-                
-                
-                }
-                }
-                else {
-                    
-                    if games["inviteTo"] as? String == PFUser.currentUser()?.username {
-                        self.noi++
-                    self.invitesButtonOutlet.title = "Invites (\(self.noi))"
-                    self.invitesButtonOutlet.enabled = true
-                    self.invitesButtonOutlet.tintColor = red
-                        
-                        
-     
-                        
-                    }
-                }
-                
-                
-                
-                self.loaded = false
-                //self.ratingArray.append(games["blackPlayer"] as! Int)
-                //  updatedArrayppend(games["blackPlayer"] as! String)
-                //  timeleftArrayppend(games["blackPlayer"] as! String)
-                
-            }
-            }
-                
-            self.tableView.reloadData()
-            self.tableView.hidden = false
+                self.tableView.reloadData()
+                self.tableView.hidden = false
                 
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
                     if self.yourturnArray.count != 0 || self.theirturnArray.count != 0 || self.gameoverArray.count != 0 {
-                    self.tableView.alpha = 1
+                        self.tableView.alpha = 1
                     }
                     }, completion: { (finished) -> Void in
                         if finished {
-                        
-                        
-                        
+                            
+                            
+                            
                         }
                 })
                 
-
                 
-      
+                
+                
             }
-
+            
         }
-    
+        
     }
     
     
     /*func find(name:String) {
+     
+     let query = PFQuery(className: "_User")
+     
+     query.whereKey("username", equalTo: name)
+     query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+     if (error == nil) {
+     
+     if let userArray = objects as? [PFUser] {
+     for user in userArray {
+     
+     cell.rating.text = String(user["rating"] as! Int)
+     
+     if let userPicture = user["profile_picture"] as? PFFile {
+     
+     userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+     if (error == nil) {
+     cell.userProfileImage.image = UIImage(data: imageData!)
+     self.imageDataArray.append(imageData!)
+     
+     
+     
+     } else {
+     }
+     }
+     
+     }
+     }
+     
+     }
+     } else {
+     // Log details of the failure
+     print("query error: \(error) \(error!.userInfo)")
+     }
+     
+     }
+     }*/
     
-        let query = PFQuery(className: "_User")
-        
-        query.whereKey("username", equalTo: name)
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
-            if (error == nil) {
-                
-                if let userArray = objects as? [PFUser] {
-                    for user in userArray {
-                        
-                        cell.rating.text = String(user["rating"] as! Int)
-                        
-                        if let userPicture = user["profile_picture"] as? PFFile {
-                            
-                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                                if (error == nil) {
-                                    cell.userProfileImage.image = UIImage(data: imageData!)
-                                    self.imageDataArray.append(imageData!)
-                                    
-                                    
-                                    
-                                } else {
-                                }
-                            }
-                            
-                        }
-                    }
-                    
-                }
-            } else {
-                // Log details of the failure
-                print("query error: \(error) \(error!.userInfo)")
-            }
-            
-        }
-    }*/
     
-
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-
+        
         return 150
         
     }
@@ -753,20 +775,20 @@ noi = 0
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
             
             cell.rating.textColor = UIColor.lightTextColor()
-
-
-        cell.username.textColor = UIColor.whiteColor()
-        
+            
+            
+            cell.username.textColor = UIColor.whiteColor()
+            
         }
         else {cell.backgroundColor = UIColor.whiteColor()
-        
+            
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
             cell.rating.textColor = UIColor.darkGrayColor()
             cell.username.textColor = UIColor.blackColor()
-
-
+            
+            
         }
-       // cell.userProfileImage.image = nil
+        // cell.userProfileImage.image = nil
         cell.username.text = ""
         
         
@@ -777,301 +799,301 @@ noi = 0
             
             
             
-        let query = PFQuery(className: "_User")
+            let query = PFQuery(className: "_User")
             
-        query.whereKey("username", equalTo: name)
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
-            if (error == nil) {
-                
-                if let userArray = objects as? [PFUser] {
-                    for user in userArray {
-                        
-                        cell.rating.text = String(user["rating"] as! Int)
-
-                        if let userPicture = user["profile_picture"] as? PFFile {
-                            
-                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                                if (error == nil) {
-                                    cell.userProfileImage.alpha = 0
-                                    cell.userProfileImage.image = UIImage(data: imageData!)
-                                    self.imageDataArray.append(imageData!)
-                                    
-                                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                        cell.userProfileImage.alpha = 1
-
-
-                                    })
-                       
-                                } else {
-                                }
-                            }
-                            
-                        }
-                    }
+            query.whereKey("username", equalTo: name)
+            query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+                if (error == nil) {
                     
+                    if let userArray = objects as? [PFUser] {
+                        for user in userArray {
+                            
+                            cell.rating.text = String(user["rating"] as! Int)
+                            
+                            if let userPicture = user["profile_picture"] as? PFFile {
+                                
+                                userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                    if (error == nil) {
+                                        cell.userProfileImage.alpha = 0
+                                        cell.userProfileImage.image = UIImage(data: imageData!)
+                                        self.imageDataArray.append(imageData!)
+                                        
+                                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                            cell.userProfileImage.alpha = 1
+                                            
+                                            
+                                        })
+                                        
+                                    } else {
+                                    }
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                } else {
+                    // Log details of the failure
+                    print("query error: \(error) \(error!.userInfo)")
                 }
-            } else {
-                // Log details of the failure
-                print("query error: \(error) \(error!.userInfo)")
+                
             }
-            
-        }
         }
         
         
         
         
-     
-
         
-       // cell.rating.text = "601"
-       // cell.updated.text = "Last Update: 1h 5min"
+        
+        
+        // cell.rating.text = "601"
+        // cell.updated.text = "Last Update: 1h 5min"
         
         switch indexPath.section {
         case 0:
-                cell.colorIndicator.backgroundColor = blue
-                find(yourturnArray[indexPath.row])
+            cell.colorIndicator.backgroundColor = blue
+            find(yourturnArray[indexPath.row])
             
-                if yourTurnColor[indexPath.row] == "white" {
-                    cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
-                }
-                else {
-                    cell.pieceIndicator.backgroundColor = UIColor.blackColor()
-                }
-                
-                
-                if yourTurnSpeed[indexPath.row] == "Normal" {
-                    cell.speedIndicator.image = UIImage(named: "normalIndicator2.png")
-                }
-                else if yourTurnSpeed[indexPath.row] == "Fast" {
-                    cell.speedIndicator.image = UIImage(named: "flash31.png")
-
-                }
-                else if yourTurnSpeed[indexPath.row] == "Slow" {
-                    cell.speedIndicator.image = UIImage(named: "clock108.png")
-                }
-
-
-                
-                
-                var since = yourturnUpdateSince[indexPath.row]
-                //making to minutes
-                cell.updated.text = "Last Updated: Now"
-
-                if since >= 60 {
-                    since = since/60
-                    let sinceOutput = Int(since)
-                    cell.updated.text = "Last Updated: \(sinceOutput)min ago"
-                }
-                //making to hours
-                if since >= 60 {
-                    since = since/60
-                    let sinceOutput = Int(since)
-                    cell.updated.text = "Last Updated: \(sinceOutput)h ago"
-                    
-                    //making to days
-                    if since >= 24 {
-                        since = since/24
-                        let sinceOutput = Int(since)
-                        cell.updated.text = "Last Updated: \(sinceOutput)d ago"
-                        
-                    }
-                    
-                }
-            
-                var timeLeftC = yourturnLeft[indexPath.row]
-                cell.timeleft.text = "Time Left: Less than a minute"
-                cell.timeleft.textColor = red
-                
-                
-                if timeLeftC >= 0 {
-                    
-
-                    
-
-                    
-                    
-                }
-  
-                
-                if timeLeftC <= -60 {
-                    timeLeftC = timeLeftC/60
-                    let sinceOutput = Int(timeLeftC) * -1
-                    cell.timeleft.text = "Time Left: \(sinceOutput)min"
-                    print("time left in is \(sinceOutput)")
-                }
-
-                //making to hours
-                if timeLeftC <= -60 {
-                    timeLeftC = timeLeftC/60
-                    let sinceOutput = Int(timeLeftC) * -1
-                    cell.timeleft.text = "Time Left: \(sinceOutput)h"
-                    cell.timeleft.textColor = UIColor.lightGrayColor()
-
-                    
-                    //making to days
-                    if timeLeftC <= -24 {
-                        timeLeftC = timeLeftC/24
-                        let sinceOutput = Int(timeLeftC) * -1
-                        cell.timeleft.text = "Time Left: \(sinceOutput)d"
-                        
-                    }
-                    
-                }
-            
-                if notationsCountYourTurn[indexPath.row] <= 1 {
-                    
-                    if yourTurnSpeed[indexPath.row] == "Fast" {
-                        cell.timeleft.text = "Time Left: 5min"
-                        cell.timeleft.textColor = red
-
-                    }
-                    else if yourTurnSpeed[indexPath.row] == "Normal" {
-                        cell.timeleft.text = "Time Left: 4h"
-                        cell.timeleft.textColor = UIColor.lightGrayColor()
-
-                    }
-                    else if yourTurnSpeed[indexPath.row] == "Slow" {
-                        cell.timeleft.text = "Time Left: 2d"
-                        cell.timeleft.textColor = UIColor.lightGrayColor()
-
-                    }
-            
-                }
-                else if timeLeftC >= 0 {
-                    if didLaunchGame == false {
-                        gameID = gameIDSYourTurn[indexPath.row]
-
-                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
-                        self.showViewController(vc as! UIViewController, sender: vc)
-                        didLaunchGame = true
-                    }
+            if yourTurnColor[indexPath.row] == "white" {
+                cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
+            }
+            else {
+                cell.pieceIndicator.backgroundColor = UIColor.blackColor()
             }
             
-   
-
-
+            
+            if yourTurnSpeed[indexPath.row] == "Normal" {
+                cell.speedIndicator.image = UIImage(named: "normalIndicator2.png")
+            }
+            else if yourTurnSpeed[indexPath.row] == "Fast" {
+                cell.speedIndicator.image = UIImage(named: "flash31.png")
+                
+            }
+            else if yourTurnSpeed[indexPath.row] == "Slow" {
+                cell.speedIndicator.image = UIImage(named: "clock108.png")
+            }
+            
+            
+            
+            
+            var since = yourturnUpdateSince[indexPath.row]
+            //making to minutes
+            cell.updated.text = "Last Updated: Now"
+            
+            if since >= 60 {
+                since = since/60
+                let sinceOutput = Int(since)
+                cell.updated.text = "Last Updated: \(sinceOutput)min ago"
+            }
+            //making to hours
+            if since >= 60 {
+                since = since/60
+                let sinceOutput = Int(since)
+                cell.updated.text = "Last Updated: \(sinceOutput)h ago"
+                
+                //making to days
+                if since >= 24 {
+                    since = since/24
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                    
+                }
+                
+            }
+            
+            var timeLeftC = yourturnLeft[indexPath.row]
+            cell.timeleft.text = "Time Left: Less than a minute"
+            cell.timeleft.textColor = red
+            
+            
+            if timeLeftC >= 0 {
+                
+                
+                
+                
+                
+                
+            }
+            
+            
+            if timeLeftC <= -60 {
+                timeLeftC = timeLeftC/60
+                let sinceOutput = Int(timeLeftC) * -1
+                cell.timeleft.text = "Time Left: \(sinceOutput)min"
+                print("time left in is \(sinceOutput)")
+            }
+            
+            //making to hours
+            if timeLeftC <= -60 {
+                timeLeftC = timeLeftC/60
+                let sinceOutput = Int(timeLeftC) * -1
+                cell.timeleft.text = "Time Left: \(sinceOutput)h"
+                cell.timeleft.textColor = UIColor.lightGrayColor()
+                
+                
+                //making to days
+                if timeLeftC <= -24 {
+                    timeLeftC = timeLeftC/24
+                    let sinceOutput = Int(timeLeftC) * -1
+                    cell.timeleft.text = "Time Left: \(sinceOutput)d"
+                    
+                }
+                
+            }
+            
+            if notationsCountYourTurn[indexPath.row] <= 1 {
+                
+                if yourTurnSpeed[indexPath.row] == "Fast" {
+                    cell.timeleft.text = "Time Left: 5min"
+                    cell.timeleft.textColor = red
+                    
+                }
+                else if yourTurnSpeed[indexPath.row] == "Normal" {
+                    cell.timeleft.text = "Time Left: 4h"
+                    cell.timeleft.textColor = UIColor.lightGrayColor()
+                    
+                }
+                else if yourTurnSpeed[indexPath.row] == "Slow" {
+                    cell.timeleft.text = "Time Left: 2d"
+                    cell.timeleft.textColor = UIColor.lightGrayColor()
+                    
+                }
+                
+            }
+            else if timeLeftC >= 0 {
+                if didLaunchGame == false {
+                    gameID = gameIDSYourTurn[indexPath.row]
+                    
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+                    self.showViewController(vc as! UIViewController, sender: vc)
+                    didLaunchGame = true
+                }
+            }
+            
+            
+            
+            
             
             
         case 1:
-                cell.colorIndicator.backgroundColor = UIColor.lightGrayColor()
-                find(theirturnArray[indexPath.row])
+            cell.colorIndicator.backgroundColor = UIColor.lightGrayColor()
+            find(theirturnArray[indexPath.row])
             
-                if theirTurnColor[indexPath.row] == "white" {
-                    cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
-                }
-                else {
-                    cell.pieceIndicator.backgroundColor = UIColor.blackColor()
+            if theirTurnColor[indexPath.row] == "white" {
+                cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
+            }
+            else {
+                cell.pieceIndicator.backgroundColor = UIColor.blackColor()
+            }
+            
+            if theirTurnSpeed[indexPath.row] == "Normal" {
+                cell.speedIndicator.image = UIImage(named: "normalIndicator2.png")
+            }
+            else if theirTurnSpeed[indexPath.row] == "Fast" {
+                cell.speedIndicator.image = UIImage(named: "flash31.png")
+                
+            }
+            else if theirTurnSpeed[indexPath.row] == "Slow" {
+                cell.speedIndicator.image = UIImage(named: "clock108.png")
+            }
+            
+            var since = theirturnUpdateSince[indexPath.row]
+            //making to minutes
+            cell.updated.text = "Last Updated: Now"
+            
+            if since >= 60 {
+                since = since/60
+                let sinceOutput = Int(since)
+                cell.updated.text = "Last Updated: \(sinceOutput)min ago"
+            }
+            //making to hours
+            if since >= 60 {
+                since = since/60
+                let sinceOutput = Int(since)
+                cell.updated.text = "Last Updated: \(sinceOutput)h ago"
+                
+                //making to days
+                if since >= 24 {
+                    since = since/24
+                    let sinceOutput = Int(since)
+                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
                 }
                 
-                if theirTurnSpeed[indexPath.row] == "Normal" {
-                    cell.speedIndicator.image = UIImage(named: "normalIndicator2.png")
+            }
+            
+            
+            
+            var timeLeftC = theirturnLeft[indexPath.row]
+            cell.timeleft.text = "Their Time: Less than a minute"
+            cell.timeleft.textColor = red
+            
+            if timeLeftC >= 0 {
+                print("times up mate")
+                cell.timeleft.text = "Time is up. Claim your victory."
+                cell.timeleft.textColor = green
+                
+                
+                // gameID = gameIDSTheirTurn[indexPath.row]
+                
+                
+                
+            }
+            print(timeLeftC)
+            
+            if timeLeftC <= -60 {
+                timeLeftC = timeLeftC/60
+                let sinceOutput = Int(timeLeftC) * -1
+                cell.timeleft.text = "Their Time: \(sinceOutput)min"
+                
+            }
+            
+            //making to hours
+            if timeLeftC <= -60 {
+                timeLeftC = timeLeftC/60
+                let sinceOutput = Int(timeLeftC) * -1
+                cell.timeleft.text = "Their Time: \(sinceOutput)h"
+                cell.timeleft.textColor = UIColor.lightGrayColor()
+                
+                
+                //making to days
+                if timeLeftC <= -24 {
+                    timeLeftC = timeLeftC/24
+                    let sinceOutput = Int(timeLeftC) * -1
+                    cell.timeleft.text = "Their Time: \(sinceOutput)d"
+                    
                 }
-                else if theirTurnSpeed[indexPath.row] == "Fast" {
-                    cell.speedIndicator.image = UIImage(named: "flash31.png")
+                
+            }
+            print(notationsCountTheirTurn[indexPath.row])
+            if notationsCountTheirTurn[indexPath.row] <= 1 {
+                
+                if theirTurnSpeed[indexPath.row] == "Fast" {
+                    cell.timeleft.text = "Their Time: 5min"
+                    cell.timeleft.textColor = red
+                    
+                }
+                else if theirTurnSpeed[indexPath.row] == "Normal" {
+                    cell.timeleft.text = "Their Time: 4h"
+                    cell.timeleft.textColor = UIColor.lightGrayColor()
                     
                 }
                 else if theirTurnSpeed[indexPath.row] == "Slow" {
-                    cell.speedIndicator.image = UIImage(named: "clock108.png")
-                }
-                
-                var since = theirturnUpdateSince[indexPath.row]
-                //making to minutes
-                cell.updated.text = "Last Updated: Now"
-
-                if since >= 60 {
-                    since = since/60
-                    let sinceOutput = Int(since)
-                    cell.updated.text = "Last Updated: \(sinceOutput)min ago"
-                }
-                //making to hours
-                if since >= 60 {
-                    since = since/60
-                    let sinceOutput = Int(since)
-                    cell.updated.text = "Last Updated: \(sinceOutput)h ago"
-                    
-                    //making to days
-                    if since >= 24 {
-                        since = since/24
-                        let sinceOutput = Int(since)
-                        cell.updated.text = "Last Updated: \(sinceOutput)d ago"
-                    }
-                    
-                }
-
-            
-            
-                var timeLeftC = theirturnLeft[indexPath.row]
-                cell.timeleft.text = "Their Time: Less than a minute"
-                cell.timeleft.textColor = red
-                
-                if timeLeftC >= 0 {
-                    print("times up mate")
-                    cell.timeleft.text = "Time is up. Claim your victory."
-                    cell.timeleft.textColor = green
-                    
-                    
-                   // gameID = gameIDSTheirTurn[indexPath.row]
-                    
-                    
-                 
-                }
-                print(timeLeftC)
-                
-                if timeLeftC <= -60 {
-                    timeLeftC = timeLeftC/60
-                    let sinceOutput = Int(timeLeftC) * -1
-                    cell.timeleft.text = "Their Time: \(sinceOutput)min"
-                    
-                }
-                
-                //making to hours
-                if timeLeftC <= -60 {
-                    timeLeftC = timeLeftC/60
-                    let sinceOutput = Int(timeLeftC) * -1
-                    cell.timeleft.text = "Their Time: \(sinceOutput)h"
+                    cell.timeleft.text = "Their Time: 2d"
                     cell.timeleft.textColor = UIColor.lightGrayColor()
-
                     
-                    //making to days
-                    if timeLeftC <= -24 {
-                        timeLeftC = timeLeftC/24
-                        let sinceOutput = Int(timeLeftC) * -1
-                        cell.timeleft.text = "Their Time: \(sinceOutput)d"
-                        
-                    }
                     
-            }
-            print(notationsCountTheirTurn[indexPath.row])
-                if notationsCountTheirTurn[indexPath.row] <= 1 {
-                    
-                    if theirTurnSpeed[indexPath.row] == "Fast" {
-                        cell.timeleft.text = "Their Time: 5min"
-                        cell.timeleft.textColor = red
- 
-                    }
-                    else if theirTurnSpeed[indexPath.row] == "Normal" {
-                        cell.timeleft.text = "Their Time: 4h"
-                        cell.timeleft.textColor = UIColor.lightGrayColor()
-
-                    }
-                    else if theirTurnSpeed[indexPath.row] == "Slow" {
-                        cell.timeleft.text = "Their Time: 2d"
-                        cell.timeleft.textColor = UIColor.lightGrayColor()
-
-                        
-                        
-                    }
                     
                 }
-                else if timeLeftC >= 0  {
-                    if didLaunchGame == false {
-                         gameID = gameIDSTheirTurn[indexPath.row]
-
-                        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
-                        self.showViewController(vc as! UIViewController, sender: vc)
-                        didLaunchGame = true
-                    }
+                
+            }
+            else if timeLeftC >= 0  {
+                if didLaunchGame == false {
+                    gameID = gameIDSTheirTurn[indexPath.row]
+                    
+                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
+                    self.showViewController(vc as! UIViewController, sender: vc)
+                    didLaunchGame = true
+                }
             }
             
             
@@ -1091,7 +1113,7 @@ noi = 0
             
             
             
-                find(gameoverArray[indexPath.row])
+            find(gameoverArray[indexPath.row])
             
             if gameoverTurnColor[indexPath.row] == "white" {
                 cell.pieceIndicator.backgroundColor = UIColor.whiteColor()
@@ -1114,14 +1136,14 @@ noi = 0
             var since = gameoverUpdateSince[indexPath.row]
             //making to minutes
             cell.updated.text = "Last Updated: Now"
-
+            
             if gameOverRated[indexPath.row] == false {
                 
                 
                 
                 if didLaunchGame == false {
                     gameID = gameIDSGameOver[indexPath.row]
-
+                    
                     let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInterFace3")
                     self.showViewController(vc as! UIViewController, sender: vc)
                     didLaunchGame = true
@@ -1149,20 +1171,20 @@ noi = 0
             cell.timeleft.textColor = UIColor.lightGrayColor()
             cell.timeleft.text = gameoverStatus[indexPath.row]
             cell.timeleft.font = UIFont(name: "Times-Italic", size: 14)
-
-
+            
+            
             
         default:
             ""
-        
-        
+            
+            
         }
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       // let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
+        // let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
         
         //oppoImageFromGameMenu = cell.userProfileImage.image!
         
@@ -1182,19 +1204,19 @@ noi = 0
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
+        
         if yourturnArray.count == 0 && theirturnArray.count == 0 && gameoverArray.count == 0 {
-        
-        tableView.hidden = true
-        
-
+            
+            tableView.hidden = true
+            
+            
             
         }
         else {
-        instructionsLabel.hidden = true
-        tableView.hidden = false
-
-        
+            instructionsLabel.hidden = true
+            tableView.hidden = false
+            
+            
         }
         
         switch section {
@@ -1206,24 +1228,24 @@ noi = 0
             return gameoverArray.count
         default:
             return 0
-        
+            
         }
-       
+        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-       
+        
         if self.yourturnArray.count != 0 || self.theirturnArray.count != 0 || self.gameoverArray.count != 0 {
             return 3
-
+            
         }
         return 0
-
-
+        
+        
     }
     
     
-
+    
     func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
         
         switch section {
@@ -1238,7 +1260,7 @@ noi = 0
         }
         return nil
     }
-
+    
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         let header = view as! UITableViewHeaderFooterView
@@ -1248,9 +1270,9 @@ noi = 0
         header.contentView.backgroundColor = UIColor.whiteColor()
         header.textLabel?.textAlignment = .Center
         header.alpha = 0.97
-
+        
         if darkMode {        header.contentView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
-}
+        }
         
         
         header.textLabel?.text? = (header.textLabel?.text?.uppercaseString)!
@@ -1258,273 +1280,1123 @@ noi = 0
     }
     
     
-//    func tableView(tableView:UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//    
-//    
-//    }
-//    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?
-//    {
-//        
-//        switch indexPath.section {
-//        case 0:
-//            var shareAction = UITableViewRowAction(style: .Destructive, title: "Resign") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
-//                
-//                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
-//                
-//                drawAlert.addAction(UIAlertAction(title: "Resign", style: .Destructive, handler: { action in
-//                    switch action.style{
-//                        
-//                    case .Cancel:
-//                        print("cancel")
-//                        
-//                    case .Destructive:
-//                        print("destructive")
-//                        
-//                    case .Default:
-//                        print("default")
-//                        
-//                    }
-//                }))
-//                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
-//                    switch action.style{
-//                        
-//                    case .Cancel:
-//                        print("cancel")
-//                        
-//                    case .Destructive:
-//                        print("destructive")
-//                        
-//                    case .Default:
-//                        print("default")
-//                        
-//                    }
-//                }))
-//                
-//                
-//                UIView.animateWithDuration(0.3, animations: { () -> Void in
-//                    self.removeNewView()
-//                    } , completion: {finish in
-//                        self.presentViewController(drawAlert, animated: true, completion: nil)
-//                        
-//                })
-//                
-//            }
-//            shareAction.backgroundColor = red
-//            return [shareAction]
-//
-//        case 1:
-//            var shareAction = UITableViewRowAction(style: .Destructive, title: "Resign") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
-//                
-//                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
-//                
-//                drawAlert.addAction(UIAlertAction(title: "Resign", style: .Destructive, handler: { action in
-//                    switch action.style{
-//                        
-//                    case .Cancel:
-//                        print("cancel")
-//                        
-//                    case .Destructive:
-//                        print("destructive")
-//                        
-//                    case .Default:
-//                        print("default")
-//                        
-//                    }
-//                }))
-//                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
-//                    switch action.style{
-//                        
-//                    case .Cancel:
-//                        print("cancel")
-//                        
-//                    case .Destructive:
-//                        print("destructive")
-//                        
-//                    case .Default:
-//                        print("default")
-//                        
-//                    }
-//                }))
-//                
-//                
-//                UIView.animateWithDuration(0.3, animations: { () -> Void in
-//                    self.removeNewView()
-//                    } , completion: {finish in
-//                        self.presentViewController(drawAlert, animated: true, completion: nil)
-//                        
-//                })
-//                
-//            }
-//            shareAction.backgroundColor = red
-//            return [shareAction]
-//
-//        case 2:
-//            var shareAction = UITableViewRowAction(style: .Destructive, title: "Delete") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
-//                
-//                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to delete this game?", preferredStyle: UIAlertControllerStyle.Alert)
-//                
-//                drawAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { action in
-//                    switch action.style{
-//                        
-//                    case .Cancel:
-//                        print("cancel")
-//                        
-//                    case .Destructive:
-//                        print("destructive")
-//                        
-//                    case .Default:
-//                        print("default")
-//                        
-//                    }
-//                }))
-//                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
-//                    switch action.style{
-//                        
-//                    case .Cancel:
-//                        print("cancel")
-//                        
-//                    case .Destructive:
-//                        print("destructive")
-//                        
-//                    case .Default:
-//                        print("default")
-//                        
-//                    }
-//                }))
-//                
-//                
-//                UIView.animateWithDuration(0.3, animations: { () -> Void in
-//                    self.removeNewView()
-//                    } , completion: {finish in
-//                        self.presentViewController(drawAlert, animated: true, completion: nil)
-//                        
-//                })
-//                
-//            }
-//            shareAction.backgroundColor = red
-//            return [shareAction]
-//
-//        default :
-//            ""
-//            
-//        }
-//        
-//
-//        
-//        
-//        return nil
-//        
-//    }
+    func tableView(tableView:UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+    }
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?
+    {
+        
+        switch indexPath.section {
+        case 0:
+            var shareAction = UITableViewRowAction(style: .Destructive, title: "Resign") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+                
+                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                drawAlert.addAction(UIAlertAction(title: "Resign", style: .Destructive, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                        
+                        let gameToEdit = gamesArrayYourTurn[indexPath.row]
+                        print("\(indexPath.row) and \(gameToEdit) and \(gamesArrayYourTurn.count)")
+                        
+                        if gameToEdit["whitePlayer"] as? String == PFUser.currentUser()!.username {
+                            
+                            if gameToEdit["whiteRatedComplete"] as! Bool == false {
+                                
+                                if gameToEdit["mode"] as! String == "Rated" {
+                                    
+                                    //lost
+                                    let Rating = self.calculateRating(Double((gameToEdit["whiteRating"] as? Int)!), bR: Double((gameToEdit["blackRating"] as? Int)!), K: 32, sW: 0, sB: 1)
+                                    
+                                    let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                                    let addRating = Rating.0 - (gameToEdit["whiteRating"] as? Int)!
+                                    
+                                    print(addRating+nowRating)
+                                    
+                                    PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                                    let s = Int(PFUser.currentUser()!.objectForKey("lost") as! String!)! + 1
+                                    PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                                    PFUser.currentUser()!.save()
+                                }
+                                
+                                gameToEdit["status_white"] = "lost"
+                                gameToEdit["status_black"] = "won"
+                                
+                                gameToEdit["whiteRatedComplete"] = true
+                                gameToEdit["gameEndStatus"] = "Resigned"
+                                
+                                gameToEdit.save()
+                                
+                                
+                                self.otUN = gameToEdit["blackPlayer"] as! String
+                                
+                                var OID = NSData()
+                                var MID = NSData()
+                                
+                                var MIR = Int()
+                                var OIR = Int()
+                                var OIRS = Int()
+                                
+                                var MIU = String()
+                                var OIU = String()
+                                
+                                let query = PFQuery(className: "_User")
+                                
+                                query.whereKey("username", containedIn: gameToEdit["players"] as! NSMutableArray as [AnyObject])
+                                query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+                                    if (error == nil) {
+                                        
+                                        if let userArray = objects as? [PFUser] {
+                                            for user in userArray {
+                                                
+                                                if user["username"] as? String == PFUser.currentUser()!.username {
+                                                    MIU = (user["username"] as? String)!
+                                                    MIR = (user["rating"] as? Int)!
+                                                    
+                                                    if let userPicture = user["profile_picture"] as? PFFile {
+                                                        
+                                                        let imageData = userPicture.getData()
+                                                        MID = imageData!
+                                                    }
+                                                    
+                                                }
+                                                else {
+                                                    OIU = (user["username"] as? String)!
+                                                    OIR = (user["rating"] as? Int)!
+                                                    OIRS = (user["rating"] as? Int)!
+                                                    
+                                                    
+                                                    if let userPicture = user["profile_picture"] as? PFFile {
+                                                        
+                                                        let imageData = userPicture.getData()
+                                                        OID = imageData!
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                        
+                                        self.UmeUserRatingIntStart = (gameToEdit["whiteRating"] as? Int)!
+                                        self.UotherUserRatingIntStart = (gameToEdit["blackRating"] as? Int)!
+                                        self.UmeUserRatingInt = MIR
+                                        self.UotherUserRatingInt = OIR
+                                        self.UotherUserName = OIU
+                                        
+                                        
+                                        if gameToEdit["mode"] as! String == "Rated" {
+                                            self.UgameIsRatedMode = true
+                                        }
+                                        else {
+                                            self.UgameIsRatedMode = false
+                                        }
+                                        
+                                        
+                                        self.gameFinishedScreen("lost",statusBy: "resigning", otherUserImage:OID,  meUserImage:MID, iamWhite:true, meUserRatingIntStart:(gameToEdit["whiteRating"] as? Int)!, otherUserRatingIntStart:(gameToEdit["blackRating"] as? Int)!, meUserRatingInt:MIR, otherUserRatingInt:OIR,  otherUserName:OIU, otherUserRating:OIRS,sbb:(gameToEdit["blackPlayer"] as? String)!,sww:(gameToEdit["whitePlayer"] as? String)!)
+                                        
+                                    }
+                                }
+                                
+                                
+                                //firebase
+                                
+                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                var status = ["turn": "done"]
+                                print(gameToEdit.objectId!)
+                                var objID = gameToEdit.objectId!
+                                print(objID)
+                                let statusRef = checkstatus.childByAppendingPath("\(objID)")
+                                statusRef.setValue(status)
+                                //firebase - end
+                                
+                                
+                                
+                            }
+                        }
+                        else {
+                            //is black
+                            
+                            if gameToEdit["blackRatedComplete"] as! Bool == false {
+                                
+                                if gameToEdit["mode"] as! String == "Rated" {
+                                    
+                                    //lost
+                                    let Rating = self.calculateRating(Double((gameToEdit["whiteRating"] as? Int)!), bR: Double((gameToEdit["blackRating"] as? Int)!), K: 32, sW: 1, sB: 0)
+                                    
+                                    let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                                    let addRating = Rating.1 - (gameToEdit["blackRating"] as? Int)!
+                                    
+                                    print(addRating+nowRating)
+                                    
+                                    PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                                    let s = Int(PFUser.currentUser()!.objectForKey("lost") as! String!)! + 1
+                                    PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                                    PFUser.currentUser()!.save()
+                                }
+                                
+                                gameToEdit["status_white"] = "won"
+                                gameToEdit["status_black"] = "lost"
+                                
+                                gameToEdit["blackRatedComplete"] = true
+                                gameToEdit["gameEndStatus"] = "Resigned"
+                                
+                                gameToEdit.save()
+                                
+                                
+                                self.otUN = gameToEdit["whitePlayer"] as! String
+                                
+                                var OID = NSData()
+                                var MID = NSData()
+                                
+                                var MIR = Int()
+                                var OIR = Int()
+                                var OIRS = Int()
+                                
+                                var MIU = String()
+                                var OIU = String()
+                                
+                                let query = PFQuery(className: "_User")
+                                
+                                query.whereKey("username", containedIn: gameToEdit["players"] as! NSMutableArray as [AnyObject])
+                                query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+                                    if (error == nil) {
+                                        
+                                        if let userArray = objects as? [PFUser] {
+                                            for user in userArray {
+                                                
+                                                if user["username"] as? String == PFUser.currentUser()!.username {
+                                                    MIU = (user["username"] as? String)!
+                                                    MIR = (user["rating"] as? Int)!
+                                                    
+                                                    if let userPicture = user["profile_picture"] as? PFFile {
+                                                        
+                                                        let imageData = userPicture.getData()
+                                                        MID = imageData!
+                                                    }
+                                                    
+                                                }
+                                                else {
+                                                    OIU = (user["username"] as? String)!
+                                                    OIR = (user["rating"] as? Int)!
+                                                    OIRS = (user["rating"] as? Int)!
+                                                    
+                                                    
+                                                    if let userPicture = user["profile_picture"] as? PFFile {
+                                                        
+                                                        let imageData = userPicture.getData()
+                                                        OID = imageData!
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                        
+                                        self.UmeUserRatingIntStart = (gameToEdit["blackRating"] as? Int)!
+                                        self.UotherUserRatingIntStart = (gameToEdit["whiteRating"] as? Int)!
+                                        self.UmeUserRatingInt = MIR
+                                        self.UotherUserRatingInt = OIR
+                                        self.UotherUserName = OIU
+                                        
+                                        
+                                        if gameToEdit["mode"] as! String == "Rated" {
+                                            self.UgameIsRatedMode = true
+                                        }
+                                        else {
+                                            self.UgameIsRatedMode = false
+                                        }
+                                        
+                                        
+                                        self.gameFinishedScreen("won",statusBy: "resigning", otherUserImage:OID,  meUserImage:MID, iamWhite:false, meUserRatingIntStart:(gameToEdit["blackRating"] as? Int)!, otherUserRatingIntStart:(gameToEdit["whiteRating"] as? Int)!, meUserRatingInt:MIR, otherUserRatingInt:OIR,  otherUserName:OIU, otherUserRating:OIRS,sbb:(gameToEdit["blackPlayer"] as? String)!,sww:(gameToEdit["whitePlayer"] as? String)!)
+                                        
+                                    }
+                                }
+                                
+                                
+                                //firebase
+                                
+                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                var status = ["turn": "done"]
+                                print(gameToEdit.objectId!)
+                                var objID = gameToEdit.objectId!
+                                print(objID)
+                                let statusRef = checkstatus.childByAppendingPath("\(objID)")
+                                statusRef.setValue(status)
+                                //firebase - end
+                                
+                                
+                                
+                            }
+                            
+                        }
+                        
+                        
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                
+                
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.removeNewView()
+                    } , completion: {finish in
+                        self.presentViewController(drawAlert, animated: true, completion: nil)
+                        
+                })
+                
+            }
+            shareAction.backgroundColor = red
+            return [shareAction]
+            
+        case 1:
+            var shareAction = UITableViewRowAction(style: .Destructive, title: "Resign") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+                
+                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to resign?", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                drawAlert.addAction(UIAlertAction(title: "Resign", style: .Destructive, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                        let gameToEdit = gamesArrayTheirTurn[indexPath.row]
+                        print("\(indexPath.row) and \(gameToEdit) and \(gamesArrayYourTurn.count)")
+                        
+                        if gameToEdit["whitePlayer"] as? String == PFUser.currentUser()!.username {
+                            
+                            if gameToEdit["whiteRatedComplete"] as! Bool == false {
+                                
+                                if gameToEdit["mode"] as! String == "Rated" {
+                                    
+                                    //lost
+                                    let Rating = self.calculateRating(Double((gameToEdit["whiteRating"] as? Int)!), bR: Double((gameToEdit["blackRating"] as? Int)!), K: 32, sW: 0, sB: 1)
+                                    
+                                    let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                                    let addRating = Rating.0 - (gameToEdit["whiteRating"] as? Int)!
+                                    
+                                    print(addRating+nowRating)
+                                    
+                                    PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                                    let s = Int(PFUser.currentUser()!.objectForKey("lost") as! String!)! + 1
+                                    PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                                    PFUser.currentUser()!.save()
+                                }
+                                
+                                gameToEdit["status_white"] = "lost"
+                                gameToEdit["status_black"] = "won"
+                                
+                                gameToEdit["whiteRatedComplete"] = true
+                                gameToEdit["gameEndStatus"] = "Resigned"
+                                
+                                gameToEdit.save()
+                                
+                                
+                                self.otUN = gameToEdit["blackPlayer"] as! String
+                                
+                                var OID = NSData()
+                                var MID = NSData()
+                                
+                                var MIR = Int()
+                                var OIR = Int()
+                                var OIRS = Int()
+                                
+                                var MIU = String()
+                                var OIU = String()
+                                
+                                let query = PFQuery(className: "_User")
+                                
+                                query.whereKey("username", containedIn: gameToEdit["players"] as! NSMutableArray as [AnyObject])
+                                query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+                                    if (error == nil) {
+                                        
+                                        if let userArray = objects as? [PFUser] {
+                                            for user in userArray {
+                                                
+                                                if user["username"] as? String == PFUser.currentUser()!.username {
+                                                    MIU = (user["username"] as? String)!
+                                                    MIR = (user["rating"] as? Int)!
+                                                    
+                                                    if let userPicture = user["profile_picture"] as? PFFile {
+                                                        
+                                                        let imageData = userPicture.getData()
+                                                        MID = imageData!
+                                                    }
+                                                    
+                                                }
+                                                else {
+                                                    OIU = (user["username"] as? String)!
+                                                    OIR = (user["rating"] as? Int)!
+                                                    OIRS = (user["rating"] as? Int)!
+                                                    
+                                                    
+                                                    if let userPicture = user["profile_picture"] as? PFFile {
+                                                        
+                                                        let imageData = userPicture.getData()
+                                                        OID = imageData!
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                        
+                                        self.UmeUserRatingIntStart = (gameToEdit["whiteRating"] as? Int)!
+                                        self.UotherUserRatingIntStart = (gameToEdit["blackRating"] as? Int)!
+                                        self.UmeUserRatingInt = MIR
+                                        self.UotherUserRatingInt = OIR
+                                        self.UotherUserName = OIU
+                                        
+                                        
+                                        if gameToEdit["mode"] as! String == "Rated" {
+                                            self.UgameIsRatedMode = true
+                                        }
+                                        else {
+                                            self.UgameIsRatedMode = false
+                                        }
+                                        
+                                        
+                                        self.gameFinishedScreen("lost",statusBy: "resigning", otherUserImage:OID,  meUserImage:MID, iamWhite:true, meUserRatingIntStart:(gameToEdit["whiteRating"] as? Int)!, otherUserRatingIntStart:(gameToEdit["blackRating"] as? Int)!, meUserRatingInt:MIR, otherUserRatingInt:OIR,  otherUserName:OIU, otherUserRating:OIRS,sbb:(gameToEdit["blackPlayer"] as? String)!,sww:(gameToEdit["whitePlayer"] as? String)!)
+                                        
+                                    }
+                                }
+                                
+                                
+                                //firebase
+                                
+                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                var status = ["turn": "done"]
+                                print(gameToEdit.objectId!)
+                                var objID = gameToEdit.objectId!
+                                print(objID)
+                                let statusRef = checkstatus.childByAppendingPath("\(objID)")
+                                statusRef.setValue(status)
+                                //firebase - end
+                                
+                                
+                                
+                            }
+                        }
+                        else {
+                            //is black
+                            
+                            if gameToEdit["blackRatedComplete"] as! Bool == false {
+                                
+                                if gameToEdit["mode"] as! String == "Rated" {
+                                    
+                                    //lost
+                                    let Rating = self.calculateRating(Double((gameToEdit["whiteRating"] as? Int)!), bR: Double((gameToEdit["blackRating"] as? Int)!), K: 32, sW: 1, sB: 0)
+                                    
+                                    let nowRating = PFUser.currentUser()!.objectForKey("rating") as! Int
+                                    let addRating = Rating.1 - (gameToEdit["blackRating"] as? Int)!
+                                    
+                                    print(addRating+nowRating)
+                                    
+                                    PFUser.currentUser()!.setObject(nowRating+addRating, forKey: "rating")
+                                    let s = Int(PFUser.currentUser()!.objectForKey("lost") as! String!)! + 1
+                                    PFUser.currentUser()!.setObject("\(s)", forKey: "lost")
+                                    PFUser.currentUser()!.save()
+                                }
+                                
+                                gameToEdit["status_white"] = "won"
+                                gameToEdit["status_black"] = "lost"
+                                
+                                gameToEdit["blackRatedComplete"] = true
+                                gameToEdit["gameEndStatus"] = "Resigned"
+                                
+                                gameToEdit.save()
+                                
+                                
+                                self.otUN = gameToEdit["whitePlayer"] as! String
+                                
+                                var OID = NSData()
+                                var MID = NSData()
+                                
+                                var MIR = Int()
+                                var OIR = Int()
+                                var OIRS = Int()
+                                
+                                var MIU = String()
+                                var OIU = String()
+                                
+                                let query = PFQuery(className: "_User")
+                                
+                                query.whereKey("username", containedIn: gameToEdit["players"] as! NSMutableArray as [AnyObject])
+                                query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+                                    if (error == nil) {
+                                        
+                                        if let userArray = objects as? [PFUser] {
+                                            for user in userArray {
+                                                
+                                                if user["username"] as? String == PFUser.currentUser()!.username {
+                                                    MIU = (user["username"] as? String)!
+                                                    MIR = (user["rating"] as? Int)!
+                                                    
+                                                    if let userPicture = user["profile_picture"] as? PFFile {
+                                                        
+                                                        let imageData = userPicture.getData()
+                                                        MID = imageData!
+                                                    }
+                                                    
+                                                }
+                                                else {
+                                                    OIU = (user["username"] as? String)!
+                                                    OIR = (user["rating"] as? Int)!
+                                                    OIRS = (user["rating"] as? Int)!
+                                                    
+                                                    
+                                                    if let userPicture = user["profile_picture"] as? PFFile {
+                                                        
+                                                        let imageData = userPicture.getData()
+                                                        OID = imageData!
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                        
+                                        self.UmeUserRatingIntStart = (gameToEdit["blackRating"] as? Int)!
+                                        self.UotherUserRatingIntStart = (gameToEdit["whiteRating"] as? Int)!
+                                        self.UmeUserRatingInt = MIR
+                                        self.UotherUserRatingInt = OIR
+                                        self.UotherUserName = OIU
+                                        
+                                        
+                                        if gameToEdit["mode"] as! String == "Rated" {
+                                            self.UgameIsRatedMode = true
+                                        }
+                                        else {
+                                            self.UgameIsRatedMode = false
+                                        }
+                                        
+                                        
+                                        self.gameFinishedScreen("won",statusBy: "resigning", otherUserImage:OID,  meUserImage:MID, iamWhite:false, meUserRatingIntStart:(gameToEdit["blackRating"] as? Int)!, otherUserRatingIntStart:(gameToEdit["whiteRating"] as? Int)!, meUserRatingInt:MIR, otherUserRatingInt:OIR,  otherUserName:OIU, otherUserRating:OIRS,sbb:(gameToEdit["blackPlayer"] as? String)!,sww:(gameToEdit["whitePlayer"] as? String)!)
+                                        
+                                    }
+                                }
+                                
+                                
+                                //firebase
+                                
+                                let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+                                var status = ["turn": "done"]
+                                print(gameToEdit.objectId!)
+                                var objID = gameToEdit.objectId!
+                                print(objID)
+                                let statusRef = checkstatus.childByAppendingPath("\(objID)")
+                                statusRef.setValue(status)
+                                //firebase - end
+                                
+                                
+                                
+                            }
+                            
+                        }
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                
+                
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.removeNewView()
+                    } , completion: {finish in
+                        self.presentViewController(drawAlert, animated: true, completion: nil)
+                        
+                })
+                
+            }
+            shareAction.backgroundColor = red
+            return [shareAction]
+            
+        case 2:
+            var shareAction = UITableViewRowAction(style: .Destructive, title: "Delete") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+                
+                let drawAlert = UIAlertController(title: "Warning", message: "Are you sure you want to delete this game?", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                drawAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                drawAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+                    switch action.style{
+                        
+                    case .Cancel:
+                        print("cancel")
+                        
+                    case .Destructive:
+                        print("destructive")
+                        
+                    case .Default:
+                        print("default")
+                        
+                    }
+                }))
+                
+                
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.removeNewView()
+                    } , completion: {finish in
+                        self.presentViewController(drawAlert, animated: true, completion: nil)
+                        
+                })
+                
+            }
+            shareAction.backgroundColor = red
+            return [shareAction]
+            
+        default :
+            ""
+            
+        }
+        
+        
+        
+        
+        return nil
+        
+    }
     
+    
+    
+    var ratToIncreaseMe = Int()
+    var ratToIncreaseOther = Int()
+    
+    func gameFinishedScreen(var statusWhite:String, var statusBy:String,var otherUserImage:NSData, let meUserImage:NSData, let iamWhite:Bool,let meUserRatingIntStart:Int,let otherUserRatingIntStart:Int,let meUserRatingInt:Int,let otherUserRatingInt:Int, let otherUserName:String,let otherUserRating:Int,let sbb:String,let sww:String) {
+        
+        let query = PFQuery(className: "_User")
+        
+        
+        
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            visualEffectView.alpha = 1
+            }, completion: {finish in
+                visualEffectSub.userInteractionEnabled = true
+                visualEffectView.userInteractionEnabled = true
+        })
+        
+        var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
+        scrollView1.delegate = self
+        scrollView1.userInteractionEnabled = true
+        scrollView1.scrollEnabled = true
+        scrollView1.pagingEnabled = false
+        scrollView1.contentSize = CGSizeMake(screenWidth, screenHeight)
+        visualEffectSub.addSubview(scrollView1)
+        
+        
+        oppoImage.image = UIImage(data:otherUserImage)
+        oppoImage.frame.size.width = 65
+        oppoImage.frame.size.height = 65
+        oppoImage.frame.origin.x = screenWidth/2 - 90
+        oppoImage.frame.origin.y = -100
+        oppoImage.clipsToBounds = true
+        oppoImage.contentMode = .ScaleAspectFill
+        oppoImage.layer.cornerRadius = oppoImage.frame.size.width/2
+        scrollView1.addSubview(oppoImage)
+        
+        iImage = UIImageView()
+        iImage.image = UIImage(data:meUserImage)
+        iImage.frame.size.width = 65
+        iImage.frame.size.height = 65
+        iImage.frame.origin.x = screenWidth/2 - 90
+        iImage.frame.origin.y = screenHeight+100
+        iImage.clipsToBounds = true
+        iImage.contentMode = .ScaleAspectFill
+        iImage.layer.cornerRadius = iImage.frame.size.width/2
+        scrollView1.addSubview(iImage)
+        
+        var wonLabel = UILabel(frame: CGRectMake(20,screenHeight/2-56 - screenHeight/8 - 30 - 10,screenWidth-40, 102))
+        
+        var by = " by "
+        if statusBy == "time" {
+            by = " on "
+        }
+        
+        if statusBy == "" {
+            by = ""
+        }
+        var meRating = Int()
+        var otherRating = Int()
+        let sb = sbb
+        let sw = sww
+        if statusWhite == "won" && iamWhite {
+            wonLabel.text = "You won against " + "\(sb)" + by + statusBy
+            
+            let Rating = self.calculateRating(Double(meUserRatingIntStart), bR: Double(otherUserRatingIntStart), K: 32, sW: 1, sB: 0)
+            meRating = Rating.0
+            otherRating = Rating.1
+            
+        }
+        else if statusWhite == "lost" && iamWhite {
+            wonLabel.text = "You lost against " + "\(sb)" + by + statusBy
+            
+            let Rating = self.calculateRating(Double(meUserRatingIntStart), bR: Double(otherUserRatingIntStart), K: 32, sW: 0, sB: 1)
+            meRating = Rating.0
+            otherRating = Rating.1
+        }
+        if statusWhite == "won" && !iamWhite {
+            wonLabel.text = "You lost against " + "\(sw)" + by + statusBy
+            
+            let Rating = self.calculateRating(Double(otherUserRatingIntStart), bR: Double(meUserRatingIntStart), K: 32, sW: 1, sB: 0)
+            meRating = Rating.1
+            otherRating = Rating.0
+        }
+        else if statusWhite == "lost" && !iamWhite {
+            wonLabel.text = "You won against " + "\(sw)" + by + statusBy
+            
+            let Rating = self.calculateRating(Double(otherUserRatingIntStart), bR: Double(meUserRatingIntStart), K: 32, sW: 0, sB: 1)
+            meRating = Rating.1
+            otherRating = Rating.0
+        }
+        else if statusWhite == "drew" && !iamWhite {
+            wonLabel.text = "You drew " + "\(sw)"
+            
+            let Rating = self.calculateRating(Double(otherUserRatingIntStart), bR: Double(meUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
+            meRating = Rating.1
+            otherRating = Rating.0
+            
+        }
+        else if statusWhite == "drew" && iamWhite {
+            wonLabel.text = "You drew " + "\(sb)"
+            
+            let Rating = self.calculateRating(Double(meUserRatingIntStart), bR: Double(otherUserRatingIntStart), K: 32, sW: 0.5, sB: 0.5)
+            meRating = Rating.0
+            otherRating = Rating.1
+        }
+        
+        
+        wonLabel.textAlignment = .Center
+        if darkMode {wonLabel.textColor = UIColor.whiteColor()}
+        else {wonLabel.textColor = UIColor.blackColor() }
+        wonLabel.alpha = 0
+        wonLabel.numberOfLines = 0
+        wonLabel.font = UIFont(name: "Times", size: 25)
+        scrollView1.addSubview(wonLabel)
+        
+        nameOppo = UILabel(frame: CGRectMake(oppoImage.frame.origin.x + oppoImage.frame.size.width + 25,oppoImage.frame.origin.y + 10,screenWidth - (oppoImage.frame.origin.x + oppoImage.frame.size.width + 25),27))
+        nameOppo.font = UIFont(name: "Times", size: 22)
+        nameOppo.textAlignment = .Left
+        if darkMode {nameOppo.textColor = UIColor.whiteColor()}
+        else {nameOppo.textColor = UIColor.blackColor() }
+        nameOppo.text = otherUserName
+        scrollView1.addSubview(nameOppo)
+        
+        ratingOppo = UILabel(frame: CGRectMake(nameOppo.frame.origin.x,nameOppo.frame.origin.y + nameOppo.frame.size.height,screenWidth - (oppoImage.frame.origin.x + oppoImage.frame.size.width + 25),21))
+        ratingOppo.font = UIFont(name: "Times-Italic", size: 15)
+        ratingOppo.textColor = UIColor.darkGrayColor()
+        if darkMode {ratingOppo.textColor = UIColor.whiteColor()}
+        else {ratingOppo.textColor = UIColor.blackColor() }
+        ratingOppo.text = "\(otherUserRating)"
+        scrollView1.addSubview(ratingOppo)
+        
+        nameI = UILabel(frame: CGRectMake(iImage.frame.origin.x + iImage.frame.size.width + 25,iImage.frame.origin.y + 10,screenWidth - (iImage.frame.origin.x + iImage.frame.size.width + 25),27))
+        nameI.font = UIFont(name: "Times", size: 22)
+        nameI.textAlignment = .Left
+        if darkMode {nameI.textColor = UIColor.whiteColor()}
+        else {nameI.textColor = UIColor.blackColor() }
+        nameI.text = PFUser.currentUser()!.username
+        scrollView1.addSubview(nameI)
+        
+        ratingI = UILabel(frame: CGRectMake(screenWidth/2,nameI.frame.origin.y + nameI.frame.size.height,200,40))
+        ratingI.font = UIFont(name: "Times-Italic", size: 25)
+        ratingI.textAlignment = .Left
+        ratingI.textColor = UIColor.darkGrayColor()
+        if darkMode {self.ratingI.textColor = UIColor.whiteColor()}
+        else {self.ratingI.textColor = UIColor.blackColor() }
+        
+        scrollView1.addSubview(ratingI)
+        
+        var shareTwitterButton = UIButton(frame: CGRectMake(screenWidth/2 - 50,screenHeight + 200,30,30))
+        shareTwitterButton.setBackgroundImage(UIImage(named:"TwitterLogo_#55acee"), forState: .Normal)
+        shareTwitterButton.addTarget(self, action: "shareTwitterButtonPressed:", forControlEvents: .TouchUpInside)
+        scrollView1.addSubview(shareTwitterButton)
+        
+        var shareFacebookButton = UIButton(frame: CGRectMake(screenWidth/2 + 20,screenHeight + 200,30,30))
+        shareFacebookButton.setBackgroundImage(UIImage(named:"facebook_logo"), forState: .Normal)
+        shareFacebookButton.addTarget(self, action: "shareFacebookButtonPressed:", forControlEvents: .TouchUpInside)
+        scrollView1.addSubview(shareFacebookButton)
+        
+        cancelB = UIButton(frame: CGRectMake(screenWidth - 60, 43,50 ,50))
+        cancelB.userInteractionEnabled = true
+        if darkMode {cancelB.setBackgroundImage(UIImage(named: "cross-mark1-3S.png"), forState: .Normal)}
+        else {cancelB.setBackgroundImage(UIImage(named: "cross-mark1-2S.png"), forState: .Normal) }
+        cancelB.addTarget(self, action: "cancelButtonPressed:", forControlEvents: .TouchUpInside)
+        scrollView1.addSubview(cancelB)
+        
+        UIView.animateWithDuration(0.8, delay: 0.5, usingSpringWithDamping: 1.3, initialSpringVelocity: 5.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
+            
+            self.oppoImage.frame.origin.y = screenHeight/2 - screenHeight/4 + 20 - screenHeight/8 - 25 - 10
+            self.nameOppo.frame.origin.y = self.oppoImage.frame.origin.y + 10
+            self.ratingOppo.frame.origin.y = self.nameOppo.frame.origin.y + self.nameOppo.frame.size.height
+            
+            self.iImage.frame.origin.y = screenHeight/2 + screenHeight/4 - (65) - 20 - screenHeight/8 - 25 - 20
+            self.nameI.frame.origin.y = self.iImage.frame.origin.y + 10
+            
+            self.ratingI.frame.origin.y = screenHeight/2 + screenHeight/7
+            
+            self.ratingI.frame.origin.y = self.nameI.frame.origin.y + self.nameI.frame.size.height
+            self.ratingI.frame.origin.x = self.nameI.frame.origin.x
+            self.ratingI.frame.size.width = screenWidth - (self.iImage.frame.origin.x + self.iImage.frame.size.width + 25)
+            self.ratingI.frame.size.height = 21
+            self.ratingI.font = UIFont(name: "Times-Italic", size: 15)
+            
+            
+            shareTwitterButton.frame.origin.y = screenHeight - 60
+            shareFacebookButton.frame.origin.y = screenHeight - 60
+            
+            let mR = Int(meUserRatingIntStart)
+            let oR = Int(otherUserRatingIntStart)
+            
+            self.ratToIncreaseMe = meRating-mR
+            self.ratToIncreaseOther = otherRating-oR
+            
+            
+            
+            wonLabel.alpha = 1
+            self.ratingI.text = "\(meUserRatingInt)" + "+ \(self.ratToIncreaseMe)"
+            self.ratingOppo.text = "\(otherUserRatingInt)" + "+ \(self.ratToIncreaseOther)"
+            
+            
+            
+        }), completion:  { finish in
+            
+            self.waitTimerRating = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: Selector("updateWaitNum"), userInfo: nil, repeats: true)
+            
+            }
+        )
+        
+        
+        
+        
+    }
+    
+    var nameI = UILabel()
+    var iImage = UIImageView()
+    var movementTimerRating = NSTimer()
+    var waitTimerRating = NSTimer()
+    
+    var meRating2 = Int()
+    var ratingI = UILabel()
+    
+    var oppoRating = Int()
+    var ratingOppo = UILabel()
+    var nameOppo = UILabel()
+    var oppoImage = UIImageView()
+    
+    
+    var waitNum = Int()
+    
+    func updateWaitNum() {
+        if waitNum >= 5 {
+            self.movementTimerRating = NSTimer.scheduledTimerWithTimeInterval(0.03, target: self, selector: Selector("updateCountTimer"), userInfo: nil, repeats: true)
+            waitTimerRating.invalidate()
+            
+        }
+        else {
+            waitNum++
+            
+        }
+    }
+    
+    var UmeUserRatingIntStart = Int()
+    var UotherUserRatingIntStart = Int()
+    var UmeUserRatingInt = Int()
+    var UotherUserRatingInt = Int()
+    var UotherUserName = String()
+    var UgameIsRatedMode = Bool()
+    
+    func updateCountTimer() {
+        
+        let meUserRatingIntStart = UmeUserRatingIntStart
+        let otherUserRatingIntStart = UotherUserRatingIntStart
+        let meUserRatingInt = UmeUserRatingInt
+        let otherUserRatingInt = UotherUserRatingInt
+        let otherUserName = UotherUserName
+        
+        if !UgameIsRatedMode {
+            self.ratingI.text = "\(PFUser.currentUser()!.objectForKey("rating") as! Int)"
+            ratingOppo.text = "\(otherUserRatingIntStart)"
+            
+        }
+        else{
+            
+            if meRating2 == ratToIncreaseMe {
+                
+                UIView.animateWithDuration(0.8, delay: 0.0, usingSpringWithDamping: 1.3, initialSpringVelocity: 5.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
+                    
+                    
+                    if darkMode {self.ratingI.textColor = UIColor.lightGrayColor()}
+                    else {self.ratingI.textColor = UIColor.darkGrayColor() }
+                    
+                    self.ratingI.text = "\(PFUser.currentUser()!.objectForKey("rating") as! Int)"
+                    
+                    
+                }), completion:
+                    {finish in
+                        
+                        //self.movementTimerRating.invalidate()
+                        
+                })
+                
+                
+            }
+            else  {
+                if ratToIncreaseMe > 0 {
+                    meRating2++
+                }
+                else if ratToIncreaseMe < 0 {
+                    meRating2--
+                    
+                }
+                ratingI.text = "\(meUserRatingInt+meRating2)"
+                
+            }
+            
+            
+            
+            if oppoRating == ratToIncreaseOther {
+                if darkMode {self.ratingOppo.textColor = UIColor.lightGrayColor()}
+                else {self.ratingOppo.textColor = UIColor.darkGrayColor() }
+            }
+            else {
+                if ratToIncreaseOther > 0 {
+                    oppoRating++
+                }
+                else if ratToIncreaseOther < 0 {
+                    oppoRating--
+                    
+                }
+                ratingOppo.text = "\(otherUserRatingInt+oppoRating)"
+            }
+        }
+    }
+    var otUN = String()
+    func shareFacebookButtonPressed(sender: UIButton!) {
+        removeNewView()
+        
+        let otherUserName = otUN
+        let vc = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        vc.setInitialText("I won against \(otherUserName) playing CHESS")
+        vc.addURL(NSURL(string: "https://itunes.apple.com/us/app/chess-play-now/id1090933229?ls=1&mt=8"))
+        presentViewController(vc, animated: true, completion: nil)
+        
+    }
+    func shareTwitterButtonPressed(sender: UIButton!) {
+        removeNewView()
+        let otherUserName = otUN
+        
+        let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+        vc.setInitialText("I won against \(otherUserName) playing CHESS")
+        vc.addURL(NSURL(string: "https://itunes.apple.com/us/app/chess-play-now/id1090933229?ls=1&mt=8"))
+        presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    var cancelB = UIButton()
+    func cancelButtonPressed(sender:UITapGestureRecognizer){
+        self.usernameArray = []
+        self.yourturnArray = []
+        self.theirturnArray = []
+        self.gameoverArray = []
+        self.imageDataArray = []
+        self.typeofGameover = []
+        
+        gamesArrayYourTurn = []
+        gamesArrayTheirTurn = []
+        gamesArrayGameOver = []
+        
+        self.usernameArray = []
+        self.ratingArray = []
+        self.updatedArray = []
+        self.timeleftArray = []
+        //self.profilePicArray = []
+        //  self.imageDataArray = []
+        self.indicatorDataArray = []
+        
+        self.yourturnUpdateSince = []
+        self.theirturnUpdateSince = []
+        self.gameoverUpdateSince = []
+        
+        self.yourturnLeft = []
+        self.theirturnLeft = []
+        self.gameoverLeft = []
+        
+        self.tableView.reloadData()
+        self.gameOverRated = []
+        
+        self.findGames()
+        
+        gameIDSYourTurn = []
+        gameIDSTheirTurn = []
+        gameIDSGameOver = []
+        gameID = ""
+        
+        self.loaded = true
+        removeNewView()
+        
+    }
     let loadingView = UIImageView(frame: CGRectMake((screenWidth/2)-30,-70,60,60))
-var loaded = false
-
+    var loaded = false
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         
-
+        
         
         let yPos = -tableView.contentOffset.y
         
         if yPos > 200 {
-    
+            
             tableView.contentOffset.y = -150
         }
         
         if yPos > 64 {
             
             self.loadingView.alpha = (((yPos/1000) * 10)) - 1.1
-          //  self.tableView.alpha = (2-((yPos/1000) * 15))
-
+            //  self.tableView.alpha = (2-((yPos/1000) * 15))
+            
         }
-//        else {
-//            
-////            UIView.animateWithDuration(0.2, animations: { () -> Void in
-////                self.tableView.alpha = 1
-////
-////            })
-//        }
+        //        else {
+        //
+        ////            UIView.animateWithDuration(0.2, animations: { () -> Void in
+        ////                self.tableView.alpha = 1
+        ////
+        ////            })
+        //        }
         
         if yPos > 200 {
             
-       
+            
             if loaded == false {
                 self.tableView.alpha = 0
-
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
                 
-                
-                }, completion: { (finished) -> Void in
-                if finished {
-                
-                    self.usernameArray = []
-                    self.yourturnArray = []
-                    self.theirturnArray = []
-                    self.gameoverArray = []
-                    self.imageDataArray = []
-                    self.typeofGameover = []
-                    
-                    self.usernameArray = []
-                    self.ratingArray = []
-                    self.updatedArray = []
-                    self.timeleftArray = []
-                    //self.profilePicArray = []
-                  //  self.imageDataArray = []
-                    self.indicatorDataArray = []
-                    
-                    self.yourturnUpdateSince = []
-                    self.theirturnUpdateSince = []
-                    self.gameoverUpdateSince = []
-                    
-                    self.yourturnLeft = []
-                    self.theirturnLeft = []
-                    self.gameoverLeft = []
-                    
-                    self.tableView.reloadData()
-                    self.gameOverRated = []
-
-                    self.findGames()
-                    
-                    gameIDSYourTurn = []
-                    gameIDSTheirTurn = []
-                    gameIDSGameOver = []
-                    gameID = ""
-                    
-            
-                    self.loaded = true
-                    
-                    //
-                    
-              
-                    
-    
-                    
-                    self.notationsCountYourTurn = []
-                    self.notationsCountTheirTurn = []
-                    self.notationsCountGameOver = []
-                    self.yourTurnSpeed = []
-                    self.theirTurnSpeed = []
-                    self.gameoverTurnSpeed = []
-           
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
                     
                     
-                    self.gameOverRated = []
-                    self.gameoverStatus = []
-                  
-                    
-                    
-                    
-                    
-                }
-            })
+                    }, completion: { (finished) -> Void in
+                        if finished {
+                            
+                            self.usernameArray = []
+                            self.yourturnArray = []
+                            self.theirturnArray = []
+                            self.gameoverArray = []
+                            self.imageDataArray = []
+                            self.typeofGameover = []
+                            
+                            self.usernameArray = []
+                            self.ratingArray = []
+                            self.updatedArray = []
+                            self.timeleftArray = []
+                            //self.profilePicArray = []
+                            //  self.imageDataArray = []
+                            self.indicatorDataArray = []
+                            
+                            self.yourturnUpdateSince = []
+                            self.theirturnUpdateSince = []
+                            self.gameoverUpdateSince = []
+                            
+                            self.yourturnLeft = []
+                            self.theirturnLeft = []
+                            self.gameoverLeft = []
+                            
+                            gamesArrayYourTurn = []
+                            gamesArrayTheirTurn = []
+                            gamesArrayGameOver = []
+                            
+                            self.tableView.reloadData()
+                            self.gameOverRated = []
+                            
+                            self.findGames()
+                            
+                            gameIDSYourTurn = []
+                            gameIDSTheirTurn = []
+                            gameIDSGameOver = []
+                            gameID = ""
+                            
+                            
+                            
+                            self.loaded = true
+                            
+                            //
+                            
+                            
+                            
+                            
+                            
+                            self.notationsCountYourTurn = []
+                            self.notationsCountTheirTurn = []
+                            self.notationsCountGameOver = []
+                            self.yourTurnSpeed = []
+                            self.theirTurnSpeed = []
+                            self.gameoverTurnSpeed = []
+                            
+                            
+                            
+                            self.gameOverRated = []
+                            self.gameoverStatus = []
+                            
+                            
+                            
+                            
+                            
+                        }
+                })
             }
             
         }
         
     }
     
-
-
+    
+    
     @IBAction func analyze(sender: AnyObject) {
         
         print(gameID)
@@ -1551,39 +2423,39 @@ var loaded = false
         let r = query.getFirstObject()
         
         if r!["isAnalyze"] as? Bool == false {
-        
-         var white =  ""
-        var black =  ""
-
-        if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
             
-             white = (PFUser.currentUser()?.username)!
-             black = (r!["blackPlayer"] as? String)!
-        } else {
-             white = (r!["blackPlayer"] as? String)!
-             black = (PFUser.currentUser()?.username)!
-        }
-        gameAnalyze["player"] = (PFUser.currentUser()?.username)!
-        gameAnalyze["whitePlayer"] = white
-        gameAnalyze["blackPlayer"] = black
-        gameAnalyze["players"] = [white,black]
-        gameAnalyze["confirmed"] = true
-        gameAnalyze["piecePosition"] = r!["piecePosition"] as! Array<String>
-        gameAnalyze["status_white"] = "analyze"
-        gameAnalyze["status_black"] = "analyze"
-        gameAnalyze["whitePromotionType"] = NSMutableArray()
-        gameAnalyze["blackPromotionType"] = NSMutableArray()
-        gameAnalyze["board"] = "regular"
-        
-        gameAnalyze["name"] = (r!["blackPlayer"] as? String)!
-        
-        gameAnalyze.saveInBackgroundWithBlock { (bool:Bool, error:NSError?) -> Void in
-            if error == nil {
-                print("analyze Made!!")
-  
+            var white =  ""
+            var black =  ""
+            
+            if r!["whitePlayer"] as? String == PFUser.currentUser()?.username {
+                
+                white = (PFUser.currentUser()?.username)!
+                black = (r!["blackPlayer"] as? String)!
+            } else {
+                white = (r!["blackPlayer"] as? String)!
+                black = (PFUser.currentUser()?.username)!
             }
-        }
-        
+            gameAnalyze["player"] = (PFUser.currentUser()?.username)!
+            gameAnalyze["whitePlayer"] = white
+            gameAnalyze["blackPlayer"] = black
+            gameAnalyze["players"] = [white,black]
+            gameAnalyze["confirmed"] = true
+            gameAnalyze["piecePosition"] = r!["piecePosition"] as! Array<String>
+            gameAnalyze["status_white"] = "analyze"
+            gameAnalyze["status_black"] = "analyze"
+            gameAnalyze["whitePromotionType"] = NSMutableArray()
+            gameAnalyze["blackPromotionType"] = NSMutableArray()
+            gameAnalyze["board"] = "regular"
+            
+            gameAnalyze["name"] = (r!["blackPlayer"] as? String)!
+            
+            gameAnalyze.saveInBackgroundWithBlock { (bool:Bool, error:NSError?) -> Void in
+                if error == nil {
+                    print("analyze Made!!")
+                    
+                }
+            }
+            
         } else if r!["isAnalyze"] as? Bool == true {
             gameAnalyze["piecePosition"] = r!["piecePosition"] as! Array<String>
             gameAnalyze.saveInBackgroundWithBlock { (bool:Bool, error:NSError?) -> Void in
@@ -1594,7 +2466,7 @@ var loaded = false
             }
         }
         
-         var game2 = PFObject(className: "Games")
+        var game2 = PFObject(className: "Games")
         game2 = r!
         
         game2.setObject(true, forKey: "isAnalyze")
@@ -1613,7 +2485,7 @@ var loaded = false
             switch action.style{
             case .Default:
                 print("default")
-
+                
                 UIView.animateWithDuration(0.5, animations: { () -> Void in
                     
                     self.tableView.frame.origin.x = -screenWidth
@@ -1622,14 +2494,14 @@ var loaded = false
                     self.invitesButtonOutlet.title = ""
                     self.navigationItem.title = "Analyze"
                     
-                    }) { Finish in
-                        
-                        self.newButtonOutlet.title = "New"
-                        self.invitesButtonOutlet.title = "Invites"
-                        self.navigationItem.title = "CHESS"
-                        self.tabBarController?.selectedIndex = 1
-                        self.tableView.frame.origin.x = 0
-                        
+                }) { Finish in
+                    
+                    self.newButtonOutlet.title = "New"
+                    self.invitesButtonOutlet.title = "Invites"
+                    self.navigationItem.title = "CHESS"
+                    self.tabBarController?.selectedIndex = 1
+                    self.tableView.frame.origin.x = 0
+                    
                 }
                 
             case .Cancel:
@@ -1655,7 +2527,7 @@ var loaded = false
         }))
         
         self.presentViewController(alert, animated: true, completion: nil)
-       
+        
         struct GAME {
             
             var objectID: String
@@ -1690,112 +2562,112 @@ var loaded = false
             var hasWhiteRookMoved2: Bool
             var hasBlackRookMoved: Bool
             var hasBlackRookMoved2: Bool
-
             
-        
+            
+            
         }
         var gameToAnalyze = GAME(objectID: "", whitePlayer: "", blackPlayer: "", timeLeftToMove: NSDate(), timePerMove: Float(), mode: "", inviteTo: "", speed: "", position: "", updatedAt: NSDate(), status_white: "", status_black: "", players: [], inviteFrom: "", piecePosition: [], createdAt: NSDate(), confirmed: Bool(), promotion: Bool(), can_Castle_black: Bool(), passantBlack: Bool(), blackPromotionPiece: [], can_Castle_white: Bool(), whitePromotionPiece: [], whitePromotionType: [], passant: Bool(), passantPiece: Int(), promotionBlack: Bool(), hasWhiteRookMoved: Bool(), hasWhiteRookMoved2: Bool(), hasBlackRookMoved: Bool(), hasBlackRookMoved2: Bool())
-
-       // NSUserDefaults.standardUserDefaults().setObject(gameToAnalyze, forKey: gameToAnalyze.objectID)
-      //  let tabledata = NSUserDefaults.standardUserDefaults().arrayForKey("testArray")
+        
+        // NSUserDefaults.standardUserDefaults().setObject(gameToAnalyze, forKey: gameToAnalyze.objectID)
+        //  let tabledata = NSUserDefaults.standardUserDefaults().arrayForKey("testArray")
         
         
     }
     
     
-//    func updateTimer() {
-//        
-//        
-//        for var i = 0; i < yourturnLeft.count; i++ {
-//            yourturnLeft[i]++
-//            yourturnLeftPrint.append(Int(yourturnLeft[i]))
-//
-//        }
-//        for var i = 0; i < theirturnLeft.count; i++ {
-//            theirturnLeft[i]++
-//            theirturnLeftPrint.append(Int(theirturnLeft[i]))
-//        }
-//        for var i = 0; i < yourturnLeft.count; i++ {
-//            gameoverLeft[i]++
-//            gameoverLeftPrint.append(Int(gameoverLeft[i]))
-//            
-//            //
-//            if gameoverLeftPrint[i] <= -60 {
-//                gameoverLeftPrint[i] = gameoverLeftPrint[i]/60
-//                let sinceOutput = gameoverLeftPrint[i] * -1
-//                timeL.text = "\(sinceOutput)min"
-//            }
-//            else {
-//                let sinceOutput = Int(timeLeftC) * -1
-//                timeL.text = "\(sinceOutput)s"
-//            }
-//            //making to hours
-//            if timeLeftC <= -60 {
-//                timeLeftC = timeLeftC/60
-//                let sinceOutput = Int(timeLeftC) * -1
-//                timeL.text = "\(sinceOutput)h"
-//                
-//                //making to days
-//                if timeLeftC <= -24 {
-//                    timeLeftC = timeLeftC/24
-//                    let sinceOutput = Int(timeLeftC) * -1
-//                    timeL.text = "\(sinceOutput)d"
-//                    
-//                }
-//                
-//            }
-//            
-//        }
-//        
-//
-//
-//        
-//        timeLeft++
-//        var timeLeftC = timeLeft
-//        print(timeLeft)
-//        if timeLeftC <= -60 {
-//            timeLeftC = timeLeftC/60
-//            let sinceOutput = Int(timeLeftC) * -1
-//            timeL.text = "\(sinceOutput)min"
-//        }
-//        else {
-//            let sinceOutput = Int(timeLeftC) * -1
-//            timeL.text = "\(sinceOutput)s"
-//        }
-//        //making to hours
-//        if timeLeftC <= -60 {
-//            timeLeftC = timeLeftC/60
-//            let sinceOutput = Int(timeLeftC) * -1
-//            timeL.text = "\(sinceOutput)h"
-//            
-//            //making to days
-//            if timeLeftC <= -24 {
-//                timeLeftC = timeLeftC/24
-//                let sinceOutput = Int(timeLeftC) * -1
-//                timeL.text = "\(sinceOutput)d"
-//                
-//            }
-//            
-//        }
-//        
-//        if timeLeftC >= 0 {
-//            timeL.text = "Game Finished"
-//            timeL.font = UIFont(name: "Times-Italic", size: 19)
-//        }
-//        
-//    
-//    }
-
+    //    func updateTimer() {
+    //
+    //
+    //        for var i = 0; i < yourturnLeft.count; i++ {
+    //            yourturnLeft[i]++
+    //            yourturnLeftPrint.append(Int(yourturnLeft[i]))
+    //
+    //        }
+    //        for var i = 0; i < theirturnLeft.count; i++ {
+    //            theirturnLeft[i]++
+    //            theirturnLeftPrint.append(Int(theirturnLeft[i]))
+    //        }
+    //        for var i = 0; i < yourturnLeft.count; i++ {
+    //            gameoverLeft[i]++
+    //            gameoverLeftPrint.append(Int(gameoverLeft[i]))
+    //
+    //            //
+    //            if gameoverLeftPrint[i] <= -60 {
+    //                gameoverLeftPrint[i] = gameoverLeftPrint[i]/60
+    //                let sinceOutput = gameoverLeftPrint[i] * -1
+    //                timeL.text = "\(sinceOutput)min"
+    //            }
+    //            else {
+    //                let sinceOutput = Int(timeLeftC) * -1
+    //                timeL.text = "\(sinceOutput)s"
+    //            }
+    //            //making to hours
+    //            if timeLeftC <= -60 {
+    //                timeLeftC = timeLeftC/60
+    //                let sinceOutput = Int(timeLeftC) * -1
+    //                timeL.text = "\(sinceOutput)h"
+    //
+    //                //making to days
+    //                if timeLeftC <= -24 {
+    //                    timeLeftC = timeLeftC/24
+    //                    let sinceOutput = Int(timeLeftC) * -1
+    //                    timeL.text = "\(sinceOutput)d"
+    //
+    //                }
+    //
+    //            }
+    //
+    //        }
+    //
+    //
+    //
+    //
+    //        timeLeft++
+    //        var timeLeftC = timeLeft
+    //        print(timeLeft)
+    //        if timeLeftC <= -60 {
+    //            timeLeftC = timeLeftC/60
+    //            let sinceOutput = Int(timeLeftC) * -1
+    //            timeL.text = "\(sinceOutput)min"
+    //        }
+    //        else {
+    //            let sinceOutput = Int(timeLeftC) * -1
+    //            timeL.text = "\(sinceOutput)s"
+    //        }
+    //        //making to hours
+    //        if timeLeftC <= -60 {
+    //            timeLeftC = timeLeftC/60
+    //            let sinceOutput = Int(timeLeftC) * -1
+    //            timeL.text = "\(sinceOutput)h"
+    //
+    //            //making to days
+    //            if timeLeftC <= -24 {
+    //                timeLeftC = timeLeftC/24
+    //                let sinceOutput = Int(timeLeftC) * -1
+    //                timeL.text = "\(sinceOutput)d"
+    //
+    //            }
+    //
+    //        }
+    //
+    //        if timeLeftC >= 0 {
+    //            timeL.text = "Game Finished"
+    //            timeL.font = UIFont(name: "Times-Italic", size: 19)
+    //        }
+    //
+    //
+    //    }
+    
     
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
-didLaunchGame = false
+        didLaunchGame = false
         lightOrDarkMode()
     }
     override func viewDidAppear(animated: Bool) {
-
+        
         shouldContinueTimer = false
-
+        
         
         gameIDSYourTurn = []
         gameIDSTheirTurn = []
@@ -1803,34 +2675,34 @@ didLaunchGame = false
         gameID = ""
         
         findGames()
-
+        
         invitesButtonOutlet.title = "Invites"
         invitesButtonOutlet.enabled = false
         self.invitesButtonOutlet.tintColor = UIColor.grayColor()
         
         
         darkMode = NSUserDefaults.standardUserDefaults().boolForKey("dark_mode")
-
+        
         //        //adding the game
-//        let game = ["id": "123456"]
-//        let gamesRef = ref.childByAppendingPath("games")
-//        gamesRef.setValue(game)
-//        
-//        //add who's turn it is
-//        let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
-//        let status = ["turn": "white"]
-//        let statusRef = checkstatus.childByAppendingPath("123456")
-//        statusRef.setValue(status)
-//
-//        //check for any changes that may have accured at the destined game ≈_≈
-//        let check = Firebase(url:"https://chess-panber.firebaseio.com/games/123456")
-//        check.observeEventType(.Value, withBlock: { snapshot in
-//            print(snapshot.value)
-//            }, withCancelBlock: { error in
-//                print(error.description)
-//        })
+        //        let game = ["id": "123456"]
+        //        let gamesRef = ref.childByAppendingPath("games")
+        //        gamesRef.setValue(game)
+        //
+        //        //add who's turn it is
+        //        let checkstatus = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+        //        let status = ["turn": "white"]
+        //        let statusRef = checkstatus.childByAppendingPath("123456")
+        //        statusRef.setValue(status)
+        //
+        //        //check for any changes that may have accured at the destined game ≈_≈
+        //        let check = Firebase(url:"https://chess-panber.firebaseio.com/games/123456")
+        //        check.observeEventType(.Value, withBlock: { snapshot in
+        //            print(snapshot.value)
+        //            }, withCancelBlock: { error in
+        //                print(error.description)
+        //        })
         lightOrDarkMode()
-
+        
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -1841,39 +2713,43 @@ didLaunchGame = false
         imageDataArray = []
         typeofGameover = []
         
-         usernameArray = []
-         ratingArray = []
-         updatedArray = []
-         timeleftArray = []
-         profilePicArray = []
-         imageDataArray = []
-         indicatorDataArray = []
+        usernameArray = []
+        ratingArray = []
+        updatedArray = []
+        timeleftArray = []
+        profilePicArray = []
+        imageDataArray = []
+        indicatorDataArray = []
         
-         notationsCountYourTurn = []
-         notationsCountTheirTurn = []
-         notationsCountGameOver = []
-         yourTurnSpeed = []
-         theirTurnSpeed = []
-         gameoverTurnSpeed = []
-     
-         yourturnUpdateSince = []
-         theirturnUpdateSince = []
-         gameoverUpdateSince = []
+        notationsCountYourTurn = []
+        notationsCountTheirTurn = []
+        notationsCountGameOver = []
+        yourTurnSpeed = []
+        theirTurnSpeed = []
+        gameoverTurnSpeed = []
         
-         yourturnLeft = []
-         theirturnLeft = []
+        yourturnUpdateSince = []
+        theirturnUpdateSince = []
+        gameoverUpdateSince = []
+        
+        yourturnLeft = []
+        theirturnLeft = []
         gameoverLeft = []
-
+        
+        gamesArrayYourTurn = []
+        gamesArrayTheirTurn = []
+        gamesArrayGameOver = []
+        
         gameOverRated = []
         gameoverStatus = []
         tableView.alpha = 0
         tableView.reloadData()
         
     }
-
+    
     
     @IBAction func newPressed(sender: AnyObject) {
-
+        
         
         UIView.animateWithDuration(0.3) { () -> Void in
             visualEffectView.alpha = 1
@@ -1988,7 +2864,7 @@ didLaunchGame = false
         locationButton.addTarget(self, action: "nearbyButtonPressed:", forControlEvents: .TouchUpInside)
         visualEffectSub.addSubview(locationButton)
         //------location end
-  
+        
         let gesture3 = UITapGestureRecognizer(target: self, action: "effectSubPressed:")
         visualEffectSub.userInteractionEnabled = true
         visualEffectSub.addGestureRecognizer(gesture3)
@@ -1997,7 +2873,7 @@ didLaunchGame = false
     
     func friendsButtonPressed(sender:UIButton) {
         removeNewView()
-    
+        
         let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("newGameFriends")
         self.showViewController(vc as! UIViewController, sender: vc)
     }
@@ -2017,7 +2893,7 @@ didLaunchGame = false
     }
     
     func randomButtonPressed(sender:UIButton) {
-    
+        
         removeNewView()
         
         let meUser = PFUser.currentUser() as PFUser!
@@ -2038,14 +2914,14 @@ didLaunchGame = false
                             
                             userArray.append(result["username"] as! String)
                         }
-                    
+                        
                     }
                     
                     let count = UInt32(userArray.count)
                     let ranInt = arc4random_uniform(count)
                     let _count = Int(ranInt)
                     
-
+                    
                     
                     
                     let query2 = PFQuery(className: "_User")
@@ -2054,50 +2930,50 @@ didLaunchGame = false
                         
                         if error2 == nil {
                             if let userArray2 = result2 as? [PFUser] {
-                                    for user in userArray2 {
-                                        
-                                        NSUserDefaults.standardUserDefaults().setObject(user["rating"] as! Int, forKey: "other_userrating_from_friends_gamemenu")
-                                        
-                                        NSUserDefaults.standardUserDefaults().setObject(userArray[_count], forKey: "other_username_from_friends_gamemenu")
-                                        
-                                        if let userPicture = user["profile_picture"] as? PFFile {
-                                            
-                                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error3: NSError?) -> Void in
-                                                if (error3 == nil) {
-                                             
-                                                    NSUserDefaults.standardUserDefaults().setObject(imageData, forKey: "other_userImage_from_friends_gamemenu")
-                                                    
-                                                    let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInvite")
-                                                    self.showViewController(vc as! UIViewController, sender: vc)
-                                                    
-                                                    
-                                                } else {
-                                                }
-                                            }
-                                            
-                                        }
-                                    }
+                                for user in userArray2 {
                                     
+                                    NSUserDefaults.standardUserDefaults().setObject(user["rating"] as! Int, forKey: "other_userrating_from_friends_gamemenu")
+                                    
+                                    NSUserDefaults.standardUserDefaults().setObject(userArray[_count], forKey: "other_username_from_friends_gamemenu")
+                                    
+                                    if let userPicture = user["profile_picture"] as? PFFile {
+                                        
+                                        userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error3: NSError?) -> Void in
+                                            if (error3 == nil) {
+                                                
+                                                NSUserDefaults.standardUserDefaults().setObject(imageData, forKey: "other_userImage_from_friends_gamemenu")
+                                                
+                                                let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("GameInvite")
+                                                self.showViewController(vc as! UIViewController, sender: vc)
+                                                
+                                                
+                                            } else {
+                                            }
+                                        }
+                                        
+                                    }
                                 }
                                 
-
-                                
+                            }
                             
-                        
+                            
+                            
+                            
+                            
                         }
                         
                     })
                     
                     
-                
+                    
                 }
-            
-            
+                
+                
             }
             
         }
-    
-
+        
+        
     }
     
     
@@ -2113,7 +2989,7 @@ didLaunchGame = false
     
     func effectSubPressed(sender:UITapGestureRecognizer){
         removeNewView()
-  
+        
     }
     
     func removeNewView() {
@@ -2132,18 +3008,52 @@ didLaunchGame = false
         
         visualEffectView.userInteractionEnabled = false
         visualEffectSub.userInteractionEnabled = false
-    
+        
     }
     
     
+    
+    // MARK: Calculate the RATING
+    ///////
+    
+    //  ----- the parameters -----
+    //  wR  = whiteRating before
+    //  bR  = blacRating before
+    //  K   = K-factor, how much the rating will impact
+    //  sW  = scoreWhite -> 1 , 0.5 or 0 , depending on who won
+    //  sB  = scoreblack -> 1 , 0.5 or 0 , depending on who won
+    //  ----- the calculation -----
+    //  wR_2 = tranformed whiteRating, part of the calcultaion
+    //  bR_2 = tranformed blackRating, part of the calcultaion
+    //  ExW  = expected whiteRating after based on whiteRating before
+    //  ExB  = expected blackRating after based on blackRating before
+    //  wR_2 = final calculation of whiteScore
+    //  bR_2 = final calculation of blackScore
+    
+    //calculateRating to calculate rating of players
+    func calculateRating(wR:Double, bR:Double, K:Double, sW:Double, sB:Double) -> (Int,Int) {
+        print("calculating...")
+        var wR_2 = Double(10^^(Int(wR / 400)))
+        var bR_2 = Double(10^^(Int(bR / 400)))
+        
+        let ExW:Double = wR_2/(wR_2 + bR_2)
+        let ExB:Double = bR_2/(wR_2 + bR_2)
+        
+        wR_2 = wR+(K*(sW - ExW))
+        bR_2 = bR+(K*(sB - ExB))
+        
+        return (Int(wR_2) , Int(bR_2))
+    }
+    
+    ///////
     
     
     
     //func to check if dark or light mode should be enabled, keep this at the bottom
     func lightOrDarkMode() {
         if darkMode == true {
-        
-
+            
+            
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
             self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.05, green: 0.05 , blue: 0.05, alpha: 1)
             self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.07, green: 0.07 , blue: 0.07, alpha: 1)
@@ -2153,54 +3063,54 @@ didLaunchGame = false
             self.tabBarController?.tabBar.tintColor = blue
             self.tabBarController?.tabBar.barTintColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             self.navigationController?.navigationBar.tintColor = blue
-                visualEffectView.effect = UIBlurEffect(style: .Dark)
-
+            visualEffectView.effect = UIBlurEffect(style: .Dark)
             
             
-                    self.newButtonOutlet.tintColor = blue
             
-                
+            self.newButtonOutlet.tintColor = blue
             
-
+            
+            
+            
             UIApplication.sharedApplication().statusBarStyle = .LightContent
-
             
-                tableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
-
-
+            
+            tableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            
+            
             
         }
         else if darkMode == false {
             
-                self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
-                self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
-                self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
+            self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
             //this is to gamemenu white
-                self.view.backgroundColor = UIColor.whiteColor()
-                self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
-                self.tabBarController?.tabBar.tintColor = blue
-                self.navigationController?.navigationBar.tintColor = blue
-                self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
-
-                self.newButtonOutlet.tintColor = blue
-
-                visualEffectView.effect = UIBlurEffect(style: .Light)
+            self.view.backgroundColor = UIColor.whiteColor()
+            self.tabBarController?.tabBar.barStyle = UIBarStyle.Default
+            self.tabBarController?.tabBar.tintColor = blue
+            self.navigationController?.navigationBar.tintColor = blue
+            self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
             
-                tableView.backgroundColor = UIColor.whiteColor()
-
-
+            self.newButtonOutlet.tintColor = blue
+            
+            visualEffectView.effect = UIBlurEffect(style: .Light)
+            
+            tableView.backgroundColor = UIColor.whiteColor()
+            
+            
             UIApplication.sharedApplication().statusBarStyle = .Default
-
-
-
-
+            
+            
+            
+            
             
         }
-    
-    
+        
+        
     }
     
-
+    
 }
 
 

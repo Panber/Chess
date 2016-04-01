@@ -155,6 +155,8 @@ class NewGameSettingsPage_Explore: UIViewController {
         game["draw_white"] = ""
         game["gameEndStatus"] = ""
 
+        game["whiteDeleted"] = false
+        game["blackDeleted"] = false
         
         game["timeLeftToMove"] = NSDate()
         

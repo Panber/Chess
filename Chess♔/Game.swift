@@ -3,7 +3,9 @@
 //  ChessNow
 //
 //  Created by Johannes Berge on 21/11/14.
-//  Copyright (c) 2014 Johannes Berge & Alexander Panayotov. All rights reserved.
+//  Copyright (c) 2016 Johannes Berge & Alexander Panayotov. All rights reserved.
+//
+//  I only see my goals, I don't believe in failure, cause I know the smallest voices they can make it major.
 //
 
 import UIKit

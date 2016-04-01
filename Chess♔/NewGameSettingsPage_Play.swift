@@ -167,6 +167,9 @@ class NewGameSettingsPage: UIViewController {
         game["draw_white"] = ""
         game["gameEndStatus"] = ""
 
+        game["whiteDeleted"] = false
+        game["blackDeleted"] = false
+
 
         
         game["whiteTime"] = Int()
