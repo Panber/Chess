@@ -1861,6 +1861,156 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                     case .Destructive:
                         print("destructive")
                         
+                        let gameToEdit = gamesArrayGameOver[indexPath.row]
+                        
+                        if gameToEdit["whitePlayer"] as? String == PFUser.currentUser()!.username {
+                        
+                        gameToEdit["whiteDeleted"] = true
+                            gameToEdit.save()
+                            
+                            self.usernameArray = []
+                            self.yourturnArray = []
+                            self.theirturnArray = []
+                            self.gameoverArray = []
+                            self.imageDataArray = []
+                            self.typeofGameover = []
+                            
+                            self.usernameArray = []
+                            self.ratingArray = []
+                            self.updatedArray = []
+                            self.timeleftArray = []
+                            //self.profilePicArray = []
+                            //  self.imageDataArray = []
+                            self.indicatorDataArray = []
+                            
+                            self.yourturnUpdateSince = []
+                            self.theirturnUpdateSince = []
+                            self.gameoverUpdateSince = []
+                            
+                            yourTurnColor = []
+                            theirTurnColor = []
+                            gameOverColor = []
+                            
+                            self.yourturnLeft = []
+                            self.theirturnLeft = []
+                            self.gameoverLeft = []
+                            
+                            gamesArrayYourTurn = []
+                            gamesArrayTheirTurn = []
+                            gamesArrayGameOver = []
+                            
+                            self.gameOverRated = []
+                            
+                            self.findGames()
+                            
+                            gameIDSYourTurn = []
+                            gameIDSTheirTurn = []
+                            gameIDSGameOver = []
+                            gameID = ""
+                            
+                            
+                            
+                            self.loaded = true
+                            
+                            //
+                            
+                            
+                            
+                            
+                            
+                            self.notationsCountYourTurn = []
+                            self.notationsCountTheirTurn = []
+                            self.notationsCountGameOver = []
+                            self.yourTurnSpeed = []
+                            self.theirTurnSpeed = []
+                            self.gameoverTurnSpeed = []
+                            
+                            
+                            
+                            self.gameOverRated = []
+                            self.gameoverStatus = []
+                            tableView.reloadData()
+
+
+                            
+                        }
+                        else  {
+                            gameToEdit["blackDeleted"] = true
+                            
+                            gameToEdit.save()
+                            
+                            self.usernameArray = []
+                            self.yourturnArray = []
+                            self.theirturnArray = []
+                            self.gameoverArray = []
+                            self.imageDataArray = []
+                            self.typeofGameover = []
+                            
+                            self.usernameArray = []
+                            self.ratingArray = []
+                            self.updatedArray = []
+                            self.timeleftArray = []
+                            //self.profilePicArray = []
+                            //  self.imageDataArray = []
+                            self.indicatorDataArray = []
+                            
+                            yourTurnColor = []
+                            theirTurnColor = []
+                            gameOverColor = []
+                            
+                            self.yourturnUpdateSince = []
+                            self.theirturnUpdateSince = []
+                            self.gameoverUpdateSince = []
+                            
+                            self.yourturnLeft = []
+                            self.theirturnLeft = []
+                            self.gameoverLeft = []
+                            
+                            gamesArrayYourTurn = []
+                            gamesArrayTheirTurn = []
+                            gamesArrayGameOver = []
+                            
+                            self.gameOverRated = []
+                            
+                            self.findGames()
+                            
+                            gameIDSYourTurn = []
+                            gameIDSTheirTurn = []
+                            gameIDSGameOver = []
+                            gameID = ""
+                            
+                            
+                            
+                            self.loaded = true
+                            
+                            //
+                            
+                            
+                            
+                            
+                            
+                            self.notationsCountYourTurn = []
+                            self.notationsCountTheirTurn = []
+                            self.notationsCountGameOver = []
+                            self.yourTurnSpeed = []
+                            self.theirTurnSpeed = []
+                            self.gameoverTurnSpeed = []
+                            
+                            
+                            
+                            self.gameOverRated = []
+                            self.gameoverStatus = []
+                            
+                           // tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+
+                            
+                            tableView.reloadData()
+
+                        }
+                        
+                        
+                        
+                        
                     case .Default:
                         print("default")
                         
@@ -2261,6 +2411,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         //  self.imageDataArray = []
         self.indicatorDataArray = []
         
+        yourTurnColor = []
+        theirTurnColor = []
+        gameOverColor = []
+        
         self.yourturnUpdateSince = []
         self.theirturnUpdateSince = []
         self.gameoverUpdateSince = []
@@ -2338,6 +2492,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                             //self.profilePicArray = []
                             //  self.imageDataArray = []
                             self.indicatorDataArray = []
+                            
+                            yourTurnColor = []
+                            theirTurnColor = []
+                            gameOverColor = []
                             
                             self.yourturnUpdateSince = []
                             self.theirturnUpdateSince = []
@@ -2720,6 +2878,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         profilePicArray = []
         imageDataArray = []
         indicatorDataArray = []
+        
+        yourTurnColor = []
+        theirTurnColor = []
+        gameOverColor = []
         
         notationsCountYourTurn = []
         notationsCountTheirTurn = []
