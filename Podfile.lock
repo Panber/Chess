@@ -1,12 +1,15 @@
 PODS:
+  - DGElasticPullToRefresh (1.0.3)
   - Firebase (2.5.0)
   - NMPopUpViewSwift (3.0.1)
 
 DEPENDENCIES:
+  - DGElasticPullToRefresh
   - Firebase (>= 2.4.3)
   - NMPopUpViewSwift
 
 SPEC CHECKSUMS:
+  DGElasticPullToRefresh: 040f39ae69840b3261d163fe6735c5901bf851e9
   Firebase: 744617c0733b45198f9486ebd5cac64ec2d10d79
   NMPopUpViewSwift: 23a44d6db17a9abc6b806f9fac597be6d7e9f300
 

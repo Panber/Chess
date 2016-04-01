@@ -121,6 +121,7 @@
 		8FA2511F1C7A7D6800A4A32D /* PanberLogov9 copy2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA2511E1C7A7D6800A4A32D /* PanberLogov9 copy2.png */; };
 		8FA251221C7BD4CF00A4A32D /* DarkModePreview2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251201C7BD4CF00A4A32D /* DarkModePreview2.png */; };
 		8FA251251C7CC46000A4A32D /* LightModePreview2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA251241C7CC46000A4A32D /* LightModePreview2.png */; };
+		8FA2C0D81CAEDD120052D8B9 /* DGElasticPullToRefresh in Resources */ = {isa = PBXBuildFile; fileRef = 8FA2C0D71CAEDD120052D8B9 /* DGElasticPullToRefresh */; };
 		8FA55EEE1C53CCA700250403 /* facebook_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA55EED1C53CCA600250403 /* facebook_logo.png */; };
 		8FA569091C011D0300AFC460 /* map158-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569071C011D0200AFC460 /* map158-2.png */; };
 		8FA5690A1C011D0300AFC460 /* map158.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA569081C011D0200AFC460 /* map158.png */; };
@@ -138,6 +139,11 @@
 		8FB94F991BE62EA80029EF00 /* chatIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB94F981BE62EA80029EF00 /* chatIcon.png */; };
 		8FB94F9B1BE62F360029EF00 /* Data@3x_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */; };
 		8FBED2FC1BB1F35700CDAACC /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */; };
+		8FC3BC341CAEE1E400958904 /* DGElasticPullToRefreshConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC3BC2F1CAEE1E400958904 /* DGElasticPullToRefreshConstants.swift */; };
+		8FC3BC351CAEE1E400958904 /* DGElasticPullToRefreshExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC3BC301CAEE1E400958904 /* DGElasticPullToRefreshExtensions.swift */; };
+		8FC3BC361CAEE1E400958904 /* DGElasticPullToRefreshLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC3BC311CAEE1E400958904 /* DGElasticPullToRefreshLoadingView.swift */; };
+		8FC3BC371CAEE1E400958904 /* DGElasticPullToRefreshLoadingViewCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC3BC321CAEE1E400958904 /* DGElasticPullToRefreshLoadingViewCircle.swift */; };
+		8FC3BC381CAEE1E400958904 /* DGElasticPullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC3BC331CAEE1E400958904 /* DGElasticPullToRefreshView.swift */; };
 		8FD804741C24CADB00902DB9 /* chessLaunchGold.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FD804731C24CADB00902DB9 /* chessLaunchGold.png */; };
 		8FDB6EFC1C4AA40500F50324 /* reAnalysis-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FDB6EFB1C4AA40500F50324 /* reAnalysis-2.png */; };
 		8FDB6EFE1C4AA4C000F50324 /* emAnalysis.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FDB6EFD1C4AA4C000F50324 /* emAnalysis.png */; };
@@ -382,6 +388,7 @@
 		8FA2511E1C7A7D6800A4A32D /* PanberLogov9 copy2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PanberLogov9 copy2.png"; sourceTree = "<group>"; };
 		8FA251201C7BD4CF00A4A32D /* DarkModePreview2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DarkModePreview2.png; sourceTree = "<group>"; };
 		8FA251241C7CC46000A4A32D /* LightModePreview2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightModePreview2.png; sourceTree = "<group>"; };
+		8FA2C0D71CAEDD120052D8B9 /* DGElasticPullToRefresh */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DGElasticPullToRefresh; sourceTree = "<group>"; };
 		8FA55EED1C53CCA600250403 /* facebook_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_logo.png; sourceTree = "<group>"; };
 		8FA569071C011D0200AFC460 /* map158-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map158-2.png"; sourceTree = "<group>"; };
 		8FA569081C011D0200AFC460 /* map158.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map158.png; sourceTree = "<group>"; };
@@ -405,6 +412,11 @@
 		8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Data@3x_blue.png"; sourceTree = "<group>"; };
 		8FBED2FB1BB1F35700CDAACC /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		8FBED2FD1BB1F50100CDAACC /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		8FC3BC2F1CAEE1E400958904 /* DGElasticPullToRefreshConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGElasticPullToRefreshConstants.swift; sourceTree = "<group>"; };
+		8FC3BC301CAEE1E400958904 /* DGElasticPullToRefreshExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGElasticPullToRefreshExtensions.swift; sourceTree = "<group>"; };
+		8FC3BC311CAEE1E400958904 /* DGElasticPullToRefreshLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGElasticPullToRefreshLoadingView.swift; sourceTree = "<group>"; };
+		8FC3BC321CAEE1E400958904 /* DGElasticPullToRefreshLoadingViewCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGElasticPullToRefreshLoadingViewCircle.swift; sourceTree = "<group>"; };
+		8FC3BC331CAEE1E400958904 /* DGElasticPullToRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGElasticPullToRefreshView.swift; sourceTree = "<group>"; };
 		8FD804731C24CADB00902DB9 /* chessLaunchGold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessLaunchGold.png; sourceTree = "<group>"; };
 		8FDB6EFB1C4AA40500F50324 /* reAnalysis-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reAnalysis-2.png"; sourceTree = "<group>"; };
 		8FDB6EFD1C4AA4C000F50324 /* emAnalysis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emAnalysis.png; sourceTree = "<group>"; };
@@ -665,6 +677,11 @@
 		8F4A02881B9A3F730084024A /* Swift */ = {
 			isa = PBXGroup;
 			children = (
+				8FC3BC2F1CAEE1E400958904 /* DGElasticPullToRefreshConstants.swift */,
+				8FC3BC301CAEE1E400958904 /* DGElasticPullToRefreshExtensions.swift */,
+				8FC3BC311CAEE1E400958904 /* DGElasticPullToRefreshLoadingView.swift */,
+				8FC3BC321CAEE1E400958904 /* DGElasticPullToRefreshLoadingViewCircle.swift */,
+				8FC3BC331CAEE1E400958904 /* DGElasticPullToRefreshView.swift */,
 				8F768D9A1BD6AC4F007A7BFC /* SignUpMenu.swift */,
 				8F4A028B1B9A414D0084024A /* GameMenu.swift */,
 				8F2392AA1C0A397500CC4B0F /* Game.swift */,
@@ -757,6 +774,7 @@
 		8FA5C8841B9A264F0097637E = {
 			isa = PBXGroup;
 			children = (
+				8FA2C0D71CAEDD120052D8B9 /* DGElasticPullToRefresh */,
 				8F45D2DB1C496B5700D7934B /* Charts.xcodeproj */,
 				8FA5C88F1B9A264F0097637E /* Chess♔ */,
 				8FA5C8A41B9A264F0097637E /* Chess♔Tests */,
@@ -1021,6 +1039,7 @@
 				8F31DCF31BC9513B004544CC /* equalization2.png in Resources */,
 				8F1E8EC41BD78F9600C41D37 /* nasaearth.jpg in Resources */,
 				8FD804741C24CADB00902DB9 /* chessLaunchGold.png in Resources */,
+				8FA2C0D81CAEDD120052D8B9 /* DGElasticPullToRefresh in Resources */,
 				8F31ECE31C67DAE80081F888 /* chesslogo800_120.png in Resources */,
 				8FE58AAC1C3B32E9007888F4 /* whiteBishop.png in Resources */,
 				8F31ECD91C67964B0081F888 /* chesstabv8@4x.png in Resources */,
@@ -1224,6 +1243,7 @@
 				F14E644E1BC98B7900751F20 /* FriendsPage.swift in Sources */,
 				8F2F6C4B1BDEDCC00048342A /* NewGameSettingsPage_Play.swift in Sources */,
 				F12EC96B1C76753B008ED169 /* NewGameUsername.swift in Sources */,
+				8FC3BC371CAEE1E400958904 /* DGElasticPullToRefreshLoadingViewCircle.swift in Sources */,
 				8FEF2ABF1BFE4CAA006E1359 /* NewGameNearby.swift in Sources */,
 				8F62C6801C00918700312A58 /* OtherUserProfilePage_Profile.swift in Sources */,
 				8F8BD2AD1BC5380100B25CFE /* FriendRequestsPage.swift in Sources */,
@@ -1239,14 +1259,18 @@
 				8FDB6F021C4AA6DC00F50324 /* NewAnalyzeEmpty.swift in Sources */,
 				F1431A5E1BD281B600C5854A /* UsersFriendsPage.swift in Sources */,
 				8F8BD2AB1BC524C600B25CFE /* ProfilePage.swift in Sources */,
+				8FC3BC341CAEE1E400958904 /* DGElasticPullToRefreshConstants.swift in Sources */,
+				8FC3BC381CAEE1E400958904 /* DGElasticPullToRefreshView.swift in Sources */,
 				8FFAD4DA1C44FA97000F4100 /* AnalyzeMenu.swift in Sources */,
 				8FDB6F001C4AA6CB00F50324 /* NewAnalyzeRegular.swift in Sources */,
 				F134DDDE1BC1C417005BA54C /* UsersProfilePage.swift in Sources */,
 				8F62C6841C0091C000312A58 /* OtherUserProfilePage_Play.swift in Sources */,
 				8F62C6821C0091A600312A58 /* OtherUserProfilePage_Analyze.swift in Sources */,
 				8F2F6C4A1BDED9100048342A /* NewGameFriends.swift in Sources */,
+				8FC3BC351CAEE1E400958904 /* DGElasticPullToRefreshExtensions.swift in Sources */,
 				8F273CF01BF28B7100275378 /* GameInvitesPage.swift in Sources */,
 				8F62C6861C00977A00312A58 /* NewGameSettingsPage_Analyze.swift in Sources */,
+				8FC3BC361CAEE1E400958904 /* DGElasticPullToRefreshLoadingView.swift in Sources */,
 				8FE58ABA1C446864007888F4 /* Analyze.swift in Sources */,
 				F1B414601BC72E5D00FEE6A4 /* SettingsPage.swift in Sources */,
 				8F840BCC1BBDAE6600511F44 /* FriendRequests.swift in Sources */,

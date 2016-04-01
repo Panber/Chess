@@ -84,8 +84,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-Chess♔UITests/DGElasticPullToRefresh.framework"
   install_framework "Pods-Chess♔UITests/Firebase.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-Chess♔UITests/DGElasticPullToRefresh.framework"
   install_framework "Pods-Chess♔UITests/Firebase.framework"
 fi

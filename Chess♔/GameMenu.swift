@@ -208,6 +208,87 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         checkInternetConnection()
         
         
+        
+        
+        // Initialize tableView
+        let loadingView = DGElasticPullToRefreshLoadingViewCircle()
+        loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
+        tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+            // Add your logic here
+            // Do not forget to call dg_stopLoading() at the end
+            
+
+            
+            self!.usernameArray = []
+            self!.yourturnArray = []
+            self!.theirturnArray = []
+            self!.gameoverArray = []
+            self!.imageDataArray = []
+            self!.typeofGameover = []
+            
+            self!.usernameArray = []
+            self!.ratingArray = []
+            self!.updatedArray = []
+            self!.timeleftArray = []
+            //self.profilePicArray = []
+            //  self.imageDataArray = []
+            self!.indicatorDataArray = []
+            
+            self!.yourTurnColor = []
+            self!.theirTurnColor = []
+            self!.gameoverTurnColor = []
+            
+            self!.yourturnUpdateSince = []
+            self!.theirturnUpdateSince = []
+            self!.gameoverUpdateSince = []
+            
+            self!.yourturnLeft = []
+            self!.theirturnLeft = []
+            self!.gameoverLeft = []
+            
+            gamesArrayYourTurn = []
+            gamesArrayTheirTurn = []
+            gamesArrayGameOver = []
+            
+            self!.tableView.reloadData()
+            self!.gameOverRated = []
+            
+            self!.findGames()
+            
+            gameIDSYourTurn = []
+            gameIDSTheirTurn = []
+            gameIDSGameOver = []
+            gameID = ""
+            
+            
+            self!.loaded = true
+            
+            //
+
+            self!.notationsCountYourTurn = []
+            self!.notationsCountTheirTurn = []
+            self!.notationsCountGameOver = []
+            self!.yourTurnSpeed = []
+            self!.theirTurnSpeed = []
+            self!.gameoverTurnSpeed = []
+            
+            
+            self!.gameOverRated = []
+            self!.gameoverStatus = []
+            
+            
+            
+            self?.tableView.dg_stopLoading()
+            }, loadingView: loadingView)
+        tableView.dg_setPullToRefreshFillColor(UIColor(red: 57/255.0, green: 67/255.0, blue: 89/255.0, alpha: 1.0))
+        tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
+//
+        
+        
+        
+        
+        
+        
         if (PFInstallation.currentInstallation().badge != 0) {
             PFInstallation.currentInstallation().badge = 0
             PFInstallation.currentInstallation().saveInBackground()
@@ -384,9 +465,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         let currentWindow: UIWindow = UIApplication.sharedApplication().keyWindow!
         currentWindow.addSubview(visualEffectView)
         
-        loadingView.image = UIImage(named: "cm3.png")
-        loadingView.alpha = 0
-        self.tableView.addSubview(loadingView)
+        //loadingView.image = UIImage(named: "cm3.png")
+        //loadingView.alpha = 0
+        //self.tableView.addSubview(loadingView)
         
         
         
@@ -1887,9 +1968,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                             self.theirturnUpdateSince = []
                             self.gameoverUpdateSince = []
                             
-                            yourTurnColor = []
-                            theirTurnColor = []
-                            gameOverColor = []
+                            self.yourTurnColor = []
+                            self.theirTurnColor = []
+                            self.gameoverTurnColor = []
                             
                             self.yourturnLeft = []
                             self.theirturnLeft = []
@@ -1954,9 +2035,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                             //  self.imageDataArray = []
                             self.indicatorDataArray = []
                             
-                            yourTurnColor = []
-                            theirTurnColor = []
-                            gameOverColor = []
+                            self.yourTurnColor = []
+                            self.theirTurnColor = []
+                            self.gameoverTurnColor = []
                             
                             self.yourturnUpdateSince = []
                             self.theirturnUpdateSince = []
@@ -2413,7 +2494,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         yourTurnColor = []
         theirTurnColor = []
-        gameOverColor = []
+        gameoverTurnColor = []
         
         self.yourturnUpdateSince = []
         self.theirturnUpdateSince = []
@@ -2440,118 +2521,118 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     let loadingView = UIImageView(frame: CGRectMake((screenWidth/2)-30,-70,60,60))
     var loaded = false
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-        
-        
-        
-        let yPos = -tableView.contentOffset.y
-        
-        if yPos > 200 {
-            
-            tableView.contentOffset.y = -150
-        }
-        
-        if yPos > 64 {
-            
-            self.loadingView.alpha = (((yPos/1000) * 10)) - 1.1
-            //  self.tableView.alpha = (2-((yPos/1000) * 15))
-            
-        }
-        //        else {
-        //
-        ////            UIView.animateWithDuration(0.2, animations: { () -> Void in
-        ////                self.tableView.alpha = 1
-        ////
-        ////            })
-        //        }
-        
-        if yPos > 200 {
-            
-            
-            if loaded == false {
-                self.tableView.alpha = 0
-                
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    
-                    
-                    }, completion: { (finished) -> Void in
-                        if finished {
-                            
-                            self.usernameArray = []
-                            self.yourturnArray = []
-                            self.theirturnArray = []
-                            self.gameoverArray = []
-                            self.imageDataArray = []
-                            self.typeofGameover = []
-                            
-                            self.usernameArray = []
-                            self.ratingArray = []
-                            self.updatedArray = []
-                            self.timeleftArray = []
-                            //self.profilePicArray = []
-                            //  self.imageDataArray = []
-                            self.indicatorDataArray = []
-                            
-                            yourTurnColor = []
-                            theirTurnColor = []
-                            gameOverColor = []
-                            
-                            self.yourturnUpdateSince = []
-                            self.theirturnUpdateSince = []
-                            self.gameoverUpdateSince = []
-                            
-                            self.yourturnLeft = []
-                            self.theirturnLeft = []
-                            self.gameoverLeft = []
-                            
-                            gamesArrayYourTurn = []
-                            gamesArrayTheirTurn = []
-                            gamesArrayGameOver = []
-                            
-                            self.tableView.reloadData()
-                            self.gameOverRated = []
-                            
-                            self.findGames()
-                            
-                            gameIDSYourTurn = []
-                            gameIDSTheirTurn = []
-                            gameIDSGameOver = []
-                            gameID = ""
-                            
-                            
-                            
-                            self.loaded = true
-                            
-                            //
-                            
-                            
-                            
-                            
-                            
-                            self.notationsCountYourTurn = []
-                            self.notationsCountTheirTurn = []
-                            self.notationsCountGameOver = []
-                            self.yourTurnSpeed = []
-                            self.theirTurnSpeed = []
-                            self.gameoverTurnSpeed = []
-                            
-                            
-                            
-                            self.gameOverRated = []
-                            self.gameoverStatus = []
-                            
-                            
-                            
-                            
-                            
-                        }
-                })
-            }
-            
-        }
-        
-    }
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        
+//        
+//        
+//        
+//        let yPos = -tableView.contentOffset.y
+//        
+//        if yPos > 200 {
+//            
+//            tableView.contentOffset.y = -150
+//        }
+//        
+//        if yPos > 64 {
+//            
+//            self.loadingView.alpha = (((yPos/1000) * 10)) - 1.1
+//            //  self.tableView.alpha = (2-((yPos/1000) * 15))
+//            
+//        }
+//        //        else {
+//        //
+//        ////            UIView.animateWithDuration(0.2, animations: { () -> Void in
+//        ////                self.tableView.alpha = 1
+//        ////
+//        ////            })
+//        //        }
+//        
+//        if yPos > 200 {
+//            
+//            
+//            if loaded == false {
+//                self.tableView.alpha = 0
+//                
+//                UIView.animateWithDuration(0.3, animations: { () -> Void in
+//                    
+//                    
+//                    }, completion: { (finished) -> Void in
+//                        if finished {
+//                            
+//                            self.usernameArray = []
+//                            self.yourturnArray = []
+//                            self.theirturnArray = []
+//                            self.gameoverArray = []
+//                            self.imageDataArray = []
+//                            self.typeofGameover = []
+//                            
+//                            self.usernameArray = []
+//                            self.ratingArray = []
+//                            self.updatedArray = []
+//                            self.timeleftArray = []
+//                            //self.profilePicArray = []
+//                            //  self.imageDataArray = []
+//                            self.indicatorDataArray = []
+//                            
+//                            self.yourTurnColor = []
+//                            self.theirTurnColor = []
+//                            self.gameoverTurnColor = []
+//                            
+//                            self.yourturnUpdateSince = []
+//                            self.theirturnUpdateSince = []
+//                            self.gameoverUpdateSince = []
+//                            
+//                            self.yourturnLeft = []
+//                            self.theirturnLeft = []
+//                            self.gameoverLeft = []
+//                            
+//                            gamesArrayYourTurn = []
+//                            gamesArrayTheirTurn = []
+//                            gamesArrayGameOver = []
+//                            
+//                            self.tableView.reloadData()
+//                            self.gameOverRated = []
+//                            
+//                            self.findGames()
+//                            
+//                            gameIDSYourTurn = []
+//                            gameIDSTheirTurn = []
+//                            gameIDSGameOver = []
+//                            gameID = ""
+//                            
+//                            
+//                            
+//                            self.loaded = true
+//                            
+//                            //
+//                            
+//                            
+//                            
+//                            
+//                            
+//                            self.notationsCountYourTurn = []
+//                            self.notationsCountTheirTurn = []
+//                            self.notationsCountGameOver = []
+//                            self.yourTurnSpeed = []
+//                            self.theirTurnSpeed = []
+//                            self.gameoverTurnSpeed = []
+//                            
+//                            
+//                            
+//                            self.gameOverRated = []
+//                            self.gameoverStatus = []
+//                            
+//                            
+//                            
+//                            
+//                            
+//                        }
+//                })
+//            }
+//            
+//        }
+//        
+//    }
     
     
     
@@ -2881,7 +2962,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         yourTurnColor = []
         theirTurnColor = []
-        gameOverColor = []
+        gameoverTurnColor = []
         
         notationsCountYourTurn = []
         notationsCountTheirTurn = []
