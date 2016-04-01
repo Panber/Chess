@@ -4,35 +4,52 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>DGElasticPullToRefresh.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>Firebase.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>NMPopUpViewSwift-NMPopUpViewSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>Pods-Chess♔.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 		<key>Pods-Chess♔Tests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>7</integer>
 		</dict>
 		<key>Pods-Chess♔UITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -42,7 +59,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>115824B7CB2E76E5ACB836A251E79404</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1315B2E60B584ABF755828EB0CF5467F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1A503F5AB3661A38F159DA3F7B8BFF4D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>47B4F6D14CE0D2038C02A974DED9346C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>81394C4C15E523DC86F4D81EEA331658</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A5684B81BB0F6AE21384FA6B5608AC88</key>
 		<dict>
 			<key>primary</key>
 			<true/>
