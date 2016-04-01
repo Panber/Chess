@@ -3327,7 +3327,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             
             tableView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
             
-            
+            tableView.dg_setPullToRefreshBackgroundColor(UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1))
+
             
         }
         else if darkMode == false {
@@ -3352,7 +3353,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             UIApplication.sharedApplication().statusBarStyle = .Default
             
             
-            
+            tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
+
             
             
         }
