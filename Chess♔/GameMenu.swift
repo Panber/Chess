@@ -281,7 +281,14 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
         tableView.dg_setPullToRefreshFillColor(UIColor(red: 57/255.0, green: 67/255.0, blue: 89/255.0, alpha: 1.0))
-        tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
+        
+        if darkMode {
+        
+        tableView.dg_setPullToRefreshBackgroundColor(UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1))
+        }
+            else {
+          tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
+        }
 //
         
         
