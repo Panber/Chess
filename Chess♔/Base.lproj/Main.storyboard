@@ -1322,10 +1322,10 @@
             </objects>
             <point key="canvasLocation" x="4785" y="314"/>
         </scene>
-        <!--Chat-->
+        <!--Chat View-->
         <scene sceneID="wZR-WN-2BB">
             <objects>
-                <viewController storyboardIdentifier="Chat" id="6VP-Cg-erH" customClass="Chat" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Chat" id="6VP-Cg-erH" customClass="ChatView" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3ca-OH-gtC"/>
                         <viewControllerLayoutGuide type="bottom" id="2la-QI-KgY"/>

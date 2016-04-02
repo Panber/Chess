@@ -39,6 +39,8 @@ func ^^ (radix: Int, power: Int) -> Int {
 
 var check: Firebase!
 
+var otherUserName = ""
+
 var gameIsOver = Bool()
 
 var oppoImageFromGameMenu = UIImage()
@@ -223,7 +225,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var size : CGFloat = pieceSize
     
     var otherUserImage = UIImage()
-    var otherUserName = ""
+    
     var otherUserRating = ""
     var otherUserRatingInt = Int()
     var otherUserRatingIntStart = Int()
@@ -1910,7 +1912,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             else {
                                 self.otherUserRatingInt = result["rating"] as! Int!
-                                self.otherUserName = (result["username"] as? String)!
+                                otherUserName = (result["username"] as? String)!
                                 
                             }
                             
@@ -1953,7 +1955,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         self.otherUserImage = UIImage(data: imageData!)!
                                         self.otherUserRating = "\(result["rating"] as! Int!)"
-                                        self.otherUserName = (result["username"] as? String)!
+                                        otherUserName = (result["username"] as? String)!
                                         
                                         UIView.animateWithDuration(0.3, animations: { () -> Void in
                                             self.otherImage.alpha = 1
@@ -4073,7 +4075,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             else {
                                 self.otherUserRatingInt = result["rating"] as! Int!
-                                self.otherUserName = (result["username"] as? String)!
+                                otherUserName = (result["username"] as? String)!
                                 
                             }
                             let profilePictureObject = result["profile_picture"] as? PFFile
@@ -4115,7 +4117,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.otherUserImage = UIImage(data: imageData!)!
                                         self.otherUserRating = "\(result["rating"] as! Int)"
                                         
-                                        self.otherUserName = (result["username"] as? String)!
+                                        otherUserName = (result["username"] as? String)!
                                         UIView.animateWithDuration(0.3, animations: { () -> Void in
                                             self.otherImage.alpha = 1
                                             if screenHeight == 480.0 {

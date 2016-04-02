@@ -12,5 +12,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <ParseFacebookUtilsV4/ParseFacebookUtilsV4.h>
+#import "JSQMessages.h"
+#import "JSQMessageData.h"
 
 #endif /* Chess__Bridging_Header_h */
