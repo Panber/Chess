@@ -2950,7 +2950,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     }
     override func viewDidAppear(animated: Bool) {
         
-     
+      
 
         
         
