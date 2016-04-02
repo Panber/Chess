@@ -959,7 +959,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
         
         myUser.signUpInBackgroundWithBlock { (success, error) -> Void in
             
-            var userMessage = "Welcome! Your registration was successful"
+            var userMessage = "Your registration was successful."
             
             if success {
             //query for friends, find out if the user already has friends, if not add friends
@@ -969,7 +969,7 @@ class SignUpMenu: UIViewController, UIScrollViewDelegate, UIImagePickerControlle
             friends["friends"] = []
             friends.saveInBackground()
             }
-            var t = "Congratulations!"
+            var t = "Welcome!"
             if !success {
                 //                userMessage = "The registration was not completed."
                 userMessage = error!.localizedDescription

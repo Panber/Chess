@@ -209,7 +209,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         
         
-        
         // Initialize tableView
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
@@ -250,11 +249,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             gamesArrayTheirTurn = []
             gamesArrayGameOver = []
             
-            self!.tableView.reloadData()
+          //  self!.tableView.reloadData()
             self!.gameOverRated = []
-            
-            self!.findGames()
-            
             gameIDSYourTurn = []
             gameIDSTheirTurn = []
             gameIDSGameOver = []
@@ -264,7 +260,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             self!.loaded = true
             
             //
-
+            
             self!.notationsCountYourTurn = []
             self!.notationsCountTheirTurn = []
             self!.notationsCountGameOver = []
@@ -275,7 +271,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             
             self!.gameOverRated = []
             self!.gameoverStatus = []
+            self!.loadingFromPull = true
+            self!.findGames()
+
             
+
             
             
             self?.tableView.dg_stopLoading()
@@ -476,9 +476,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         //loadingView.alpha = 0
         //self.tableView.addSubview(loadingView)
         
-        
+
         
         lightOrDarkMode()
+
     }
     
     // Location Manager helper stuff
@@ -850,7 +851,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         return 150
         
     }
-    
+    var loadingFromPull = false
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
@@ -883,8 +885,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         func find(name:String) {
             
             cell.username.text = name
-            cell.userProfileImage.image = nil
             
+            if !loadingFromPull {
+            cell.userProfileImage.image = nil
+            }
             
             
             let query = PFQuery(className: "_User")
@@ -902,7 +906,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                                 
                                 userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                     if (error == nil) {
+                                        if !self.loadingFromPull {
+
                                         cell.userProfileImage.alpha = 0
+                                        }
                                         cell.userProfileImage.image = UIImage(data: imageData!)
                                         self.imageDataArray.append(imageData!)
                                         
@@ -920,6 +927,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         }
                         
                     }
+                   // self.loadingFromPull = false
                 } else {
                     // Log details of the failure
                     print("query error: \(error) \(error!.userInfo)")
@@ -966,24 +974,24 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             
             var since = yourturnUpdateSince[indexPath.row]
             //making to minutes
-            cell.updated.text = "Last Updated: Now"
+            cell.updated.text = "Updated Now"
             
             if since >= 60 {
                 since = since/60
                 let sinceOutput = Int(since)
-                cell.updated.text = "Last Updated: \(sinceOutput)min ago"
+                cell.updated.text = "Updated \(sinceOutput)min ago"
             }
             //making to hours
             if since >= 60 {
                 since = since/60
                 let sinceOutput = Int(since)
-                cell.updated.text = "Last Updated: \(sinceOutput)h ago"
+                cell.updated.text = "Updated \(sinceOutput)h ago"
                 
                 //making to days
                 if since >= 24 {
                     since = since/24
                     let sinceOutput = Int(since)
-                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                    cell.updated.text = "Updated \(sinceOutput)d ago"
                     
                 }
                 
@@ -1087,24 +1095,24 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             
             var since = theirturnUpdateSince[indexPath.row]
             //making to minutes
-            cell.updated.text = "Last Updated: Now"
+            cell.updated.text = "Updated Now"
             
             if since >= 60 {
                 since = since/60
                 let sinceOutput = Int(since)
-                cell.updated.text = "Last Updated: \(sinceOutput)min ago"
+                cell.updated.text = "Updated \(sinceOutput)min ago"
             }
             //making to hours
             if since >= 60 {
                 since = since/60
                 let sinceOutput = Int(since)
-                cell.updated.text = "Last Updated: \(sinceOutput)h ago"
+                cell.updated.text = "Updated \(sinceOutput)h ago"
                 
                 //making to days
                 if since >= 24 {
                     since = since/24
                     let sinceOutput = Int(since)
-                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                    cell.updated.text = "Updated \(sinceOutput)d ago"
                 }
                 
             }
@@ -1223,7 +1231,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             
             var since = gameoverUpdateSince[indexPath.row]
             //making to minutes
-            cell.updated.text = "Last Updated: Now"
+            cell.updated.text = "Updated Now"
             
             if gameOverRated[indexPath.row] == false {
                 
@@ -1241,19 +1249,19 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             if since >= 60 {
                 since = since/60
                 let sinceOutput = Int(since)
-                cell.updated.text = "Last Updated: \(sinceOutput)min ago"
+                cell.updated.text = "Updated \(sinceOutput)min ago"
             }
             //making to hours
             if since >= 60 {
                 since = since/60
                 let sinceOutput = Int(since)
-                cell.updated.text = "Last Updated: \(sinceOutput)h ago"
+                cell.updated.text = "Updated \(sinceOutput)h ago"
                 
                 //making to days
                 if since >= 24 {
                     since = since/24
                     let sinceOutput = Int(since)
-                    cell.updated.text = "Last Updated: \(sinceOutput)d ago"
+                    cell.updated.text = "Updated \(sinceOutput)d ago"
                 }
             }
             cell.timeleft.textColor = UIColor.lightGrayColor()
@@ -2528,17 +2536,21 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     let loadingView = UIImageView(frame: CGRectMake((screenWidth/2)-30,-70,60,60))
     var loaded = false
     
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+    
+        let yPos = -tableView.contentOffset.y
+        print(yPos)
+
+        if yPos < 64 {
+            loadingFromPull = false
+        }
+
+    }
+//
 //        
 //        
 //        
-//        
-//        let yPos = -tableView.contentOffset.y
-//        
-//        if yPos > 200 {
-//            
-//            tableView.contentOffset.y = -150
-//        }
+//
 //        
 //        if yPos > 64 {
 //            
@@ -2948,10 +2960,75 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         //                print(error.description)
         //        })
         lightOrDarkMode()
+        //whatsNew("1.1")
+
+        //check this before launching!!!!!!
+        //Checking if first launch
+        let whatsnew11check = NSUserDefaults.standardUserDefaults().boolForKey("whatsnew11check")
+        if whatsnew11check  {
+            print("Not first launch.")
+        }
+        else {
+            whatsNew("1.1")
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "whatsnew11check")
+
+        }
+
+    }
+    
+    func whatsNew(let version:String) {
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            visualEffectView.alpha = 1
+            }, completion: {finish in
+                visualEffectSub.userInteractionEnabled = true
+                visualEffectView.userInteractionEnabled = true
+        })
+        
+        var scrollView1 = UIScrollView(frame: CGRectMake(0,0,screenWidth,screenHeight))
+        scrollView1.delegate = self
+        scrollView1.userInteractionEnabled = true
+        scrollView1.scrollEnabled = true
+        scrollView1.pagingEnabled = false
+        scrollView1.contentSize = CGSizeMake(screenWidth, screenHeight + 420)
+        visualEffectSub.addSubview(scrollView1)
+        
+        cancelB = UIButton(frame: CGRectMake(screenWidth - 60, 43,50 ,50))
+        cancelB.userInteractionEnabled = true
+        if darkMode {cancelB.setBackgroundImage(UIImage(named: "cross-mark1-3S.png"), forState: .Normal)}
+        else {cancelB.setBackgroundImage(UIImage(named: "cross-mark1-2S.png"), forState: .Normal) }
+        cancelB.addTarget(self, action: "cancelButtonPressed:", forControlEvents: .TouchUpInside)
+        scrollView1.addSubview(cancelB)
+        
+        let versionNumLabel = UILabel(frame: CGRectMake(0,110,screenWidth, 29))
+        versionNumLabel.text = "This is new in version \(version)"
+        versionNumLabel.textAlignment = .Center
+        if darkMode {versionNumLabel.textColor = UIColor.whiteColor()}
+        else {versionNumLabel
+            .textColor = UIColor.blackColor() }
+        versionNumLabel.font = UIFont(name: "Times", size: 26)
+        scrollView1.addSubview(versionNumLabel)
+        
+        let newImage = UIImageView(frame: CGRectMake(0,120,screenWidth,900))
+        if darkMode {newImage.image = UIImage(named:"whatsnew11.png")}
+        else {newImage.image = UIImage(named:"whatsnew11-2.png")}
+        newImage.contentMode = .ScaleAspectFit
+        scrollView1.addSubview(newImage)
+        
+        let otherThings = UILabel(frame: CGRectMake(0,newImage.frame.origin.y+newImage.frame.size.height-90,screenWidth, 29))
+        otherThings.text = "+ bug fixes and other improvements."
+        otherThings.textAlignment = .Center
+        if darkMode {otherThings.textColor = UIColor.whiteColor()}
+        else {otherThings
+            .textColor = UIColor.blackColor() }
+        otherThings.font = UIFont(name: "Times", size: 20)
+        scrollView1.addSubview(otherThings)
+        
         
     }
     
     override func viewDidDisappear(animated: Bool) {
+
         usernameArray = []
         yourturnArray = []
         theirturnArray = []
