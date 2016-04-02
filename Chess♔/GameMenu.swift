@@ -901,9 +901,11 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             
             cell.username.text = name
             
-            if !loadingFromPull {
+            //if !loadingFromPull {
             cell.userProfileImage.image = nil
-            }
+            //}
+            
+            
             
             
             let query = PFQuery(className: "_User")
@@ -921,10 +923,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                                 
                                 userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                     if (error == nil) {
-                                        if !self.loadingFromPull {
+                                        //if !self.loadingFromPull {
 
                                         cell.userProfileImage.alpha = 0
-                                        }
+                                        //}
                                         cell.userProfileImage.image = UIImage(data: imageData!)
                                         self.imageDataArray.append(imageData!)
                                         
