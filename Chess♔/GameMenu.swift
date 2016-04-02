@@ -14,7 +14,7 @@ import SystemConfiguration
 import Firebase
 import Social
 
-
+var justLaunched = true
 extension UIViewController{
     func checkInternetConnection() {
         
@@ -552,7 +552,17 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     var noi = 0
     func findGames() {
         //  self.tableView.alpha = 0
+        self.tabBarController?.tabBar.userInteractionEnabled = false
+
         noi = 0
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+             //   self.tableView.alpha = 0.7
+            //visualEffectView.alpha = 0.3
+
+            
+            }, completion: { (finished) -> Void in
+         
+        })
         //tableView.hidden = true
         let gamesQuery = PFQuery(className: "Games")
         //fix this
@@ -778,14 +788,19 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                         //  timeleftArrayppend(games["blackPlayer"] as! String)
                         
                     }
+
                 }
-                
+                self.tableView.userInteractionEnabled = true
+                self.tabBarController?.tabBar.userInteractionEnabled = true
+
                 self.tableView.reloadData()
                 self.tableView.hidden = false
                 
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
                     if self.yourturnArray.count != 0 || self.theirturnArray.count != 0 || self.gameoverArray.count != 0 {
                         self.tableView.alpha = 1
+                        //visualEffectView.alpha = 0.0
+
                     }
                     }, completion: { (finished) -> Void in
                         if finished {
@@ -802,7 +817,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             
         }
         
-    }
+}
     
     
     /*func find(name:String) {
@@ -1284,6 +1299,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         //oppoImageFromGameMenu = cell.userProfileImage.image!
         
+        
+//        var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+//        selectedCell.contentView.backgroundColor = UIColor.redColor()
+        
         switch indexPath.section {
         case 0:
             gameID = gameIDSYourTurn[indexPath.row]
@@ -1297,6 +1316,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         }
         print("this is \(gameID)")
         
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -1361,13 +1382,15 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "Didot", size: 19)!
-        header.textLabel?.textColor = UIColor.lightGrayColor()
+        header.textLabel?.textColor = UIColor.blackColor()
         header.backgroundColor = blue
         header.contentView.backgroundColor = UIColor.whiteColor()
         header.textLabel?.textAlignment = .Center
-        header.alpha = 0.97
+        header.alpha = 1
         
         if darkMode {        header.contentView.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)
+            header.textLabel?.textColor = UIColor.whiteColor()
+
         }
         
         
@@ -2539,7 +2562,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     func scrollViewDidScroll(scrollView: UIScrollView) {
     
         let yPos = -tableView.contentOffset.y
-        print(yPos)
+        //print(yPos)
 
         if yPos < 64 {
             loadingFromPull = false
@@ -2918,21 +2941,89 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     
     override func viewWillAppear(animated: Bool) {
+        
+      
+        
         self.tabBarController?.tabBar.hidden = false
         didLaunchGame = false
         lightOrDarkMode()
     }
     override func viewDidAppear(animated: Bool) {
         
+      
+
+        
+        
+//        if justLaunched {
+//            
+//            self.tableView.alpha = 0
+//            
+//            UIView.animateWithDuration(0.5, animations: { () -> Void in
+//                self.tableView.alpha = 1
+//                
+//                
+//                }, completion: { (finished) -> Void in
+//                    
+//            })
+//            
+//            
+//            
+//            justLaunched = false
+//        }
+        
         shouldContinueTimer = false
         
+        //if justLaunched {
+
+                usernameArray = []
+                yourturnArray = []
+                theirturnArray = []
+                gameoverArray = []
+                imageDataArray = []
+                typeofGameover = []
+        
+                usernameArray = []
+                ratingArray = []
+                updatedArray = []
+                timeleftArray = []
+                profilePicArray = []
+                imageDataArray = []
+                indicatorDataArray = []
+        
+                yourTurnColor = []
+                theirTurnColor = []
+                gameoverTurnColor = []
+        
+                notationsCountYourTurn = []
+                notationsCountTheirTurn = []
+                notationsCountGameOver = []
+                yourTurnSpeed = []
+                theirTurnSpeed = []
+                gameoverTurnSpeed = []
+        
+                yourturnUpdateSince = []
+                theirturnUpdateSince = []
+                gameoverUpdateSince = []
+        
+                yourturnLeft = []
+                theirturnLeft = []
+                gameoverLeft = []
+                
+                gamesArrayYourTurn = []
+                gamesArrayTheirTurn = []
+                gamesArrayGameOver = []
+                
+                gameOverRated = []
+                gameoverStatus = []
         
         gameIDSYourTurn = []
         gameIDSTheirTurn = []
         gameIDSGameOver = []
         gameID = ""
-        
+        loadingFromPull = true
+tableView.userInteractionEnabled = false
         findGames()
+        justLaunched = false
         
         invitesButtonOutlet.title = "Invites"
         invitesButtonOutlet.enabled = false
@@ -3029,49 +3120,50 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     
     override func viewDidDisappear(animated: Bool) {
 
-        usernameArray = []
-        yourturnArray = []
-        theirturnArray = []
-        gameoverArray = []
-        imageDataArray = []
-        typeofGameover = []
-        
-        usernameArray = []
-        ratingArray = []
-        updatedArray = []
-        timeleftArray = []
-        profilePicArray = []
-        imageDataArray = []
-        indicatorDataArray = []
-        
-        yourTurnColor = []
-        theirTurnColor = []
-        gameoverTurnColor = []
-        
-        notationsCountYourTurn = []
-        notationsCountTheirTurn = []
-        notationsCountGameOver = []
-        yourTurnSpeed = []
-        theirTurnSpeed = []
-        gameoverTurnSpeed = []
-        
-        yourturnUpdateSince = []
-        theirturnUpdateSince = []
-        gameoverUpdateSince = []
-        
-        yourturnLeft = []
-        theirturnLeft = []
-        gameoverLeft = []
-        
-        gamesArrayYourTurn = []
-        gamesArrayTheirTurn = []
-        gamesArrayGameOver = []
-        
-        gameOverRated = []
-        gameoverStatus = []
-        tableView.alpha = 0
-        tableView.reloadData()
-        
+//        usernameArray = []
+//        yourturnArray = []
+//        theirturnArray = []
+//        gameoverArray = []
+//        imageDataArray = []
+//        typeofGameover = []
+//        
+//        usernameArray = []
+//        ratingArray = []
+//        updatedArray = []
+//        timeleftArray = []
+//        profilePicArray = []
+//        imageDataArray = []
+//        indicatorDataArray = []
+//        
+//        yourTurnColor = []
+//        theirTurnColor = []
+//        gameoverTurnColor = []
+//        
+//        notationsCountYourTurn = []
+//        notationsCountTheirTurn = []
+//        notationsCountGameOver = []
+//        yourTurnSpeed = []
+//        theirTurnSpeed = []
+//        gameoverTurnSpeed = []
+//        
+//        yourturnUpdateSince = []
+//        theirturnUpdateSince = []
+//        gameoverUpdateSince = []
+//        
+//        yourturnLeft = []
+//        theirturnLeft = []
+//        gameoverLeft = []
+//        
+//        gamesArrayYourTurn = []
+//        gamesArrayTheirTurn = []
+//        gamesArrayGameOver = []
+//        
+//        gameOverRated = []
+//        gameoverStatus = []
+//        tableView.alpha = 0
+//        tableView.reloadData()
+      //  tableView.dg_stopLoading()
+
     }
     
     

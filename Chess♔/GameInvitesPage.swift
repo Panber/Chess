@@ -15,7 +15,7 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
 
     var invites: Array<String> = []
-    
+    var inviteObjectIds : Array<String> = []
     var inviteName: Array<String> = []
     var ratedArray: Array<String> = []
     var colorArray: Array<String> = []
@@ -63,6 +63,8 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
                         
                         if result["blackPlayer"] as? String == PFUser.currentUser()!.username {
                             
+                            self.inviteObjectIds.append(result.objectId!)
+                            
                             self.inviteName.append((result["whitePlayer"] as? String)!)
                              self.ratedArray.append((result["mode"] as? String)!)
                              self.colorArray.append("Black")
@@ -71,7 +73,8 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
                         }
                             
                         else {
-                        
+                            self.inviteObjectIds.append(result.objectId!)
+
                             self.inviteName.append((result["blackPlayer"] as? String)!)
                             self.ratedArray.append((result["mode"] as? String)!)
                             self.colorArray.append("White")
@@ -216,7 +219,7 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
     func checkmarkButtonPressed(sender:UIButton) {
         
         print(inviteName[sender.tag - 1])
-
+        print(inviteObjectIds[sender.tag - 1])
         
         let buttonRow = sender.tag
         let tmpButton = self.view.viewWithTag(buttonRow) as? UIButton
@@ -241,7 +244,7 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         requestQuery.whereKey("inviteTo", equalTo: (PFUser.currentUser()?.username)!)
         requestQuery.whereKey("players", equalTo: (PFUser.currentUser()?.username)!)
         requestQuery.whereKey("confirmed", equalTo: false)
-        requestQuery.whereKey("inviteFrom", equalTo: inviteName[sender.tag - 1])
+        requestQuery.whereKey("objectId", equalTo: inviteObjectIds[sender.tag - 1])
         
         requestQuery.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, error:NSError?) -> Void in
             if error == nil {
@@ -375,7 +378,7 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
         requestQuery.whereKey("inviteTo", equalTo: (PFUser.currentUser()?.username)!)
         requestQuery.whereKey("players", equalTo: (PFUser.currentUser()?.username)!)
         requestQuery.whereKey("confirmed", equalTo: false)
-        requestQuery.whereKey("inviteFrom", equalTo: inviteName[sender.tag - 99_999 - 1
+        requestQuery.whereKey("objectId", equalTo: inviteObjectIds[sender.tag - 99_999 - 1
 ])
         
         requestQuery.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, error:NSError?) -> Void in
