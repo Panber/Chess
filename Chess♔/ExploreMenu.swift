@@ -761,7 +761,8 @@ class FriendsMenu: UIViewController, UISearchBarDelegate, UISearchDisplayDelegat
     override func viewWillAppear(animated: Bool) {
         lightOrDarkMode()
         //searchUsers(searchBar.text!)
-        
+        navigationController?.navigationBar.topItem?.title = "Explore"
+self.title = "Explore"
         
         // This is to keep the rating of featured player up to date
         
