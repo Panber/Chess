@@ -196,6 +196,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var capsuleB = UIButton()
     var capsuleL = UILabel()
     
+    var chatB = UIButton()
+
+    
     var forwardB = UIButton()
     var backwardB = UIButton()
     
@@ -2323,6 +2326,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             self.slider.frame.origin.y = screenHeight/2 + 150
                             self.capsuleB.frame.origin.y = screenHeight/2 + 246
+                            self.chatB.frame.origin.y = screenHeight/2 + 246
+
                             self.capsuleL.frame.origin.y = 200
                             
                             self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
@@ -2345,6 +2350,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             if screenHeight == 667 {
                                 self.capsuleB.frame.origin.y = screenHeight/2 + 220
+                                self.chatB.frame.origin.y = screenHeight/2 + 220
+
                                 self.slider.frame.origin.y = screenHeight/2 + 150
                                 self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
                                 self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
@@ -2356,6 +2363,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 
                             }
                             else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                                self.chatB.frame.origin.y = screenHeight/2 + 180
                                 self.slider.frame.origin.y = screenHeight/2 + 150 - 50
                                 self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
                                 self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
@@ -2369,6 +2377,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             else   if screenHeight == 480 {
                                 self.slider.frame.origin.y = screenHeight/2 + 150 - 47
                                 self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                                self.chatB.frame.origin.y = screenHeight/2 + 180
+
                                 self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
                                 self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
                                 self.collectionView.frame.origin.y = 74
@@ -4470,6 +4480,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             self.slider.frame.origin.y = screenHeight/2 + 150
                             self.capsuleB.frame.origin.y = screenHeight/2 + 246
+                            self.chatB.frame.origin.y = screenHeight/2 + 246
+
                             self.capsuleL.frame.origin.y = 200
                             
                             self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
@@ -4492,6 +4504,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             
                             if screenHeight == 667 {
                                 self.capsuleB.frame.origin.y = screenHeight/2 + 220
+                                self.chatB.frame.origin.y = screenHeight/2 + 220
+
                                 self.slider.frame.origin.y = screenHeight/2 + 150
                                 self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
                                 self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
@@ -4503,6 +4517,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                 
                             }
                             else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                                self.chatB.frame.origin.y = screenHeight/2 + 180
                                 self.slider.frame.origin.y = screenHeight/2 + 150 - 50
                                 self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
                                 self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
@@ -4516,6 +4531,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             else   if screenHeight == 480 {
                                 self.slider.frame.origin.y = screenHeight/2 + 150 - 47
                                 self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                                self.chatB.frame.origin.y = screenHeight/2 + 180
+
                                 self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
                                 self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
                                 self.collectionView.frame.origin.y = 74
@@ -5347,12 +5364,21 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             view.sendSubviewToBack(notationsL)
             
             
-            capsuleB = UIButton(frame: CGRectMake(screenWidth - 60,screenHeight/2 + 246,40,40))
+            capsuleB = UIButton(frame: CGRectMake(screenWidth - 120,screenHeight/2 + 246,40,40))
             if screenHeight == 667 { capsuleB.frame.origin.y = screenHeight/2 + 220}
             else if screenHeight ==  568 {capsuleB.frame.origin.y = screenHeight/2 + 180}
             capsuleB.setBackgroundImage(UIImage(named: "capsuleClock.png"), forState: .Normal)
             capsuleB.addTarget(self, action: "capsuleButtonPressed:", forControlEvents: .TouchUpInside)
             view.addSubview(capsuleB)
+            
+            
+            chatB = UIButton(frame: CGRectMake(screenWidth - 60,screenHeight/2 + 246,40,40))
+            if screenHeight == 667 { chatB.frame.origin.y = screenHeight/2 + 220}
+            else if screenHeight ==  568 {chatB.frame.origin.y = screenHeight/2 + 180}
+            chatB.setBackgroundImage(UIImage(named: "chatHollo.png"), forState: .Normal)
+            chatB.addTarget(self, action: "chatButtonPressed:", forControlEvents: .TouchUpInside)
+            view.addSubview(chatB)
+            
             
             backwardB = UIButton(frame: CGRectMake(screenWidth/2-60,screenHeight/2 + 150 - 47,40,40))
             backwardB.setBackgroundImage(UIImage(named: "arrow_blueB.png"), forState: .Normal)
@@ -5400,6 +5426,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 self.tabBarController?.tabBar.hidden = true
                 slider.frame.origin.y = screenHeight/2 + 150 - 47
                 capsuleB.frame.origin.y = screenHeight/2 + 180
+                chatB.frame.origin.y = screenHeight/2 + 180
+
             }
             
             //print("\(screenHeight) is the height and \(screenWidth) is the width. \(screenSize) is the screensize. \(pieceSize) is the pieceSize")
@@ -5658,8 +5686,9 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     func tabBarIsVisible() ->Bool {
         return self.tabBarController?.tabBar.frame.origin.y < CGRectGetMaxY(self.view.frame)
     }
-    
-    
+    func chatButtonPressed(sender: UIButton!) {
+        //add function to go to chat here
+    }
     
     // MARK: -Time Capsule
     func capsuleButtonPressed(sender: UIButton!) {
@@ -5795,6 +5824,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             
             self.slider.frame.origin.y = screenHeight/2 + screenWidth/2 + 1
             self.capsuleB.frame.origin.y += 200
+            self.chatB.frame.origin.y += 200
+
             self.capsuleL.frame.origin.y = 78
             self.backwardB.frame.origin.y = 600 + 16
             self.forwardB.frame.origin.y = 600 + 16
@@ -5835,6 +5866,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             else if screenHeight == 480 {
                 self.slider.frame.origin.y = 450
                 self.capsuleB.frame.origin.y = 600
+                self.chatB.frame.origin.y = 600
+
                 self.backwardB.frame.origin.y = 409
                 self.forwardB.frame.origin.y = 409
             }
@@ -5875,6 +5908,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             UIView.animateWithDuration(0.8, animations: { () -> Void in
                 self.slider.frame.origin.y = screenHeight/2 + 150
                 self.capsuleB.frame.origin.y = screenHeight/2 + 246
+                self.chatB.frame.origin.y = screenHeight/2 + 246
+
                 self.capsuleL.frame.origin.y = 200
                 
                 self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
@@ -5890,6 +5925,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 if screenHeight == 667 {
                     self.capsuleB.frame.origin.y = screenHeight/2 + 220
+                    self.chatB.frame.origin.y = screenHeight/2 + 220
+
                     self.slider.frame.origin.y = screenHeight/2 + 150
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
                     self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
@@ -5897,6 +5934,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 }
                     
                 else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.chatB.frame.origin.y = screenHeight/2 + 180
                     self.slider.frame.origin.y = screenHeight/2 + 150 - 50
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
                     self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
@@ -5905,6 +5943,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 else   if screenHeight == 480 {
                     self.slider.frame.origin.y = screenHeight/2 + 150 - 47
                     self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.chatB.frame.origin.y = screenHeight/2 + 180
+
                     self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
                     
@@ -6013,6 +6053,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     }
                     self.slider.frame.origin.y = screenHeight/2 + 150
                     self.capsuleB.frame.origin.y = screenHeight/2 + 246
+                    self.chatB.frame.origin.y = screenHeight/2 + 246
+
                     self.capsuleL.frame.origin.y = 200
                     
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
@@ -6029,6 +6071,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                     if screenHeight == 667 {
                         self.capsuleB.frame.origin.y = screenHeight/2 + 220
+                        self.chatB.frame.origin.y = screenHeight/2 + 220
+
                         self.slider.frame.origin.y = screenHeight/2 + 150
                         self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
                         self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
@@ -6040,6 +6084,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                         
                     }
                     else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                        self.chatB.frame.origin.y = screenHeight/2 + 180
                         self.slider.frame.origin.y = screenHeight/2 + 150 - 50
                         self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
                         self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
@@ -6053,6 +6098,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     else   if screenHeight == 480 {
                         self.slider.frame.origin.y = screenHeight/2 + 150 - 47
                         self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                        self.chatB.frame.origin.y = screenHeight/2 + 180
+
                         self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
                         self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
                         self.collectionView.frame.origin.y = 74
@@ -6181,6 +6228,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 self.slider.frame.origin.y = screenHeight/2 + 150
                 self.capsuleB.frame.origin.y = screenHeight/2 + 246
+                self.chatB.frame.origin.y = screenHeight/2 + 246
+
                 self.capsuleL.frame.origin.y = 200
                 
                 self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
@@ -6203,6 +6252,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 
                 if screenHeight == 667 {
                     self.capsuleB.frame.origin.y = screenHeight/2 + 220
+                    self.chatB.frame.origin.y = screenHeight/2 + 220
+
                     self.slider.frame.origin.y = screenHeight/2 + 150
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 47
                     self.forwardB.frame.origin.y = screenHeight/2 + 150 - 47
@@ -6214,6 +6265,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                     
                 }
                 else if screenHeight ==  568 {self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.chatB.frame.origin.y = screenHeight/2 + 180
                     self.slider.frame.origin.y = screenHeight/2 + 150 - 50
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
                     self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
@@ -6227,6 +6279,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                 else   if screenHeight == 480 {
                     self.slider.frame.origin.y = screenHeight/2 + 150 - 47
                     self.capsuleB.frame.origin.y = screenHeight/2 + 180
+                    self.chatB.frame.origin.y = screenHeight/2 + 180
+
                     self.forwardB.frame.origin.y = screenHeight/2 + 150 - 50
                     self.backwardB.frame.origin.y = screenHeight/2 + 150 - 50
                     self.collectionView.frame.origin.y = 74

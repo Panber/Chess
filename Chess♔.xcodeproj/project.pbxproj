@@ -21,6 +21,9 @@
 		8F273CF01BF28B7100275378 /* GameInvitesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F273CEF1BF28B7100275378 /* GameInvitesPage.swift */; };
 		8F273CF51BF29E4300275378 /* clock104.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F273CF21BF29E4300275378 /* clock104.png */; };
 		8F273CF61BF29E4300275378 /* flash31.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F273CF31BF29E4300275378 /* flash31.png */; };
+		8F2BD9721CB0469900037FE0 /* chatFilled.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2BD9711CB0469900037FE0 /* chatFilled.png */; };
+		8F2BD9821CB04F0300037FE0 /* chatHollo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2BD9811CB04F0300037FE0 /* chatHollo.png */; };
+		8F2BD9841CB04FD300037FE0 /* capsuleClock.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2BD9831CB04FD300037FE0 /* capsuleClock.png */; };
 		8F2DD6DE1B9AFFF80059CEFA /* board black and white no border.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D21B9AFFF80059CEFA /* board black and white no border.png */; };
 		8F2DD6DF1B9AFFF80059CEFA /* ChessIconTab@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D31B9AFFF80059CEFA /* ChessIconTab@3x.png */; };
 		8F2DD6E01B9AFFF80059CEFA /* clack and white board with half boarder copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D41B9AFFF80059CEFA /* clack and white board with half boarder copy.png */; };
@@ -86,7 +89,6 @@
 		8F6E354A1C14F4BE0099EED3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6E35491C14F4BE0099EED3 /* FBSDKCoreKit.framework */; };
 		8F6E64E31C283D190092471C /* cross-mark1-2S.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6E64E11C283D190092471C /* cross-mark1-2S.png */; };
 		8F6E64E41C283D190092471C /* cross-mark1-3S.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6E64E21C283D190092471C /* cross-mark1-3S.png */; };
-		8F6E64E61C28BC720092471C /* capsuleClock.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6E64E51C28BC720092471C /* capsuleClock.png */; };
 		8F6E64E91C2974730092471C /* arrow_blueB.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6E64E71C2974730092471C /* arrow_blueB.png */; };
 		8F6E64EA1C2974730092471C /* arrow_blueF.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6E64E81C2974730092471C /* arrow_blueF.png */; };
 		8F7480A01C4ABA1200CE6735 /* emAnalysis-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F74809F1C4ABA1200CE6735 /* emAnalysis-2.png */; };
@@ -290,6 +292,9 @@
 		8F273CEF1BF28B7100275378 /* GameInvitesPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInvitesPage.swift; sourceTree = "<group>"; };
 		8F273CF21BF29E4300275378 /* clock104.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock104.png; sourceTree = "<group>"; };
 		8F273CF31BF29E4300275378 /* flash31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash31.png; sourceTree = "<group>"; };
+		8F2BD9711CB0469900037FE0 /* chatFilled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatFilled.png; sourceTree = "<group>"; };
+		8F2BD9811CB04F0300037FE0 /* chatHollo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatHollo.png; sourceTree = "<group>"; };
+		8F2BD9831CB04FD300037FE0 /* capsuleClock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = capsuleClock.png; sourceTree = "<group>"; };
 		8F2DD6D21B9AFFF80059CEFA /* board black and white no border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "board black and white no border.png"; sourceTree = "<group>"; };
 		8F2DD6D31B9AFFF80059CEFA /* ChessIconTab@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChessIconTab@3x.png"; sourceTree = "<group>"; };
 		8F2DD6D41B9AFFF80059CEFA /* clack and white board with half boarder copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clack and white board with half boarder copy.png"; sourceTree = "<group>"; };
@@ -355,7 +360,6 @@
 		8F6E35491C14F4BE0099EED3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-20150813/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		8F6E64E11C283D190092471C /* cross-mark1-2S.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-mark1-2S.png"; sourceTree = "<group>"; };
 		8F6E64E21C283D190092471C /* cross-mark1-3S.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-mark1-3S.png"; sourceTree = "<group>"; };
-		8F6E64E51C28BC720092471C /* capsuleClock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = capsuleClock.png; sourceTree = "<group>"; };
 		8F6E64E71C2974730092471C /* arrow_blueB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_blueB.png; sourceTree = "<group>"; };
 		8F6E64E81C2974730092471C /* arrow_blueF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_blueF.png; sourceTree = "<group>"; };
 		8F74809F1C4ABA1200CE6735 /* emAnalysis-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emAnalysis-2.png"; sourceTree = "<group>"; };
@@ -587,6 +591,9 @@
 				8F1E8ECD1BD7F66C00C41D37 /* profilePicPlaceholder.jpg */,
 				8FEF2A911BFA7C7C006E1359 /* Boards */,
 				8F273CF21BF29E4300275378 /* clock104.png */,
+				8F2BD9811CB04F0300037FE0 /* chatHollo.png */,
+				8F2BD9711CB0469900037FE0 /* chatFilled.png */,
+				8F2BD9831CB04FD300037FE0 /* capsuleClock.png */,
 				8FC3BC3F1CAEF42D00958904 /* editimageButton.png */,
 				8FA2511E1C7A7D6800A4A32D /* PanberLogov9 copy2.png */,
 				8FA251191C7A7A8100A4A32D /* PanberLogov9 copy.png */,
@@ -664,7 +671,6 @@
 				8FA5690E1C02795100AFC460 /* new100-2.png */,
 				8F6E64E11C283D190092471C /* cross-mark1-2S.png */,
 				8F6E64E21C283D190092471C /* cross-mark1-3S.png */,
-				8F6E64E51C28BC720092471C /* capsuleClock.png */,
 				8F6E64E71C2974730092471C /* arrow_blueB.png */,
 				8F6E64E81C2974730092471C /* arrow_blueF.png */,
 				8F31ECDC1C67DAE80081F888 /* chesslogo800_58.png */,
@@ -1064,6 +1070,7 @@
 				8FA5C89B1B9A264F0097637E /* LaunchScreen.storyboard in Resources */,
 				8F6E64E31C283D190092471C /* cross-mark1-2S.png in Resources */,
 				F176C7FD1C50466100518A81 /* PopUpViewController_iPhone6Plus.xib in Resources */,
+				8F2BD9821CB04F0300037FE0 /* chatHollo.png in Resources */,
 				8FEF2AAF1BFCE136006E1359 /* multimedia option23.png in Resources */,
 				8F8BD2B71BC6C1C500B25CFE /* checkmark11.png in Resources */,
 				8F8BD2A81BC41ED700B25CFE /* arrow_white.png in Resources */,
@@ -1098,7 +1105,6 @@
 				8F2392A31C09EF2D00CC4B0F /* cm1.png in Resources */,
 				8F4A02691B9A3E890084024A /* PANBERlogo.png in Resources */,
 				8FEF2AB51BFD1779006E1359 /* grayBC.jpg in Resources */,
-				8F6E64E61C28BC720092471C /* capsuleClock.png in Resources */,
 				8FEF2A991BFA7C8A006E1359 /* aquaChessBoard.png in Resources */,
 				8F56E1721C665D880000ECDB /* BN.png in Resources */,
 				8F970FBF1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png in Resources */,
@@ -1154,12 +1160,14 @@
 				8FEF2A9B1BFA7C8A006E1359 /* blackSquareChessBoard.png in Resources */,
 				8F8BD2BD1BC6E22B00B25CFE /* close1.png in Resources */,
 				8FA2511A1C7A7A8100A4A32D /* PanberLogov9 copy.png in Resources */,
+				8F2BD9841CB04FD300037FE0 /* capsuleClock.png in Resources */,
 				8FE58AA21C3B1F26007888F4 /* whiteRook.png in Resources */,
 				8F2DD6E31B9AFFF80059CEFA /* graySquare.png in Resources */,
 				8F31DCED1BC7C8B5004544CC /* pending.png in Resources */,
 				8F2392A51C09EF3A00CC4B0F /* cm2.png in Resources */,
 				8FE58AB81C44676B007888F4 /* whitePawn.png in Resources */,
 				8FE58A991C3B1F26007888F4 /* blackKnight.png in Resources */,
+				8F2BD9721CB0469900037FE0 /* chatFilled.png in Resources */,
 				8F4A02871B9A3F240084024A /* chessIcon180.png in Resources */,
 				8FB94F991BE62EA80029EF00 /* chatIcon.png in Resources */,
 				8F6E64E41C283D190092471C /* cross-mark1-3S.png in Resources */,
