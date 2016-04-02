@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TTV-3l-qnx">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -473,7 +473,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1824" y="313"/>
+            <point key="canvasLocation" x="1812" y="314"/>
         </scene>
         <!--New Game Username-->
         <scene sceneID="lve-Pj-AQN">
@@ -671,7 +671,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIK-B4-3DB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3314" y="-212"/>
+            <point key="canvasLocation" x="3274" y="-244"/>
         </scene>
         <!--New Game Settings Page-->
         <scene sceneID="dny-OR-sFx">
@@ -971,7 +971,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFl-en-0nA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2522" y="314"/>
+            <point key="canvasLocation" x="2608" y="366"/>
         </scene>
         <!--Regular-->
         <scene sceneID="yk7-zq-FN4">
@@ -1322,6 +1322,24 @@
             </objects>
             <point key="canvasLocation" x="4785" y="314"/>
         </scene>
+        <!--Chat-->
+        <scene sceneID="wZR-WN-2BB">
+            <objects>
+                <viewController storyboardIdentifier="Chat" id="6VP-Cg-erH" customClass="Chat" customModule="Chess_" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3ca-OH-gtC"/>
+                        <viewControllerLayoutGuide type="bottom" id="2la-QI-KgY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="raa-oT-Hci">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tGl-jG-yN6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5445" y="271"/>
+        </scene>
         <!--Play-->
         <scene sceneID="ICd-Pm-2GB">
             <objects>
@@ -1339,7 +1357,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Yq-3u-w7Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1099" y="288"/>
+            <point key="canvasLocation" x="1099" y="314"/>
         </scene>
         <!--tabBarController-->
         <scene sceneID="suy-iP-UXV">
@@ -2996,7 +3014,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wH9-7B-skl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3981" y="-266"/>
+            <point key="canvasLocation" x="3965" y="-268"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="p94-aD-qGo">

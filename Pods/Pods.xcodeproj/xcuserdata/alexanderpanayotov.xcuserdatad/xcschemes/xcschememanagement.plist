@@ -6,55 +6,58 @@
 	<dict>
 		<key>DGElasticPullToRefresh.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>9</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Firebase.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
+		</dict>
+		<key>JSQMessagesViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JSQSystemSoundPlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>NMPopUpViewSwift-NMPopUpViewSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
+		</dict>
+		<key>NMPopUpViewSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-Chess♔.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>Pods-Chess♔Tests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
 		<key>Pods-Chess♔UITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>8</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0AB0033A265A207E63A4612FA39EE031</key>
+		<key>0DE93A80D9EC89B94FE9F41228A430A6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -64,32 +67,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1315B2E60B584ABF755828EB0CF5467F</key>
+		<key>5AB4064A892A058275164B0D06D01EB3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1A503F5AB3661A38F159DA3F7B8BFF4D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>47B4F6D14CE0D2038C02A974DED9346C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>81394C4C15E523DC86F4D81EEA331658</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A5684B81BB0F6AE21384FA6B5608AC88</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B6DB2ED07599AC03A2B5A075DE37CBCF</key>
+		<key>95DB89A8BFC5FF0BF98458651D0163CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -99,12 +82,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BFE5C0677743DC0EFBBE9E8608754988</key>
+		<key>B9960628F44C8AE9F53048B11D53FA17</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C5DF5FF6ABC90F1F4393E6F76C74F81C</key>
+		<key>CBC51E79E8FAD17EE2C16E4F1A7F2B75</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DF44742F900448AC907176D8D6A0C037</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9A4FDDCA2758068AF1E6A8FE7240411</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EDA125ADA52355B7CA6DF7BA96918357</key>
 		<dict>
 			<key>primary</key>
 			<true/>

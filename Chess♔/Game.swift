@@ -196,6 +196,8 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var capsuleB = UIButton()
     var capsuleL = UILabel()
     
+    var chatB = UIButton()
+    
     var forwardB = UIButton()
     var backwardB = UIButton()
     
@@ -769,7 +771,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     override func viewDidLoad() {
         timer.invalidate()
 
-        
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
         shouldContinueTimer = false 
         loadVariablesAndConstants()
@@ -5361,6 +5362,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             backwardB.enabled = false
             view.sendSubviewToBack(backwardB)
             
+            chatB = UIButton(frame: CGRectMake(screenWidth - 110,screenHeight/2 + 246,40,40))
+            if screenHeight == 667 { chatB.frame.origin.y = screenHeight/2 + 220}
+            else if screenHeight ==  568 {chatB.frame.origin.y = screenHeight/2 + 180}
+            chatB.setBackgroundImage(UIImage(named: "chatIcon.png"), forState: .Normal)
+            chatB.addTarget(self, action: "chatButtonPressed:", forControlEvents: .TouchUpInside)
+            view.addSubview(chatB)
+            
+            
             
             //        let sliderOverlay = UILabel(frame: CGRectMake(0,screenHeight/2 + screenWidth/2 + 12,screenWidth,25))
             //        sliderOverlay.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
@@ -5459,11 +5468,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     override func viewDidAppear(animated: Bool) {
+        
         canCheckFirebase = true
         goBackAfterLaunch = true
         var bottomOffset = CGPointMake(0, collectionView.contentSize.height - collectionView.bounds.size.height)
         collectionView.setContentOffset(bottomOffset, animated: false)
         
+        self.tabBarController?.tabBar.hidden = false
         forwardB.userInteractionEnabled = false
         backwardB.userInteractionEnabled = false
         exitTimeCapsuleB.userInteractionEnabled = false
@@ -5659,7 +5670,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
         return self.tabBarController?.tabBar.frame.origin.y < CGRectGetMaxY(self.view.frame)
     }
     
-    
+    // MARK: - Chat
+    func chatButtonPressed(sender: UIButton!) {
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Chat")
+        self.showViewController(vc as! UIViewController, sender: vc)
+        self.tabBarController?.tabBar.hidden = true
+//        self.navigationController?.navigationBar.barTintColor = blue
+//        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
+    }
     
     // MARK: -Time Capsule
     func capsuleButtonPressed(sender: UIButton!) {

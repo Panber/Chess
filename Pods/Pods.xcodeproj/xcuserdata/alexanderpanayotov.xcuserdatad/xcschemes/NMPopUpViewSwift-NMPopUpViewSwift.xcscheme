@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F8BBDD8710455629A638CE19'
+               BlueprintIdentifier = 'FD7701E815548BB8C4F024B1'
                BlueprintName = 'NMPopUpViewSwift-NMPopUpViewSwift'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'NMPopUpViewSwift.bundle'>
