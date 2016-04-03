@@ -17,7 +17,6 @@ var myLostProfile = "\(0)"
 
 var myRatingProfile = 0
 
-
 class ProfilePage: UIViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var scrollView: UIScrollView!

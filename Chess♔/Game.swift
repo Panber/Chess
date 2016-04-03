@@ -5386,15 +5386,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             view.addSubview(backwardB)
             backwardB.enabled = false
             view.sendSubviewToBack(backwardB)
-            
-            chatB = UIButton(frame: CGRectMake(screenWidth - 110,screenHeight/2 + 246,40,40))
-            if screenHeight == 667 { chatB.frame.origin.y = screenHeight/2 + 220}
-            else if screenHeight ==  568 {chatB.frame.origin.y = screenHeight/2 + 180}
-            chatB.setBackgroundImage(UIImage(named: "chatIcon.png"), forState: .Normal)
-            chatB.addTarget(self, action: "chatButtonPressed:", forControlEvents: .TouchUpInside)
-            view.addSubview(chatB)
-            
-            
+
             
             //        let sliderOverlay = UILabel(frame: CGRectMake(0,screenHeight/2 + screenWidth/2 + 12,screenWidth,25))
             //        sliderOverlay.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)

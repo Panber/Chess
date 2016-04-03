@@ -12,29 +12,29 @@ import Firebase
 
 class ChatView: JSQMessagesViewController {
 
-    var user: FAuthData?
+    var user = PFUser.currentUser()
     
     var messages = [Message]()
     var avatars = Dictionary<String, UIImage>()
     var outgoingBubbleImageView = JSQMessagesBubbleImageFactory.outgoingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleLightGrayColor())
-    var incomingBubbleImageView = JSQMessagesBubbleImageFactory.incomingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleGreenColor())
+    var incomingBubbleImageView = JSQMessagesBubbleImageFactory.incomingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleBlueColor())
     var senderImageUrl: String!
     var batchMessages = true
-    let ref = Firebase(url:"https://chess-panber.firebaseio.com/games/")
+    var ref: Firebase!
     
     
-    // *** STEP 1: STORE FIREBASE REFERENCES
+    // Firebase reference
     var messagesRef: Firebase!
     
     func setupFirebase() {
-        // *** STEP 2: SETUP FIREBASE
+        // Get messages from firebase
         messagesRef = ref.childByAppendingPath("messages")
         
-        // *** STEP 4: RECEIVE MESSAGES FROM FIREBASE (limited to latest 25 messages)
         messagesRef.queryLimitedToNumberOfChildren(25).observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
-            let text = snapshot.value["text"] as? String
-            let sender = snapshot.value["sender"] as? String
-            let imageUrl = snapshot.value["imageUrl"] as? String
+            print(snapshot)
+            let text = snapshot.value.objectForKey("text") as? String
+            let sender = snapshot.value.objectForKey("sender") as? String
+            let imageUrl = snapshot.value.objectForKey("sender") as? String
             
             let message = Message(text: text, sender: sender, imageUrl: imageUrl)
             self.messages.append(message)
@@ -43,7 +43,7 @@ class ChatView: JSQMessagesViewController {
     }
     
     func sendMessage(text: String!, sender: String!) {
-        // *** STEP 3: ADD A MESSAGE TO FIREBASE
+        // Add message to firebase
         messagesRef.childByAutoId().setValue([
             "text":text,
             "sender":sender,
@@ -87,24 +87,25 @@ class ChatView: JSQMessagesViewController {
         let userImage = JSQMessagesAvatarFactory.avatarWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
         
         avatars[name] = userImage
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         inputToolbar!.contentView!.leftBarButtonItem = nil
         automaticallyScrollsToMostRecentMessage = true
-        navigationController?.navigationBar.topItem?.title = "Logout"
         
         sender = (sender != nil) ? sender : "Anonymous"
-        let profileImageUrl = user?.providerData["cachedUserProfile"]?["profile_image_url_https"] as? NSString
-        if let urlString = profileImageUrl {
-            setupAvatarImage(sender, imageUrl: urlString as String, incoming: false)
-            senderImageUrl = urlString as String
-        } else {
-            setupAvatarColor(sender, incoming: false)
-            senderImageUrl = ""
-        }
-        
+//        let profileImageUrl = user?.providerData["cachedUserProfile"]?["profile_image_url_https"] as? NSString
+//        if let urlString = profileImageUrl {
+//            setupAvatarImage(sender, imageUrl: urlString as String, incoming: false)
+//            senderImageUrl = urlString as String
+//        } else {
+//            setupAvatarColor(sender, incoming: false)
+//            senderImageUrl = ""
+//        }
+        ref = Firebase(url: "https://chess-panber.firebaseio.com/messages")
         setupFirebase()
     }
     
