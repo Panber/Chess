@@ -111,7 +111,8 @@ class GameInvitesPage: UIViewController,UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:GameInvitesTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("GameInviteCell", forIndexPath: indexPath) as! GameInvitesTableViewCell
         
-        
+        cell.username.highlightedTextColor = UIColor.whiteColor()
+        cell.rating.highlightedTextColor = UIColor.whiteColor()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         

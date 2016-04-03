@@ -216,7 +216,8 @@ class LeaderBoard: UIViewController,UITableViewDelegate {
         let cell:UserTableViewCell4 = self.tableView.dequeueReusableCellWithIdentifier("cell4", forIndexPath: indexPath) as! UserTableViewCell4
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-
+        cell.username.highlightedTextColor = UIColor.whiteColor()
+        cell.rating.highlightedTextColor = UIColor.whiteColor()
 
         if darkMode {
             cell.backgroundColor = UIColor(red: 0.15, green: 0.15 , blue: 0.15, alpha: 1)

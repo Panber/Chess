@@ -19,8 +19,6 @@
 		8F2392A91C09FBA900CC4B0F /* cm4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2392A81C09FBA900CC4B0F /* cm4.png */; };
 		8F2392AB1C0A397500CC4B0F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2392AA1C0A397500CC4B0F /* Game.swift */; };
 		8F273CF01BF28B7100275378 /* GameInvitesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F273CEF1BF28B7100275378 /* GameInvitesPage.swift */; };
-		8F273CF51BF29E4300275378 /* clock104.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F273CF21BF29E4300275378 /* clock104.png */; };
-		8F273CF61BF29E4300275378 /* flash31.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F273CF31BF29E4300275378 /* flash31.png */; };
 		8F2BD9721CB0469900037FE0 /* chatFilled.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2BD9711CB0469900037FE0 /* chatFilled.png */; };
 		8F2BD9821CB04F0300037FE0 /* chatHollo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2BD9811CB04F0300037FE0 /* chatHollo.png */; };
 		8F2BD9841CB04FD300037FE0 /* capsuleClock.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2BD9831CB04FD300037FE0 /* capsuleClock.png */; };
@@ -30,12 +28,7 @@
 		8F2DD6E11B9AFFF80059CEFA /* Data@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D51B9AFFF80059CEFA /* Data@3x.png */; };
 		8F2DD6E21B9AFFF80059CEFA /* Friends@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D61B9AFFF80059CEFA /* Friends@3x.png */; };
 		8F2DD6E31B9AFFF80059CEFA /* graySquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D71B9AFFF80059CEFA /* graySquare.png */; };
-		8F2DD6E41B9AFFF80059CEFA /* moveOption.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D81B9AFFF80059CEFA /* moveOption.png */; };
-		8F2DD6E51B9AFFF80059CEFA /* pieceMarked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6D91B9AFFF80059CEFA /* pieceMarked.png */; };
-		8F2DD6E61B9AFFF80059CEFA /* piecePossibilities.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6DA1B9AFFF80059CEFA /* piecePossibilities.png */; };
 		8F2DD6E91B9AFFF80059CEFA /* whiteSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */; };
-		8F2EEC7F1C70F02100FB6127 /* normalIndicator2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2EEC7E1C70F02100FB6127 /* normalIndicator2.png */; };
-		8F2EEC831C70F27600FB6127 /* clock108.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F2EEC821C70F27600FB6127 /* clock108.png */; };
 		8F2F6C4A1BDED9100048342A /* NewGameFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF77E1BDBAF1E0037865C /* NewGameFriends.swift */; };
 		8F2F6C4B1BDEDCC00048342A /* NewGameSettingsPage_Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CF7801BDBB6AD0037865C /* NewGameSettingsPage_Play.swift */; };
 		8F31DCE11BC70E30004544CC /* checkmark13.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F31DCE01BC70E30004544CC /* checkmark13.png */; };
@@ -149,6 +142,13 @@
 		8FC3BC401CAEF42D00958904 /* editimageButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC3BC3F1CAEF42D00958904 /* editimageButton.png */; };
 		8FC3BC461CAF1D8F00958904 /* whatsnew11.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC3BC451CAF1D8F00958904 /* whatsnew11.png */; };
 		8FC3BC481CAF1EE300958904 /* whatsnew11-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC3BC471CAF1EE300958904 /* whatsnew11-2.png */; };
+		8FC577E91CB1C5C8003BC32F /* clock104.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC577E61CB1C5C8003BC32F /* clock104.png */; };
+		8FC577EA1CB1C5C8003BC32F /* flash31.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC577E71CB1C5C8003BC32F /* flash31.png */; };
+		8FC577EB1CB1C5C8003BC32F /* normalIndicator2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC577E81CB1C5C8003BC32F /* normalIndicator2.png */; };
+		8FC577ED1CB1C6EE003BC32F /* clock108.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC577EC1CB1C6EE003BC32F /* clock108.png */; };
+		8FC577F11CB1C8F1003BC32F /* moveOption.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC577F01CB1C8F1003BC32F /* moveOption.png */; };
+		8FC577FE1CB1CAFF003BC32F /* pieceMarked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC577FC1CB1CAFF003BC32F /* pieceMarked.png */; };
+		8FC578031CB1CC8A003BC32F /* piecePossibilities.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC578021CB1CC8A003BC32F /* piecePossibilities.png */; };
 		8FD804741C24CADB00902DB9 /* chessLaunchGold.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FD804731C24CADB00902DB9 /* chessLaunchGold.png */; };
 		8FDB6EFC1C4AA40500F50324 /* reAnalysis-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FDB6EFB1C4AA40500F50324 /* reAnalysis-2.png */; };
 		8FDB6EFE1C4AA4C000F50324 /* emAnalysis.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FDB6EFD1C4AA4C000F50324 /* emAnalysis.png */; };
@@ -290,8 +290,6 @@
 		8F2392A81C09FBA900CC4B0F /* cm4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cm4.png; sourceTree = "<group>"; };
 		8F2392AA1C0A397500CC4B0F /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		8F273CEF1BF28B7100275378 /* GameInvitesPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInvitesPage.swift; sourceTree = "<group>"; };
-		8F273CF21BF29E4300275378 /* clock104.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock104.png; sourceTree = "<group>"; };
-		8F273CF31BF29E4300275378 /* flash31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash31.png; sourceTree = "<group>"; };
 		8F2BD9711CB0469900037FE0 /* chatFilled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatFilled.png; sourceTree = "<group>"; };
 		8F2BD9811CB04F0300037FE0 /* chatHollo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatHollo.png; sourceTree = "<group>"; };
 		8F2BD9831CB04FD300037FE0 /* capsuleClock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = capsuleClock.png; sourceTree = "<group>"; };
@@ -301,12 +299,7 @@
 		8F2DD6D51B9AFFF80059CEFA /* Data@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Data@3x.png"; sourceTree = "<group>"; };
 		8F2DD6D61B9AFFF80059CEFA /* Friends@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Friends@3x.png"; sourceTree = "<group>"; };
 		8F2DD6D71B9AFFF80059CEFA /* graySquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graySquare.png; sourceTree = "<group>"; };
-		8F2DD6D81B9AFFF80059CEFA /* moveOption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moveOption.png; sourceTree = "<group>"; };
-		8F2DD6D91B9AFFF80059CEFA /* pieceMarked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pieceMarked.png; sourceTree = "<group>"; };
-		8F2DD6DA1B9AFFF80059CEFA /* piecePossibilities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piecePossibilities.png; sourceTree = "<group>"; };
 		8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteSquare.png; sourceTree = "<group>"; };
-		8F2EEC7E1C70F02100FB6127 /* normalIndicator2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalIndicator2.png; sourceTree = "<group>"; };
-		8F2EEC821C70F27600FB6127 /* clock108.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock108.png; sourceTree = "<group>"; };
 		8F31DCE01BC70E30004544CC /* checkmark13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark13.png; sourceTree = "<group>"; };
 		8F31DCE41BC716F9004544CC /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		8F31DCE61BC7189B004544CC /* add1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add1.png; sourceTree = "<group>"; };
@@ -427,6 +420,13 @@
 		8FC3BC3F1CAEF42D00958904 /* editimageButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editimageButton.png; sourceTree = "<group>"; };
 		8FC3BC451CAF1D8F00958904 /* whatsnew11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whatsnew11.png; sourceTree = "<group>"; };
 		8FC3BC471CAF1EE300958904 /* whatsnew11-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whatsnew11-2.png"; sourceTree = "<group>"; };
+		8FC577E61CB1C5C8003BC32F /* clock104.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock104.png; sourceTree = "<group>"; };
+		8FC577E71CB1C5C8003BC32F /* flash31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash31.png; sourceTree = "<group>"; };
+		8FC577E81CB1C5C8003BC32F /* normalIndicator2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalIndicator2.png; sourceTree = "<group>"; };
+		8FC577EC1CB1C6EE003BC32F /* clock108.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock108.png; sourceTree = "<group>"; };
+		8FC577F01CB1C8F1003BC32F /* moveOption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moveOption.png; sourceTree = "<group>"; };
+		8FC577FC1CB1CAFF003BC32F /* pieceMarked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pieceMarked.png; sourceTree = "<group>"; };
+		8FC578021CB1CC8A003BC32F /* piecePossibilities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piecePossibilities.png; sourceTree = "<group>"; };
 		8FD804731C24CADB00902DB9 /* chessLaunchGold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chessLaunchGold.png; sourceTree = "<group>"; };
 		8FDB6EFB1C4AA40500F50324 /* reAnalysis-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reAnalysis-2.png"; sourceTree = "<group>"; };
 		8FDB6EFD1C4AA4C000F50324 /* emAnalysis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emAnalysis.png; sourceTree = "<group>"; };
@@ -590,7 +590,6 @@
 				8F14D18A1B9C917800A58CCF /* LoginImages */,
 				8F1E8ECD1BD7F66C00C41D37 /* profilePicPlaceholder.jpg */,
 				8FEF2A911BFA7C7C006E1359 /* Boards */,
-				8F273CF21BF29E4300275378 /* clock104.png */,
 				8F2BD9811CB04F0300037FE0 /* chatHollo.png */,
 				8F2BD9711CB0469900037FE0 /* chatFilled.png */,
 				8F2BD9831CB04FD300037FE0 /* capsuleClock.png */,
@@ -599,14 +598,16 @@
 				8FA251191C7A7A8100A4A32D /* PanberLogov9 copy.png */,
 				8FA251081C79F60600A4A32D /* CHESSLONG2.png */,
 				8FA251061C79F57E00A4A32D /* CHESSLONG.png */,
-				8F2EEC821C70F27600FB6127 /* clock108.png */,
 				8F56E1701C665D880000ECDB /* BN.png */,
-				8F2EEC7E1C70F02100FB6127 /* normalIndicator2.png */,
 				8F56E1711C665D880000ECDB /* WN.png */,
 				8FDB6EFB1C4AA40500F50324 /* reAnalysis-2.png */,
 				8FDB6EFD1C4AA4C000F50324 /* emAnalysis.png */,
 				8F7480A31C4AC31000CE6735 /* reAnalysis.png */,
 				8F74809F1C4ABA1200CE6735 /* emAnalysis-2.png */,
+				8FC577EC1CB1C6EE003BC32F /* clock108.png */,
+				8FC577E61CB1C5C8003BC32F /* clock104.png */,
+				8FC577E71CB1C5C8003BC32F /* flash31.png */,
+				8FC577E81CB1C5C8003BC32F /* normalIndicator2.png */,
 				8F2392A21C09EF2D00CC4B0F /* cm1.png */,
 				8F2392A41C09EF3A00CC4B0F /* cm2.png */,
 				8F2392A61C09FAE600CC4B0F /* cm3.png */,
@@ -623,7 +624,6 @@
 				8FEF2AA51BFCE135006E1359 /* map-pointer7.png */,
 				8FEF2AA61BFCE135006E1359 /* multimedia option23-2.png */,
 				8FEF2AA71BFCE135006E1359 /* multimedia option23.png */,
-				8F273CF31BF29E4300275378 /* flash31.png */,
 				8FB94F981BE62EA80029EF00 /* chatIcon.png */,
 				8FA569111C02829700AFC460 /* PanBerLogo1.png */,
 				8F1E8ECF1BD7F74500C41D37 /* profilePicPlaceholderDark.jpg */,
@@ -653,9 +653,9 @@
 				8F2DD6D61B9AFFF80059CEFA /* Friends@3x.png */,
 				8F1BB5581BA22BAF0043E2B7 /* profileTabBarIcon@3x.png */,
 				8F2DD6D71B9AFFF80059CEFA /* graySquare.png */,
-				8F2DD6D81B9AFFF80059CEFA /* moveOption.png */,
-				8F2DD6D91B9AFFF80059CEFA /* pieceMarked.png */,
-				8F2DD6DA1B9AFFF80059CEFA /* piecePossibilities.png */,
+				8FC577F01CB1C8F1003BC32F /* moveOption.png */,
+				8FC577FC1CB1CAFF003BC32F /* pieceMarked.png */,
+				8FC578021CB1CC8A003BC32F /* piecePossibilities.png */,
 				8F2392A01C08C7E200CC4B0F /* PanBerLogo2.png */,
 				8F2DD6DD1B9AFFF80059CEFA /* whiteSquare.png */,
 				8FB94F9A1BE62F360029EF00 /* Data@3x_blue.png */,
@@ -1050,7 +1050,6 @@
 				8F7480A01C4ABA1200CE6735 /* emAnalysis-2.png in Resources */,
 				8FA251071C79F57E00A4A32D /* CHESSLONG.png in Resources */,
 				8FA55EEE1C53CCA700250403 /* facebook_logo.png in Resources */,
-				8F2EEC7F1C70F02100FB6127 /* normalIndicator2.png in Resources */,
 				8F31DCF31BC9513B004544CC /* equalization2.png in Resources */,
 				8F1E8EC41BD78F9600C41D37 /* nasaearth.jpg in Resources */,
 				8FD804741C24CADB00902DB9 /* chessLaunchGold.png in Resources */,
@@ -1077,6 +1076,7 @@
 				8FEF2A9F1BFA7C8A006E1359 /* whiteSquareChessBoard.png in Resources */,
 				8F56E1751C6665B80000ECDB /* BB.png in Resources */,
 				8F31DCE51BC716F9004544CC /* add.png in Resources */,
+				8FC577E91CB1C5C8003BC32F /* clock104.png in Resources */,
 				8FA569101C02795100AFC460 /* new100-2.png in Resources */,
 				8FA5690A1C011D0300AFC460 /* map158.png in Resources */,
 				8F1E8ECE1BD7F66C00C41D37 /* profilePicPlaceholder.jpg in Resources */,
@@ -1085,7 +1085,6 @@
 				8F8BD2BB1BC6D83F00B25CFE /* close.png in Resources */,
 				8FA2511F1C7A7D6800A4A32D /* PanberLogov9 copy2.png in Resources */,
 				8F6E64EA1C2974730092471C /* arrow_blueF.png in Resources */,
-				8F273CF61BF29E4300275378 /* flash31.png in Resources */,
 				8FA5690F1C02795100AFC460 /* new100.png in Resources */,
 				8F31ECE11C67DAE80081F888 /* chesslogo800_87.png in Resources */,
 				8FE58AB71C44676B007888F4 /* blackPawn.png in Resources */,
@@ -1097,7 +1096,6 @@
 				8F31ECDB1C6796C00081F888 /* chesstabv7@3x.png in Resources */,
 				8FEF2AAB1BFCE136006E1359 /* group4-2.png in Resources */,
 				8FEF2AB21BFD0F2F006E1359 /* cross-mark1-3.png in Resources */,
-				8F273CF51BF29E4300275378 /* clock104.png in Resources */,
 				8FC3BC481CAF1EE300958904 /* whatsnew11-2.png in Resources */,
 				8F2392A11C08C7E200CC4B0F /* PanBerLogo2.png in Resources */,
 				8F38EF6A1BB8399D00668B3B /* JBpp.jpg in Resources */,
@@ -1108,7 +1106,6 @@
 				8FEF2A991BFA7C8A006E1359 /* aquaChessBoard.png in Resources */,
 				8F56E1721C665D880000ECDB /* BN.png in Resources */,
 				8F970FBF1BB8950000ED758C /* ChessIconSmallTextAndLogoDarkMode.png in Resources */,
-				8F2DD6E51B9AFFF80059CEFA /* pieceMarked.png in Resources */,
 				8F87E8BC1BD6DBE600506F2F /* arrow483.png in Resources */,
 				8F4A02851B9A3F240084024A /* chessIcon.png in Resources */,
 				8FE58AAA1C3B3198007888F4 /* blackBishop.png in Resources */,
@@ -1117,6 +1114,7 @@
 				8FC3BC401CAEF42D00958904 /* editimageButton.png in Resources */,
 				8F2392A71C09FAE600CC4B0F /* cm3.png in Resources */,
 				8FA018D31B9B0D76002B410E /* chessIconRounded.png in Resources */,
+				8FC577EA1CB1C5C8003BC32F /* flash31.png in Resources */,
 				8FA018D51B9B0E33002B410E /* Bauru.ttf in Resources */,
 				8FDB6EFC1C4AA40500F50324 /* reAnalysis-2.png in Resources */,
 				8FEF2A9C1BFA7C8A006E1359 /* brownChessBoard.png in Resources */,
@@ -1137,6 +1135,7 @@
 				8FEF2AAC1BFCE136006E1359 /* search74-2.png in Resources */,
 				8FEF2A9D1BFA7C8A006E1359 /* greenblueChessBoard.png in Resources */,
 				8F7480A41C4AC31000CE6735 /* reAnalysis.png in Resources */,
+				8FC577FE1CB1CAFF003BC32F /* pieceMarked.png in Resources */,
 				8F56E1731C665D880000ECDB /* WN.png in Resources */,
 				8FEF2AAD1BFCE136006E1359 /* map-pointer7.png in Resources */,
 				8F2DD6E11B9AFFF80059CEFA /* Data@3x.png in Resources */,
@@ -1144,28 +1143,29 @@
 				8FEF2AAA1BFCE136006E1359 /* map-pointer7-2.png in Resources */,
 				8FE58AA61C3B1FBD007888F4 /* whiteQueen.png in Resources */,
 				8F8BD2B61BC6C1C500B25CFE /* close38.png in Resources */,
-				8F2DD6E61B9AFFF80059CEFA /* piecePossibilities.png in Resources */,
 				8FE58A9C1C3B1F26007888F4 /* blackRook.png in Resources */,
 				8FA251221C7BD4CF00A4A32D /* DarkModePreview2.png in Resources */,
 				8FE496791C247E7000E2E77D /* chessLaunch3.png in Resources */,
 				8F8BD2A91BC41ED700B25CFE /* arrow_black.png in Resources */,
-				8F2DD6E41B9AFFF80059CEFA /* moveOption.png in Resources */,
 				8F2392A91C09FBA900CC4B0F /* cm4.png in Resources */,
 				8F31ECE21C67DAE80081F888 /* chesslogo800_80.png in Resources */,
 				8F31ECD51C6795960081F888 /* chesstabv9@3x.png in Resources */,
 				8F970FBD1BB88EFD00ED758C /* ChessIconSmallTextAndLogo.png in Resources */,
 				8F56E1871C66BE650000ECDB /* chesslogo800_180.png in Resources */,
 				8FEF2A9E1BFA7C8A006E1359 /* oldSkoolChessBoard.png in Resources */,
-				8F2EEC831C70F27600FB6127 /* clock108.png in Resources */,
 				8FEF2A9B1BFA7C8A006E1359 /* blackSquareChessBoard.png in Resources */,
 				8F8BD2BD1BC6E22B00B25CFE /* close1.png in Resources */,
 				8FA2511A1C7A7A8100A4A32D /* PanberLogov9 copy.png in Resources */,
 				8F2BD9841CB04FD300037FE0 /* capsuleClock.png in Resources */,
 				8FE58AA21C3B1F26007888F4 /* whiteRook.png in Resources */,
+				8FC578031CB1CC8A003BC32F /* piecePossibilities.png in Resources */,
 				8F2DD6E31B9AFFF80059CEFA /* graySquare.png in Resources */,
 				8F31DCED1BC7C8B5004544CC /* pending.png in Resources */,
 				8F2392A51C09EF3A00CC4B0F /* cm2.png in Resources */,
 				8FE58AB81C44676B007888F4 /* whitePawn.png in Resources */,
+				8FC577ED1CB1C6EE003BC32F /* clock108.png in Resources */,
+				8FC577EB1CB1C5C8003BC32F /* normalIndicator2.png in Resources */,
+				8FC577F11CB1C8F1003BC32F /* moveOption.png in Resources */,
 				8FE58A991C3B1F26007888F4 /* blackKnight.png in Resources */,
 				8F2BD9721CB0469900037FE0 /* chatFilled.png in Resources */,
 				8F4A02871B9A3F240084024A /* chessIcon180.png in Resources */,

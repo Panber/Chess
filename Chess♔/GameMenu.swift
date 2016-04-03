@@ -875,7 +875,12 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         print(indexPath.row)
         print(imageDataArray.count)
         
- 
+        cell.username.highlightedTextColor = UIColor.whiteColor()
+        cell.rating.highlightedTextColor = UIColor.whiteColor()
+        cell.updated.highlightedTextColor = UIColor.whiteColor()
+        cell.timeleft.highlightedTextColor = UIColor.whiteColor()
+
+
         
         if darkMode {cell.backgroundColor = UIColor.clearColor() //(red:0.22, green:0.22, blue:0.22, alpha:1.0)
             
@@ -1310,14 +1315,23 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
         return cell
     }
-    
+    func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+                var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+             //   selectedCell.backgroundColor = UIColor.redColor()
+        
+    }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
         
         //oppoImageFromGameMenu = cell.userProfileImage.image!
         
         
+        
 //        var selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+//        selectedCell.selectionStyle = UITableViewCellSelectionStyle.Blue
+
+//        selectedCell.backgroundColor = UIColor.redColor()
+
 //        selectedCell.contentView.backgroundColor = UIColor.redColor()
         
         switch indexPath.section {
@@ -2702,6 +2716,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         let cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath!)! as
         UITableViewCell
         
+        
+        
         switch indexPath!.section {
         case 0:
             gameID = gameIDSYourTurn[indexPath!.row]
@@ -2967,6 +2983,7 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
     override func viewDidAppear(animated: Bool) {
         
       
+        lightOrDarkMode()
 
         
         

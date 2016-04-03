@@ -192,6 +192,9 @@ class GameMenuTableViewCell: UITableViewCell {
         
         self.colorIndicator.backgroundColor = color
         self.pieceIndicator.backgroundColor = color2
+        
+      //  self.contentView.backgroundColor = blue
+
     }
     
     override func setHighlighted(highlighted: Bool, animated: Bool) {
@@ -202,6 +205,8 @@ class GameMenuTableViewCell: UITableViewCell {
         
         self.colorIndicator.backgroundColor = color
         self.pieceIndicator.backgroundColor = color2
+        
+     //   self.contentView.backgroundColor = blue
     }
     
 }

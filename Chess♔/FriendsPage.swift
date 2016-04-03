@@ -103,7 +103,8 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UserTableViewCell3 = self.tableView.dequeueReusableCellWithIdentifier("cell3", forIndexPath: indexPath) as! UserTableViewCell3
-        
+        cell.username.highlightedTextColor = UIColor.whiteColor()
+        cell.rating.highlightedTextColor = UIColor.whiteColor()
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         

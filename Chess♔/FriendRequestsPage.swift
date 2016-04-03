@@ -161,6 +161,9 @@ findRequests()
         
         let cell:UserTableViewCell2 = self.tableView.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath) as! UserTableViewCell2
 
+        cell.username.highlightedTextColor = UIColor.whiteColor()
+        cell.rating.highlightedTextColor = UIColor.whiteColor()
+        
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         
