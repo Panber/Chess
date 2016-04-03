@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '1C0661B415149F30014D1CB1'
-               BlueprintName = 'NMPopUpViewSwift-NMPopUpViewSwift'
+               BlueprintIdentifier = '9FABECFFAF679DFAA6D639D6'
+               BlueprintName = 'DGElasticPullToRefresh'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'NMPopUpViewSwift.bundle'>
+               BuildableName = 'DGElasticPullToRefresh.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -1,16 +1,22 @@
 PODS:
   - DGElasticPullToRefresh (1.0.3)
   - Firebase (2.5.0)
+  - JSQMessagesViewController (7.2.0):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - NMPopUpViewSwift (3.0.1)
 
 DEPENDENCIES:
   - DGElasticPullToRefresh
   - Firebase (>= 2.4.3)
+  - JSQMessagesViewController
   - NMPopUpViewSwift
 
 SPEC CHECKSUMS:
   DGElasticPullToRefresh: 040f39ae69840b3261d163fe6735c5901bf851e9
   Firebase: 744617c0733b45198f9486ebd5cac64ec2d10d79
+  JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   NMPopUpViewSwift: 23a44d6db17a9abc6b806f9fac597be6d7e9f300
 
 COCOAPODS: 0.39.0

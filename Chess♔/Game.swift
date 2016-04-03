@@ -39,6 +39,8 @@ func ^^ (radix: Int, power: Int) -> Int {
 
 var check: Firebase!
 
+var otherUserName = ""
+
 var gameIsOver = Bool()
 
 var oppoImageFromGameMenu = UIImage()
@@ -197,7 +199,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var capsuleL = UILabel()
     
     var chatB = UIButton()
-
     
     var forwardB = UIButton()
     var backwardB = UIButton()
@@ -224,7 +225,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     var size : CGFloat = pieceSize
     
     var otherUserImage = UIImage()
-    var otherUserName = ""
+    
     var otherUserRating = ""
     var otherUserRatingInt = Int()
     var otherUserRatingIntStart = Int()
@@ -772,7 +773,6 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     override func viewDidLoad() {
         timer.invalidate()
 
-        
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide) // with animation option.
         shouldContinueTimer = false 
         loadVariablesAndConstants()
@@ -1912,7 +1912,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             else {
                                 self.otherUserRatingInt = result["rating"] as! Int!
-                                self.otherUserName = (result["username"] as? String)!
+                                otherUserName = (result["username"] as? String)!
                                 
                             }
                             
@@ -1955,7 +1955,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         
                                         self.otherUserImage = UIImage(data: imageData!)!
                                         self.otherUserRating = "\(result["rating"] as! Int!)"
-                                        self.otherUserName = (result["username"] as? String)!
+                                        otherUserName = (result["username"] as? String)!
                                         
                                         UIView.animateWithDuration(0.3, animations: { () -> Void in
                                             self.otherImage.alpha = 1
@@ -4082,7 +4082,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                             }
                             else {
                                 self.otherUserRatingInt = result["rating"] as! Int!
-                                self.otherUserName = (result["username"] as? String)!
+                                otherUserName = (result["username"] as? String)!
                                 
                             }
                             let profilePictureObject = result["profile_picture"] as? PFFile
@@ -4124,7 +4124,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
                                         self.otherUserImage = UIImage(data: imageData!)!
                                         self.otherUserRating = "\(result["rating"] as! Int)"
                                         
-                                        self.otherUserName = (result["username"] as? String)!
+                                        otherUserName = (result["username"] as? String)!
                                         UIView.animateWithDuration(0.3, animations: { () -> Void in
                                             self.otherImage.alpha = 1
                                             if screenHeight == 480.0 {
@@ -5386,7 +5386,7 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
             view.addSubview(backwardB)
             backwardB.enabled = false
             view.sendSubviewToBack(backwardB)
-            
+
             
             //        let sliderOverlay = UILabel(frame: CGRectMake(0,screenHeight/2 + screenWidth/2 + 12,screenWidth,25))
             //        sliderOverlay.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
@@ -5487,11 +5487,13 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     override func viewDidAppear(animated: Bool) {
+        
         canCheckFirebase = true
         goBackAfterLaunch = true
         var bottomOffset = CGPointMake(0, collectionView.contentSize.height - collectionView.bounds.size.height)
         collectionView.setContentOffset(bottomOffset, animated: false)
         
+        self.tabBarController?.tabBar.hidden = false
         forwardB.userInteractionEnabled = false
         backwardB.userInteractionEnabled = false
         exitTimeCapsuleB.userInteractionEnabled = false
@@ -5686,8 +5688,14 @@ class Game: UIViewController, UICollectionViewDataSource, UICollectionViewDelega
     func tabBarIsVisible() ->Bool {
         return self.tabBarController?.tabBar.frame.origin.y < CGRectGetMaxY(self.view.frame)
     }
+    
+    // MARK: - Chat
     func chatButtonPressed(sender: UIButton!) {
-        //add function to go to chat here
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("Chat")
+        self.showViewController(vc as! UIViewController, sender: vc)
+        self.tabBarController?.tabBar.hidden = true
+//        self.navigationController?.navigationBar.barTintColor = blue
+//        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
     }
     
     // MARK: -Time Capsule
