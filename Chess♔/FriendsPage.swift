@@ -123,32 +123,62 @@ class FriendsPage: UIViewController, UITableViewDelegate, UIScrollViewDelegate {
         
 
         
-        
+        ///
         cell.username.text = friendsArray[indexPath.row] as! String
         
         let userQuery = PFQuery(className: "_User")
         userQuery.whereKey("username", equalTo: friendsArray[indexPath.row])
-        let _user = userQuery.getFirstObject() as! PFUser
+   
         
-        let rating = _user["rating"] as? Int
-        cell.rating.text = "\(rating!)"
-        
-        let profilePictureObject = _user["profile_picture"] as? PFFile
-        
-        if(profilePictureObject != nil)
-        {
-            profilePictureObject!.getDataInBackgroundWithBlock { (imageData:NSData?, error:NSError?) -> Void in
+        cell.userProfileImage.alpha = 0
+        cell.userProfileImage.image = nil
+
+
+        userQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+            if (error == nil) {
                 
-                if(imageData != nil)
-                {
-                    self.profilePicArray.append(UIImage(data: imageData!)!)
-                    cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
-                    cell.userProfileImage.image = self.profilePicArray[indexPath.row]
-                    self.imageDataArray.append(imageData!)
+                if let userArray = objects as? [PFUser] {
+                    for _user in userArray {
+                        
+                        let rating = _user["rating"] as? Int
+                        cell.rating.text = "\(rating!)"
+                        
+                        if let userPicture = _user["profile_picture"] as? PFFile {
+                            
+                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                if (error == nil) {
+                                   
+                                    
+                                    self.profilePicArray.append(UIImage(data: imageData!)!)
+                                    cell.userProfileImage.contentMode = UIViewContentMode.ScaleAspectFill
+                                    cell.userProfileImage.image = UIImage(data: imageData!)!
+                                    self.imageDataArray.append(imageData!)
+                                    
+                                    
+                                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                        cell.userProfileImage.alpha = 1
+                                        
+                                        
+                                    })
+                                    
+                                } else {
+                                }
+                            }
+                            
+                        }
+                    }
+                    
                 }
-                
+                // self.loadingFromPull = false
+            } else {
+                // Log details of the failure
+                print("query error: \(error) \(error!.userInfo)")
             }
+            
         }
+        
+        /////7
+        
         
         if cell.username.text == friendsArray.last {
             cell.separatorInset = UIEdgeInsetsZero

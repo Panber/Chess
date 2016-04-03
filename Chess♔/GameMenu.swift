@@ -867,13 +867,15 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         
     }
     var loadingFromPull = false
-
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
         
         let cell:GameMenuTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("gameCell",forIndexPath: indexPath) as! GameMenuTableViewCell
+        print(indexPath.row)
+        print(imageDataArray.count)
         
+ 
         
         if darkMode {cell.backgroundColor = UIColor.clearColor() //(red:0.22, green:0.22, blue:0.22, alpha:1.0)
             
@@ -901,11 +903,20 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
             
             cell.username.text = name
             
-            if !loadingFromPull {
-            cell.userProfileImage.image = nil
+//            cell.userProfileImage.image = nil
+            //}
+            
+            if indexPath.row < imageDataArray.count {
+                cell.userProfileImage.image = UIImage(data:imageDataArray[indexPath.row])
             }
-            
-            
+        //    else {
+                if !loadingFromPull {
+
+                cell.userProfileImage.image = nil
+               // cell.userProfileImage.alpha = 0
+                }
+                
+          //  }
             let query = PFQuery(className: "_User")
             
             query.whereKey("username", equalTo: name)
@@ -925,6 +936,10 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
 
                                         cell.userProfileImage.alpha = 0
                                         }
+                                        
+//                                        if self.imageDataArray[indexPath.row] == UIImage(data: imageData!) {
+//                                         cell.userProfileImage.image = self.imageDataArray[indexPath.row]
+//                                        }
                                         cell.userProfileImage.image = UIImage(data: imageData!)
                                         self.imageDataArray.append(imageData!)
                                         
@@ -949,6 +964,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                 }
                 
             }
+                
+            
         }
         
         
@@ -2020,7 +2037,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                             
                             self.gameOverRated = []
                             
-                            self.findGames()
                             
                             gameIDSYourTurn = []
                             gameIDSTheirTurn = []
@@ -2048,7 +2064,8 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                             
                             self.gameOverRated = []
                             self.gameoverStatus = []
-                            tableView.reloadData()
+                           // tableView.reloadData()
+                            self.findGames()
 
 
                             
@@ -2091,7 +2108,6 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                             
                             self.gameOverRated = []
                             
-                            self.findGames()
                             
                             gameIDSYourTurn = []
                             gameIDSTheirTurn = []
@@ -2122,8 +2138,9 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
                             
                            // tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
 
-                            
-                            tableView.reloadData()
+                            self.findGames()
+
+                            //tableView.reloadData()
 
                         }
                         
@@ -2542,16 +2559,15 @@ class GameMenu: UIViewController, UIScrollViewDelegate,UINavigationBarDelegate, 
         self.theirturnLeft = []
         self.gameoverLeft = []
         
-        self.tableView.reloadData()
         self.gameOverRated = []
         
-        self.findGames()
         
         gameIDSYourTurn = []
         gameIDSTheirTurn = []
         gameIDSGameOver = []
         gameID = ""
-        
+        self.findGames()
+
         self.loaded = true
         removeNewView()
         

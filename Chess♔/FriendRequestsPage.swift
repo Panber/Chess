@@ -195,6 +195,9 @@ findRequests()
         cell.username.text = self.userArray[indexPath.row]
         cell.username.sizeToFit()
         
+        cell.userProfileImage.alpha = 0
+        cell.userProfileImage.image = nil
+
         let query = PFQuery(className: "_User")
         let usernamee = self.userArray
         
@@ -217,6 +220,12 @@ findRequests()
                             
                             self.imageDataArray.append(imageData!)
                             
+                            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                cell.userProfileImage.alpha = 1
+                                
+                                
+                            })
+
                         }
                     }
                     
